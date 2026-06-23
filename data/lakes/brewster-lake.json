@@ -1,0 +1,24 @@
+{
+  "lakeId": "00017CAMB",
+  "title": "Brewster Lake",
+  "lat": 50.1076,
+  "lng": -125.5828,
+  "recSites": [
+    { "name": "Camp 5", "recId": "REC0171", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0171" }], "description": "", "lat": 50.080266, "lng": -125.591560 },
+    { "name": "Apple Point", "recId": "REC0172", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0172" }], "description": "", "lat": 50.079792, "lng": -125.587005 },
+    { "name": "Brewster Lake", "recId": "REC0173", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0173" }], "description": "", "lat": 50.088125, "lng": -125.577555 },
+    { "name": "Sayward Forest Canoe Route", "recId": "REC0197", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0197" }], "description": "", "lat": 50.164444, "lng": -125.487191 },
+    { "name": "Brewster Point", "recId": "REC16198", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC16198" }], "description": "", "lat": 50.111462, "lng": -125.573003 },
+    { "name": "Memekay Horse Camp", "recId": "REC169767", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC169767" }], "description": "", "lat": 50.218141, "lng": -125.778591 },
+    { "name": "Salmon Brewster Trail", "recId": "REC191957", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC191957" }], "description": "", "lat": 50.218245, "lng": -125.778008 },
+    { "name": "Pine Marten", "recId": "REC204459", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC204459" }], "description": "", "lat": 50.185639, "lng": -125.704354 },
+    { "name": "Brewster Camp", "recId": "REC3054", "siteMap": null, "references": [{ "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC3054" }], "description": "", "lat": 50.076337, "lng": -125.589041 }
+  ],
+  "fishingReferences": {
+    "bcIdentifier": "00017CAMB (308671)",
+    "areaKm2": 4.80,
+    "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00233701.pdf",
+    "stockingName": ""
+  },
+  "furtherReading": {}
+}
