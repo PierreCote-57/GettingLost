@@ -1,0 +1,12 @@
+{
+  "name": "gettinglost-wp-sync",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pushes this repo's pages, scripts, and data files to WordPress, overwriting live content.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "sync": "node sync.js"
+  }
+}

@@ -1,0 +1,28 @@
+name: Sync to WordPress
+
+# Manual trigger only — pushing to GitHub does NOT auto-publish.
+# Go to the Actions tab → "Sync to WordPress" → "Run workflow" to push
+# the current state of this repo's pages/scripts/data to WordPress,
+# overwriting whatever is currently live there.
+on:
+  workflow_dispatch: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run sync script
+        working-directory: scripts/sync
+        env:
+          WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node sync.js
