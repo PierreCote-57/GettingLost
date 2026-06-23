@@ -1,0 +1,103 @@
+{
+  "lakeId": "00385SALM",
+  "title": "Mohun Lake",
+  "lat": 50.1151,
+  "lng": -125.4974,
+  "recSites": [
+    {
+      "name": "Mohun Lake",
+      "recId": "REC0184",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0184" }
+      ],
+      "description": "Site provides a good jump-off point to explore the many nooks and crannies of Mohun Lake. Check out the islands and sandy beaches. Smaller boats can pass through the narrows and into Mohun Lagoon. Site is part of the Sayward Forest Canoe Route chain of lakes. Includes the end of the 0.3 km portage trail from Lawier Lake to Mohun Lake.",
+      "lat": 50.085584,
+      "lng": -125.515456
+    },
+    {
+      "name": "Twin Lake",
+      "recId": "REC0185",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0185" }
+      ],
+      "description": "A small site close to town with day-use opportunities as well as overnight. There are two halves to the lake to explore. Or, hike the 2.1 km loop trail from the campsite out to the rocky point and back around. Site is part of the Sayward Forest Canoe Route chain of lakes. It includes the start of the 0.8 km portage trail from Twin Lake to Amor Lake. A nice trek to make even if you're not packing a canoe. The portage trail from Mohun Lake ends at the swamp at the east end of Twin Lake.",
+      "lat": 50.174991,
+      "lng": -125.517853
+    },
+    {
+      "name": "Sayward Forest Canoe Route",
+      "recId": "REC0197",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0197" }
+      ],
+      "description": "One of the Island's best kept secrets, the Sayward Forest Canoe Route can be paddled in 3-5 days. Most popular starting point is Mohun Lake, accessed from Morton Lake Provincial Park. Note: additional portaging/lining will be needed during dry seasons with low water levels (particularly at the Twin Swamps and Gray Lake to Whymper channel). The following rec sites along the canoe route are fee for service sites, first come first served and cash only: Brewster Lake, Apple Point, Brewster Camp, Gray Lake, Orchard Meadow, Loon Bay, Dogwood Bay, Campbell Lake.",
+      "lat": 50.164444,
+      "lng": -125.487191
+    },
+    {
+      "name": "Seagull Bay",
+      "recId": "REC0300",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0300" }
+      ],
+      "description": "A small, open area at the northeast end of Mohun Lake. A good staging area for groups paddling the Sayward Forest Canoe Route, as this is the start of the portage trail to Twin Lake. There is room to pitch a few tents if you get a late start from Morton Lake.",
+      "lat": 50.164431,
+      "lng": -125.486966
+    },
+    {
+      "name": "Mohun Island",
+      "recId": "REC0429",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0429" }
+      ],
+      "description": "This is boat access only site located along the Sayward Forest Canoe Route on an island at the south end of Mohun Lake. Plenty of room to stay the night with 3 tent pads set amongst a beautiful stand of mature Douglas fir and cedar.",
+      "lat": 50.092049,
+      "lng": -125.504777
+    },
+    {
+      "name": "Goose Lake Trail",
+      "recId": "REC3104",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC3104" }
+      ],
+      "description": "A relatively gentle 30 minute hike to Goose Lake. The trail is accessed through Morton Lake Provincial Park.",
+      "lat": 50.126310,
+      "lng": -125.479770
+    },
+    {
+      "name": "Mohun Beach",
+      "recId": "REC6787",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC6787" }
+      ],
+      "description": "This is a boat access only site located along the Sayward Forest Canoe Route on the east side of Mohun Lake. This is a smaller site with room for two or three tents.",
+      "lat": 50.111061,
+      "lng": -125.493264
+    },
+    {
+      "name": "Bedrock City",
+      "recId": "REC6788",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC6788" }
+      ],
+      "description": "This is a boat access only site located along the Sayward Forest Canoe Route. Plenty of room for paddlers to set up with 4 tent locations in the forest.",
+      "lat": 50.143823,
+      "lng": -125.500356
+    }
+  ],
+  "fishingReferences": {
+    "bcIdentifier": "00385SALM (309406)",
+    "areaKm2": 6.117,
+    "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00183801.pdf",
+    "stockingName": ""
+  },
+  "furtherReading": {}
+}

@@ -1,0 +1,26 @@
+{
+  "lakeId": "00292SALM",
+  "title": "Blackwater Lake",
+  "lat": 50.1673,
+  "lng": -125.5922,
+  "recSites": [
+    {
+      "name": "Blackwater Point",
+      "recId": "REC204456",
+      "siteMap": null,
+      "references": [
+        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC204456" }
+      ],
+      "description": "A small walk-in site off of Blackwater Main that is accessed by a short trail (approximately 100m) leading to two tent pads on a point on Blackwater Lake. This small site has great views of the lake and has a small area to launch a canoe.",
+      "lat": 50.168378,
+      "lng": -125.589476
+    }
+  ],
+  "fishingReferences": {
+    "bcIdentifier": "00292SALM (309678)",
+    "areaKm2": 0.435,
+    "lakeChartUrl": null,
+    "stockingName": ""
+  },
+  "furtherReading": {}
+}

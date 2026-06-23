@@ -1,0 +1,14 @@
+{
+  "lakeId": "00126CAMB",
+  "title": "Echo Lake",
+  "lat": 49.9864,
+  "lng": -125.4084,
+  "recSites": [],
+  "fishingReferences": {
+    "bcIdentifier": "00126CAMB (308499)",
+    "areaKm2": 0.23,
+    "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00058601.pdf",
+    "stockingName": "ECHO"
+  },
+  "furtherReading": {}
+}

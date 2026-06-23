@@ -1,0 +1,61 @@
+{
+  "lakeId": "01128ALBN",
+  "title": "Sproat Lake",
+  "lat": 49.2901,
+  "lng": -124.9153,
+  "recSites": [
+    {
+      "name": "Sproat Lake Camping",
+      "recId": "Private",
+      "siteMap": null,
+      "references": [
+        { "name": "Website", "url": "https://www.sproatlakecamping.com" }
+      ],
+      "description": "",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "name": "Sproat Lake Provincial Park",
+      "recId": "NA",
+      "siteMap": null,
+      "references": [
+        { "name": "Website", "url": "https://www.campingrvbc.com/sites/bc/sproat-lake-provincial-park-port-alberni/" }
+      ],
+      "description": "",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "name": "Taylor Arm Provincial Park",
+      "recId": "NA",
+      "siteMap": null,
+      "references": [
+        { "name": "BC Parks", "url": "https://bcparks.ca/sproat-lake-park/" }
+      ],
+      "description": "",
+      "lat": null,
+      "lng": null
+    }
+  ],
+  "fishingReferences": {
+    "bcIdentifier": "01128ALBN (317802)",
+    "areaKm2": 42.33,
+    "lakeChartUrl": [
+      {
+        "name": "BC Bathymetric # 1",
+        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215801.pdf"
+      },
+      {
+        "name": "BC Bathymetric # 2",
+        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215802.pdf"
+      },
+      {
+        "name": "BC Bathymetric # 3",
+        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215803.pdf"
+      }
+    ],
+    "stockingName": ""
+  },
+  "furtherReading": {}
+}

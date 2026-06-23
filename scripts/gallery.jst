@@ -1,0 +1,70 @@
+/**
+ * gallery.jst
+ *
+ * Renders a card-grid list of destinations on the /gallery/ page,
+ * driven entirely by URL query params:
+ *
+ *   ?file=NAME   loads /wp-content/uploads/NAME.json (default "Destinations")
+ *   ?title=TEXT  sets the page heading + browser tab title (default "Destinations")
+ *
+ * Each JSON entry is {title, slug, image, teaser}.
+ *
+ * Card markup/CSS and escapeHtml() now live in gettinglost.jst
+ * (window.GL.renderCard / window.GL.escapeHtml), shared with the
+ * .gl-featured block on other pages — this file only handles the
+ * URL params, the JSON fetch, and grid assembly/sorting.
+ */
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var listName = params.get("title") || "Destinations";
+  var fileBase = params.get("file") || "Destinations";
+  var JSON_URL = "/wp-content/uploads/" + fileBase + ".json";
+
+  function render(container, entries) {
+    entries.sort(function (a, b) {
+      return (a.title || "").localeCompare(b.title || "");
+    });
+
+    var html = '<div class="gl-gallery-grid">';
+    for (var i = 0; i < entries.length; i++) {
+      html += window.GL.renderCard(entries[i]);
+    }
+    html += "</div>";
+
+    container.innerHTML = html;
+  }
+
+  function init() {
+    var containers = document.querySelectorAll("[data-gallery-list]");
+    if (!containers.length) return;
+
+    var pageTitleEl = document.querySelector(".wp-block-post-title");
+    if (pageTitleEl) pageTitleEl.textContent = listName;
+    document.title = listName + " – " + document.title.split(" – ").slice(1).join(" – ");
+
+    fetch(JSON_URL)
+      .then(function (res) {
+        if (!res.ok) throw new Error("Failed to load " + fileBase + ".json: " + res.status);
+        return res.json();
+      })
+      .then(function (entries) {
+        containers.forEach(function (container) {
+          render(container, entries.slice());
+        });
+      })
+      .catch(function (err) {
+        containers.forEach(function (container) {
+          container.innerHTML =
+            '<p style="color:#999;font-style:italic;">Content is temporarily unavailable.</p>';
+        });
+        console.error(err);
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();

@@ -1,0 +1,14 @@
+{
+  "lakeId": "00350CAMB",
+  "title": "Crest Lake",
+  "lat": 49.8418,
+  "lng": -125.9092,
+  "recSites": [],
+  "fishingReferences": {
+    "bcIdentifier": "00350CAMB (509409)",
+    "areaKm2": 0.12,
+    "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00239501.pdf",
+    "stockingName": ""
+  },
+  "furtherReading": {}
+}

@@ -1,0 +1,319 @@
+/**
+ * lakes.jst
+ *
+ * Page-type-specific block renderers for "Getting Lost on VI" lake pages.
+ * Registers on window.GL.blockRenderers, the shared registry defined in
+ * gettinglost.jst (loaded on every page), which already handles:
+ *
+ *   - fetching the page's own JSON (/wp-content/uploads/<slug>.json) once
+ *   - dispatching each [data-block-type] element to its renderer
+ *   - per-block error handling (a renderer that throws just skips that
+ *     one block; other blocks on the page still render normally)
+ *   - the generic, page-type-agnostic renderers ("campground",
+ *     "googleMap", "furtherReading", "backToGallery")
+ *
+ * This file adds the two renderers specific to lake pages:
+ *
+ *   <div data-block-type="recSites"></div>
+ *   <div data-block-type="fishingReferences"></div>
+ *
+ * Both read directly from the page's own JSON — no data-lake-id
+ * attribute, no separate fetch, no #lake-id element needed anymore.
+ *
+ * The lake's general-purpose links (what used to be the fishing table's
+ * "References" row, fed by lakeData.fishing.references) now live in the
+ * page's top-level pageData.furtherReading and are rendered by the
+ * generic furtherReading renderer in gettinglost.jst — not duplicated
+ * here.
+ *
+ * NOTE: the richer lake + rec-site multi-marker map from the old
+ * version of this file is intentionally NOT carried over in this pass.
+ * The lake page now uses the generic single-marker googleMap renderer
+ * (pageData.lat/lng) like every other page type. Revisit rec-site map
+ * markers once all lakes are migrated to this structure.
+ */
+
+(function () {
+  "use strict";
+
+  window.GL = window.GL || {};
+  window.GL.blockRenderers = window.GL.blockRenderers || {};
+
+  var CONFIG = {
+    naLabel: "NA",
+    // Every lake on this site is on Vancouver Island, so region is fixed;
+    // only the waterbody name (stockingName) varies per lake.
+    stockingReportBaseUrl:
+      "https://www.gofishbc.com/stocked-fish/?reportType=lake&region=VANCOUVER%20ISLAND&waterbody="
+  };
+
+  // ---------------------------------------------------------------------
+  // Small DOM helpers (same table/cell styling convention used by the
+  // generic renderers in gettinglost.jst)
+  // ---------------------------------------------------------------------
+
+  function buildHeading(text) {
+    var heading = document.createElement("h3");
+    heading.textContent = text;
+    heading.style.fontSize = "1.15rem";
+    heading.style.fontWeight = "700";
+    heading.style.color = "#2a1a0e";
+    heading.style.margin = "1.5rem 0 0.4rem";
+    heading.style.paddingBottom = "0.25rem";
+    heading.style.borderBottom = "2px solid #5e442c";
+    return heading;
+  }
+
+  function createStyledTable() {
+    var table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.marginTop = "0.25rem";
+    table.style.marginLeft = "auto";
+    table.style.marginRight = "auto";
+    return table;
+  }
+
+  function buildHeaderCell(label, width) {
+    var cell = document.createElement("th");
+    cell.textContent = label;
+    cell.style.fontSize = "0.9rem";
+    cell.style.fontWeight = "700";
+    cell.style.textAlign = "left";
+    cell.style.padding = "0.2rem 1rem 0.2rem 0";
+    if (width) {
+      cell.style.width = width;
+    }
+    return cell;
+  }
+
+  function buildLabelCell(label) {
+    var cell = document.createElement("td");
+    cell.textContent = label;
+    cell.style.padding = "0.2rem 1.5rem 0.2rem 0";
+    cell.style.verticalAlign = "top";
+    cell.style.color = "#666";
+    cell.style.fontSize = "0.88rem";
+    return cell;
+  }
+
+  function buildBodyCell(text) {
+    var cell = document.createElement("td");
+    cell.textContent = text === undefined || text === null ? CONFIG.naLabel : text;
+    cell.style.padding = "0.2rem 0";
+    cell.style.verticalAlign = "top";
+    cell.style.fontSize = "0.9rem";
+    return cell;
+  }
+
+  function buildExternalLink(url, label) {
+    var link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = label;
+    return link;
+  }
+
+  function buildLinkOrNaCell(url, label) {
+    if (!url) {
+      return buildBodyCell(CONFIG.naLabel);
+    }
+    var cell = buildBodyCell("");
+    cell.appendChild(buildExternalLink(url, label));
+    return cell;
+  }
+
+  function buildLabelValueRow(label, value) {
+    var row = document.createElement("tr");
+    row.appendChild(buildLabelCell(label));
+    row.appendChild(buildBodyCell(value || CONFIG.naLabel));
+    return row;
+  }
+
+  /**
+   * Renders a list of { name, url } references as links separated by
+   * <br>, inside a single table cell. An empty/missing reference name
+   * falls back to a label derived from the URL's domain.
+   */
+  function buildReferencesCell(references) {
+    if (!references || references.length === 0) {
+      return buildBodyCell(CONFIG.naLabel);
+    }
+
+    var cell = buildBodyCell("");
+
+    references.forEach(function (reference, index) {
+      if (index > 0) {
+        cell.appendChild(document.createElement("br"));
+      }
+      var label = reference.name || deriveLabelFromUrl(reference.url);
+      cell.appendChild(buildExternalLink(reference.url, label));
+    });
+
+    return cell;
+  }
+
+  /**
+   * Falls back to a short, readable label based on a URL's hostname when
+   * no explicit reference name is given, e.g.
+   * "https://www.sitesandtrailsbc.ca/resource/REC0174" -> "sitesandtrailsbc.ca".
+   */
+  function deriveLabelFromUrl(url) {
+    try {
+      var hostname = new URL(url).hostname;
+      return hostname.replace(/^www\./, "");
+    } catch (e) {
+      return url;
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "recSites"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.recSites = [{ name, recId, siteMap, reservationUrl,
+  // reservationLabel, references, description, lat, lng }, ...] and
+  // renders the Name/ID/Site map/Reservation/References table.
+  //
+  // lat/lng per site are currently unused (rec-site map markers are on
+  // hold) but are left in the schema for when that work resumes — extra
+  // fields in the JSON are always ignored rather than treated as errors.
+
+  window.GL.blockRenderers.recSites = function (el, pageData) {
+    var recSites = pageData.recSites || [];
+
+    el.textContent = "";
+    el.appendChild(buildHeading("Recreational sites"));
+
+    if (recSites.length === 0) {
+      var notice = document.createElement("p");
+      notice.textContent = "No recreational site";
+      el.appendChild(notice);
+      return;
+    }
+
+    var table = createStyledTable();
+
+    var thead = document.createElement("thead");
+    var headerRow = document.createElement("tr");
+    [
+      { label: "Name", width: "200px" },
+      { label: "ID", width: "90px" },
+      { label: "Site map", width: "80px" },
+      { label: "Reservation", width: "90px" },
+      { label: "References", width: "100px" }
+    ].forEach(function (column) {
+      headerRow.appendChild(buildHeaderCell(column.label, column.width));
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement("tbody");
+    recSites.forEach(function (site) {
+      var row = document.createElement("tr");
+
+      var nameCell = buildBodyCell(site.name);
+      if (site.description) {
+        nameCell.setAttribute("title", site.description);
+      }
+      row.appendChild(nameCell);
+
+      row.appendChild(buildBodyCell(site.recId));
+      row.appendChild(buildLinkOrNaCell(site.siteMap, "Site map"));
+      row.appendChild(buildReservationCell(site));
+      row.appendChild(buildReferencesCell(site.references));
+
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+
+    el.appendChild(table);
+  };
+
+  /**
+   * Renders the Reservation cell. A rec site may carry a reservationUrl
+   * (renders as a link, labeled by reservationLabel or "Reservations" if
+   * no label is given), a reservationLabel with no URL (renders as plain
+   * text, e.g. "First come, first served"), or neither (renders "NA").
+   */
+  function buildReservationCell(site) {
+    if (site.reservationUrl) {
+      var label = site.reservationLabel || "Reservations";
+      var cell = buildBodyCell("");
+      cell.appendChild(buildExternalLink(site.reservationUrl, label));
+      return cell;
+    }
+    if (site.reservationLabel) {
+      return buildBodyCell(site.reservationLabel);
+    }
+    return buildBodyCell(CONFIG.naLabel);
+  }
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "fishingReferences"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.fishingReferences = { bcIdentifier, areaKm2,
+  // lakeChartUrl, stockingName }.
+  //
+  // The general-purpose "References" row that used to live in this same
+  // table has moved out to the shared, top-level pageData.furtherReading
+  // block (rendered generically by gettinglost.jst) — it's no longer
+  // part of this renderer.
+
+  window.GL.blockRenderers.fishingReferences = function (el, pageData) {
+    var fishing = pageData.fishingReferences || {};
+
+    el.textContent = "";
+    el.appendChild(buildHeading("Fishing references"));
+
+    var table = createStyledTable();
+    var tbody = document.createElement("tbody");
+
+    tbody.appendChild(buildLabelValueRow("BC Identifier", fishing.bcIdentifier));
+    tbody.appendChild(buildLabelValueRow("Area", formatAreaKm2(fishing.areaKm2)));
+    tbody.appendChild(buildLakeChartRow(fishing.lakeChartUrl));
+    tbody.appendChild(buildStockingReportRow(fishing.stockingName));
+
+    table.appendChild(tbody);
+    el.appendChild(table);
+  };
+
+  function formatAreaKm2(areaKm2) {
+    if (typeof areaKm2 !== "number") {
+      return null;
+    }
+    return areaKm2 + "\u00A0km\u00B2";
+  }
+
+  function buildLakeChartRow(lakeChartUrl) {
+    if (!lakeChartUrl) {
+      return buildLabelValueRow("Lake chart", null);
+    }
+    var row = document.createElement("tr");
+    row.appendChild(buildLabelCell("Lake chart"));
+    var valueCell = buildBodyCell("");
+    valueCell.appendChild(buildExternalLink(lakeChartUrl, "BC Bathymetric"));
+    row.appendChild(valueCell);
+    return row;
+  }
+
+  /**
+   * Renders the Go Fish BC stocking report row. stockingName is the bare
+   * waterbody name Go Fish BC expects (e.g. "ECHO") -- not a full URL --
+   * so the link is built from CONFIG.stockingReportBaseUrl + the name.
+   * An empty/missing stockingName still gets a row, just showing "NA".
+   */
+  function buildStockingReportRow(stockingName) {
+    if (!stockingName) {
+      return buildLabelValueRow("Stocking report", null);
+    }
+    var row = document.createElement("tr");
+    row.appendChild(buildLabelCell("Stocking report"));
+    var url = CONFIG.stockingReportBaseUrl + encodeURIComponent(stockingName);
+    var valueCell = buildBodyCell("");
+    valueCell.appendChild(buildExternalLink(url, "Go Fish BC"));
+    row.appendChild(valueCell);
+    return row;
+  }
+})();

@@ -1,0 +1,647 @@
+/**
+ * common.jst
+ *
+ * Sitewide helper script for "Getting Lost on VI", loaded on every page
+ * (via the site's Footer template) — unlike lakes.jst (lake pages
+ * only) and gallery.jst (the /gallery/ page only).
+ *
+ * Currently handles:
+ *
+ *   .gl-photo — renders a clickable photo with a GPS-linked caption
+ *   from a single placeholder <div>. Markup:
+ *
+ *     <div class="gl-photo"
+ *          style="width:25%;float:left;"
+ *          data-img="IMG_0512.jpg"
+ *          data-lat="49.984331"
+ *          data-lng="-125.413606"></div>
+ *
+ *   - data-img is just the filename; this script prepends
+ *     "/wp-content/uploads/" automatically.
+ *   - data-lat / data-lng are decimal degrees (negative = S / W).
+ *   - style="width:..." is optional, defaults to 25%.
+ *   - style="float:..." is optional, defaults to "right".
+ *       "left"  -> floats left, text wraps on the right
+ *       "right" -> floats right, text wraps on the left (default)
+ *       "none"  -> centers the image as its own block
+ *
+ *   .gl-featured — renders a random selection of destination cards
+ *   from Destinations.json. Markup:
+ *
+ *     <div class="gl-featured" data-count="3"></div>
+ *
+ *   - data-count is optional, defaults to 3.
+ *   - Selection re-shuffles on every page load (no caching).
+ *   - Uses the same card markup/styling as the /gallery/ page
+ *     (gallery.jst), via the shared escapeHtml()/renderCard()
+ *     helpers and CSS exposed on window.GL below.
+ *
+ *   [data-block-type] — generic block-rendering system. Any element
+ *   carrying a data-block-type attribute is handed off to a renderer
+ *   registered on window.GL.blockRenderers[type]. This file registers
+ *   the generic, page-type-agnostic renderers ("campground",
+ *   "googleMap", "furtherReading", "backToGallery", "notes");
+ *   page-type-specific renderers (e.g. "fishing", "recSites" in
+ *   lakes.jst) register themselves the same way from their own script
+ *   files. Markup:
+ *
+ *     <div data-block-type="campground"></div>
+ *     <div data-block-type="googleMap"></div>
+ *     <div data-block-type="furtherReading"></div>
+ *     <div class="gl-dest-back" data-block-type="backToGallery"
+ *          data-title="Optional title" data-file="Optional file"></div>
+ *     <div data-block-type="notes"></div>
+ *
+ *   - backToGallery is driven by its own data-title/data-file
+ *     attributes (not pageData), so a page can include more than one,
+ *     each pointing at a different gallery filter (e.g. "Back to
+ *     Parks" and "Back to Destinations" on the same page).
+ *
+ *   - The page's own slug (from window.location.pathname) is used to
+ *     fetch /wp-content/uploads/<slug>.json once; every block on the
+ *     page renders from that same data.
+ *   - If a page has zero [data-block-type] elements, no fetch happens
+ *     at all — this system is fully opt-in per page.
+ *   - A missing renderer (typo, or the type-specific .jst wasn't
+ *     included on this page) logs a console error and that block is
+ *     skipped; other blocks on the page still render normally.
+ *   - A renderer that throws (bad/missing data) is caught per-block,
+ *     logs a console error with the original error, and that block is
+ *     skipped; other blocks on the page still render normally.
+ *
+ * Shared card rendering (window.GL) — escapeHtml() and renderCard(),
+ * plus the .gl-gallery-* CSS, live here (not in gallery.jst) so any
+ * page can render destination cards via .gl-featured without needing
+ * to load gallery.jst. gallery.jst calls window.GL.renderCard() for
+ * its own grid instead of keeping a local copy.
+ *
+ * Unknown/extra data attributes are ignored rather than treated as
+ * errors, matching the convention used throughout this file.
+ */
+
+(function () {
+  "use strict";
+
+  // ---------------------------------------------------------------------
+  // Shared card rendering (used by .gl-featured here, and by gallery.jst)
+  // ---------------------------------------------------------------------
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function escapeAttr(str) {
+    return escapeHtml(str);
+  }
+
+  function renderCard(entry) {
+    var title = escapeHtml(entry.title || "");
+    var slug = escapeHtml(entry.slug || "");
+    var image = escapeHtml(entry.image || "");
+    var teaser = escapeHtml(entry.teaser || "");
+    var href = "/" + slug + "/";
+
+    return (
+      '<a class="gl-gallery-card" href="' + href + '">' +
+      '<img class="gl-gallery-card-img" src="' + image + '" alt="' + title + '" loading="lazy">' +
+      '<h3 class="gl-gallery-card-title">' + title + "</h3>" +
+      '<p class="gl-gallery-card-teaser">' + teaser + "</p>" +
+      "</a>"
+    );
+  }
+
+  window.GL = window.GL || {};
+  window.GL.escapeHtml = escapeHtml;
+  window.GL.renderCard = renderCard;
+  window.GL.blockRenderers = window.GL.blockRenderers || {};
+
+  function injectGalleryCss() {
+    if (document.getElementById("gl-gallery-css")) return;
+    var style = document.createElement("style");
+    style.id = "gl-gallery-css";
+    style.textContent =
+      ".gl-gallery-grid {" +
+      "display: grid;" +
+      "grid-template-columns: repeat(3, 1fr);" +
+      "gap: 1.5rem;" +
+      "margin: 1.5rem 0;" +
+      "}" +
+      "@media (max-width: 900px) {" +
+      ".gl-gallery-grid { grid-template-columns: repeat(2, 1fr); }" +
+      "}" +
+      "@media (max-width: 600px) {" +
+      ".gl-gallery-grid { grid-template-columns: 1fr; }" +
+      "}" +
+      ".gl-gallery-card {" +
+      "display: block;" +
+      "text-decoration: none;" +
+      "color: inherit;" +
+      "}" +
+      ".gl-gallery-card-img {" +
+      "width: 100%;" +
+      "height: 200px;" +
+      "object-fit: cover;" +
+      "border-radius: 6px;" +
+      "display: block;" +
+      "}" +
+      ".gl-gallery-card-title {" +
+      "margin: 0.6rem 0 0.3rem;" +
+      "font-size: 1.15rem;" +
+      "}" +
+      ".gl-gallery-card-teaser {" +
+      "margin: 0;" +
+      "font-size: 0.95rem;" +
+      "color: #555;" +
+      "line-height: 1.4;" +
+      "}";
+    document.head.appendChild(style);
+  }
+
+  // ---------------------------------------------------------------------
+  // Helpers
+  // ---------------------------------------------------------------------
+
+  function toDMS(decimal, isLat) {
+    var ref = isLat
+      ? (decimal >= 0 ? "N" : "S")
+      : (decimal >= 0 ? "E" : "W");
+    var abs = Math.abs(decimal);
+    var deg = Math.floor(abs);
+    var minFull = (abs - deg) * 60;
+    var min = Math.floor(minFull);
+    var sec = (minFull - min) * 60;
+    return deg + "\u00b0 " + min + "\u2032 " + sec.toFixed(2) + "\u2033 " + ref;
+  }
+
+  function pickRandom(arr, n) {
+    var pool = arr.slice();
+    var result = [];
+    for (var i = 0; i < n && pool.length; i++) {
+      var idx = Math.floor(Math.random() * pool.length);
+      result.push(pool.splice(idx, 1)[0]);
+    }
+    return result;
+  }
+
+  // ---------------------------------------------------------------------
+  // .gl-photo
+  // ---------------------------------------------------------------------
+
+  function renderPhoto(el) {
+    var img = el.getAttribute("data-img");
+    var lat = parseFloat(el.getAttribute("data-lat"));
+    var lng = parseFloat(el.getAttribute("data-lng"));
+
+    if (!img || isNaN(lat) || isNaN(lng)) {
+      return;
+    }
+
+    // Defaults — only applied if the author hasn't already set them.
+    if (!el.style.width) {
+      el.style.width = "25%";
+    }
+    if (!el.style.float) {
+      el.style.float = "right";
+    }
+    if (!el.style.margin) {
+      if (el.style.float === "left") {
+        el.style.margin = "0 1.5rem 1rem 0";
+      } else if (el.style.float === "right") {
+        el.style.margin = "0 0 1rem 1.5rem";
+      } else {
+        el.style.float = "none";
+        el.style.display = "block";
+        el.style.margin = "0 auto 1rem";
+      }
+    }
+
+    var src = "/wp-content/uploads/" + img;
+    var mapsUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+    var caption = toDMS(lat, true) + ", " + toDMS(lng, false);
+
+    el.innerHTML =
+      '<a href="' + src + '" target="_blank" rel="noopener noreferrer">' +
+      '<img src="' + src + '" alt="" style="width:100%;height:auto;display:block;border:1px solid #ccc;">' +
+      "</a>" +
+      '<p style="font-size:0.8rem;color:#888;margin:0.3rem 0 0;text-align:center;">' +
+      '<a href="' + mapsUrl + '" target="_blank" rel="noopener noreferrer" style="color:#888;">' +
+      caption +
+      "</a>" +
+      "</p>";
+  }
+
+  // ---------------------------------------------------------------------
+  // .gl-featured
+  // ---------------------------------------------------------------------
+
+  function renderFeatured(el) {
+    var count = parseInt(el.getAttribute("data-count"), 10) || 3;
+
+    fetch("/wp-content/uploads/Destinations.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error("Failed to load Destinations.json: " + res.status);
+        return res.json();
+      })
+      .then(function (entries) {
+        var picks = pickRandom(entries, count);
+        var html = '<div class="gl-gallery-grid">';
+        for (var i = 0; i < picks.length; i++) {
+          html += renderCard(picks[i]);
+        }
+        html += "</div>";
+        el.innerHTML = html;
+      })
+      .catch(function (err) {
+        el.innerHTML =
+          '<p style="color:#999;font-style:italic;">Content is temporarily unavailable.</p>';
+        console.error(err);
+      });
+  }
+
+  // ---------------------------------------------------------------------
+  // Generic [data-block-type] system
+  // ---------------------------------------------------------------------
+
+  function getSlugFromUrl() {
+    var path = window.location.pathname;
+    var parts = path.split("/").filter(Boolean);
+    return parts.length ? parts[parts.length - 1] : "";
+  }
+
+  function fetchPageData(slug) {
+    var url = "/wp-content/uploads/" + slug + ".json";
+    return fetch(url).then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load " + url + " (HTTP " + response.status + ")");
+      }
+      return response.json();
+    });
+  }
+
+  function renderBlocks(pageData) {
+    var blocks = document.querySelectorAll("[data-block-type]");
+    blocks.forEach(function (el) {
+      var type = el.getAttribute("data-block-type");
+      var renderer = window.GL.blockRenderers[type];
+
+      if (!renderer) {
+        console.error(
+          '[gettinglost] No renderer registered for block type "' + type +
+          '" — is the matching .jst file included on this page?'
+        );
+        return;
+      }
+
+      try {
+        renderer(el, pageData);
+      } catch (err) {
+        console.error('[gettinglost] Error rendering block type "' + type + '":', err);
+      }
+    });
+  }
+
+  function initBlocks() {
+    var blockEls = document.querySelectorAll("[data-block-type]");
+    if (!blockEls.length) {
+      return; // nothing to do on this page
+    }
+
+    var slug = getSlugFromUrl();
+    if (!slug) {
+      console.error("[gettinglost] Could not determine page slug from URL; cannot load page data.");
+      return;
+    }
+
+    fetchPageData(slug)
+      .then(renderBlocks)
+      .catch(function (err) {
+        console.error('[gettinglost] Failed to load page data for "' + slug + '":', err);
+      });
+  }
+
+  // ---------------------------------------------------------------------
+  // Google Maps API loader (shared with lakes.jst via window globals,
+  // so the script tag is only ever injected once per page)
+  // ---------------------------------------------------------------------
+
+  var MAP_CONFIG = {
+    mapApiKey: "AIzaSyBHN5E9rVPW6wqbMXEzFE5nDc-TH58gKQ8",
+    mapZoom: 13,
+    mapTypeId: "roadmap",
+    mapStyles: [
+      // { featureType: "poi.park", elementType: "labels", stylers: [{ visibility: "off" }] }
+    ]
+  };
+
+  function loadGoogleMapsApi(onReady) {
+    if (window.google && window.google.maps) {
+      onReady();
+      return;
+    }
+    if (window.__gettingLostMapsApiLoading) {
+      window.__gettingLostMapsApiCallbacks.push(onReady);
+      return;
+    }
+    window.__gettingLostMapsApiLoading = true;
+    window.__gettingLostMapsApiCallbacks = [onReady];
+    window.__gettingLostMapsApiInit = function () {
+      window.__gettingLostMapsApiCallbacks.forEach(function (callback) {
+        callback();
+      });
+    };
+    var script = document.createElement("script");
+    script.src =
+      "https://maps.googleapis.com/maps/api/js?key=" +
+      MAP_CONFIG.mapApiKey +
+      "&callback=__gettingLostMapsApiInit";
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "campground"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.campground = { website, siteMap, reservation }
+  // (any of the three may be omitted) and renders the familiar
+  // "Website · Site map · Reservations" link row.
+
+  window.GL.blockRenderers.campground = function (el, pageData) {
+    var data = pageData.campground;
+    if (!data) {
+      throw new Error('No "campground" block found in page JSON.');
+    }
+
+    if (!el.style.marginTop) el.style.marginTop = "0";
+
+    var parts = [];
+    if (data.website) {
+      parts.push('<a href="' + escapeAttr(data.website) + '" target="_blank" rel="noopener noreferrer">Website</a>');
+    }
+    if (data.siteMap) {
+      parts.push('<a href="' + escapeAttr(data.siteMap) + '" target="_blank" rel="noopener noreferrer">Site map</a>');
+    }
+    if (data.reservation) {
+      parts.push('<a href="' + escapeAttr(data.reservation) + '" target="_blank" rel="noopener noreferrer">Reservations</a>');
+    }
+
+    el.innerHTML =
+      '<p style="font-size:1.1rem;margin-top:0;margin-bottom:1.5rem;">' +
+      parts.join("&nbsp;\u00b7&nbsp; ") +
+      "</p>";
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "googleMap"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.title / pageData.lat / pageData.lng (top-level,
+  // not nested) and renders a single-marker map. No rec-site loop —
+  // that richer, multi-marker behaviour stays specific to lakes.jst
+  // for now.
+
+  window.GL.blockRenderers.googleMap = function (el, pageData) {
+    if (typeof pageData.lat !== "number" || typeof pageData.lng !== "number") {
+      throw new Error('Page JSON is missing numeric "lat"/"lng" for the googleMap block.');
+    }
+
+    el.textContent = "";
+    if (!el.style.width) el.style.width = "45%";
+    if (!el.style.height) el.style.height = "400px";
+    if (!el.style.float) el.style.float = "right";
+    if (!el.style.margin) el.style.margin = "0 0 1rem 1.5rem";
+
+    loadGoogleMapsApi(function () {
+      var map = new google.maps.Map(el, {
+        zoom: MAP_CONFIG.mapZoom,
+        center: { lat: pageData.lat, lng: pageData.lng },
+        mapTypeId: MAP_CONFIG.mapTypeId,
+        styles: MAP_CONFIG.mapStyles
+      });
+      /*
+      new google.maps.Marker({
+        position: { lat: pageData.lat, lng: pageData.lng },
+        map: map,
+        title: pageData.title || ""
+      });
+      */
+    });
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "furtherReading"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.furtherReading = { "<row label>": { name, url }, ... }
+  // and renders a two-column table: row label on the left, the link
+  // (labelled by `name`) on the right.
+
+  function buildGlHeading(text) {
+    var heading = document.createElement("h3");
+    heading.textContent = text;
+    heading.style.fontSize = "1.15rem";
+    heading.style.fontWeight = "700";
+    heading.style.color = "#2a1a0e";
+    heading.style.margin = "1.5rem 0 0.4rem";
+    heading.style.paddingBottom = "0.25rem";
+    heading.style.borderBottom = "2px solid #5e442c";
+    return heading;
+  }
+
+  window.GL.blockRenderers.furtherReading = function (el, pageData) {
+    var data = pageData.furtherReading;
+    if (!data) {
+      throw new Error('No "furtherReading" block found in page JSON.');
+    }
+
+    var table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.marginTop = "0.25rem";
+    table.style.marginLeft = "auto";
+    table.style.marginRight = "auto";
+
+    var tbody = document.createElement("tbody");
+
+    Object.keys(data).forEach(function (rowLabel) {
+      var entry = data[rowLabel];
+      var row = document.createElement("tr");
+
+      var labelCell = document.createElement("td");
+      labelCell.textContent = rowLabel;
+      labelCell.style.padding = "0.2rem 1.5rem 0.2rem 0";
+      labelCell.style.verticalAlign = "top";
+      labelCell.style.color = "#666";
+      labelCell.style.fontSize = "0.88rem";
+
+      var bodyCell = document.createElement("td");
+      bodyCell.style.padding = "0.2rem 0";
+      bodyCell.style.verticalAlign = "top";
+      bodyCell.style.fontSize = "0.9rem";
+
+      var link = document.createElement("a");
+      link.href = entry.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = entry.name;
+      bodyCell.appendChild(link);
+
+      row.appendChild(labelCell);
+      row.appendChild(bodyCell);
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+
+    el.textContent = "";
+    el.appendChild(buildGlHeading("Further reading"));
+    el.appendChild(table);
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "backToGallery"
+  // ---------------------------------------------------------------------
+  //
+  // Renders a "← Back to <title>" link. Fully driven by the element's
+  // own attributes (not pageData), so multiple instances can coexist on
+  // one page, each pointing at a different gallery filter:
+  //
+  //   <div class="gl-dest-back" data-block-type="backToGallery"
+  //        data-title="Parks" data-file="Parks.json"></div>
+  //   <div class="gl-dest-back" data-block-type="backToGallery"
+  //        data-title="Destinations" data-file="Destinations.json"></div>
+  //
+  //   - data-title is optional, defaults to "Destinations" — used both in
+  //     the "Back to <title>" label and as the gallery page's ?title=.
+  //   - data-file is optional; when present it's passed through as the
+  //     gallery page's ?file=. When omitted, the link just goes to the
+  //     plain /gallery/ page (no query string).
+  //   - Centralizing this here means the link style/wording can change
+  //     sitewide from one place.
+
+  window.GL.blockRenderers.backToGallery = function (el, pageData) {
+    var title = el.getAttribute("data-title") || "Destinations";
+    var file = el.getAttribute("data-file") || "";
+
+    if (!el.className) {
+      el.className = "gl-dest-back";
+    }
+
+    var href = "/gallery/";
+    if (file) {
+      href += "?file=" + encodeURIComponent(file) + "&title=" + encodeURIComponent(title);
+    }
+
+    el.innerHTML =
+      '<a href="' + escapeAttr(href) + '">\u2190 Back to ' + escapeHtml(title) + "</a>";
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "notes"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.notes = [ { sectionName, list: [ { name, url, description } ] }, ... ]
+  // and renders one heading + two-column table per section:
+  //
+  //   <div data-block-type="notes"></div>
+  //
+  //   - Each section in the array gets its own heading (sectionName) and
+  //     its own table, in array order.
+  //   - Each item in a section's "list" renders as one table row:
+  //       left column (25% width)  — item.name, wrapped in a link to
+  //                                   item.url if url is present (use
+  //                                   null, not "", when there's no link)
+  //       right column             — item.description, an array of
+  //                                   strings joined with "\n" and
+  //                                   displayed as continuous flowing
+  //                                   text (the "\n" is just a soft word
+  //                                   separator, not a line break).
+  //   - A section with no items still renders its heading with an empty
+  //     table, rather than throwing.
+
+  window.GL.blockRenderers.notes = function (el, pageData) {
+    var sections = pageData.notes;
+    if (!sections) {
+      throw new Error('No "notes" block found in page JSON.');
+    }
+
+    el.textContent = "";
+
+    sections.forEach(function (section) {
+      el.appendChild(buildGlHeading(section.sectionName || ""));
+
+      var table = document.createElement("table");
+      table.style.borderCollapse = "collapse";
+      table.style.width = "100%";
+      table.style.marginTop = "0.25rem";
+      table.style.marginBottom = "1rem";
+
+      var tbody = document.createElement("tbody");
+      var items = section.list || [];
+
+      items.forEach(function (item) {
+        var row = document.createElement("tr");
+
+        var nameCell = document.createElement("td");
+        nameCell.style.width = "25%";
+        nameCell.style.padding = "0.3rem 1.5rem 0.3rem 0";
+        nameCell.style.verticalAlign = "top";
+        nameCell.style.fontWeight = "600";
+
+        if (item.url) {
+          var link = document.createElement("a");
+          link.href = item.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = item.name || "";
+          nameCell.appendChild(link);
+        } else {
+          nameCell.textContent = item.name || "";
+        }
+
+        var descCell = document.createElement("td");
+        descCell.style.padding = "0.3rem 0";
+        descCell.style.verticalAlign = "top";
+        descCell.textContent = (item.description || []).join("\n");
+
+        row.appendChild(nameCell);
+        row.appendChild(descCell);
+        tbody.appendChild(row);
+      });
+
+      table.appendChild(tbody);
+      el.appendChild(table);
+    });
+  };
+
+  // ---------------------------------------------------------------------
+  // Init
+  // ---------------------------------------------------------------------
+
+  function init() {
+    injectGalleryCss();
+
+    var photos = document.querySelectorAll(".gl-photo");
+    for (var i = 0; i < photos.length; i++) {
+      renderPhoto(photos[i]);
+    }
+
+    var featured = document.querySelectorAll(".gl-featured");
+    for (var j = 0; j < featured.length; j++) {
+      renderFeatured(featured[j]);
+    }
+
+    initBlocks();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
