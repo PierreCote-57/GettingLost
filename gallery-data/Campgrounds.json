@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Pacific Playgrounds Resort",
+    "slug": "pacific-playgrounds-resort",
+    "image": "/wp-content/uploads/2026/06/under-construction.png",
+    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+  },
+  {
+    "title": "Salmon Point Resort",
+    "slug": "salmon-point-resort",
+    "image": "/wp-content/uploads/2026/06/under-construction.png",
+    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+  },
+  {
+    "title": "Elk Falls Park (Quinsam Campground)",
+    "slug": "elk-falls-quinsam-campground",
+    "image": "/wp-content/uploads/2026/06/under-construction.png",
+    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+  }
+]
