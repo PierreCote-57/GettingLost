@@ -1,0 +1,21 @@
+{
+  "campgroundId": "salmon-point-resort",
+  "title": "Salmon Point Resort",
+  "lat": 49.889183,
+  "lng": -125.1282272,
+  "campground": {
+    "website": "https://salmonpoint.com",
+    "siteMap": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf",
+    "reservation": "https://www.campspot.com/book/salmon-point"
+  },
+  "furtherReading": {
+    "Travel British Columbia": {
+      "name": "Listing",
+      "url": "https://www.travel-british-columbia.com/listings/salmon-point-resort-rv-park-marina/"
+    },
+    "Camping & RV BC": {
+      "name": "Campground Profile",
+      "url": "https://www.campingrvbc.com/sites/bc/salmon-point-resort-rv-park-marina-campbell-river/"
+    }
+  }
+}
