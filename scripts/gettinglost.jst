@@ -195,10 +195,13 @@
 
   function renderPhoto(el) {
     var img = el.getAttribute("data-img");
-    var lat = parseFloat(el.getAttribute("data-lat"));
-    var lng = parseFloat(el.getAttribute("data-lng"));
+    var hasLat = el.hasAttribute("data-lat");
+    var hasLng = el.hasAttribute("data-lng");
+    var lat = hasLat ? parseFloat(el.getAttribute("data-lat")) : NaN;
+    var lng = hasLng ? parseFloat(el.getAttribute("data-lng")) : NaN;
+    var hasGps = !isNaN(lat) && !isNaN(lng);
 
-    if (!img || isNaN(lat) || isNaN(lng)) {
+    if (!img) {
       return;
     }
 
@@ -222,18 +225,24 @@
     }
 
     var src = "/wp-content/uploads/" + img;
-    var mapsUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
-    var caption = toDMS(lat, true) + ", " + toDMS(lng, false);
+
+    var captionHtml = "";
+    if (hasGps) {
+      var mapsUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+      var caption = toDMS(lat, true) + ", " + toDMS(lng, false);
+      captionHtml =
+        '<p style="font-size:0.8rem;color:#888;margin:0.3rem 0 0;text-align:center;">' +
+        '<a href="' + mapsUrl + '" target="_blank" rel="noopener noreferrer" style="color:#888;">' +
+        caption +
+        "</a>" +
+        "</p>";
+    }
 
     el.innerHTML =
       '<a href="' + src + '" target="_blank" rel="noopener noreferrer">' +
       '<img src="' + src + '" alt="" style="width:100%;height:auto;display:block;border:1px solid #ccc;">' +
       "</a>" +
-      '<p style="font-size:0.8rem;color:#888;margin:0.3rem 0 0;text-align:center;">' +
-      '<a href="' + mapsUrl + '" target="_blank" rel="noopener noreferrer" style="color:#888;">' +
-      caption +
-      "</a>" +
-      "</p>";
+      captionHtml;
   }
 
   // ---------------------------------------------------------------------
