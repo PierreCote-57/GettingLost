@@ -33,7 +33,7 @@
       "sectionName": "RV",
       "list": [
         {
-          "name": "Coachmen Beyond manuals",
+          "name": "Coachmen Beyond",
           "url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
           "description": [
             "Index to all the manuals and videos."
@@ -45,14 +45,14 @@
       "sectionName": "Canada",
       "list": [
         {
-          "name": "Canada Day soon",
+          "name": "Canada Parks",
           "url": "https://parks.canada.ca",
           "description": [
             "Tons of information about the parks and camping in general."
           ]
         },
 		  {
-			  "name": "Canada Day soon",
+			  "name": "Canada Parks Reservations",
 			  "url": "https://reservation.pc.gc.ca",
 			  "description": [
 				  "Reserve your campsite in a Canadian park"
@@ -97,10 +97,10 @@
       "sectionName": "Other province",
       "list": [
         {
-          "name": "TBD",
-          "url": null,
+          "name": "New Foundland and Labrador",
+          "url": "https://www.newfoundlandlabrador.com",
           "description": [
-            "TBD"
+            "The island at the other end of Canada"
           ]
         }
       ]

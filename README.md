@@ -6,6 +6,9 @@ site (gettinglostonvi.wpcomstaging.com).
 
 **Blog posts stay native to WordPress** and are not represented here.
 
+## To push to Wordpress:
+https://github.com/PierreCote-57/GettingLost/actions/workflows/sync.yml
+
 ## Structure
 
 ```
