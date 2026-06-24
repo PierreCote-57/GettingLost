@@ -33,10 +33,10 @@
       "sectionName": "RV",
       "list": [
         {
-          "name": "TBD",
-          "url": null,
+          "name": "Coachmen Beyond manuals",
+          "url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
           "description": [
-            "TBD"
+            "Index to all the manuals and videos."
           ]
         }
       ]
@@ -46,11 +46,18 @@
       "list": [
         {
           "name": "Canada Day soon",
-          "url": null,
+          "url": "https://parks.canada.ca",
           "description": [
-            "TBD"
+            "Tons of information about the parks and camping in general."
           ]
-        }
+        },
+		  {
+			  "name": "Canada Day soon",
+			  "url": "https://reservation.pc.gc.ca",
+			  "description": [
+				  "Reserve your campsite in a Canadian park"
+			  ]
+		  }
       ]
     },
     {
