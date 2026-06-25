@@ -74,4 +74,5 @@ jobs:
           WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          FILEBIRD_TOKEN: ${{ secrets.FILEBIRD_TOKEN }}
         run: node sync.js --changed-files=../../changed-files.txt --removed-files=../../removed-files.txt

@@ -59,6 +59,12 @@ const WP_APP_PASSWORD = requireEnv("WP_APP_PASSWORD");
 const AUTH_HEADER =
   "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
 
+// Intentionally NOT read via requireEnv(): FileBird folder filing is a
+// best-effort, log-only feature (see syncOneFileToFileBird below). A
+// missing or bad token should degrade that one feature, never crash
+// the actual WordPress content sync.
+const FILEBIRD_TOKEN = process.env.FILEBIRD_TOKEN || null;
+
 // ---------------------------------------------------------------------
 // Incremental mode
 //
@@ -130,6 +136,17 @@ function wpFetch(endpoint, options = {}) {
     ...options,
     headers: {
       Authorization: AUTH_HEADER,
+      ...(options.headers || {}),
+    },
+  });
+}
+
+function fbFetch(endpoint, options = {}) {
+  const url = `${WP_SITE_URL}/wp-json/filebird/public/v1${endpoint}`;
+  return fetch(url, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${FILEBIRD_TOKEN}`,
       ...(options.headers || {}),
     },
   });
@@ -285,7 +302,110 @@ async function uploadMedia(filename, fileBuffer, mimeType) {
   return res.json();
 }
 
-async function syncFiles() {
+async function syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType) {
+  try {
+    const existingId = await findExistingMediaIdByFilename(filename);
+    if (existingId) {
+      await deleteMedia(existingId);
+    }
+    const uploaded = await uploadMedia(filename, fileBuffer, mimeType);
+    console.log(`[files] OK ${relSubPath}${existingId ? " (overwritten)" : " (new)"}`);
+    return uploaded.id;
+  } catch (err) {
+    console.error(`[files] FAILED ${relSubPath}:`, err.message);
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------
+// FILEBIRD folder filing — best effort, log-only. A FileBird problem
+// (no token, network error, bad folder data, etc.) never affects
+// syncFiles()'s successCount/failCount; it's only ever logged.
+//
+// A file's path relative to media/ (e.g. "data/lakes/amor-lake.json")
+// is mirrored EXACTLY into FileBird as nested folders, case-sensitive
+// — "data" then "lakes" — with the file assigned to the innermost one.
+// Folders are created on demand the first time they're needed.
+// ---------------------------------------------------------------------
+
+async function loadFileBirdFolderTree() {
+  const cache = new Map(); // full path string (e.g. "data/lakes") -> folder id
+  const res = await fbFetch("/folders");
+  if (!res.ok) {
+    throw new Error(`folder list failed: HTTP ${res.status}`);
+  }
+  const json = await res.json();
+  const roots = (json.data && json.data.folders) || [];
+
+  function walk(nodes, parentPath) {
+    for (const node of nodes) {
+      const fullPath = parentPath ? `${parentPath}/${node.text}` : node.text;
+      cache.set(fullPath, node.id);
+      if (node.children && node.children.length) {
+        walk(node.children, fullPath);
+      }
+    }
+  }
+  walk(roots, "");
+  return cache;
+}
+
+async function ensureFileBirdFolderPath(folderCache, segments) {
+  let parentId = 0;
+  let pathSoFar = "";
+
+  for (const name of segments) {
+    pathSoFar = pathSoFar ? `${pathSoFar}/${name}` : name;
+
+    if (!folderCache.has(pathSoFar)) {
+      const res = await fbFetch("/folders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, parent_id: parentId }),
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error(`create folder "${pathSoFar}" failed: HTTP ${res.status} — ${body}`);
+      }
+      const created = await res.json();
+      const newId = created.data && created.data.id;
+      if (!newId) {
+        throw new Error(`create folder "${pathSoFar}" returned no id: ${JSON.stringify(created)}`);
+      }
+      folderCache.set(pathSoFar, newId);
+      console.log(`[filebird] created folder "${pathSoFar}" (id ${newId})`);
+    }
+
+    parentId = folderCache.get(pathSoFar);
+  }
+
+  return parentId; // id of the deepest (innermost) folder in the path
+}
+
+async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
+  if (!folderCache) return; // disabled this run — no token, or initial load failed
+
+  const segments = path.posix.dirname(relSubPath).split("/").filter(Boolean);
+  if (segments.length === 0) return; // file sits directly in media/ root, nothing to file into
+
+  try {
+    const folderId = await ensureFileBirdFolderPath(folderCache, segments);
+    const res = await fbFetch("/folder/set-attachment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ folder: folderId, ids: mediaId }),
+    });
+    const json = await res.json().catch(() => null);
+    if (!res.ok || !json || json.success !== true) {
+      throw new Error(`set-attachment failed: HTTP ${res.status} — ${JSON.stringify(json)}`);
+    }
+    console.log(`[filebird] filed ${relSubPath} -> ${segments.join("/")}`);
+  } catch (err) {
+    console.warn(`[filebird] FAILED to file ${relSubPath}:`, err.message);
+  }
+}
+
+async function syncFiles(fileBirdFolderCache) {
   let successCount = 0;
   let failCount = 0;
 
@@ -309,16 +429,12 @@ async function syncFiles() {
     const fileBuffer = fs.readFileSync(filePath);
     const mimeType = guessMimeFromExt(filename);
 
-    try {
-      const existingId = await findExistingMediaIdByFilename(filename);
-      if (existingId) {
-        await deleteMedia(existingId);
-      }
-      await uploadMedia(filename, fileBuffer, mimeType);
-      console.log(`[files] OK ${relSubPath}${existingId ? " (overwritten)" : " (new)"}`);
+    const mediaId = await syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType);
+
+    if (mediaId) {
       successCount++;
-    } catch (err) {
-      console.error(`[files] FAILED ${relSubPath}:`, err.message);
+      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, relSubPath);
+    } else {
       failCount++;
     }
   }
@@ -338,8 +454,21 @@ async function syncFiles() {
 async function main() {
   console.log(`Syncing to ${WP_SITE_URL} ...\n`);
 
+  let fileBirdFolderCache = null;
+  if (FILEBIRD_TOKEN) {
+    try {
+      fileBirdFolderCache = await loadFileBirdFolderTree();
+      console.log(`[filebird] Loaded folder tree (${fileBirdFolderCache.size} folders known).\n`);
+    } catch (err) {
+      console.warn(`[filebird] Could not load folder tree — FileBird filing disabled for this run: ${err.message}\n`);
+      fileBirdFolderCache = null;
+    }
+  } else {
+    console.warn("[filebird] FILEBIRD_TOKEN not set — FileBird filing disabled for this run.\n");
+  }
+
   console.log("=== Syncing files (JSON data + scripts) ===");
-  const filesResult = await syncFiles();
+  const filesResult = await syncFiles(fileBirdFolderCache);
 
   console.log("\n=== Syncing pages ===");
   const pagesResult = await syncPages();
