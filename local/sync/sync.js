@@ -38,7 +38,26 @@
 const fs = require("fs");
 const path = require("path");
 
+// ---------------------------------------------------------------------
+// Top-level constants (ALL CAPS) — grouped here for easy reference
+// and adjustment. Everything else in the file is functions and logic;
+// if you need to change a path, env var name, or mode flag, it's here.
+// ---------------------------------------------------------------------
+
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
+const PAGES_ROOT = path.join(REPO_ROOT, "pages");
+const MEDIA_ROOT = path.join(REPO_ROOT, "media");
+
+const INCREMENTAL =
+  process.argv.some((a) => a.startsWith("--changed-files=")) ||
+  process.argv.some((a) => a.startsWith("--removed-files="));
+
+const WP_SITE_URL = requireEnv("WP_SITE_URL").replace(/\/$/, "");
+const WP_USER = requireEnv("WP_USER");
+const WP_APP_PASSWORD = requireEnv("WP_APP_PASSWORD");
+
+const AUTH_HEADER =
+  "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
 
 // ---------------------------------------------------------------------
 // Incremental mode
@@ -71,10 +90,6 @@ function readLines(flagName) {
     .filter(Boolean);
 }
 
-const changedArgPresent = process.argv.some((a) => a.startsWith("--changed-files="));
-const removedArgPresent = process.argv.some((a) => a.startsWith("--removed-files="));
-const INCREMENTAL = changedArgPresent || removedArgPresent;
-
 let CHANGED = null;
 if (INCREMENTAL) {
   const changedList = readLines("--changed-files") || [];
@@ -100,13 +115,6 @@ if (INCREMENTAL) {
   console.log("Running in full-overwrite mode (no --changed-files/--removed-files supplied).");
 }
 
-const WP_SITE_URL = requireEnv("WP_SITE_URL").replace(/\/$/, "");
-const WP_USER = requireEnv("WP_USER");
-const WP_APP_PASSWORD = requireEnv("WP_APP_PASSWORD");
-
-const AUTH_HEADER =
-  "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
-
 function requireEnv(name) {
   const value = process.env[name];
   if (!value) {
@@ -131,19 +139,35 @@ function wpFetch(endpoint, options = {}) {
 // PAGES sync
 // ---------------------------------------------------------------------
 
-function checkForUnmappedPages(pageMap, pageDirs) {
+function buildPageFileMap() {
+  // slug -> { filePath, relPath } — built from one recursive walk of
+  // pages/, so the actual folder a page lives in (lakes/parks/
+  // campgrounds/templates/special/...) never has to be hardcoded or
+  // kept in sync with page-map.json's category names.
+  const map = new Map();
+  if (!fs.existsSync(PAGES_ROOT)) return map;
+
+  const entries = fs.readdirSync(PAGES_ROOT, { recursive: true });
+  for (const entry of entries) {
+    if (!entry.endsWith(".html")) continue;
+    const slug = path.basename(entry, ".html");
+    const filePath = path.join(PAGES_ROOT, entry);
+    const relPath = path.posix.join("pages", entry.split(path.sep).join("/"));
+    map.set(slug, { filePath, relPath });
+  }
+  return map;
+}
+
+function checkForUnmappedPages(pageMap, pageFileMap) {
+  const mappedSlugs = new Set();
+  for (const slugToId of Object.values(pageMap)) {
+    for (const slug of Object.keys(slugToId)) mappedSlugs.add(slug);
+  }
+
   const unmapped = [];
-
-  for (const [category, dir] of Object.entries(pageDirs)) {
-    if (!fs.existsSync(dir)) continue;
-    const mappedSlugs = new Set(Object.keys(pageMap[category] || {}));
-
-    for (const filename of fs.readdirSync(dir)) {
-      if (!filename.endsWith(".html")) continue;
-      const slug = filename.replace(/\.html$/, "");
-      if (!mappedSlugs.has(slug)) {
-        unmapped.push(`${category}/${filename}`);
-      }
+  for (const [slug, entry] of pageFileMap) {
+    if (!mappedSlugs.has(slug)) {
+      unmapped.push(entry.relPath);
     }
   }
 
@@ -160,40 +184,26 @@ async function syncPages() {
   const pageMapPath = path.join(REPO_ROOT, "local", "config", "page-map.json");
   const pageMap = JSON.parse(fs.readFileSync(pageMapPath, "utf8"));
 
-  const pageDirs = {
-    lakes: path.join(REPO_ROOT, "pages", "lakes"),
-    parks: path.join(REPO_ROOT, "pages", "parks"),
-    campgrounds: path.join(REPO_ROOT, "pages", "campgrounds"),
-    templates: path.join(REPO_ROOT, "pages", "templates"),
-    site: path.join(REPO_ROOT, "pages", "site"),
-  };
-
-  checkForUnmappedPages(pageMap, pageDirs);
+  const pageFileMap = buildPageFileMap();
+  checkForUnmappedPages(pageMap, pageFileMap);
 
   let successCount = 0;
   let failCount = 0;
 
   for (const [category, slugToId] of Object.entries(pageMap)) {
-    const dir = pageDirs[category];
-    if (!dir) {
-      console.warn(`No page directory configured for category "${category}" — skipping.`);
-      continue;
-    }
-
     for (const [slug, pageId] of Object.entries(slugToId)) {
-      const filePath = path.join(dir, `${slug}.html`);
-      const relPath = path.posix.join("pages", category, `${slug}.html`);
+      const entry = pageFileMap.get(slug);
 
-      if (CHANGED && !CHANGED.pageMapChanged && !CHANGED.files.has(relPath)) {
-        continue; // not part of this push — leave it alone
-      }
-
-      if (!fs.existsSync(filePath)) {
-        console.warn(`[pages] ${category}/${slug}: no file at ${filePath} — skipping.`);
+      if (!entry) {
+        console.warn(`[pages] ${category}/${slug}: no file found anywhere under pages/ — skipping.`);
         continue;
       }
 
-      const content = fs.readFileSync(filePath, "utf8");
+      if (CHANGED && !CHANGED.pageMapChanged && !CHANGED.files.has(entry.relPath)) {
+        continue; // not part of this push — leave it alone
+      }
+
+      const content = fs.readFileSync(entry.filePath, "utf8");
 
       try {
         const res = await wpFetch(`/pages/${pageId}`, {
@@ -229,8 +239,6 @@ async function syncPages() {
 // ---------------------------------------------------------------------
 // FILES sync (JSON data files + .jst scripts) — delete-then-recreate
 // ---------------------------------------------------------------------
-
-const MEDIA_ROOT = path.join(REPO_ROOT, "media");
 
 function guessMimeFromExt(filename) {
   if (filename.endsWith(".jst")) return "text/text";
