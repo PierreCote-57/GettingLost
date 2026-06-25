@@ -20,7 +20,7 @@ jobs:
           node-version: "20"
 
       - name: Run sync script
-        working-directory: scripts/sync
+        working-directory: local/sync
         env:
           WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
           WP_USER: ${{ secrets.WP_USER }}

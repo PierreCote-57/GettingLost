@@ -69,7 +69,7 @@ jobs:
           echo "Removed files:"; cat removed-files.txt
 
       - name: Run incremental sync
-        working-directory: scripts/sync
+        working-directory: local/sync
         env:
           WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
           WP_USER: ${{ secrets.WP_USER }}
