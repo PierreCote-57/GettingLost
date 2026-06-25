@@ -1,4 +1,4 @@
-name: Sync to WordPress (incremental, on push)
+name: To WordPress (incr, on push)
 
 # Runs automatically on every push to main. Builds the list of
 # changed/removed files from the push event itself (commits[].added /

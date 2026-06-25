@@ -1,4 +1,4 @@
-name: Sync to WordPress
+name: To WordPress (full)
 
 # Manual trigger only — pushing to GitHub does NOT auto-publish.
 # Go to the Actions tab → "Sync to WordPress" → "Run workflow" to push
