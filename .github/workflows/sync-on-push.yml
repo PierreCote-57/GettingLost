@@ -1,9 +1,12 @@
 name: To WordPress (incr, on push)
 
 # Runs automatically on every push to main. Builds the list of
-# changed/removed files from the push event itself (commits[].added /
-# .modified / .removed — no git diff needed) and syncs only those
-# files to WordPress.
+# changed/removed files with `git diff --name-status` between the
+# push's before/after commits — this reads the actual commit history,
+# so it works the same whether the push came from the GitHub web
+# editor, the command line, or anything else. (The push event's own
+# commits[].added/modified/removed fields are NOT used here — they're
+# unreliable for commits made via the web editor.)
 #
 # - Removed files are logged as a warning, never auto-deleted from WP.
 # - New page files with no entry in config/page-map.json are logged
@@ -29,40 +32,41 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Determine changed files from push event
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const commits = context.payload.commits || [];
+      - name: Determine changed files
+        run: |
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.event.after }}"
+          EMPTY_SHA="0000000000000000000000000000000000000000"
 
-            // Walk commits in order so a later status wins (e.g. a
-            // file added then removed within the same push ends up
-            // correctly marked "removed").
-            const status = new Map();
-            for (const commit of commits) {
-              for (const f of commit.added || [])    status.set(f, 'changed');
-              for (const f of commit.modified || [])  status.set(f, 'changed');
-              for (const f of commit.removed || [])   status.set(f, 'removed');
-            }
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "$EMPTY_SHA" ]; then
+            echo "No previous commit on this branch — diffing the commit against its parent (or treating as all-new if it's the root commit)."
+            git show --name-status --pretty=format: "$AFTER" > diff.txt
+          else
+            git diff --name-status "$BEFORE" "$AFTER" > diff.txt
+          fi
 
-            const changed = [];
-            const removed = [];
-            for (const [file, st] of status) {
-              (st === 'removed' ? removed : changed).push(file);
-            }
+          echo "Raw diff:"
+          cat diff.txt
 
-            fs.writeFileSync('changed-files.txt', changed.join('\n'));
-            fs.writeFileSync('removed-files.txt', removed.join('\n'));
+          # D <path>            -> removed
+          # everything else, last column on the line -> changed
+          # (covers A/M, and R### old\tnew renames by taking the new path)
+          awk '
+            $1 ~ /^D/ { print $2 >> "removed-files.txt"; next }
+            { print $NF >> "changed-files.txt" }
+          ' diff.txt
 
-            console.log('Changed files:', changed);
-            console.log('Removed files:', removed);
+          touch changed-files.txt removed-files.txt
+          echo "Changed files:"; cat changed-files.txt
+          echo "Removed files:"; cat removed-files.txt
 
       - name: Run incremental sync
         working-directory: scripts/sync
