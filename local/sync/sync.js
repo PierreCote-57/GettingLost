@@ -157,7 +157,7 @@ function checkForUnmappedPages(pageMap, pageDirs) {
 }
 
 async function syncPages() {
-  const pageMapPath = path.join(REPO_ROOT, "config", "page-map.json");
+  const pageMapPath = path.join(REPO_ROOT, "local", "config", "page-map.json");
   const pageMap = JSON.parse(fs.readFileSync(pageMapPath, "utf8"));
 
   const pageDirs = {
@@ -230,14 +230,7 @@ async function syncPages() {
 // FILES sync (JSON data files + .jst scripts) — delete-then-recreate
 // ---------------------------------------------------------------------
 
-const FILE_SOURCE_DIRS = [
-  { dir: path.join(REPO_ROOT, "scripts"), mime: guessMimeFromExt },
-  { dir: path.join(REPO_ROOT, "media", "campgrounds"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "media", "lakes"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "media", "parks"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "media", "special"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "gallery-data"), mime: () => "application/json" },
-];
+const MEDIA_ROOT = path.join(REPO_ROOT, "media");
 
 function guessMimeFromExt(filename) {
   if (filename.endsWith(".jst")) return "text/text";
@@ -288,36 +281,37 @@ async function syncFiles() {
   let successCount = 0;
   let failCount = 0;
 
-  for (const { dir, mime } of FILE_SOURCE_DIRS) {
-    if (!fs.existsSync(dir)) continue;
+  if (!fs.existsSync(MEDIA_ROOT)) {
+    console.warn(`[files] media root not found at ${MEDIA_ROOT} — nothing to sync.`);
+    return { successCount, failCount };
+  }
 
-    const filenames = fs
-      .readdirSync(dir)
-      .filter((f) => f.endsWith(".json") || f.endsWith(".jst"));
+  const allEntries = fs.readdirSync(MEDIA_ROOT, { recursive: true });
+  const filenames = allEntries.filter((f) => f.endsWith(".json") || f.endsWith(".jst"));
 
-    for (const filename of filenames) {
-      const filePath = path.join(dir, filename);
-      const relPath = path.posix.relative(REPO_ROOT, filePath);
+  for (const relSubPath of filenames) {
+    const filePath = path.join(MEDIA_ROOT, relSubPath);
+    const filename = path.basename(filePath);
+    const relPath = path.posix.relative(REPO_ROOT, filePath);
 
-      if (CHANGED && !CHANGED.files.has(relPath)) {
-        continue; // not part of this push — leave it alone
+    if (CHANGED && !CHANGED.files.has(relPath)) {
+      continue; // not part of this push — leave it alone
+    }
+
+    const fileBuffer = fs.readFileSync(filePath);
+    const mimeType = guessMimeFromExt(filename);
+
+    try {
+      const existingId = await findExistingMediaIdByFilename(filename);
+      if (existingId) {
+        await deleteMedia(existingId);
       }
-
-      const fileBuffer = fs.readFileSync(filePath);
-      const mimeType = mime(filename);
-
-      try {
-        const existingId = await findExistingMediaIdByFilename(filename);
-        if (existingId) {
-          await deleteMedia(existingId);
-        }
-        await uploadMedia(filename, fileBuffer, mimeType);
-        console.log(`[files] OK ${filename}${existingId ? " (overwritten)" : " (new)"}`);
-        successCount++;
-      } catch (err) {
-        console.error(`[files] FAILED ${filename}:`, err.message);
-        failCount++;
-      }
+      await uploadMedia(filename, fileBuffer, mimeType);
+      console.log(`[files] OK ${relSubPath}${existingId ? " (overwritten)" : " (new)"}`);
+      successCount++;
+    } catch (err) {
+      console.error(`[files] FAILED ${relSubPath}:`, err.message);
+      failCount++;
     }
   }
 
@@ -325,9 +319,8 @@ async function syncFiles() {
 }
 
 // ---------------------------------------------------------------------
-// Gallery JSON sync (Destinations/Lakes/Parks/Campgrounds in
-// gallery-data/) is already covered by syncFiles() above since
-// gallery-data/ is in FILE_SOURCE_DIRS — no special-casing needed.
+// Gallery JSON (media/special/gallery-data/) is picked up automatically
+// by syncFiles()'s recursive walk of media/ — no special-casing needed.
 // ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------
