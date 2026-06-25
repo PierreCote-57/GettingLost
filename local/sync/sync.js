@@ -11,7 +11,7 @@
  *
  *   1. PAGES — full-content overwrite via the WP REST API
  *      (PUT/POST /wp/v2/pages/<id> with the repo's HTML as `content`).
- *      Uses config/page-map.json to know which WordPress page ID
+ *      Uses local/config/page-map.json to know which WordPress page ID
  *      corresponds to each repo file.
  *
  *   2. FILES (JSON data files + .jst scripts) — uploaded to the media
@@ -89,12 +89,12 @@ if (INCREMENTAL) {
 
   CHANGED = {
     files: new Set(changedList),
-    pageMapChanged: changedList.includes("config/page-map.json"),
+    pageMapChanged: changedList.includes("local/config/page-map.json"),
   };
 
   console.log(`[incremental] Running in incremental mode — ${CHANGED.files.size} changed file(s).`);
   if (CHANGED.pageMapChanged) {
-    console.log("[incremental] config/page-map.json changed — all pages will be synced.");
+    console.log("[incremental] local/config/page-map.json changed — all pages will be synced.");
   }
 } else {
   console.log("Running in full-overwrite mode (no --changed-files/--removed-files supplied).");
@@ -149,9 +149,9 @@ function checkForUnmappedPages(pageMap, pageDirs) {
 
   if (unmapped.length > 0) {
     console.warn(
-      `[pages] ${unmapped.length} page file(s) found with no entry in config/page-map.json — NOT synced:\n` +
+      `[pages] ${unmapped.length} page file(s) found with no entry in local/config/page-map.json — NOT synced:\n` +
         unmapped.map((f) => `  - ${f}`).join("\n") +
-        `\n  Create the page in WordPress, add its slug → page ID to config/page-map.json, then push again.`
+        `\n  Create the page in WordPress, add its slug → page ID to local/config/page-map.json, then push again.`
     );
   }
 }
@@ -232,10 +232,10 @@ async function syncPages() {
 
 const FILE_SOURCE_DIRS = [
   { dir: path.join(REPO_ROOT, "scripts"), mime: guessMimeFromExt },
-  { dir: path.join(REPO_ROOT, "data", "lakes"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "data", "parks"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "data", "campgrounds"), mime: () => "application/json" },
-  { dir: path.join(REPO_ROOT, "data", "site"), mime: () => "application/json" },
+  { dir: path.join(REPO_ROOT, "media", "campgrounds"), mime: () => "application/json" },
+  { dir: path.join(REPO_ROOT, "media", "lakes"), mime: () => "application/json" },
+  { dir: path.join(REPO_ROOT, "media", "parks"), mime: () => "application/json" },
+  { dir: path.join(REPO_ROOT, "media", "special"), mime: () => "application/json" },
   { dir: path.join(REPO_ROOT, "gallery-data"), mime: () => "application/json" },
 ];
 
