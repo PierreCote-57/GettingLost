@@ -40,6 +40,66 @@ const path = require("path");
 
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
 
+// ---------------------------------------------------------------------
+// Incremental mode
+//
+// Invoked with --changed-files=<path> and --removed-files=<path>,
+// each pointing to a plain text file (one repo-relative path per
+// line), built by the push workflow from the GitHub push event's
+// commits[].added / .modified / .removed lists.
+//
+//   - With no flags: full-overwrite mode, identical to the original
+//     script (used by the manual workflow_dispatch trigger).
+//   - With flags: only files in --changed-files are synced. Files in
+//     --removed-files are logged as a warning and otherwise ignored —
+//     this script never deletes content from WordPress automatically.
+// ---------------------------------------------------------------------
+
+function readLines(flagName) {
+  const arg = process.argv.find((a) => a.startsWith(`${flagName}=`));
+  if (!arg) return null;
+
+  const listPath = path.resolve(arg.slice(flagName.length + 1));
+  if (!fs.existsSync(listPath)) {
+    console.warn(`${flagName} path not found (${listPath}) — treating as empty.`);
+    return [];
+  }
+  return fs
+    .readFileSync(listPath, "utf8")
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+}
+
+const changedArgPresent = process.argv.some((a) => a.startsWith("--changed-files="));
+const removedArgPresent = process.argv.some((a) => a.startsWith("--removed-files="));
+const INCREMENTAL = changedArgPresent || removedArgPresent;
+
+let CHANGED = null;
+if (INCREMENTAL) {
+  const changedList = readLines("--changed-files") || [];
+  const removedList = readLines("--removed-files") || [];
+
+  if (removedList.length > 0) {
+    console.warn(
+      `[incremental] ${removedList.length} file(s) removed in this push — skipping, NOT deleting from WordPress:\n` +
+        removedList.map((f) => `  - ${f}`).join("\n")
+    );
+  }
+
+  CHANGED = {
+    files: new Set(changedList),
+    pageMapChanged: changedList.includes("config/page-map.json"),
+  };
+
+  console.log(`[incremental] Running in incremental mode — ${CHANGED.files.size} changed file(s).`);
+  if (CHANGED.pageMapChanged) {
+    console.log("[incremental] config/page-map.json changed — all pages will be synced.");
+  }
+} else {
+  console.log("Running in full-overwrite mode (no --changed-files/--removed-files supplied).");
+}
+
 const WP_SITE_URL = requireEnv("WP_SITE_URL").replace(/\/$/, "");
 const WP_USER = requireEnv("WP_USER");
 const WP_APP_PASSWORD = requireEnv("WP_APP_PASSWORD");
@@ -71,6 +131,31 @@ function wpFetch(endpoint, options = {}) {
 // PAGES sync
 // ---------------------------------------------------------------------
 
+function checkForUnmappedPages(pageMap, pageDirs) {
+  const unmapped = [];
+
+  for (const [category, dir] of Object.entries(pageDirs)) {
+    if (!fs.existsSync(dir)) continue;
+    const mappedSlugs = new Set(Object.keys(pageMap[category] || {}));
+
+    for (const filename of fs.readdirSync(dir)) {
+      if (!filename.endsWith(".html")) continue;
+      const slug = filename.replace(/\.html$/, "");
+      if (!mappedSlugs.has(slug)) {
+        unmapped.push(`${category}/${filename}`);
+      }
+    }
+  }
+
+  if (unmapped.length > 0) {
+    console.warn(
+      `[pages] ${unmapped.length} page file(s) found with no entry in config/page-map.json — NOT synced:\n` +
+        unmapped.map((f) => `  - ${f}`).join("\n") +
+        `\n  Create the page in WordPress, add its slug → page ID to config/page-map.json, then push again.`
+    );
+  }
+}
+
 async function syncPages() {
   const pageMapPath = path.join(REPO_ROOT, "config", "page-map.json");
   const pageMap = JSON.parse(fs.readFileSync(pageMapPath, "utf8"));
@@ -82,6 +167,8 @@ async function syncPages() {
     templates: path.join(REPO_ROOT, "pages", "templates"),
     site: path.join(REPO_ROOT, "pages", "site"),
   };
+
+  checkForUnmappedPages(pageMap, pageDirs);
 
   let successCount = 0;
   let failCount = 0;
@@ -95,6 +182,12 @@ async function syncPages() {
 
     for (const [slug, pageId] of Object.entries(slugToId)) {
       const filePath = path.join(dir, `${slug}.html`);
+      const relPath = path.posix.join("pages", category, `${slug}.html`);
+
+      if (CHANGED && !CHANGED.pageMapChanged && !CHANGED.files.has(relPath)) {
+        continue; // not part of this push — leave it alone
+      }
+
       if (!fs.existsSync(filePath)) {
         console.warn(`[pages] ${category}/${slug}: no file at ${filePath} — skipping.`);
         continue;
@@ -204,6 +297,12 @@ async function syncFiles() {
 
     for (const filename of filenames) {
       const filePath = path.join(dir, filename);
+      const relPath = path.posix.relative(REPO_ROOT, filePath);
+
+      if (CHANGED && !CHANGED.files.has(relPath)) {
+        continue; // not part of this push — leave it alone
+      }
+
       const fileBuffer = fs.readFileSync(filePath);
       const mimeType = mime(filename);
 

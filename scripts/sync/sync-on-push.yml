@@ -1,0 +1,73 @@
+name: Sync to WordPress (incremental, on push)
+
+# Runs automatically on every push to main. Builds the list of
+# changed/removed files from the push event itself (commits[].added /
+# .modified / .removed — no git diff needed) and syncs only those
+# files to WordPress.
+#
+# - Removed files are logged as a warning, never auto-deleted from WP.
+# - New page files with no entry in config/page-map.json are logged
+#   as a warning by sync.js, never auto-created in WP.
+# - If config/page-map.json itself changes, all pages are synced
+#   (IDs/structure may have shifted).
+#
+# The separate "Sync to WordPress" workflow (manual, workflow_dispatch)
+# is unchanged and remains your full-overwrite "force everything" tool.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pages/**"
+      - "data/**"
+      - "gallery-data/**"
+      - "scripts/**"
+      - "config/page-map.json"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Determine changed files from push event
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const commits = context.payload.commits || [];
+
+            // Walk commits in order so a later status wins (e.g. a
+            // file added then removed within the same push ends up
+            // correctly marked "removed").
+            const status = new Map();
+            for (const commit of commits) {
+              for (const f of commit.added || [])    status.set(f, 'changed');
+              for (const f of commit.modified || [])  status.set(f, 'changed');
+              for (const f of commit.removed || [])   status.set(f, 'removed');
+            }
+
+            const changed = [];
+            const removed = [];
+            for (const [file, st] of status) {
+              (st === 'removed' ? removed : changed).push(file);
+            }
+
+            fs.writeFileSync('changed-files.txt', changed.join('\n'));
+            fs.writeFileSync('removed-files.txt', removed.join('\n'));
+
+            console.log('Changed files:', changed);
+            console.log('Removed files:', removed);
+
+      - name: Run incremental sync
+        working-directory: scripts/sync
+        env:
+          WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node sync.js --changed-files=../../changed-files.txt --removed-files=../../removed-files.txt
