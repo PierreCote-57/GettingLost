@@ -96,6 +96,13 @@
     {
       "sectionName": "Other province",
       "list": [
+		  {
+			  "name": "Camping in Alberta Parks",
+			  "url": "https://www.albertaparks.ca/albertaparks-ca/visit-our-parks/camping-in-alberta-parks/",
+			  "description": [
+				  "Beautiful rockies"
+			  ]
+		  },
         {
           "name": "New Foundland and Labrador",
           "url": "https://www.newfoundlandlabrador.com",
