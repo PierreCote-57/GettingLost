@@ -1,140 +1,62 @@
 [
-  {
-    "title": "Amor Lake",
-    "slug": "amor-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0706.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Beavertail Lake",
-    "slug": "beavertail-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0873.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Blackwater Lake",
-    "slug": "blackwater-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0696.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Brewster Lake",
-    "slug": "brewster-lake",
-    "image": "/wp-content/uploads/IMG_0611.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Campbell Lake",
-    "slug": "campbell-lake",
-    "image": "/wp-content/uploads/IMG_0891.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Chain Lake",
-    "slug": "chain-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0682.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Crest Lake",
-    "slug": "crest-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0786.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Drum Lake",
-    "slug": "drum-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0781.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Echo Lake",
-    "slug": "echo-lake",
-    "image": "/wp-content/uploads/IMG_0522.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Gosling Lake",
-    "slug": "gosling-lake",
-    "image": "/wp-content/uploads/2026/06/ActiveWorksite.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Gray Lake",
-    "slug": "gray-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0769.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Keogh Lake",
-    "slug": "keogh-lake",
-    "image": "/wp-content/uploads/2026/06/under-construction.png",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "McCreight Lake",
-    "slug": "mccreight-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0407.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Merrill Lake",
-    "slug": "merrill-lake",
-    "image": "/wp-content/uploads/IMG_0737.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Mohun Lake",
-    "slug": "mohun-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0430.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Morton Lake",
-    "slug": "morton-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0578.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Muchalat Lake",
-    "slug": "muchalat-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0795.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Roberts Lake",
-    "slug": "roberts-lake",
-    "image": "/wp-content/uploads/IMG_0627.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Snakehead Lake",
-    "slug": "snakehead-lake",
-    "image": "/wp-content/uploads/2026/06/IMG_0878.jpg",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Sproat Lake",
-    "slug": "sproat-lake",
-    "image": "/wp-content/uploads/2026/06/under-construction.png",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Pacific Playgrounds Resort",
-    "slug": "pacific-playgrounds-resort",
-    "image": "/wp-content/uploads/2026/06/under-construction.png",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Salmon Point Resort",
-    "slug": "salmon-point-resort",
-    "image": "/wp-content/uploads/2026/06/under-construction.png",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  },
-  {
-    "title": "Elk Falls Park (Quinsam Campground)",
-    "slug": "elk-falls-quinsam-campground",
-    "image": "/wp-content/uploads/2026/06/under-construction.png",
-    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
-  }
+    {
+        "title": "Amor Lake",
+        "slug": "amor-lake",
+        "image": "/wp-content/uploads/2026/06/IMG_0706.jpg",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Echo Lake",
+        "slug": "echo-lake",
+        "image": "/wp-content/uploads/IMG_0522.jpg",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Gosling Lake",
+        "slug": "gosling-lake",
+        "image": "/wp-content/uploads/2026/06/ActiveWorksite.jpg",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Keogh Lake",
+        "slug": "keogh-lake",
+        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Muchalat Lake",
+        "slug": "muchalat-lake",
+        "image": "/wp-content/uploads/2026/06/IMG_0795.jpg",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Roberts Lake",
+        "slug": "roberts-lake",
+        "image": "/wp-content/uploads/IMG_0627.jpg",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Sproat Lake",
+        "slug": "sproat-lake",
+        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Pacific Playgrounds Resort",
+        "slug": "pacific-playgrounds-resort",
+        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Salmon Point Resort",
+        "slug": "salmon-point-resort",
+        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    },
+    {
+        "title": "Elk Falls Park (Quinsam Campground)",
+        "slug": "elk-falls-quinsam-campground",
+        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+    }
 ]
