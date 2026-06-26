@@ -1,42 +1,29 @@
 {
-  "lakes": {
-    "echo-lake": 809,
-    "amor-lake": 776,
-    "sproat-lake": 332,
-    "keogh-lake": 331,
-    "mohun-lake": 200,
-    "drum-lake": 196,
-    "crest-lake": 193,
-    "blackwater-lake": 180,
-    "chain-lake": 177,
-    "muchalat-lake": 174,
-    "snakehead-lake": 171,
-    "beavertail-lake": 139,
-    "mccreight-lake": 134,
-    "gosling-lake": 124,
-    "gray-lake": 121,
-    "morton-lake": 108,
-    "campbell-lake": 36,
-    "brewster-lake": 35,
-    "merrill-lake": 34,
-    "roberts-lake": 33
-  },
-  "parks": {
-    "elk-falls-quinsam-campground": 988
-  },
-  "campgrounds": {
-    "pacific-playgrounds-resort": 585,
-    "salmon-point-resort": 579
-  },
-  "templates": {
-    "lake-template": 856,
-    "park-template": 1144,
-    "campground-template": 1180
-  },
-  "site": {
-    "home": 6,
-    "gallery": 843,
-    "about": 597,
-    "useful-links": 302
-  }
+    "lakes": {
+        "echo-lake": 809,
+        "amor-lake": 776,
+        "sproat-lake": 332,
+        "keogh-lake": 331,
+        "muchalat-lake": 174,
+        "gosling-lake": 124,
+        "roberts-lake": 33
+    },
+    "parks": {
+        "elk-falls-quinsam-campground": 988
+    },
+    "campgrounds": {
+        "pacific-playgrounds-resort": 585,
+        "salmon-point-resort": 579
+    },
+    "templates": {
+        "lake-template": 856,
+        "park-template": 1144,
+        "campground-template": 1180
+    },
+    "site": {
+        "home": 6,
+        "gallery": 843,
+        "about": 597,
+        "useful-links": 302
+    }
 }
