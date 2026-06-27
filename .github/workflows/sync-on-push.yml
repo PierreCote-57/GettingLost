@@ -9,9 +9,9 @@ name: To WordPress (incr, on push)
 # unreliable for commits made via the web editor.)
 #
 # - Removed files are logged as a warning, never auto-deleted from WP.
-# - New page files with no entry in config/page-map.json are logged
+# - New page files with no entry in local/config/page-map.json are logged
 #   as a warning by sync.js, never auto-created in WP.
-# - If config/page-map.json itself changes, all pages are synced
+# - If anything under local/config/ changes, all pages are synced
 #   (IDs/structure may have shifted).
 #
 # The separate "Sync to WordPress" workflow (manual, workflow_dispatch)
@@ -21,10 +21,9 @@ on:
     branches: [main]
     paths:
       - "pages/**"
-      - "data/**"
-      - "gallery-data/**"
-      - "scripts/**"
-      - "config/page-map.json"
+      - "media/**"
+      - "local/config/**"
+      - "local/sync/**"
 
 jobs:
   sync:

@@ -108,14 +108,21 @@ if (INCREMENTAL) {
     );
   }
 
-  CHANGED = {
-    files: new Set(changedList),
-    pageMapChanged: changedList.includes("local/config/page-map.json"),
-  };
+  const localChanged = changedList.some((f) => f.startsWith("local/"));
 
-  console.log(`[incremental] Running in incremental mode — ${CHANGED.files.size} changed file(s).`);
-  if (CHANGED.pageMapChanged) {
-    console.log("[incremental] local/config/page-map.json changed — all pages will be synced.");
+  if (localChanged) {
+    // Something under local/ changed — could be page-map.json (mappings
+    // may have shifted) or the sync script itself (its own filtering
+    // logic might be the thing that's buggy, so don't trust it). Safest
+    // move: drop back to full-overwrite mode, identical to a manual
+    // workflow_dispatch run.
+    console.log(
+      "[incremental] A file under local/ changed (config and/or sync script) — falling back to a full sync instead of incremental, to be safe."
+    );
+    CHANGED = null;
+  } else {
+    CHANGED = { files: new Set(changedList) };
+    console.log(`[incremental] Running in incremental mode — ${CHANGED.files.size} changed file(s).`);
   }
 } else {
   console.log("Running in full-overwrite mode (no --changed-files/--removed-files supplied).");
@@ -216,7 +223,7 @@ async function syncPages() {
         continue;
       }
 
-      if (CHANGED && !CHANGED.pageMapChanged && !CHANGED.files.has(entry.relPath)) {
+      if (CHANGED && !CHANGED.files.has(entry.relPath)) {
         continue; // not part of this push — leave it alone
       }
 
