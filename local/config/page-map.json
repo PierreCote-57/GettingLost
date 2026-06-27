@@ -15,10 +15,14 @@
         "pacific-playgrounds-resort": 585,
         "salmon-point-resort": 579
     },
+    "van": {
+        "van-overview": 1627
+    },
     "templates": {
         "lake-template": 856,
         "park-template": 1144,
-        "campground-template": 1180
+        "campground-template": 1180,
+        "van-template": 1628
     },
     "site": {
         "home": 6,
