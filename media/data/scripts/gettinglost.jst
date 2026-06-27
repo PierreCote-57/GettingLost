@@ -159,6 +159,49 @@
       "font-size: 0.95rem;" +
       "color: #555;" +
       "line-height: 1.4;" +
+      "}" +
+      "html {" +
+      "scroll-behavior: smooth;" +
+      "}" +
+      ".gl-photogallery-grid {" +
+      "display: grid;" +
+      "grid-template-columns: repeat(5, 1fr);" +
+      "gap: 1rem;" +
+      "margin: 1rem 0;" +
+      "}" +
+      "@media (max-width: 900px) {" +
+      ".gl-photogallery-grid { grid-template-columns: repeat(3, 1fr); }" +
+      "}" +
+      "@media (max-width: 600px) {" +
+      ".gl-photogallery-grid { grid-template-columns: repeat(2, 1fr); }" +
+      "}" +
+      ".gl-photogallery-item {" +
+      "text-align: center;" +
+      "border-radius: 6px;" +
+      "scroll-margin-top: 80px;" +
+      "}" +
+      ".gl-photogallery-item img {" +
+      "width: 100%;" +
+      "height: 110px;" +
+      "object-fit: cover;" +
+      "border-radius: 6px;" +
+      "border: 1px solid #ccc;" +
+      "display: block;" +
+      "}" +
+      ".gl-photogallery-caption {" +
+      "font-size: 0.78rem;" +
+      "color: #666;" +
+      "margin: 0.3rem 0 0;" +
+      "line-height: 1.3;" +
+      "}" +
+      ".gl-photogallery-item:target {" +
+      "outline: 3px solid #c98a3e;" +
+      "outline-offset: 3px;" +
+      "animation: gl-photo-flash 1.6s ease-out 1;" +
+      "}" +
+      "@keyframes gl-photo-flash {" +
+      "0% { box-shadow: 0 0 0 6px rgba(201, 138, 62, 0.6); }" +
+      "100% { box-shadow: 0 0 0 0 rgba(201, 138, 62, 0); }" +
       "}";
     document.head.appendChild(style);
   }
@@ -626,6 +669,112 @@
       table.appendChild(tbody);
       el.appendChild(table);
     });
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "photoGallery"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.photoGallery = [ { id, img, label }, ... ] and renders
+  // a compact grid of thumbnails at the bottom of the page, as an
+  // alternative to inline .gl-photo images for pages that want to
+  // reference several photos without breaking up the body text.
+  //
+  //   <div data-block-type="photoGallery"></div>
+  //
+  //   - id is a stable slug (independent of the label) used as the
+  //     thumbnail's anchor: id="gl-photo-<id>". Inline text links to
+  //     "#gl-photo-<id>" to jump to (and briefly highlight, via the
+  //     :target CSS rule above) a specific photo.
+  //   - img is just the filename; "/wp-content/uploads/" is prepended,
+  //     matching the convention used by .gl-photo.
+  //   - label is the caption shown under the thumbnail. It can be
+  //     freely renamed without touching id or any inline reference —
+  //     see the "photoRef" renderer below, which pulls this same label
+  //     live so inline text never goes stale.
+  //   - Clicking a thumbnail opens the full-size image in a new tab,
+  //     same behaviour as .gl-photo (no separate lightbox).
+
+  window.GL.blockRenderers.photoGallery = function (el, pageData) {
+    var items = pageData.photoGallery;
+    if (!items || !items.length) {
+      throw new Error('No "photoGallery" block found in page JSON.');
+    }
+
+    el.textContent = "";
+    el.appendChild(buildGlHeading("Photo gallery"));
+
+    var grid = document.createElement("div");
+    grid.className = "gl-photogallery-grid";
+
+    items.forEach(function (item) {
+      var wrapper = document.createElement("div");
+      wrapper.className = "gl-photogallery-item";
+      wrapper.id = "gl-photo-" + item.id;
+
+      var src = "/wp-content/uploads/" + item.img;
+
+      var link = document.createElement("a");
+      link.href = src;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+
+      var img = document.createElement("img");
+      img.src = src;
+      img.alt = item.label || "";
+      img.loading = "lazy";
+      link.appendChild(img);
+
+      var caption = document.createElement("p");
+      caption.className = "gl-photogallery-caption";
+      caption.textContent = item.label || "";
+
+      wrapper.appendChild(link);
+      wrapper.appendChild(caption);
+      grid.appendChild(wrapper);
+    });
+
+    el.appendChild(grid);
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "photoRef"
+  // ---------------------------------------------------------------------
+  //
+  // Renders an inline link to a specific photoGallery entry, with the
+  // link text always matching that entry's current label — so renaming
+  // a caption in the page JSON never requires hunting down and editing
+  // inline references in the body text. Markup (inline, inside a
+  // paragraph or list item):
+  //
+  //   <span data-block-type="photoRef" data-id="truma-on-panel"></span>
+  //
+  //   - data-id must match the id of an entry in pageData.photoGallery.
+  //   - Renders as <a href="#gl-photo-<id>">{label}</a>.
+  //   - A data-id with no matching photoGallery entry throws (caught,
+  //     skipped) rather than silently rendering an empty/broken link.
+
+  window.GL.blockRenderers.photoRef = function (el, pageData) {
+    var id = el.getAttribute("data-id");
+    var items = pageData.photoGallery || [];
+    var match = null;
+
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id === id) {
+        match = items[i];
+        break;
+      }
+    }
+
+    if (!match) {
+      throw new Error('photoRef: no photoGallery entry with id "' + id + '".');
+    }
+
+    el.textContent = "";
+    var link = document.createElement("a");
+    link.href = "#gl-photo-" + id;
+    link.textContent = match.label || id;
+    el.appendChild(link);
   };
 
   // ---------------------------------------------------------------------
