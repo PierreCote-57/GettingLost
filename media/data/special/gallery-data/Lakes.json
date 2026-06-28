@@ -20,7 +20,7 @@
     {
         "title": "Keogh Lake",
         "slug": "keogh-lake",
-        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "image": "/wp-content/uploads/under-construction.png",
         "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
     },
     {
@@ -38,7 +38,7 @@
     {
         "title": "Sproat Lake",
         "slug": "sproat-lake",
-        "image": "/wp-content/uploads/2026/06/under-construction.png",
+        "image": "/wp-content/uploads/under-construction.png",
         "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
     }
 ]
