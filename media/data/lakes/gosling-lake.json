@@ -9,7 +9,10 @@
       "recId": "REC0163",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0163" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC0163"
+        }
       ],
       "description": "",
       "lat": 50.045022,
@@ -20,7 +23,10 @@
       "recId": "REC0167",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0167" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC0167"
+        }
       ],
       "description": "",
       "lat": 50.036904,
@@ -31,7 +37,10 @@
       "recId": "REC16068",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC16068" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC16068"
+        }
       ],
       "description": "",
       "lat": 50.031957,
@@ -42,7 +51,10 @@
       "recId": "REC6345",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC6345" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC6345"
+        }
       ],
       "description": "",
       "lat": 50.069066,
@@ -51,9 +63,15 @@
   ],
   "fishingReferences": {
     "bcIdentifier": "00040CAMB (308657)",
-    "areaKm2": 0.70,
+    "areaKm2": 0.7,
     "lakeChartUrl": null,
     "stockingName": ""
   },
-  "furtherReading": {}
+  "furtherReading": {},
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": []
+    }
+  ]
 }

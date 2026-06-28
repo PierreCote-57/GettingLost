@@ -9,7 +9,10 @@
       "recId": "REC0191",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0191" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC0191"
+        }
       ],
       "description": "A walk-in day use site at the south end of Roberts Lake, popular with anglers and picnickers. There is a sandy beach, a number of picnic tables and plenty of area to set up for the day. This site is wheelchair accessible.",
       "lat": 50.211914,
@@ -22,5 +25,11 @@
     "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00202801.pdf",
     "stockingName": ""
   },
-  "furtherReading": {}
+  "furtherReading": {},
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": []
+    }
+  ]
 }

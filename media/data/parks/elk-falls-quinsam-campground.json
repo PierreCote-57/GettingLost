@@ -13,5 +13,19 @@
       "name": "Quality Recreation",
       "url": "https://explorebcparks.ca/elk-falls-provincial-park/"
     }
-  }
+  },
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": [
+        {
+          "name": "Explore BC Parks",
+          "url": "https://explorebcparks.ca/elk-falls-provincial-park/",
+          "description": [
+            "Quality Recreation"
+          ]
+        }
+      ]
+    }
+  ]
 }

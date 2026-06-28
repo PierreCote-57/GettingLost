@@ -2,7 +2,7 @@
   "lakeId": "00324SALM",
   "title": "Amor Lake",
   "lat": 50.1602,
-  "lng": -125.5600,
+  "lng": -125.56,
   "recSites": [
     {
       "name": "Amor Lake",
@@ -10,8 +10,14 @@
       "siteMap": null,
       "reservationLabel": "First come, first served",
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0174" },
-        { "name": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Amor_Lake" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC0174"
+        },
+        {
+          "name": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amor_Lake"
+        }
       ],
       "description": "This site has 2 parts: 4 units south of the creek under the trees and 1 unit north of the creek by the boat launch. It has the only boat launch access to Amor Lake. It is a great lake to explore with lots of small, sandy beaches and rocky islets. It is part of the Sayward Forest Canoe Route chain of lakes.",
       "lat": 50.157993,
@@ -22,7 +28,10 @@
       "recId": "REC0185",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0185" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC0185"
+        }
       ],
       "description": "A small site close to town with day-use opportunities as well as overnight. There are two halves to the lake to explore. Or, hike the 2.1 km loop trail from the campsite out to the rocky point and back around. Site is part of the Sayward Forest Canoe Route chain of lakes. It includes the start of the 0.8 km portage trail from Twin Lake to Amor Lake. A nice trek to make even if you're not packing a canoe. The portage trail from Mohun Lake ends at the swamp at the east end of Twin Lake.",
       "lat": 50.174991,
@@ -33,7 +42,10 @@
       "recId": "REC3046",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC3046" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC3046"
+        }
       ],
       "description": "A beautiful sandy beach with boat access only. Popular campsite for those paddling the Sayward Forest Canoe Route. In summer when the water level is lower there is plenty of room to camp on the sand.",
       "lat": 50.172074,
@@ -44,7 +56,10 @@
       "recId": "REC3067",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC3067" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC3067"
+        }
       ],
       "description": "A secluded little site between Amor Lake and Surprise Lake, along the portage trail. One of the more popular sites for those paddling the Sayward Forest Canoe Route. With 8 tent pads in two private locations, there is plenty of room for larger paddling groups. This is a beautiful site with great views looking down both lakes. There is a real feeling of solitude on Surprise Lake. Look for the sundew plants on the edge of Amor Lake.",
       "lat": 50.151251,
@@ -55,21 +70,27 @@
       "recId": "REC6322",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC6322" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC6322"
+        }
       ],
       "description": "Boat in access site located just north of the Sayward Forest Canoe Route on Amor Lake. There is a small shelter to get out of the weather and a beautiful sandy beach.",
       "lat": 50.182179,
-      "lng": -125.554080
+      "lng": -125.55408
     },
     {
       "name": "Sterling Island Rec.Site",
       "recId": "REC6423",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC6423" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC6423"
+        }
       ],
       "description": "Located along the Sayward Forest Canoe Route, there are a few options for camping on the on the small Sterling Islands chain.",
-      "lat": 50.163150,
+      "lat": 50.16315,
       "lng": -125.556706
     },
     {
@@ -77,7 +98,10 @@
       "recId": "REC6622",
       "siteMap": null,
       "references": [
-        { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC6622" }
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC6622"
+        }
       ],
       "description": "Located along the Sayward Forest Canoe Route, this is a popular stop for paddlers making their way along the route. In summer when water levels are lower, there is plenty of room to camp on the beach.",
       "lat": 50.175148,
@@ -91,7 +115,34 @@
     "stockingName": ""
   },
   "furtherReading": {
-    "Sites & Trails BC": { "name": "Sites & Trails BC", "url": "https://www.sitesandtrailsbc.ca/resource/REC0174" },
-    "Wikipedia": { "name": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Amor_Lake" }
-  }
+    "Sites & Trails BC": {
+      "name": "Sites & Trails BC",
+      "url": "https://www.sitesandtrailsbc.ca/resource/REC0174"
+    },
+    "Wikipedia": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Amor_Lake"
+    }
+  },
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": [
+        {
+          "name": "Sites & Trails BC",
+          "url": "https://www.sitesandtrailsbc.ca/resource/REC0174",
+          "description": [
+            "Sites & Trails BC"
+          ]
+        },
+        {
+          "name": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amor_Lake",
+          "description": [
+            "Wikipedia"
+          ]
+        }
+      ]
+    }
+  ]
 }

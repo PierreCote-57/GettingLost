@@ -17,5 +17,26 @@
       "name": "Campground Profile",
       "url": "https://www.campingrvbc.com/sites/bc/pacific-playgrounds-oceanside-resort-black-creek/"
     }
-  }
+  },
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": [
+        {
+          "name": "GoRVing Canada",
+          "url": "https://gorving.ca/campground/pacific-playgrounds-oceanside-resort/",
+          "description": [
+            "Campground Profile"
+          ]
+        },
+        {
+          "name": "Camping & RV BC",
+          "url": "https://www.campingrvbc.com/sites/bc/pacific-playgrounds-oceanside-resort-black-creek/",
+          "description": [
+            "Campground Profile"
+          ]
+        }
+      ]
+    }
+  ]
 }

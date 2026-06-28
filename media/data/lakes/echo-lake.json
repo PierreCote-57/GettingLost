@@ -10,5 +10,11 @@
     "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00058601.pdf",
     "stockingName": "ECHO"
   },
-  "furtherReading": {}
+  "furtherReading": {},
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": []
+    }
+  ]
 }
