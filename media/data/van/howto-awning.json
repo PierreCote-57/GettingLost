@@ -4,6 +4,11 @@
 			"name": "Instructions images",
 			"items": [
 				{
+					"id": "awning-panel-location",
+					"img": "awning-panel-location",
+					"label": "Location of awning control panel, next to the Garmin unit"
+				},
+				{
 					"id": "awning-control-panel",
 					"img": "awning-control-panel.png",
 					"label": "Awning control panel"
