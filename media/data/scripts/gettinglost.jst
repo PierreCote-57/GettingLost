@@ -166,6 +166,9 @@
       "ul, ol {" +
       "margin-top: 0;" +
       "}" +
+      "[data-howto-section] {" +
+      "margin-bottom: 2.5rem;" +
+      "}" +
       ".gl-photogallery-grid {" +
       "display: grid;" +
       "grid-template-columns: repeat(5, 1fr);" +
@@ -678,7 +681,7 @@
   // Generic block renderer: "photoGallery"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.photoGalleries = { "<galleryName>": [ {id, img, label}, ... ], ... }
+  // Reads pageData.photoGalleries = { "<galleryKey>": { name, items: [ {id, img, label}, ... ] }, ... }
   // and renders one named mini-gallery as a compact grid of thumbnails —
   // an alternative to inline .gl-photo images for pages that want to
   // reference several photos without breaking up the body text. A page
@@ -690,14 +693,21 @@
   //   - data-gallery is required and must match a key in photoGalleries.
   //     There is no "show everything" fallback — every block names the
   //     mini-gallery it shows.
-  //   - Within one mini-gallery's array, id is a stable slug (independent
-  //     of the label) used to build that thumbnail's anchor:
-  //     id="gl-photo-<galleryName>-<id>". ids only need to be unique
-  //     within their own mini-gallery, not across the whole page — the
-  //     same photo (same img filename) can appear in more than one
-  //     mini-gallery under different ids, with a different label tuned
-  //     to that context. That's the expected way to reuse a photo with
-  //     a different caption, rather than a single shared caption.
+  //   - galleryKey (e.g. "details") is for lookup only — it's what
+  //     data-gallery and the "gallery/id" half of a photoRef point at.
+  //     It is NOT used to derive the heading shown on the page.
+  //   - name is the gallery's required, freely-worded display heading
+  //     (e.g. "Details", "AC vs Heater") — change it any time without
+  //     touching the key, data-gallery, or any photoRef.
+  //   - Within one mini-gallery's items array, id is a stable slug
+  //     (independent of the label) used to build that thumbnail's
+  //     anchor: id="gl-photo-<galleryKey>-<id>". ids only need to be
+  //     unique within their own mini-gallery, not across the whole
+  //     page — the same photo (same img filename) can appear in more
+  //     than one mini-gallery under different ids, with a different
+  //     label tuned to that context. That's the expected way to reuse
+  //     a photo with a different caption, rather than a single shared
+  //     caption.
   //   - img is just the filename; "/wp-content/uploads/" is prepended,
   //     matching the convention used by .gl-photo.
   //   - label is the caption shown under the thumbnail. It can be
@@ -714,15 +724,22 @@
     }
 
     var galleries = pageData.photoGalleries || {};
-    var items = galleries[galleryName];
-    if (!items || !items.length) {
+    var gallery = galleries[galleryName];
+    if (!gallery || !gallery.items || !gallery.items.length) {
       throw new Error(
         'photoGallery: no mini-gallery named "' + galleryName + '" found in page JSON.'
       );
     }
+    if (!gallery.name) {
+      throw new Error(
+        'photoGallery: mini-gallery "' + galleryName + '" is missing its required "name" field.'
+      );
+    }
+
+    var items = gallery.items;
 
     el.textContent = "";
-    el.appendChild(buildGlHeading("Photo gallery"));
+    el.appendChild(buildGlHeading(gallery.name));
 
     var grid = document.createElement("div");
     grid.className = "gl-photogallery-grid";
@@ -792,7 +809,8 @@
     var itemId = raw.substring(slashIndex + 1);
 
     var galleries = pageData.photoGalleries || {};
-    var items = galleries[galleryName] || [];
+    var gallery = galleries[galleryName];
+    var items = (gallery && gallery.items) || [];
     var match = null;
 
     for (var i = 0; i < items.length; i++) {
