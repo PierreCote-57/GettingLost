@@ -678,17 +678,26 @@
   // Generic block renderer: "photoGallery"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.photoGallery = [ { id, img, label }, ... ] and renders
-  // a compact grid of thumbnails at the bottom of the page, as an
-  // alternative to inline .gl-photo images for pages that want to
-  // reference several photos without breaking up the body text.
+  // Reads pageData.photoGalleries = { "<galleryName>": [ {id, img, label}, ... ], ... }
+  // and renders one named mini-gallery as a compact grid of thumbnails —
+  // an alternative to inline .gl-photo images for pages that want to
+  // reference several photos without breaking up the body text. A page
+  // can have any number of mini-galleries (e.g. "instructions", "details"),
+  // each shown by its own block:
   //
-  //   <div data-block-type="photoGallery"></div>
+  //   <div data-block-type="photoGallery" data-gallery="details"></div>
   //
-  //   - id is a stable slug (independent of the label) used as the
-  //     thumbnail's anchor: id="gl-photo-<id>". Inline text links to
-  //     "#gl-photo-<id>" to jump to (and briefly highlight, via the
-  //     :target CSS rule above) a specific photo.
+  //   - data-gallery is required and must match a key in photoGalleries.
+  //     There is no "show everything" fallback — every block names the
+  //     mini-gallery it shows.
+  //   - Within one mini-gallery's array, id is a stable slug (independent
+  //     of the label) used to build that thumbnail's anchor:
+  //     id="gl-photo-<galleryName>-<id>". ids only need to be unique
+  //     within their own mini-gallery, not across the whole page — the
+  //     same photo (same img filename) can appear in more than one
+  //     mini-gallery under different ids, with a different label tuned
+  //     to that context. That's the expected way to reuse a photo with
+  //     a different caption, rather than a single shared caption.
   //   - img is just the filename; "/wp-content/uploads/" is prepended,
   //     matching the convention used by .gl-photo.
   //   - label is the caption shown under the thumbnail. It can be
@@ -699,9 +708,17 @@
   //     same behaviour as .gl-photo (no separate lightbox).
 
   window.GL.blockRenderers.photoGallery = function (el, pageData) {
-    var items = pageData.photoGallery;
+    var galleryName = el.getAttribute("data-gallery");
+    if (!galleryName) {
+      throw new Error("photoGallery: missing required data-gallery attribute.");
+    }
+
+    var galleries = pageData.photoGalleries || {};
+    var items = galleries[galleryName];
     if (!items || !items.length) {
-      throw new Error('No "photoGallery" block found in page JSON.');
+      throw new Error(
+        'photoGallery: no mini-gallery named "' + galleryName + '" found in page JSON.'
+      );
     }
 
     el.textContent = "";
@@ -713,7 +730,7 @@
     items.forEach(function (item) {
       var wrapper = document.createElement("div");
       wrapper.className = "gl-photogallery-item";
-      wrapper.id = "gl-photo-" + item.id;
+      wrapper.id = "gl-photo-" + galleryName + "-" + item.id;
 
       var src = "/wp-content/uploads/" + item.img;
 
@@ -744,39 +761,57 @@
   // Generic block renderer: "photoRef"
   // ---------------------------------------------------------------------
   //
-  // Renders an inline link to a specific photoGallery entry, with the
+  // Renders an inline link to a specific photoGalleries entry, with the
   // link text always matching that entry's current label — so renaming
   // a caption in the page JSON never requires hunting down and editing
   // inline references in the body text. Markup (inline, inside a
   // paragraph or list item):
   //
-  //   <span data-block-type="photoRef" data-id="truma-on-panel"></span>
+  //   <span data-block-type="photoRef" data-id="details/panel"></span>
   //
-  //   - data-id must match the id of an entry in pageData.photoGallery.
-  //   - Renders as <a href="#gl-photo-<id>">{label}</a>.
-  //   - A data-id with no matching photoGallery entry throws (caught,
-  //     skipped) rather than silently rendering an empty/broken link.
+  //   - data-id is "<galleryName>/<id>" — everything before the first
+  //     "/" is the mini-gallery name, everything after it is the id
+  //     within that mini-gallery's array. (ids are plain filename-style
+  //     slugs and are never expected to contain a "/" themselves, so
+  //     splitting on the first one is unambiguous.)
+  //   - Renders as <a href="#gl-photo-<galleryName>-<id>">{label}</a>.
+  //   - A malformed data-id (no "/"), an unknown gallery name, or an id
+  //     not present in that gallery all throw (caught, skipped) rather
+  //     than silently rendering an empty/broken link.
 
   window.GL.blockRenderers.photoRef = function (el, pageData) {
-    var id = el.getAttribute("data-id");
-    var items = pageData.photoGallery || [];
+    var raw = el.getAttribute("data-id") || "";
+    var slashIndex = raw.indexOf("/");
+    if (slashIndex === -1) {
+      throw new Error(
+        'photoRef: data-id "' + raw + '" must be in "gallery/id" form.'
+      );
+    }
+
+    var galleryName = raw.substring(0, slashIndex);
+    var itemId = raw.substring(slashIndex + 1);
+
+    var galleries = pageData.photoGalleries || {};
+    var items = galleries[galleryName] || [];
     var match = null;
 
     for (var i = 0; i < items.length; i++) {
-      if (items[i].id === id) {
+      if (items[i].id === itemId) {
         match = items[i];
         break;
       }
     }
 
     if (!match) {
-      throw new Error('photoRef: no photoGallery entry with id "' + id + '".');
+      throw new Error(
+        'photoRef: no entry "' + itemId + '" in mini-gallery "' + galleryName + '".'
+      );
     }
 
     el.textContent = "";
     var link = document.createElement("a");
-    link.href = "#gl-photo-" + id;
-    link.textContent = match.label || id;
+    link.href = "#gl-photo-" + galleryName + "-" + itemId;
+    link.textContent = match.label || itemId;
     el.appendChild(link);
   };
 
