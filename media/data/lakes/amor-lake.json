@@ -114,16 +114,6 @@
     "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00228201.pdf",
     "stockingName": ""
   },
-  "furtherReading": {
-    "Sites & Trails BC": {
-      "name": "Sites & Trails BC",
-      "url": "https://www.sitesandtrailsbc.ca/resource/REC0174"
-    },
-    "Wikipedia": {
-      "name": "Wikipedia",
-      "url": "https://en.wikipedia.org/wiki/Amor_Lake"
-    }
-  },
   "notes": [
     {
       "sectionName": "Further readings",

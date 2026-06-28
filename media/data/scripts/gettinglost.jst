@@ -40,14 +40,13 @@
  *   carrying a data-block-type attribute is handed off to a renderer
  *   registered on window.GL.blockRenderers[type]. This file registers
  *   the generic, page-type-agnostic renderers ("campground",
- *   "googleMap", "furtherReading", "backToGallery", "notes");
+ *   "googleMap", "backToGallery", "notes");
  *   page-type-specific renderers (e.g. "fishing", "recSites" in
  *   lakes.jst) register themselves the same way from their own script
  *   files. Markup:
  *
  *     <div data-block-type="campground"></div>
  *     <div data-block-type="googleMap"></div>
- *     <div data-block-type="furtherReading"></div>
  *     <div class="gl-dest-back" data-block-type="backToGallery"
  *          data-title="Optional title" data-file="Optional file"></div>
  *     <div data-block-type="notes"></div>
@@ -493,12 +492,12 @@
   };
 
   // ---------------------------------------------------------------------
-  // Generic block renderer: "furtherReading"
+  // Shared helper: buildGlHeading
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.furtherReading = { "<row label>": { name, url }, ... }
-  // and renders a two-column table: row label on the left, the link
-  // (labelled by `name`) on the right.
+  // Used by the "notes" block renderer (and previously by the retired
+  // "furtherReading" renderer it replaced) for the small h3 section
+  // heading style used throughout these generic blocks.
 
   function buildGlHeading(text) {
     var heading = document.createElement("h3");
@@ -511,68 +510,6 @@
     heading.style.borderBottom = "2px solid #5e442c";
     return heading;
   }
-
-  window.GL.blockRenderers.furtherReading = function (el, pageData) {
-    var data = pageData.furtherReading;
-
-    // Key absent entirely: this page intentionally has no Further Reading
-    // section. Render nothing, log nothing.
-    if (!data) {
-      return;
-    }
-
-    var rowLabels = Object.keys(data);
-
-    // Key present but empty: not broken, just not filled in yet. Render the
-    // heading with an empty list below it (a visible reminder to fill it
-    // in), and flag it as a to-do rather than a defect.
-    if (rowLabels.length === 0) {
-      console.warn('[gettinglost] "furtherReading" block is present but has no entries yet (' +
-        (getSlugFromUrl() || "unknown page") + ').');
-    }
-
-    var table = document.createElement("table");
-    table.style.borderCollapse = "collapse";
-    table.style.marginTop = "0.25rem";
-    table.style.marginLeft = "auto";
-    table.style.marginRight = "auto";
-
-    var tbody = document.createElement("tbody");
-
-    Object.keys(data).forEach(function (rowLabel) {
-      var entry = data[rowLabel];
-      var row = document.createElement("tr");
-
-      var labelCell = document.createElement("td");
-      labelCell.textContent = rowLabel;
-      labelCell.style.padding = "0.2rem 1.5rem 0.2rem 0";
-      labelCell.style.verticalAlign = "top";
-      labelCell.style.color = "#666";
-      labelCell.style.fontSize = "0.88rem";
-
-      var bodyCell = document.createElement("td");
-      bodyCell.style.padding = "0.2rem 0";
-      bodyCell.style.verticalAlign = "top";
-      bodyCell.style.fontSize = "0.9rem";
-
-      var link = document.createElement("a");
-      link.href = entry.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = entry.name;
-      bodyCell.appendChild(link);
-
-      row.appendChild(labelCell);
-      row.appendChild(bodyCell);
-      tbody.appendChild(row);
-    });
-
-    table.appendChild(tbody);
-
-    el.textContent = "";
-    el.appendChild(buildGlHeading("Further reading"));
-    el.appendChild(table);
-  };
 
   // ---------------------------------------------------------------------
   // Generic block renderer: "backToGallery"
