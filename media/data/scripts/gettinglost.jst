@@ -514,8 +514,21 @@
 
   window.GL.blockRenderers.furtherReading = function (el, pageData) {
     var data = pageData.furtherReading;
+
+    // Key absent entirely: this page intentionally has no Further Reading
+    // section. Render nothing, log nothing.
     if (!data) {
-      throw new Error('No "furtherReading" block found in page JSON.');
+      return;
+    }
+
+    var rowLabels = Object.keys(data);
+
+    // Key present but empty: not broken, just not filled in yet. Render the
+    // heading with an empty list below it (a visible reminder to fill it
+    // in), and flag it as a to-do rather than a defect.
+    if (rowLabels.length === 0) {
+      console.warn('[gettinglost] "furtherReading" block is present but has no entries yet (' +
+        (getSlugFromUrl() || "unknown page") + ').');
     }
 
     var table = document.createElement("table");
@@ -621,11 +634,21 @@
   //                                   separator, not a line break).
   //   - A section with no items still renders its heading with an empty
   //     table, rather than throwing.
+  //   - If pageData.notes is absent entirely (no "notes" key in the page's
+  //     JSON), the block renders nothing and logs nothing — an absent key
+  //     is treated as an intentional "this page has no notes," not a
+  //     defect.
 
   window.GL.blockRenderers.notes = function (el, pageData) {
     var sections = pageData.notes;
+
+    // Key absent entirely: this page intentionally has no notes section(s).
+    // Render nothing, log nothing. (A section that IS present but has an
+    // empty "list" still renders its heading with an empty table below —
+    // see the forEach over `items` further down; that case was already
+    // correct and is unchanged.)
     if (!sections) {
-      throw new Error('No "notes" block found in page JSON.');
+      return;
     }
 
     el.textContent = "";
