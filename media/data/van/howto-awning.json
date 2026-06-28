@@ -5,7 +5,7 @@
 			"items": [
 				{
 					"id": "awning-panel-location",
-					"img": "awning-panel-location",
+					"img": "awning-panel-location.png",
 					"label": "Location of awning control panel, next to the Garmin unit"
 				},
 				{
