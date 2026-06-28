@@ -1,0 +1,16 @@
+{
+  "photoGalleries": {
+    "instructions": {
+      "name": "Instructions images",
+      "items": [
+        { "id": "under-construction", "img": "under-construction.png", "label": "Under construction" }
+      ]
+    },
+    "details": {
+      "name": "Details images",
+      "items": [
+        { "id": "under-construction", "img": "under-construction.png", "label": "Under construction" }
+      ]
+    }
+  }
+}
