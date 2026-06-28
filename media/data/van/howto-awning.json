@@ -1,16 +1,29 @@
 {
-  "photoGalleries": {
-    "instructions": {
-      "name": "Instructions images",
-      "items": [
-        { "id": "awning-control-panel", "img": "awning-control-panel.png", "label": "Awning control panel" }
-      ]
-    },
-    "details": {
-      "name": "Details images",
-      "items": [
-        { "id": "under-construction", "img": "under-construction.png", "label": "Under construction" }
-      ]
-    }
-  }
+	"photoGalleries": {
+		"instructions": {
+			"name": "Instructions images",
+			"items": [
+				{
+					"id": "awning-control-panel",
+					"img": "awning-control-panel.png",
+					"label": "Awning control panel"
+				},
+				{
+					"id": "under-construction",
+					"img": "under-construction.png",
+					"label": "Under construction"
+				}
+			]
+		},
+		"details": {
+			"name": "Details images",
+			"items": [
+				{
+					"id": "under-construction",
+					"img": "under-construction.png",
+					"label": "Under construction"
+				}
+			]
+		}
+	}
 }
