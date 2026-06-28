@@ -1,0 +1,16 @@
+{
+  "photoGalleries": {
+    "instructions": {
+      "name": "Instructions images",
+      "items": [
+        { "id": "example", "img": "placeholder.png", "label": "Example caption" }
+      ]
+    },
+    "details": {
+      "name": "Details images",
+      "items": [
+        { "id": "example", "img": "placeholder.png", "label": "Example caption" }
+      ]
+    }
+  }
+}
