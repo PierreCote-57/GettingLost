@@ -12,5 +12,13 @@
         { "id": "example", "img": "placeholder.png", "label": "Example caption" }
       ]
     }
-  }
+  },
+  "notes": [
+    {
+      "sectionName": "Example section",
+      "list": [
+        { "name": "Example link", "url": "https://example.com", "description": ["Example description"] }
+      ]
+    }
+  ]
 }
