@@ -40,7 +40,7 @@
  *   carrying a data-block-type attribute is handed off to a renderer
  *   registered on window.GL.blockRenderers[type]. This file registers
  *   the generic, page-type-agnostic renderers ("campground",
- *   "googleMap", "backToGallery", "notes");
+ *   "googleMap", "backToGallery", "notes", "warning");
  *   page-type-specific renderers (e.g. "fishing", "recSites" in
  *   lakes.jst) register themselves the same way from their own script
  *   files. Markup:
@@ -50,6 +50,7 @@
  *     <div class="gl-dest-back" data-block-type="backToGallery"
  *          data-title="Optional title" data-file="Optional file"></div>
  *     <div data-block-type="notes"></div>
+ *     <div data-block-type="warning" data-text="Required warning text"></div>
  *
  *   - backToGallery is driven by its own data-title/data-file
  *     attributes (not pageData), so a page can include more than one,
@@ -207,6 +208,19 @@
       "@keyframes gl-photo-flash {" +
       "0% { box-shadow: 0 0 0 6px rgba(201, 138, 62, 0.6); }" +
       "100% { box-shadow: 0 0 0 0 rgba(201, 138, 62, 0); }" +
+      "}" +
+      ".gl-warning {" +
+      "display: block;" +
+      "background: #fdf3e0;" +
+      "border: 1px solid #c98a3e;" +
+      "border-left: 5px solid #c98a3e;" +
+      "border-radius: 4px;" +
+      "padding: 0.75rem 1rem;" +
+      "margin: 1rem 0;" +
+      "color: #5e442c;" +
+      "}" +
+      ".gl-warning-label {" +
+      "color: #a85d1a;" +
       "}";
     document.head.appendChild(style);
   }
@@ -547,6 +561,42 @@
 
     el.innerHTML =
       '<a href="' + escapeAttr(href) + '">\u2190 Back to ' + escapeHtml(title) + "</a>";
+  };
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "warning"
+  // ---------------------------------------------------------------------
+  //
+  // Renders a highlighted callout box for safety/operational warnings.
+  // Fully driven by the element's own attributes (not pageData), so it
+  // can be dropped into any page's markup without touching that page's
+  // JSON file:
+  //
+  //   <div data-block-type="warning"
+  //        data-text="Always keep an eye on the awning during operation."></div>
+  //
+  //   - data-text is required and is the warning's body text. A missing
+  //     data-text throws (caught, skipped) rather than rendering an
+  //     empty box.
+  //   - data-label is optional, defaults to "Warning" — override it for
+  //     a different callout tone, e.g. data-label="Caution" or
+  //     data-label="Note", without changing the visual style.
+  //   - Multiple warnings can appear on one page; each is independent.
+
+  window.GL.blockRenderers.warning = function (el, pageData) {
+    var text = el.getAttribute("data-text");
+    if (!text) {
+      throw new Error('warning: missing required data-text attribute.');
+    }
+    var label = el.getAttribute("data-label") || "Warning";
+
+    if (!el.className) {
+      el.className = "gl-warning";
+    }
+
+    el.innerHTML =
+      '<strong class="gl-warning-label">\u26A0 ' + escapeHtml(label) + ":</strong> " +
+      escapeHtml(text);
   };
 
   // ---------------------------------------------------------------------
