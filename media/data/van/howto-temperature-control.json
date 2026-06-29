@@ -20,22 +20,8 @@
   },
   "notes": [
     {
-      "sectionName": "The Truma system",
+      "sectionName": "The control panel",
       "list": [
-        {
-          "name": "Truma Aventa eco + soft start — product page",
-          "url": "https://www.truma.com/us/products/air-conditioning-systems-us/aventa-us/truma-aventa-eco-soft-start/",
-          "description": [
-            "Manufacturer page for the 13,500 BTU/h rooftop air conditioner installed in this van, with the SoftStartRV module pre-installed to reduce start-up amp draw on inverter power."
-          ]
-        },
-        {
-          "name": "Truma Aventa eco / comfort — operating instructions",
-          "url": "https://forestriverinc.com/files/Component-Manuals/Heating%20-%20Air%20Conditioning/Truma%20-%20Air%20Conditioner%20Model%20Eco,%20Comfort%20Operating%20Instructions.pdf",
-          "description": [
-            "Full operating instructions for the Aventa eco unit, including the automatic, manual, and dehumidification fan modes shown on the touchscreen."
-          ]
-        },
         {
           "name": "Truma CP plus — product page",
           "url": "https://www.truma.com/us/products/operating-systems-us/truma-cp-plus/",
@@ -48,6 +34,44 @@
           "url": "https://imperial-outdoors.com/wp-content/uploads/2022/12/truma-heating-cp-plus-operating-instructions-EN.pdf",
           "description": [
             "Covers the rotary push-button menu and the ACC (Automatic Climate Control) setting, which must be ON for the Garmin panel to be able to issue temperature commands to the Truma system."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionName": "The AC unit",
+      "list": [
+        {
+          "name": "Truma Aventa eco + soft start — product page",
+          "url": "https://www.truma.com/us/products/air-conditioning-systems-us/aventa-us/truma-aventa-eco-soft-start/",
+          "description": [
+            "Manufacturer page for the 13,500 BTU/h rooftop air conditioner installed in this van, with the SoftStartRV module pre-installed to reduce start-up amp draw on inverter power. Cooling only — this model has no heat pump."
+          ]
+        },
+        {
+          "name": "Truma Aventa eco / comfort — operating instructions",
+          "url": "https://forestriverinc.com/files/Component-Manuals/Heating%20-%20Air%20Conditioning/Truma%20-%20Air%20Conditioner%20Model%20Eco,%20Comfort%20Operating%20Instructions.pdf",
+          "description": [
+            "Full operating instructions for the Aventa eco unit, including the automatic, manual, and dehumidification fan modes shown on the touchscreen."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionName": "The heater unit",
+      "list": [
+        {
+          "name": "Truma Combi G comfort — product page",
+          "url": "https://www.truma.com/us/products/heating-systems-us/combi-us/truma-combi-g-comfort/",
+          "description": [
+            "Manufacturer page for the gasoline-fired furnace and hot water heater installed in this van — a separate unit from the roof-mounted Aventa, mounted low inside the van and ducted to floor-level vents. Runs on gas, electric, or a mix of both."
+          ]
+        },
+        {
+          "name": "Truma Combi G comfort — operating instructions",
+          "url": "https://www.manualslib.com/manual/3582386/Truma-Combi-G-Comfort.html",
+          "description": [
+            "Covers initial start-up, filling the water container, and the gas/electric/mix energy-source modes for cabin heat and hot water."
           ]
         }
       ]
