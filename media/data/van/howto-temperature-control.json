@@ -17,5 +17,40 @@
         { "id": "garmin-temp-select", "img": "garmin-temp-select.png", "label": "Garmin temperature select screen" }
       ]
     }
-  }
+  },
+  "notes": [
+    {
+      "sectionName": "The Truma system",
+      "list": [
+        {
+          "name": "Truma Aventa eco + soft start — product page",
+          "url": "https://www.truma.com/us/products/air-conditioning-systems-us/aventa-us/truma-aventa-eco-soft-start/",
+          "description": [
+            "Manufacturer page for the 13,500 BTU/h rooftop air conditioner installed in this van, with the SoftStartRV module pre-installed to reduce start-up amp draw on inverter power."
+          ]
+        },
+        {
+          "name": "Truma Aventa eco / comfort — operating instructions",
+          "url": "https://forestriverinc.com/files/Component-Manuals/Heating%20-%20Air%20Conditioning/Truma%20-%20Air%20Conditioner%20Model%20Eco,%20Comfort%20Operating%20Instructions.pdf",
+          "description": [
+            "Full operating instructions for the Aventa eco unit, including the automatic, manual, and dehumidification fan modes shown on the touchscreen."
+          ]
+        },
+        {
+          "name": "Truma CP plus — product page",
+          "url": "https://www.truma.com/us/products/operating-systems-us/truma-cp-plus/",
+          "description": [
+            "Manufacturer page for the physical control panel that drives the thermostat loop using its own CP plus temperature sensor, independent of the Garmin display."
+          ]
+        },
+        {
+          "name": "Truma CP plus — operating instructions",
+          "url": "https://imperial-outdoors.com/wp-content/uploads/2022/12/truma-heating-cp-plus-operating-instructions-EN.pdf",
+          "description": [
+            "Covers the rotary push-button menu and the ACC (Automatic Climate Control) setting, which must be ON for the Garmin panel to be able to issue temperature commands to the Truma system."
+          ]
+        }
+      ]
+    }
+  ]
 }
