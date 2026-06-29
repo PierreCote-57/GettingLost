@@ -34,9 +34,16 @@
 				},
 				{
 					"name": "Owner's manual",
-					"url": "https://carefreeofcolorado.com/wp-content/uploads/2022/06/052568-201r7-Eclipse-Owners-Manual-Std.pdf",
+					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/052568-201r10-Eclipse-Owners-Manual-Std-.pdf",
 					"description": [
 						"Operating instructions matching the simple ON/RETRACT, OFF/EXTEND switch installed \u2014 no auto-retract."
+					]
+				},
+				{
+					"name": "Installation manual",
+					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/052568-001r10-Eclipse-Installation-Manual-.pdf",
+					"description": [
+						"Wiring and mounting reference for the awning as originally installed by the manufacturer."
 					]
 				}
 			]
@@ -48,14 +55,21 @@
 					"name": "Product page",
 					"url": "https://www.carefreeofcolorado.com/rv-products/carefree-connects/",
 					"description": [
-						"Wireless motion-sensor auto-retract upgrade. NOT installed on this van \u2014 listed for reference only."
+						"Bluetooth motion-sensor auto-retract and app-control upgrade. NOT installed on this van \u2014 listed for reference only."
 					]
 				},
 				{
 					"name": "Owner's manual (with BT12 / Connects motion sensor)",
-					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/2022/06/052568-231r1-Eclipse-Owners-Manual-with-BT12.pdf",
+					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/052568-231r12-Eclipse-Owners-Manual-with-BT12-.pdf",
 					"description": [
 						"Describes the Bluetooth motion-sensor auto-retract system. NOT installed on this van \u2014 listed for reference only."
+					]
+				},
+				{
+					"name": "Mobile app manual",
+					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/2022/07/070029-201r5-Carefree-Connects-Mobile-App-Manual.pdf",
+					"description": [
+						"Covers the Carefree Mobile app used to control the BT12 system from a phone. NOT installed on this van \u2014 listed for reference only."
 					]
 				}
 			]
