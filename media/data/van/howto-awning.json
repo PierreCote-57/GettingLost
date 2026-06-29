@@ -20,5 +20,45 @@
 			"items": [
 			]
 		}
-	}
+	},
+	"notes": [
+		{
+			"sectionName": "The awning",
+			"list": [
+				{
+					"name": "Carefree Eclipse \u2014 product page",
+					"url": "https://www.carefreeofcolorado.com/rv-products/patio-awnings/eclipse/",
+					"description": [
+						"Manufacturer page for the Eclipse 12V scissor-arm (armless) awning installed on this van."
+					]
+				},
+				{
+					"name": "Carefree Eclipse \u2014 owner's manual (standard, single-switch)",
+					"url": "https://carefreeofcolorado.com/wp-content/uploads/2022/06/052568-201r7-Eclipse-Owners-Manual-Std.pdf",
+					"description": [
+						"Operating instructions matching the simple ON/RETRACT, OFF/EXTEND switch installed \u2014 no auto-retract."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Not installed options",
+			"list": [
+				{
+					"name": "Carefree Connects \u2014 product page",
+					"url": "https://www.carefreeofcolorado.com/rv-products/carefree-connects/",
+					"description": [
+						"Wireless motion-sensor auto-retract upgrade. NOT installed on this van \u2014 listed for reference only."
+					]
+				},
+				{
+					"name": "Carefree Eclipse \u2014 owner's manual (with BT12 / Connects motion sensor)",
+					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/2022/06/052568-231r1-Eclipse-Owners-Manual-with-BT12.pdf",
+					"description": [
+						"Describes the Bluetooth motion-sensor auto-retract system. NOT installed on this van \u2014 listed for reference only."
+					]
+				}
+			]
+		}
+	]
 }
