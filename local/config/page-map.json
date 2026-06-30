@@ -20,7 +20,9 @@
     "howto-temperature-control": 1657,
     "howto-awning": 1726,
     "howto-shower": 1875,
-    "howto-water": 1876
+    "howto-water": 1876,
+    "checklist-arriving-campsite": 1913,
+    "checklist-leaving-campsite": 1914
   },
   "templates": {
     "lake-template": 856,

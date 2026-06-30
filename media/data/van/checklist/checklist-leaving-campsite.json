@@ -1,0 +1,12 @@
+{
+  "photoGalleries": {
+    "instructions": {
+      "name": "Instructions images",
+      "items": []
+    },
+    "details": {
+      "name": "Details images",
+      "items": []
+    }
+  }
+}
