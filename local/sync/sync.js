@@ -204,7 +204,7 @@ function checkForUnmappedPages(pageMap, pageFileMap) {
   }
 }
 
-async function syncPages() {
+async function syncPages(pageFolderCache) {
   const pageMapPath = path.join(REPO_ROOT, "local", "config", "page-map.json");
   const pageMap = JSON.parse(fs.readFileSync(pageMapPath, "utf8"));
 
@@ -249,6 +249,7 @@ async function syncPages() {
         } else {
           console.log(`[pages] OK ${category}/${slug} (id ${pageId})`);
         }
+        await syncOnePageToFileBird(pageFolderCache, pageId, entry.relPath);
         successCount++;
       } catch (err) {
         console.error(`[pages] ERROR ${category}/${slug} (id ${pageId}):`, err.message);
@@ -412,6 +413,103 @@ async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
   }
 }
 
+// ---------------------------------------------------------------------
+// FILEBIRD PAGE FOLDER filing — best effort, log-only. Same token and
+// degradation strategy as media folder filing above.
+//
+// A page's path relative to pages/ (e.g. "van/howto/howto-awning.html")
+// is mirrored into FileBird page folders: the dirname segments become
+// nested folders ("Van" → "HowTo") and the page is assigned to the
+// innermost one. Folder lookup is case-insensitive so existing
+// Title-Case folders ("HowTo") are matched by lowercase repo segments.
+// ---------------------------------------------------------------------
+
+async function loadFileBirdPageFolderTree() {
+  const cache = new Map(); // lowercase full path -> folder id
+  const res = await fbFetch("/post-type-folders/?post_type=page");
+  if (!res.ok) {
+    throw new Error(`page folder list failed: HTTP ${res.status}`);
+  }
+  const json = await res.json();
+  const roots = Array.isArray(json.data?.folders)
+    ? json.data.folders
+    : Array.isArray(json.data)
+    ? json.data
+    : [];
+
+  function walk(nodes, parentPath) {
+    for (const node of nodes) {
+      const name = node.text || node.title || "";
+      if (!name) continue;
+      const fullPath = parentPath ? `${parentPath}/${name}` : name;
+      cache.set(fullPath.toLowerCase(), node.id);
+      if (node.children && node.children.length) walk(node.children, fullPath);
+    }
+  }
+  walk(roots, "");
+  return cache;
+}
+
+async function ensureFileBirdPageFolderPath(pageFolderCache, segments) {
+  let parentId = 0;
+  let pathSoFar = "";
+
+  for (const name of segments) {
+    const pathKey = pathSoFar ? `${pathSoFar}/${name}` : name;
+    const cacheKey = pathKey.toLowerCase();
+
+    if (!pageFolderCache.has(cacheKey)) {
+      const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+      const res = await fbFetch("/post-type-folders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ post_type: "page", title: displayName, parent: parentId }),
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error(`create page folder "${pathKey}" failed: HTTP ${res.status} — ${body}`);
+      }
+      const created = await res.json();
+      const newId = created.data && created.data.id;
+      if (!newId) {
+        throw new Error(`create page folder "${pathKey}" returned no id: ${JSON.stringify(created)}`);
+      }
+      pageFolderCache.set(cacheKey, newId);
+      console.log(`[filebird:pages] created folder "${pathKey}" (id ${newId})`);
+    }
+
+    parentId = pageFolderCache.get(cacheKey);
+    pathSoFar = pathKey;
+  }
+
+  return parentId;
+}
+
+async function syncOnePageToFileBird(pageFolderCache, pageId, relPath) {
+  if (!pageFolderCache) return;
+
+  // relPath is like "pages/van/howto/howto-temperature-control.html"
+  const afterPages = relPath.startsWith("pages/") ? relPath.slice("pages/".length) : relPath;
+  const segments = path.posix.dirname(afterPages).split("/").filter((s) => s && s !== ".");
+  if (segments.length === 0) return; // file sits directly in pages/ root
+
+  try {
+    const folderId = await ensureFileBirdPageFolderPath(pageFolderCache, segments);
+    const res = await fbFetch("/post-type-folder/set-posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ post_type: "page", folderId, ids: [pageId] }),
+    });
+    const json = await res.json().catch(() => null);
+    if (!res.ok || !json) {
+      throw new Error(`set-posts failed: HTTP ${res.status} — ${JSON.stringify(json)}`);
+    }
+    console.log(`[filebird:pages] filed ${relPath} -> ${segments.join("/")}`);
+  } catch (err) {
+    console.warn(`[filebird:pages] FAILED to file ${relPath}:`, err.message);
+  }
+}
+
 async function syncFiles(fileBirdFolderCache) {
   let successCount = 0;
   let failCount = 0;
@@ -474,11 +572,21 @@ async function main() {
     console.warn("[filebird] FILEBIRD_TOKEN not set — FileBird filing disabled for this run.\n");
   }
 
+  let pageFolderCache = null;
+  if (FILEBIRD_TOKEN) {
+    try {
+      pageFolderCache = await loadFileBirdPageFolderTree();
+      console.log(`[filebird:pages] Loaded page folder tree (${pageFolderCache.size} folders known).\n`);
+    } catch (err) {
+      console.warn(`[filebird:pages] Could not load page folder tree — page folder filing disabled for this run: ${err.message}\n`);
+    }
+  }
+
   console.log("=== Syncing files (JSON data + scripts) ===");
   const filesResult = await syncFiles(fileBirdFolderCache);
 
   console.log("\n=== Syncing pages ===");
-  const pagesResult = await syncPages();
+  const pagesResult = await syncPages(pageFolderCache);
 
   console.log("\n=== Summary ===");
   console.log(`Files:  ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
