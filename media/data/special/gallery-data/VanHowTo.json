@@ -1,13 +1,25 @@
 [
   {
+    "title": "How To: Awning",
+    "slug": "howto-awning",
+    "image": "/wp-content/uploads/under-construction.png",
+    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+  },
+  {
+    "title": "How To: Take Shower",
+    "slug": "howto-shower",
+    "image": "/wp-content/uploads/under-construction.png",
+    "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
+  },
+  {
     "title": "How To: Temperature Control",
     "slug": "howto-temperature-control",
     "image": "/wp-content/uploads/under-construction.png",
     "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
   },
   {
-    "title": "How To: Awning",
-    "slug": "howto-awning",
+    "title": "How To: Have Water",
+    "slug": "howto-water",
     "image": "/wp-content/uploads/under-construction.png",
     "teaser": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut."
   }
