@@ -735,7 +735,7 @@
 
     var galleries = pageData.photoGalleries || {};
     var gallery = galleries[galleryName];
-    if (!gallery || !gallery.items || !gallery.items.length) {
+    if (!gallery || !gallery.items) {
       throw new Error(
         'photoGallery: no mini-gallery named "' + galleryName + '" found in page JSON.'
       );
