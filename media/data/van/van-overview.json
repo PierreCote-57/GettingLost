@@ -1,3 +1,30 @@
 {
-
+  "photoGalleries": {
+    "listing-pictures": {
+      "name": "Listing pictures",
+      "items": [
+        { "id": "1", "img": "beyond_22d_floorplan_5fx5gqbr8e.jpg.webp", "label": "" },
+        { "id": "2", "img": "img_5515_wzparrun2b.jpg.webp", "label": "" },
+        { "id": "3", "img": "img_5964_fmimbnk79c.jpg.webp", "label": "" },
+        { "id": "4", "img": "img_5965_9aoa2p2ukw.jpg.webp", "label": "" },
+        { "id": "5", "img": "img_5966_6ufww700uy.jpg.webp", "label": "" },
+        { "id": "6", "img": "img_5967_risdniw771.jpg.webp", "label": "" },
+        { "id": "7", "img": "img_5968_ulzms78k8r.jpg.webp", "label": "" },
+        { "id": "8", "img": "img_5969_z4gtqo49ub.jpg.webp", "label": "" },
+        { "id": "9", "img": "img_5970_ui1jix36xu.jpg.webp", "label": "" },
+        { "id": "10", "img": "img_5971_trso67r1v9.jpg.webp", "label": "" },
+        { "id": "11", "img": "img_5972_0tdjwyp0pi.jpg.webp", "label": "" },
+        { "id": "12", "img": "img_5973_9fe967c1h6.jpg.webp", "label": "" },
+        { "id": "13", "img": "img_5974_s53120jofo.jpg.webp", "label": "" },
+        { "id": "14", "img": "img_5976_93dyonmwah.jpg.webp", "label": "" },
+        { "id": "15", "img": "img_5978_2pwlbbwa78.jpg.webp", "label": "" },
+        { "id": "16", "img": "img_5979_93hay3cd31.jpg.webp", "label": "" },
+        { "id": "17", "img": "img_6412_gfhs68xofk.jpg.webp", "label": "" },
+        { "id": "18", "img": "img_6413_mvso8p7g7h.jpg.webp", "label": "" },
+        { "id": "19", "img": "img_6414_oqzjmjwyb0.jpg.webp", "label": "" },
+        { "id": "20", "img": "img_6415_drsnaaz7fv.jpg.webp", "label": "" },
+        { "id": "21", "img": "img_6416_bu9cqirazk.jpg.webp", "label": "" }
+      ]
+    }
+  }
 }
