@@ -465,17 +465,32 @@ async function ensureFileBirdPageFolderPath(pageFolderCache, segments) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ post_type: "page", title: displayName, parent: parentId }),
       });
+
       if (!res.ok) {
         const body = await res.text();
-        throw new Error(`create page folder "${pathKey}" failed: HTTP ${res.status} — ${body}`);
+        let parsed = null;
+        try { parsed = JSON.parse(body); } catch (_) {}
+        if (parsed?.code === "folder_name_exist") {
+          // Folder exists but wasn't in our cache — reload tree to recover the id
+          const fresh = await loadFileBirdPageFolderTree();
+          for (const [k, v] of fresh) pageFolderCache.set(k, v);
+          if (!pageFolderCache.has(cacheKey)) {
+            throw new Error(`create page folder "${pathKey}" failed and folder not found after reload`);
+          }
+          console.log(`[filebird:pages] recovered existing folder "${pathKey}" after cache miss`);
+        } else {
+          throw new Error(`create page folder "${pathKey}" failed: HTTP ${res.status} — ${body}`);
+        }
+      } else {
+        const created = await res.json();
+        // API returns either [{id, ...}] or {data: {id: ...}}
+        const newId = Array.isArray(created) ? created[0]?.id : (created.data && created.data.id);
+        if (!newId) {
+          throw new Error(`create page folder "${pathKey}" returned no id: ${JSON.stringify(created)}`);
+        }
+        pageFolderCache.set(cacheKey, newId);
+        console.log(`[filebird:pages] created folder "${pathKey}" (id ${newId})`);
       }
-      const created = await res.json();
-      const newId = created.data && created.data.id;
-      if (!newId) {
-        throw new Error(`create page folder "${pathKey}" returned no id: ${JSON.stringify(created)}`);
-      }
-      pageFolderCache.set(cacheKey, newId);
-      console.log(`[filebird:pages] created folder "${pathKey}" (id ${newId})`);
     }
 
     parentId = pageFolderCache.get(cacheKey);
