@@ -401,7 +401,7 @@ async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
     const res = await fbFetch("/folder/set-attachment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ folder: folderId, ids: mediaId }),
+      body: JSON.stringify({ folder: folderId, ids: [mediaId] }),
     });
     const json = await res.json().catch(() => null);
     if (!res.ok || !json || json.success !== true) {
