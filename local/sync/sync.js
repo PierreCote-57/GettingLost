@@ -7,12 +7,14 @@
  * "GitHub is master" sync: run it, and WordPress is made to match
  * the repo, full stop.
  *
- * Two kinds of targets:
+ * Three kinds of targets:
  *
- *   1. PAGES — full-content overwrite via the WP REST API
- *      (PUT/POST /wp/v2/pages/<id> with the repo's HTML as `content`).
- *      Uses local/config/page-map.json to know which WordPress page ID
- *      corresponds to each repo file.
+ *   1. PAGES — full-content overwrite via the WP REST API.
+ *      Pages are discovered dynamically from WP (no page-map.json).
+ *      New pages are auto-created when an HTML file exists in the
+ *      repo with no matching WP page. Title, excerpt, featured
+ *      image, and publish status are pushed from per-page JSON
+ *      files under media/data/.
  *
  *   2. FILES (JSON data files + .jst scripts) — uploaded to the media
  *      library at /wp-content/uploads/<filename>. WordPress does NOT
@@ -22,31 +24,28 @@
  *        a. looks up the existing media item by filename
  *        b. deletes it (force=true, permanent — no trash)
  *        c. re-uploads a new media item with the same filename
- *      This briefly 404s the file while the delete/recreate happens
- *      (typically well under a second), which is an accepted tradeoff
- *      for keeping the same data file architecture every page already
- *      depends on.
+ *
+ *   3. GALLERY JSONs — auto-generated from per-page data files.
+ *      Each gallery rule maps a folder path prefix to a gallery
+ *      name. Only pages with published:true are included. Generated
+ *      in memory and uploaded to WP — never written to the repo.
  *
  * Auth: WordPress Application Password (Basic Auth), provided via
  * the WP_USER and WP_APP_PASSWORD environment variables (GitHub
  * Secrets in the Action). Site URL via WP_SITE_URL.
- *
- * Blog posts are intentionally untouched — this script only ever
- * looks at /wp/v2/pages and /wp/v2/media, never /wp/v2/posts.
  */
 
 const fs = require("fs");
 const path = require("path");
 
 // ---------------------------------------------------------------------
-// Top-level constants (ALL CAPS) — grouped here for easy reference
-// and adjustment. Everything else in the file is functions and logic;
-// if you need to change a path, env var name, or mode flag, it's here.
+// Top-level constants
 // ---------------------------------------------------------------------
 
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
 const PAGES_ROOT = path.join(REPO_ROOT, "pages");
 const MEDIA_ROOT = path.join(REPO_ROOT, "media");
+const DATA_ROOT = path.join(MEDIA_ROOT, "data");
 
 const INCREMENTAL =
   process.argv.some((a) => a.startsWith("--changed-files=")) ||
@@ -59,25 +58,21 @@ const WP_APP_PASSWORD = requireEnv("WP_APP_PASSWORD");
 const AUTH_HEADER =
   "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
 
-// Intentionally NOT read via requireEnv(): FileBird folder filing is a
-// best-effort, log-only feature (see syncOneFileToFileBird below). A
-// missing or bad token should degrade that one feature, never crash
-// the actual WordPress content sync.
 const FILEBIRD_TOKEN = process.env.FILEBIRD_TOKEN || null;
+
+const FALLBACK_FEATURED_IMAGE_ID = 1751;
+
+const GALLERY_RULES = [
+  { name: "Lakes", path: "destinations/lakes/" },
+  { name: "Campgrounds", path: "destinations/campgrounds/" },
+  { name: "Parks", path: "destinations/parks/" },
+  { name: "Destinations", path: "destinations/" },
+  { name: "VanHowTo", path: "van/instructions/" },
+  { name: "VanChecklist", path: "van/checklists/" },
+];
 
 // ---------------------------------------------------------------------
 // Incremental mode
-//
-// Invoked with --changed-files=<path> and --removed-files=<path>,
-// each pointing to a plain text file (one repo-relative path per
-// line), built by the push workflow from the GitHub push event's
-// commits[].added / .modified / .removed lists.
-//
-//   - With no flags: full-overwrite mode, identical to the original
-//     script (used by the manual workflow_dispatch trigger).
-//   - With flags: only files in --changed-files are synced. Files in
-//     --removed-files are logged as a warning and otherwise ignored —
-//     this script never deletes content from WordPress automatically.
 // ---------------------------------------------------------------------
 
 function readLines(flagName) {
@@ -111,11 +106,6 @@ if (INCREMENTAL) {
   const localChanged = changedList.some((f) => f.startsWith("local/"));
 
   if (localChanged) {
-    // Something under local/ changed — could be page-map.json (mappings
-    // may have shifted) or the sync script itself (its own filtering
-    // logic might be the thing that's buggy, so don't trust it). Safest
-    // move: drop back to full-overwrite mode, identical to a manual
-    // workflow_dispatch run.
     console.log(
       "[incremental] A file under local/ changed (config and/or sync script) — falling back to a full sync instead of incremental, to be safe."
     );
@@ -160,14 +150,125 @@ function fbFetch(endpoint, options = {}) {
 }
 
 // ---------------------------------------------------------------------
+// Data loading — WP pages, per-page JSONs, WP media
+// ---------------------------------------------------------------------
+
+async function loadWpPageMap() {
+  const map = new Map();
+  let page = 1;
+  while (true) {
+    const res = await wpFetch(`/pages?per_page=100&page=${page}&status=any`);
+    if (!res.ok) throw new Error(`page listing failed: HTTP ${res.status}`);
+    const items = await res.json();
+    for (const item of items) {
+      map.set(item.slug, { id: item.id, status: item.status });
+    }
+    const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+    if (page >= totalPages) break;
+    page++;
+  }
+  return map;
+}
+
+function loadPerPageDataMap() {
+  const map = new Map();
+  if (!fs.existsSync(DATA_ROOT)) return map;
+
+  const entries = fs.readdirSync(DATA_ROOT, { recursive: true });
+  for (const entry of entries) {
+    if (!entry.endsWith(".json")) continue;
+    const normalized = entry.split(path.sep).join("/");
+    const slug = path.basename(normalized, ".json");
+    const parentDir = path.basename(path.dirname(normalized));
+    if (slug !== parentDir) continue;
+    const fullPath = path.join(DATA_ROOT, entry);
+    const data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
+    const repoPath = path.dirname(normalized);
+    map.set(slug, { data, repoPath });
+  }
+  return map;
+}
+
+async function loadWpMediaMap() {
+  const map = new Map();
+  let page = 1;
+  while (true) {
+    const res = await wpFetch(`/media?per_page=100&page=${page}&media_type=image`);
+    if (!res.ok) throw new Error(`media listing failed: HTTP ${res.status}`);
+    const items = await res.json();
+    for (const item of items) {
+      if (!item.source_url) continue;
+      try {
+        const urlPath = new URL(item.source_url).pathname;
+        map.set(urlPath, item.id);
+      } catch {
+        map.set(item.source_url, item.id);
+      }
+    }
+    const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+    if (page >= totalPages) break;
+    page++;
+  }
+  return map;
+}
+
+// ---------------------------------------------------------------------
+// Gallery JSON generation
+// ---------------------------------------------------------------------
+
+function generateGalleryJsons(perPageDataMap) {
+  const galleries = new Map();
+
+  for (const rule of GALLERY_RULES) {
+    const entries = [];
+
+    for (const [slug, { data, repoPath }] of perPageDataMap) {
+      if (!repoPath.startsWith(rule.path)) continue;
+      if (data.published !== true) continue;
+
+      entries.push({
+        title: data.title || slug,
+        slug,
+        image: data.image || "/wp-content/uploads/under-construction.png",
+        teaser: data.excerpt || "",
+        tags: data.tags || [],
+      });
+    }
+
+    entries.sort((a, b) => a.title.localeCompare(b.title));
+    galleries.set(rule.name, entries);
+  }
+
+  return galleries;
+}
+
+async function syncGalleryJsons(galleries, fileBirdFolderCache) {
+  let successCount = 0;
+  let failCount = 0;
+
+  for (const [name, entries] of galleries) {
+    const filename = `${name}.json`;
+    const fileBuffer = Buffer.from(JSON.stringify(entries, null, 2));
+    const relSubPath = `data/shared/gallery/${filename}`;
+    const mediaId = await syncOneFileToWordPress(relSubPath, filename, fileBuffer, "application/json");
+    if (mediaId) {
+      successCount++;
+      if (fileBirdFolderCache) {
+        await syncOneFileToFileBird(fileBirdFolderCache, mediaId, relSubPath);
+      }
+    } else {
+      failCount++;
+    }
+  }
+
+  return { successCount, failCount };
+}
+
+// ---------------------------------------------------------------------
 // PAGES sync
 // ---------------------------------------------------------------------
 
 function buildPageFileMap() {
-  // slug -> { filePath, relPath } — built from one recursive walk of
-  // pages/, so the actual folder a page lives in (lakes/parks/
-  // campgrounds/templates/special/...) never has to be hardcoded or
-  // kept in sync with page-map.json's category names.
   const map = new Map();
   if (!fs.existsSync(PAGES_ROOT)) return map;
 
@@ -182,79 +283,83 @@ function buildPageFileMap() {
   return map;
 }
 
-function checkForUnmappedPages(pageMap, pageFileMap) {
-  const mappedSlugs = new Set();
-  for (const slugToId of Object.values(pageMap)) {
-    for (const slug of Object.keys(slugToId)) mappedSlugs.add(slug);
-  }
-
-  const unmapped = [];
-  for (const [slug, entry] of pageFileMap) {
-    if (!mappedSlugs.has(slug)) {
-      unmapped.push(entry.relPath);
-    }
-  }
-
-  if (unmapped.length > 0) {
-    console.warn(
-      `[pages] ${unmapped.length} page file(s) found with no entry in local/config/page-map.json — NOT synced:\n` +
-        unmapped.map((f) => `  - ${f}`).join("\n") +
-        `\n  Create the page in WordPress, add its slug → page ID to local/config/page-map.json, then push again.`
-    );
-  }
-}
-
-async function syncPages(pageFolderCache) {
-  const pageMapPath = path.join(REPO_ROOT, "local", "config", "page-map.json");
-  const pageMap = JSON.parse(fs.readFileSync(pageMapPath, "utf8"));
-
+async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap) {
   const pageFileMap = buildPageFileMap();
-  checkForUnmappedPages(pageMap, pageFileMap);
 
   let successCount = 0;
   let failCount = 0;
 
-  for (const [category, slugToId] of Object.entries(pageMap)) {
-    for (const [slug, pageId] of Object.entries(slugToId)) {
-      const entry = pageFileMap.get(slug);
+  for (const [slug, entry] of pageFileMap) {
+    if (CHANGED && !CHANGED.files.has(entry.relPath)) {
+      continue;
+    }
 
-      if (!entry) {
-        console.warn(`[pages] ${category}/${slug}: no file found anywhere under pages/ — skipping.`);
-        continue;
-      }
+    const content = fs.readFileSync(entry.filePath, "utf8");
+    const pageData = perPageDataMap.get(slug)?.data || {};
+    const wpPage = wpPageMap.get(slug);
 
-      if (CHANGED && !CHANGED.files.has(entry.relPath)) {
-        continue; // not part of this push — leave it alone
-      }
+    const body = { content };
+    if (pageData.title) body.title = pageData.title;
+    if (pageData.excerpt !== undefined) body.excerpt = pageData.excerpt || "";
+    if (pageData.published !== undefined) {
+      body.status = pageData.published ? "publish" : "draft";
+    }
+    if (pageData.image && wpMediaMap) {
+      body.featured_media = wpMediaMap.get(pageData.image) || FALLBACK_FEATURED_IMAGE_ID;
+    }
 
-      const content = fs.readFileSync(entry.filePath, "utf8");
-
-      try {
+    try {
+      let pageId;
+      if (wpPage) {
+        pageId = wpPage.id;
         const res = await wpFetch(`/pages/${pageId}`, {
-          method: "POST", // WP REST API uses POST for partial/full updates
+          method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content }),
+          body: JSON.stringify(body),
         });
 
         if (!res.ok) {
-          const body = await res.text();
-          console.error(`[pages] FAILED ${category}/${slug} (id ${pageId}): HTTP ${res.status} — ${body}`);
+          const text = await res.text();
+          console.error(`[pages] FAILED update ${slug} (id ${pageId}): HTTP ${res.status} — ${text}`);
           failCount++;
           continue;
         }
 
         const data = await res.json();
         if (data._content_warnings) {
-          console.warn(`[pages] ${category}/${slug} (id ${pageId}): saved with warnings:`, data._content_warnings);
+          console.warn(`[pages] ${slug} (id ${pageId}): saved with warnings:`, data._content_warnings);
         } else {
-          console.log(`[pages] OK ${category}/${slug} (id ${pageId})`);
+          console.log(`[pages] OK updated ${slug} (id ${pageId})`);
         }
-        await syncOnePageToFileBird(pageFolderCache, pageId, entry.relPath);
-        successCount++;
-      } catch (err) {
-        console.error(`[pages] ERROR ${category}/${slug} (id ${pageId}):`, err.message);
-        failCount++;
+      } else {
+        body.slug = slug;
+        body.comment_status = "closed";
+        if (!body.status) body.status = "draft";
+
+        const res = await wpFetch("/pages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          console.error(`[pages] FAILED create ${slug}: HTTP ${res.status} — ${text}`);
+          failCount++;
+          continue;
+        }
+
+        const data = await res.json();
+        pageId = data.id;
+        wpPageMap.set(slug, { id: pageId, status: data.status });
+        console.log(`[pages] OK created ${slug} (id ${pageId}, status ${data.status})`);
       }
+
+      await syncOnePageToFileBird(pageFolderCache, pageId, entry.relPath);
+      successCount++;
+    } catch (err) {
+      console.error(`[pages] ERROR ${slug}:`, err.message);
+      failCount++;
     }
   }
 
@@ -272,10 +377,6 @@ function guessMimeFromExt(filename) {
 }
 
 async function findExistingMediaIdByFilename(filename) {
-  // WordPress media "search" matches title, not filename directly, but
-  // titles here are always set to the filename minus extension, and
-  // the source_url ends in the exact filename — search narrows the
-  // candidate list, then we confirm by checking source_url.
   const titleGuess = filename.replace(/\.(json|jst)$/, "");
   const res = await wpFetch(`/media?search=${encodeURIComponent(titleGuess)}&per_page=20`);
   if (!res.ok) {
@@ -326,18 +427,11 @@ async function syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType
 }
 
 // ---------------------------------------------------------------------
-// FILEBIRD folder filing — best effort, log-only. A FileBird problem
-// (no token, network error, bad folder data, etc.) never affects
-// syncFiles()'s successCount/failCount; it's only ever logged.
-//
-// A file's path relative to media/ (e.g. "data/lakes/amor-lake.json")
-// is mirrored EXACTLY into FileBird as nested folders, case-sensitive
-// — "data" then "lakes" — with the file assigned to the innermost one.
-// Folders are created on demand the first time they're needed.
+// FILEBIRD folder filing
 // ---------------------------------------------------------------------
 
 async function loadFileBirdFolderTree() {
-  const cache = new Map(); // lowercase full path (e.g. "data/lakes") -> folder id
+  const cache = new Map();
   const res = await fbFetch("/folders");
   if (!res.ok) {
     throw new Error(`folder list failed: HTTP ${res.status}`);
@@ -388,14 +482,14 @@ async function ensureFileBirdFolderPath(folderCache, segments) {
     parentId = folderCache.get(cacheKey);
   }
 
-  return parentId; // id of the deepest (innermost) folder in the path
+  return parentId;
 }
 
 async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
-  if (!folderCache) return; // disabled this run — no token, or initial load failed
+  if (!folderCache) return;
 
   const segments = path.posix.dirname(relSubPath).split("/").filter(Boolean);
-  if (segments.length === 0) return; // file sits directly in media/ root, nothing to file into
+  if (segments.length === 0) return;
 
   try {
     const folderId = await ensureFileBirdFolderPath(folderCache, segments);
@@ -415,18 +509,11 @@ async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
 }
 
 // ---------------------------------------------------------------------
-// FILEBIRD PAGE FOLDER filing — best effort, log-only. Same token and
-// degradation strategy as media folder filing above.
-//
-// A page's path relative to pages/ (e.g. "van/howto/howto-awning.html")
-// is mirrored into FileBird page folders: the dirname segments become
-// nested folders ("Van" → "HowTo") and the page is assigned to the
-// innermost one. Folder lookup is case-insensitive so existing
-// Title-Case folders ("HowTo") are matched by lowercase repo segments.
+// FILEBIRD PAGE FOLDER filing
 // ---------------------------------------------------------------------
 
 async function loadFileBirdPageFolderTree() {
-  const cache = new Map(); // lowercase full path -> folder id
+  const cache = new Map();
   const res = await fbFetch("/post-type-folders/?post_type=page");
   if (!res.ok) {
     throw new Error(`page folder list failed: HTTP ${res.status}`);
@@ -472,7 +559,6 @@ async function ensureFileBirdPageFolderPath(pageFolderCache, segments) {
         let parsed = null;
         try { parsed = JSON.parse(body); } catch (_) {}
         if (parsed?.code === "folder_name_exist") {
-          // Folder exists but wasn't in our cache — reload tree to recover the id
           const fresh = await loadFileBirdPageFolderTree();
           for (const [k, v] of fresh) pageFolderCache.set(k, v);
           if (!pageFolderCache.has(cacheKey)) {
@@ -484,7 +570,6 @@ async function ensureFileBirdPageFolderPath(pageFolderCache, segments) {
         }
       } else {
         const created = await res.json();
-        // API returns either [{id, ...}] or {data: {id: ...}}
         const newId = Array.isArray(created) ? created[0]?.id : (created.data && created.data.id);
         if (!newId) {
           throw new Error(`create page folder "${pathKey}" returned no id: ${JSON.stringify(created)}`);
@@ -504,10 +589,9 @@ async function ensureFileBirdPageFolderPath(pageFolderCache, segments) {
 async function syncOnePageToFileBird(pageFolderCache, pageId, relPath) {
   if (!pageFolderCache) return;
 
-  // relPath is like "pages/van/howto/howto-temperature-control.html"
   const afterPages = relPath.startsWith("pages/") ? relPath.slice("pages/".length) : relPath;
   const segments = path.posix.dirname(afterPages).split("/").filter((s) => s && s !== ".");
-  if (segments.length === 0) return; // file sits directly in pages/ root
+  if (segments.length === 0) return;
 
   try {
     const folderId = await ensureFileBirdPageFolderPath(pageFolderCache, segments);
@@ -539,22 +623,29 @@ async function syncFiles(fileBirdFolderCache) {
   const filenames = allEntries.filter((f) => f.endsWith(".json") || f.endsWith(".jst"));
 
   for (const relSubPath of filenames) {
+    const normalized = relSubPath.split(path.sep).join("/");
+
+    // Skip gallery index JSONs — auto-generated by generateGalleryJsons()
+    if (normalized.startsWith("data/shared/gallery/") && normalized.endsWith(".json")) {
+      continue;
+    }
+
     const filePath = path.join(MEDIA_ROOT, relSubPath);
     const filename = path.basename(filePath);
     const relPath = path.posix.relative(REPO_ROOT, filePath);
 
     if (CHANGED && !CHANGED.files.has(relPath)) {
-      continue; // not part of this push — leave it alone
+      continue;
     }
 
     const fileBuffer = fs.readFileSync(filePath);
     const mimeType = guessMimeFromExt(filename);
 
-    const mediaId = await syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType);
+    const mediaId = await syncOneFileToWordPress(normalized, filename, fileBuffer, mimeType);
 
     if (mediaId) {
       successCount++;
-      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, relSubPath);
+      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, normalized);
     } else {
       failCount++;
     }
@@ -562,11 +653,6 @@ async function syncFiles(fileBirdFolderCache) {
 
   return { successCount, failCount };
 }
-
-// ---------------------------------------------------------------------
-// Gallery JSON (media/special/gallery-data/) is picked up automatically
-// by syncFiles()'s recursive walk of media/ — no special-casing needed.
-// ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------
 // Main
@@ -582,7 +668,6 @@ async function main() {
       console.log(`[filebird] Loaded folder tree (${fileBirdFolderCache.size} folders known).\n`);
     } catch (err) {
       console.warn(`[filebird] Could not load folder tree — FileBird filing disabled for this run: ${err.message}\n`);
-      fileBirdFolderCache = null;
     }
   } else {
     console.warn("[filebird] FILEBIRD_TOKEN not set — FileBird filing disabled for this run.\n");
@@ -598,17 +683,38 @@ async function main() {
     }
   }
 
-  console.log("=== Syncing files (JSON data + scripts) ===");
+  console.log("=== Loading data maps ===");
+  const perPageDataMap = loadPerPageDataMap();
+  console.log(`[data] Loaded ${perPageDataMap.size} per-page data files.`);
+
+  const wpPageMap = await loadWpPageMap();
+  console.log(`[wp] Loaded ${wpPageMap.size} existing WP pages.`);
+
+  const wpMediaMap = await loadWpMediaMap();
+  console.log(`[wp] Loaded ${wpMediaMap.size} media attachments.\n`);
+
+  console.log("=== Generating gallery JSONs ===");
+  const galleries = generateGalleryJsons(perPageDataMap);
+  for (const [name, entries] of galleries) {
+    console.log(`[gallery] ${name}.json: ${entries.length} entries`);
+  }
+
+  console.log("\n=== Syncing files (JSON data + scripts) ===");
   const filesResult = await syncFiles(fileBirdFolderCache);
 
+  console.log("\n=== Syncing gallery JSONs ===");
+  const galleryResult = await syncGalleryJsons(galleries, fileBirdFolderCache);
+
   console.log("\n=== Syncing pages ===");
-  const pagesResult = await syncPages(pageFolderCache);
+  const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
 
   console.log("\n=== Summary ===");
-  console.log(`Files:  ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
-  console.log(`Pages:  ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
+  console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
+  console.log(`Galleries: ${galleryResult.successCount} ok, ${galleryResult.failCount} failed`);
+  console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
 
-  if (filesResult.failCount > 0 || pagesResult.failCount > 0) {
+  const totalFails = filesResult.failCount + galleryResult.failCount + pagesResult.failCount;
+  if (totalFails > 0) {
     process.exit(1);
   }
 }
