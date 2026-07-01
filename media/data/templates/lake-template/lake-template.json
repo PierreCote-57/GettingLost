@@ -1,0 +1,14 @@
+{
+  "lakeId": "",
+  "title": "Lake Template",
+  "lat": 0,
+  "lng": 0,
+  "recSites": [],
+  "fishingReferences": {
+    "bcIdentifier": "",
+    "areaKm2": 0,
+    "lakeChartUrl": "",
+    "stockingName": ""
+  },
+  "notes": []
+}
