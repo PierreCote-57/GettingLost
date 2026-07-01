@@ -337,7 +337,7 @@ async function syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType
 // ---------------------------------------------------------------------
 
 async function loadFileBirdFolderTree() {
-  const cache = new Map(); // full path string (e.g. "data/lakes") -> folder id
+  const cache = new Map(); // lowercase full path (e.g. "data/lakes") -> folder id
   const res = await fbFetch("/folders");
   if (!res.ok) {
     throw new Error(`folder list failed: HTTP ${res.status}`);
@@ -348,7 +348,7 @@ async function loadFileBirdFolderTree() {
   function walk(nodes, parentPath) {
     for (const node of nodes) {
       const fullPath = parentPath ? `${parentPath}/${node.text}` : node.text;
-      cache.set(fullPath, node.id);
+      cache.set(fullPath.toLowerCase(), node.id);
       if (node.children && node.children.length) {
         walk(node.children, fullPath);
       }
@@ -364,8 +364,9 @@ async function ensureFileBirdFolderPath(folderCache, segments) {
 
   for (const name of segments) {
     pathSoFar = pathSoFar ? `${pathSoFar}/${name}` : name;
+    const cacheKey = pathSoFar.toLowerCase();
 
-    if (!folderCache.has(pathSoFar)) {
+    if (!folderCache.has(cacheKey)) {
       const res = await fbFetch("/folders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -380,11 +381,11 @@ async function ensureFileBirdFolderPath(folderCache, segments) {
       if (!newId) {
         throw new Error(`create folder "${pathSoFar}" returned no id: ${JSON.stringify(created)}`);
       }
-      folderCache.set(pathSoFar, newId);
+      folderCache.set(cacheKey, newId);
       console.log(`[filebird] created folder "${pathSoFar}" (id ${newId})`);
     }
 
-    parentId = folderCache.get(pathSoFar);
+    parentId = folderCache.get(cacheKey);
   }
 
   return parentId; // id of the deepest (innermost) folder in the path
