@@ -1,6 +1,9 @@
 {
-  "campgroundId": "elk-falls-quinsam-campground",
-  "title": "Elk Falls Park (Quinsam Campground)",
+  "title": "Elk Falls Park",
+  "image": "/wp-content/uploads/under-construction.png",
+  "excerpt": "A thundering waterfall and old-growth Douglas fir, just north of Campbell River.",
+  "tags": ["camping", "fishing", "hiking"],
+  "published": true,
   "lat": 50.04139,
   "lng": -125.32083,
   "campground": {

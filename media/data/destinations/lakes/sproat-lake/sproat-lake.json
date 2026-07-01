@@ -1,6 +1,9 @@
 {
-  "lakeId": "01128ALBN",
   "title": "Sproat Lake",
+  "image": "/wp-content/uploads/under-construction.png",
+  "excerpt": "A massive lake near Port Alberni with provincial parks, private campgrounds, and great fishing.",
+  "tags": ["fishing", "camping", "swimming"],
+  "published": true,
   "lat": 49.2901,
   "lng": -124.9153,
   "recSites": [
@@ -48,7 +51,7 @@
     }
   ],
   "fishingReferences": {
-    "bcIdentifier": "01128ALBN (317802)",
+    "bcIdentifier": "01128ALBN",
     "areaKm2": 42.33,
     "lakeChartUrl": [
       {

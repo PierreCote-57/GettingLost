@@ -1,6 +1,9 @@
 {
-  "lakeId": "00216NIMP",
   "title": "Keogh Lake",
+  "image": "/wp-content/uploads/under-construction.png",
+  "excerpt": "A popular summer lake near Port McNeill with sandy beach, boat launch, and the Clint Beek rec site.",
+  "tags": ["fishing", "camping"],
+  "published": true,
   "lat": 50.4962,
   "lng": -127.1664,
   "recSites": [
@@ -21,7 +24,7 @@
     }
   ],
   "fishingReferences": {
-    "bcIdentifier": "00216NIMP (314259)",
+    "bcIdentifier": "00216NIMP",
     "areaKm2": 0.798,
     "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00279001.pdf",
     "stockingName": ""

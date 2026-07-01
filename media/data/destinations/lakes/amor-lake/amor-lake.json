@@ -1,6 +1,9 @@
 {
-  "lakeId": "00324SALM",
   "title": "Amor Lake",
+  "image": "/wp-content/uploads/IMG_0706.jpg",
+  "excerpt": "Part of the Sayward Forest Canoe Route, with sandy beaches, rocky islets, and multiple rec sites to explore.",
+  "tags": ["fishing", "camping"],
+  "published": true,
   "lat": 50.1602,
   "lng": -125.56,
   "recSites": [
@@ -109,7 +112,7 @@
     }
   ],
   "fishingReferences": {
-    "bcIdentifier": "00324SALM (309679)",
+    "bcIdentifier": "00324SALM",
     "areaKm2": 3.145,
     "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00228201.pdf",
     "stockingName": ""
