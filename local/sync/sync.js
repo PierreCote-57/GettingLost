@@ -292,7 +292,11 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
 
   for (const [slug, entry] of pageFileMap) {
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
-      continue;
+      const pd = perPageDataMap.get(slug);
+      const jsonRelPath = pd
+        ? `media/data/${pd.repoPath}/${slug}.json`
+        : null;
+      if (!jsonRelPath || !CHANGED.files.has(jsonRelPath)) continue;
     }
 
     const content = fs.readFileSync(entry.filePath, "utf8");
