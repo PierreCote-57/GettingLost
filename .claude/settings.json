@@ -3,7 +3,8 @@
 		"allow": [
 			"Edit",
 			"Write",
-			"Bash(curl \"https://gettinglostonvi.wpcomstaging.com*)"
+			"Bash(curl 'https://gettinglostonvi.wpcomstaging.com*)",
+			"Bash(python3 -c *)"
 		]
 	}
 }
