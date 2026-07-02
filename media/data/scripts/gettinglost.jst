@@ -100,6 +100,29 @@
     return escapeHtml(str);
   }
 
+  var TAG_COLORS = {
+    camping:  { bg: "rgba(31, 158, 117, 0.88)", text: "#E1F5EE" },
+    fishing:  { bg: "rgba(55, 138, 221, 0.88)", text: "#E6F1FB" },
+    hiking:   { bg: "rgba(216, 90, 48, 0.88)",  text: "#FAECE7" },
+    picnic:   { bg: "rgba(186, 117, 23, 0.88)", text: "#FAEEDA" }
+  };
+  var TAG_FALLBACK = { bg: "rgba(95, 94, 90, 0.88)", text: "#F1EFE8" };
+
+  function renderTags(tags) {
+    if (!tags || !tags.length) return "";
+    var sorted = tags.slice().sort();
+    var html = '<div class="gl-tag-stack">';
+    for (var i = 0; i < sorted.length; i++) {
+      var c = TAG_COLORS[sorted[i]] || TAG_FALLBACK;
+      html +=
+        '<span class="gl-tag" style="background:' + c.bg + ";color:" + c.text + ';">' +
+        escapeHtml(sorted[i]) +
+        "</span>";
+    }
+    html += "</div>";
+    return html;
+  }
+
   function renderCard(entry) {
     var title = escapeHtml(entry.title || "");
     var slug = escapeHtml(entry.slug || "");
@@ -109,7 +132,10 @@
 
     return (
       '<a class="gl-gallery-card" href="' + href + '">' +
+      '<div class="gl-gallery-card-img-wrap">' +
       '<img class="gl-gallery-card-img" src="' + image + '" alt="' + title + '" loading="lazy">' +
+      renderTags(entry.tags) +
+      "</div>" +
       '<h3 class="gl-gallery-card-title">' + title + "</h3>" +
       '<p class="gl-gallery-card-teaser">' + teaser + "</p>" +
       "</a>"
@@ -143,12 +169,31 @@
       "text-decoration: none;" +
       "color: inherit;" +
       "}" +
+      ".gl-gallery-card-img-wrap {" +
+      "position: relative;" +
+      "}" +
       ".gl-gallery-card-img {" +
       "width: 100%;" +
       "height: 200px;" +
       "object-fit: cover;" +
       "border-radius: 6px;" +
       "display: block;" +
+      "}" +
+      ".gl-tag-stack {" +
+      "position: absolute;" +
+      "top: 8px;" +
+      "right: 8px;" +
+      "display: flex;" +
+      "flex-direction: column;" +
+      "gap: 4px;" +
+      "align-items: flex-end;" +
+      "}" +
+      ".gl-tag {" +
+      "font-size: 11px;" +
+      "font-weight: 500;" +
+      "padding: 2px 8px;" +
+      "border-radius: 10px;" +
+      "line-height: 1.3;" +
       "}" +
       ".gl-gallery-card-title {" +
       "margin: 0.6rem 0 0.3rem;" +
