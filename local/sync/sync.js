@@ -66,6 +66,7 @@ const GALLERY_RULES = [
   { name: "Lakes", path: "destinations/lakes/" },
   { name: "Campgrounds", path: "destinations/campgrounds/" },
   { name: "Parks", path: "destinations/parks/" },
+  { name: "RecSites", path: "destinations/rec-sites/" },
   { name: "Destinations", path: "destinations/" },
   { name: "VanHowTo", path: "van/instructions/" },
   { name: "VanChecklist", path: "van/checklists/" },
