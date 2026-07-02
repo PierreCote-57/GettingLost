@@ -21,6 +21,7 @@ on:
     branches: [main]
     paths:
       - "pages/**"
+      - "posts/**"
       - "media/**"
       - "local/config/**"
       - "local/sync/**"

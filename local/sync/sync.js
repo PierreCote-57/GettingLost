@@ -44,6 +44,7 @@ const path = require("path");
 
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
 const PAGES_ROOT = path.join(REPO_ROOT, "pages");
+const POSTS_ROOT = path.join(REPO_ROOT, "posts");
 const MEDIA_ROOT = path.join(REPO_ROOT, "media");
 const DATA_ROOT = path.join(MEDIA_ROOT, "data");
 
@@ -284,6 +285,38 @@ function buildPageFileMap() {
   return map;
 }
 
+function buildPostFileMap() {
+  const map = new Map();
+  if (!fs.existsSync(POSTS_ROOT)) return map;
+
+  const entries = fs.readdirSync(POSTS_ROOT);
+  for (const entry of entries) {
+    if (!entry.endsWith(".html")) continue;
+    const slug = path.basename(entry, ".html");
+    const filePath = path.join(POSTS_ROOT, entry);
+    const relPath = path.posix.join("posts", entry);
+    map.set(slug, { filePath, relPath });
+  }
+  return map;
+}
+
+async function loadWpPostMap() {
+  const map = new Map();
+  let page = 1;
+  while (true) {
+    const res = await wpFetch(`/posts?per_page=100&page=${page}&status=any`);
+    if (!res.ok) throw new Error(`post listing failed: HTTP ${res.status}`);
+    const items = await res.json();
+    for (const item of items) {
+      map.set(item.slug, { id: item.id, status: item.status });
+    }
+    const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+    if (page >= totalPages) break;
+    page++;
+  }
+  return map;
+}
+
 async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap) {
   const pageFileMap = buildPageFileMap();
 
@@ -364,6 +397,98 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
       successCount++;
     } catch (err) {
       console.error(`[pages] ERROR ${slug}:`, err.message);
+      failCount++;
+    }
+  }
+
+  return { successCount, failCount };
+}
+
+// ---------------------------------------------------------------------
+// POSTS sync
+// ---------------------------------------------------------------------
+
+async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap) {
+  const postFileMap = buildPostFileMap();
+
+  let successCount = 0;
+  let failCount = 0;
+
+  for (const [slug, entry] of postFileMap) {
+    if (CHANGED && !CHANGED.files.has(entry.relPath)) {
+      const pd = perPageDataMap.get(slug);
+      const jsonRelPath = pd
+        ? `media/data/${pd.repoPath}/${slug}.json`
+        : null;
+      if (!jsonRelPath || !CHANGED.files.has(jsonRelPath)) continue;
+    }
+
+    const content = fs.readFileSync(entry.filePath, "utf8");
+    const postData = perPageDataMap.get(slug)?.data || {};
+    const wpPost = wpPostMap.get(slug);
+
+    const body = { content };
+    if (postData.title) body.title = postData.title;
+    if (postData.excerpt !== undefined) body.excerpt = postData.excerpt || "";
+    if (postData.date) body.date = postData.date;
+    if (postData.published !== undefined) {
+      body.status = postData.published ? "publish" : "draft";
+    }
+    if (postData.image && wpMediaMap) {
+      body.featured_media = wpMediaMap.get(postData.image) || FALLBACK_FEATURED_IMAGE_ID;
+    }
+
+    try {
+      let postId;
+      if (wpPost) {
+        postId = wpPost.id;
+        const res = await wpFetch(`/posts/${postId}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          console.error(`[posts] FAILED update ${slug} (id ${postId}): HTTP ${res.status} — ${text}`);
+          failCount++;
+          continue;
+        }
+
+        const data = await res.json();
+        if (data._content_warnings) {
+          console.warn(`[posts] ${slug} (id ${postId}): saved with warnings:`, data._content_warnings);
+        } else {
+          console.log(`[posts] OK updated ${slug} (id ${postId})`);
+        }
+      } else {
+        body.slug = slug;
+        body.comment_status = "open";
+        if (!body.status) body.status = "draft";
+
+        const res = await wpFetch("/posts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          console.error(`[posts] FAILED create ${slug}: HTTP ${res.status} — ${text}`);
+          failCount++;
+          continue;
+        }
+
+        const data = await res.json();
+        postId = data.id;
+        wpPostMap.set(slug, { id: postId, status: data.status });
+        console.log(`[posts] OK created ${slug} (id ${postId}, status ${data.status})`);
+      }
+
+      await syncOnePageToFileBird(postFolderCache, postId, entry.relPath);
+      successCount++;
+    } catch (err) {
+      console.error(`[posts] ERROR ${slug}:`, err.message);
       failCount++;
     }
   }
@@ -695,6 +820,9 @@ async function main() {
   const wpPageMap = await loadWpPageMap();
   console.log(`[wp] Loaded ${wpPageMap.size} existing WP pages.`);
 
+  const wpPostMap = await loadWpPostMap();
+  console.log(`[wp] Loaded ${wpPostMap.size} existing WP posts.`);
+
   const wpMediaMap = await loadWpMediaMap();
   console.log(`[wp] Loaded ${wpMediaMap.size} media attachments.\n`);
 
@@ -713,12 +841,16 @@ async function main() {
   console.log("\n=== Syncing pages ===");
   const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
 
+  console.log("\n=== Syncing posts ===");
+  const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
+
   console.log("\n=== Summary ===");
   console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
   console.log(`Galleries: ${galleryResult.successCount} ok, ${galleryResult.failCount} failed`);
   console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
+  console.log(`Posts:     ${postsResult.successCount} ok, ${postsResult.failCount} failed`);
 
-  const totalFails = filesResult.failCount + galleryResult.failCount + pagesResult.failCount;
+  const totalFails = filesResult.failCount + galleryResult.failCount + pagesResult.failCount + postsResult.failCount;
   if (totalFails > 0) {
     process.exit(1);
   }

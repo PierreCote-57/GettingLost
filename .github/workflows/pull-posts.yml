@@ -1,0 +1,39 @@
+name: Pull new posts from WordPress
+
+# Manual trigger only — pulls WP posts that don't exist in the repo yet,
+# commits them, and pushes to main. The subsequent push triggers the
+# normal sync workflow (idempotent — content matches, so it's a no-op).
+on:
+  workflow_dispatch: {}
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Pull new posts from WordPress
+        working-directory: local/sync
+        env:
+          WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node pull-posts.js
+
+      - name: Commit and push if new posts were pulled
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add posts/ media/data/posts/
+          if git diff --cached --quiet; then
+            echo "No new posts to commit."
+          else
+            git commit -m "Pull new posts from WordPress"
+            git push
+          fi
