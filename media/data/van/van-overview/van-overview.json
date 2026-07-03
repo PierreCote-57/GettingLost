@@ -2,6 +2,16 @@
   "title": "Van Overview",
   "published": true,
   "photoGalleries": {
+    "our-van": {
+      "name": "Our van",
+      "items": [
+        { "id": "1", "img": "IMG_2769_crop.jpg", "label": "" },
+        { "id": "2", "img": "IMG_2770_crop.jpg", "label": "" },
+        { "id": "3", "img": "IMG_2771_crop.jpg", "label": "" },
+        { "id": "4", "img": "IMG_2772_crop.jpg", "label": "" },
+        { "id": "5", "img": "IMG_2773_crop.jpg", "label": "" }
+      ]
+    },
     "listing-pictures": {
       "name": "Listing pictures",
       "items": [
