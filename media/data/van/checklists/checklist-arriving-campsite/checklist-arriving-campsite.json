@@ -7,11 +7,23 @@
   "photoGalleries": {
     "instructions": {
       "name": "Instructions images",
-      "items": []
+      "items": [
+        {
+          "id": "campers-code",
+          "img": "CampersCode_CampfireIllustration.jpg",
+          "label": "Camper's Code"
+        }
+      ]
     },
     "details": {
       "name": "Details images",
-      "items": []
+      "items": [
+        {
+          "id": "campers-code",
+          "img": "CampersCode_CampfireIllustration.jpg",
+          "label": "Camper's Code"
+        }
+      ]
     }
   }
 }
