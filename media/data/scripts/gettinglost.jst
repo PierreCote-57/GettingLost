@@ -265,7 +265,7 @@
       "}" +
       "@keyframes gl-photo-flash {" +
       "0% { box-shadow: 0 0 0 6px rgba(201, 138, 62, 0.6); }" +
-      "75% { box-shadow: 0 0 0 0 rgba(201, 138, 62, 0); }" +
+      "100% { box-shadow: 0 0 0 0 rgba(201, 138, 62, 0); }" +
       "}" +
       ".gl-warning {" +
       "display: block;" +
@@ -324,14 +324,17 @@
       ".gl-lightbox-figure {" +
       "margin: 0;" +
       "max-width: 100%;" +
-      "max-height: 75%;" +
+      "max-height: 100%;" +
+      "min-height: 0;" +
       "display: flex;" +
       "flex-direction: column;" +
       "align-items: center;" +
       "}" +
       ".gl-lightbox-img {" +
+      "display: block;" +
       "max-width: 100%;" +
       "max-height: 75vh;" +
+      "min-height: 0;" +
       "object-fit: contain;" +
       "border-radius: 4px;" +
       "box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" +
