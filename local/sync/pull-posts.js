@@ -135,14 +135,24 @@ async function main() {
     const content = post.content.raw || "";
     const title = post.title.raw || post.title.rendered || slug;
     const excerpt = stripParagraphWrap(post.excerpt.raw || post.excerpt.rendered || "");
-    const image = post.featured_media ? (reverseMediaMap.get(post.featured_media) || "") : "";
+    let featuredImage = null;
+    if (post.featured_media) {
+      const resolved = reverseMediaMap.get(post.featured_media);
+      if (resolved) {
+        featuredImage = path.basename(resolved);
+      } else {
+        console.warn(
+          `[pull] ${slug}: featured_media ${post.featured_media} not found in media library — leaving featuredImage null.`
+        );
+      }
+    }
     const date = post.date || "";
     const published = post.status === "publish";
 
     const jsonData = {
       title,
       excerpt,
-      image,
+      featuredImage,
       date,
       published,
       categories: [],

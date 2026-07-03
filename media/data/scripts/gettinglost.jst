@@ -100,6 +100,18 @@
     return escapeHtml(str);
   }
 
+  // Turn a bare image filename (e.g. "IMG_0795.jpg") into its WordPress
+  // uploads URL. A future `size` argument will append the resized-variant
+  // suffix here. Mirrors formatImageUrl in sync.js.
+  // Empty/missing input is never valid — callers guarantee a real filename —
+  // so it throws rather than manufacturing a broken <img src=""> value.
+  function formatImageUrl(img) {
+    if (!img) {
+      throw new Error("formatImageUrl: empty/missing image filename — data bug");
+    }
+    return "/wp-content/uploads/" + img;
+  }
+
   var TAG_COLORS = {
     camping:  { bg: "rgba(31, 158, 117, 0.88)", text: "#E1F5EE" },
     fishing:  { bg: "rgba(55, 138, 221, 0.88)", text: "#E6F1FB" },
@@ -126,7 +138,7 @@
   function renderCard(entry) {
     var title = escapeHtml(entry.title || "");
     var slug = escapeHtml(entry.slug || "");
-    var image = escapeHtml(entry.image || "");
+    var image = escapeHtml(formatImageUrl(entry.image));
     var teaser = escapeHtml(entry.teaser || "");
     var href = "/" + slug + "/";
 
@@ -332,7 +344,7 @@
       }
     }
 
-    var src = "/wp-content/uploads/" + img;
+    var src = formatImageUrl(img);
 
     var captionHtml = "";
     if (hasGps) {
@@ -805,7 +817,7 @@
       wrapper.className = "gl-photogallery-item";
       wrapper.id = "gl-photo-" + galleryName + "-" + item.id;
 
-      var src = "/wp-content/uploads/" + item.img;
+      var src = formatImageUrl(item.img);
 
       var link = document.createElement("a");
       link.href = src;

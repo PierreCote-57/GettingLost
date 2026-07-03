@@ -191,6 +191,21 @@ function loadPerPageDataMap() {
   return map;
 }
 
+// Turn a bare image filename (e.g. "IMG_0795.jpg") from page/post data into
+// its WordPress uploads URL, matching how loadWpMediaMap keys the media map.
+// A future `size` argument will append the resized-variant suffix here.
+// Mirrors formatImageUrl in gettinglost.jst.
+// Empty/missing input is never valid — callers guarantee a real filename —
+// so it throws rather than manufacturing a broken "" value.
+function formatImageUrl(filename) {
+  if (!filename) {
+    throw new Error(
+      "formatImageUrl: empty/missing image filename — data bug; callers must pass a real filename."
+    );
+  }
+  return "/wp-content/uploads/" + filename;
+}
+
 async function loadWpMediaMap() {
   const map = new Map();
   let page = 1;
@@ -231,7 +246,7 @@ function generateGalleryJsons(perPageDataMap) {
       entries.push({
         title: data.title || slug,
         slug,
-        image: data.image || "/wp-content/uploads/under-construction.png",
+        image: data.galleryImage ?? data.featuredImage ?? "under-construction.png",
         teaser: data.excerpt || "",
         tags: data.tags || [],
       });
@@ -342,8 +357,15 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
     if (pageData.published !== undefined) {
       body.status = pageData.published ? "publish" : "draft";
     }
-    if (pageData.image && wpMediaMap) {
-      body.featured_media = wpMediaMap.get(pageData.image) || FALLBACK_FEATURED_IMAGE_ID;
+    // GitHub is master: always assert the featured image. A named image
+    // resolves to its media id (or the under-construction fallback if not yet
+    // uploaded); null/absent pushes 0 to actively clear any featured image WP
+    // may still have. Otherwise "remove the featured image" couldn't be done
+    // from the repo alone.
+    if (pageData.featuredImage) {
+      body.featured_media = (wpMediaMap && wpMediaMap.get(formatImageUrl(pageData.featuredImage))) || FALLBACK_FEATURED_IMAGE_ID;
+    } else {
+      body.featured_media = 0;
     }
 
     try {
@@ -434,8 +456,12 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
     if (postData.published !== undefined) {
       body.status = postData.published ? "publish" : "draft";
     }
-    if (postData.image && wpMediaMap) {
-      body.featured_media = wpMediaMap.get(postData.image) || FALLBACK_FEATURED_IMAGE_ID;
+    // GitHub is master: always assert the featured image (see syncPages).
+    // null/absent pushes 0 to clear any featured image WP may still have.
+    if (postData.featuredImage) {
+      body.featured_media = (wpMediaMap && wpMediaMap.get(formatImageUrl(postData.featuredImage))) || FALLBACK_FEATURED_IMAGE_ID;
+    } else {
+      body.featured_media = 0;
     }
 
     try {
