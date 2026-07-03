@@ -279,6 +279,33 @@
       "}" +
       ".gl-warning-label {" +
       "color: #a85d1a;" +
+      "}" +
+      ".gl-checklist {" +
+      "list-style: none;" +
+      "padding-left: 0;" +
+      "margin: 0.5rem 0 1.5rem;" +
+      "}" +
+      ".gl-checklist li {" +
+      "margin: 0.45rem 0;" +
+      "}" +
+      ".gl-checklist label {" +
+      "display: flex;" +
+      "align-items: flex-start;" +
+      "gap: 0.6rem;" +
+      "cursor: pointer;" +
+      "line-height: 1.45;" +
+      "}" +
+      ".gl-checklist input[type=\"checkbox\"] {" +
+      "margin-top: 0.2rem;" +
+      "width: 1.05rem;" +
+      "height: 1.05rem;" +
+      "flex-shrink: 0;" +
+      "accent-color: #c98a3e;" +
+      "cursor: pointer;" +
+      "}" +
+      ".gl-checklist input[type=\"checkbox\"]:checked + span {" +
+      "text-decoration: line-through;" +
+      "color: #999;" +
       "}";
     document.head.appendChild(style);
   }
@@ -902,6 +929,34 @@
   };
 
   // ---------------------------------------------------------------------
+  // Checklists
+  // ---------------------------------------------------------------------
+
+  // Turns a plain <ol class="gl-checklist"><li>text</li></ol> (or <ul>) into
+  // an interactive to-do list: each <li>'s content is wrapped in a
+  // <label><input type="checkbox"><span>text</span></label> so the whole row
+  // toggles. Authors only write the bare <li> lines. Idempotent.
+  function enhanceChecklist(list) {
+    var items = list.children;
+    for (var i = 0; i < items.length; i++) {
+      var li = items[i];
+      if (li.tagName !== "LI") continue;
+      if (li.querySelector('input[type="checkbox"]')) continue;
+
+      var label = document.createElement("label");
+      var box = document.createElement("input");
+      box.type = "checkbox";
+      var span = document.createElement("span");
+      while (li.firstChild) {
+        span.appendChild(li.firstChild);
+      }
+      label.appendChild(box);
+      label.appendChild(span);
+      li.appendChild(label);
+    }
+  }
+
+  // ---------------------------------------------------------------------
   // Init
   // ---------------------------------------------------------------------
 
@@ -916,6 +971,11 @@
     var featured = document.querySelectorAll(".gl-featured");
     for (var j = 0; j < featured.length; j++) {
       renderFeatured(featured[j]);
+    }
+
+    var checklists = document.querySelectorAll(".gl-checklist");
+    for (var k = 0; k < checklists.length; k++) {
+      enhanceChecklist(checklists[k]);
     }
 
     initBlocks();
