@@ -5,8 +5,8 @@
   "tags": [],
   "published": true,
   "photoGalleries": {
-    "instructions": {
-      "name": "Instructions images",
+    "howto": {
+      "name": "How to images",
       "items": [
         {
           "id": "campers-code",

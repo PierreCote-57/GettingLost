@@ -69,7 +69,7 @@ const GALLERY_RULES = [
   { name: "Parks", path: "destinations/parks/" },
   { name: "RecSites", path: "destinations/rec-sites/" },
   { name: "Destinations", path: "destinations/" },
-  { name: "VanHowTo", path: "van/instructions/" },
+  { name: "VanHowTo", path: "van/howto/" },
   { name: "VanChecklist", path: "van/checklists/" },
 ];
 

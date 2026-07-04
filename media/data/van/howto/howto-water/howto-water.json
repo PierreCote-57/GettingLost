@@ -1,12 +1,12 @@
 {
-  "title": "How To: Take Shower",
+  "title": "How To: Have Water",
   "featuredImage": "under-construction.png",
-  "excerpt": "Steps for using the van's shower system.",
+  "excerpt": "Manage the van's fresh water system.",
   "tags": [],
   "published": true,
   "photoGalleries": {
-    "instructions": {
-      "name": "Instructions images",
+    "howto": {
+      "name": "How to images",
       "items": []
     },
     "details": {

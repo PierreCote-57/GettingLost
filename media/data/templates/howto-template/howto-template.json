@@ -2,8 +2,8 @@
   "title": "Howto Template",
   "published": false,
   "photoGalleries": {
-    "instructions": {
-      "name": "Instructions images",
+    "howto": {
+      "name": "How to images",
       "items": [
         { "id": "example", "img": "placeholder.png", "label": "Example caption" }
       ]

@@ -3,7 +3,7 @@
 
 All checklist content (title, intro, group headings, steps) is read live from
 the page HTML in pages/van/checklists/*.html -- nothing is duplicated here.
-Only the instructions section of each page is used; images and the collapsed
+Only the howto section of each page is used; images and the collapsed
 "details" section are ignored.
 
 Regenerate from the repo root:
@@ -145,7 +145,7 @@ def checklist_table(steps):
 
 
 # ---------------------------------------------------------------------------
-# Parsing: pull the instructions section out of a checklist page.
+# Parsing: pull the howto section out of a checklist page.
 # ---------------------------------------------------------------------------
 
 def _text(node):
@@ -157,7 +157,7 @@ def parse_checklist(path):
     with open(path, encoding="utf-8") as f:
         soup = BeautifulSoup(f.read(), "html.parser")
 
-    section = soup.find("section", attrs={"data-howto-section": "instructions"})
+    section = soup.find("section", attrs={"data-howto-section": "howto"})
     if section is None:
         return None
 
@@ -219,7 +219,7 @@ def build(path):
     files = glob.glob(os.path.join(CHECKLIST_DIR, "*.html"))
     checklists = [c for c in (parse_checklist(p) for p in files) if c]
     if not checklists:
-        sys.exit("No checklist instructions sections found in " + CHECKLIST_DIR)
+        sys.exit("No checklist howto sections found in " + CHECKLIST_DIR)
     checklists.sort(key=lambda c: c["title"].lower())
 
     doc = BookletDoc(
