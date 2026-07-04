@@ -192,9 +192,11 @@ function loadPerPageDataMap() {
 }
 
 // Turn a bare image filename (e.g. "IMG_0795.jpg") from page/post data into
-// its WordPress uploads URL, matching how loadWpMediaMap keys the media map.
-// A future `size` argument will append the resized-variant suffix here.
-// Mirrors formatImageUrl in gettinglost.jst.
+// its WordPress uploads path, matching how loadWpMediaMap keys the media map.
+// This is a media-map lookup KEY, not a display URL — so it intentionally does
+// NOT mirror gettinglost.jst's formatImageUrl, which now returns a Jetpack
+// Photon (i0.wp.com) URL for on-the-fly resizing. Keep this a plain
+// /wp-content/uploads/ path, or the featured-image media-id lookup breaks.
 // Empty/missing input is never valid — callers guarantee a real filename —
 // so it throws rather than manufacturing a broken "" value.
 function formatImageUrl(filename) {
