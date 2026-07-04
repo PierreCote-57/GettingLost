@@ -634,7 +634,7 @@ async function ensureFileBirdFolderPath(folderCache, segments) {
         throw new Error(`create folder "${pathSoFar}" returned no id: ${JSON.stringify(created)}`);
       }
       folderCache.set(cacheKey, newId);
-      console.log(`[filebird] created folder "${pathSoFar}" (id ${newId})`);
+      console.log(`[filebird:media] created folder "${pathSoFar}" (id ${newId})`);
     }
 
     parentId = folderCache.get(cacheKey);
@@ -660,9 +660,9 @@ async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
     if (!res.ok || !json || json.success !== true) {
       throw new Error(`set-attachment failed: HTTP ${res.status} — ${JSON.stringify(json)}`);
     }
-    console.log(`[filebird] filed ${relSubPath} -> ${segments.join("/")}`);
+    console.log(`[filebird:media] filed ${relSubPath} -> ${segments.join("/")}`);
   } catch (err) {
-    console.warn(`[filebird] FAILED to file ${relSubPath}:`, err.message);
+    console.warn(`[filebird:media] FAILED to file ${relSubPath}:`, err.message);
   }
 }
 
@@ -823,12 +823,12 @@ async function main() {
   if (FILEBIRD_TOKEN) {
     try {
       fileBirdFolderCache = await loadFileBirdFolderTree();
-      console.log(`[filebird] Loaded folder tree (${fileBirdFolderCache.size} folders known).\n`);
+      console.log(`[filebird:media] Loaded folder tree (${fileBirdFolderCache.size} folders known).\n`);
     } catch (err) {
-      console.warn(`[filebird] Could not load folder tree — FileBird filing disabled for this run: ${err.message}\n`);
+      console.warn(`[filebird:media] Could not load folder tree — FileBird filing disabled for this run: ${err.message}\n`);
     }
   } else {
-    console.warn("[filebird] FILEBIRD_TOKEN not set — FileBird filing disabled for this run.\n");
+    console.warn("[filebird:media] FILEBIRD_TOKEN not set — FileBird filing disabled for this run.\n");
   }
 
   let pageFolderCache = null;
