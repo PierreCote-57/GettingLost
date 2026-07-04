@@ -115,7 +115,7 @@
     }
     w = w || 1920;
     h = h || 1920;
-    return "https://i0.wp.com/" + location.host + "/wp-content/uploads/" + img + "?fit=" + w + "," + h;
+    return "https://i0.wp.com/" + location.host + "/wp-content/uploads/" + img + "?fit=" + w + "," + h + "&quality=80";
   }
 
   var TAG_COLORS = {
@@ -253,7 +253,7 @@
       ".gl-photogallery-item img {" +
       "width: 100%;" +
       "height: 110px;" +
-      "object-fit: cover;" +
+      "object-fit: contain;" +
       "border-radius: 6px;" +
       "border: 1px solid #ccc;" +
       "display: block;" +
