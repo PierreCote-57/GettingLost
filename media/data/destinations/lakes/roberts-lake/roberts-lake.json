@@ -25,7 +25,7 @@
   "fishingReferences": {
     "bcIdentifier": "00155SALM",
     "areaKm2": 1.676,
-    "lakeChartUrl": [
+    "lakeChartList": [
       {
         "name": "BC Bathymetric",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00202801.pdf"

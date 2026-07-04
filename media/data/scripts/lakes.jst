@@ -254,7 +254,7 @@
   // ---------------------------------------------------------------------
   //
   // Reads pageData.fishingReferences = { bcIdentifier, areaKm2,
-  // lakeChartUrl, stockingName }.
+  // lakeChartList, stockingName }.
   //
   // The general-purpose "References" row that used to live in this same
   // table has moved out to the shared, top-level pageData.furtherReading
@@ -272,7 +272,7 @@
 
     tbody.appendChild(buildLabelValueRow("BC Identifier", fishing.bcIdentifier));
     tbody.appendChild(buildLabelValueRow("Area", formatAreaKm2(fishing.areaKm2)));
-    tbody.appendChild(buildLakeChartRow(fishing.lakeChartUrl));
+    tbody.appendChild(buildLakeChartRow(fishing.lakeChartList));
     tbody.appendChild(buildStockingReportRow(fishing.stockingName));
 
     table.appendChild(tbody);

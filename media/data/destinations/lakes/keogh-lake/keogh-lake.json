@@ -26,7 +26,7 @@
   "fishingReferences": {
     "bcIdentifier": "00216NIMP",
     "areaKm2": 0.798,
-    "lakeChartUrl": [
+    "lakeChartList": [
       {
         "name": "BC Bathymetric",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00279001.pdf"

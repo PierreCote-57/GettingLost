@@ -53,7 +53,7 @@
   "fishingReferences": {
     "bcIdentifier": "01128ALBN",
     "areaKm2": 42.33,
-    "lakeChartUrl": [
+    "lakeChartList": [
       {
         "name": "BC Bathymetric # 1",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215801.pdf"

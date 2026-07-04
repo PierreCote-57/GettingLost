@@ -67,7 +67,7 @@
   "fishingReferences": {
     "bcIdentifier": "00040CAMB",
     "areaKm2": 0.7,
-    "lakeChartUrl": [],
+    "lakeChartList": [],
     "stockingName": ""
   },
   "notes": [

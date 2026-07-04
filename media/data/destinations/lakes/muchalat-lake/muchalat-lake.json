@@ -29,7 +29,7 @@
   "fishingReferences": {
     "bcIdentifier": "00197GOLD",
     "areaKm2": 5.314,
-    "lakeChartUrl": [
+    "lakeChartList": [
       {
         "name": "BC Bathymetric",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00186701.pdf"

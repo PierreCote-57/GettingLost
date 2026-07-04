@@ -98,7 +98,7 @@ always edit in the repo and sync.
   in the WordPress uploads folder from before the slug-rename migration.
   These are stale and are **not** included here — only the current slug-named
   files are considered live/canonical.
-- `fishingReferences.lakeChartUrl` is always an array of `{name, url}`
+- `fishingReferences.lakeChartList` is always an array of `{name, url}`
   objects — one entry per bathymetric map. Most lakes have a single chart;
   `sproat-lake.json` has 3. An empty array `[]` means no chart (renders "NA").
   `lakes.jst`'s `buildLakeChartRow()` renders one link per entry, stacked.
