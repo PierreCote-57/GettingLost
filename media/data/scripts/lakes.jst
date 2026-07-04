@@ -287,13 +287,29 @@
   }
 
   function buildLakeChartRow(lakeChartUrl) {
-    if (!lakeChartUrl) {
+    // Normalize to a list of { name, url } entries. Legacy pages store a
+    // single URL string; lakes with several bathymetric charts store an
+    // array of { name, url } objects.
+    var charts = (Array.isArray(lakeChartUrl)
+      ? lakeChartUrl
+      : [{ name: "BC Bathymetric", url: lakeChartUrl }]
+    ).filter(function (chart) {
+      return chart && chart.url;
+    });
+
+    if (!charts.length) {
       return buildLabelValueRow("Lake chart", null);
     }
+
     var row = document.createElement("tr");
     row.appendChild(buildLabelCell("Lake chart"));
     var valueCell = buildBodyCell("");
-    valueCell.appendChild(buildExternalLink(lakeChartUrl, "BC Bathymetric"));
+    charts.forEach(function (chart, i) {
+      if (i > 0) {
+        valueCell.appendChild(document.createElement("br"));
+      }
+      valueCell.appendChild(buildExternalLink(chart.url, chart.name || "BC Bathymetric"));
+    });
     row.appendChild(valueCell);
     return row;
   }

@@ -98,10 +98,9 @@ always edit in the repo and sync.
   in the WordPress uploads folder from before the slug-rename migration.
   These are stale and are **not** included here — only the current slug-named
   files are considered live/canonical.
-- `sproat-lake.json`'s `fishingReferences.lakeChartUrl` is an array of
-  `{name, url}` objects (3 bathymetric maps), whereas the `lakes.jst`
-  renderer's `buildLakeChartRow()` expects a single URL string. This looks
-  like a pre-existing data/renderer mismatch on the live site, not something
-  introduced by this migration — worth flagging to Pierre separately.
+- `fishingReferences.lakeChartUrl` accepts either a single URL string (most
+  lakes) or an array of `{name, url}` objects for lakes with several
+  bathymetric maps (e.g. `sproat-lake.json`, 3 charts). `lakes.jst`'s
+  `buildLakeChartRow()` normalizes both forms and renders one link per chart.
 - Images remain hosted in the WordPress media library (not migrated here).
   Page/data files reference them by path only.
