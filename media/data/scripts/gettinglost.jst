@@ -100,16 +100,22 @@
     return escapeHtml(str);
   }
 
-  // Turn a bare image filename (e.g. "IMG_0795.jpg") into its WordPress
-  // uploads URL. A future `size` argument will append the resized-variant
-  // suffix here. Mirrors formatImageUrl in sync.js.
+  // Turn a bare image filename (e.g. "IMG_0795.jpg") into a Jetpack Photon
+  // (i0.wp.com) URL sized to the display window via ?fit=w,h. `fit` never crops
+  // (contain semantics), matching the gallery's object-fit: contain. w/h default
+  // to 1920 — a long-edge cap — so an arg-less call still returns a valid
+  // full-size URL. location.host keeps this correct across a future custom-domain
+  // move. NOTE: intentionally NOT mirrored in sync.js — that copy stays a plain
+  // /wp-content/uploads/ path because it's a media-map lookup KEY, not a URL.
   // Empty/missing input is never valid — callers guarantee a real filename —
   // so it throws rather than manufacturing a broken <img src=""> value.
-  function formatImageUrl(img) {
+  function formatImageUrl(img, w, h) {
     if (!img) {
       throw new Error("formatImageUrl: empty/missing image filename — data bug");
     }
-    return "/wp-content/uploads/" + img;
+    w = w || 1920;
+    h = h || 1920;
+    return "https://i0.wp.com/" + location.host + "/wp-content/uploads/" + img + "?fit=" + w + "," + h;
   }
 
   var TAG_COLORS = {
@@ -138,7 +144,7 @@
   function renderCard(entry) {
     var title = escapeHtml(entry.title || "");
     var slug = escapeHtml(entry.slug || "");
-    var image = escapeHtml(formatImageUrl(entry.image));
+    var image = escapeHtml(formatImageUrl(entry.image, 600, 400));
     var teaser = escapeHtml(entry.teaser || "");
     var href = "/" + slug + "/";
 
@@ -456,7 +462,8 @@
       }
     }
 
-    var src = formatImageUrl(img);
+    var displaySrc = formatImageUrl(img, 480, 480);
+    var fullSrc = formatImageUrl(img, 1920, 1920);
 
     var captionHtml = "";
     if (hasGps) {
@@ -471,8 +478,8 @@
     }
 
     el.innerHTML =
-      '<a href="' + src + '" target="_blank" rel="noopener noreferrer">' +
-      '<img src="' + src + '" alt="" style="width:100%;height:auto;display:block;border:1px solid #ccc;">' +
+      '<a href="' + fullSrc + '" target="_blank" rel="noopener noreferrer">' +
+      '<img src="' + displaySrc + '" alt="" style="width:100%;height:auto;display:block;border:1px solid #ccc;">' +
       "</a>" +
       captionHtml;
 
@@ -484,7 +491,7 @@
     if (imageLink) {
       imageLink.addEventListener("click", function (e) {
         e.preventDefault();
-        lightbox.open([{ src: src, caption: "" }], 0);
+        lightbox.open([{ src: fullSrc, caption: "" }], 0);
       });
     }
   }
@@ -938,7 +945,7 @@
 
     // Ordered list handed to the shared lightbox; prev/next walks it.
     var entries = items.map(function (item) {
-      return { src: formatImageUrl(item.img), caption: item.label || "" };
+      return { src: formatImageUrl(item.img, 1920, 1920), caption: item.label || "" };
     });
 
     items.forEach(function (item, idx) {
@@ -947,6 +954,7 @@
       wrapper.id = "gl-photo-" + galleryName + "-" + item.id;
 
       var src = entries[idx].src;
+      var thumbSrc = formatImageUrl(item.img, 360, 220);
 
       // href stays as a no-JS fallback; the click opens the lightbox.
       var link = document.createElement("a");
@@ -959,7 +967,7 @@
       });
 
       var img = document.createElement("img");
-      img.src = src;
+      img.src = thumbSrc;
       img.alt = item.label || "";
       img.loading = "lazy";
       link.appendChild(img);
