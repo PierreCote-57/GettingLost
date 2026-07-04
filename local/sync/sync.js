@@ -248,7 +248,7 @@ function generateGalleryJsons(perPageDataMap) {
       entries.push({
         title: data.title || slug,
         slug,
-        image: data.galleryImage ?? data.featuredImage ?? "under-construction.png",
+        image: data.featuredImage ?? "under-construction.png",
         teaser: data.excerpt || "",
         tags: data.tags || [],
       });
