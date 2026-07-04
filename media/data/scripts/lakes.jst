@@ -286,29 +286,20 @@
     return areaKm2 + "\u00A0km\u00B2";
   }
 
-  function buildLakeChartRow(lakeChartUrl) {
-    // Normalize to a list of { name, url } entries. Legacy pages store a
-    // single URL string; lakes with several bathymetric charts store an
-    // array of { name, url } objects.
-    var charts = (Array.isArray(lakeChartUrl)
-      ? lakeChartUrl
-      : [{ name: "BC Bathymetric", url: lakeChartUrl }]
-    ).filter(function (chart) {
-      return chart && chart.url;
-    });
-
-    if (!charts.length) {
+  function buildLakeChartRow(lakeCharts) {
+    // lakeCharts is an array of { name, url }. Most lakes have a single
+    // chart; some (e.g. sproat-lake) have several. Empty/missing -> NA row.
+    if (!lakeCharts || !lakeCharts.length) {
       return buildLabelValueRow("Lake chart", null);
     }
-
     var row = document.createElement("tr");
     row.appendChild(buildLabelCell("Lake chart"));
     var valueCell = buildBodyCell("");
-    charts.forEach(function (chart, i) {
+    lakeCharts.forEach(function (chart, i) {
       if (i > 0) {
         valueCell.appendChild(document.createElement("br"));
       }
-      valueCell.appendChild(buildExternalLink(chart.url, chart.name || "BC Bathymetric"));
+      valueCell.appendChild(buildExternalLink(chart.url, chart.name));
     });
     row.appendChild(valueCell);
     return row;

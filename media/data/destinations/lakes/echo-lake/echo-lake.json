@@ -10,7 +10,12 @@
   "fishingReferences": {
     "bcIdentifier": "00126CAMB",
     "areaKm2": 0.23,
-    "lakeChartUrl": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00058601.pdf",
+    "lakeChartUrl": [
+      {
+        "name": "BC Bathymetric",
+        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00058601.pdf"
+      }
+    ],
     "stockingName": "ECHO"
   },
   "notes": [
