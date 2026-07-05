@@ -83,6 +83,11 @@ ul, ol {
   border-bottom: 2px solid #5e442c;
 }
 
+/* Drop the focus rectangle on mouse click; keep it for keyboard (Tab). */
+summary:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .gl-photogallery-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
