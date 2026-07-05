@@ -3,7 +3,7 @@
   "featuredImage": "under-construction.png",
   "excerpt": "Understand and manage the van's power sources and loads.",
   "tags": [],
-  "published": false,
+  "published": true,
   "photoGalleries": {
     "howto": {
       "name": "How to images",

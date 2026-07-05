@@ -7,6 +7,11 @@
 			"name": "Our van",
 			"items": [
 				{
+					"id": "3220",
+					"img": "control-panel.png",
+					"label": "Control panel"
+				},
+				{
 					"id": "3",
 					"img": "IMG_2771_crop.jpg",
 					"label": "Driver"

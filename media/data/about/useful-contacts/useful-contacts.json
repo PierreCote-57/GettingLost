@@ -62,8 +62,20 @@
 					"url": "https://www.courtenayrvs.com",
 					"description": [
 						"Well rated for RV modifications (Google 4.8 stars).",
-						"At 2920 B Moray Ave,  Courtenay,  BC"
+						"At Comox, BC"
 					]
+				},
+				{
+					"name": "Van Isle Van Conversions",
+					"url": "https://vanislevanconversions.com/projects/",
+					"description": [
+						"At 10049 Galaran Road, Sidney, BC"
+					]
+				},
+				{
+					"name": "Watts of Love",
+					"url": "https://www.wattsoflove.ca",
+					"description": []
 				}
 			]
 		}
