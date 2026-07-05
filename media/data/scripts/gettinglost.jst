@@ -723,7 +723,25 @@
     var items = gallery.items;
 
     el.textContent = "";
-    el.appendChild(buildGlHeading(gallery.name));
+
+    // data-collapsible="true" wraps the whole mini-gallery in a <details>,
+    // with the gallery name as the <summary> heading. Default (absent or
+    // "false") renders the heading + grid straight into el, as before.
+    var collapsible = el.getAttribute("data-collapsible") === "true";
+    var target;
+    if (collapsible) {
+      var details = document.createElement("details");
+      var summary = document.createElement("summary");
+      var heading = buildGlHeading(gallery.name);
+      heading.style.display = "inline";
+      summary.appendChild(heading);
+      details.appendChild(summary);
+      el.appendChild(details);
+      target = details;
+    } else {
+      el.appendChild(buildGlHeading(gallery.name));
+      target = el;
+    }
 
     var grid = document.createElement("div");
     grid.className = "gl-photogallery-grid";
@@ -766,7 +784,7 @@
       grid.appendChild(wrapper);
     });
 
-    el.appendChild(grid);
+    target.appendChild(grid);
   };
 
   // ---------------------------------------------------------------------
