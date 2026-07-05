@@ -405,16 +405,28 @@
     document.head.appendChild(style);
   }
 
-  // Active: inject a <link> to the external stylesheet (test of the
-  // real-CSS-file approach). Rollback = rename injectGalleryCssSAV above
-  // back to injectGalleryCss and remove/rename this one.
+  // Active: fetch the external stylesheet as text and inject it into a
+  // <style>. Because the CSS arrives via fetch() (which ignores
+  // Content-Type) and is applied from a <style> tag, the file's served
+  // MIME is irrelevant — no text/css requirement, no strict-mode issue.
+  // Rollback = rename injectGalleryCssSAV above back to injectGalleryCss.
   function injectGalleryCss() {
-    if (document.getElementById("gl-gallery-css-link")) return;
-    var link = document.createElement("link");
-    link.id = "gl-gallery-css-link";
-    link.rel = "stylesheet";
-    link.href = "/wp-content/uploads/gettinglost.cst";
-    document.head.appendChild(link);
+    if (document.getElementById("gl-gallery-css")) return;
+    fetch("/wp-content/uploads/gettinglost.cst")
+      .then(function (res) {
+        if (!res.ok) throw new Error("gettinglost.cst: HTTP " + res.status);
+        return res.text();
+      })
+      .then(function (css) {
+        if (document.getElementById("gl-gallery-css")) return;
+        var style = document.createElement("style");
+        style.id = "gl-gallery-css";
+        style.textContent = css;
+        document.head.appendChild(style);
+      })
+      .catch(function (err) {
+        console.error("injectGalleryCss: failed to load gettinglost.cst", err);
+      });
   }
 
   // ---------------------------------------------------------------------
