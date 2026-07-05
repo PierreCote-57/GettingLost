@@ -366,11 +366,18 @@
       return;
     }
 
-    fetchPageData(slug)
-      .then(renderBlocks)
-      .catch(function (err) {
-        console.error('[gettinglost] Failed to load page data for "' + slug + '":', err);
-      });
+    var pageMapUrl = "/wp-content/uploads/PageMap.json";
+    Promise.all([
+      fetchPageData(slug),
+      fetch(pageMapUrl).then(function (r) {
+        return r.ok ? r.json() : {};
+      }).catch(function () { return {}; })
+    ]).then(function (results) {
+      window.GL.pageMap = results[1];
+      renderBlocks(results[0]);
+    }).catch(function (err) {
+      console.error('[gettinglost] Failed to load page data for "' + slug + '":', err);
+    });
   }
 
   // ---------------------------------------------------------------------
@@ -843,6 +850,38 @@
     var link = document.createElement("a");
     link.href = "#gl-photo-" + galleryName + "-" + itemId;
     link.textContent = match.label || itemId;
+    el.appendChild(link);
+  };
+
+  // Generic block renderer: "pageLink"
+  // ---------------------------------------------------------------------
+  //
+  // Renders an inline link to another page on the site, with the link
+  // text resolved from PageMap.json so it always matches the target
+  // page's current title. Markup (inline):
+  //
+  //   <span data-block-type="pageLink" data-slug="howto-power">fallback</span>
+  //
+  //   - data-slug is the target page's slug.
+  //   - Renders as <a href="/slug/">title</a>.
+  //   - Falls back to the element's existing text content if the slug
+  //     is not found in PageMap.
+
+  window.GL.blockRenderers.pageLink = function (el) {
+    var slug = el.getAttribute("data-slug") || "";
+    if (!slug) {
+      console.error("pageLink: missing data-slug attribute.");
+      return;
+    }
+
+    var map = window.GL.pageMap || {};
+    var entry = map[slug];
+    var title = (entry && entry.title) || el.textContent || slug;
+
+    var link = document.createElement("a");
+    link.href = "/" + slug + "/";
+    link.textContent = title;
+    el.textContent = "";
     el.appendChild(link);
   };
 
