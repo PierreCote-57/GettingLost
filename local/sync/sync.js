@@ -261,7 +261,16 @@ function generateGalleryJsons(perPageDataMap) {
   return galleries;
 }
 
-async function syncGalleryJsons(galleries, fileBirdFolderCache) {
+function generatePageMap(perPageDataMap) {
+  const map = {};
+  for (const [slug, { data }] of perPageDataMap) {
+    if (data.published !== true) continue;
+    map[slug] = { title: data.title || slug };
+  }
+  return map;
+}
+
+async function syncGalleryJsons(galleries, pageMap, fileBirdFolderCache) {
   let successCount = 0;
   let failCount = 0;
 
@@ -278,6 +287,19 @@ async function syncGalleryJsons(galleries, fileBirdFolderCache) {
     } else {
       failCount++;
     }
+  }
+
+  // PageMap.json — slug-to-metadata lookup for cross-page references
+  const pmBuffer = Buffer.from(JSON.stringify(pageMap, null, 2));
+  const pmRelPath = "data/shared/gallery/PageMap.json";
+  const pmId = await syncOneFileToWordPress(pmRelPath, "PageMap.json", pmBuffer, "application/json");
+  if (pmId) {
+    successCount++;
+    if (fileBirdFolderCache) {
+      await syncOneFileToFileBird(fileBirdFolderCache, pmId, pmRelPath);
+    }
+  } else {
+    failCount++;
   }
 
   return { successCount, failCount };
@@ -861,11 +883,14 @@ async function main() {
     console.log(`[gallery] ${name}.json: ${entries.length} entries`);
   }
 
+  const pageMap = generatePageMap(perPageDataMap);
+  console.log(`[pageMap] PageMap.json: ${Object.keys(pageMap).length} entries`);
+
   console.log("\n=== Syncing files (JSON data + scripts) ===");
   const filesResult = await syncFiles(fileBirdFolderCache);
 
   console.log("\n=== Syncing gallery JSONs ===");
-  const galleryResult = await syncGalleryJsons(galleries, fileBirdFolderCache);
+  const galleryResult = await syncGalleryJsons(galleries, pageMap, fileBirdFolderCache);
 
   console.log("\n=== Syncing pages ===");
   const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
