@@ -68,6 +68,9 @@ html {
 ul, ol {
   margin-top: 0;
 }
+li {
+  margin-top: 0.25em;
+}
 [data-howto-section] {
   margin-bottom: 2.5rem;
 }
