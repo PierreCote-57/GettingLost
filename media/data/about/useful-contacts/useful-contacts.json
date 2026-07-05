@@ -4,18 +4,38 @@
 	"notes": [
 		{
 			"sectionName": "RV Dealers",
-			"list": []
+			"list": [
+				{
+					"name": "Peden RV Superstore",
+					"url": "https://www.pedenrv.com",
+					"description": [
+						"Coachmen (Beyond) dealer on the island (Google 4.5 stars).",
+						"at 10049 Galaran Road, Sidney, BC"
+					]
+				}
+			]
 		},
 		{
 			"sectionName": "Maintenance Contacts",
-			"list": []
+			"list": [
+				{
+					"name": "Campbell River RV & Marine",
+					"url": "https://www.campbellriverrv.com",
+					"description": [
+						"Seem very appreciated, with occasional miss (Google 4.2 stars).",
+						"After some checks, they are able to perform maintenance/warranty work on our Beyond,",
+						"much more practical than driving 3 hours to Peden in Sidney.",
+						" At 1632 Coulter Rd Campbell River, BC"
+					]
+				}
+			]
 		},
 		{
 			"sectionName": "Modifications",
 			"list": [
 				{
 					"name": "Van Toys",
-					"link": "https://vantoys.ca",
+					"url": "https://vantoys.ca",
 					"description": [
 						"Highly rated for RV modifications (Google 4.9 stars).",
 						" At 1748 Alberni Hwy #1A, Coombs, BC"
@@ -23,9 +43,9 @@
 				},
 				{
 					"name": "Courtenay RC Specialists",
-					"link": "https://www.courtenayrvs.com",
+					"url": "https://www.courtenayrvs.com",
 					"description": [
-						"Highly rated for RV modifications (google 4.8 stars).",
+						"Highly rated for RV modifications (Google 4.8 stars).",
 						" At 2920 B Moray Ave,  Courtenay,  BC"
 					]
 				}
