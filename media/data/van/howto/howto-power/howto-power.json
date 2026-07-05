@@ -11,12 +11,7 @@
 				{
 					"id": "master-cutoff",
 					"img": "master-cutoff.png",
-					"label": "Disconnect and solar switches"
-				},
-				{
-					"id": "garmin-generator",
-					"img": "garmin-generator.png",
-					"label": "Generator controls"
+					"label": "Master controls"
 				},
 				{
 					"id": "garmin-inverter",
@@ -27,6 +22,11 @@
 					"id": "solar-panel",
 					"img": "solar-panel.png",
 					"label": "Go Power solar controller"
+				},
+				{
+					"id": "garmin-generator",
+					"img": "garmin-generator.png",
+					"label": "Generator controls"
 				}
 			]
 		},
