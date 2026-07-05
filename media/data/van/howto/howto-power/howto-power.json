@@ -1,54 +1,80 @@
 {
-  "title": "Power management",
-  "featuredImage": "under-construction.png",
-  "excerpt": "Understand and manage the van's power sources and loads.",
-  "tags": [],
-  "published": true,
-  "photoGalleries": {
-    "howto": {
-      "name": "How to images",
-      "items": [
-        { "id": "master-cutoff", "img": "master-cutoff.png", "label": "Disconnect and solar switches" },
-        { "id": "solar-panel", "img": "solar-panel.png", "label": "Go Power solar controller" }
-      ]
-    },
-    "details": {
-      "name": "Details images",
-      "items": [
-        { "id": "construction-sources", "img": "under-construction.png", "label": "Placeholder — power sources" },
-        { "id": "construction-sinks", "img": "under-construction.png", "label": "Placeholder — power sinks" }
-      ]
-    }
-  },
-  "notes": [
-    {
-      "sectionName": "Generator",
-      "list": [
-        {
-          "name": "Specification sheet",
-          "url": "https://www.absolutegenerators.com/media/blfa_files/Cummins_RV_Generator_2.5-2.8_HGLAA_-_Specification_Sheet.pdf",
-          "description": [
-            "Cummins RV Generator 2.5–2.8 HGLAA specification sheet — power output, fuel, and electrical ratings for the installed gasoline generator."
-          ]
-        },
-        {
-          "name": "Cummins document",
-          "url": "https://mart.cummins.com/imagelibrary/data/assetfiles/0064324.pdf",
-          "description": [
-            "Manufacturer document from the Cummins asset library (exact type not yet confirmed)."
-          ]
-        }
-      ]
-    },
-    {
-      "sectionName": "Solar panels",
-      "list": [
-        {
-          "name": "To be researched",
-          "url": null,
-          "description": []
-        }
-      ]
-    }
-  ]
+	"title": "Power management",
+	"featuredImage": "under-construction.png",
+	"excerpt": "Understand and manage the van's power sources and loads.",
+	"tags": [],
+	"published": true,
+	"photoGalleries": {
+		"howto": {
+			"name": "How to images",
+			"items": [
+				{
+					"id": "master-cutoff",
+					"img": "master-cutoff.png",
+					"label": "Disconnect and solar switches"
+				},
+				{
+					"id": "garmin-generator",
+					"img": "garmin-generator.png",
+					"label": "Generator controls"
+				},
+				{
+					"id": "garmin-inverter",
+					"img": "garmin-inverter.png",
+					"label": "Inverter controls"
+				},
+				{
+					"id": "solar-panel",
+					"img": "solar-panel.png",
+					"label": "Go Power solar controller"
+				}
+			]
+		},
+		"details": {
+			"name": "Details images",
+			"items": [
+				{
+					"id": "construction-sources",
+					"img": "under-construction.png",
+					"label": "Placeholder — power sources"
+				},
+				{
+					"id": "construction-sinks",
+					"img": "under-construction.png",
+					"label": "Placeholder — power sinks"
+				}
+			]
+		}
+	},
+	"notes": [
+		{
+			"sectionName": "Generator",
+			"list": [
+				{
+					"name": "Specification sheet",
+					"url": "https://www.absolutegenerators.com/media/blfa_files/Cummins_RV_Generator_2.5-2.8_HGLAA_-_Specification_Sheet.pdf",
+					"description": [
+						"Cummins RV Generator 2.5–2.8 HGLAA specification sheet — power output, fuel, and electrical ratings for the installed gasoline generator."
+					]
+				},
+				{
+					"name": "Cummins document",
+					"url": "https://mart.cummins.com/imagelibrary/data/assetfiles/0064324.pdf",
+					"description": [
+						"Manufacturer document from the Cummins asset library (exact type not yet confirmed)."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Solar panels",
+			"list": [
+				{
+					"name": "To be researched",
+					"url": null,
+					"description": []
+				}
+			]
+		}
+	]
 }
