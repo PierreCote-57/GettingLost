@@ -165,7 +165,11 @@
   window.GL.renderCard = renderCard;
   window.GL.blockRenderers = window.GL.blockRenderers || {};
 
-  function injectGalleryCss() {
+  // SAV — original inline-<style> injector, kept during the external-CSS
+  // test for instant rollback. NOT called; the active injectGalleryCss
+  // below injects a <link> to gettinglost.cst instead. To roll back, swap
+  // the two names.
+  function injectGalleryCssSAV() {
     if (document.getElementById("gl-gallery-css")) return;
     var style = document.createElement("style");
     style.id = "gl-gallery-css";
@@ -399,6 +403,18 @@
       "right: 0.75rem;" +
       "}";
     document.head.appendChild(style);
+  }
+
+  // Active: inject a <link> to the external stylesheet (test of the
+  // real-CSS-file approach). Rollback = rename injectGalleryCssSAV above
+  // back to injectGalleryCss and remove/rename this one.
+  function injectGalleryCss() {
+    if (document.getElementById("gl-gallery-css-link")) return;
+    var link = document.createElement("link");
+    link.id = "gl-gallery-css-link";
+    link.rel = "stylesheet";
+    link.href = "/wp-content/uploads/gettinglost.cst";
+    document.head.appendChild(link);
   }
 
   // ---------------------------------------------------------------------
