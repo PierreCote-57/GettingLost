@@ -7,7 +7,10 @@
   "photoGalleries": {
     "howto": {
       "name": "How to images",
-      "items": []
+      "items": [
+        { "id": "master-cutoff", "img": "master-cutoff.png", "label": "Disconnect and solar switches" },
+        { "id": "solar-panel", "img": "solar-panel.png", "label": "Go Power solar controller" }
+      ]
     },
     "details": {
       "name": "Details images",
