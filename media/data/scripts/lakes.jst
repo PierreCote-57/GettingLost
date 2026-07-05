@@ -52,18 +52,6 @@
   // generic renderers in gettinglost.jst)
   // ---------------------------------------------------------------------
 
-  function buildHeading(text) {
-    var heading = document.createElement("h3");
-    heading.textContent = text;
-    heading.style.fontSize = "1.15rem";
-    heading.style.fontWeight = "700";
-    heading.style.color = "#2a1a0e";
-    heading.style.margin = "1.5rem 0 0.4rem";
-    heading.style.paddingBottom = "0.25rem";
-    heading.style.borderBottom = "2px solid #5e442c";
-    return heading;
-  }
-
   function createStyledTable() {
     var table = document.createElement("table");
     table.style.borderCollapse = "collapse";
@@ -183,7 +171,7 @@
     var recSites = pageData.recSites || [];
 
     el.textContent = "";
-    el.appendChild(buildHeading("Recreational sites"));
+    el.appendChild(window.GL.buildGlHeading("Recreational sites"));
 
     if (recSites.length === 0) {
       var notice = document.createElement("p");
@@ -265,7 +253,7 @@
     var fishing = pageData.fishingReferences || {};
 
     el.textContent = "";
-    el.appendChild(buildHeading("Fishing references"));
+    el.appendChild(window.GL.buildGlHeading("Fishing references"));
 
     var table = createStyledTable();
     var tbody = document.createElement("tbody");

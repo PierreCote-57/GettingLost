@@ -486,21 +486,18 @@
   // Shared helper: buildGlHeading
   // ---------------------------------------------------------------------
   //
-  // Used by the "notes" block renderer (and previously by the retired
-  // "furtherReading" renderer it replaced) for the small h3 section
-  // heading style used throughout these generic blocks.
+  // Builds the standard bordered section heading, <h3 class="gl-heading">.
+  // The style lives in gettinglost.cst (.gl-heading). Exposed on window.GL
+  // so other scripts (lakes.jst) and authored HTML all produce the exact
+  // same heading — one definition, no copies.
 
   function buildGlHeading(text) {
     var heading = document.createElement("h3");
+    heading.className = "gl-heading";
     heading.textContent = text;
-    heading.style.fontSize = "1.15rem";
-    heading.style.fontWeight = "700";
-    heading.style.color = "#2a1a0e";
-    heading.style.margin = "1.5rem 0 0.4rem";
-    heading.style.paddingBottom = "0.25rem";
-    heading.style.borderBottom = "2px solid #5e442c";
     return heading;
   }
+  window.GL.buildGlHeading = buildGlHeading;
 
   // ---------------------------------------------------------------------
   // Generic block renderer: "backToGallery"

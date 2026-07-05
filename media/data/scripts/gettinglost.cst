@@ -72,6 +72,17 @@ ul, ol {
   margin-bottom: 2.5rem;
 }
 
+/* Standard bordered section heading. Produced by window.GL.buildGlHeading
+ * (block renderers, lakes.jst) and used on authored <h3 class="gl-heading">. */
+.gl-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2a1a0e;
+  margin: 1.5rem 0 0.4rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #5e442c;
+}
+
 .gl-photogallery-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
