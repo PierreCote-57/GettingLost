@@ -1,0 +1,52 @@
+name: Slug refactor (manual)
+
+# Manual-only, one-shot migration. Brings existing WP slugs into the universal
+# "<base>_<ext>" format, IN PLACE — slug (post_name) only, filenames untouched.
+#
+# Run ONE content type at a time so you can validate between them, and leave
+# "apply" UNCHECKED first: that is a DRY RUN — it enumerates everything and
+# logs every planned change and flag, but writes nothing to WordPress. Read
+# the log, then re-run with "apply" checked to actually write.
+#
+# Log states: PLANNED (dry run) · OK (already correct) · CHANGED · FLAGGED
+# (a "-N" duplicate or an orphan not in github — no action, your cleanup) ·
+# FAILED (red — WP refused the write). See local/sync/slug-refactor.js.
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        description: "Which content type to refactor"
+        type: choice
+        options:
+          - media
+          - pages
+          - posts
+        default: media
+      apply:
+        description: "Apply changes? (leave UNCHECKED for a dry run — nothing is written)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  slug-refactor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run slug refactor
+        working-directory: local/refactor
+        env:
+          WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node slug-refactor.js --type=${{ inputs.type }} --apply=${{ inputs.apply }}
