@@ -134,8 +134,16 @@
       if (index > 0) {
         cell.appendChild(document.createElement("br"));
       }
-      var label = reference.name || deriveLabelFromUrl(reference.url);
-      cell.appendChild(buildExternalLink(reference.url, label));
+      if (reference.file) {
+        // Internal page link — derive the slug from the filename, same tab.
+        var link = document.createElement("a");
+        link.href = "/" + window.GL.fileToSlug(reference.file) + "/";
+        link.textContent = reference.name || reference.file;
+        cell.appendChild(link);
+      } else {
+        var label = reference.name || deriveLabelFromUrl(reference.url);
+        cell.appendChild(buildExternalLink(reference.url, label));
+      }
     });
 
     return cell;

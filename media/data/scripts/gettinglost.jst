@@ -186,6 +186,7 @@
   window.GL = window.GL || {};
   window.GL.escapeHtml = escapeHtml;
   window.GL.renderCard = renderCard;
+  window.GL.fileToSlug = fileToSlug; // shared so lakes.jst can derive slugs
   window.GL.blockRenderers = window.GL.blockRenderers || {};
 
   // Fetch the external stylesheet as text and inject it into a <style>.
@@ -669,7 +670,13 @@
         nameCell.style.verticalAlign = "top";
         nameCell.style.fontWeight = "600";
 
-        if (item.url) {
+        if (item.file) {
+          // Internal page link — derive the slug from the filename, same tab.
+          var ilink = document.createElement("a");
+          ilink.href = "/" + fileToSlug(item.file) + "/";
+          ilink.textContent = item.name || "";
+          nameCell.appendChild(ilink);
+        } else if (item.url) {
           var link = document.createElement("a");
           link.href = item.url;
           link.target = "_blank";
