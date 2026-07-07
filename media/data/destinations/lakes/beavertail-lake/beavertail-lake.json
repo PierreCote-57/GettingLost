@@ -1,0 +1,27 @@
+{
+  "title": "Beavertail Lake",
+  "featuredImage": "under-construction.png",
+  "excerpt": "Under construction",
+  "tags": ["fishing"],
+  "published": true,
+  "lat": 49.9812,
+  "lng": -125.5033,
+  "recSites": [],
+  "fishingReferences": {
+    "bcIdentifier": "00121CAMB",
+    "areaKm2": 1.076,
+    "lakeChartList": [
+      {
+        "name": "BC Bathymetric",
+        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00110501.pdf"
+      }
+    ],
+    "stockingName": ""
+  },
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": []
+    }
+  ]
+}
