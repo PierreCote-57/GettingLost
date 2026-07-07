@@ -1,0 +1,101 @@
+name: Slug test (manual probe)
+
+# Manual-only. Uploads ONE file to the WP media library asking for an explicit
+# slug, then reads back what WP actually stored. Answers a single question:
+#   Does WP honour a requested attachment slug on a binary upload in ONE call
+#   (?slug=), or does it need a follow-up POST /media/{id} to set the slug?
+#
+# It does NOT touch pages, posts, or any other media. It leaves the one test
+# attachment behind on purpose so you can eyeball it in WP — delete it after.
+#
+# NOTE: if you keep the default filename (amor-lake.json), WP will file-dedup
+# the file to amor-lake-2.json because amor-lake.json already exists, and an
+# "amor-lake" attachment slug already exists. The verdict below is still valid
+# (it compares against the REQUESTED slug), but for a zero-noise result run it
+# with a fresh name, e.g. filename=slugtest.json / requested_slug=slugtest_json.
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_path:
+        description: "Repo path of the file to upload"
+        default: "media/data/destinations/lakes/amor-lake/amor-lake.json"
+      filename:
+        description: "Filename sent in Content-Disposition"
+        default: "amor-lake.json"
+      requested_slug:
+        description: "Slug to request via ?slug="
+        default: "amor-lake_json"
+
+permissions:
+  contents: read
+
+jobs:
+  slug-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Upload with requested slug, then read back the actual slug
+        env:
+          WP_SITE_URL: ${{ secrets.WP_SITE_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          SOURCE_PATH: ${{ inputs.source_path }}
+          FILENAME: ${{ inputs.filename }}
+          REQ_SLUG: ${{ inputs.requested_slug }}
+        run: |
+          set -uo pipefail
+          SITE="${WP_SITE_URL%/}"
+
+          if [ ! -f "$SOURCE_PATH" ]; then
+            echo "Source file not found: $SOURCE_PATH" >&2
+            exit 1
+          fi
+
+          jq() { python3 -c "import sys,json;print(json.load(sys.stdin).get('$1',''))"; }
+
+          echo "== POST /media?slug=$REQ_SLUG  (filename=$FILENAME, body=$SOURCE_PATH) =="
+          CREATE=$(curl -sS -u "$WP_USER:$WP_APP_PASSWORD" \
+            -X POST "$SITE/wp-json/wp/v2/media?slug=$REQ_SLUG" \
+            -H "Content-Disposition: attachment; filename=\"$FILENAME\"" \
+            -H "Content-Type: application/json" \
+            --data-binary @"$SOURCE_PATH")
+          echo "$CREATE" | python3 -m json.tool || { echo "Create response was not JSON:"; echo "$CREATE"; exit 1; }
+
+          ID=$(echo "$CREATE" | jq id)
+          CREATE_SLUG=$(echo "$CREATE" | jq slug)
+
+          echo "== GET /media/$ID  (authoritative) =="
+          GET=$(curl -sS -u "$WP_USER:$WP_APP_PASSWORD" "$SITE/wp-json/wp/v2/media/$ID")
+          GET_SLUG=$(echo "$GET" | jq slug)
+          SRC=$(echo "$GET" | jq source_url)
+
+          echo "----------------------------------------"
+          echo "requested slug         : $REQ_SLUG"
+          echo "slug in CREATE response: $CREATE_SLUG"
+          echo "slug from GET (truth)  : $GET_SLUG"
+          echo "source_url             : $SRC"
+          echo "attachment id          : $ID"
+          echo "----------------------------------------"
+
+          if [ "$GET_SLUG" = "$REQ_SLUG" ]; then
+            echo "RESULT: one-call ?slug= WORKS -- WP stored the requested slug. [PASS]"
+          else
+            echo "RESULT: one-call ?slug= was NOT honoured. Trying follow-up POST /media/$ID ..."
+            UPD=$(curl -sS -u "$WP_USER:$WP_APP_PASSWORD" \
+              -X POST "$SITE/wp-json/wp/v2/media/$ID" \
+              -H "Content-Type: application/json" \
+              --data "{\"slug\":\"$REQ_SLUG\"}")
+            UPD_SLUG=$(echo "$UPD" | jq slug)
+            echo "slug after follow-up update: $UPD_SLUG"
+            if [ "$UPD_SLUG" = "$REQ_SLUG" ]; then
+              echo "RESULT: needs TWO calls -- follow-up POST /media/{id} sets the slug. [PASS via fallback]"
+            else
+              echo "RESULT: could not set the slug at all. [FAIL]"
+            fi
+          fi
+
+          echo ""
+          echo "Left attachment id $ID in the media library for inspection. Delete it when done."
