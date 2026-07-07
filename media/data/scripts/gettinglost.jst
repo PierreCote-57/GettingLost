@@ -141,12 +141,35 @@
     return html;
   }
 
+  // Slug transforms — mirror sync.js. The github filename is the master; a
+  // slug is only ever DERIVED from it. Must match sync.js's fileToSlug byte
+  // for byte so the hrefs we build equal the slugs WordPress stored.
+  //   fileToSlug("amor-lake.html") -> "amor-lake_html"
+  //   slugToFilename("amor-lake_html") -> "amor-lake.html"
+  function sanitizeSlug(s) {
+    return String(s)
+      .toLowerCase()
+      .replace(/[^a-z0-9 _-]/g, "")
+      .replace(/^\s+|\s+$/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  }
+  function fileToSlug(filename) {
+    var dot = filename.lastIndexOf(".");
+    var base = dot === -1 ? filename : filename.slice(0, dot);
+    var ext = dot === -1 ? "" : filename.slice(dot + 1);
+    return sanitizeSlug(ext ? base + "_" + ext : base);
+  }
+  function slugToFilename(slug) {
+    var i = slug.lastIndexOf("_");
+    return i === -1 ? slug : slug.slice(0, i) + "." + slug.slice(i + 1);
+  }
+
   function renderCard(entry) {
     var title = escapeHtml(entry.title || "");
-    var slug = escapeHtml(entry.slug || "");
     var image = escapeHtml(formatImageUrl(entry.image, 600, 400));
     var teaser = escapeHtml(entry.teaser || "");
-    var href = "/" + slug + "/";
+    var href = "/" + escapeAttr(fileToSlug(entry.file || "")) + "/";
 
     return (
       '<a class="gl-gallery-card" href="' + href + '">' +
@@ -323,7 +346,11 @@
   }
 
   function fetchPageData(slug) {
-    var url = "/wp-content/uploads/" + slug + ".json";
+    // `slug` is the page's URL slug (<base>_<ext>). Reverse it to the page
+    // filename, then its data file is that base + ".json".
+    var file = slugToFilename(slug);
+    var dataName = file.replace(/\.[^.]*$/, "") + ".json";
+    var url = "/wp-content/uploads/" + dataName;
     return fetch(url).then(function (response) {
       if (!response.ok) {
         throw new Error("Could not load " + url + " (HTTP " + response.status + ")");
@@ -860,26 +887,27 @@
   // text resolved from PageMap.json so it always matches the target
   // page's current title. Markup (inline):
   //
-  //   <span data-block-type="pageLink" data-slug="howto-power">fallback</span>
+  //   <span data-block-type="pageLink" data-file="howto-power.html">fallback</span>
   //
-  //   - data-slug is the target page's slug.
+  //   - data-file is the target page's github filename (what the author works
+  //     with) — the URL slug is derived from it via fileToSlug.
   //   - Renders as <a href="/slug/">title</a>.
-  //   - Falls back to the element's existing text content if the slug
+  //   - Falls back to the element's existing text content if the file
   //     is not found in PageMap.
 
   window.GL.blockRenderers.pageLink = function (el) {
-    var slug = el.getAttribute("data-slug") || "";
-    if (!slug) {
-      console.error("pageLink: missing data-slug attribute.");
+    var file = el.getAttribute("data-file") || "";
+    if (!file) {
+      console.error("pageLink: missing data-file attribute.");
       return;
     }
 
     var map = window.GL.pageMap || {};
-    var entry = map[slug];
-    var title = (entry && entry.title) || el.textContent || slug;
+    var entry = map[file];
+    var title = (entry && entry.title) || el.textContent || file;
 
     var link = document.createElement("a");
-    link.href = "/" + slug + "/";
+    link.href = "/" + fileToSlug(file) + "/";
     link.textContent = title;
     el.textContent = "";
     el.appendChild(link);

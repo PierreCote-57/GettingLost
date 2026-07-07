@@ -232,13 +232,14 @@ function loadPerPageDataMap() {
   for (const entry of entries) {
     if (!entry.endsWith(".json")) continue;
     const normalized = entry.split(path.sep).join("/");
-    const slug = path.basename(normalized, ".json");
+    const filename = path.basename(normalized); // amor-lake.json — the key
+    const base = path.basename(normalized, ".json");
     const parentDir = path.basename(path.dirname(normalized));
-    if (slug !== parentDir) continue;
+    if (base !== parentDir) continue;
     const fullPath = path.join(DATA_ROOT, entry);
     const data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
     const repoPath = path.dirname(normalized);
-    map.set(slug, { data, repoPath });
+    map.set(filename, { data, repoPath });
   }
   return map;
 }
@@ -287,19 +288,27 @@ async function loadWpMediaMap() {
 // Gallery JSON generation
 // ---------------------------------------------------------------------
 
-function generateGalleryJsons(perPageDataMap) {
+// Both generators are driven by the PAGE files (keyed by filename — the
+// master). Each page's data is its "<base>.json" — constructed from the page
+// filename, never looked up by base. The emitted `file` is the master; the
+// consumer (gettinglost.jst) derives the URL slug from it via fileToSlug.
+function generateGalleryJsons(pageFileMap, perPageDataMap) {
   const galleries = new Map();
 
   for (const rule of GALLERY_RULES) {
     const entries = [];
 
-    for (const [slug, { data, repoPath }] of perPageDataMap) {
+    for (const [filename] of pageFileMap) {
+      const base = path.basename(filename, path.extname(filename));
+      const pd = perPageDataMap.get(`${base}.json`);
+      if (!pd) continue;
+      const { data, repoPath } = pd;
       if (!repoPath.startsWith(rule.path)) continue;
       if (data.published !== true) continue;
 
       entries.push({
-        title: data.title || slug,
-        slug,
+        title: data.title || base,
+        file: filename,
         image: data.featuredImage ?? "under-construction.png",
         teaser: data.excerpt || "",
         tags: data.tags || [],
@@ -313,11 +322,13 @@ function generateGalleryJsons(perPageDataMap) {
   return galleries;
 }
 
-function generatePageMap(perPageDataMap) {
+function generatePageMap(pageFileMap, perPageDataMap) {
   const map = {};
-  for (const [slug, { data }] of perPageDataMap) {
-    if (data.published !== true) continue;
-    map[slug] = { title: data.title || slug };
+  for (const [filename] of pageFileMap) {
+    const base = path.basename(filename, path.extname(filename));
+    const pd = perPageDataMap.get(`${base}.json`);
+    if (!pd || pd.data.published !== true) continue;
+    map[filename] = { title: pd.data.title || base };
   }
   return map;
 }
@@ -415,7 +426,7 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
   for (const [filename, entry] of pageFileMap) {
     const base = path.basename(filename, path.extname(filename));
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
-      const pd = perPageDataMap.get(base);
+      const pd = perPageDataMap.get(`${base}.json`);
       const jsonRelPath = pd
         ? `media/data/${pd.repoPath}/${base}.json`
         : null;
@@ -423,7 +434,7 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
     }
 
     const content = fs.readFileSync(entry.filePath, "utf8");
-    const pageData = perPageDataMap.get(base)?.data || {};
+    const pageData = perPageDataMap.get(`${base}.json`)?.data || {};
     const wpSlug = fileToSlug(filename);
     const wpPage = wpPageMap.get(filename);
 
@@ -523,7 +534,7 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
   for (const [filename, entry] of postFileMap) {
     const base = path.basename(filename, path.extname(filename));
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
-      const pd = perPageDataMap.get(base);
+      const pd = perPageDataMap.get(`${base}.json`);
       const jsonRelPath = pd
         ? `media/data/${pd.repoPath}/${base}.json`
         : null;
@@ -531,7 +542,7 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
     }
 
     const content = fs.readFileSync(entry.filePath, "utf8");
-    const postData = perPageDataMap.get(base)?.data || {};
+    const postData = perPageDataMap.get(`${base}.json`)?.data || {};
     const wpSlug = fileToSlug(filename);
     const wpPost = wpPostMap.get(filename);
 
@@ -984,13 +995,15 @@ async function main() {
   const wpMediaMap = await loadWpMediaMap();
   console.log(`[wp] Loaded ${wpMediaMap.size} media attachments.\n`);
 
+  const pageFileMap = buildPageFileMap();
+
   console.log("=== Generating gallery JSONs ===");
-  const galleries = generateGalleryJsons(perPageDataMap);
+  const galleries = generateGalleryJsons(pageFileMap, perPageDataMap);
   for (const [name, entries] of galleries) {
     console.log(`[gallery] ${name}.json: ${entries.length} entries`);
   }
 
-  const pageMap = generatePageMap(perPageDataMap);
+  const pageMap = generatePageMap(pageFileMap, perPageDataMap);
   console.log(`[pageMap] PageMap.json: ${Object.keys(pageMap).length} entries`);
 
   console.log("\n=== Syncing files (JSON data + scripts) ===");
