@@ -152,6 +152,58 @@ function fbFetch(endpoint, options = {}) {
 }
 
 // ---------------------------------------------------------------------
+// Slug helpers — universal "<base>_<ext>" WP slug format
+// ---------------------------------------------------------------------
+// Every object we push to WP (page, post, attachment) gets a slug of the form
+// "<base>_<ext>" so nothing shares the post-slug namespace with anything else:
+//   beavertail-lake.html -> beavertail-lake_html
+//   beavertail-lake.json -> beavertail-lake_json
+// The data FILE keeps its plain name (beavertail-lake.json, fetched by URL);
+// only the attachment's post_name carries the _json. WP lowercases + sanitises
+// slugs, so we pre-sanitise to what WP will store — otherwise the
+// requested-vs-actual validation below would false-flag.
+
+function sanitizeSlug(s) {
+  return String(s)
+    .toLowerCase()
+    .replace(/[^a-z0-9 _-]/g, "") // drop chars WP drops (e.g. ".")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+// The one universal rule: filename -> slug. Replace the last "." with "_",
+// then sanitise to what WP will store. Used for pages, posts, AND media —
+// the github filename is the master and the sole source of a slug. No
+// extension is assumed.
+//   amor-lake.html -> amor-lake_html      foo.bar -> foo_bar
+function fileToSlug(filename) {
+  const ext = path.extname(filename).replace(/^\./, "").toLowerCase();
+  const base = path.basename(filename, path.extname(filename));
+  return sanitizeSlug(`${base}_${ext}`);
+}
+
+// The inverse: slug -> filename. Replace the last "_" with ".". Lets a map
+// keyed by filename be looked up from a WP object's slug.
+//   amor-lake_html -> amor-lake.html      foo_bar -> foo.bar
+function slugToFilename(slug) {
+  const i = slug.lastIndexOf("_");
+  return i === -1 ? slug : `${slug.slice(0, i)}.${slug.slice(i + 1)}`;
+}
+
+// Extract the slug WP actually assigned, from a permalink. Authoritative —
+// unlike a create response's `slug`, which can echo the requested value while
+// WP silently stored a "-2" suffix.
+function slugFromLink(link) {
+  try {
+    const parts = new URL(link).pathname.split("/").filter(Boolean);
+    return parts.length ? parts[parts.length - 1] : "";
+  } catch (_) {
+    return "";
+  }
+}
+
+// ---------------------------------------------------------------------
 // Data loading — WP pages, per-page JSONs, WP media
 // ---------------------------------------------------------------------
 
@@ -163,7 +215,7 @@ async function loadWpPageMap() {
     if (!res.ok) throw new Error(`page listing failed: HTTP ${res.status}`);
     const items = await res.json();
     for (const item of items) {
-      map.set(item.slug, { id: item.id, status: item.status });
+      map.set(slugToFilename(item.slug), { id: item.id, status: item.status });
     }
     const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
     if (page >= totalPages) break;
@@ -309,34 +361,32 @@ async function syncGalleryJsons(galleries, pageMap, fileBirdFolderCache) {
 // PAGES sync
 // ---------------------------------------------------------------------
 
-function buildPageFileMap() {
+// Map of page/post source files, keyed by FILENAME — the source of truth.
+// Discovery is generic: every non-hidden regular file under the root, with
+// no extension assumed. The slug is derived from the filename via fileToSlug;
+// the base (filename minus its own extension) is only used to locate the
+// page's data file (<base>.json).
+function buildFileMap(root, repoPrefix) {
   const map = new Map();
-  if (!fs.existsSync(PAGES_ROOT)) return map;
+  if (!fs.existsSync(root)) return map;
 
-  const entries = fs.readdirSync(PAGES_ROOT, { recursive: true });
-  for (const entry of entries) {
-    if (!entry.endsWith(".html")) continue;
-    const slug = path.basename(entry, ".html");
-    const filePath = path.join(PAGES_ROOT, entry);
-    const relPath = path.posix.join("pages", entry.split(path.sep).join("/"));
-    map.set(slug, { filePath, relPath });
+  for (const entry of fs.readdirSync(root, { recursive: true })) {
+    const filename = path.basename(entry);
+    if (filename.startsWith(".")) continue; // skip .DS_Store and the like
+    const filePath = path.join(root, entry);
+    if (!fs.statSync(filePath).isFile()) continue; // skip directories
+    const relPath = path.posix.join(repoPrefix, entry.split(path.sep).join("/"));
+    map.set(filename, { filePath, relPath });
   }
   return map;
 }
 
-function buildPostFileMap() {
-  const map = new Map();
-  if (!fs.existsSync(POSTS_ROOT)) return map;
+function buildPageFileMap() {
+  return buildFileMap(PAGES_ROOT, "pages");
+}
 
-  const entries = fs.readdirSync(POSTS_ROOT);
-  for (const entry of entries) {
-    if (!entry.endsWith(".html")) continue;
-    const slug = path.basename(entry, ".html");
-    const filePath = path.join(POSTS_ROOT, entry);
-    const relPath = path.posix.join("posts", entry);
-    map.set(slug, { filePath, relPath });
-  }
-  return map;
+function buildPostFileMap() {
+  return buildFileMap(POSTS_ROOT, "posts");
 }
 
 async function loadWpPostMap() {
@@ -347,7 +397,7 @@ async function loadWpPostMap() {
     if (!res.ok) throw new Error(`post listing failed: HTTP ${res.status}`);
     const items = await res.json();
     for (const item of items) {
-      map.set(item.slug, { id: item.id, status: item.status });
+      map.set(slugToFilename(item.slug), { id: item.id, status: item.status });
     }
     const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
     if (page >= totalPages) break;
@@ -362,18 +412,20 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
   let successCount = 0;
   let failCount = 0;
 
-  for (const [slug, entry] of pageFileMap) {
+  for (const [filename, entry] of pageFileMap) {
+    const base = path.basename(filename, path.extname(filename));
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
-      const pd = perPageDataMap.get(slug);
+      const pd = perPageDataMap.get(base);
       const jsonRelPath = pd
-        ? `media/data/${pd.repoPath}/${slug}.json`
+        ? `media/data/${pd.repoPath}/${base}.json`
         : null;
       if (!jsonRelPath || !CHANGED.files.has(jsonRelPath)) continue;
     }
 
     const content = fs.readFileSync(entry.filePath, "utf8");
-    const pageData = perPageDataMap.get(slug)?.data || {};
-    const wpPage = wpPageMap.get(slug);
+    const pageData = perPageDataMap.get(base)?.data || {};
+    const wpSlug = fileToSlug(filename);
+    const wpPage = wpPageMap.get(filename);
 
     const body = { content };
     if (pageData.title) body.title = pageData.title;
@@ -404,19 +456,23 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
 
         if (!res.ok) {
           const text = await res.text();
-          console.error(`[pages] FAILED update ${slug} (id ${pageId}): HTTP ${res.status} — ${text}`);
+          console.error(`[pages] FAILED update ${filename} (id ${pageId}): HTTP ${res.status} — ${text}`);
           failCount++;
           continue;
         }
 
         const data = await res.json();
+        const actualSlug = slugFromLink(data.link) || data.slug;
         if (data._content_warnings) {
-          console.warn(`[pages] ${slug} (id ${pageId}): saved with warnings:`, data._content_warnings);
+          console.warn(`[pages] ${wpSlug} (id ${pageId}): saved with warnings:`, data._content_warnings);
         } else {
-          console.log(`[pages] OK updated "${slug}" (id ${pageId}, slug "${data.slug}")`);
+          console.log(`[pages] OK updated "${wpSlug}" (id ${pageId}, actual slug "${actualSlug}")`);
+        }
+        if (actualSlug !== wpSlug) {
+          console.warn(`[pages] SLUG MISMATCH on update: id ${pageId} is stored as "${actualSlug}", expected "${wpSlug}".`);
         }
       } else {
-        body.slug = slug;
+        body.slug = wpSlug;
         body.comment_status = "closed";
         if (!body.status) body.status = "draft";
 
@@ -428,24 +484,25 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
 
         if (!res.ok) {
           const text = await res.text();
-          console.error(`[pages] FAILED create ${slug}: HTTP ${res.status} — ${text}`);
+          console.error(`[pages] FAILED create ${filename}: HTTP ${res.status} — ${text}`);
           failCount++;
           continue;
         }
 
         const data = await res.json();
         pageId = data.id;
-        wpPageMap.set(slug, { id: pageId, status: data.status });
-        console.log(`[pages] OK created "${slug}" → id ${pageId}, slug "${data.slug}", status ${data.status}`);
-        if (data.slug !== slug) {
-          console.warn(`[pages] SLUG DRIFT: requested "${slug}" but WP stored "${data.slug}" — JSON lookup will 404 and the next sync will re-create instead of update; slug likely reserved (check Trash).`);
+        const actualSlug = slugFromLink(data.link) || data.slug;
+        wpPageMap.set(slugToFilename(actualSlug), { id: pageId, status: data.status });
+        console.log(`[pages] OK created "${wpSlug}" → id ${pageId}, actual slug "${actualSlug}" (link ${data.link}), status ${data.status}`);
+        if (actualSlug !== wpSlug) {
+          console.warn(`[pages] SLUG DRIFT: requested "${wpSlug}" but WP stored "${actualSlug}" — slug reserved (duplicate/trash); next sync will re-create instead of update.`);
         }
       }
 
       await syncOnePageToFileBird(pageFolderCache, pageId, entry.relPath);
       successCount++;
     } catch (err) {
-      console.error(`[pages] ERROR ${slug}:`, err.message);
+      console.error(`[pages] ERROR ${filename}:`, err.message);
       failCount++;
     }
   }
@@ -463,18 +520,20 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
   let successCount = 0;
   let failCount = 0;
 
-  for (const [slug, entry] of postFileMap) {
+  for (const [filename, entry] of postFileMap) {
+    const base = path.basename(filename, path.extname(filename));
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
-      const pd = perPageDataMap.get(slug);
+      const pd = perPageDataMap.get(base);
       const jsonRelPath = pd
-        ? `media/data/${pd.repoPath}/${slug}.json`
+        ? `media/data/${pd.repoPath}/${base}.json`
         : null;
       if (!jsonRelPath || !CHANGED.files.has(jsonRelPath)) continue;
     }
 
     const content = fs.readFileSync(entry.filePath, "utf8");
-    const postData = perPageDataMap.get(slug)?.data || {};
-    const wpPost = wpPostMap.get(slug);
+    const postData = perPageDataMap.get(base)?.data || {};
+    const wpSlug = fileToSlug(filename);
+    const wpPost = wpPostMap.get(filename);
 
     const body = { content };
     if (postData.title) body.title = postData.title;
@@ -503,19 +562,23 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
 
         if (!res.ok) {
           const text = await res.text();
-          console.error(`[posts] FAILED update ${slug} (id ${postId}): HTTP ${res.status} — ${text}`);
+          console.error(`[posts] FAILED update ${filename} (id ${postId}): HTTP ${res.status} — ${text}`);
           failCount++;
           continue;
         }
 
         const data = await res.json();
+        const actualSlug = slugFromLink(data.link) || data.slug;
         if (data._content_warnings) {
-          console.warn(`[posts] ${slug} (id ${postId}): saved with warnings:`, data._content_warnings);
+          console.warn(`[posts] ${wpSlug} (id ${postId}): saved with warnings:`, data._content_warnings);
         } else {
-          console.log(`[posts] OK updated "${slug}" (id ${postId}, slug "${data.slug}")`);
+          console.log(`[posts] OK updated "${wpSlug}" (id ${postId}, actual slug "${actualSlug}")`);
+        }
+        if (actualSlug !== wpSlug) {
+          console.warn(`[posts] SLUG MISMATCH on update: id ${postId} is stored as "${actualSlug}", expected "${wpSlug}".`);
         }
       } else {
-        body.slug = slug;
+        body.slug = wpSlug;
         body.comment_status = "open";
         if (!body.status) body.status = "draft";
 
@@ -527,24 +590,25 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
 
         if (!res.ok) {
           const text = await res.text();
-          console.error(`[posts] FAILED create ${slug}: HTTP ${res.status} — ${text}`);
+          console.error(`[posts] FAILED create ${filename}: HTTP ${res.status} — ${text}`);
           failCount++;
           continue;
         }
 
         const data = await res.json();
         postId = data.id;
-        wpPostMap.set(slug, { id: postId, status: data.status });
-        console.log(`[posts] OK created "${slug}" → id ${postId}, slug "${data.slug}", status ${data.status}`);
-        if (data.slug !== slug) {
-          console.warn(`[posts] SLUG DRIFT: requested "${slug}" but WP stored "${data.slug}" — JSON lookup will 404 and the next sync will re-create instead of update; slug likely reserved (check Trash).`);
+        const actualSlug = slugFromLink(data.link) || data.slug;
+        wpPostMap.set(slugToFilename(actualSlug), { id: postId, status: data.status });
+        console.log(`[posts] OK created "${wpSlug}" → id ${postId}, actual slug "${actualSlug}" (link ${data.link}), status ${data.status}`);
+        if (actualSlug !== wpSlug) {
+          console.warn(`[posts] SLUG DRIFT: requested "${wpSlug}" but WP stored "${actualSlug}" — slug reserved (duplicate/trash); next sync will re-create instead of update.`);
         }
       }
 
       await syncOnePageToFileBird(postFolderCache, postId, entry.relPath);
       successCount++;
     } catch (err) {
-      console.error(`[posts] ERROR ${slug}:`, err.message);
+      console.error(`[posts] ERROR ${filename}:`, err.message);
       failCount++;
     }
   }
@@ -582,8 +646,9 @@ async function deleteMedia(id) {
   }
 }
 
-async function uploadMedia(filename, fileBuffer, mimeType) {
-  const res = await wpFetch(`/media`, {
+async function uploadMedia(filename, fileBuffer, mimeType, desiredSlug) {
+  const qs = desiredSlug ? `?slug=${encodeURIComponent(desiredSlug)}` : "";
+  const res = await wpFetch(`/media${qs}`, {
     method: "POST",
     headers: {
       "Content-Type": mimeType,
@@ -598,14 +663,50 @@ async function uploadMedia(filename, fileBuffer, mimeType) {
   return res.json();
 }
 
+// Force an attachment's slug via a follow-up update — used when the binary
+// create ignores the ?slug= query parameter.
+async function setMediaSlug(id, desiredSlug) {
+  const res = await wpFetch(`/media/${id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ slug: desiredSlug }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`slug update failed: HTTP ${res.status} — ${body}`);
+  }
+  return res.json();
+}
+
 async function syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType) {
   try {
+    const desiredSlug = fileToSlug(filename);
     const existingId = await findExistingMediaIdByFilename(filename);
     if (existingId) {
       await deleteMedia(existingId);
     }
-    const uploaded = await uploadMedia(filename, fileBuffer, mimeType);
-    console.log(`[files] OK ${relSubPath}${existingId ? " (overwritten)" : " (new)"}`);
+    let uploaded = await uploadMedia(filename, fileBuffer, mimeType, desiredSlug);
+
+    // The binary create may ignore ?slug=. If the slug didn't take, force it
+    // with a follow-up update so the attachment lands on "<base>_<ext>".
+    if (uploaded.slug !== desiredSlug) {
+      console.warn(`[files] ${relSubPath}: slug on create was "${uploaded.slug}", requested "${desiredSlug}" — applying follow-up update.`);
+      try {
+        uploaded = await setMediaSlug(uploaded.id, desiredSlug);
+      } catch (e) {
+        console.error(`[files] ${relSubPath}: follow-up slug update FAILED: ${e.message}`);
+      }
+    }
+
+    // Validate: WP must have stored the slug and filename we asked for.
+    if (uploaded.slug !== desiredSlug) {
+      console.error(`[files] SLUG MISMATCH ${relSubPath}: requested "${desiredSlug}", WP stored "${uploaded.slug}".`);
+    }
+    if (!(typeof uploaded.source_url === "string" && uploaded.source_url.endsWith(`/${filename}`))) {
+      console.error(`[files] FILENAME MISMATCH ${relSubPath}: expected .../${filename}, WP stored "${uploaded.source_url}".`);
+    }
+
+    console.log(`[files] OK ${relSubPath}${existingId ? " (overwritten)" : " (new)"} — id ${uploaded.id}, slug "${uploaded.slug}", url ${uploaded.source_url}`);
     return uploaded.id;
   } catch (err) {
     console.error(`[files] FAILED ${relSubPath}:`, err.message);
