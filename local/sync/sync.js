@@ -413,7 +413,7 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
         if (data._content_warnings) {
           console.warn(`[pages] ${slug} (id ${pageId}): saved with warnings:`, data._content_warnings);
         } else {
-          console.log(`[pages] OK updated ${slug} (id ${pageId})`);
+          console.log(`[pages] OK updated "${slug}" (id ${pageId}, slug "${data.slug}")`);
         }
       } else {
         body.slug = slug;
@@ -436,7 +436,10 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
         const data = await res.json();
         pageId = data.id;
         wpPageMap.set(slug, { id: pageId, status: data.status });
-        console.log(`[pages] OK created ${slug} (id ${pageId}, status ${data.status})`);
+        console.log(`[pages] OK created "${slug}" → id ${pageId}, slug "${data.slug}", status ${data.status}`);
+        if (data.slug !== slug) {
+          console.warn(`[pages] SLUG DRIFT: requested "${slug}" but WP stored "${data.slug}" — JSON lookup will 404 and the next sync will re-create instead of update; slug likely reserved (check Trash).`);
+        }
       }
 
       await syncOnePageToFileBird(pageFolderCache, pageId, entry.relPath);
@@ -509,7 +512,7 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
         if (data._content_warnings) {
           console.warn(`[posts] ${slug} (id ${postId}): saved with warnings:`, data._content_warnings);
         } else {
-          console.log(`[posts] OK updated ${slug} (id ${postId})`);
+          console.log(`[posts] OK updated "${slug}" (id ${postId}, slug "${data.slug}")`);
         }
       } else {
         body.slug = slug;
@@ -532,7 +535,10 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
         const data = await res.json();
         postId = data.id;
         wpPostMap.set(slug, { id: postId, status: data.status });
-        console.log(`[posts] OK created ${slug} (id ${postId}, status ${data.status})`);
+        console.log(`[posts] OK created "${slug}" → id ${postId}, slug "${data.slug}", status ${data.status}`);
+        if (data.slug !== slug) {
+          console.warn(`[posts] SLUG DRIFT: requested "${slug}" but WP stored "${data.slug}" — JSON lookup will 404 and the next sync will re-create instead of update; slug likely reserved (check Trash).`);
+        }
       }
 
       await syncOnePageToFileBird(postFolderCache, postId, entry.relPath);
