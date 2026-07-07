@@ -32,6 +32,21 @@ This is standing authorization for that one case: log change → `git add` → c
 - This is intentional so a quick voice-dictated log entry on the phone persists to
   GitHub without extra taps.
 
+## 4. Verify the effect, don't echo the intent.
+
+After any **mutating call to an external system** (WordPress, git, DNS, file moves),
+the call returning success is **NOT** proof it did what I asked. I must read the
+**actual resulting state** back and compare it to my intent — then report the real
+value, flagging any discrepancy, **before** moving on.
+
+- **Never report back the value I requested as if it were the result.** Report the
+  value the system actually used, read from its response or a follow-up fetch.
+- WP slug example: I asked for `my-post`; WP may return `my-post-2` (collision),
+  `chateau` (sanitized `Château`), or silently ignore the field. Validate the slug
+  **WP actually assigned**, not the one I typed.
+- If the response doesn't reveal the resulting state, do a follow-up read to confirm it.
+- Gap between intended and actual → tell Pierre immediately, don't bury it.
+
 ---
 See the memory `feedback-working-style` for the fuller collaboration notes
 (git workflow, response style, curl format, data-migration preference, etc.).
