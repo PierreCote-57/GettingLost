@@ -1,0 +1,15 @@
+{
+  "title": "Beavertail Lake Day Use",
+  "featuredImage": "under-construction.png",
+  "excerpt": "Under construction",
+  "tags": ["fishing", "picnic"],
+  "published": true,
+  "lat": 49.97964,
+  "lng": -125.50546,
+  "campground": {
+    "website": "",
+    "siteMap": "",
+    "reservation": ""
+  },
+  "notes": []
+}

@@ -2,11 +2,23 @@
   "title": "Beavertail Lake",
   "featuredImage": "under-construction.png",
   "excerpt": "Under construction",
-  "tags": ["fishing"],
+  "tags": ["fishing", "picnic"],
   "published": true,
   "lat": 49.9812,
   "lng": -125.5033,
-  "recSites": [],
+  "recSites": [
+    {
+      "name": "Beavertail Lake Day Use",
+      "recId": null,
+      "siteMap": null,
+      "references": [
+        {
+          "name": "Day-use page",
+          "url": "/beavertail-lake-dayuse/"
+        }
+      ]
+    }
+  ],
   "fishingReferences": {
     "bcIdentifier": "00121CAMB",
     "areaKm2": 1.076,
