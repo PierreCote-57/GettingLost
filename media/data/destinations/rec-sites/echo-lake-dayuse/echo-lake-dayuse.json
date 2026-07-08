@@ -11,5 +11,18 @@
     "siteMap": "",
     "reservation": ""
   },
-  "notes": []
+  "notes": [
+    {
+      "sectionName": "Further readings",
+      "list": [
+        {
+          "name": "Campbell River Fish & Wildlife Association",
+          "url": "https://crfishandwildlifeclub.ca",
+          "description": [
+            "Working to serve our community in all aspects of fish and wildlife conservation and outdoor activities."
+          ]
+        }
+      ]
+    }
+  ]
 }

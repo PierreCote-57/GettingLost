@@ -6,7 +6,19 @@
   "published": true,
   "lat": 49.9864,
   "lng": -125.4084,
-  "recSites": [],
+  "recSites": [
+    {
+      "name": "Echo Lake Day Use",
+      "recId": null,
+      "siteMap": null,
+      "references": [
+        {
+          "name": "Day-use page",
+          "file": "echo-lake-dayuse.html"
+        }
+      ]
+    }
+  ],
   "fishingReferences": {
     "bcIdentifier": "00126CAMB",
     "areaKm2": 0.23,

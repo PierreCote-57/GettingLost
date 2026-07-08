@@ -203,6 +203,14 @@ function slugFromLink(link) {
   }
 }
 
+// A slug/filename drift means WP did NOT store what we asked for. That's a
+// failure, not a warning: emit a GitHub Actions error annotation (shows on the
+// run summary) so it can't be missed. Callers must ALSO count it (failCount++ /
+// return null) so the job actually goes red.
+function annotateFailure(message) {
+  console.log(`::error::${message}`);
+}
+
 // ---------------------------------------------------------------------
 // Data loading — WP pages, per-page JSONs, WP media
 // ---------------------------------------------------------------------
@@ -480,7 +488,9 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
           console.log(`[pages] OK updated "${wpSlug}" (id ${pageId}, actual slug "${actualSlug}")`);
         }
         if (actualSlug !== wpSlug) {
-          console.warn(`[pages] SLUG MISMATCH on update: id ${pageId} is stored as "${actualSlug}", expected "${wpSlug}".`);
+          annotateFailure(`[pages] SLUG MISMATCH on update: id ${pageId} is stored as "${actualSlug}", expected "${wpSlug}".`);
+          failCount++;
+          continue;
         }
       } else {
         body.slug = wpSlug;
@@ -506,7 +516,9 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
         wpPageMap.set(slugToFilename(actualSlug), { id: pageId, status: data.status });
         console.log(`[pages] OK created "${wpSlug}" → id ${pageId}, actual slug "${actualSlug}" (link ${data.link}), status ${data.status}`);
         if (actualSlug !== wpSlug) {
-          console.warn(`[pages] SLUG DRIFT: requested "${wpSlug}" but WP stored "${actualSlug}" — slug reserved (duplicate/trash); next sync will re-create instead of update.`);
+          annotateFailure(`[pages] SLUG DRIFT: requested "${wpSlug}" but WP stored "${actualSlug}" — slug reserved (duplicate/trash).`);
+          failCount++;
+          continue;
         }
       }
 
@@ -586,7 +598,9 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
           console.log(`[posts] OK updated "${wpSlug}" (id ${postId}, actual slug "${actualSlug}")`);
         }
         if (actualSlug !== wpSlug) {
-          console.warn(`[posts] SLUG MISMATCH on update: id ${postId} is stored as "${actualSlug}", expected "${wpSlug}".`);
+          annotateFailure(`[posts] SLUG MISMATCH on update: id ${postId} is stored as "${actualSlug}", expected "${wpSlug}".`);
+          failCount++;
+          continue;
         }
       } else {
         body.slug = wpSlug;
@@ -612,7 +626,9 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
         wpPostMap.set(slugToFilename(actualSlug), { id: postId, status: data.status });
         console.log(`[posts] OK created "${wpSlug}" → id ${postId}, actual slug "${actualSlug}" (link ${data.link}), status ${data.status}`);
         if (actualSlug !== wpSlug) {
-          console.warn(`[posts] SLUG DRIFT: requested "${wpSlug}" but WP stored "${actualSlug}" — slug reserved (duplicate/trash); next sync will re-create instead of update.`);
+          annotateFailure(`[posts] SLUG DRIFT: requested "${wpSlug}" but WP stored "${actualSlug}" — slug reserved (duplicate/trash).`);
+          failCount++;
+          continue;
         }
       }
 
@@ -711,10 +727,12 @@ async function syncOneFileToWordPress(relSubPath, filename, fileBuffer, mimeType
 
     // Validate: WP must have stored the slug and filename we asked for.
     if (uploaded.slug !== desiredSlug) {
-      console.error(`[files] SLUG MISMATCH ${relSubPath}: requested "${desiredSlug}", WP stored "${uploaded.slug}".`);
+      annotateFailure(`[files] SLUG MISMATCH ${relSubPath}: requested "${desiredSlug}", WP stored "${uploaded.slug}".`);
+      return null;
     }
     if (!(typeof uploaded.source_url === "string" && uploaded.source_url.endsWith(`/${filename}`))) {
-      console.error(`[files] FILENAME MISMATCH ${relSubPath}: expected .../${filename}, WP stored "${uploaded.source_url}".`);
+      annotateFailure(`[files] FILENAME MISMATCH ${relSubPath}: expected .../${filename}, WP stored "${uploaded.source_url}".`);
+      return null;
     }
 
     console.log(`[files] OK ${relSubPath}${existingId ? " (overwritten)" : " (new)"} — id ${uploaded.id}, slug "${uploaded.slug}", url ${uploaded.source_url}`);
