@@ -5,8 +5,8 @@
   "tags": ["camping", "fishing", "hiking"],
   "published": true,
   "location": {
-    "lat": 50.04139,
-    "lng": -125.32083,
+    "lat": 50.037009,
+    "lng": -125.295734,
     "pin": "tent"
   },
   "campground": {
