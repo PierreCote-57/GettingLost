@@ -96,6 +96,26 @@
       ]
     },
     {
+      "sectionName": "Fishing",
+      "list": [
+        {
+          "name": "Freshwater Fisheries Society of BC",
+          "url": "https://www.gofishbc.com",
+          "description": [
+            "Stocking data, regulations, and how-to guides for freshwater fishing across BC.",
+            "Their lake-by-lake stocking reports are handy for planning where to go."
+          ]
+        },
+        {
+          "name": "Go Hiking",
+          "url": "https://gohiking.ca/",
+          "description": [
+            "Trail guides and lake write-ups across BC, with directions and photos."
+          ]
+        }
+      ]
+    },
+    {
       "sectionName": "Other province",
       "list": [
 		  {

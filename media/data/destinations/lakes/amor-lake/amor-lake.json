@@ -127,17 +127,17 @@
       "sectionName": "Further readings",
       "list": [
         {
-          "name": "Sites & Trails BC",
-          "url": "https://www.sitesandtrailsbc.ca/resource/REC0174",
-          "description": [
-            "Sites & Trails BC"
-          ]
-        },
-        {
           "name": "Wikipedia",
           "url": "https://en.wikipedia.org/wiki/Amor_Lake",
           "description": [
             "Wikipedia"
+          ]
+        },
+        {
+          "name": "Go Hiking",
+          "url": "https://gohiking.ca/amor-lake/",
+          "description": [
+            "Trail guide, directions, and photos for Amor Lake."
           ]
         }
       ]
