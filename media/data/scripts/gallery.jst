@@ -4,10 +4,10 @@
  * Renders a card-grid list of destinations on the /gallery/ page,
  * driven entirely by URL query params:
  *
- *   ?file=NAME   loads /wp-content/uploads/NAME.json (default "Destinations")
- *   ?title=TEXT  sets the page heading + browser tab title (default "Destinations")
+ *   ?file=FILENAME  loads /wp-content/uploads/FILENAME (default "Destinations.json")
+ *   ?title=TEXT     sets the page heading + browser tab title (default "Destinations")
  *
- * Each JSON entry is {title, slug, image, teaser}.
+ * Each JSON entry is {title, file, image, teaser}.
  *
  * Card markup/CSS and escapeHtml() now live in gettinglost.jst
  * (window.GL.renderCard / window.GL.escapeHtml), shared with the
@@ -18,8 +18,8 @@
 (function () {
   var params = new URLSearchParams(window.location.search);
   var listName = params.get("title") || "Destinations";
-  var fileBase = params.get("file") || "Destinations";
-  var JSON_URL = "/wp-content/uploads/" + fileBase + ".json";
+  var file = params.get("file") || "Destinations.json";
+  var JSON_URL = "/wp-content/uploads/" + file;
 
   function render(container, entries) {
     entries.sort(function (a, b) {
@@ -45,7 +45,7 @@
 
     fetch(JSON_URL)
       .then(function (res) {
-        if (!res.ok) throw new Error("Failed to load " + fileBase + ".json: " + res.status);
+        if (!res.ok) throw new Error("Failed to load " + file + ": " + res.status);
         return res.json();
       })
       .then(function (entries) {

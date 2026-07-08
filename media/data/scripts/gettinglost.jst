@@ -549,9 +549,9 @@
   //
   //   - data-title is optional, defaults to "Destinations" — used both in
   //     the "Back to <title>" label and as the gallery page's ?title=.
-  //   - data-file is optional; when present it's passed through as the
-  //     gallery page's ?file=. When omitted, the link just goes to the
-  //     plain /gallery/ page (no query string).
+  //   - data-file is the gallery JSON's full filename (e.g. "Lakes.json"),
+  //     passed through as the gallery page's ?file=. When omitted, the link
+  //     goes to the gallery page (URL derived from gallery.html) unfiltered.
   //   - Centralizing this here means the link style/wording can change
   //     sitewide from one place.
 
@@ -563,7 +563,9 @@
       el.className = "gl-dest-back";
     }
 
-    var href = "/gallery/";
+    // The gallery listing page is gallery.html — derive its URL slug so we
+    // never hardcode the slug form.
+    var href = "/" + fileToSlug("gallery.html") + "/";
     if (file) {
       href += "?file=" + encodeURIComponent(file) + "&title=" + encodeURIComponent(title);
     }
