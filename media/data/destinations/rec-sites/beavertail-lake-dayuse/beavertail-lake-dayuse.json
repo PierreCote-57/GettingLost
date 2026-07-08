@@ -24,5 +24,26 @@
         }
       ]
     }
-  ]
+  ],
+  "photoGalleries": {
+    "photos": {
+      "name": "Photos",
+      "items": [
+        { "id": "img_0863", "img": "IMG_0863.jpg", "label": "" },
+        { "id": "img_0864", "img": "IMG_0864.jpg", "label": "" },
+        { "id": "img_0865", "img": "IMG_0865.jpg", "label": "" },
+        { "id": "img_0866", "img": "IMG_0866.jpg", "label": "" },
+        { "id": "img_0867", "img": "IMG_0867.jpg", "label": "" },
+        { "id": "img_0868-rotated", "img": "IMG_0868-rotated.jpg", "label": "" },
+        { "id": "img_0869-rotated", "img": "IMG_0869-rotated.jpg", "label": "" },
+        { "id": "img_0870-rotated", "img": "IMG_0870-rotated.jpg", "label": "" },
+        { "id": "img_0871", "img": "IMG_0871.jpg", "label": "" },
+        { "id": "img_0872-rotated", "img": "IMG_0872-rotated.jpg", "label": "" },
+        { "id": "img_0873", "img": "IMG_0873.jpg", "label": "" },
+        { "id": "img_0874", "img": "IMG_0874.jpg", "label": "" },
+        { "id": "img_0875", "img": "IMG_0875.jpg", "label": "" },
+        { "id": "img_0876", "img": "IMG_0876.jpg", "label": "" }
+      ]
+    }
+  }
 }
