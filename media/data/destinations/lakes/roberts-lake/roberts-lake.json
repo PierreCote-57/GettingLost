@@ -4,8 +4,11 @@
   "excerpt": "A wheelchair-accessible day-use site with sandy beach, popular with anglers and picnickers.",
   "tags": ["fishing"],
   "published": true,
-  "lat": 50.2172,
-  "lng": -125.5387,
+  "location": {
+    "lat": 50.2172,
+    "lng": -125.5387,
+    "pin": "lake"
+  },
   "recSites": [
     {
       "name": "Roberts Lake",

@@ -1,0 +1,94 @@
+/**
+ * gl-constants.jst
+ *
+ * Sitewide constants for "Getting Lost on VI". Loaded in the Footer
+ * template part immediately BEFORE gettinglost.jst, so every value here
+ * is on window.GL before the core script (and its renderers) run.
+ *
+ * Home for cross-cutting ALL-CAPS constants:
+ *   GL.PIN_ICONS   — map-marker SVGs keyed by a page's location.pin.
+ *   GL.TAG_COLORS  — tag-chip colors (used by renderTags).
+ *   GL.TAG_FALLBACK
+ *   GL.MAP_CONFIG  — Google Maps API key + default zoom / type / styles.
+ *
+ * Renderer-specific config (e.g. lakes.jst's stocking-report URL) stays
+ * with its renderer; only genuinely global constants belong here.
+ */
+
+(function () {
+  "use strict";
+
+  var GL = (window.GL = window.GL || {});
+
+  GL.TAG_COLORS = {
+    camping:  { bg: "rgba(31, 158, 117, 0.88)", text: "#E1F5EE" },
+    fishing:  { bg: "rgba(55, 138, 221, 0.88)", text: "#E6F1FB" },
+    hiking:   { bg: "rgba(216, 90, 48, 0.88)",  text: "#FAECE7" },
+    picnic:   { bg: "rgba(186, 117, 23, 0.88)", text: "#FAEEDA" }
+  };
+  GL.TAG_FALLBACK = { bg: "rgba(95, 94, 90, 0.88)", text: "#F1EFE8" };
+
+  GL.MAP_CONFIG = {
+    mapApiKey: "AIzaSyBHN5E9rVPW6wqbMXEzFE5nDc-TH58gKQ8",
+    mapZoom: 13,
+    mapTypeId: "roadmap",
+    mapStyles: [
+      // { featureType: "poi.park", elementType: "labels", stylers: [{ visibility: "off" }] }
+    ]
+  };
+
+  // Map-marker figures, keyed by the page JSON's location.pin value.
+  // Each is a standalone 48x48 SVG (xmlns is required for data-URI use),
+  // with the figure centered via translate(24,24) so gettinglost.jst can
+  // anchor every pin at (24,24). Unknown/absent pin -> the core script
+  // falls back to the default Google marker.
+  GL.PIN_ICONS = {
+    lake:
+      '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">' +
+        '<g transform="translate(24,24) scale(0.82)">' +
+          '<circle cx="0" cy="0" r="24" fill="#2b7fbf"/>' +
+          '<g fill="none" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round">' +
+            '<path d="M-12,-7 q4,-5 8,0 t8,0 t8,0"/>' +
+            '<path d="M-12,0 q4,-5 8,0 t8,0 t8,0"/>' +
+            '<path d="M-12,7 q4,-5 8,0 t8,0 t8,0"/>' +
+          '</g>' +
+        '</g>' +
+      '</svg>',
+    campground:
+      '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">' +
+        '<g transform="translate(24,24)">' +
+          '<rect x="-16" y="-10" width="28" height="17" rx="3" fill="#d98324"/>' +
+          '<rect x="-12" y="-6" width="7" height="7" rx="1" fill="#f2b877"/>' +
+          '<line x1="12" y1="2" x2="18" y2="4" stroke="#d98324" stroke-width="2.6" stroke-linecap="round"/>' +
+          '<circle cx="-8" cy="9" r="3.6" fill="#d98324"/>' +
+          '<circle cx="6" cy="9" r="3.6" fill="#d98324"/>' +
+        '</g>' +
+      '</svg>',
+    park:
+      '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">' +
+        '<g transform="translate(24,24)">' +
+          '<polygon points="0,-18 -11,-4 11,-4" fill="#3f9a54"/>' +
+          '<polygon points="0,-11 -14,7 14,7" fill="#3f9a54"/>' +
+          '<rect x="-2.5" y="7" width="5" height="8" fill="#3f9a54"/>' +
+        '</g>' +
+      '</svg>',
+    tent:
+      '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">' +
+        '<g transform="translate(24,24)">' +
+          '<polygon points="0,-20 -16,11 16,11" fill="#9a6b3f"/>' +
+          '<line x1="0" y1="-20" x2="-22" y2="12" stroke="#9a6b3f" stroke-width="2.4" stroke-linecap="round"/>' +
+          '<line x1="0" y1="-20" x2="22" y2="12" stroke="#9a6b3f" stroke-width="2.4" stroke-linecap="round"/>' +
+          '<polygon points="-5,11 5,11 0,-4" fill="#cda876"/>' +
+        '</g>' +
+      '</svg>',
+    picnic:
+      '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">' +
+        '<g transform="translate(24,24)" stroke="#c0504d" stroke-linecap="round" fill="none">' +
+          '<line x1="-13" y1="-6" x2="13" y2="-6" stroke-width="4.5"/>' +
+          '<line x1="-8" y1="-6" x2="-16" y2="13" stroke-width="3.5"/>' +
+          '<line x1="8" y1="-6" x2="16" y2="13" stroke-width="3.5"/>' +
+          '<line x1="-19" y1="7" x2="19" y2="7" stroke-width="3.5"/>' +
+        '</g>' +
+      '</svg>'
+  };
+})();

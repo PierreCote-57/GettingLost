@@ -4,8 +4,11 @@
   "excerpt": "Under construction",
   "tags": ["fishing", "picnic"],
   "published": true,
-  "lat": 49.9812,
-  "lng": -125.5033,
+  "location": {
+    "lat": 49.9812,
+    "lng": -125.5033,
+    "pin": "lake"
+  },
   "recSites": [
     {
       "name": "Beavertail Lake Day Use",

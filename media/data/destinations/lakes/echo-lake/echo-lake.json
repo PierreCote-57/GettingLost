@@ -4,8 +4,11 @@
   "excerpt": "Beautiful fishing and picnic lake near Campbell River. Great first fishing trip for children and testing gear.",
   "tags": ["fishing", "picnic"],
   "published": true,
-  "lat": 49.9864,
-  "lng": -125.4084,
+  "location": {
+    "lat": 49.9864,
+    "lng": -125.4084,
+    "pin": "lake"
+  },
   "recSites": [
     {
       "name": "Echo Lake Day Use",

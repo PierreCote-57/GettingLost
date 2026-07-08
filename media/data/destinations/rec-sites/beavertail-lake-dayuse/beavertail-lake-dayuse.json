@@ -4,8 +4,12 @@
   "excerpt": "Under construction",
   "tags": ["fishing", "picnic"],
   "published": true,
-  "lat": 49.97964,
-  "lng": -125.50546,
+  "location": {
+    "lat": 49.97964,
+    "lng": -125.50546,
+    "pin": "picnic",
+    "zoom": 14
+  },
   "campground": {
     "website": "",
     "siteMap": "",

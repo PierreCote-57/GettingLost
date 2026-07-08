@@ -4,8 +4,11 @@
   "excerpt": "An oceanside resort and campground near Black Creek on Vancouver Island's east coast.",
   "tags": ["camping"],
   "published": true,
-  "lat": 49.8705759,
-  "lng": -125.118066,
+  "location": {
+    "lat": 49.8705759,
+    "lng": -125.118066,
+    "pin": "campground"
+  },
   "campground": {
     "website": "https://pacificplaygrounds.ca",
     "siteMap": "https://pacificplaygrounds.ca/wp-content/uploads/2025/03/0372501-Pacific-Playground-site-map.pdf",

@@ -82,6 +82,14 @@
 (function () {
   "use strict";
 
+  // Sitewide constants live in gl-constants.jst, loaded just before this
+  // script in the Footer template. Alias them locally so the code below
+  // reads exactly as before.
+  var GL = (window.GL = window.GL || {});
+  var TAG_COLORS = GL.TAG_COLORS;
+  var TAG_FALLBACK = GL.TAG_FALLBACK;
+  var MAP_CONFIG = GL.MAP_CONFIG;
+
   // ---------------------------------------------------------------------
   // Shared card rendering (used by .gl-featured here, and by gallery.jst)
   // ---------------------------------------------------------------------
@@ -117,14 +125,6 @@
     h = h || 1920;
     return "https://i0.wp.com/" + location.host + "/wp-content/uploads/" + img + "?fit=" + w + "," + h + "&quality=80";
   }
-
-  var TAG_COLORS = {
-    camping:  { bg: "rgba(31, 158, 117, 0.88)", text: "#E1F5EE" },
-    fishing:  { bg: "rgba(55, 138, 221, 0.88)", text: "#E6F1FB" },
-    hiking:   { bg: "rgba(216, 90, 48, 0.88)",  text: "#FAECE7" },
-    picnic:   { bg: "rgba(186, 117, 23, 0.88)", text: "#FAEEDA" }
-  };
-  var TAG_FALLBACK = { bg: "rgba(95, 94, 90, 0.88)", text: "#F1EFE8" };
 
   function renderTags(tags) {
     if (!tags || !tags.length) return "";
@@ -413,15 +413,6 @@
   // so the script tag is only ever injected once per page)
   // ---------------------------------------------------------------------
 
-  var MAP_CONFIG = {
-    mapApiKey: "AIzaSyBHN5E9rVPW6wqbMXEzFE5nDc-TH58gKQ8",
-    mapZoom: 13,
-    mapTypeId: "roadmap",
-    mapStyles: [
-      // { featureType: "poi.park", elementType: "labels", stylers: [{ visibility: "off" }] }
-    ]
-  };
-
   function loadGoogleMapsApi(onReady) {
     if (window.google && window.google.maps) {
       onReady();
@@ -484,14 +475,27 @@
   // Generic block renderer: "googleMap"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.title / pageData.lat / pageData.lng (top-level,
-  // not nested) and renders a single-marker map. No rec-site loop —
-  // that richer, multi-marker behaviour stays specific to lakes.jst
-  // for now.
+  // Reads pageData.location = { lat, lng, pin, zoom } and renders a
+  // single-marker map centered on the primary item. pin selects the
+  // marker icon (GL.PIN_ICONS); zoom overrides MAP_CONFIG.mapZoom when
+  // present. No rec-site loop — the primary item is the only pin.
+
+  // Build a marker icon from a pin type via GL.PIN_ICONS (SVG data-URI).
+  // Unknown/absent type -> null, so the marker uses the default pin.
+  function pinIcon(type) {
+    var svg = GL.PIN_ICONS && GL.PIN_ICONS[type];
+    if (!svg) return null;
+    return {
+      url: "data:image/svg+xml," + encodeURIComponent(svg),
+      scaledSize: new google.maps.Size(48, 48),
+      anchor: new google.maps.Point(24, 24)
+    };
+  }
 
   window.GL.blockRenderers.googleMap = function (el, pageData) {
-    if (typeof pageData.lat !== "number" || typeof pageData.lng !== "number") {
-      throw new Error('Page JSON is missing numeric "lat"/"lng" for the googleMap block.');
+    var loc = pageData.location;
+    if (!loc || typeof loc.lat !== "number" || typeof loc.lng !== "number") {
+      throw new Error('Page JSON is missing numeric "location.lat"/"location.lng" for the googleMap block.');
     }
 
     el.textContent = "";
@@ -502,16 +506,19 @@
 
     loadGoogleMapsApi(function () {
       var map = new google.maps.Map(el, {
-        zoom: MAP_CONFIG.mapZoom,
-        center: { lat: pageData.lat, lng: pageData.lng },
+        zoom: (typeof loc.zoom === "number") ? loc.zoom : MAP_CONFIG.mapZoom,
+        center: { lat: loc.lat, lng: loc.lng },
         mapTypeId: MAP_CONFIG.mapTypeId,
         styles: MAP_CONFIG.mapStyles
       });
-      new google.maps.Marker({
-        position: { lat: pageData.lat, lng: pageData.lng },
+      var markerOptions = {
+        position: { lat: loc.lat, lng: loc.lng },
         map: map,
         title: pageData.title || ""
-      });
+      };
+      var icon = pinIcon(loc.pin);
+      if (icon) markerOptions.icon = icon;
+      new google.maps.Marker(markerOptions);
     });
   };
 

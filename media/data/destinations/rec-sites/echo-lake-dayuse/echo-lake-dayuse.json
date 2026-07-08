@@ -4,8 +4,12 @@
   "excerpt": "FIshing pier at echo lake",
   "tags": ["fishing", "picnic"],
   "published": true,
-  "lat": 49.98480,
-  "lng": -125.41399,
+  "location": {
+    "lat": 49.98480,
+    "lng": -125.41399,
+    "pin": "picnic",
+    "zoom": 14
+  },
   "campground": {
     "website": "",
     "siteMap": "",

@@ -4,8 +4,11 @@
   "excerpt": "An RV park and marina near Campbell River, popular for salmon fishing.",
   "tags": ["camping", "fishing"],
   "published": true,
-  "lat": 49.889183,
-  "lng": -125.1282272,
+  "location": {
+    "lat": 49.889183,
+    "lng": -125.1282272,
+    "pin": "campground"
+  },
   "campground": {
     "website": "https://salmonpoint.com",
     "siteMap": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf",

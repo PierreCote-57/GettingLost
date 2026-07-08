@@ -4,8 +4,11 @@
   "excerpt": "A large lake near Gold River with boat ramp, dock, beach, and swimming area.",
   "tags": ["fishing", "camping"],
   "published": true,
-  "lat": 49.873,
-  "lng": -126.1828,
+  "location": {
+    "lat": 49.873,
+    "lng": -126.1828,
+    "pin": "lake"
+  },
   "recSites": [
     {
       "name": "Muchalat Lake",

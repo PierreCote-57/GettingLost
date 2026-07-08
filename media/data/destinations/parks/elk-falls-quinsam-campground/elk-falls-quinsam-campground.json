@@ -4,8 +4,11 @@
   "excerpt": "A thundering waterfall and old-growth Douglas fir, just north of Campbell River.",
   "tags": ["camping", "fishing", "hiking"],
   "published": true,
-  "lat": 50.04139,
-  "lng": -125.32083,
+  "location": {
+    "lat": 50.04139,
+    "lng": -125.32083,
+    "pin": "tent"
+  },
   "campground": {
     "website": "https://bcparks.ca/elk-falls-park/#camping",
     "siteMap": "https://nrs.objectstore.gov.bc.ca/kuwyyf/elk_falls_quinsam_campground_map_21bba6d02b.pdf",
