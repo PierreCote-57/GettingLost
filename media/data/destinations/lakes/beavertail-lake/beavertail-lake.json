@@ -28,12 +28,34 @@
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00110501.pdf"
       }
     ],
-    "stockingName": ""
+    "stockingName": "BEAVERTAIL"
   },
   "notes": [
     {
       "sectionName": "Further readings",
-      "list": []
+      "list": [
+        {
+          "name": "Go Hiking",
+          "url": "https://gohiking.ca/beavertail-lake/",
+          "description": [
+            "Trail guide, directions, and photos for Beavertail Lake."
+          ]
+        },
+        {
+          "name": "New docks make fishing access easier",
+          "url": "https://www.gofishbc.com/news/news/new-docks-make-fishing-access-easier/",
+          "description": [
+            "Go Fish BC on the new fishing docks — Beavertail's dock was built in 2023."
+          ]
+        },
+        {
+          "name": "New kokanee fisheries on Vancouver Island",
+          "url": "https://www.gofishbc.com/learn/fishing-tips/lake-fishing/new-kokanee-fisheries-on-vancouver-island/",
+          "description": [
+            "How kokanee were introduced to Beavertail and nearby lakes."
+          ]
+        }
+      ]
     }
   ]
 }
