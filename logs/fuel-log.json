@@ -1,12 +1,13 @@
 [
   {
-    "id": "dummy-0001",
-    "note": "DUMMY ENTRY — write-validation test, safe to delete",
-    "date": "2026-07-06",
-    "odometer_km": 0,
-    "liters": 0,
-    "price_per_liter_cad": 0,
-    "total_cost_cad": 0,
-    "location": "N/A"
+    "id": "fuel-0001",
+    "note": "Starting point — full tank baseline.",
+    "date": "2026-07-05",
+    "odometer_km": 641,
+    "liters": null,
+    "price_per_liter_cad": null,
+    "total_cost_cad": null,
+    "location": null,
+    "fullTank": true
   }
 ]
