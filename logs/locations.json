@@ -1,0 +1,55 @@
+[
+  {
+    "id": "indoor-storage",
+    "name": "Indoor Storage Solutions",
+    "address": "1474 Ironwood Street, Campbell River, BC V9W 5T5",
+    "url": "https://www.indoorstoragesolutions.ca",
+    "location": {
+      "lat": 50.028517,
+      "lng": -125.255148,
+      "pin": "home"
+    }
+  },
+  {
+    "id": "peden-rv",
+    "name": "Peden RV",
+    "address": "10049 Galaran Road, Sidney, BC V8L 5X3",
+    "url": "https://www.pedenrv.com",
+    "location": {
+      "lat": 48.654480,
+      "lng": -123.412022
+    }
+  },
+  {
+    "id": "steve-marshall-ford",
+    "name": "Steve Marshall Ford",
+    "address": "2300 N Island Hwy, Campbell River, BC V9W 2G8",
+    "url": "https://www.stevemarshallfordcampbellriver.com",
+    "location": {
+      "lat": 50.043601,
+      "lng": -125.266515
+    }
+  },
+  {
+    "id": "campbell-river-rv",
+    "name": "Campbell River RV",
+    "address": "1632 Coulter Road, Campbell River, BC V9W 7M1",
+    "url": "https://www.campbellriverrv.com",
+    "location": {
+      "lat": 50.045360,
+      "lng": -125.265786
+    }
+  },
+  {
+    "id": "salmon-point-resort",
+    "name": "Salmon Point Resort",
+    "address": "2176 Salmon Point Road, Campbell River, BC V9H 1E5",
+    "url": "https://salmonpoint.com",
+    "destination": "salmon-point-resort.html",
+    "location": {
+      "lat": 49.889183,
+      "lng": -125.1282272,
+      "pin": "campground"
+    }
+  }
+]
