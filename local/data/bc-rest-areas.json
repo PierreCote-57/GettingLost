@@ -1,0 +1,3224 @@
+{
+  "source": "https://www2.gov.bc.ca/assets/gov/driving-and-transportation/driving/rest-areas/bc-rest-areas-list.pdf",
+  "downloaded": "2026-07-08",
+  "note": "Official BC provincial rest areas parsed from bc-rest-areas-list.pdf. Coordinates are decimal degrees (longitude negative). Provincial rest areas only.",
+  "count": 201,
+  "rest_areas": [
+    {
+      "name": "CASSIDY",
+      "route": "1",
+      "direction": "Northbound",
+      "distance_from": "14.0KM SOUTH OF NANAIMO",
+      "latitude": 49.06718114,
+      "longitude": -123.87803074,
+      "amenities": {
+        "toilets": 8,
+        "toilet_type": "Flush",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "REDGRAVE EAST",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "40.0KM EAST OF GOLDEN",
+      "latitude": 51.49056013,
+      "longitude": -117.27840264,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "REDGRAVE WEST",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "40.0KM WEST OF GOLDEN",
+      "latitude": 51.49154312,
+      "longitude": -117.28322114,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HUNTER CREEK",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "11.0KM WEST OF HOPE",
+      "latitude": 49.35554149,
+      "longitude": -121.57519003,
+      "amenities": {
+        "toilets": 9,
+        "toilet_type": "Flush",
+        "tables": 28,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BRADNER",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "52.5KM EAST OF VANCOUVER",
+      "latitude": 49.07796304,
+      "longitude": -122.43212059,
+      "amenities": {
+        "toilets": 9,
+        "toilet_type": "Flush",
+        "tables": 14,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COLE ROAD",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "73.0KM EAST OF VANCOUVER",
+      "latitude": 49.05653669,
+      "longitude": -122.17798078,
+      "amenities": {
+        "toilets": 9,
+        "toilet_type": "Flush",
+        "tables": 14,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "THE LAST SPIKE",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "24.0KM EAST OF SICAMOUS",
+      "latitude": 50.9772762,
+      "longitude": -118.72326359,
+      "amenities": {
+        "toilets": 9,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SHUSWAP LAKE",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "6.0KM WEST OF SICAMOUS",
+      "latitude": 50.81484267,
+      "longitude": -119.04395196,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KAMLOOPS LAKE",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "30.7KM WEST OF KAMLOOPS",
+      "latitude": 50.75175621,
+      "longitude": -120.72793945,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 8,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ILLECILLEWAET BRAKE CHECK",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "42 KM EAST OF REVELSTOKE",
+      "latitude": 51.17926722,
+      "longitude": -117.76424111,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "RED HILL",
+      "route": "1",
+      "direction": "Northbound",
+      "distance_from": "10.1KM SOUTH OF ASHCROFT",
+      "latitude": 50.6377583,
+      "longitude": -121.34433487,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SKUPPA",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "14.0KM SOUTH OF LYTTON",
+      "latitude": 50.17931005,
+      "longitude": -121.57215482,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "RUTHERFORD BEACH",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "21.0KM WEST OF REVELSTOKE",
+      "latitude": 50.9284873,
+      "longitude": -118.4766056,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MALAHAT SUMMIT",
+      "route": "1",
+      "direction": "Northbound",
+      "distance_from": "28.7KM NORTH OF VICTORIA",
+      "latitude": 48.56781242,
+      "longitude": -123.54868171,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Chemical",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ARBUTUS",
+      "route": "1",
+      "direction": "Northbound",
+      "distance_from": "31.0KM NORTH OF VICTORIA",
+      "latitude": 48.57767263,
+      "longitude": -123.52818449,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Compost",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COBBLEHILL",
+      "route": "1",
+      "direction": "Northbound",
+      "distance_from": "47.0KM NORTH OF VICTORIA",
+      "latitude": 48.70779937,
+      "longitude": -123.60754376,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Chemical",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LAKE OF THE WOODS",
+      "route": "1",
+      "direction": "Southbound",
+      "distance_from": "5.0KM NORTH OF HOPE",
+      "latitude": 49.40931046,
+      "longitude": -121.44591689,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COLUMBIA",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "1KM WEST OF REVELSTOKE",
+      "latitude": 51.00348666,
+      "longitude": -118.22480813,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TEN MILE HILL TRUCKER REST STOP",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "16.0KM EAST OF GOLDEN",
+      "latitude": 51.27338799,
+      "longitude": -116.76123672,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KICKING HORSE",
+      "route": "1",
+      "direction": "Westbound",
+      "distance_from": "11.0KM EAST OF GOLDEN",
+      "latitude": 51.28773379,
+      "longitude": -116.82401506,
+      "amenities": {
+        "toilets": 6,
+        "toilet_type": "Flush",
+        "tables": 21,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WEIGH SCALE #1 EAST",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "KAMLOOPS",
+      "latitude": 50.66578721,
+      "longitude": -120.42847213,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "YALE REST AREA",
+      "route": "1",
+      "direction": "Eastbound",
+      "distance_from": "23.0KM NORTH OF HOPE",
+      "latitude": 49.56281705,
+      "longitude": -121.43529656,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "POUCE INSPECTION REST AREA",
+      "route": "2",
+      "direction": "Northbound",
+      "distance_from": "1KM SOUTH OF DAWSON CREEK",
+      "latitude": 55.70537994,
+      "longitude": -120.12543343,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MCRAE CREEK",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "4.0KM EAST OF CHRISTINA LAKE",
+      "latitude": 49.12562198,
+      "longitude": -118.20889699,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BIG SHEEP CREEK",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "5.6KM WEST OF NANCY GREEN JUNCTION",
+      "latitude": 49.24419305,
+      "longitude": -118.00183845,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "OOTISCHENIA",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "7.0KM EAST OF CASTELGAR",
+      "latitude": 49.24826122,
+      "longitude": -117.6371017,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WILGRESS LAKE",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "26.0KM WEST OF GRAND FORKS",
+      "latitude": 49.14519996,
+      "longitude": -118.53491463,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Compost",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KIDD CREEK",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "21.0KM EAST OF CRESTON",
+      "latitude": 49.16149087,
+      "longitude": -116.26671126,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "BLAZED CREEK",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "21.4KM WEST OF JCT 3/3A AT CRESTON",
+      "latitude": 49.13641168,
+      "longitude": -116.79352249,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LOST CREEK",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "2.0KM E. OF RTE 3/6 JCT AT NELWAY",
+      "latitude": 49.06930003,
+      "longitude": -117.24895583,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BRIDAL LAKE",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "TOP OF KOOTENAY PASS",
+      "latitude": 49.05864569,
+      "longitude": -117.04049987,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ERIE LAKE",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "4.7KM WEST OF JCT 3/6 AT SALMO",
+      "latitude": 49.19177337,
+      "longitude": -117.34845981,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "AMERICAN RAILWAY",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "5.5KM WEST OF KEREMEOS",
+      "latitude": 49.20969464,
+      "longitude": -119.89324645,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MINE HILL",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "17.6KM WEST OF PRINCETON",
+      "latitude": 49.34126243,
+      "longitude": -120.56890477,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ANARCHIST MOUNTAIN",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "29.8KM EAST OF OSOYOOS",
+      "latitude": 49.01303632,
+      "longitude": -119.35449145,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "HOPE SLIDE",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "18.2KM EAST OF HOPE",
+      "latitude": 49.2977111,
+      "longitude": -121.263791,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Chemical",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "RAMPART",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "11.3KM SOUTHEAST OF CRANBROOK",
+      "latitude": 49.5497513,
+      "longitude": -115.64752497,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 8,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "RYAN",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "8.0KM NORTHEAST OF YAHK",
+      "latitude": 49.13997537,
+      "longitude": -116.02804927,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "OLSON",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "16.1KM EAST OF FERNIE",
+      "latitude": 49.62619031,
+      "longitude": -114.93206258,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CAITHNESS CREEK",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "35.4KM WEST OF FERNIE",
+      "latitude": 49.32325917,
+      "longitude": -115.1780604,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CROWSNEST",
+      "route": "3",
+      "direction": "Westbound",
+      "distance_from": "20.0KM EAST OF SPARWOOD",
+      "latitude": 49.6488076,
+      "longitude": -114.69916564,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CASTLEGAR WEIGH SCALE REST AREA",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "2.0 KM FROM CASTLEGAR",
+      "latitude": 49.2869804,
+      "longitude": -117.63169457,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MIDWAY SCALE REST AREA",
+      "route": "3",
+      "direction": "Eastbound",
+      "distance_from": "5KM WEST OF MIDWAY",
+      "latitude": 49.01300745,
+      "longitude": -118.83862975,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TAYLOR RIVER",
+      "route": "4",
+      "direction": "Westbound",
+      "distance_from": "37.0KM WEST OF PORT ALBERNI",
+      "latitude": 49.29585797,
+      "longitude": -125.29949728,
+      "amenities": {
+        "toilets": 6,
+        "toilet_type": "Compost",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "KENNEDY RIVER",
+      "route": "4",
+      "direction": "Westbound",
+      "distance_from": "65.0KM WEST OF PORT ALBERNI",
+      "latitude": 49.15550735,
+      "longitude": -125.42139908,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "THUNDER RIVER",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "13.5KM NORTH OF BLUE RIVER",
+      "latitude": 52.2265999,
+      "longitude": -119.21533144,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MT TERRY FOX 5",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "5.0KM NORTH OF VALEMOUNT",
+      "latitude": 52.88550139,
+      "longitude": -119.31065021,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "FISH TRAP",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "50.5KM NORTH OF KAMLOOPS",
+      "latitude": 51.07592547,
+      "longitude": -120.20471793,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "BIRCH ISLAND",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "13.0KM NORTH OF CLEARWATER",
+      "latitude": 51.60969206,
+      "longitude": -119.91276584,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COQUIHALLA LAKES SB",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "70.0KM SOUTH OF MERRITT",
+      "latitude": 49.63292564,
+      "longitude": -121.01185154,
+      "amenities": {
+        "toilets": 5,
+        "toilet_type": "Flush",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BRITTON CREEK",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "67.0KM SOUTH OF MERRITT",
+      "latitude": 49.65253453,
+      "longitude": -121.00257541,
+      "amenities": {
+        "toilets": 12,
+        "toilet_type": "Flush",
+        "tables": 13,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "ZOPKIOS",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "78.0KM SOUTH OF MERRITT",
+      "latitude": 49.59554499,
+      "longitude": -121.10958956,
+      "amenities": {
+        "toilets": 12,
+        "toilet_type": "Flush",
+        "tables": 10,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "INKS LAKE BRAKE CHECK",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "56.9KM NORTH OF MERRITT",
+      "latitude": 50.54470475,
+      "longitude": -120.45714499,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LITTLE FORT",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "31.0KM SOUTH OF CLEARWATER",
+      "latitude": 51.42642154,
+      "longitude": -120.20398729,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "CLAPPERTON BRAKE CHECK",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "21.1KM NORTH OF MERRITT",
+      "latitude": 50.27369443,
+      "longitude": -120.62861232,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MESSITER SUMMIT",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "18.3KM NORTH OF AVOLA",
+      "latitude": 51.93352726,
+      "longitude": -119.33651844,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOX CANYON",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "71.0KM SOUTH OF MERRITT",
+      "latitude": 49.57685744,
+      "longitude": -121.17812324,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COQUIHALLA LAKES NB",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "70.0KM SOUTH OF MERRITT",
+      "latitude": 49.6293553,
+      "longitude": -121.01819871,
+      "amenities": {
+        "toilets": 5,
+        "toilet_type": "Flush",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "VINSULLA REST AREA",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "13.3 KM NORTH OF KAMLOOPS MUNICIPAL BOUNDARY",
+      "latitude": 50.97962164,
+      "longitude": -120.22974925,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CLAPPERTON CHAIN UP",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "5.1KM NORTH OF MERRITT",
+      "latitude": 50.15830041,
+      "longitude": -120.71364871,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WIRE CACHE",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "14.0KM SOUTH OF AVOLA",
+      "latitude": 51.68458016,
+      "longitude": -119.42175691,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Flush",
+        "tables": 11,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "CAMP CREEK WEST",
+      "route": "5",
+      "direction": "Southbound",
+      "distance_from": "10KM SOUTH OF VALEMOUNT",
+      "latitude": 52.74228904,
+      "longitude": -119.26627278,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CAMP CREEK EAST",
+      "route": "5",
+      "direction": "Northbound",
+      "distance_from": "10KM SOUTH OF VALEMOUNT",
+      "latitude": 52.74228904,
+      "longitude": -119.26627278,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LOST LAKE",
+      "route": "6",
+      "direction": "Eastbound",
+      "distance_from": "87.0KM EAST OF VERNON",
+      "latitude": 50.06265723,
+      "longitude": -118.48766038,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "STEWART CREEK",
+      "route": "6",
+      "direction": "Southbound",
+      "distance_from": "24.0KM SOUTH OF NELSON",
+      "latitude": 49.31258998,
+      "longitude": -117.23217569,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LEMON CREEK",
+      "route": "6",
+      "direction": "Southbound",
+      "distance_from": "7.2KM SOUTH OF SLOCAN",
+      "latitude": 49.70129506,
+      "longitude": -117.47993336,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SILVERTON LOOKOUT",
+      "route": "6",
+      "direction": "Southbound",
+      "distance_from": "10.3KM SOUTH OF NEW DENVER",
+      "latitude": 49.90010267,
+      "longitude": -117.38657529,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Chemical",
+        "tables": 3,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "FAUQUIER",
+      "route": "6",
+      "direction": "Westbound",
+      "distance_from": "FAUQUIER FERRY TERMINAL",
+      "latitude": 49.87173349,
+      "longitude": -118.08131243,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "NEEDLES",
+      "route": "6",
+      "direction": "Westbound",
+      "distance_from": "NEEDLES FERRY TERMINAL",
+      "latitude": 49.87400389,
+      "longitude": -118.09805716,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SUMMIT LAKE",
+      "route": "6",
+      "direction": "Northbound",
+      "distance_from": "18.0KM SOUTH OF NAKUSP",
+      "latitude": 50.14733903,
+      "longitude": -117.62985884,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "JOHNSON SLOUGH",
+      "route": "7",
+      "direction": "Westbound",
+      "distance_from": "17.0KM WEST OF HOPE",
+      "latitude": 49.32903803,
+      "longitude": -121.63793094,
+      "amenities": {
+        "toilets": 5,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SOMBRIO",
+      "route": "14",
+      "direction": "Eastbound",
+      "distance_from": "57.0KM WEST OF SOOKE",
+      "latitude": 48.51459789,
+      "longitude": -124.29333863,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BULKLEY VIEW",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "4.5 KM EAST OF TELKWA",
+      "latitude": 54.66828166,
+      "longitude": -126.99686259,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "GLACIER VIEW",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "7.0KM NORTH OF SMITHERS",
+      "latitude": 54.84919263,
+      "longitude": -127.22078727,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOULDER CREEK",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "52.8KM WEST OF HAZELTON",
+      "latitude": 55.07108933,
+      "longitude": -128.2042191,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "BAKER CREEK",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "22.3KM SOUTH OF MCBRIDE",
+      "latitude": 53.18171998,
+      "longitude": -119.9138792,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TETE JAUNE CACHE",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "1.0KM EAST OF TETE JAUNE JUNCTION",
+      "latitude": 52.97646437,
+      "longitude": -119.41580154,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MT TERRY FOX 16",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "6.5KM EAST OF TETE JAUNE JUNCTION",
+      "latitude": 52.98061363,
+      "longitude": -119.31978552,
+      "amenities": {
+        "toilets": 8,
+        "toilet_type": "Flush",
+        "tables": 10,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "DRY WILLIAM LAKE",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "47.5KM WEST OF VANDERHOOF",
+      "latitude": 54.06080569,
+      "longitude": -124.68386526,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SAVORY",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "82.1KM WEST OF VANDERHOOF",
+      "latitude": 54.09398566,
+      "longitude": -125.16796007,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CLUCULZ LAKE",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "34.1KM EAST OF VANDERHOOF",
+      "latitude": 53.90920571,
+      "longitude": -123.58687067,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Flush",
+        "tables": 10,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TINTAGEL",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "15.0KM EAST OF BURNS LAKE",
+      "latitude": 54.20522039,
+      "longitude": -125.6051861,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HUNGRY HILL",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "21.0KM WEST OF HOUSTON",
+      "latitude": 54.5352006,
+      "longitude": -126.77578686,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "PALLING",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "19.0KM WEST OF BURNS LAKE",
+      "latitude": 54.35641335,
+      "longitude": -125.91979232,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TOPLEY",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "2.0KM WEST OF TOPLEY",
+      "latitude": 54.51045786,
+      "longitude": -126.3139933,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SANDERSON POINT",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "30.0KM EAST OF TERRACE",
+      "latitude": 54.7147186,
+      "longitude": -128.3110478,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "EXSTEW",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "44.0KM WEST OF TERRACE",
+      "latitude": 54.40291921,
+      "longitude": -129.03269202,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TELEGRAPH POINT",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "88.5KM WEST OF TERRACE",
+      "latitude": 54.19184375,
+      "longitude": -129.65398932,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOWRON RIVER",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "51.4KM EAST OF PRINCE GEORGE",
+      "latitude": 53.89781872,
+      "longitude": -121.98993506,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SLIM CREEK",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "120.0KM EAST OF PRINCE GEORGE",
+      "latitude": 53.72632941,
+      "longitude": -121.1419629,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Flush",
+        "tables": 9,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SHERATON",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "29.0KM EAST OF BURNS LAKE",
+      "latitude": 54.15044692,
+      "longitude": -125.40909742,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HALIBUT BIGHT",
+      "route": "16",
+      "direction": "Northbound",
+      "distance_from": "50.0KM SOUTH OF PORT CLEMENTS",
+      "latitude": 53.45083578,
+      "longitude": -131.92155843,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BASALT CREEK",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "98.5KM WEST OF TERRACE",
+      "latitude": 54.22037794,
+      "longitude": -129.76720103,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOWRON NORTH REST AREA",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "49.5KM EAST OF PRINCE GEORGE",
+      "latitude": 53.89781872,
+      "longitude": -121.98993506,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOWRON SOUTH REST AREA",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "49.5KM EAST OF PRINCE GEORGE",
+      "latitude": 53.89931021,
+      "longitude": -122.00176901,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WILLOW RIVER",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "29.7KM EAST OF PRINCE GEORGE",
+      "latitude": 53.88699202,
+      "longitude": -122.28673094,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "GOAT RIVER",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "39.7KM NORTHWEST OF MCBRIDE",
+      "latitude": 53.4939483,
+      "longitude": -120.60679671,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SMALL RIVER",
+      "route": "16",
+      "direction": "Westbound",
+      "distance_from": "47.0KM EAST OF MCBRIDE",
+      "latitude": 53.0591009,
+      "longitude": -119.6156869,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SAVORY WEST",
+      "route": "16",
+      "direction": "Eastbound",
+      "distance_from": "82.2KM WEST OF VANDERHOOF",
+      "latitude": 54.09396683,
+      "longitude": -125.17140822,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "EVE RIVER",
+      "route": "19",
+      "direction": "Southbound",
+      "distance_from": "33.0KM NORTHWEST OF SAYWARD",
+      "latitude": 50.31727684,
+      "longitude": -126.23430835,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KETA LAKE",
+      "route": "19",
+      "direction": "Southbound",
+      "distance_from": "13.0KM NORTHWEST OF SAYWARD",
+      "latitude": 50.31583051,
+      "longitude": -126.02980643,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ROBERTS LAKE",
+      "route": "19",
+      "direction": "Northbound",
+      "distance_from": "32.0KM NORTH OF CAMPBELL RIVER",
+      "latitude": 50.22382356,
+      "longitude": -125.55091805,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Chemical",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HOOMAK LAKE",
+      "route": "19",
+      "direction": "Southbound",
+      "distance_from": "8.0 KM SOUTH OF WOSS CAMP",
+      "latitude": 50.20827064,
+      "longitude": -126.51950803,
+      "amenities": {
+        "toilets": 5,
+        "toilet_type": "Compost",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "EAGLES NEST",
+      "route": "19",
+      "direction": "Southbound",
+      "distance_from": "6.5KM NORTH OF WOSS CAMP",
+      "latitude": 50.2423171,
+      "longitude": -126.66129723,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MISTY LAKE",
+      "route": "19",
+      "direction": "Northbound",
+      "distance_from": "16.0KM NORTH OF PORT MCNEILL",
+      "latitude": 50.60476664,
+      "longitude": -127.27082511,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "NANOOSE",
+      "route": "19",
+      "direction": "Southbound",
+      "distance_from": "8.9KM NORTH OF NANAIMO",
+      "latitude": 49.25359123,
+      "longitude": -124.17182864,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Chemical",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BUCKLEY BAY",
+      "route": "19",
+      "direction": "Northbound",
+      "distance_from": "24.0KM SOUTH OF COURTENAY",
+      "latitude": 49.5260965,
+      "longitude": -124.8573638,
+      "amenities": {
+        "toilets": 9,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "POLYWOG",
+      "route": "20",
+      "direction": "Westbound",
+      "distance_from": "15.0KM EAST OF TATLA LAKE",
+      "latitude": 51.94125449,
+      "longitude": -124.46122463,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HANCEVILLE",
+      "route": "20",
+      "direction": "Eastbound",
+      "distance_from": "84.7KM WEST OF WILLIAMS LAKE",
+      "latitude": 51.93695691,
+      "longitude": -122.98756442,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SHEEP CREEK BRAKE CHECK",
+      "route": "20",
+      "direction": "Eastbound",
+      "distance_from": "32.8KM EAST OF WILLIAMS LAKE",
+      "latitude": 51.96635085,
+      "longitude": -122.33942081,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TWEEDSMUIR CHAIN OFF AREA WB",
+      "route": "20",
+      "direction": "Westbound",
+      "distance_from": "30.0KM WEST OF ANAHIM LAKE",
+      "latitude": 52.5410989,
+      "longitude": -125.66847615,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TWEEDSMUIR CHAIN OFF AREA EB",
+      "route": "20",
+      "direction": "Eastbound",
+      "distance_from": "30.0KM WEST OF ANAHIM LAKE",
+      "latitude": 52.5410989,
+      "longitude": -125.66847615,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "OASIS",
+      "route": "22",
+      "direction": "Southbound",
+      "distance_from": "5.9KM NORTH OF TRAIL",
+      "latitude": 49.14359243,
+      "longitude": -117.73866932,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SHELTER BAY",
+      "route": "23",
+      "direction": "Northbound",
+      "distance_from": "50 KM SOUTH OF REVELSTOKE @SHELTER BAY FERRY TERMINAL",
+      "latitude": 50.63600391,
+      "longitude": -117.92828843,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "GALENA BAY",
+      "route": "23",
+      "direction": "Southbound",
+      "distance_from": "50 KM NORTH OF NAKUSP @GALENA BAY FERRY TERMINAL",
+      "latitude": 50.62550495,
+      "longitude": -117.86507847,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "IONE",
+      "route": "23",
+      "direction": "Northbound",
+      "distance_from": "19.5KM NORTH OF NAKUSP",
+      "latitude": 50.40520867,
+      "longitude": -117.89317679,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Chemical",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MACDONALD",
+      "route": "24",
+      "direction": "Northbound",
+      "distance_from": "46.0KM WEST OF LITTLE FORT",
+      "latitude": 51.49874155,
+      "longitude": -120.59412796,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "#24 REST AREA",
+      "route": "24",
+      "direction": "Northbound",
+      "distance_from": "39KM FROM CLEARWATER MUNI BOUNDARY",
+      "latitude": 51.49114612,
+      "longitude": -120.30013857,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "JACK-OF-CLUBS",
+      "route": "26",
+      "direction": "Westbound",
+      "distance_from": "79.0KM EAST OF QUESNEL",
+      "latitude": 53.09042961,
+      "longitude": -121.5989982,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "FISH LAKE",
+      "route": "27",
+      "direction": "Northbound",
+      "distance_from": "27.715KM SOUTH OF FORT ST JAMES",
+      "latitude": 54.22959623,
+      "longitude": -124.23369743,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BIG DEN",
+      "route": "28",
+      "direction": "Westbound",
+      "distance_from": "58.0KM WEST OF CAMPBELL RIVER",
+      "latitude": 49.88176719,
+      "longitude": -125.68560517,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Chemical",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "PEACEVIEW",
+      "route": "29",
+      "direction": "Eastbound",
+      "distance_from": "47.5KM EAST OF HUDSON'S HOPE",
+      "latitude": 56.24083998,
+      "longitude": -121.40408816,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "DEL NORTH REST AREA",
+      "route": "29",
+      "direction": "Northbound",
+      "distance_from": "43.9KM SOUTH OF CHETWYND",
+      "latitude": 55.3704675,
+      "longitude": -121.41468663,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "RHONE",
+      "route": "33",
+      "direction": "Southbound",
+      "distance_from": "19.5KM NORTH OF ROCK CREEK",
+      "latitude": 49.21499762,
+      "longitude": -119.01170571,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HALL CREEK",
+      "route": "33",
+      "direction": "Southbound",
+      "distance_from": "62.5KM NORTH OF ROCK CREEK",
+      "latitude": 49.53549814,
+      "longitude": -119.0776158,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BELL 1",
+      "route": "37",
+      "direction": "Northbound",
+      "distance_from": "51.0KM NORTH OF MEZIADIN LAKE JUNCTION",
+      "latitude": 56.32786693,
+      "longitude": -129.2998048,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "NASS",
+      "route": "37",
+      "direction": "Northbound",
+      "distance_from": "145KM NORTH OF KITWANGA",
+      "latitude": 56.03356799,
+      "longitude": -129.15164771,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MOONLIT CREEK",
+      "route": "37",
+      "direction": "Northbound",
+      "distance_from": "24.0KM NORTH OF KITWANGA",
+      "latitude": 55.32528177,
+      "longitude": -128.08998895,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MORCHUEA LAKE",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "17.0KM NORTH OF ISKUT",
+      "latitude": 57.96971462,
+      "longitude": -130.07470086,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "EDDONTENAJON NORTH",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "7.0KM SOUTH OF ISKUT",
+      "latitude": 57.76419503,
+      "longitude": -129.96874069,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "EASTMAN CREEK",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "192.0KM NORTH OF MEZIADIN LAKE JUNCTION",
+      "latitude": 57.38010413,
+      "longitude": -130.24526793,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOB QUINN AIRSTRIP",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "144.0KM NORTH OF MEZIADIN LAKE JUNCTION",
+      "latitude": 56.96760079,
+      "longitude": -130.24821357,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "RED FLATS MEMORIAL",
+      "route": "37",
+      "direction": "Northbound",
+      "distance_from": "350.0KM NORTH OF TERRACE",
+      "latitude": 56.77914635,
+      "longitude": -129.95215072,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MEHAN (HODDER) LAKE",
+      "route": "37",
+      "direction": "Northbound",
+      "distance_from": "117.0KM NORTH OF MEZIADIN LAKE JUNCTION",
+      "latitude": 56.72595042,
+      "longitude": -129.78072738,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "RABID GRIZZLY",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "30.0KM NORTH OF DEASE LAKE",
+      "latitude": 58.68146579,
+      "longitude": -130.04823325,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COTTONWOOD NORTH",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "83.0KM NORTH OF DEASE LAKE",
+      "latitude": 59.12238958,
+      "longitude": -129.81975318,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "COTTONWOOD SOUTH",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "83.0KM NORTH OF DEASE LAKE",
+      "latitude": 59.12161777,
+      "longitude": -129.81808294,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BORDER",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "BC/YUKON BORDER",
+      "latitude": 59.99852386,
+      "longitude": -129.05360283,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BEAVERDAM CREEK",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "38.0KM NORTH OF CASSIAR JUNCTION",
+      "latitude": 59.44852944,
+      "longitude": -129.21719682,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BROWN BEAR",
+      "route": "37",
+      "direction": "Southbound",
+      "distance_from": "125 KM NORTH OF KITWANGA",
+      "latitude": 55.90161029,
+      "longitude": -129.02399093,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TBD",
+      "route": "37",
+      "direction": "Westbound",
+      "distance_from": "53 KM EAST OF TELEGRAPH CREEK",
+      "latitude": 58.1667729,
+      "longitude": -130.71642926,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SALT FLATS REST AREA",
+      "route": "52",
+      "direction": "Southbound",
+      "distance_from": "62KM FROM DAWSON CREEK",
+      "latitude": 55.46321115,
+      "longitude": -120.8184302,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "FORT NELSON RIVER",
+      "route": "77",
+      "direction": "Southbound",
+      "distance_from": "42.0KM NORTH OF FORT NELSON",
+      "latitude": 59.23248112,
+      "longitude": -123.2510535,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ELKO JUNCTION",
+      "route": "93",
+      "direction": "Eastbound",
+      "distance_from": "94 M SOUTH OF ELKO JUNCTION",
+      "latitude": 49.29292853,
+      "longitude": -115.12573655,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BRAISHER CREEK",
+      "route": "95",
+      "direction": "Northbound",
+      "distance_from": "30 KM SOUTH OF GOLDEN",
+      "latitude": 51.11141624,
+      "longitude": -116.71343086,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SPILLIMACHEEN",
+      "route": "95",
+      "direction": "Southbound",
+      "distance_from": "71 KM SOUTH OF GOLDEN",
+      "latitude": 50.86677958,
+      "longitude": -116.32228394,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "COYS HILL",
+      "route": "95",
+      "direction": "Northbound",
+      "distance_from": "10 KM SOUTH OF FAIRMONT HOT SPRINGS",
+      "latitude": 50.26531476,
+      "longitude": -115.88490629,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Flush",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CAMPBELL-MYER LAKE",
+      "route": "95",
+      "direction": "Northbound",
+      "distance_from": "9.7KM NORTH OF FORT STEELE JUNCTION",
+      "latitude": 49.64813169,
+      "longitude": -115.64798126,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WASA",
+      "route": "95",
+      "direction": "Northbound",
+      "distance_from": "29.0KM NORTH OF KIMBERLY",
+      "latitude": 49.82171238,
+      "longitude": -115.75920842,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 5,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "CROOKED RIVER",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "116.0KM NORTH OF PRINCE GEORGE",
+      "latitude": 54.78757195,
+      "longitude": -122.82842403,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "108 MILE",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "12.8KM NORTH OF 100 MILE HOUSE",
+      "latitude": 51.75083346,
+      "longitude": -121.34621606,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BIG BAR",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "9.8KM NORTH OF CLINTON",
+      "latitude": 51.14764577,
+      "longitude": -121.50219657,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WOODPECKER",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "65.3KM NORTH OF QUESNEL",
+      "latitude": 53.49436241,
+      "longitude": -122.63940472,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HUSH LAKE",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "24.2KM NORTH OF QUESNEL",
+      "latitude": 53.15476035,
+      "longitude": -122.36030948,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MCLEESE LAKE",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "75.9KM SOUTH OF QUESNEL",
+      "latitude": 52.4260163,
+      "longitude": -122.30292766,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 8,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SOUTH TAYLOR HILL",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "60.0KM NORTH OF DAWSON CREEK",
+      "latitude": 56.09429691,
+      "longitude": -120.64353492,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "EAST PINE",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "71.2KM WEST OF DAWSON CREEK",
+      "latitude": 55.73132219,
+      "longitude": -121.17366743,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WEST PINE RIVER",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "71.8KM SOUTH OF CHETWYND",
+      "latitude": 55.50094766,
+      "longitude": -122.58494728,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MILE 80",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "60.0KM NORTH OF FORT ST JOHN",
+      "latitude": 56.56217606,
+      "longitude": -121.38455358,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Flush",
+        "tables": 7,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LOCH LOMAN",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "37.0KM SOUTH OF 100 MILE HOUSE",
+      "latitude": 51.3334579,
+      "longitude": -121.38299345,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MARGUERITE REST AREA",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "57 KM SOUTH OF QUESNEL",
+      "latitude": 52.52330233,
+      "longitude": -122.43826022,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "POWERLINE REST AREA",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "97 KM SOUTH OF QUESNEL",
+      "latitude": 52.30306318,
+      "longitude": -122.20458044,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "UNA",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "8.0KM SOUTH OF FALKLAND",
+      "latitude": 50.45168447,
+      "longitude": -119.4475802,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KISKATINAW",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "40KM NORTH OF DAWSON CREEK",
+      "latitude": 55.95970422,
+      "longitude": -120.61326102,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KALAMALKA LAKE",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "2 KM SOUTH OF VERNON",
+      "latitude": 50.22141173,
+      "longitude": -119.28853153,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WELCOME TO WILLIAMS LAKE",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "2.792KM S OF WILLIAMS LAKE",
+      "latitude": 52.11829019,
+      "longitude": -122.04756983,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "AUSTRALIAN",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "36.2KM SOUTH OF QUESNEL",
+      "latitude": 52.71006342,
+      "longitude": -122.45654245,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Other",
+        "tables": 10,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SOUTH TAYLOR HILL REST AREA",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "5KM SOUTH OF TAYLOR",
+      "latitude": 56.08208793,
+      "longitude": -120.64228217,
+      "amenities": {
+        "toilets": 4,
+        "toilet_type": "Flush",
+        "tables": null,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "FORT NELSON CVSE SCALES",
+      "route": "97",
+      "direction": "Southbound",
+      "distance_from": "8.1KM SOUTH OF FORT NELSON",
+      "latitude": 58.74803061,
+      "longitude": -122.67786852,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "SALMON VALLEY",
+      "route": "97",
+      "direction": "Northbound",
+      "distance_from": "27.68KM NORTH OF PRINCE GEORGE",
+      "latitude": 54.25333663,
+      "longitude": -122.62116001,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "GRANISLE",
+      "route": "118",
+      "direction": "Northbound",
+      "distance_from": "31.0KM NORTH OF TOPLEY",
+      "latitude": 54.75148051,
+      "longitude": -126.18680187,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BAYNES SOUND",
+      "route": "19A",
+      "direction": "Northbound",
+      "distance_from": "21.5KM SOUTH OF COURTENAY",
+      "latitude": 49.5487215,
+      "longitude": -124.86801039,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 6,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "OYSTER BAY",
+      "route": "19A",
+      "direction": "Northbound",
+      "distance_from": "8.0KM SOUTH OF CAMPBELL RIVER",
+      "latitude": 49.89509148,
+      "longitude": -125.14553856,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 11,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "FISH LAKE",
+      "route": "31A",
+      "direction": "Westbound",
+      "distance_from": "17.0KM EAST OF NEW DENVER",
+      "latitude": 50.04605018,
+      "longitude": -117.18024381,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Chemical",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BEAR GLACIER",
+      "route": "37A",
+      "direction": "Eastbound",
+      "distance_from": "35KM EAST OF STEWART",
+      "latitude": 56.10744998,
+      "longitude": -129.67360897,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WINDY HILL CHAINUP",
+      "route": "37A",
+      "direction": "Westbound",
+      "distance_from": "48KM EAST OF STEWART",
+      "latitude": 56.0923664,
+      "longitude": -129.47929126,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BRILLIANT",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "2.8KM EAST OF BRILLIANT BRIDGE",
+      "latitude": 49.33695435,
+      "longitude": -117.60267045,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BALFOUR",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "BALFOUR FERRY TERMINAL",
+      "latitude": 49.62479858,
+      "longitude": -116.95941056,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Flush",
+        "tables": 6,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KOOTENAY BAY",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "KOOTENAY BAY FERRY LANDING",
+      "latitude": 49.67532057,
+      "longitude": -116.87262885,
+      "amenities": {
+        "toilets": 3,
+        "toilet_type": "Flush",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "KUSKANOOK",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "54.0KM SOUTH OF KOOTENAY BAY",
+      "latitude": 49.30039448,
+      "longitude": -116.66170026,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "TWIN BAYS",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "48.0KM SOUTH OF KOOTENAY BAY",
+      "latitude": 49.34114913,
+      "longitude": -116.72045776,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "YELLOW LAKE #2",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "19.3KM NORTHEAST OF KEREMEOS",
+      "latitude": 49.34135187,
+      "longitude": -119.74133041,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "YELLOW LAKE #1",
+      "route": "3A",
+      "direction": "Eastbound",
+      "distance_from": "17.0KM NORTHEAST OF KEREMEOS",
+      "latitude": 49.33515714,
+      "longitude": -119.76703663,
+      "amenities": {
+        "toilets": 5,
+        "toilet_type": "Flush",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "STUMP LAKE",
+      "route": "5A",
+      "direction": "Northbound",
+      "distance_from": "51.3KM NORTH OF MERRITT",
+      "latitude": 50.36270259,
+      "longitude": -120.38231303,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "NICOLA LAKE",
+      "route": "5A",
+      "direction": "Southbound",
+      "distance_from": "13.0KM EAST OF MERRITT",
+      "latitude": 50.15294326,
+      "longitude": -120.60891387,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 5,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "GULLIFORD LAKE",
+      "route": "5A",
+      "direction": "Southbound",
+      "distance_from": "52.0KM SOUTH OF MERRITT",
+      "latitude": 49.7472103,
+      "longitude": -120.62931907,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "KNUTSFORD BRAKE CHECK",
+      "route": "5A",
+      "direction": "Northbound",
+      "distance_from": "81.0KM NORTH OF MERRITT",
+      "latitude": 50.6064024,
+      "longitude": -120.31174919,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "CHERRY CREEK",
+      "route": "95A",
+      "direction": "Southbound",
+      "distance_from": "12.0KM NORTHEAST OF KIMBERLY",
+      "latitude": 49.69336698,
+      "longitude": -115.82988901,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MARA LAKE",
+      "route": "97A",
+      "direction": "Southbound",
+      "distance_from": "10.0KM SOUTH OF SICAMOUS",
+      "latitude": 50.7752988,
+      "longitude": -119.0046776,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "ELKHART (LOON LAKE) BRAKE CHECK",
+      "route": "97C",
+      "direction": "Westbound",
+      "distance_from": "47.5KM EAST OF MERRITT",
+      "latitude": 49.89493479,
+      "longitude": -120.34973741,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LOON LAKE CHAINUP",
+      "route": "97C",
+      "direction": "Eastbound",
+      "distance_from": "LOON LAKE CHAINUP; 37KM EAST OF MERRITT",
+      "latitude": 49.89452517,
+      "longitude": -120.48268467,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "HAMILTON BRAKE CHECK",
+      "route": "97C",
+      "direction": "Westbound",
+      "distance_from": "10.0KM EAST OF MERRITT",
+      "latitude": 50.07882222,
+      "longitude": -120.67192266,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "LOON LAKE REST AREA",
+      "route": "97C",
+      "direction": "Southbound",
+      "distance_from": "42.6KM SOUTH OF MERRITT",
+      "latitude": 49.88365594,
+      "longitude": -120.46511647,
+      "amenities": {
+        "toilets": 8,
+        "toilet_type": "Flush",
+        "tables": 9,
+        "wheelchair": true,
+        "wifi": true,
+        "ev_charging": true
+      }
+    },
+    {
+      "name": "WALLOPER REST AREA",
+      "route": "97D",
+      "direction": "Eastbound",
+      "distance_from": "18.7KM EAST OF LOGAN LAKE",
+      "latitude": 50.48684115,
+      "longitude": -120.5489969,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "HITCHCOCK",
+      "route": "N",
+      "direction": "Northbound",
+      "distance_from": "ATLIN HIGHWAY; 40.5KM NORTH OF ATLIN",
+      "latitude": 59.9059188,
+      "longitude": -133.80385415,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "WINDY POINT",
+      "route": "N",
+      "direction": "Eastbound",
+      "distance_from": "TELEGRAPH CREEK ROAD; 25.0KM EAST OF TELEGRAPH CREEK",
+      "latitude": 58.02066286,
+      "longitude": -130.94433796,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 3,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "PINCHI",
+      "route": "N",
+      "direction": "Northbound",
+      "distance_from": "GERMANSEN LANDING ROAD; 26.0KM NORTH OF FORT ST JAMES",
+      "latitude": 54.60092031,
+      "longitude": -124.13715129,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "MOOSE SPRINGS",
+      "route": "N",
+      "direction": "Westbound",
+      "distance_from": "64KM NORTH OF QUESNEL; NAZKO HIGHWAY",
+      "latitude": 53.0077044,
+      "longitude": -123.21418033,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 0,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "GRASSY BAY",
+      "route": "N",
+      "direction": "Westbound",
+      "distance_from": "ALLIFORD BAY ROAD; 7KM WEST OF SANDSPIT",
+      "latitude": 53.23765483,
+      "longitude": -131.91384442,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 4,
+        "wheelchair": true,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "INGHAM",
+      "route": "N",
+      "direction": "Eastbound",
+      "distance_from": "19.0KM EAST OF FERNIE",
+      "latitude": 49.64617319,
+      "longitude": -114.91234874,
+      "amenities": {
+        "toilets": 2,
+        "toilet_type": "Pit",
+        "tables": 2,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    },
+    {
+      "name": "BOWRON LAKE",
+      "route": "N",
+      "direction": "Southbound",
+      "distance_from": "BOWRON LAKE ROAD; 13.2KM NORTH OF BARKERVILLE",
+      "latitude": 53.1660253,
+      "longitude": -121.48110145,
+      "amenities": {
+        "toilets": 1,
+        "toilet_type": "Pit",
+        "tables": 1,
+        "wheelchair": false,
+        "wifi": false,
+        "ev_charging": false
+      }
+    }
+  ]
+}
