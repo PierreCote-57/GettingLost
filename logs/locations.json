@@ -51,5 +51,15 @@
       "lng": -125.1282272,
       "pin": "campground"
     }
+  },
+  {
+    "id": "oyster-bay-rest-area",
+    "name": "Oyster Bay Rest Area",
+    "address": "Highway 19A, 8 km south of Campbell River, BC",
+    "location": {
+      "lat": 49.89509148,
+      "lng": -125.14553856,
+      "pin": "picnic"
+    }
   }
 ]

@@ -22,5 +22,17 @@
     "datetime": "2026-06-28T13:00:00-08:00",
     "location_id": "indoor-storage",
     "id": "travel-0004"
+  },
+  {
+    "name": "To Oyster Bay",
+    "datetime": "2026-07-05T11:00:00-08:00",
+    "location_id": "oyster-bay-rest-area",
+    "id": "travel-0005"
+  },
+  {
+    "name": "Return to indoor storage",
+    "datetime": "2026-07-06T08:15:00-08:00",
+    "location_id": "indoor-storage",
+    "id": "travel-0006"
   }
 ]
