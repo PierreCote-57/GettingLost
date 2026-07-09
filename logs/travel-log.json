@@ -1,24 +1,24 @@
 [
   {
-    "event": "Delivery of van",
+    "name": "Delivery of van",
     "datetime": "2026-06-18T13:00:00-08:00",
     "location_id": "peden-rv",
     "id": "travel-0001"
   },
   {
-    "event": "Van moved to indoor storage",
+    "name": "Van moved to indoor storage",
     "datetime": "2026-06-22T08:15:00-08:00",
     "location_id": "indoor-storage",
-    "id": "travel-0002"
+	  "id": "travel-0002"
   },
   {
-    "event": "Arrived at Salmon Point Resort",
+    "name": "Arrived at Salmon Point Resort",
     "datetime": "2026-06-26T18:00:00-08:00",
     "location_id": "salmon-point-resort",
     "id": "travel-0003"
   },
   {
-    "event": "Van returned to indoor storage",
+    "name": "Van returned to indoor storage",
     "datetime": "2026-06-28T13:00:00-08:00",
     "location_id": "indoor-storage",
     "id": "travel-0004"
