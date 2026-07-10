@@ -1,42 +1,46 @@
 {
-  "title": "Echo Lake",
-  "featuredImage": "IMG_0510.jpg",
-  "excerpt": "Beautiful fishing and picnic lake near Campbell River. Great first fishing trip for children and testing gear.",
-  "tags": ["fishing", "picnic"],
-  "published": true,
-  "location": {
-    "lat": 49.9864,
-    "lng": -125.4084,
-    "pin": "lake"
-  },
-  "recSites": [
-    {
-      "name": "Echo Lake Day Use",
-      "recId": null,
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Day-use page",
-          "file": "echo-lake-dayuse.html"
-        }
-      ]
-    }
-  ],
-  "fishingReferences": {
-    "bcIdentifier": "00126CAMB",
-    "areaKm2": 0.23,
-    "lakeChartList": [
-      {
-        "name": "BC Bathymetric",
-        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00058601.pdf"
-      }
-    ],
-    "stockingName": "ECHO"
-  },
-  "notes": [
-    {
-      "sectionName": "Further readings",
-      "list": []
-    }
-  ]
+	"title": "Echo Lake",
+	"featuredImage": "IMG_0510.jpg",
+	"excerpt": "Beautiful fishing and picnic lake near Campbell River. Great first fishing trip for children and testing gear.",
+	"tags": [
+		"fishing",
+		"picnic"
+	],
+	"published": true,
+	"location": {
+		"lat": 49.9864,
+		"lng": -125.4084,
+		"pin": "lake",
+		"Zoom": 14
+	},
+	"recSites": [
+		{
+			"name": "Echo Lake Day Use",
+			"recId": null,
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Day-use page",
+					"file": "echo-lake-dayuse.html"
+				}
+			]
+		}
+	],
+	"fishingReferences": {
+		"bcIdentifier": "00126CAMB",
+		"areaKm2": 0.23,
+		"lakeChartList": [
+			{
+				"name": "BC Bathymetric",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00058601.pdf"
+			}
+		],
+		"stockingName": "ECHO"
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": []
+		}
+	]
 }
