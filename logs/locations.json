@@ -58,8 +58,8 @@
     "address": "Highway 19A, 8 km south of Campbell River, BC",
     "url": "https://www.drivebc.ca/?pan=-125.1535983%2C49.9079064&zoom=9&type=restStop&id=426",
     "location": {
-      "lat": 49.89509148,
-      "lng": -125.14553856,
+      "lat": 49.895435,
+      "lng": -125.147474,
       "pin": "outhouse"
     }
   },
