@@ -34,17 +34,18 @@ showing the plan and waiting.
 
 If in doubt about whether I'm authorized to change something: **ask, don't act.**
 
-## 3. Log entries auto-commit. (scoped exception to rules 1 & 2)
+## 3. Log entries: phone auto-commits, computer defers to Pierre. (scoped exception to rules 1 & 2)
 
-When Pierre adds or updates a **log entry under `logs/`** (e.g. `logs/fuel-log.json`),
-commit it and push to the working branch **automatically — no confirmation step**.
-This is standing authorization for that one case: log change → `git add` → commit →
-`git push`, done.
+Changes under `logs/` (e.g. `logs/fuel-log.json`) follow a device split:
 
-- Applies **only** to changes under `logs/`. Everything outside `logs/` still follows
-  rules 1 and 2 (find ≠ fix, plan before acting, confirm before pushing).
-- This is intentional so a quick voice-dictated log entry on the phone persists to
-  GitHub without extra taps.
+- **On the phone:** when Pierre adds/updates a log entry, Claude does the whole thing
+  automatically — `git add` → commit → `git push` to `main`, no confirmation step. Standing
+  authorization so a voice-dictated entry persists to GitHub without extra taps.
+- **On the computer:** Claude makes/edits the `logs/` entry and **STOPS**. Pierre pushes.
+
+Applies **only** to changes under `logs/`. Everything outside `logs/` still follows rules 1
+and 2 (find ≠ fix, plan before acting, confirm before pushing). Detect device from the
+runtime environment (computer = local shell + filesystem present).
 
 ---
 See the memory `feedback-working-style` for the fuller collaboration notes
