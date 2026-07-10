@@ -1,9 +1,14 @@
 {
-  "title": "First try",
-  "excerpt": "My excerpt: First actual camping trip, not too far, no forestry road, with shore power = baby steps.",
-  "featuredImage": null,
-  "date": "2026-06-26T09:00:00",
-  "published": true,
-  "categories": [],
-  "tags": []
+	"title": "First try",
+	"excerpt": "My excerpt: First actual camping trip, not too far, no forestry road, with shore power = baby steps.",
+	"featuredImage": "RVIcon.png",
+	"date": "2026-06-26T09:00:00",
+	"published": true,
+	"categories": [],
+	"tags": [],
+	"location": {
+		"lat": 49.9812,
+		"lng": -125.5033,
+		"pin": "lake"
+	}
 }
