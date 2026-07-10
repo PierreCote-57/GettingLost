@@ -1,13 +1,13 @@
 [
   {
-    "id": "fuel-0001",
-    "note": "Starting point — full tank baseline.",
-    "date": "2026-07-05",
+    "name": "Starting point — full tank baseline.",
+    "datetime": "2026-07-05T17:00:00-08:00",
     "odometer_km": 641,
     "liters": null,
     "price_per_liter_cad": null,
     "total_cost_cad": null,
-    "location": null,
-    "fullTank": true
+    "location": { "name": "Shell station", "lat": 49.966569, "lng": -125.209436 },
+    "fullTank": true,
+    "id": "fuel-0001"
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
-    "id": "indoor-storage",
     "name": "Indoor Storage Solutions",
+    "id": "indoor-storage",
     "address": "1474 Ironwood Street, Campbell River, BC V9W 5T5",
     "url": "https://www.indoorstoragesolutions.ca",
     "location": {
@@ -11,8 +11,8 @@
     }
   },
   {
-    "id": "peden-rv",
     "name": "Peden RV",
+    "id": "peden-rv",
     "address": "10049 Galaran Road, Sidney, BC V8L 5X3",
     "url": "https://www.pedenrv.com",
     "location": {
@@ -21,8 +21,8 @@
     }
   },
   {
-    "id": "steve-marshall-ford",
     "name": "Steve Marshall Ford",
+    "id": "steve-marshall-ford",
     "address": "2300 N Island Hwy, Campbell River, BC V9W 2G8",
     "url": "https://www.stevemarshallfordcampbellriver.com",
     "location": {
@@ -31,8 +31,8 @@
     }
   },
   {
-    "id": "campbell-river-rv",
     "name": "Campbell River RV",
+    "id": "campbell-river-rv",
     "address": "1632 Coulter Road, Campbell River, BC V9W 7M1",
     "url": "https://www.campbellriverrv.com",
     "location": {
@@ -41,11 +41,11 @@
     }
   },
   {
-    "id": "salmon-point-resort",
     "name": "Salmon Point Resort",
+    "id": "salmon-point-resort",
     "address": "2176 Salmon Point Road, Campbell River, BC V9H 1E5",
     "url": "https://salmonpoint.com",
-    "destination": "salmon-point-resort.html",
+    "destination_id": "salmon-point-resort.html",
     "location": {
       "lat": 49.889183,
       "lng": -125.1282272,
@@ -53,13 +53,25 @@
     }
   },
   {
-    "id": "oyster-bay-rest-area",
     "name": "Oyster Bay Rest Area",
+    "id": "oyster-bay-rest-area",
     "address": "Highway 19A, 8 km south of Campbell River, BC",
+    "url": "https://www.drivebc.ca/?pan=-125.1535983%2C49.9079064&zoom=9&type=restStop&id=426",
     "location": {
       "lat": 49.89509148,
       "lng": -125.14553856,
       "pin": "picnic"
+    }
+  },
+  {
+    "name": "Tyee Spit",
+    "id": "tyee-spit",
+    "address": "Spit Road, Campbell River, BC",
+    "url": "https://www.campbellriver.ca/discover-campbell-river/points-of-interest/tyee-spit",
+    "location": {
+      "lat": 50.046944,
+      "lng": -125.253889,
+      "pin": "park"
     }
   }
 ]

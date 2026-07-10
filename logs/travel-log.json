@@ -1,38 +1,39 @@
 [
   {
-    "name": "Delivery of van",
-    "datetime": "2026-06-18T13:00:00-08:00",
-    "location_id": "peden-rv",
-    "id": "travel-0001"
+    "name": "Van delivered from Peden RV",
+    "arrival":   "2026-06-18T10:00:00-08:00",
+    "departure": "2026-06-18T19:00:00-08:00",
+    "location": { "location_id": "peden-rv" },
+    "id": "stop-0001"
   },
   {
-    "name": "Van moved to indoor storage",
-    "datetime": "2026-06-22T08:15:00-08:00",
-    "location_id": "indoor-storage",
-	  "id": "travel-0002"
+    "name": "Learning the van",
+    "arrival": "2026-06-20T11:00:00-08:00",
+    "departure": "2026-06-20T14:00:00-08:00",
+    "location": { "location_id": "tyee-spit" },
+    "id": "stop-0007"
   },
   {
-    "name": "Arrived at Salmon Point Resort",
-    "datetime": "2026-06-26T18:00:00-08:00",
-    "location_id": "salmon-point-resort",
-    "id": "travel-0003"
+    "name": "Stay at Salmon Point Resort",
+    "arrival": "2026-06-26T18:00:00-08:00",
+    "departure": "2026-06-29T10:00:00-08:00",
+    "location": { "location_id": "salmon-point-resort" },
+    "post_id": "first-try.html",
+    "id": "stop-0003"
   },
   {
-    "name": "Van returned to indoor storage",
-    "datetime": "2026-06-28T13:00:00-08:00",
-    "location_id": "indoor-storage",
-    "id": "travel-0004"
+    "name": "Learning the van",
+    "arrival": "2026-07-04T11:00:00-08:00",
+    "departure": "2026-07-04T14:00:00-08:00",
+    "location": { "location_id": "tyee-spit" },
+    "id": "stop-0008"
   },
   {
-    "name": "To Oyster Bay",
-    "datetime": "2026-07-05T11:00:00-08:00",
-    "location_id": "oyster-bay-rest-area",
-    "id": "travel-0005"
-  },
-  {
-    "name": "Return to indoor storage",
-    "datetime": "2026-07-05T17:08:00-08:00",
-    "location_id": "indoor-storage",
-    "id": "travel-0006"
+    "name": "Picnic at Oyster Bay rest area",
+    "arrival": "2026-07-05T11:00:00-08:00",
+    "departure": "2026-07-05T17:00:00-08:00",
+    "location": { "location_id": "oyster-bay-rest-area" },
+    "post_id": null,
+    "id": "stop-0005"
   }
 ]
