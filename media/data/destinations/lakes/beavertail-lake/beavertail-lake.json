@@ -76,13 +76,8 @@
 			"name": "Photos",
 			"items": [
 				{
-					"id": "img_0869-rotated",
-					"img": "IMG_0869-rotated.jpg",
-					"label": ""
-				},
-				{
-					"id": "img_0870-rotated",
-					"img": "IMG_0870-rotated.jpg",
+					"id": "img_0873",
+					"img": "IMG_0873.jpg",
 					"label": ""
 				},
 				{
@@ -91,13 +86,8 @@
 					"label": ""
 				},
 				{
-					"id": "img_0872-rotated",
-					"img": "IMG_0872-rotated.jpg",
-					"label": ""
-				},
-				{
-					"id": "img_0873",
-					"img": "IMG_0873.jpg",
+					"id": "img_0870-rotated",
+					"img": "IMG_0870-rotated.jpg",
 					"label": ""
 				},
 				{
