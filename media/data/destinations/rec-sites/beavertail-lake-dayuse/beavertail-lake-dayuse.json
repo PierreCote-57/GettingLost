@@ -95,12 +95,12 @@
 				{
 					"id": "img_0870-rotated",
 					"img": "IMG_0870-rotated.jpg",
-					"label": ""
+					"label": "Path to fishing dock"
 				},
 				{
 					"id": "img_0871",
 					"img": "IMG_0871.jpg",
-					"label": ""
+					"label": "Boat ramp"
 				},
 				{
 					"id": "img_0872-rotated",
@@ -110,22 +110,22 @@
 				{
 					"id": "img_0873",
 					"img": "IMG_0873.jpg",
-					"label": ""
+					"label": "Boat ramp and fishing dock"
 				},
 				{
 					"id": "img_0874",
 					"img": "IMG_0874.jpg",
-					"label": ""
+					"label": "Fishing dock (under construction in June '21)"
 				},
 				{
 					"id": "img_0875",
 					"img": "IMG_0875.jpg",
-					"label": ""
+					"label": "Boat ramp from fishing dock"
 				},
 				{
 					"id": "img_0876",
 					"img": "IMG_0876.jpg",
-					"label": ""
+					"label": "Logs underwater"
 				}
 			]
 		}
