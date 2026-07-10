@@ -1,53 +1,133 @@
 {
-  "title": "Beavertail Lake Day Use",
-  "featuredImage": "IMG_0866.jpg",
-  "excerpt": "Under construction",
-  "tags": ["fishing", "picnic"],
-  "published": true,
-  "location": {
-    "lat": 49.97964,
-    "lng": -125.50546,
-    "pin": "picnic",
-    "zoom": 14
-  },
-  "campground": {
-    "website": "",
-    "siteMap": "",
-    "reservation": ""
-  },
-  "notes": [
-    {
-      "sectionName": "Further readings",
-      "list": [
-        {
-          "name": "Campbell River Fish & Wildlife Association",
-          "url": "https://crfishandwildlifeclub.ca",
-          "description": [
-            "Working to serve our community in all aspects of fish and wildlife conservation and outdoor activities."
-          ]
-        }
-      ]
-    }
-  ],
-  "photoGalleries": {
-    "photos": {
-      "name": "Photos",
-      "items": [
-        { "id": "img_0863", "img": "IMG_0863.jpg", "label": "" },
-        { "id": "img_0864", "img": "IMG_0864.jpg", "label": "" },
-        { "id": "img_0865", "img": "IMG_0865.jpg", "label": "" },
-        { "id": "img_0866", "img": "IMG_0866.jpg", "label": "" },
-        { "id": "img_0867", "img": "IMG_0867.jpg", "label": "" },
-        { "id": "img_0868-rotated", "img": "IMG_0868-rotated.jpg", "label": "" },
-        { "id": "img_0869-rotated", "img": "IMG_0869-rotated.jpg", "label": "" },
-        { "id": "img_0870-rotated", "img": "IMG_0870-rotated.jpg", "label": "" },
-        { "id": "img_0871", "img": "IMG_0871.jpg", "label": "" },
-        { "id": "img_0872-rotated", "img": "IMG_0872-rotated.jpg", "label": "" },
-        { "id": "img_0873", "img": "IMG_0873.jpg", "label": "" },
-        { "id": "img_0874", "img": "IMG_0874.jpg", "label": "" },
-        { "id": "img_0875", "img": "IMG_0875.jpg", "label": "" },
-        { "id": "img_0876", "img": "IMG_0876.jpg", "label": "" }
-      ]
-    }
-  }
+	"title": "Beavertail Lake Day Use",
+	"featuredImage": "IMG_0866.jpg",
+	"excerpt": "Under construction",
+	"tags": [
+		"fishing",
+		"picnic"
+	],
+	"published": true,
+	"location": {
+		"lat": 49.97964,
+		"lng": -125.50546,
+		"pin": "picnic",
+		"zoom": 14
+	},
+	"campground": {
+		"website": "",
+		"siteMap": "",
+		"reservation": ""
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Campbell River Fish & Wildlife Association",
+					"url": "https://crfishandwildlifeclub.ca",
+					"description": [
+						"Working to serve our community in all aspects of fish and wildlife conservation and outdoor activities."
+					]
+				},
+				{
+					"name": "New docks make fishing access easier",
+					"url": "https://www.gofishbc.com/news/news/new-docks-make-fishing-access-easier/",
+					"description": [
+						"Go Fish BC on the new fishing docks — Beavertail's dock was built in 2023."
+					]
+				},
+				{
+					"name": "New kokanee fisheries on Vancouver Island",
+					"url": "https://www.gofishbc.com/learn/fishing-tips/lake-fishing/new-kokanee-fisheries-on-vancouver-island/",
+					"description": [
+						"How kokanee were introduced to Beavertail and nearby lakes."
+					]
+				},
+				{
+					"name": "Go Hiking",
+					"url": "https://gohiking.ca/beavertail-lake/",
+					"description": [
+						"Trail guide, directions, and photos for Beavertail Lake."
+					]
+				}
+			]
+		}
+	],
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "img_0863",
+					"img": "IMG_0863.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0864",
+					"img": "IMG_0864.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0865",
+					"img": "IMG_0865.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0866",
+					"img": "IMG_0866.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0867",
+					"img": "IMG_0867.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0868-rotated",
+					"img": "IMG_0868-rotated.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0869-rotated",
+					"img": "IMG_0869-rotated.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0870-rotated",
+					"img": "IMG_0870-rotated.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0871",
+					"img": "IMG_0871.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0872-rotated",
+					"img": "IMG_0872-rotated.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0873",
+					"img": "IMG_0873.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0874",
+					"img": "IMG_0874.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0875",
+					"img": "IMG_0875.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0876",
+					"img": "IMG_0876.jpg",
+					"label": ""
+				}
+			]
+		}
+	}
 }
