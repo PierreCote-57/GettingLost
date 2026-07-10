@@ -7,8 +7,6 @@
 	"categories": [],
 	"tags": [],
 	"location": {
-		"lat": 49.9812,
-		"lng": -125.5033,
-		"pin": "lake"
+		"location_id": "salmon-point-resort"
 	}
 }

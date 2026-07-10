@@ -47,6 +47,7 @@ const PAGES_ROOT = path.join(REPO_ROOT, "pages");
 const POSTS_ROOT = path.join(REPO_ROOT, "posts");
 const MEDIA_ROOT = path.join(REPO_ROOT, "media");
 const DATA_ROOT = path.join(MEDIA_ROOT, "data");
+const LOGS_ROOT = path.join(REPO_ROOT, "logs");
 
 const INCREMENTAL =
   process.argv.some((a) => a.startsWith("--changed-files=")) ||
@@ -971,6 +972,53 @@ async function syncFiles(fileBirdFolderCache) {
   return { successCount, failCount };
 }
 
+// Publish the entire logs/ tree to /wp-content/uploads/<filename> and file it
+// in FileBird under a top-level "logs" folder (peer of "data" and "images").
+// The WP upload path is flat (by basename), so logs/locations.json is fetchable
+// at /wp-content/uploads/locations.json — that's what the googleMap renderer
+// reads to resolve location.location_id. Walked generically so future log files
+// (travel-log maps, etc.) sync without touching this code.
+async function syncLogs(fileBirdFolderCache) {
+  let successCount = 0;
+  let failCount = 0;
+
+  if (!fs.existsSync(LOGS_ROOT)) {
+    console.warn(`[logs] logs root not found at ${LOGS_ROOT} — nothing to sync.`);
+    return { successCount, failCount };
+  }
+
+  const allEntries = fs.readdirSync(LOGS_ROOT, { recursive: true });
+
+  for (const relSubPath of allEntries) {
+    const filePath = path.join(LOGS_ROOT, relSubPath);
+    if (!fs.statSync(filePath).isFile()) continue;
+
+    const filename = path.basename(filePath);
+    if (filename.startsWith(".")) continue; // skip .DS_Store and other dotfiles
+
+    // Relative to REPO_ROOT so the FileBird folder path is "logs" (or "logs/<sub>").
+    const relPath = path.posix.relative(REPO_ROOT, filePath);
+
+    if (CHANGED && !CHANGED.files.has(relPath)) {
+      continue;
+    }
+
+    const fileBuffer = fs.readFileSync(filePath);
+    const mimeType = guessMimeFromExt(filename);
+
+    const mediaId = await syncOneFileToWordPress(relPath, filename, fileBuffer, mimeType);
+
+    if (mediaId) {
+      successCount++;
+      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, relPath);
+    } else {
+      failCount++;
+    }
+  }
+
+  return { successCount, failCount };
+}
+
 // ---------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------
@@ -1027,6 +1075,9 @@ async function main() {
   console.log("\n=== Syncing files (JSON data + scripts) ===");
   const filesResult = await syncFiles(fileBirdFolderCache);
 
+  console.log("\n=== Syncing logs ===");
+  const logsResult = await syncLogs(fileBirdFolderCache);
+
   console.log("\n=== Syncing gallery JSONs ===");
   const galleryResult = await syncGalleryJsons(galleries, pageMap, fileBirdFolderCache);
 
@@ -1038,11 +1089,12 @@ async function main() {
 
   console.log("\n=== Summary ===");
   console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
+  console.log(`Logs:      ${logsResult.successCount} ok, ${logsResult.failCount} failed`);
   console.log(`Galleries: ${galleryResult.successCount} ok, ${galleryResult.failCount} failed`);
   console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
   console.log(`Posts:     ${postsResult.successCount} ok, ${postsResult.failCount} failed`);
 
-  const totalFails = filesResult.failCount + galleryResult.failCount + pagesResult.failCount + postsResult.failCount;
+  const totalFails = filesResult.failCount + logsResult.failCount + galleryResult.failCount + pagesResult.failCount + postsResult.failCount;
   if (totalFails > 0) {
     process.exit(1);
   }

@@ -492,33 +492,83 @@
     };
   }
 
-  window.GL.blockRenderers.googleMap = function (el, pageData) {
-    var loc = pageData.location;
-    if (!loc || typeof loc.lat !== "number" || typeof loc.lng !== "number") {
-      throw new Error('Page JSON is missing numeric "location.lat"/"location.lng" for the googleMap block.');
+  // Cached loader for the published locations registry (logs/locations.json ->
+  // /wp-content/uploads/locations.json). Resolves once per page load to an
+  // { id: entry } map, shared by every googleMap block that references a
+  // location by location_id.
+  var locationsMapPromise = null;
+  function loadLocationsMap() {
+    if (!locationsMapPromise) {
+      locationsMapPromise = fetch("/wp-content/uploads/locations.json")
+        .then(function (res) {
+          if (!res.ok) throw new Error("Failed to load locations.json: " + res.status);
+          return res.json();
+        })
+        .then(function (list) {
+          var byId = {};
+          (list || []).forEach(function (entry) {
+            if (entry && entry.id) byId[entry.id] = entry;
+          });
+          return byId;
+        });
     }
+    return locationsMapPromise;
+  }
 
-    el.textContent = "";
-    if (!el.style.width) el.style.width = "45%";
-    if (!el.style.height) el.style.height = "400px";
-    if (!el.style.float) el.style.float = "right";
-    if (!el.style.margin) el.style.margin = "0 0 1rem 1.5rem";
-
-    loadGoogleMapsApi(function () {
-      var map = new google.maps.Map(el, {
-        zoom: (typeof loc.zoom === "number") ? loc.zoom : MAP_CONFIG.mapZoom,
-        center: { lat: loc.lat, lng: loc.lng },
-        mapTypeId: MAP_CONFIG.mapTypeId,
-        styles: MAP_CONFIG.mapStyles
+  // Resolve a page's location block into concrete { lat, lng, pin, zoom }.
+  // Inline numeric lat/lng win (backward compatible); otherwise location_id is
+  // looked up in the registry, with pin/zoom inherited from the referenced entry
+  // unless the page's own location block overrides them. Returns a Promise.
+  function resolveLocation(loc) {
+    if (loc && typeof loc.lat === "number" && typeof loc.lng === "number") {
+      return Promise.resolve({ lat: loc.lat, lng: loc.lng, pin: loc.pin, zoom: loc.zoom });
+    }
+    if (loc && loc.location_id) {
+      return loadLocationsMap().then(function (byId) {
+        var entry = byId[loc.location_id];
+        var e = entry && entry.location;
+        if (!e || typeof e.lat !== "number" || typeof e.lng !== "number") {
+          throw new Error('location_id "' + loc.location_id +
+            '" not found (or missing numeric lat/lng) in locations.json.');
+        }
+        return {
+          lat: e.lat,
+          lng: e.lng,
+          pin: (loc.pin != null) ? loc.pin : e.pin,
+          zoom: (typeof loc.zoom === "number") ? loc.zoom : e.zoom
+        };
       });
-      var markerOptions = {
-        position: { lat: loc.lat, lng: loc.lng },
-        map: map,
-        title: pageData.title || ""
-      };
-      var icon = pinIcon(loc.pin);
-      if (icon) markerOptions.icon = icon;
-      new google.maps.Marker(markerOptions);
+    }
+    return Promise.reject(new Error(
+      'Page JSON needs numeric "location.lat"/"location.lng" or a "location.location_id" for the googleMap block.'));
+  }
+
+  window.GL.blockRenderers.googleMap = function (el, pageData) {
+    resolveLocation(pageData.location).then(function (r) {
+      el.textContent = "";
+      if (!el.style.width) el.style.width = "45%";
+      if (!el.style.height) el.style.height = "400px";
+      if (!el.style.float) el.style.float = "right";
+      if (!el.style.margin) el.style.margin = "0 0 1rem 1.5rem";
+
+      loadGoogleMapsApi(function () {
+        var map = new google.maps.Map(el, {
+          zoom: (typeof r.zoom === "number") ? r.zoom : MAP_CONFIG.mapZoom,
+          center: { lat: r.lat, lng: r.lng },
+          mapTypeId: MAP_CONFIG.mapTypeId,
+          styles: MAP_CONFIG.mapStyles
+        });
+        var markerOptions = {
+          position: { lat: r.lat, lng: r.lng },
+          map: map,
+          title: pageData.title || ""
+        };
+        var icon = pinIcon(r.pin);
+        if (icon) markerOptions.icon = icon;
+        new google.maps.Marker(markerOptions);
+      });
+    }).catch(function (err) {
+      console.error('[gettinglost] Error rendering block type "googleMap":', err);
     });
   };
 
