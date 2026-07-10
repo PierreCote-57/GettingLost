@@ -72,10 +72,11 @@
 					"img": "IMG_0869-rotated.jpg",
 					"label": "Campbell River Fish & Wildlife Association"
 				},
+
 				{
-					"id": "img_0870-rotated",
-					"img": "IMG_0870-rotated.jpg",
-					"label": "Path to fishing dock"
+					"id": "img_0873",
+					"img": "IMG_0873.jpg",
+					"label": "Boat ramp and fishing dock"
 				},
 				{
 					"id": "img_0871",
@@ -83,9 +84,9 @@
 					"label": "Boat ramp"
 				},
 				{
-					"id": "img_0873",
-					"img": "IMG_0873.jpg",
-					"label": "Boat ramp and fishing dock"
+					"id": "img_0870-rotated",
+					"img": "IMG_0870-rotated.jpg",
+					"label": "Path to fishing dock"
 				},
 				{
 					"id": "img_0874",
