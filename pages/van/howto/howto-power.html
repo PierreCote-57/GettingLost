@@ -257,7 +257,231 @@
 	<div data-block-type="photoGallery" data-gallery="howto"></div>
 </details>
 
+<!-- Power consumption - Raw -->
+<details>
+	<summary><h2 style="display:inline;">Power consumption &mdash; raw</h2></summary>
 
+	<p>
+		Draw for each element on its own &mdash; the building blocks. The
+		<strong>Power</strong> column is what the element runs on natively;
+		battery is shown as instantaneous draw (A) and, where the source figure
+		is a nightly total, accumulated use (Ah). Where a load has an average and
+		a peak, the average is shown and the peak is noted.
+	</p>
+
+	<p>
+		<strong>120&nbsp;VAC loads are tricky:</strong> on shore power or the
+		generator they cost no battery, but off-grid they pull from the battery
+		<em>through the inverter</em> &mdash; so a battery draw is shown for them
+		too. Figures marked <em>typ.</em> are computed from rated wattage
+		(battery&nbsp;A &asymp; watts &divide; ~11) and still need measuring.
+	</p>
+
+	<table style="margin:0 auto;">
+		<thead>
+		<tr>
+			<th style="text-align:left;">Element</th>
+			<th style="text-align:center;">Power</th>
+			<th style="text-align:center;">Gasoline</th>
+			<th style="text-align:center;">Draw (A)</th>
+			<th style="text-align:center;">Battery (Ah)</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Furnace (Combi G, gas mode) &mdash; 50&deg;F out, 70&deg;F set</td>
+			<td style="text-align:center;">gas + 12V</td>
+			<td style="text-align:center;">&asymp;3.8 L / night</td>
+			<td style="text-align:center;">&asymp;1.6<sup>1</sup></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>Nova Kool fridge</td>
+			<td style="text-align:center;">12V</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;2 <small>typ.</small></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>2 CPAPs &mdash; no humidifier</td>
+			<td style="text-align:center;">12V</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;7</td>
+			<td style="text-align:center;">&asymp;55 / night</td>
+		</tr>
+		<tr>
+			<td>2 CPAPs &mdash; 1 w/ humidifier, 1 without</td>
+			<td style="text-align:center;">12V</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;10</td>
+			<td style="text-align:center;">&asymp;80 / night</td>
+		</tr>
+		<tr>
+			<td>Induction cooktop <small>(1800W typ)</small></td>
+			<td style="text-align:center;">120V</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;165 <small>typ.</small></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>Convection microwave / air fryer <small>(1200W typ)</small></td>
+			<td style="text-align:center;">120V</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;110 <small>typ.</small></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>Keurig coffee maker <small>(1500W typ)</small></td>
+			<td style="text-align:center;">120V</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;135 <small>typ.</small></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>Generator (15A&nbsp;AC load)</td>
+			<td style="text-align:center;">gas</td>
+			<td style="text-align:center;">&asymp;1.1 L/hr</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>A/C on generator (~11A&nbsp;AC load)</td>
+			<td style="text-align:center;">gas</td>
+			<td style="text-align:center;">&asymp;0.8 L/hr</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;"></td>
+		</tr>
+		<tr>
+			<td>Generator recharge &mdash; 330Ah AGM, 50%&rarr;full (4&ndash;5 hrs)</td>
+			<td style="text-align:center;">gas</td>
+			<td style="text-align:center;">&asymp;3&ndash;4 L<sup>2</sup></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">+165</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>
+		<sup>1</sup> Peak &asymp;6A.<br/>
+		<sup>2</sup> Converter spec still unconfirmed.<br/>
+		<sup>3</sup> To be confirmed: figures marked <em>typ.</em> are computed from
+		rated wattage, not measured &mdash; provisional until verified in real use.
+	</p>
+</details>
+
+<!-- Power consumption - by activity -->
+<details>
+	<summary><h2 style="display:inline;">Power consumption &mdash; by activity</h2></summary>
+
+	<p>
+		The raw figures rolled up into real situations, one row per element so you
+		can see where the biggest draw comes from. 120&nbsp;VAC appliances are
+		counted through the inverter (off-grid); on shore power or generator they
+		cost no battery. Values marked <em>typ.</em> or <em>est.</em> are starting
+		estimates to replace with real measurements.
+	</p>
+
+	<table style="margin:0 auto;">
+		<thead>
+		<tr>
+			<th style="text-align:left;">Element</th>
+			<th style="text-align:center;">Gasoline</th>
+			<th style="text-align:center;">Draw (A)</th>
+			<th style="text-align:center;">Battery (Ah)</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td><strong>&#9776; ONE NIGHT</strong> <small>(~10 hr)</small></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Furnace (gas-mode fan)</td>
+			<td style="text-align:center;">&asymp;3.8 L</td>
+			<td style="text-align:center;">&asymp;1.6</td>
+			<td style="text-align:center;">&asymp;16 <small>est.</small></td>
+		</tr>
+		<tr>
+			<td>Nova Kool fridge</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;2</td>
+			<td style="text-align:center;">&asymp;20 <small>est.</small></td>
+		</tr>
+		<tr>
+			<td>2 CPAPs (1 w/ humidifier)</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;10</td>
+			<td style="text-align:center;">&asymp;80</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;"><em>night subtotal</em></td>
+			<td style="text-align:center;">&asymp;3.8 L</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;"><strong>&asymp;116</strong></td>
+		</tr>
+		<tr>
+			<td><strong>&#9776; ONE DAYLIGHT DAY</strong> <small>(~14 hr; solar may offset)</small></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Nova Kool fridge</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;2</td>
+			<td style="text-align:center;">&asymp;28 <small>est.</small></td>
+		</tr>
+		<tr>
+			<td>Induction cooktop <small>(via inverter, ~20 min)</small></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;165</td>
+			<td style="text-align:center;">&asymp;55 <small>typ.</small></td>
+		</tr>
+		<tr>
+			<td>Microwave / air fryer <small>(via inverter, ~15 min)</small></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;110</td>
+			<td style="text-align:center;">&asymp;28 <small>typ.</small></td>
+		</tr>
+		<tr>
+			<td>Keurig <small>(via inverter, 2 cups)</small></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">&asymp;135</td>
+			<td style="text-align:center;">&asymp;9 <small>typ.</small></td>
+		</tr>
+		<tr>
+			<td>Roof fan, lights, TV, water pump</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">TBD</td>
+			<td style="text-align:center;">TBD</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;"><em>day subtotal</em></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;"><strong>&asymp;120+</strong> <small>(before TBD)</small></td>
+		</tr>
+		<tr>
+			<td><strong>&#9776; RECHARGE BOAT BATTERY</strong> <small>(100Ah lithium, from 50%)</small></td>
+			<td style="text-align:center;">&asymp;1&ndash;1.5 L<sup>1</sup></td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">+50</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>
+		<sup>1</sup> Estimated by scaling the AGM recharge rate; converter spec still unconfirmed.<br/>
+		<sup>2</sup> To be confirmed: all <em>typ.</em> and <em>est.</em> values &mdash;
+		and the assumed run-times &mdash; are provisional until measured in real use.<br/>
+		<em>typ.</em> = from rated wattage through the inverter (battery A &asymp; watts &divide; ~11).
+		<em>est.</em> = estimated from average draw over the period.
+	</p>
+</details>
+
+<!-- Supplier documentation -->
 <details>
 	<summary><h2 style="display:inline;">Supplier documentation</h2></summary>
 	<div data-block-type="notes"></div>
