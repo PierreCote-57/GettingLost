@@ -1,0 +1,23 @@
+{
+	"title": "How to: Empty water tanks",
+	"featuredImage": "under-construction.png",
+	"excerpt": "Emptying the van's grey and black water tanks.",
+	"tags": [],
+	"published": true,
+	"photoGalleries": {
+		"howto": {
+			"name": "How to images",
+			"items": [
+				{
+					"id": "dump-station",
+					"img": "IMG_2790.jpeg",
+					"label": "Controls on the van"
+				}
+			]
+		},
+		"details": {
+			"name": "Details images",
+			"items": []
+		}
+	}
+}
