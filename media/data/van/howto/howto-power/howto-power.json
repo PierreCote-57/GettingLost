@@ -180,6 +180,17 @@
 					]
 				}
 			]
+		},
+		{
+			"sectionName": "Garmin control panel",
+			"list": [
+				{
+					"name": "Product page",
+					"url": "/wp-content/uploads/Coachmen-User-Guide.pdf",
+					"description": [
+						"user manual for Coachmen Class B Vans."
+					]
+				}			]
 		}
 	]
 }
