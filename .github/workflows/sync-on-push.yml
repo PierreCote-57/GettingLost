@@ -22,6 +22,7 @@ on:
     paths:
       - "pages/**"
       - "posts/**"
+      - "logs/**"
       - "media/**"
       - "local/config/**"
       - "local/sync/**"

@@ -72,7 +72,8 @@
 		"location": {
 			"lat": 50.046944,
 			"lng": -125.253889,
-			"pin": "park"
+			"pin": "park",
+			"zoom": 12
 		}
 	}
 ]
