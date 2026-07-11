@@ -206,7 +206,7 @@
 			<td style="text-align:center;"></td>
 		</tr>
 		<tr>
-			<td>Fuel tank (95 liters = 25 gallons)</td>
+			<td>Fuel tank<sup>1</sup></td>
 			<td></td>
 			<td style="text-align:center;"></td>
 			<td style="text-align:center;"></td>
@@ -216,7 +216,8 @@
 	</table>
 
 	<p>
-		<strong>Legend:</strong> &#9679; = delivers this kind of power
+		<strong>Legend:</strong> &#9679; = delivers this kind of power<br/>
+		<sup>1</sup> 95&nbsp;L (25&nbsp;gal).
 	</p>
 </details>
 
@@ -262,19 +263,7 @@
 	<summary><h2 style="display:inline;">Power consumption &mdash; raw</h2></summary>
 
 	<p>
-		Draw for each element on its own &mdash; the building blocks. The
-		<strong>Power</strong> column is what the element runs on natively;
-		battery is shown as instantaneous draw (A) and, where the source figure
-		is a nightly total, accumulated use (Ah). Where a load has an average and
-		a peak, the average is shown and the peak is noted.
-	</p>
-
-	<p>
-		<strong>120&nbsp;VAC loads are tricky:</strong> on shore power or the
-		generator they cost no battery, but off-grid they pull from the battery
-		<em>through the inverter</em> &mdash; so a battery draw is shown for them
-		too. These 120&nbsp;V draws are computed as watts &divide; ~11 and carry
-		the <sup>2</sup> &ldquo;to be validated&rdquo; note below.
+		Draw for each element on its own &mdash; the building blocks.
 	</p>
 
 	<table style="margin:0 auto;">
@@ -282,7 +271,7 @@
 		<tr>
 			<th style="text-align:left;">Element</th>
 			<th style="text-align:center;">Power</th>
-			<th style="text-align:center;">Gasoline</th>
+			<th style="text-align:center;">Gas<sup>1</sup></th>
 			<th style="text-align:center;">Draw (A)</th>
 		</tr>
 		</thead>
@@ -291,13 +280,13 @@
 			<td>Furnace (Combi G, gas mode) &mdash; 50&deg;F out, 70&deg;F set</td>
 			<td style="text-align:center;">gas + 12V</td>
 			<td style="text-align:center;">0.4 L/hr</td>
-			<td style="text-align:center;">1.6<sup>1</sup></td>
+			<td style="text-align:center;">1.6<sup>2</sup></td>
 		</tr>
 		<tr>
 			<td>Nova Kool fridge</td>
 			<td style="text-align:center;">12V</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">2<sup>2</sup></td>
+			<td style="text-align:center;">2<sup>3</sup></td>
 		</tr>
 		<tr>
 			<td>2 CPAPs &mdash; no humidifier</td>
@@ -315,19 +304,19 @@
 			<td>Induction cooktop <small>(1800 W assumed)</small></td>
 			<td style="text-align:center;">120V</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">165<sup>2</sup></td>
+			<td style="text-align:center;">165<sup>3</sup></td>
 		</tr>
 		<tr>
 			<td>Convection microwave / air fryer <small>(1200 W assumed)</small></td>
 			<td style="text-align:center;">120V</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">110<sup>2</sup></td>
+			<td style="text-align:center;">110<sup>3</sup></td>
 		</tr>
 		<tr>
 			<td>Keurig coffee maker <small>(1500 W assumed)</small></td>
 			<td style="text-align:center;">120V</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">135<sup>2</sup></td>
+			<td style="text-align:center;">135<sup>3</sup></td>
 		</tr>
 		<tr>
 			<td>Generator (15A&nbsp;AC load)</td>
@@ -345,10 +334,9 @@
 	</table>
 
 	<p>
-		<sup>1</sup> Peak &asymp;6A.<br/>
-		<sup>2</sup> <strong>To be validated:</strong> estimated, not measured &mdash;
-		120&nbsp;V appliance draws computed as watts &divide; ~11 (12&nbsp;V through the
-		inverter) from assumed wattages; the fridge is an estimated average draw.
+		<sup>1</sup> Fuel tank: 95&nbsp;L (25&nbsp;gal).<br/>
+		<sup>2</sup> Peak &asymp;6A.<br/>
+		<sup>3</sup> <strong>To be validated:</strong> appliance draws from assumed watts &divide; ~11 (12&nbsp;V via inverter); fridge is an estimated average.
 	</p>
 </details>
 
@@ -357,18 +345,16 @@
 	<summary><h2 style="display:inline;">Power consumption &mdash; by activity</h2></summary>
 
 	<p>
-		The raw figures rolled up into real situations, one row per element so you
-		can see where the biggest draw comes from. 120&nbsp;VAC appliances are
-		counted through the inverter (off-grid); on shore power or generator they
-		cost no battery. Values carrying the <sup>2</sup> note are estimated and
-		still to be validated against real measurements.
+		The raw figures rolled up into real situations, one row per element.
+		120&nbsp;V appliances are counted through the inverter when off-grid; on
+		shore power or the generator they cost no battery.
 	</p>
 
 	<table style="margin:0 auto;">
 		<thead>
 		<tr>
 			<th style="text-align:left;">Element</th>
-			<th style="text-align:center;">Gasoline</th>
+			<th style="text-align:center;">Gas<sup>1</sup></th>
 			<th style="text-align:center;">Battery (Ah)</th>
 		</tr>
 		</thead>
@@ -380,23 +366,23 @@
 		</tr>
 		<tr>
 			<td>Furnace (gas-mode fan)</td>
-			<td style="text-align:center;">&asymp;3.8 L</td>
-			<td style="text-align:center;">&asymp;16<sup>2</sup></td>
+			<td style="text-align:center;">3.8 L</td>
+			<td style="text-align:center;">16<sup>2</sup></td>
 		</tr>
 		<tr>
 			<td>Nova Kool fridge</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">&asymp;20<sup>2</sup></td>
+			<td style="text-align:center;">20<sup>2</sup></td>
 		</tr>
 		<tr>
 			<td>2 CPAPs (1 w/ humidifier)</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">&asymp;80</td>
+			<td style="text-align:center;">80</td>
 		</tr>
 		<tr>
 			<td style="text-align:right;"><em>night subtotal</em></td>
-			<td style="text-align:center;">&asymp;3.8 L</td>
-			<td style="text-align:center;"><strong>&asymp;116</strong></td>
+			<td style="text-align:center;">3.8 L</td>
+			<td style="text-align:center;"><strong>116</strong></td>
 		</tr>
 		<tr>
 			<td><strong>&#9776; ONE DAYLIGHT DAY</strong> <small>(~14 hr; solar may offset)</small></td>
@@ -406,32 +392,52 @@
 		<tr>
 			<td>Nova Kool fridge</td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">&asymp;28<sup>2</sup></td>
+			<td style="text-align:center;">28<sup>2</sup></td>
 		</tr>
 		<tr>
 			<td>Induction cooktop <small>(via inverter, ~20 min)</small></td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">&asymp;55<sup>2</sup></td>
+			<td style="text-align:center;">55<sup>2</sup></td>
 		</tr>
 		<tr>
 			<td>Microwave / air fryer <small>(via inverter, ~15 min)</small></td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">&asymp;28<sup>2</sup></td>
+			<td style="text-align:center;">28<sup>2</sup></td>
 		</tr>
 		<tr>
 			<td>Keurig <small>(via inverter, 2 cups)</small></td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;">&asymp;9<sup>2</sup></td>
+			<td style="text-align:center;">9<sup>2</sup></td>
 		</tr>
 		<tr>
-			<td>Roof fan, lights, TV, water pump</td>
+			<td>Roof fan</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">TBD</td>
+		</tr>
+		<tr>
+			<td>Interior lights</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">TBD</td>
+		</tr>
+		<tr>
+			<td>TV</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">TBD</td>
+		</tr>
+		<tr>
+			<td>Water pump</td>
+			<td style="text-align:center;"></td>
+			<td style="text-align:center;">TBD</td>
+		</tr>
+		<tr>
+			<td>Water heater (Combi G)</td>
 			<td style="text-align:center;"></td>
 			<td style="text-align:center;">TBD</td>
 		</tr>
 		<tr>
 			<td style="text-align:right;"><em>day subtotal</em></td>
 			<td style="text-align:center;"></td>
-			<td style="text-align:center;"><strong>&asymp;120+</strong> <small>(before TBD)</small></td>
+			<td style="text-align:center;"><strong>120+</strong> <small>(before TBD)</small></td>
 		</tr>
 		<tr>
 			<td><strong>&#9776; BATTERY CHARGING</strong></td>
@@ -439,23 +445,21 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td>House bank &mdash; 330Ah AGM, 50%&rarr;full (4&ndash;5 hrs)</td>
-			<td style="text-align:center;">&asymp;3&ndash;4 L<sup>1</sup></td>
+			<td>House bank &mdash; 330Ah AGM, from 50%</td>
+			<td style="text-align:center;">3&ndash;4 L<sup>2</sup></td>
 			<td style="text-align:center;">+165</td>
 		</tr>
 		<tr>
 			<td>Boat battery &mdash; 100Ah lithium, from 50%</td>
-			<td style="text-align:center;">&asymp;1&ndash;1.5 L<sup>1</sup></td>
+			<td style="text-align:center;">1&ndash;1.5 L<sup>2</sup></td>
 			<td style="text-align:center;">+50</td>
 		</tr>
 		</tbody>
 	</table>
 
 	<p>
-		<sup>1</sup> Converter spec still unconfirmed; the boat figure is estimated by scaling the AGM recharge rate.<br/>
-		<sup>2</sup> <strong>To be validated:</strong> estimated, not measured &mdash;
-		including the assumed run-times. 120&nbsp;V draws computed as watts &divide; ~11
-		(12&nbsp;V through the inverter); others from average draw over the period.
+		<sup>1</sup> Fuel tank: 95&nbsp;L (25&nbsp;gal).<br/>
+		<sup>2</sup> <strong>To be validated:</strong> estimates not yet measured &mdash; assumed run-times, inverter appliance draws (watts &divide; ~11), and recharge (converter unconfirmed; boat scaled from the AGM).
 	</p>
 </details>
 
