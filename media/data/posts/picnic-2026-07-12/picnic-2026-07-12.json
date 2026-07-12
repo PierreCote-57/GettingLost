@@ -8,5 +8,31 @@
 	"tags": ["picnic"],
 	"location": {
 		"location_id": "beavertail-lake-dayuse"
-	}
+	},
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "img_0874",
+					"img": "IMG_0874.jpg",
+					"label": "Fishing dock (under construction in June '21)"
+				}
+			]
+		}
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Campbell River Fish & Wildlife Association",
+					"url": "https://crfishandwildlifeclub.ca",
+					"description": [
+						"Working to serve our community in all aspects of fish and wildlife conservation and outdoor activities."
+					]
+				}
+			]
+		}
+	]
 }
