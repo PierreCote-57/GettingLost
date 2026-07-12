@@ -18,7 +18,8 @@
 		For the heater, the Truma is set to heat only.
 		There are two questions to answer:
 	</p>
-	<ul style="list-style:none; padding-left:0;">
+	<ul style="list-style:none; padding-left:0.5in;">
+		<!-- status marker: &#9989; = pass (✅), &#10060; = fail (❌), &#9744; = pending (☐) -->
 		<li>&#9989; Will it start when it is supposed to?</li>
 		<li>&#9744; Will it stop when it is supposed to?</li>
 	</ul>
@@ -41,15 +42,16 @@
 			<h3 class="gl-heading" style="display:inline;">Temperature log</h3>
 		</summary>
 
-		<table style="table-layout:fixed; width:80%; text-align:center;">
+		<table style="table-layout:fixed; width:100%; text-align:center;">
 			<thead>
 			<tr>
-				<th style="width:12.5%;">Time</th>
-				<th style="width:12.5%;">Outside</th>
-				<th style="width:12.5%;">Cabin</th>
-				<th style="width:12.5%;">Fridge</th>
-				<th style="width:12.5%;">Heater Fan</th>
-				<th style="width:37.5%;">Notes</th>
+				<th style="width:10%;">Time</th>
+				<th style="width:10%;">Outside</th>
+				<th style="width:10%;">Cabin</th>
+				<th style="width:10%;">Fridge</th>
+				<th style="width:10%;">Heater Fan</th>
+				<th style="width:10%;">Battery</th>
+				<th style="width:40%;">Notes</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -59,7 +61,17 @@
 				<td>56.4°F</td>
 				<td>57.2°F</td>
 				<td>On</td>
+				<td>12.8</td>
 				<td>Exhaust warm</td>
+			</tr>
+			<tr>
+				<td>8:25 AM</td>
+				<td>55°F</td>
+				<td>67.8°F</td>
+				<td>29.9°F</td>
+				<td>Off</td>
+				<td></td>
+				<td>Exhaust off</td>
 			</tr>
 			</tbody>
 		</table>
