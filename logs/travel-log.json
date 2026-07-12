@@ -35,5 +35,13 @@
     "location": { "location_id": "oyster-bay-rest-area" },
     "post_id": null,
     "id": "stop-0005"
+  },
+  {
+    "name": "Picnic at Beavertail Lake",
+    "arrival":   "2026-07-12T10:00:00-08:00",
+    "departure": "2026-07-12T15:00:00-08:00",
+    "location": { "location_id": "beavertail-lake-dayuse" },
+    "post_id": "picnic-2026-07-12.html",
+    "id": "stop-0009"
   }
 ]

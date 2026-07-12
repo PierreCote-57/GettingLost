@@ -75,5 +75,16 @@
 			"pin": "park",
 			"zoom": 12
 		}
+	},
+	{
+		"name": "Beavertail Lake Day Use",
+		"id": "beavertail-lake-dayuse",
+		"destination_id": "beavertail-lake-dayuse.html",
+		"location": {
+			"lat": 49.97964,
+			"lng": -125.50546,
+			"pin": "picnic",
+			"zoom": 15
+		}
 	}
 ]
