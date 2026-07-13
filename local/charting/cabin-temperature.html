@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body{margin:0;background:#dedede;font-family:-apple-system,Helvetica,Arial,sans-serif;}
+  .card{background:#fff;border-radius:12px;padding:16px 16px 8px;max-width:720px;margin:24px auto;}
+  .title{font-size:16px;font-weight:500;color:#000;text-align:center;margin-bottom:2px;}
+  .sub{font-size:12px;color:#6b6b6b;text-align:center;margin-bottom:10px;}
+  .wrap{position:relative;width:100%;height:300px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="title">Cabin temperature</div>
+  <div class="sub">Picnic at Beavertail Lake &middot; 2026-07-12</div>
+  <div class="wrap"><canvas id="cA"></canvas></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const INK='#000000', LO=15, HI=25;
+const clocks=["7:00 AM","8:25 AM","9:05 AM","10:05 AM","12:45 PM"];
+const baseX=[7,8+25/60,9+5/60,10+5/60,12+45/60];
+const vals=[13.6,19.9,21.4,22.6,25.5];
+const THERMO=21.1;
+const cl=v=>Math.max(LO,Math.min(HI,v));
+const oob=v=>v<LO||v>HI;
+function clampSeries(xs,vs){const pts=[];for(let i=0;i<xs.length;i++){if(i>0){const x0=xs[i-1],y0=vs[i-1],x1=xs[i],y1=vs[i];const cr=[];[LO,HI].forEach(b=>{if((y0<b&&y1>b)||(y0>b&&y1<b)){const f=(b-y0)/(y1-y0);cr.push({x:x0+f*(x1-x0),y:b,r:false});}});cr.sort((a,b)=>a.x-b.x);cr.forEach(c=>pts.push(c));}pts.push({x:xs[i],y:cl(vs[i]),r:true,idx:i});}return pts;}
+function fmtClock(h){h=((h%24)+24)%24;const ap=h<12?'AM':'PM';let hr=h%12;if(hr===0)hr=12;return hr+' '+ap;}
+function niceStep(span){return [1,2,3,4,6,12,24].find(s=>span/s<=12)||24;}
+
+const winMin=Math.floor(baseX[0]), winMax=Math.ceil(baseX[baseX.length-1]);
+const step=niceStep(winMax-winMin);
+const line=clampSeries(baseX,vals);
+const pcol=p=>p.r?(oob(vals[p.idx])?'#e34948':'#2a78d6'):'rgba(0,0,0,0)';
+
+const paint={id:'paint',
+  beforeDraw(ch){const{ctx,width,height}=ch;ctx.save();ctx.fillStyle='#ffffff';ctx.fillRect(0,0,width,height);ctx.restore();},
+  afterDatasetsDraw(ch){const{ctx}=ch;
+    const y=ch.scales.y.getPixelForValue(THERMO);const{right}=ch.chartArea;
+    ctx.save();ctx.font='11px sans-serif';ctx.fillStyle=INK;ctx.textAlign='right';ctx.textBaseline='bottom';ctx.fillText('Thermostat '+THERMO.toFixed(1)+'°C',right-4,y-3);ctx.restore();
+  }};
+
+new Chart(document.getElementById('cA'),{type:'line',
+  data:{datasets:[
+    {data:line,borderColor:'#2a78d6',borderWidth:3,fill:false,tension:0,order:2,
+     pointRadius:line.map(p=>p.r?5:0),pointHoverRadius:line.map(p=>p.r?7:0),
+     pointBackgroundColor:line.map(pcol),pointBorderColor:line.map(pcol),
+     segment:{borderColor:c=>{const a=c.p0.parsed.y,b=c.p1.parsed.y;return((a===LO&&b===LO)||(a===HI&&b===HI))?'#e34948':'#2a78d6';}}},
+    {data:[{x:winMin,y:THERMO},{x:winMax,y:THERMO}],borderColor:INK,borderWidth:2,pointRadius:0,pointHoverRadius:0,fill:false,tension:0,order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:20}},
+    plugins:{legend:{display:false},title:{display:false},tooltip:{filter:it=>it.datasetIndex===0&&line[it.dataIndex]&&line[it.dataIndex].r,callbacks:{title:it=>clocks[line[it[0].dataIndex].idx],label:c=>{const p=line[c.dataIndex];const v=vals[p.idx];return v.toFixed(1)+' °C'+(oob(v)?(v>HI?' (clamped to 25)':' (clamped to 15)'):'');}}}},
+    scales:{
+      y:{min:LO,max:HI,title:{display:true,text:'Temperature (°C)',color:'#000',font:{size:12}},ticks:{stepSize:1,callback:v=>v+'°',color:'#000',font:{size:11}},grid:{color:'#e1e0d9'},border:{color:'#000'}},
+      x:{type:'linear',min:winMin,max:winMax,ticks:{stepSize:step,autoSkip:false,maxRotation:0,color:'#000',font:{size:11},callback:v=>((v-winMin)%step!==0)?'':fmtClock(v)},grid:{display:true,color:'#e1e0d9'},border:{color:'#000'}}
+    }},plugins:[paint]});
+</script>
+</body>
+</html>
