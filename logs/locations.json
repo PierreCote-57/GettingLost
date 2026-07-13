@@ -86,5 +86,26 @@
 			"pin": "picnic",
 			"zoom": 15
 		}
+	},
+	{
+		"name": "Tuktoyaktuk",
+		"id": "tuktoyaktuk",
+		"address": "Tuktoyaktuk, NT X0E 1C0",
+		"url": "https://www.tuktoyaktuk.ca",
+		"location": {
+			"lat": 69.442778,
+			"lng": -133.031111,
+			"zoom": 12
+		}
+	},
+	{
+		"name": "Destination Arrows",
+		"id": "destination-arrows",
+		"address": "The Point, Tuktoyaktuk, NT X0E 1C0",
+		"location": {
+			"lat": 69.456013,
+			"lng": -133.036440,
+			"zoom": 15
+		}
 	}
 ]
