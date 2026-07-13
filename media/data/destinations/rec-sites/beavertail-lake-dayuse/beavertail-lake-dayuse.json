@@ -102,6 +102,21 @@
 					"id": "img_0876",
 					"img": "IMG_0876.jpg",
 					"label": "Logs underwater"
+				},
+				{
+					"id": "img_2796",
+					"img": "IMG_2796.jpeg",
+					"label": "New floating dock and gangway"
+				},
+				{
+					"id": "img_2800",
+					"img": "IMG_2800.jpeg",
+					"label": "Day use picnic area sign"
+				},
+				{
+					"id": "img_2801",
+					"img": "IMG_2801.jpeg",
+					"label": "Outhouse"
 				}
 			]
 		}
