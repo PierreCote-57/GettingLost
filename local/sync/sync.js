@@ -74,6 +74,11 @@ const GALLERY_RULES = [
   { name: "VanChecklist", path: "van/checklists/" },
 ];
 
+// Valid road-condition values for the lower-left gallery badge. Mirrors the
+// GL.ROAD_COLORS keys in gl-constants.jst (browser side); duplicated here
+// because that file is browser code and can't be required. Keep the two in sync.
+const ROAD_VALUES = ["pavement", "gravel", "potholes", "rugged"];
+
 // ---------------------------------------------------------------------
 // Incremental mode
 // ---------------------------------------------------------------------
@@ -212,6 +217,13 @@ function annotateFailure(message) {
   console.log(`::error::${message}`);
 }
 
+// A bad-but-recoverable data value (e.g. an unknown road condition): emit a
+// GitHub Actions warning annotation so it shows on the run summary without
+// failing the job. Callers also console.warn and drop the offending value.
+function annotateWarning(message) {
+  console.log(`::warning::${message}`);
+}
+
 // ---------------------------------------------------------------------
 // Data loading — WP pages, per-page JSONs, WP media
 // ---------------------------------------------------------------------
@@ -315,12 +327,23 @@ function generateGalleryJsons(pageFileMap, perPageDataMap) {
       if (!repoPath.startsWith(rule.path)) continue;
       if (data.published !== true) continue;
 
+      const badgesIn = data.badges || {};
+      let road = badgesIn.road;
+      if (road && !ROAD_VALUES.includes(road)) {
+        const msg = `[gallery] ${filename}: unknown road value "${road}" — omitting road badge.`;
+        console.warn(msg);
+        annotateWarning(msg);
+        road = undefined;
+      }
+      const badges = { tags: badgesIn.tags || [] };
+      if (road) badges.road = road;
+
       entries.push({
         title: data.title || base,
         file: filename,
         image: data.featuredImage ?? "under-construction.png",
         teaser: data.excerpt || "",
-        tags: data.tags || [],
+        badges,
       });
     }
 

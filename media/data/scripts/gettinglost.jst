@@ -88,6 +88,7 @@
   var GL = (window.GL = window.GL || {});
   var TAG_COLORS = GL.TAG_COLORS;
   var TAG_FALLBACK = GL.TAG_FALLBACK;
+  var ROAD_COLORS = GL.ROAD_COLORS;
   var MAP_CONFIG = GL.MAP_CONFIG;
 
   // ---------------------------------------------------------------------
@@ -141,6 +142,24 @@
     return html;
   }
 
+  // Single road-condition badge for the lower-left corner. Falsy road (absent
+  // or "") renders nothing, exactly like an empty tag list. An unknown value
+  // is treated as a data error: render nothing and log it (sync.js catches the
+  // same case at build time and names the offending file).
+  function renderRoad(road) {
+    if (!road) return "";
+    var c = ROAD_COLORS[road];
+    if (!c) {
+      console.error('Unknown road value "' + road + '" — no road badge rendered.');
+      return "";
+    }
+    return (
+      '<span class="gl-road" style="background:' + c.bg + ";color:" + c.text + ';">' +
+      escapeHtml(road) +
+      "</span>"
+    );
+  }
+
   // Slug transforms — mirror sync.js. The github filename is the master; a
   // slug is only ever DERIVED from it. Must match sync.js's fileToSlug byte
   // for byte so the hrefs we build equal the slugs WordPress stored.
@@ -175,7 +194,8 @@
       '<a class="gl-gallery-card" href="' + href + '">' +
       '<div class="gl-gallery-card-img-wrap">' +
       '<img class="gl-gallery-card-img" src="' + image + '" alt="' + title + '" loading="lazy">' +
-      renderTags(entry.tags) +
+      renderTags(entry.badges && entry.badges.tags) +
+      renderRoad(entry.badges && entry.badges.road) +
       "</div>" +
       '<h3 class="gl-gallery-card-title">' + title + "</h3>" +
       '<p class="gl-gallery-card-teaser">' + teaser + "</p>" +

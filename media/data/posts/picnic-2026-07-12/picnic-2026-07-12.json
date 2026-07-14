@@ -5,7 +5,7 @@
 	"date": "2026-07-12T06:00:00",
 	"published": true,
 	"categories": [],
-	"tags": ["picnic"],
+	"badges": { "tags": ["picnic"] },
 	"location": {
 		"location_id": "beavertail-lake-dayuse"
 	},

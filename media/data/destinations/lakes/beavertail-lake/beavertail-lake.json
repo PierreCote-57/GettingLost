@@ -2,10 +2,12 @@
 	"title": "Beavertail Lake",
 	"featuredImage": "IMG_0873.jpg",
 	"excerpt": "Under construction",
-	"tags": [
-		"fishing",
-		"picnic"
-	],
+	"badges": {
+		"tags": [
+			"fishing",
+			"picnic"
+		]
+	},
 	"published": true,
 	"location": {
 		"lat": 49.9812,
