@@ -1,152 +1,164 @@
 {
-  "title": "Useful Links",
-  "published": true,
-  "notes": [
-    {
-      "sectionName": "Camping",
-      "list": [
-        {
-          "name": "The Campers Code",
-          "url": "https://www.camperscode.com/",
-          "description": [
-            "A straightforward guide to responsible backcountry camping.",
-            " Worth reading before your first trip and revisiting occasionally after."
-          ]
-        },
-        {
-          "name": "Rules & Etiquette",
-          "url": "https://www2.gov.bc.ca/gov/content/sports-culture/recreation/camping-hiking/sites-trails/planning/rules",
-          "description": [
-            "The Province’s rules and etiquette for recreation sites and trails.",
-            "Worth a read before heading into the backcountry."
-          ]
-        },
-        {
-          "name": "Campspot",
-          "url": "https://www.campspot.com/",
-          "description": [
-            "A campground search and booking platform covering campgrounds,",
-            "RV parks, and glamping sites across North America."
-          ]
-        }
-      ]
-    },
-    {
-      "sectionName": "RV",
-      "list": [
-        {
-          "name": "Coachmen Beyond",
-          "url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
-          "description": [
-            "Index to all the manuals and videos."
-          ]
-        }
-      ]
-    },
-    {
-      "sectionName": "Canada",
-      "list": [
-        {
-          "name": "Canada Parks",
-          "url": "https://parks.canada.ca",
-          "description": [
-            "Tons of information about the parks and camping in general."
-          ]
-        },
-		  {
-			  "name": "Canada Parks Reservations",
-			  "url": "https://reservation.pc.gc.ca",
-			  "description": [
-				  "Reserve your campsite in a Canadian park"
-			  ]
-		  }
-      ]
-    },
-    {
-      "sectionName": "British Columbia",
-      "list": [
-        {
-          "name": "BC Parks",
-          "url": "https://bcparks.ca/",
-          "description": [
-            "Description of the parks."
-          ]
-        },
-        {
-          "name": "BC Parks Reservations",
-          "url": "https://camping.bcparks.ca/",
-          "description": [
-            "Book campsites for BC provincial parks online."
-          ]
-        },
-        {
-          "name": "BC Sites and Trails",
-          "url": "https://www.sitesandtrailsbc.ca/search?view=list",
-          "description": [
-            "Official BC directory of recreation sites and trails. Search by area to find camping, boat launches, and day-use sites near your destination."
-          ]
-        },
-        {
-          "name": "BC Bathymetric Lake Maps",
-          "url": "https://a100.gov.bc.ca/pub/fidq/viewBathymetricMaps.do",
-          "description": [
-            "Depth charts for lakes across the province. Useful for understanding where fish hold and how to approach a lake you haven’t fished before."
-          ]
-        },
-		  {
-			  "name": "Drive BC",
-			  "url": "https://www.drivebc.ca/?pan=-124.54973412027462%2C49.64955191300723&zoom=7.562177654260315",
-			  "description": [
-				  "Everything about the roads, from closures, to road conditions to rest stops."
-			  ]
-		  }
-      ]
-    },
-    {
-      "sectionName": "Other province",
-      "list": [
-		  {
-			  "name": "Camping in Alberta Parks",
-			  "url": "https://www.albertaparks.ca/albertaparks-ca/visit-our-parks/camping-in-alberta-parks/",
-			  "description": [
-				  "Beautiful rockies"
-			  ]
-		  },
-        {
-          "name": "New Foundland and Labrador",
-          "url": "https://www.newfoundlandlabrador.com",
-          "description": [
-            "The island at the other end of Canada"
-          ]
-        }
-      ]
-    },
-    {
-		  "sectionName": "Fishing",
-		  "list": [
-			  {
-				  "name": "Freshwater Fisheries Society of BC",
-				  "url": "https://www.gofishbc.com",
-				  "description": [
-					  "Stocking data, regulations, and how-to guides for freshwater fishing across BC.",
-					  "Their lake-by-lake stocking reports are handy for planning where to go."
-				  ]
-			  },
-			  {
-				  "name": "Go Hiking",
-				  "url": "https://gohiking.ca/",
-				  "description": [
-					  "Trail guides and lake write-ups across BC, with directions and photos."
-				  ]
-			  },
-			  {
-				  "name": "Campbell River Fish & Wildlife Association",
-				  "url": "https://crfishandwildlifeclub.ca",
-				  "description": [
-					  "Working to serve our community in all aspects of fish and wildlife conservation and outdoor activities."
-				  ]
-			  }
-		  ]
-	  }
-  ]
+	"title": "Useful Links",
+	"published": true,
+	"notes": [
+		{
+			"sectionName": "Camping",
+			"list": [
+				{
+					"name": "The Campers Code",
+					"url": "https://www.camperscode.com/",
+					"description": [
+						"A straightforward guide to responsible backcountry camping.",
+						" Worth reading before your first trip and revisiting occasionally after."
+					]
+				},
+				{
+					"name": "Rules & Etiquette",
+					"url": "https://www2.gov.bc.ca/gov/content/sports-culture/recreation/camping-hiking/sites-trails/planning/rules",
+					"description": [
+						"The Province’s rules and etiquette for recreation sites and trails.",
+						"Worth a read before heading into the backcountry."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Camping",
+			"list": [
+				{
+					"name": "Go Hiking",
+					"url": "https://gohiking.ca/",
+					"description": [
+						"Trail guides and lake write-ups across BC, with directions and photos."
+					]
+				},
+				{
+					"name": "Off track travel",
+					"url": "https://offtracktravel.ca",
+					"description": [
+						"A guide to the campsites and van life."
+					]
+				},
+				{
+					"name": "Campspot",
+					"url": "https://www.campspot.com/",
+					"description": [
+						"A campground search and booking platform covering campgrounds,",
+						"RV parks, and glamping sites across North America."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "RV",
+			"list": [
+				{
+					"name": "Coachmen Beyond",
+					"url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
+					"description": [
+						"Index to all the manuals and videos."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Canada",
+			"list": [
+				{
+					"name": "Canada Parks",
+					"url": "https://parks.canada.ca",
+					"description": [
+						"Tons of information about the parks and camping in general."
+					]
+				},
+				{
+					"name": "Canada Parks Reservations",
+					"url": "https://reservation.pc.gc.ca",
+					"description": [
+						"Reserve your campsite in a Canadian park"
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "British Columbia",
+			"list": [
+				{
+					"name": "BC Parks",
+					"url": "https://bcparks.ca/",
+					"description": [
+						"Description of the parks."
+					]
+				},
+				{
+					"name": "BC Parks Reservations",
+					"url": "https://camping.bcparks.ca/",
+					"description": [
+						"Book campsites for BC provincial parks online."
+					]
+				},
+				{
+					"name": "BC Sites and Trails",
+					"url": "https://www.sitesandtrailsbc.ca/search?view=list",
+					"description": [
+						"Official BC directory of recreation sites and trails. Search by area to find camping, boat launches, and day-use sites near your destination."
+					]
+				},
+				{
+					"name": "BC Bathymetric Lake Maps",
+					"url": "https://a100.gov.bc.ca/pub/fidq/viewBathymetricMaps.do",
+					"description": [
+						"Depth charts for lakes across the province. Useful for understanding where fish hold and how to approach a lake you haven’t fished before."
+					]
+				},
+				{
+					"name": "Drive BC",
+					"url": "https://www.drivebc.ca/?pan=-124.54973412027462%2C49.64955191300723&zoom=7.562177654260315",
+					"description": [
+						"Everything about the roads, from closures, to road conditions to rest stops."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Other province",
+			"list": [
+				{
+					"name": "Camping in Alberta Parks",
+					"url": "https://www.albertaparks.ca/albertaparks-ca/visit-our-parks/camping-in-alberta-parks/",
+					"description": [
+						"Beautiful rockies"
+					]
+				},
+				{
+					"name": "New Foundland and Labrador",
+					"url": "https://www.newfoundlandlabrador.com",
+					"description": [
+						"The island at the other end of Canada"
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Fishing",
+			"list": [
+				{
+					"name": "Freshwater Fisheries Society of BC",
+					"url": "https://www.gofishbc.com",
+					"description": [
+						"Stocking data, regulations, and how-to guides for freshwater fishing across BC.",
+						"Their lake-by-lake stocking reports are handy for planning where to go."
+					]
+				},
+				{
+					"name": "Campbell River Fish & Wildlife Association",
+					"url": "https://crfishandwildlifeclub.ca",
+					"description": [
+						"Working to serve our community in all aspects of fish and wildlife conservation and outdoor activities."
+					]
+				}
+			]
+		}
+	]
 }
