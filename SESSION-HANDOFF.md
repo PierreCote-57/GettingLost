@@ -1,0 +1,84 @@
+# Session handoff — road-condition badge
+
+_Last updated: 2026-07-14. This is a scratch handoff note for the next session; Pierre can delete it once the work is merged._
+
+---
+
+## 0. READ FIRST — environment & workflow (this tripped up the last session)
+
+- **This branch's work was done in Claude Code *on the web*** — a remote, ephemeral cloud VM with its **own separate clone** of the repo. It **cannot** read or write Pierre's local drive. The **only** way changes reach Pierre is: push to GitHub → Pierre pulls.
+- **Pierre's normal/preferred workflow** (used for a long time via the **local** Claude Code CLI): edits land directly on his **local drive**, on branch **`main`**, and **Pierre does the commit and push himself.**
+- **In a web session that model is impossible** — no local-drive access, and the session is pinned to a feature branch. If Pierre wants his normal flow, he should run the work in the **local CLI**, not the web app.
+- **This web session was configured** to develop on `claude/project-plan-discussion-5sdl11` and push there (hard rule: never push elsewhere without explicit permission). That's why it's not on `main`.
+- **Lesson for next session:** if the session is remote AND Pierre says "make changes on my local drive / I'll push," flag the mismatch immediately — don't silently follow the web config.
+
+---
+
+## 1. What the feature is
+
+A single **road-condition badge** in the **lower-left** corner of gallery cards, mirroring how the activity `tags` sit in the upper-right. It shows the **worst** stretch of the drive in, color-coded by severity. Gallery cards **only** (never on destination pages — consistent with how `tags` already behave).
+
+## 2. Data model (locked)
+
+A `badges` wrapper groups all corner-chip data in each content JSON:
+```json
+"badges": { "tags": ["fishing", "picnic"], "road": "gravel" }
+```
+- `tags` — array, unchanged meaning (upper-right, multiple).
+- `road` — single string, one of four values (lower-left, one badge).
+- **Nested end-to-end**: source JSON → `sync.js` aggregate → `renderCard` all use this shape.
+- `road` **absent or `""`** are both valid and both mean "no badge" (no warning).
+
+## 3. The road vocabulary (locked) + definitions
+
+| value | meaning | color bg / text |
+|---|---|---|
+| `pavement` | Sealed. Any car, normal speed. | `rgba(45,110,200,.9)` / `#E6F0FB` |
+| `gravel` | Smooth gravel/dirt. Normal pace. | `rgba(46,133,85,.9)` / `#E4F5EC` |
+| `potholes` | Looks like gravel but pothole-riddled — crawl ~5 km/h. | `rgba(196,100,28,.95)` / `#FCEDE0` |
+| `rugged` | Overgrown two-track: dirt tracks with grass down the middle and sides. High-clearance. | `rgba(178,55,44,.94)` / `#FBE4E1` |
+
+Ramp: blue → green → orange → red. All light text. Text-only chip (no icon — emoji was unreadable at chip size). Colors are provisional/easy to nudge (all in `gl-constants.jst`).
+
+## 4. Behavior rules (locked)
+
+- Missing / empty `road` → no badge, silently.
+- Unrecognized non-empty value (typo):
+  - **Browser** (`renderRoad`) → render nothing + `console.error`.
+  - **sync.js** → `console.warn` naming the file + a `::warning::` CI annotation + omit `road` from the aggregate.
+
+## 5. What was implemented (commit `64c2e0b` on `claude/project-plan-discussion-5sdl11`, pushed to origin)
+
+**Code (4 files):**
+- `media/data/scripts/gl-constants.jst` — added `GL.ROAD_COLORS` map (4 keys, `{bg,text}`), **no fallback**.
+- `media/data/scripts/gettinglost.jst` — `ROAD_COLORS` alias; new `renderRoad()`; `renderCard` reads nested `entry.badges.tags` / `entry.badges.road`.
+- `media/data/scripts/gettinglost.cst` — `.gl-road` rule (same pill as `.gl-tag`, `position:absolute; bottom:8px; left:8px`).
+- `local/sync/sync.js` — `ROAD_VALUES` const; `annotateWarning()` helper (`::warning::`); `generateGalleryJsons` emits nested `badges:{tags,road}`, validates `road`, warns+annotates+omits on bad value.
+
+**Data (17 files) — migrated top-level `tags` into `badges:{tags}`:**
+- 13 destinations + 4 posts. Two carry `road`:
+  - `echo-lake-dayuse` → `gravel`
+  - `beavertail-lake-dayuse` → `potholes`
+- Other 11 destinations + 4 posts have no `road` (empty corner).
+
+## 6. Validation done
+
+- All 17 JSON parse; each has `badges.tags`, none has leftover top-level `tags`; road only on the two intended files.
+- `sync.js` passes `node --check`; both `.jst` compile clean.
+- Exercised sync road-validation: `gravel`→kept, missing→none, `""`→none (no warning), `gravle`→omitted + warning. Correct.
+
+## 7. Remaining work / next steps
+
+1. **Review & merge** the branch. To bring it onto local `main` (fast-forward, it's one commit on top of `main`):
+   ```
+   git fetch origin
+   git checkout main
+   git merge --ff-only origin/claude/project-plan-discussion-5sdl11
+   ```
+   (If Pierre wants to author the commit himself instead, cherry-pick `--no-commit` then commit.)
+2. **Regenerate the gallery aggregate.** `Destinations.json` (and the other gallery aggregates) are **generated by `sync.js`**, not committed — the badges only appear on the live site after a sync run regenerates them into the nested shape and uploads. The data migration + `renderCard` change are designed to ship together, so a normal sync deploy handles it. (Not run in the web session — needs WP credentials/network.)
+3. **Backfill the other 11 destinations** with `road` values over time (data-entry step; render-nothing until then). Pierre knows the roads first-hand.
+
+## 8. Reference
+
+- Visual mockup (design pitch, text-only chips + ramp): https://claude.ai/code/artifact/a409ee04-dc57-4eab-870f-fa6b0fbb608b
