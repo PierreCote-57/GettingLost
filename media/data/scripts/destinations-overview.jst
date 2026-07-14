@@ -53,7 +53,6 @@
   var COLUMNS = [
     { label: "Name", field: "name", width: 170 },
     { label: "On lost", field: "on_lost", width: 70 },
-    { label: "Operator", field: "operator", width: 140 },
     { label: "Location", field: "location", width: 160 },
     { label: "Access", field: "access", width: 110 },
     { label: "Sites", field: "sites", width: 60 },
@@ -114,7 +113,8 @@
   // link behaviors:
   //   - name: always links to the campground's own home page (external
   //     `url`, e.g. a bcparks.ca or private-resort page). Plain text when
-  //     there's no url.
+  //     there's no url. The operator (no longer its own column) is shown as
+  //     a hover tooltip on the cell, e.g. "Operator: Quality Recreation Ltd."
   //   - on_lost ("On lost"): internal link to this campground's page on
   //     Getting Lost, when it has a `file`. Empty otherwise.
   //   - location: the location is now a block { lat, lng, pin, zoom, notes };
@@ -129,6 +129,7 @@
     if (field === "name") {
       if (place.url) cell.appendChild(externalLink(place.url, cellText(place.name)));
       else cell.textContent = cellText(place.name);
+      if (place.operator) cell.title = "Operator: " + cellText(place.operator);
     } else if (field === "on_lost") {
       if (place.file) cell.appendChild(internalLink(place.file, "View"));
     } else if (field === "location") {
@@ -222,10 +223,16 @@
         fillDataCell(cell, place, col.field);
 
         // Numbered note for this cell, if the place has one for this field.
+        // Identical texts share a number (so a column full of the same
+        // "Preliminary…" note shows one footnote, not dozens).
         var noteText = place.notes && place.notes[col.field];
         if (noteText) {
-          footnotes.push(noteText);
-          appendNoteMarker(cell, footnotes.length);
+          var idx = footnotes.indexOf(noteText);
+          if (idx === -1) {
+            footnotes.push(noteText);
+            idx = footnotes.length - 1;
+          }
+          appendNoteMarker(cell, idx + 1);
         }
 
         row.appendChild(cell);
