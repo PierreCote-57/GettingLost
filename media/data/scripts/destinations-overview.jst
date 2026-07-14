@@ -1,0 +1,96 @@
+/**
+ * destinations-overview.jst
+ *
+ * Page-specific block renderer for the Destinations Overview page.
+ * Registers on window.GL.blockRenderers, the shared registry defined in
+ * gettinglost.jst (loaded on every page), which already handles fetching
+ * the page's own JSON (/wp-content/uploads/destinations-overview.json)
+ * and dispatching each [data-block-type] element to its renderer.
+ *
+ * This file adds one renderer:
+ *
+ *   <div data-block-type="placesTable"></div>
+ *
+ * It reads pageData.places = [ { group, list: [ { name, operator,
+ * location, site_count, amenities, reservation_status }, ... ] }, ... ]
+ * and renders a single plain table, one row per place, with the group
+ * shown in the first column.
+ *
+ * This is deliberately a bare-bones v1 — a plain table to get the data
+ * on the page. Styling, per-group sectioning, sorting, links, etc. are
+ * expected to be tuned over later iterations.
+ */
+
+(function () {
+  "use strict";
+
+  window.GL = window.GL || {};
+  window.GL.blockRenderers = window.GL.blockRenderers || {};
+
+  var COLUMNS = [
+    { label: "Group", field: "group" },
+    { label: "Name", field: "name" },
+    { label: "Operator", field: "operator" },
+    { label: "Location", field: "location" },
+    { label: "Sites", field: "site_count" },
+    { label: "Amenities", field: "amenities" },
+    { label: "Reservation", field: "reservation_status" }
+  ];
+
+  // Missing values (null / undefined / "") render as an empty cell.
+  // Arrays (e.g. amenities) join with ", ".
+  function cellText(value) {
+    if (value === null || value === undefined || value === "") return "";
+    if (Array.isArray(value)) return value.join(", ");
+    return String(value);
+  }
+
+  function buildCell(tag, value) {
+    var cell = document.createElement(tag);
+    cell.textContent = cellText(value);
+    cell.style.border = "1px solid #ddd";
+    cell.style.padding = "0.3rem 0.6rem";
+    cell.style.verticalAlign = "top";
+    cell.style.fontSize = "0.9rem";
+    if (tag === "th") {
+      cell.style.textAlign = "left";
+      cell.style.fontWeight = "700";
+    }
+    return cell;
+  }
+
+  window.GL.blockRenderers.placesTable = function (el, pageData) {
+    var groups = pageData.places || [];
+
+    el.textContent = "";
+    el.appendChild(window.GL.buildGlHeading("Campgrounds"));
+
+    var table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.width = "100%";
+    table.style.marginTop = "0.25rem";
+
+    var thead = document.createElement("thead");
+    var headerRow = document.createElement("tr");
+    COLUMNS.forEach(function (col) {
+      headerRow.appendChild(buildCell("th", col.label));
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement("tbody");
+    groups.forEach(function (group) {
+      (group.list || []).forEach(function (place) {
+        var row = document.createElement("tr");
+        COLUMNS.forEach(function (col) {
+          var value = col.field === "group" ? group.group : place[col.field];
+          row.appendChild(buildCell("td", value));
+        });
+        tbody.appendChild(row);
+      });
+    });
+    table.appendChild(tbody);
+
+    el.appendChild(table);
+  };
+})();

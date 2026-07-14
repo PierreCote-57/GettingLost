@@ -5,10 +5,11 @@
 			"Edit",
 			"Write",
 			"Bash(curl 'https://gettinglostonvi.wpcomstaging.com*)",
-			"Bash(python3 -c *)",
-			"Bash(cd *)",
-			"Bash(grep *)",
-			"Bash(git *)"
+			"Bash(python3:*)",
+			"Bash(cd:*)",
+			"Bash(ls:*)",
+			"Bash(grep:*)",
+			"Bash(git:*)"
 		]
 	}
 }

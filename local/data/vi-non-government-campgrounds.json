@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Vancouver Island Campgrounds NOT managed by the BC provincial government",
+    "scope": "All of Vancouver Island. Includes private RV parks/resorts, First Nations-operated campgrounds, regional/municipal parks, and federal (Parks Canada) sites.",
+    "compiled": "2026-07-13",
+    "updated": "2026-07-14 (added First Nations and regional district research pass)",
+    "primary_sources": "Pacific RV Ventures 'Big List of RV Campsites on Vancouver Island' (Parts One & Two); TinWis '5 Nuu-chah-nulth-owned Campgrounds' article; CRD, RDN, and Regional District of Mount Waddington websites",
+    "completeness_note": "This is a working v2 list, closer to complete but still NOT exhaustive. Vancouver Island likely has 100+ campgrounds in this category total; this list now captures ~50 well-documented full-hookup RV parks, 9 First Nations-operated sites, and most regional-district-run campgrounds. Still likely missing: smaller/rustic private campgrounds without full hookups, west-coast lodges with camping, and any regional sites not surfaced by these particular sources."
+  },
+  "private_rv_parks_resorts": {
+    "victoria_saanich_westshore": [
+      {"name": "Salish Seaside RV Haven", "location": "Victoria, BC"},
+      {"name": "Fort Victoria RV Park", "location": "Victoria, BC"},
+      {"name": "Oceanside RV Park", "location": "Saanichton, BC"},
+      {"name": "Cedar Springs Ranch", "location": "Malahat, BC"},
+      {"name": "All Fun Recreation RV Park", "location": "Langford, BC"},
+      {"name": "Pedder Bay RV Resort & Marina", "location": "Metchosin, BC"},
+      {"name": "Sooke River Campsite", "location": "Sooke, BC"}
+    ],
+    "duncan_chemainus_ladysmith_cowichan": [
+      {"name": "Four Ways RV Park", "location": "Duncan, BC"},
+      {"name": "Riverside Campground & RV Park", "location": "Duncan, BC"},
+      {"name": "Country Maples RV Resort", "location": "Chemainus, BC"},
+      {"name": "Bald Eagle Campground & RV Sites", "location": "Chemainus, BC"},
+      {"name": "Chemainus Gardens RV Park", "location": "Chemainus, BC"},
+      {"name": "Osbourne Bay Resort", "location": "Crofton, BC"},
+      {"name": "Rondalyn Resort", "location": "Ladysmith, BC"}
+    ],
+    "nanaimo_parksville_qualicum_mid_island": [
+      {"name": "Brannen Lake Campsites", "location": "Nanaimo, BC"},
+      {"name": "Jingle Pot RV Park", "location": "Nanaimo, BC"},
+      {"name": "Living Forest Oceanside Campground", "location": "Nanaimo, BC"},
+      {"name": "Mountainaire Campground", "location": "Nanaimo, BC"},
+      {"name": "Westwood Lake RV Camping & Cabins (Westwood Lake Campground Resort)", "location": "Nanaimo, BC"},
+      {"name": "Zuiderzee Campsites", "location": "Cedar, BC (near Nanaimo)"},
+      {"name": "Nanoose Creek Campground", "location": "Nanoose Bay, BC"},
+      {"name": "Heart Haven RV Family Campground", "location": "Parksville, BC"},
+      {"name": "Paradise Sea-Side Resort", "location": "Parksville, BC"},
+      {"name": "Park Sands Beach Resort", "location": "Parksville, BC"},
+      {"name": "Riverbend Resort", "location": "Parksville, BC"},
+      {"name": "Surfside RV Park", "location": "Parksville, BC"},
+      {"name": "Pacific Palms RV Resort", "location": "Parksville, BC"},
+      {"name": "Cedar Grove RV Park & Campground", "location": "Qualicum Beach, BC"},
+      {"name": "Qualicum Bay Resort and RV Park", "location": "Qualicum Beach, BC"},
+      {"name": "Shalom RV Park", "location": "Qualicum Beach, BC"},
+      {"name": "Riverside Resort Motel & Campground", "location": "Qualicum Beach, BC"},
+      {"name": "Tranquility Woods Campground", "location": "Errington, BC"},
+      {"name": "Cameron Lake Resort", "location": "Qualicum Beach, BC"},
+      {"name": "Deep Bay RV Park", "location": "Bowser, BC"}
+    ],
+    "port_alberni_ucluelet_tofino": [
+      {"name": "China Creek Marina & RV Park", "location": "Port Alberni, BC", "note": "Operated by Port Alberni Port Authority, which leases the land from Alberni-Clayoquot Regional District — functionally a hybrid private/regional-district site"},
+      {"name": "Island West Resort", "location": "Ucluelet, BC"},
+      {"name": "Surf Junction Campground", "location": "Ucluelet, BC"},
+      {"name": "Ucluelet Campground", "location": "Ucluelet, BC"},
+      {"name": "Bella Pacifica Campground", "location": "Tofino, BC"},
+      {"name": "Surf Grove Campground", "location": "Tofino, BC"},
+      {"name": "Crystal Cove Beach Resort", "location": "Tofino, BC"}
+    ],
+    "courtenay_comox_campbell_river_north_island": [
+      {"name": "Cape Lazo Resort", "location": "Comox, BC"},
+      {"name": "Pacific Playgrounds International", "location": "Black Creek, BC"},
+      {"name": "Saratoga Beach Resort", "location": "Black Creek, BC"},
+      {"name": "Speedway RV Park", "location": "Black Creek, BC"},
+      {"name": "Seal Bay RV Park", "location": "Courtenay, BC", "note": "Adjacent to (but distinct from) Seal Bay Regional Park"},
+      {"name": "Driftwood By The Sea RV Park & Cottages", "location": "Campbell River, BC"},
+      {"name": "Brown Bay Resort", "location": "Campbell River, BC"},
+      {"name": "Salmon Point Resort & RV Park", "location": "Campbell River, BC"},
+      {"name": "Shelter Bay Resort", "location": "Campbell River, BC"},
+      {"name": "Thunderbird Campsite", "location": "Campbell River, BC"},
+      {"name": "Fisherboy Park", "location": "Sayward, BC"},
+      {"name": "White River Resort", "location": "Sayward, BC"},
+      {"name": "Seaside RV Campground", "location": "Tahsis, BC"},
+      {"name": "Telegraph Cove Marina & RV Park", "location": "Telegraph Cove, BC"},
+      {"name": "Alder Bay Resort", "location": "Port McNeill, BC"},
+      {"name": "Harmony Shores Campground", "location": "Sointula, BC"},
+      {"name": "Port Alice RV Park & Campground", "location": "Port Alice, BC"},
+      {"name": "Pioneer Inn", "location": "Port Hardy, BC"},
+      {"name": "Sunny Sanctuary Campground / Port Hardy RV Resort", "location": "Port Hardy, BC"}
+    ]
+  },
+  "first_nations_operated": [
+    {"name": "Tsawaak RV Resort & Campground", "location": "Tofino, BC (near MacKenzie Beach)", "operator": "Tla-o-qui-aht First Nation"},
+    {"name": "Secret Beach Campground & Kayak Launch", "location": "Ucluelet, BC (Toquaht Bay, 13km gravel off Hwy 4)", "operator": "Toquaht First Nation"},
+    {"name": "Pachena Bay Campground", "location": "Bamfield, BC", "operator": "Huu-ay-aht First Nations"},
+    {"name": "Pacheedaht Campground", "location": "Port Renfrew, BC", "operator": "Pacheedaht First Nation"},
+    {"name": "Nitinaht Lake Campground", "location": "Nitinaht Lake, BC", "operator": "Ditidaht First Nation (operating since 2006)"},
+    {"name": "Qualicum First Nation Waterfront Campground, Cabins and RV Park", "location": "Bowser, BC (near Qualicum Beach)", "operator": "Qualicum First Nation"},
+    {"name": "Snaw-Naw-as Campground", "location": "Lantzville, BC", "operator": "Snaw-Naw-as First Nation"},
+    {"name": "Puntledge RV Park & Campground", "location": "Courtenay, BC", "operator": "Located in traditional territory of the K'ómoks First Nation — operating entity still needs confirmation (may be privately run)"},
+    {"name": "Sooke Potholes (Spring Salmon Place / KWL-UCHUN Campground)", "location": "Sooke, BC", "operator": "Managed by CRD, operated by T'Sou-ke Nation"}
+  ],
+  "regional_district_municipal_parks": [
+    {"name": "Island View Beach Campground", "location": "Saanich Peninsula, BC", "operator": "Capital Regional District (CRD)"},
+    {"name": "Spring Salmon Place (KWL-UCHUN) Campground, Sooke Potholes", "location": "Sooke, BC", "operator": "CRD (operated by T'Sou-ke Nation)", "note": "duplicate cross-reference with First Nations list above"},
+    {"name": "Jordan River Campground", "location": "Jordan River, BC", "operator": "Capital Regional District (CRD)"},
+    {"name": "Horne Lake Regional Park", "location": "near Qualicum Beach, BC", "operator": "Regional District of Nanaimo (RDN)"},
+    {"name": "Kwaksistah Regional Park Campground", "location": "near Winter Harbour, BC", "operator": "Regional District of Mount Waddington", "notes": "7 rustic sites, no services, unreliable cell service"},
+    {"name": "Link River Regional Park Campground", "location": "near Port Alice, BC (Alice Lake)", "operator": "Regional District of Mount Waddington", "notes": "23 waterfront/wooded sites, no services except accessible outhouses"}
+  ],
+  "regional_districts_with_no_camping_confirmed": [
+    "Comox Valley Regional District — no regional park camping",
+    "Cowichan Valley Regional District — no regional park camping"
+  ],
+  "federal_parks_canada": [
+    {"name": "Green Point Campground, Pacific Rim National Park Reserve", "location": "Ucluelet, BC (Long Beach area)", "operator": "Parks Canada (federal, not BC provincial)"}
+  ],
+  "needs_more_digging": [
+    "This list captures the well-documented full-hookup RV parks; smaller/rustic private campgrounds are likely underrepresented",
+    "Puntledge RV Park operator status — confirm if First Nations-operated or privately run on traditional territory",
+    "West coast (Ahousaht, Ehattesaht, Kyuquot, Zeballos area) may have additional First Nations or lodge-based campgrounds not yet surfaced",
+    "Smaller/informal private campgrounds and farm-stay/Hipcamp-style listings not systematically catalogued — Hipcamp/RVezy searches would surface many more individual small operators",
+    "Regional District of Mount Waddington's third campground (on Malcolm Island) excluded as not on Vancouver Island proper — worth double-checking there isn't a second VI site missed",
+    "Full exhaustive coverage of this category (likely 100+ total sites) would benefit from a dedicated Research pass"
+  ]
+}

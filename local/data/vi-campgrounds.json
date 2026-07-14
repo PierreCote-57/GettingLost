@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Vancouver Island Campgrounds — BC Parks & Recreation Sites and Trails BC (RSTBC)",
+    "scope": "Vancouver Island only (Gulf Islands, Quadra, Cortes, Denman, Hornby, and Lasqueti excluded from this pass)",
+    "fields": ["name", "type", "operator", "location", "site_count", "amenities", "reservation_status", "notes"],
+    "compiled": "2026-07-13",
+    "completeness_note": "This is a working v1 list, not exhaustive. BC Parks entries cover all known vehicle-accessible frontcountry campgrounds on Vancouver Island proper. RSTBC has 1,200+ recreation sites province-wide with hundreds on Vancouver Island; only a well-documented subset with published site counts is included here. Expand over time via sitesandtrailsbc.ca and bcparks.ca."
+  },
+  "bc_parks": [
+    {"name": "Goldstream Provincial Park", "operator": "RLC Park Services", "location": "16 km NW of Victoria, Trans-Canada Hwy", "site_count": 155, "amenities": ["flush toilets", "showers", "drinking water", "wheelchair accessible", "group campsites", "fire pits", "winter camping"], "reservation_status": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services"},
+    {"name": "French Beach Provincial Park", "operator": "RLC Park Services", "location": "Between Sooke and Jordan River", "site_count": null, "amenities": ["beach access", "pit toilets"], "reservation_status": "Reservable"},
+    {"name": "Juan de Fuca Provincial Park (China Beach Campground)", "operator": "RLC Park Services", "location": "Southwest Vancouver Island, Juan de Fuca coast", "site_count": "99 vehicle-accessible + 26 walk-in", "amenities": ["outhouses", "potable water taps", "no cell service"], "reservation_status": "Nearly all sites reservable; 1 site FCFS"},
+    {"name": "Little Qualicum Falls Provincial Park", "operator": "RLC Park Services", "location": "Between Parksville/Qualicum and Port Alberni", "site_count": null, "amenities": ["hiking trails to waterfalls"], "reservation_status": "Reservable"},
+    {"name": "Rathtrevor Beach Provincial Park", "operator": "RLC Park Services", "location": "Parksville", "site_count": "226 vehicle-accessible + 25 walk-in", "amenities": ["sandy beach", "flush toilets", "showers"], "reservation_status": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)"},
+    {"name": "Sproat Lake Provincial Park", "operator": "RLC Park Services", "location": "Near Port Alberni", "site_count": null, "amenities": ["two separate campgrounds", "day-use area", "lake access"], "reservation_status": "Reservable"},
+    {"name": "Stamp River Provincial Park", "operator": "RLC Park Services", "location": "Near Port Alberni", "site_count": null, "amenities": ["salmon-viewing trail", "fish ladder lookout"], "reservation_status": "Reservable"},
+    {"name": "Taylor Arm Provincial Park", "operator": "RLC Park Services", "location": "West of Sproat Lake", "site_count": "3 group sites", "amenities": ["group camping only", "day-use"], "reservation_status": "Group sites reservable"},
+    {"name": "Gordon Bay Provincial Park", "operator": "K2 Park Services Ltd.", "location": "Cowichan Lake, north of Duncan", "site_count": 126, "amenities": ["flush toilets", "outhouses", "potable water taps", "no cell service", "sandy beach"], "reservation_status": "123 of 126 sites reservable; limited winter FCFS at reduced rate"},
+    {"name": "Elk Falls Provincial Park", "operator": "Quality Recreation Ltd.", "location": "Near Campbell River", "site_count": null, "amenities": ["suspension bridge", "waterfall", "winter camping year-round"], "reservation_status": "Reservable; open March 20–Oct 31 plus year-round winter camping"},
+    {"name": "Loveland Bay Provincial Park", "operator": "Quality Recreation Ltd.", "location": "Campbell Lake, near Campbell River", "site_count": null, "amenities": ["rustic wilderness lakeside camping"], "reservation_status": "Reservable; open April 1–Oct 12"},
+    {"name": "Miracle Beach Provincial Park", "operator": "Quality Recreation Ltd.", "location": "Black Creek, between Campbell River and Courtenay", "site_count": null, "amenities": ["hot showers", "flush toilets", "nature house and store", "adventure playground", "sheltered beach"], "reservation_status": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30"},
+    {"name": "Morton Lake Provincial Park", "operator": "Quality Recreation Ltd.", "location": "Near Campbell River", "site_count": null, "amenities": ["rustic wilderness lakeside camping", "winter camping year-round"], "reservation_status": "Reservable; open April 30–Sept 27 plus year-round winter camping"},
+    {"name": "Strathcona Provincial Park — Buttle Lake Campground", "operator": "BC Parks", "location": "Highway 28, ~48 km west of Campbell River", "site_count": "85–88", "amenities": ["sandy lakefront beach", "washrooms", "water pump", "boat launch", "fire rings", "no RV hookups", "RV length limit 32 ft"], "reservation_status": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly"},
+    {"name": "Strathcona Provincial Park — Ralph River Campground", "operator": "BC Parks", "location": "35 km south of Buttle Lake along Buttle Lake (Western Mines) Road", "site_count": "74–75", "amenities": ["old-growth forest setting", "pit toilets", "water pump", "no RV hookups", "RV length limit 32 ft"], "reservation_status": "Partially reservable, remainder first-come-first-served"}
+  ],
+  "bc_parks_known_gaps": [
+    "Cowichan River Provincial Park (Stolz Falls & 66 Mile Trestle campgrounds)",
+    "Chemainus River Provincial Park",
+    "Nitinat Lake Provincial Park",
+    "Schoen Lake Provincial Park (backcountry, canoe-in)",
+    "Cape Scott Provincial Park (backcountry only, no vehicle camping)",
+    "Woss Lake Provincial Park (undeveloped)",
+    "Newcastle Island Marine Provincial Park (boat access only, off Nanaimo)"
+  ],
+  "rstbc": [
+    {"name": "Nahwitti Lake Recreation Site", "operator": "RSTBC", "location": "En route to/from Cape Scott Provincial Park, North Island", "site_count": 8, "amenities": ["vehicle accessible"], "reservation_status": "First-come-first-served, free"},
+    {"name": "Marble River Recreation Site", "operator": "RSTBC", "location": "40 min drive from Port McNeill, adjacent to Marble River Provincial Park", "site_count": 35, "amenities": ["two campground loops", "river access", "salmon spawning viewing nearby"], "reservation_status": "First-come-first-served, free; closed September–May (gated)"},
+    {"name": "Spring Salmon Place Recreation Site (Horne Lake Potholes)", "operator": "RSTBC", "location": "Horne Lake area", "site_count": 67, "amenities": ["potable water", "outhouses", "swimming", "hiking", "biking", "limited cell service"], "reservation_status": "First-come-first-served, $25/night (2026)"},
+    {"name": "Lizard Lake Recreation Site", "operator": "RSTBC", "location": "~20 min drive from Port Renfrew", "site_count": "19 vehicle-accessible + 8 walk-in", "amenities": ["two floating docks", "swimming", "paddling", "lake loop trail"], "reservation_status": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night"},
+    {"name": "Pacific Yew Recreation Site", "operator": "RSTBC", "location": "Mohun Lake, Sayward Canoe Route, north of Campbell River", "site_count": null, "amenities": ["large sites", "outhouses", "paddling/boating access"], "reservation_status": "First-come-first-served"},
+    {"name": "Upper Campbell Reservoir Recreation Site", "operator": "RSTBC", "location": "Upper Campbell Lake, near Strathcona Park", "site_count": 40, "amenities": ["pit toilets", "picnic tables", "fire pits", "small beach", "boat launch"], "reservation_status": "First-come-first-served; max stay 14 nights"},
+    {"name": "Blackies Beach Recreation Site", "operator": "RSTBC", "location": "Backroads toward Nahmint Lake, near Sproat Lake", "site_count": 6, "amenities": ["tent pads", "toilets", "small cabin"], "reservation_status": "First-come-first-served, free"},
+    {"name": "Scout Beach Recreation Site", "operator": "RSTBC", "location": "Great Central Lake, near Port Alberni", "site_count": 12, "amenities": ["picnic tables", "pit toilets", "fire pits", "boat launch"], "reservation_status": "First-come-first-served, free"},
+    {"name": "Arden Creek Recreation Site", "operator": "RSTBC", "location": "Alberni Inlet, outside Port Alberni", "site_count": "6 (2 walk-in tent pads, 4 vehicle pads)", "amenities": ["picnic tables", "pit toilets", "fire pits", "boat launch", "not suitable for motorhomes"], "reservation_status": "First-come-first-served, free"},
+    {"name": "Kinman Creek Recreation Site", "operator": "RSTBC", "location": "Nimpkish Lake, near Port McNeill", "site_count": null, "amenities": [], "reservation_status": "First-come-first-served"},
+    {"name": "Mr. Canoehead Recreation Site", "operator": "RSTBC", "location": "Sayward Forest Canoe Route, between Amor Lake and Surprise Lake", "site_count": 8, "amenities": ["picnic tables", "pit toilets", "boat/canoe access only"], "reservation_status": "First-come-first-served, free"},
+    {"name": "Schoen Lake area sites (Western Forest Products, upper & lower)", "operator": "RSTBC / Western Forest Products", "location": "Near Woss, adjacent to Schoen Lake Provincial Park", "site_count": "5 lower + 5 upper", "amenities": ["larger sites at upper campsite"], "reservation_status": "First-come-first-served, free"}
+  ],
+  "rstbc_known_gaps": [
+    "Nitnaht Lake area recreation sites (some run by Nitinaht campground keepers, booked online)",
+    "Numerous Sayward Forest / Campbell Lake area recreation sites north of Loveland Bay",
+    "Nanaimo Lakes (First, Second, Third, Fourth Lake) recreation sites",
+    "Woss Lake and Nimpkish Lake area sites beyond Kinman Creek",
+    "Full province-wide RSTBC dataset available via sitesandtrailsbc.ca search/interactive map for further expansion"
+  ]
+}
