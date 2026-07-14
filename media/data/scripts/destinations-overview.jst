@@ -52,6 +52,7 @@
 
   var COLUMNS = [
     { label: "Name", field: "name", width: 170 },
+    { label: "On lost", field: "on_lost", width: 70 },
     { label: "Operator", field: "operator", width: 140 },
     { label: "Location", field: "location", width: 160 },
     { label: "Access", field: "access", width: 110 },
@@ -111,18 +112,21 @@
 
   // Fills a data cell for one column of one place, applying the per-column
   // link behaviors:
-  //   - name: links to the place's home page — an internal site page when
-  //     it has a `file`, otherwise an external `url` (e.g. a bcparks.ca
-  //     page). Plain text when it has neither.
+  //   - name: always links to the campground's own home page (external
+  //     `url`, e.g. a bcparks.ca or private-resort page). Plain text when
+  //     there's no url.
+  //   - on_lost ("On lost"): internal link to this campground's page on
+  //     Getting Lost, when it has a `file`. Empty otherwise.
   //   - site_count ("Sites"): links to the place's `site_map` when present.
   //     Link text is the site count, or "Map" when the count is unknown so
   //     there's still something to click.
   //   - everything else: plain text.
   function fillDataCell(cell, place, field) {
-    if (field === "name" && place.file) {
-      cell.appendChild(internalLink(place.file, cellText(place.name)));
-    } else if (field === "name" && place.url) {
-      cell.appendChild(externalLink(place.url, cellText(place.name)));
+    if (field === "name") {
+      if (place.url) cell.appendChild(externalLink(place.url, cellText(place.name)));
+      else cell.textContent = cellText(place.name);
+    } else if (field === "on_lost") {
+      if (place.file) cell.appendChild(internalLink(place.file, "View"));
     } else if (field === "site_count" && place.site_map) {
       cell.appendChild(externalLink(place.site_map, cellText(place.site_count) || "Map"));
     } else {
@@ -141,7 +145,35 @@
     return colgroup;
   }
 
-  function buildGroupTable(group) {
+  // Appends a superscript reference marker (e.g. "1") to a cell.
+  function appendNoteMarker(cell, number) {
+    var sup = document.createElement("sup");
+    sup.textContent = String(number);
+    sup.style.marginLeft = "1px";
+    cell.appendChild(sup);
+  }
+
+  // Renders the numbered explanations collected for a group's table, as an
+  // <ol> whose item numbers match the in-cell superscripts.
+  function buildFootnotesList(footnotes) {
+    var ol = document.createElement("ol");
+    ol.style.fontSize = "0.8rem";
+    ol.style.color = "#666";
+    ol.style.margin = "0.4rem 0 0";
+    ol.style.paddingLeft = "1.5rem";
+    footnotes.forEach(function (text) {
+      var li = document.createElement("li");
+      li.textContent = text;
+      ol.appendChild(li);
+    });
+    return ol;
+  }
+
+  // Builds one group's table. Any per-place notes (place.notes = { field:
+  // "explanation" }) are turned into numbered superscripts on the matching
+  // cell, and their texts are pushed — in the same order — onto `footnotes`
+  // so the caller can render a matching numbered list beneath the table.
+  function buildGroupTable(group, footnotes) {
     var table = document.createElement("table");
     table.style.borderCollapse = "collapse";
     // Width is the sum of the fixed columns (not 100%): the table only uses
@@ -175,6 +207,14 @@
       COLUMNS.forEach(function (col) {
         var cell = buildCell("td");
         fillDataCell(cell, place, col.field);
+
+        // Numbered note for this cell, if the place has one for this field.
+        var noteText = place.notes && place.notes[col.field];
+        if (noteText) {
+          footnotes.push(noteText);
+          appendNoteMarker(cell, footnotes.length);
+        }
+
         row.appendChild(cell);
       });
       tbody.appendChild(row);
@@ -215,10 +255,16 @@
 
       // overflow-x wrapper: if the columns ever sum past the content
       // column, the table scrolls sideways instead of overflowing the page.
+      var footnotes = [];
       var scroller = document.createElement("div");
       scroller.style.overflowX = "auto";
-      scroller.appendChild(buildGroupTable(group));
+      scroller.appendChild(buildGroupTable(group, footnotes));
       details.appendChild(scroller);
+
+      // Numbered explanations for this group's table (if any), below it.
+      if (footnotes.length) {
+        details.appendChild(buildFootnotesList(footnotes));
+      }
 
       el.appendChild(details);
     });
