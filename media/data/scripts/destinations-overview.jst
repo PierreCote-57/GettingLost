@@ -71,9 +71,10 @@
     return String(value);
   }
 
-  function buildCell(tag, value) {
+  // Builds an empty, styled cell (th or td). Callers fill it with text or
+  // a link.
+  function buildCell(tag) {
     var cell = document.createElement(tag);
-    cell.textContent = cellText(value);
     cell.style.border = "1px solid #ddd";
     cell.style.padding = "0.3rem 0.6rem";
     cell.style.verticalAlign = "top";
@@ -86,6 +87,41 @@
       cell.style.fontWeight = "700";
     }
     return cell;
+  }
+
+  // Internal link to another page on the site. `file` is the github
+  // filename; the slug is derived from it (shared GL.fileToSlug), same tab.
+  function internalLink(file, text) {
+    var a = document.createElement("a");
+    a.href = "/" + window.GL.fileToSlug(file) + "/";
+    a.textContent = text;
+    return a;
+  }
+
+  // External link (site maps, etc.) — new tab, safe rel.
+  function externalLink(url, text) {
+    var a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = text;
+    return a;
+  }
+
+  // Fills a data cell for one column of one place, applying the per-column
+  // link behaviors:
+  //   - name: links to the place's own page when it has a `file`.
+  //   - site_count ("Sites"): links to the place's `site_map` when present,
+  //     falling back to a "Map" label when there's no count to show.
+  //   - everything else: plain text.
+  function fillDataCell(cell, place, field) {
+    if (field === "name" && place.file) {
+      cell.appendChild(internalLink(place.file, cellText(place.name)));
+    } else if (field === "site_count" && place.site_map) {
+      cell.appendChild(externalLink(place.site_map, cellText(place.site_count) || "Map"));
+    } else {
+      cell.textContent = cellText(place[field]);
+    }
   }
 
   // One identical colgroup per table keeps columns aligned across groups.
@@ -113,16 +149,27 @@
     var thead = document.createElement("thead");
     var headerRow = document.createElement("tr");
     COLUMNS.forEach(function (col) {
-      headerRow.appendChild(buildCell("th", col.label));
+      var th = buildCell("th");
+      th.textContent = col.label;
+      headerRow.appendChild(th);
     });
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
+    // Sort by name within the group, client-side (a copy — never mutate the
+    // source data). Deliberately client-side: the JSON keeps its own order
+    // (relevant for later features); display order is decided here at render.
+    var places = (group.list || []).slice().sort(function (a, b) {
+      return (a.name || "").localeCompare(b.name || "");
+    });
+
     var tbody = document.createElement("tbody");
-    (group.list || []).forEach(function (place) {
+    places.forEach(function (place) {
       var row = document.createElement("tr");
       COLUMNS.forEach(function (col) {
-        row.appendChild(buildCell("td", place[col.field]));
+        var cell = buildCell("td");
+        fillDataCell(cell, place, col.field);
+        row.appendChild(cell);
       });
       tbody.appendChild(row);
     });
