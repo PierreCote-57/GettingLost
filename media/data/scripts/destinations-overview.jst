@@ -56,7 +56,7 @@
     { label: "Operator", field: "operator", width: 140 },
     { label: "Location", field: "location", width: 160 },
     { label: "Access", field: "access", width: 110 },
-    { label: "Sites", field: "site_count", width: 60 },
+    { label: "Sites", field: "sites", width: 60 },
     { label: "Amenities", field: "amenities", width: 190 },
     { label: "Reservation", field: "reservation_status", width: 140 }
   ];
@@ -117,9 +117,13 @@
   //     there's no url.
   //   - on_lost ("On lost"): internal link to this campground's page on
   //     Getting Lost, when it has a `file`. Empty otherwise.
-  //   - site_count ("Sites"): links to the place's `site_map` when present.
-  //     Link text is the site count, or "Map" when the count is unknown so
-  //     there's still something to click.
+  //   - location: the location is now a block { lat, lng, pin, zoom, notes };
+  //     the column shows its `notes` text (display unchanged from when
+  //     location was a plain string). lat/lng/pin/zoom are for a future map.
+  //   - sites ("Sites"): a list of { label, url } entries, one per line
+  //     (<br> between). Each entry with a url is a link (label as text, or
+  //     "Map" if the label is empty); a label with no url is plain text.
+  //     Empty list -> empty cell.
   //   - everything else: plain text.
   function fillDataCell(cell, place, field) {
     if (field === "name") {
@@ -127,8 +131,17 @@
       else cell.textContent = cellText(place.name);
     } else if (field === "on_lost") {
       if (place.file) cell.appendChild(internalLink(place.file, "View"));
-    } else if (field === "site_count" && place.site_map) {
-      cell.appendChild(externalLink(place.site_map, cellText(place.site_count) || "Map"));
+    } else if (field === "location") {
+      cell.textContent = cellText(place.location && place.location.notes);
+    } else if (field === "sites") {
+      (place.sites || []).forEach(function (site, i) {
+        if (i > 0) cell.appendChild(document.createElement("br"));
+        if (site.url) {
+          cell.appendChild(externalLink(site.url, cellText(site.label) || "Map"));
+        } else {
+          cell.appendChild(document.createTextNode(cellText(site.label)));
+        }
+      });
     } else {
       cell.textContent = cellText(place[field]);
     }
