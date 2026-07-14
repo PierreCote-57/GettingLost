@@ -13,12 +13,16 @@
  *
  * It reads pageData.places = [ { group, list: [ { name, operator,
  * location, site_count, amenities, reservation_status }, ... ] }, ... ]
- * and renders a single plain table, one row per place, with the group
- * shown in the first column.
+ * and renders each group as its own collapsible <details> block (summary
+ * = group name + count), with one table per group, one row per place.
  *
- * This is deliberately a bare-bones v1 — a plain table to get the data
- * on the page. Styling, per-group sectioning, sorting, links, etc. are
- * expected to be tuned over later iterations.
+ * Columns are fixed-width (table-layout:fixed + an identical <colgroup>
+ * on every group table) so that column N lines up across all groups even
+ * though each group is a separate table.
+ *
+ * Still an early iteration — styling, sorting, links, per-column
+ * formatting, and the collapsed-by-default choice are all expected to be
+ * tuned further.
  */
 
 (function () {
@@ -27,15 +31,37 @@
   window.GL = window.GL || {};
   window.GL.blockRenderers = window.GL.blockRenderers || {};
 
+  // Fixed pixel widths per column. Adding/removing a column is a one-line
+  // change here — no rebalancing (unlike percentages, which must re-sum to
+  // 100 every time). The table's total width is the SUM of these, computed
+  // below, so it starts narrow and only grows as columns are added.
+  //
+  // Keep the sum <= MAX_CONTENT_WIDTH or the table overflows the content
+  // column (it will scroll sideways rather than break the page — see the
+  // overflow-x wrapper — but that's a fallback, not the intent).
+  //
+  // Because every group renders its own <table> (one per expandable
+  // block), the tables only line up if they all use table-layout:fixed
+  // with an identical <colgroup>. That's what keeps column N the same
+  // width across groups.
+  // Padded full-content width: the post-content area is the window minus
+  // ~50px side padding (measured ~1180 at a 1280px window). The theme caps
+  // this block at 900 (contentSize), but the placesTable renderer overrides
+  // that (below) to widen out to here. Doubles as the column-sum guardrail.
+  var MAX_CONTENT_WIDTH = 1180;
+
   var COLUMNS = [
-    { label: "Group", field: "group" },
-    { label: "Name", field: "name" },
-    { label: "Operator", field: "operator" },
-    { label: "Location", field: "location" },
-    { label: "Sites", field: "site_count" },
-    { label: "Amenities", field: "amenities" },
-    { label: "Reservation", field: "reservation_status" }
+    { label: "Name", field: "name", width: 170 },
+    { label: "Operator", field: "operator", width: 140 },
+    { label: "Location", field: "location", width: 160 },
+    { label: "Sites", field: "site_count", width: 60 },
+    { label: "Amenities", field: "amenities", width: 190 },
+    { label: "Reservation", field: "reservation_status", width: 140 }
   ];
+
+  function totalWidth() {
+    return COLUMNS.reduce(function (sum, col) { return sum + col.width; }, 0);
+  }
 
   // Missing values (null / undefined / "") render as an empty cell.
   // Arrays (e.g. amenities) join with ", ".
@@ -52,6 +78,9 @@
     cell.style.padding = "0.3rem 0.6rem";
     cell.style.verticalAlign = "top";
     cell.style.fontSize = "0.9rem";
+    // Fixed layout clips overflow; let long words/strings wrap instead.
+    cell.style.overflowWrap = "break-word";
+    cell.style.wordWrap = "break-word";
     if (tag === "th") {
       cell.style.textAlign = "left";
       cell.style.fontWeight = "700";
@@ -59,16 +88,27 @@
     return cell;
   }
 
-  window.GL.blockRenderers.placesTable = function (el, pageData) {
-    var groups = pageData.places || [];
+  // One identical colgroup per table keeps columns aligned across groups.
+  function buildColGroup() {
+    var colgroup = document.createElement("colgroup");
+    COLUMNS.forEach(function (col) {
+      var colEl = document.createElement("col");
+      colEl.style.width = col.width + "px";
+      colgroup.appendChild(colEl);
+    });
+    return colgroup;
+  }
 
-    el.textContent = "";
-    el.appendChild(window.GL.buildGlHeading("Campgrounds"));
-
+  function buildGroupTable(group) {
     var table = document.createElement("table");
     table.style.borderCollapse = "collapse";
-    table.style.width = "100%";
+    // Width is the sum of the fixed columns (not 100%): the table only uses
+    // as much room as its columns need, leaving space to expand later.
+    table.style.width = totalWidth() + "px";
+    table.style.tableLayout = "fixed";
     table.style.marginTop = "0.25rem";
+
+    table.appendChild(buildColGroup());
 
     var thead = document.createElement("thead");
     var headerRow = document.createElement("tr");
@@ -79,18 +119,55 @@
     table.appendChild(thead);
 
     var tbody = document.createElement("tbody");
-    groups.forEach(function (group) {
-      (group.list || []).forEach(function (place) {
-        var row = document.createElement("tr");
-        COLUMNS.forEach(function (col) {
-          var value = col.field === "group" ? group.group : place[col.field];
-          row.appendChild(buildCell("td", value));
-        });
-        tbody.appendChild(row);
+    (group.list || []).forEach(function (place) {
+      var row = document.createElement("tr");
+      COLUMNS.forEach(function (col) {
+        row.appendChild(buildCell("td", place[col.field]));
       });
+      tbody.appendChild(row);
     });
     table.appendChild(tbody);
 
-    el.appendChild(table);
+    return table;
+  }
+
+  window.GL.blockRenderers.placesTable = function (el, pageData) {
+    var groups = pageData.places || [];
+
+    el.textContent = "";
+
+    // Break out of the theme's 900px content cap. width:100% fills the
+    // padded post-content area and stays responsive on narrow screens;
+    // max-width caps it near the full 1280-minus-padding width on wide ones.
+    el.style.width = "100%";
+    el.style.maxWidth = MAX_CONTENT_WIDTH + "px";
+
+    el.appendChild(window.GL.buildGlHeading("Campgrounds"));
+
+    groups.forEach(function (group) {
+      var count = (group.list || []).length;
+
+      // Each group is its own collapsible block. Collapsed by default;
+      // the count in the summary shows how much is inside without opening.
+      var details = document.createElement("details");
+      details.style.marginBottom = "1rem";
+
+      var summary = document.createElement("summary");
+      summary.style.cursor = "pointer";
+      summary.style.fontWeight = "700";
+      summary.style.fontSize = "1rem";
+      summary.style.padding = "0.3rem 0";
+      summary.textContent = (group.group || "") + " (" + count + ")";
+      details.appendChild(summary);
+
+      // overflow-x wrapper: if the columns ever sum past the content
+      // column, the table scrolls sideways instead of overflowing the page.
+      var scroller = document.createElement("div");
+      scroller.style.overflowX = "auto";
+      scroller.appendChild(buildGroupTable(group));
+      details.appendChild(scroller);
+
+      el.appendChild(details);
+    });
   };
 })();
