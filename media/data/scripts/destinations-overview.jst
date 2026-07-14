@@ -54,6 +54,7 @@
     { label: "Name", field: "name", width: 170 },
     { label: "Operator", field: "operator", width: 140 },
     { label: "Location", field: "location", width: 160 },
+    { label: "Access", field: "access", width: 110 },
     { label: "Sites", field: "site_count", width: 60 },
     { label: "Amenities", field: "amenities", width: 190 },
     { label: "Reservation", field: "reservation_status", width: 140 }
@@ -110,13 +111,18 @@
 
   // Fills a data cell for one column of one place, applying the per-column
   // link behaviors:
-  //   - name: links to the place's own page when it has a `file`.
-  //   - site_count ("Sites"): links to the place's `site_map` when present,
-  //     falling back to a "Map" label when there's no count to show.
+  //   - name: links to the place's home page — an internal site page when
+  //     it has a `file`, otherwise an external `url` (e.g. a bcparks.ca
+  //     page). Plain text when it has neither.
+  //   - site_count ("Sites"): links to the place's `site_map` when present.
+  //     Link text is the site count, or "Map" when the count is unknown so
+  //     there's still something to click.
   //   - everything else: plain text.
   function fillDataCell(cell, place, field) {
     if (field === "name" && place.file) {
       cell.appendChild(internalLink(place.file, cellText(place.name)));
+    } else if (field === "name" && place.url) {
+      cell.appendChild(externalLink(place.url, cellText(place.name)));
     } else if (field === "site_count" && place.site_map) {
       cell.appendChild(externalLink(place.site_map, cellText(place.site_count) || "Map"));
     } else {
