@@ -2,10 +2,13 @@
 	"title": "Beavertail Lake Day Use",
 	"featuredImage": "IMG_0866.jpg",
 	"excerpt": "Under construction",
-	"tags": [
-		"fishing",
-		"picnic"
-	],
+	"badges": {
+		"tags": [
+			"fishing",
+			"picnic"
+		],
+		"road": "potholes"
+	},
 	"published": true,
 	"location": {
 		"lat": 49.97964,

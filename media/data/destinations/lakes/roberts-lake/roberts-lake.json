@@ -2,7 +2,7 @@
   "title": "Roberts Lake",
   "featuredImage": "IMG_0627.jpg",
   "excerpt": "A wheelchair-accessible day-use site with sandy beach, popular with anglers and picnickers.",
-  "tags": ["fishing"],
+  "badges": { "tags": ["fishing"] },
   "published": true,
   "location": {
     "lat": 50.2172,

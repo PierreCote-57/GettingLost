@@ -2,7 +2,7 @@
   "title": "Keogh Lake",
   "featuredImage": "under-construction.png",
   "excerpt": "A popular summer lake near Port McNeill with sandy beach, boat launch, and the Clint Beek rec site.",
-  "tags": ["fishing", "camping"],
+  "badges": { "tags": ["fishing", "camping"] },
   "published": true,
   "location": {
     "lat": 50.4962,
