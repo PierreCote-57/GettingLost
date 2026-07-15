@@ -3,7 +3,7 @@
   "featuredImage": "under-construction.png",
   "excerpt": "A popular summer lake near Port McNeill with sandy beach, boat launch, and the Clint Beek rec site.",
   "badges": { "tags": ["fishing", "camping"] },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 50.4962,
     "lng": -127.1664,

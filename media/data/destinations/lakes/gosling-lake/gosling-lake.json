@@ -3,7 +3,7 @@
   "featuredImage": "ActiveWorksite.jpg",
   "excerpt": "A large lake with multiple rec sites and bay access, part of the Sayward Forest area.",
   "badges": { "tags": ["fishing"] },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 50.0603,
     "lng": -125.5031,

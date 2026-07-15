@@ -148,13 +148,14 @@ async function main() {
     }
     const date = post.date || "";
     const published = post.status === "publish";
+    const comments = post.comment_status === "closed" ? "closed" : "open";
 
     const jsonData = {
       title,
       excerpt,
       featuredImage,
       date,
-      published,
+      wpSettings: { published, comments },
       categories: [],
       tags: [],
     };

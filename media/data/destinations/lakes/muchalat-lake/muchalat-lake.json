@@ -3,7 +3,7 @@
   "featuredImage": "IMG_0795.jpg",
   "excerpt": "A large lake near Gold River with boat ramp, dock, beach, and swimming area.",
   "badges": { "tags": ["fishing", "camping"] },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.873,
     "lng": -126.1828,

@@ -3,7 +3,7 @@
   "featuredImage": "IMG_0706.jpg",
   "excerpt": "Part of the Sayward Forest Canoe Route, with sandy beaches, rocky islets, and multiple rec sites to explore.",
   "badges": { "tags": ["fishing", "camping"] },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 50.1602,
     "lng": -125.56,

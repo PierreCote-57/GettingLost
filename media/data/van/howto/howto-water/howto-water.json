@@ -3,7 +3,7 @@
   "featuredImage": "under-construction.png",
   "excerpt": "Manage the van's fresh water system.",
   "tags": [],
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "photoGalleries": {
     "howto": {
       "name": "How to images",

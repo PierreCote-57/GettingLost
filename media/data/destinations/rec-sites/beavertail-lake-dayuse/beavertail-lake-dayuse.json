@@ -9,7 +9,7 @@
 		],
 		"road": "potholes"
 	},
-	"published": true,
+	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 49.97964,
 		"lng": -125.50546,

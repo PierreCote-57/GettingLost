@@ -9,7 +9,7 @@
 		],
 		"road": "gravel"
 	},
-	"published": true,
+	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 49.9864,
 		"lng": -125.4084,

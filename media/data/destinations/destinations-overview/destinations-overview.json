@@ -1,6 +1,6 @@
 {
   "title": "Destinations Overview",
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "places": [
     {
       "group": "BC Parks",

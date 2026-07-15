@@ -1,6 +1,6 @@
 {
   "title": "Destination Template",
-  "published": false,
+  "wpSettings": {"published": false, "comments": "open"},
   "lat": 0,
   "lng": 0,
   "campground": {

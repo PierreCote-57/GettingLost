@@ -3,7 +3,7 @@
   "featuredImage": "under-construction.png",
   "excerpt": "A massive lake near Port Alberni with provincial parks, private campgrounds, and great fishing.",
   "badges": { "tags": ["fishing", "camping"] },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.2901,
     "lng": -124.9153,

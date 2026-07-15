@@ -3,7 +3,7 @@
   "featuredImage": "under-construction.png",
   "excerpt": "A thundering waterfall and old-growth Douglas fir, just north of Campbell River.",
   "badges": { "tags": ["camping", "fishing", "hiking"], "road": "pavement" },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 50.037009,
     "lng": -125.295734,

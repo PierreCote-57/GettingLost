@@ -225,6 +225,27 @@ function annotateWarning(message) {
 }
 
 // ---------------------------------------------------------------------
+// wpSettings — GitHub-mastered per-object WordPress settings
+// ---------------------------------------------------------------------
+// Each page/post data file carries a `wpSettings` block:
+//   { "published": <bool>, "comments": "open" | "closed" }
+// published -> WP status:         true "publish" / false "draft"
+//              (absent -> undefined; create then falls back to "draft").
+// comments  -> WP comment_status: passed through; DEFAULT "open" when absent
+//              (only an explicit "closed" turns them off). Asserted on every
+//              create AND update so the repo always wins (like featured_media).
+
+function wpStatusFromData(data) {
+  const pub = data.wpSettings ? data.wpSettings.published : undefined;
+  return pub === undefined ? undefined : (pub ? "publish" : "draft");
+}
+
+function wpCommentStatusFromData(data) {
+  const c = data.wpSettings ? data.wpSettings.comments : undefined;
+  return c === "closed" ? "closed" : "open";
+}
+
+// ---------------------------------------------------------------------
 // Data loading — WP pages, per-page JSONs, WP media
 // ---------------------------------------------------------------------
 
@@ -325,7 +346,7 @@ function generateGalleryJsons(pageFileMap, perPageDataMap) {
       if (!pd) continue;
       const { data, repoPath } = pd;
       if (!repoPath.startsWith(rule.path)) continue;
-      if (data.published !== true) continue;
+      if (wpStatusFromData(data) !== "publish") continue;
 
       const badgesIn = data.badges || {};
       let road = badgesIn.road;
@@ -359,7 +380,7 @@ function generatePageMap(pageFileMap, perPageDataMap) {
   for (const [filename] of pageFileMap) {
     const base = path.basename(filename, path.extname(filename));
     const pd = perPageDataMap.get(`${base}.json`);
-    if (!pd || pd.data.published !== true) continue;
+    if (!pd || wpStatusFromData(pd.data) !== "publish") continue;
     map[filename] = { title: pd.data.title || base };
   }
   return map;
@@ -473,9 +494,11 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
     const body = { content };
     if (pageData.title) body.title = pageData.title;
     if (pageData.excerpt !== undefined) body.excerpt = pageData.excerpt || "";
-    if (pageData.published !== undefined) {
-      body.status = pageData.published ? "publish" : "draft";
-    }
+    const pageStatus = wpStatusFromData(pageData);
+    if (pageStatus !== undefined) body.status = pageStatus;
+    // GitHub is master: assert comment_status on every create AND update
+    // (default "open"; only an explicit wpSettings.comments="closed" turns it off).
+    body.comment_status = wpCommentStatusFromData(pageData);
     // GitHub is master: always assert the featured image. A named image
     // resolves to its media id (or the under-construction fallback if not yet
     // uploaded); null/absent pushes 0 to actively clear any featured image WP
@@ -518,7 +541,6 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
         }
       } else {
         body.slug = wpSlug;
-        body.comment_status = "closed";
         if (!body.status) body.status = "draft";
 
         const res = await wpFetch("/pages", {
@@ -586,9 +608,11 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
     if (postData.title) body.title = postData.title;
     if (postData.excerpt !== undefined) body.excerpt = postData.excerpt || "";
     if (postData.date) body.date = postData.date;
-    if (postData.published !== undefined) {
-      body.status = postData.published ? "publish" : "draft";
-    }
+    const postStatus = wpStatusFromData(postData);
+    if (postStatus !== undefined) body.status = postStatus;
+    // GitHub is master: assert comment_status on every create AND update
+    // (default "open"; only an explicit wpSettings.comments="closed" turns it off).
+    body.comment_status = wpCommentStatusFromData(postData);
     // GitHub is master: always assert the featured image (see syncPages).
     // null/absent pushes 0 to clear any featured image WP may still have.
     if (postData.featuredImage) {
@@ -628,7 +652,6 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
         }
       } else {
         body.slug = wpSlug;
-        body.comment_status = "open";
         if (!body.status) body.status = "draft";
 
         const res = await wpFetch("/posts", {

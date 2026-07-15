@@ -3,7 +3,7 @@
   "featuredImage": "garmin-temp-panel.png",
   "excerpt": "Set up and operate the Truma heating and air conditioning system.",
   "tags": [],
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "photoGalleries": {
     "howto": {
       "name": "How to images",

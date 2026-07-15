@@ -3,7 +3,7 @@
 	"featuredImage": "DumpStation.jpeg",
 	"excerpt": "Emptying the van's grey and black water tanks.",
 	"tags": [],
-	"published": true,
+	"wpSettings": {"published": true, "comments": "open"},
 	"photoGalleries": {
 		"howto": {
 			"name": "How to images",

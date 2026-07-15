@@ -3,7 +3,7 @@
   "featuredImage": "IMG_0529-rotated.jpg",
   "excerpt": "FIshing pier at echo lake",
   "badges": { "tags": ["fishing", "picnic"], "road": "gravel" },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.98480,
     "lng": -125.41399,

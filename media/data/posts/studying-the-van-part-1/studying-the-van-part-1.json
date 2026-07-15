@@ -3,7 +3,7 @@
 	"excerpt": "Under construction",
 	"featuredImage": "open-book-icon.png",
 	"date": "2026-07-11T13:00:00",
-	"published": true,
+	"wpSettings": {"published": true, "comments": "open"},
 	"categories": [],
 	"badges": { "tags": [] },
 	"location": {

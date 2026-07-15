@@ -3,7 +3,7 @@
   "featuredImage": "under-construction.png",
   "excerpt": "An oceanside resort and campground near Black Creek on Vancouver Island's east coast.",
   "badges": { "tags": ["camping"], "road": "pavement" },
-  "published": true,
+  "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.8705759,
     "lng": -125.118066,

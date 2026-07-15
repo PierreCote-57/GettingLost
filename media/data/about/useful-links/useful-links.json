@@ -1,6 +1,6 @@
 {
 	"title": "Useful Links",
-	"published": true,
+	"wpSettings": {"published": true, "comments": "open"},
 	"notes": [
 		{
 			"sectionName": "Camping",

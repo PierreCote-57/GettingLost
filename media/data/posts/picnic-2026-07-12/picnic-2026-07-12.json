@@ -3,7 +3,7 @@
 	"excerpt": "Under construction",
 	"featuredImage": "IMG_0873.jpg",
 	"date": "2026-07-12T06:00:00",
-	"published": true,
+	"wpSettings": {"published": true, "comments": "open"},
 	"categories": [],
 	"badges": { "tags": ["picnic"] },
 	"location": {

@@ -1,6 +1,6 @@
 {
   "title": "Howto Template",
-  "published": false,
+  "wpSettings": {"published": false, "comments": "open"},
   "photoGalleries": {
     "howto": {
       "name": "How to images",
