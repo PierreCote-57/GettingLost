@@ -183,10 +183,12 @@
     return ol;
   }
 
-  // Builds one group's table. Any per-place notes (place.notes = { field:
-  // "explanation" }) are turned into numbered superscripts on the matching
-  // cell, and their texts are pushed — in the same order — onto `footnotes`
-  // so the caller can render a matching numbered list beneath the table.
+  // Builds one group's table. Any per-place footnotes (place.footnotes = a
+  // list of { field, text }) are turned into numbered superscripts on the
+  // matching cell, and their texts are pushed — in the same order — onto
+  // `footnotes` so the caller can render a matching numbered list beneath the
+  // table. A place may carry several footnotes, including more than one on the
+  // same field.
   function buildGroupTable(group, footnotes) {
     var table = document.createElement("table");
     table.style.borderCollapse = "collapse";
@@ -222,18 +224,19 @@
         var cell = buildCell("td");
         fillDataCell(cell, place, col.field);
 
-        // Numbered note for this cell, if the place has one for this field.
-        // Identical texts share a number (so a column full of the same
-        // "Preliminary…" note shows one footnote, not dozens).
-        var noteText = place.notes && place.notes[col.field];
-        if (noteText) {
-          var idx = footnotes.indexOf(noteText);
+        // Numbered footnote(s) for this cell — every place.footnotes entry
+        // whose field matches this column. Identical texts share a number (so
+        // a column full of the same "Preliminary…" note shows one footnote,
+        // not dozens).
+        (place.footnotes || []).forEach(function (fn) {
+          if (fn.field !== col.field) return;
+          var idx = footnotes.indexOf(fn.text);
           if (idx === -1) {
-            footnotes.push(noteText);
+            footnotes.push(fn.text);
             idx = footnotes.length - 1;
           }
           appendNoteMarker(cell, idx + 1);
-        }
+        });
 
         row.appendChild(cell);
       });
