@@ -76,6 +76,28 @@
   line-height: 1.4;
 }
 
+/* "Download printable booklet (PDF)" button shown above a gallery grid
+ * (gallery.jst, for galleries with a companion PDF). Brown palette matches
+ * .gl-heading so it reads as part of the same family. */
+.gl-gallery-pdf {
+  margin: 0.5rem 0 0.25rem;
+}
+.gl-pdf-button {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: #5e442c;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #2a1a0e;
+  transition: background 0.15s ease;
+}
+.gl-pdf-button:hover {
+  background: #2a1a0e;
+}
+
 html {
   scroll-behavior: smooth;
 }

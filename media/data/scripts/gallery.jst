@@ -21,12 +21,36 @@
   var file = params.get("file") || "Destinations.json";
   var JSON_URL = "/wp-content/uploads/" + file;
 
+  // Galleries that have a companion printable booklet. Keyed by the gallery
+  // JSON's filename; the value is the PDF's flat uploads filename (same
+  // /wp-content/uploads/ convention as the JSON). Present a "download booklet"
+  // button above the grid for these; absent = no button.
+  var PDF_BY_FILE = {
+    "VanHowTo.json": "howto.pdf",
+    "VanChecklist.json": "checklists.pdf",
+  };
+
+  function renderPdfButton(pdf) {
+    var href = "/wp-content/uploads/" + pdf;
+    return (
+      '<div class="gl-gallery-pdf">' +
+      '<a class="gl-pdf-button" href="' + href + '" target="_blank" rel="noopener">' +
+      "📄 Download printable booklet (PDF)" +
+      "</a>" +
+      "</div>"
+    );
+  }
+
   function render(container, entries) {
     entries.sort(function (a, b) {
       return (a.title || "").localeCompare(b.title || "");
     });
 
-    var html = '<div class="gl-gallery-grid">';
+    var html = "";
+    var pdf = PDF_BY_FILE[file];
+    if (pdf) html += renderPdfButton(pdf);
+
+    html += '<div class="gl-gallery-grid">';
     for (var i = 0; i < entries.length; i++) {
       html += window.GL.renderCard(entries[i]);
     }
