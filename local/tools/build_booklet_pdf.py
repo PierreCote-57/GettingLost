@@ -37,10 +37,15 @@ from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, PageBreak, Table, TableStyle, Flowable, Spacer
 )
 from reportlab.platypus.tableofcontents import TableOfContents
+from reportlab.lib.utils import ImageReader
 
 HALF_LETTER = (5.5 * inch, 8.5 * inch)
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Booklet images (cover art, in-page pictures) live under here, addressed by
+# bare filename and located by search -- the folder layout doesn't matter.
+PICTURES_BASE = os.path.expanduser("~/Pictures/GettingLost")
 
 
 def _p(*parts):
@@ -49,8 +54,9 @@ def _p(*parts):
 
 # ---------------------------------------------------------------------------
 # Per-booklet config. These are the ONLY literal cover strings in the file, and
-# the only things that differ between booklets: where to read pages, what the
-# cover says, and how each step renders ("checkbox" or "number").
+# the only things that differ between booklets: where to read pages and what the
+# cover says. How a list renders (checkbox / number / bullet) is decided by the
+# page markup, not here -- the renderer doesn't know which booklet it's in.
 # ---------------------------------------------------------------------------
 BOOKLETS = {
     "checklists": {
@@ -58,7 +64,7 @@ BOOKLETS = {
         "data_dir": _p("media", "data", "van", "checklists"),
         "cover_title": "Checklists",
         "cover_subtitle": "Quick checklists, refer to howto for more details",
-        "step_style": "checkbox",
+        "cover_image": "IMG_2773_crop.jpg",
         "default_output": _p("media", "data", "van", "checklists", "checklists.pdf"),
     },
     "howto": {
@@ -66,7 +72,7 @@ BOOKLETS = {
         "data_dir": _p("media", "data", "van", "howto"),
         "cover_title": "How To",
         "cover_subtitle": "Step-by-step instructions",
-        "step_style": "number",
+        "cover_image": "IMG_2773_crop.jpg",
         "default_output": _p("media", "data", "van", "howto", "howto.pdf"),
     },
 }
@@ -169,21 +175,23 @@ class CheckBox(Flowable):
         c.rect(0, 0, self.size, self.size, stroke=1, fill=0)
 
 
-def _marker(style, ordered, n):
-    """The left-column marker for a list item: a checkbox (checklist style),
+def _marker(checklist, ordered, n):
+    """The left-column marker for a list item: a checkbox (gl-checklist list),
     a "n." number (ordered list), or a bullet (unordered list)."""
-    if style == "checkbox":
+    if checklist:
         return CheckBox()
     if ordered:
         return Paragraph("%d." % n, item)
     return Paragraph("•", item)
 
 
-def render_list(list_el, style):
-    """Render an <ol>/<ul> as a Table of [marker, content] rows. Content is the
-    item's own text plus any nested lists, rendered recursively (so nesting and
-    ul-inside-ol both work)."""
+def render_list(list_el):
+    """Render an <ol>/<ul> as a Table of [marker, content] rows. The marker
+    follows the markup, exactly like the web: a class="gl-checklist" list gets
+    checkboxes, otherwise <ol> is numbered and <ul> is bulleted. Nested lists
+    recurse, each deciding by its own class."""
     ordered = list_el.name == "ol"
+    checklist = "gl-checklist" in (list_el.get("class") or [])
     rows = []
     n = 0
     for li in list_el.find_all("li", recursive=False):
@@ -196,10 +204,10 @@ def render_list(list_el, style):
         if text:
             content.append(Paragraph(text, item))
         for sub in nested:
-            content.append(render_list(sub, style))
-        rows.append([_marker(style, ordered, n), content or [Paragraph("", item)]])
+            content.append(render_list(sub))
+        rows.append([_marker(checklist, ordered, n), content or [Paragraph("", item)]])
 
-    marker_top_pad = 2.6 if style == "checkbox" else 1.7  # nudge box onto line
+    marker_top_pad = 2.6 if checklist else 1.7  # nudge box onto line
     t = Table(rows, colWidths=[0.26 * inch, None])
     t.setStyle(TableStyle([
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -273,7 +281,7 @@ def _clean_inline(section, galleries):
         div.decompose()
 
 
-def render_element(el, style):
+def render_element(el):
     """Render one block-level element from inside the section into a list of
     flowables, recursing into <details> (expanded) and nested content."""
     name = el.name
@@ -282,7 +290,7 @@ def render_element(el, style):
     if name == "p":
         return [Paragraph(_text(el), intro)]
     if name in ("ol", "ul"):
-        return [render_list(el, style)]
+        return [render_list(el)]
     if name == "table":
         return [render_table(el)]
     if name == "details":
@@ -292,7 +300,7 @@ def render_element(el, style):
             out.append(Paragraph(_text(summary), group))
         for child in el.children:
             if getattr(child, "name", None) and child.name != "summary":
-                out.extend(render_element(child, style))
+                out.extend(render_element(child))
         return out
     if name == "div" and el.get("data-block-type") == "warning":
         txt = el.get("data-text", "")
@@ -302,7 +310,7 @@ def render_element(el, style):
     return [Paragraph(txt, intro)] if txt else []
 
 
-def build_page(path, data_dir, style):
+def build_page(path, data_dir):
     """Return a list of (title, subtitle, [flowables]) — one booklet page per
     <section data-howto-section="howto"> on the page. The title is the page's
     actual title (JSON), shared by every section; the subtitle is that section's
@@ -334,15 +342,55 @@ def build_page(path, data_dir, style):
             # The section's own heading becomes the subtitle, not body content.
             if heading_id and child.get("id") == heading_id:
                 continue
-            flowables.extend(render_element(child, style))
+            flowables.extend(render_element(child))
         entries.append((title, subtitle, flowables))
 
     return entries
 
 
+def _find_image(name):
+    """First file named <name> (case-insensitive) anywhere under PICTURES_BASE,
+    or None. The folder layout is the author's business; we just locate it."""
+    if not name:
+        return None
+    low = name.lower()
+    for root, _dirs, files in os.walk(PICTURES_BASE):
+        for f in files:
+            if f.lower() == low:
+                return os.path.join(root, f)
+    return None
+
+
+def _cover_image(name, width):
+    """(path, height) for the cover image scaled to <width>. If the file isn't
+    found, (None, <placeholder height>)."""
+    path = _find_image(name)
+    if path:
+        iw, ih = ImageReader(path).getSize()
+        return path, width * ih / float(iw)
+    return None, 2.5 * inch
+
+
+def _draw_cover_image(c, path, img_h, y, width):
+    """Draw the cover image (or a 'Missing picture' placeholder) <width> wide,
+    with its bottom at y, horizontally centered."""
+    x = (HALF_LETTER[0] - width) / 2.0
+    if path:
+        c.drawImage(path, x, y, width=width, height=img_h,
+                    preserveAspectRatio=True, mask="auto")
+    else:
+        c.setStrokeColor(MUTED)
+        c.setLineWidth(0.8)
+        c.rect(x, y, width, img_h, stroke=1, fill=0)
+        c.setFillColor(MUTED)
+        c.setFont("Helvetica-Oblique", 11)
+        c.drawCentredString(HALF_LETTER[0] / 2.0, y + img_h / 2.0 - 4, "Missing picture")
+
+
 def make_cover_drawer(cfg):
-    """Return an onFirstPage callback that paints the cover directly on page 1
-    (so the subtitle can be pinned at 1/3 of the page height from the bottom)."""
+    """Return an onFirstPage callback that paints the cover: image centered on
+    the page, and each title centered in its own white band (main above the
+    image, subtitle below)."""
     def draw_cover(c, doc):
         w, h = HALF_LETTER
         avail = w - doc.leftMargin - doc.rightMargin
@@ -352,13 +400,26 @@ def make_cover_drawer(cfg):
         subtitle = Paragraph(cfg["cover_subtitle"], cover_sub)
 
         _, title_h = title.wrap(avail, h)
-        kicker.wrap(avail, h)
-        subtitle.wrap(avail, h)
+        _, kicker_h = kicker.wrap(avail, h)
+        _, sub_h = subtitle.wrap(avail, h)
 
-        y_title = h * 0.60
-        title.drawOn(c, doc.leftMargin, y_title)
-        kicker.drawOn(c, doc.leftMargin, y_title + title_h + 8)
-        subtitle.drawOn(c, doc.leftMargin, h / 3.0)
+        # Image: 4" wide, vertically centered on the page.
+        width = 4 * inch
+        path, img_h = _cover_image(cfg.get("cover_image"), width)
+        img_bottom = h / 2.0 - img_h / 2.0
+        img_top = h / 2.0 + img_h / 2.0
+        _draw_cover_image(c, path, img_h, img_bottom, width)
+
+        # Main block (kicker above title) centered in the band above the image.
+        gap = 8
+        block_h = title_h + gap + kicker_h
+        block_bottom = (img_top + (h - doc.topMargin)) / 2.0 - block_h / 2.0
+        title.drawOn(c, doc.leftMargin, block_bottom)
+        kicker.drawOn(c, doc.leftMargin, block_bottom + title_h + gap)
+
+        # Subtitle centered in the band below the image.
+        subtitle.drawOn(c, doc.leftMargin,
+                        (doc.bottomMargin + img_bottom) / 2.0 - sub_h / 2.0)
 
     return draw_cover
 
@@ -376,7 +437,7 @@ def build(cfg, path):
     files = glob.glob(os.path.join(cfg["source_dir"], "*.html"))
     pages = []
     for p in files:
-        pages.extend(build_page(p, cfg["data_dir"], cfg["step_style"]))
+        pages.extend(build_page(p, cfg["data_dir"]))
     if not pages:
         sys.exit("No pages found in " + cfg["source_dir"])
     # Stable sort by title keeps multiple sections from one page in document order.

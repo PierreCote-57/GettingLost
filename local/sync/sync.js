@@ -698,11 +698,12 @@ function guessMimeFromExt(filename) {
   if (filename.endsWith(".jst")) return "text/text";
   if (filename.endsWith(".cst")) return "text/css";
   if (filename.endsWith(".json")) return "application/json";
+  if (filename.endsWith(".pdf")) return "application/pdf";
   return "application/octet-stream";
 }
 
 async function findExistingMediaIdByFilename(filename) {
-  const titleGuess = filename.replace(/\.(json|jst|cst)$/, "");
+  const titleGuess = filename.replace(/\.(json|jst|cst|pdf)$/, "");
   const res = await wpFetch(`/media?search=${encodeURIComponent(titleGuess)}&per_page=20`);
   if (!res.ok) {
     throw new Error(`media search failed: HTTP ${res.status}`);
@@ -984,7 +985,7 @@ async function syncFiles(fileBirdFolderCache) {
   }
 
   const allEntries = fs.readdirSync(MEDIA_ROOT, { recursive: true });
-  const filenames = allEntries.filter((f) => f.endsWith(".json") || f.endsWith(".jst") || f.endsWith(".cst"));
+  const filenames = allEntries.filter((f) => f.endsWith(".json") || f.endsWith(".jst") || f.endsWith(".cst") || f.endsWith(".pdf"));
 
   for (const relSubPath of filenames) {
     const normalized = relSubPath.split(path.sep).join("/");
