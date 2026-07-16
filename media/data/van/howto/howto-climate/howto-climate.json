@@ -8,8 +8,8 @@
     "howto": {
       "name": "How to images",
       "items": [
-        { "id": "garmin-temp-panel", "img": "garmin-temp-panel.png", "label": "Garmin SERV panel" },
         { "id": "garmin-temp-select", "img": "garmin-temp-select.png", "label": "Garmin temperature select screen" },
+        { "id": "garmin-temp-panel", "img": "garmin-temp-panel.png", "label": "Garmin SERV panel" },
         { "id": "truma-on-panel", "img": "truma-on-panel.png", "label": "Truma touchscreen — AC on" },
         { "id": "truma-acc", "img": "truma-ACC.png", "label": "Truma touchscreen — ACC/Auto mode" },
         { "id": "truma-tools", "img": "truma-tools.png", "label": "Truma touchscreen — tool icons" },
