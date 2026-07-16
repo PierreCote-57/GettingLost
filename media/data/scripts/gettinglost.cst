@@ -76,11 +76,18 @@
   line-height: 1.4;
 }
 
-/* "Download printable booklet (PDF)" button shown above a gallery grid
- * (gallery.jst, for galleries with a companion PDF). Brown palette matches
- * .gl-heading so it reads as part of the same family. */
-.gl-gallery-pdf {
-  margin: 0.5rem 0 0.25rem;
+/* "Download printable booklet (PDF)" button (gallery.jst, for galleries with
+ * a companion PDF). It's injected into the .wp-block-post-title element, which
+ * .gl-title-with-pdf turns into a flex row so the button sits on the title's
+ * line, right-justified. Brown palette matches .gl-heading so it reads as part
+ * of the same family. On narrow screens the row wraps and the button drops
+ * below the heading, still right-aligned. */
+.gl-title-with-pdf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
 }
 .gl-pdf-button {
   display: inline-block;

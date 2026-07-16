@@ -33,11 +33,9 @@
   function renderPdfButton(pdf) {
     var href = "/wp-content/uploads/" + pdf;
     return (
-      '<div class="gl-gallery-pdf">' +
       '<a class="gl-pdf-button" href="' + href + '" target="_blank" rel="noopener">' +
       "📄 Download printable booklet (PDF)" +
-      "</a>" +
-      "</div>"
+      "</a>"
     );
   }
 
@@ -46,11 +44,7 @@
       return (a.title || "").localeCompare(b.title || "");
     });
 
-    var html = "";
-    var pdf = PDF_BY_FILE[file];
-    if (pdf) html += renderPdfButton(pdf);
-
-    html += '<div class="gl-gallery-grid">';
+    var html = '<div class="gl-gallery-grid">';
     for (var i = 0; i < entries.length; i++) {
       html += window.GL.renderCard(entries[i]);
     }
@@ -66,6 +60,22 @@
     var pageTitleEl = document.querySelector(".wp-block-post-title");
     if (pageTitleEl) pageTitleEl.textContent = listName;
     document.title = listName + " – " + document.title.split(" – ").slice(1).join(" – ");
+
+    // Companion booklet button, right-aligned on the title's line. Placed
+    // inside the title element (turned into a flex row via .gl-title-with-pdf)
+    // so it sits beside the heading rather than above the grid. If the theme
+    // has no title element, fall back to the top of the gallery container.
+    var pdf = PDF_BY_FILE[file];
+    if (pdf) {
+      if (pageTitleEl) {
+        pageTitleEl.classList.add("gl-title-with-pdf");
+        pageTitleEl.insertAdjacentHTML("beforeend", renderPdfButton(pdf));
+      } else {
+        containers.forEach(function (c) {
+          c.insertAdjacentHTML("afterbegin", renderPdfButton(pdf));
+        });
+      }
+    }
 
     fetch(JSON_URL)
       .then(function (res) {
