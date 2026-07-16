@@ -69,6 +69,8 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
 - **No redundant sign-off / manufactured approval.** Once something is decided, don't
   re-wrap it as "are you good with X?" Don't offer to do trivial one-liners he can do
   faster in IntelliJ. Reserve offering for real leverage (bulk/multi-file/lookups).
+- **Never offer a local preview.** Pierre checks rendering himself (IntelliJ / the live
+  site). Don't spin one up, and don't offer to.
 - **Response style:** numbered lists (`1. 2. 3.`), not bullets, so he can reply
   item-by-item. Direct answer first.
 - **One command per Bash call** — no `&&`/`;`/pipes/loops/inline scripts (they defeat

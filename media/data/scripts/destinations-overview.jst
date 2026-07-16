@@ -145,7 +145,21 @@
     } else if (field === "on_lost") {
       if (place.file) cell.appendChild(internalLink(place.file, "View"));
     } else if (field === "location") {
-      cell.textContent = cellText(place.location && place.location.notes);
+      // The notes text links to Google Maps at the place's coordinates (new
+      // tab). Plain text when there are no coordinates (only the Horne Lake
+      // entry so far). Column label stays "Location".
+      var loc = place.location || {};
+      var notes = cellText(loc.notes);
+      if (loc.lat != null && loc.lng != null && notes) {
+        var mapLink = externalLink(
+          "https://www.google.com/maps/search/?api=1&query=" + loc.lat + "," + loc.lng,
+          notes
+        );
+        mapLink.title = "Open in Google Maps";
+        cell.appendChild(mapLink);
+      } else {
+        cell.textContent = notes;
+      }
     } else if (field === "distanceKM") {
       // Straight-line km from Campbell River (see column footnote). Blank when
       // the place has no distance (no coordinates).
