@@ -54,6 +54,7 @@
     { label: "Name", field: "name", width: 170 },
     { label: "On lost", field: "on_lost", width: 65 },
     { label: "Location", field: "location", width: 160 },
+    { label: "Distance", field: "distanceKM", width: 80 },
     { label: "Access", field: "access", width: 80 },
     { label: "Sites", field: "sites", width: 70 },
     { label: "Amenities", field: "amenities", width: 190 },
@@ -62,6 +63,17 @@
 
   function totalWidth() {
     return COLUMNS.reduce(function (sum, col) { return sum + col.width; }, 0);
+  }
+
+  // Pulls the "Campbell River" straight-line distance (km) for a place, or
+  // null when it has none (e.g. a place with no coordinates). The distanceKM
+  // list is structured so more origin cities can be added later.
+  function campbellRiverKm(place) {
+    var list = place.distanceKM || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] && list[i].from === "Campbell River") return list[i].km;
+    }
+    return null;
   }
 
   // Missing values (null / undefined / "") render as an empty cell.
@@ -134,6 +146,11 @@
       if (place.file) cell.appendChild(internalLink(place.file, "View"));
     } else if (field === "location") {
       cell.textContent = cellText(place.location && place.location.notes);
+    } else if (field === "distanceKM") {
+      // Straight-line km from Campbell River (see column footnote). Blank when
+      // the place has no distance (no coordinates).
+      var km = campbellRiverKm(place);
+      if (km !== null && km !== undefined) cell.textContent = km + " km";
     } else if (field === "sites") {
       (place.sites || []).forEach(function (site, i) {
         if (i > 0) cell.appendChild(document.createElement("br"));
@@ -205,6 +222,15 @@
     COLUMNS.forEach(function (col) {
       var th = buildCell("th");
       th.textContent = col.label;
+      // The Distance column carries a header caveat (straight-line, not road
+      // distance), surfaced through the same numbered-footnote mechanism as
+      // the per-cell notes so it dedupes to one entry per group table.
+      if (col.field === "distanceKM") {
+        var caveat = "Straight-line distance from Campbell River, approximate.";
+        var idx = footnotes.indexOf(caveat);
+        if (idx === -1) { footnotes.push(caveat); idx = footnotes.length - 1; }
+        appendNoteMarker(th, idx + 1);
+      }
       headerRow.appendChild(th);
     });
     thead.appendChild(headerRow);

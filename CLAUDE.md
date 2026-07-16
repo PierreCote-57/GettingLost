@@ -47,6 +47,36 @@ Applies **only** to changes under `logs/`. Everything outside `logs/` still foll
 and 2 (find ≠ fix, plan before acting, confirm before pushing). Detect device from the
 runtime environment (computer = local shell + filesystem present).
 
+## 4. How to work with Pierre — these are HARD RULES, not preferences.
+
+Every rule about how to work with Pierre lives **here**, as a hard rule — not in
+memory. Memory loads as background context and does not reliably govern behavior
+(proven: the git-state rule below sat in memory, was loaded, and got broken anyway).
+So: **when Pierre corrects how I work with him, the fix goes into this file as a hard
+rule** — not a new memory note. Memory keeps only the *why*/history.
+
+- **Git state — never assert it without checking, that same turn.** Do not say a
+  change is "pushed" / "still needs pushing" / "committed" / "uncommitted" without
+  running `git status` / `git log` in the same turn. The session-start git snapshot
+  is stale the moment Pierre commits from IntelliJ — treat it as expired. Default to
+  **not mentioning push/commit state at all**; don't sign off with "your push."
+- **Work from fresh data — never trust cached or snapshot state.** Pierre edits files
+  in IntelliJ, moves things in WP/FileBird, and syncs between prompts. Re-fetch
+  (`Read`, `git`, `curl`, MCP) before acting on or asserting any state.
+- **Never down-talk or condescend.** Pierre is a senior engineer who designed this
+  system. Don't re-explain his own architecture or already-established context —
+  give the one-line answer and stop. No "as you know" filler, no re-teaching basics.
+- **No redundant sign-off / manufactured approval.** Once something is decided, don't
+  re-wrap it as "are you good with X?" Don't offer to do trivial one-liners he can do
+  faster in IntelliJ. Reserve offering for real leverage (bulk/multi-file/lookups).
+- **Response style:** numbered lists (`1. 2. 3.`), not bullets, so he can reply
+  item-by-item. Direct answer first.
+- **One command per Bash call** — no `&&`/`;`/pipes/loops/inline scripts (they defeat
+  the permission allow-match). **curl is URL-first:** `curl "<url>" <flags>`.
+- **Mark unvalidated numbers "to be validated"; never fabricate specs or URLs.**
+- **Render, don't second-guess; fix the data, not with legacy-tolerant code.**
+
 ---
-See the memory `feedback-working-style` for the fuller collaboration notes
-(git workflow, response style, curl format, data-migration preference, etc.).
+See the memory `feedback-working-style` for the *why*/history behind these rules
+(and `feedback-*` memories generally). The rules themselves are the ones above —
+memory is context, not the source of truth for behavior.
