@@ -1,0 +1,60 @@
+{
+	"title": "Mohun Lake",
+	"featuredImage": "IMG_0429.jpg",
+	"excerpt": "Under construction",
+	"badges": {
+		"tags": [
+			"fishing"
+		],
+		"road": "gravel"
+	},
+	"wpSettings": {"published": true, "comments": "open"},
+	"location": {
+		"lat": 50.085584,
+		"lng": -125.515456,
+		"pin": "campground",
+		"zoom": 15
+	},
+	"campground": {
+		"website": "",
+		"siteMap": "",
+		"reservation": ""
+	},
+	"photoGalleries": {
+		"atSite": {
+			"name": "At the rec site",
+			"items": [
+				{ "id": "img_0421", "img": "IMG_0421.jpg", "label": "TBD" },
+				{ "id": "img_0423", "img": "IMG_0423.jpg", "label": "TBD" },
+				{ "id": "img_0427", "img": "IMG_0427.jpg", "label": "TBD" },
+				{ "id": "img_0429", "img": "IMG_0429.jpg", "label": "TBD" },
+				{ "id": "img_0430", "img": "IMG_0430.jpg", "label": "TBD" },
+				{ "id": "img_0431", "img": "IMG_0431.jpg", "label": "TBD" },
+				{ "id": "img_0432", "img": "IMG_0432.jpg", "label": "TBD" },
+				{ "id": "img_0433", "img": "IMG_0433.jpg", "label": "TBD" },
+				{ "id": "img_0434", "img": "IMG_0434.jpg", "label": "TBD" },
+				{ "id": "img_0435", "img": "IMG_0435.jpg", "label": "TBD" },
+				{ "id": "img_0436", "img": "IMG_0436.jpg", "label": "TBD" },
+				{ "id": "img_0437", "img": "IMG_0437.jpg", "label": "TBD" },
+				{ "id": "img_0439", "img": "IMG_0439.jpg", "label": "TBD" },
+				{ "id": "img_0440", "img": "IMG_0440.jpg", "label": "TBD" },
+				{ "id": "img_0441", "img": "IMG_0441.jpg", "label": "TBD" },
+				{ "id": "img_0442", "img": "IMG_0442.jpg", "label": "TBD" }
+			]
+		},
+		"onTheWay": {
+			"name": "On the way",
+			"items": [
+				{ "id": "img_0420", "img": "IMG_0420.jpg", "label": "TBD" },
+				{ "id": "img_0445", "img": "IMG_0445.jpg", "label": "TBD" },
+				{ "id": "img_0449", "img": "IMG_0449.jpg", "label": "TBD" },
+				{ "id": "img_0562", "img": "IMG_0562.jpg", "label": "TBD" },
+				{ "id": "img_0563", "img": "IMG_0563.jpg", "label": "TBD" },
+				{ "id": "img_0571", "img": "IMG_0571.jpg", "label": "TBD" },
+				{ "id": "img_0573", "img": "IMG_0573.jpg", "label": "TBD" },
+				{ "id": "img_0574", "img": "IMG_0574.jpg", "label": "TBD" },
+				{ "id": "img_0575", "img": "IMG_0575.jpg", "label": "TBD" }
+			]
+		}
+	}
+}
