@@ -11,7 +11,12 @@
 				{
 					"id": "dump-station",
 					"img": "IMG_2790.jpeg",
-					"label": "Controls on the van"
+					"label": "Sewage controls on the van"
+				},
+				{
+					"id": "dump-water",
+					"img": "IMG_2774.jpeg",
+					"label": "Water connections"
 				}
 			]
 		},

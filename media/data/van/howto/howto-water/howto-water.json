@@ -7,7 +7,13 @@
   "photoGalleries": {
     "howto": {
       "name": "How to images",
-      "items": []
+      "items": [
+		  {
+			  "id": "dump-water",
+			  "img": "IMG_2774.jpeg",
+			  "label": "Water connections"
+		  }
+	  ]
     },
     "details": {
       "name": "Details images",
