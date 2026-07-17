@@ -217,6 +217,50 @@ summary:focus:not(:focus-visible) {
   color: #999;
 }
 
+/* gl-numcheck: same interactive row as gl-checklist, but with an automatic
+   number between the checkbox and the text (checkbox, then "1.", then text).
+   The number is a CSS counter so authors write only bare <li> lines; each
+   <ol class="gl-numcheck"> restarts its own count at 1. The .gl-num span is
+   created empty by enhanceChecklist(); its ::before draws the digit. */
+.gl-numcheck {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 1.5rem;
+  counter-reset: gl-numcheck;
+}
+.gl-numcheck li {
+  margin: 0.45rem 0;
+  counter-increment: gl-numcheck;
+}
+.gl-numcheck label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+  line-height: 1.45;
+}
+.gl-numcheck input[type="checkbox"] {
+  margin-top: 0.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+  accent-color: #c98a3e;
+  cursor: pointer;
+}
+.gl-numcheck .gl-num {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.gl-numcheck .gl-num::before {
+  content: counter(gl-numcheck) ".";
+}
+/* On check, strike + dim the text (the number stays solid), mirroring
+   gl-checklist. The text span is the one that is not .gl-num. */
+.gl-numcheck input[type="checkbox"]:checked ~ span:not(.gl-num) {
+  text-decoration: line-through;
+  color: #999;
+}
+
 .gl-lightbox {
   position: fixed;
   inset: 0;

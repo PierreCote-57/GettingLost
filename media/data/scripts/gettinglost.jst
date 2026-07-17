@@ -1005,7 +1005,14 @@
   // an interactive to-do list: each <li>'s content is wrapped in a
   // <label><input type="checkbox"><span>text</span></label> so the whole row
   // toggles. Authors only write the bare <li> lines. Idempotent.
+  //
+  // A <ol class="gl-numcheck"> is the same, but with a numbered marker between
+  // the checkbox and the text: <label><input><span class="gl-num"><span>text</span></label>.
+  // The .gl-num span is left empty — its digit is drawn by a CSS counter (see
+  // ol.gl-numcheck in the stylesheet), so the count stays automatic and each
+  // list restarts at 1.
   function enhanceChecklist(list) {
+    var isNum = list.classList.contains("gl-numcheck");
     var items = list.children;
     for (var i = 0; i < items.length; i++) {
       var li = items[i];
@@ -1015,11 +1022,16 @@
       var label = document.createElement("label");
       var box = document.createElement("input");
       box.type = "checkbox";
+      label.appendChild(box);
+      if (isNum) {
+        var num = document.createElement("span");
+        num.className = "gl-num";
+        label.appendChild(num);
+      }
       var span = document.createElement("span");
       while (li.firstChild) {
         span.appendChild(li.firstChild);
       }
-      label.appendChild(box);
       label.appendChild(span);
       li.appendChild(label);
     }
@@ -1180,7 +1192,7 @@
       renderFeatured(featured[j]);
     }
 
-    var checklists = document.querySelectorAll(".gl-checklist");
+    var checklists = document.querySelectorAll(".gl-checklist, .gl-numcheck");
     for (var k = 0; k < checklists.length; k++) {
       enhanceChecklist(checklists[k]);
     }
