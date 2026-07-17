@@ -1119,7 +1119,13 @@ async function main() {
   const pageMap = generatePageMap(pageFileMap, perPageDataMap);
   console.log(`[pageMap] PageMap.json: ${Object.keys(pageMap).length} entries`);
 
-  console.log("\n=== Syncing files (JSON data + scripts) ===");
+  console.log("\n=== Syncing pages ===");
+  const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
+
+  console.log("\n=== Syncing posts ===");
+  const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
+
+  console.log("\n=== Syncing files (Media) ===");
   const filesResult = await syncFiles(fileBirdFolderCache);
 
   console.log("\n=== Syncing logs ===");
@@ -1127,12 +1133,6 @@ async function main() {
 
   console.log("\n=== Syncing gallery JSONs ===");
   const galleryResult = await syncGalleryJsons(galleries, pageMap, fileBirdFolderCache);
-
-  console.log("\n=== Syncing pages ===");
-  const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
-
-  console.log("\n=== Syncing posts ===");
-  const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
 
   console.log("\n=== Summary ===");
   console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
