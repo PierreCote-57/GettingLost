@@ -9,7 +9,12 @@
       "name": "How to images",
       "items": [
 		  {
-			  "id": "dump-water",
+			  "id": "van-side-view",
+			  "img": "IMG_2771-labelled.jpeg",
+			  "label": "Side view of the van"
+		  },
+		  {
+			  "id": "water-hookup",
 			  "img": "IMG_2774.jpg",
 			  "label": "Water connections"
 		  }

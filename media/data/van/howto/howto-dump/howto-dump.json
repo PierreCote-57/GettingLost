@@ -9,6 +9,11 @@
 			"name": "How to images",
 			"items": [
 				{
+					"id": "van-side-view",
+					"img": "IMG_2771-labelled.jpeg",
+					"label": "Side view of the van"
+				},
+				{
 					"id": "dump-station",
 					"img": "IMG_2790.jpeg",
 					"label": "Sewage controls on the van"
