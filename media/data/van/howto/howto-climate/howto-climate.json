@@ -14,7 +14,7 @@
         { "id": "truma-on-panel", "img": "truma-on-panel.png", "label": "Truma touchscreen — AC on" },
         { "id": "truma-acc", "img": "truma-ACC.png", "label": "Truma touchscreen — ACC/Auto mode" },
         { "id": "truma-tools", "img": "truma-tools.png", "label": "Truma touchscreen — tool icons" },
-        { "id": "cabin-temp", "img": "cabin-temperature.png", "label": "Cabin temperature" }
+        { "id": "cabin-climate", "img": "cabin-indoor-2026-07-13.png", "label": "Cabin climate in storage" }
       ]
     },
     "details": {

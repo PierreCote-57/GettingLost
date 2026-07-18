@@ -1,69 +1,68 @@
-# Charting — how to draw a chart (CSV logger → PNG)
+# Charting — CSV logger → SVG → PNG
 
-Turns TempU03 CSV logger data into a PNG for the blog galleries.
-No local node and no numpy on this machine — the pipeline is headless Chrome + Pillow.
+Turns TempU03 CSV logger data into a chart for the howto-climate gallery.
+
+**Pipeline (as of 2026-07-18):** pure-Python **SVG** generator → Pierre converts
+SVG→PNG in IntelliJ (~1 s) → PNG into the gallery. No Chart.js, no CDN, no headless
+Chrome, no Pillow. The `.svg` is the source of truth; the `.png` is the gallery
+deliverable (the gallery serves raster via Jetpack Photon, which can't resize SVG).
 
 ## Files here
-- `cabin-temperature.template.html` — LOCKED cabin-temp template (edit this for new cabin charts)
-- `cabin-temperature.html` — interactive Chart.js version
-- `cabin-temperature.png` — sample output (780×520)
-- `TZ0325122310_*.csv`, `Calibration Certificate_*.pdf` — source data
+- `gen-chart.py` — **the generator.** `python3 gen-chart.py` → writes `<base>-<start-date>.svg`.
+- `cabin-indoor-*.svg` etc. — current output (dual-axis cabin climate chart).
+- `TZ0325122310_*.csv` — source data (TempU03, one point every 10 min).
+- `Calibration Certificate_*.pdf` — logger calibration.
+- `cabin-temperature.html`, `cabin-temperature.template.html`, `cabin-temperature.png` —
+  **legacy Chart.js** temp chart, fully superseded by `gen-chart.py` (thermostat line
+  ported; clamp is universal; red-out-of-range was dropped by design). Safe to retire
+  once the temp chart is confirmed uploaded to the gallery.
 
-## Steps
+## How to draw a chart
+1. **Ask Pierre (clickable), then set `CFG` in `gen-chart.py`:**
+   - **Location?** → Indoor Storage | Outdoors | Fridge | Freezer → `CFG["location"]`
+   - **How many Eva-dry?** (1/2) → `CFG["dehumidifier"]` — **only for Indoor Storage.**
+2. `python3 gen-chart.py` → writes `<base>-<start-date>.svg` (auto-named, below).
+3. Pierre: SVG→PNG in IntelliJ (makes `<name>.svg.png`), rename to `<name>.png`, drop
+   into the howto-climate gallery.
 
-### 1. Get the data into `TIMES` / `VALS`
-The CSV has a metadata block, then a table:
-```
-Date,Time,Temperature(C),Humidity(%RH)
-07/12/2026, 22:28:17, 22.2,53.9
-...
-```
-Skip everything above that header and the `***` separator row. For each data row:
-- `TIMES`  = time as **decimal hours** (`HH + MM/60`, e.g. `08:25` → `8 + 25/60`)
-- `VALS`   = the `Temperature(C)` value (trim leading spaces)
+## Filename (auto-derived — never typed)
+Lowercase `<location-base>-<start-date>.svg`, start date ISO `YYYY-MM-DD` (sortable;
+the full range lives in the subtitle). One Eva-dry config per start date, so the
+count is not in the name.
 
-One point every 10 min is expected — that's why the format is line-only (no markers).
+| Location | Base | Example |
+|---|---|---|
+| Indoor Storage | `cabin-indoor` | `cabin-indoor-2026-07-13.svg` |
+| Outdoors | `cabin-outdoor` | `cabin-outdoor-2026-07-13.svg` |
+| Fridge | `fridge` | `fridge-2026-07-13.svg` |
+| Freezer | `freezer` | `freezer-2026-07-13.svg` |
 
-### 2. Copy the template and edit the two blocks at the top
-Copy `cabin-temperature.template.html` → a working `*-export.html` (scratchpad is fine).
-Edit only:
-- `CFG.title`, `CFG.subtitle`
-- `CFG.band` — fixed y-axis (cabin = `{lo:15, hi:25}`). Readings outside clamp to the nearest edge.
-- `CFG.thermostat` — °C setpoint line (cabin only; from the post's "Furnace set to" caption). `null` = omit.
-- `TIMES`, `VALS`
+## Locked format (cabin climate, dual-axis) — finalized 2026-07-18
+- **900 × 520**, white bg, black L+R+bottom axis borders, `#e1e0d9` gridlines.
+- **Left axis** Temperature °C, red `#d62728`. **Right axis** Humidity %RH, blue
+  `#2166c4`. Per-location bands (`BANDS` in `gen-chart.py`) — both always **4 intervals**
+  so gridlines coincide; all values **clamp** to their band (no interpolation needed at
+  10-min cadence):
 
-Aspect is 1.5:1 at 780×520 (the `<canvas width height>`). Keep the render `--window-size` width = canvas width.
+  | Location | Temp | Humidity | Thermostat |
+  |---|---|---|---|
+  | Indoor Storage | 0–20 by 5 | 20–60 by 10 | 6 °C |
+  | Outdoors | 10–30 by 5 | 30–70 by 10 | 20 °C |
+  | Fridge | 0–20 by 5 | 30–70 by 10 | — |
+  | Freezer | −20–0 by 5 | 30–70 by 10 | — |
 
-### 3. Render to PNG at 2× (headless Chrome)
-```sh
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless=new --disable-gpu --hide-scrollbars \
-  --force-device-scale-factor=2 --window-size=780,540 --virtual-time-budget=4000 \
-  --screenshot=/abs/scratch/out-2x.png \
-  file:///abs/path/to/your-export.html
-```
-Gives a 1560×1080 PNG (canvas 1560×1040 + a white bottom margin).
-
-### 4. Crop the white margin and halve (Pillow, supersampled = crisp)
-```python
-from PIL import Image
-im = Image.open('/abs/scratch/out-2x.png').convert('RGB')
-assert im.crop((0,1040,im.size[0],im.size[1])).getextrema()==((255,255),(255,255),(255,255))  # bottom is white
-im.crop((0,0,1560,1040)).resize((780,520), Image.LANCZOS).save('local/charting/<name>.png')
-```
-
-### 5. Verify, then that's the deliverable
-Open (or read) the PNG to confirm it looks right. The PNG in `local/charting/` is how Pierre
-reviews it. On the computer I stop after writing the file — Pierre pushes.
-
-## Locked cabin-temp format (baked into the template)
-Fixed 15–25 °C band, clamp-to-nearest-extreme on the **interpolated line** (red flat segments
-at an edge = out of range), real linear hourly x-axis with adaptive AM/PM labels
-(`niceStep` ≤12 labels; day name on midnight ticks for multi-day), black thermostat setpoint
-line + label, line only, white bg, black axes, axis font 14 / title 17 / subtitle 12, 1.5:1.
-
-## To adapt for other chart families (planned)
-- **Temp + Humidity, several days (indoor storage):** long window (niceStep widens the axis
-  automatically), second series for humidity, no thermostat line.
-- **Temp only, a few hours (heating / fridge / freezer):** change `CFG.band` per equipment
-  (fridge ~0–10, freezer sub-zero, heating warm), no thermostat line.
+- **Thermostat** (Indoor/Outdoors): solid **bold green** `#1a9850` line on the temp
+  axis + right-aligned "Thermostat N °C" label.
+- **Two lines** width 3, no markers; axis titles 18 pt **colored to match their line**;
+  **legend** top-right.
+- **X axis** real linear time, gridline every **12 h**, **24-hour** labels
+  (`00:00`/`12:00`), **real weekday name** under each midnight tick. Default range =
+  data range **snapped out to the enclosing 12 h ticks** (start = tick at/left of first
+  point, end = tick at/right of last point) — always includes all data. Narrow one
+  chart by setting `WIN_START` / `WIN_END`.
+- **Title** 24 bold, **subtitle** 18 grey. Subtitle **date range derived from the
+  data**; only manual subtitle input is the Eva-dry count.
+- **Title / subtitle rules:**
+  - Indoor Storage / Outdoors → title `Cabin climate (<Location>)`
+  - Fridge / Freezer → title is **just** `<Location>`
+  - Indoor Storage subtitle → `<Single|Double> Eva-dry, <date range>`; others → `<date range>`
