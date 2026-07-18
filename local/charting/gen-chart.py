@@ -29,7 +29,7 @@ import csv, datetime, math, os, sys
 # None,None = full data range (default). Set to focus one chart on a sub-range, e.g.
 #   WIN_START = datetime.datetime(2026, 7, 13, 5, 0)
 #   WIN_END   = datetime.datetime(2026, 7, 17, 12, 0)
-WIN_START = None
+WIN_START = datetime.datetime(2026, 7, 18, 7, 0)
 WIN_END   = None
 
 def load(src, win_start=None, win_end=None):
@@ -72,7 +72,7 @@ def date_range(d0, d1):
 # Temp span 20 (step 5) and hum span 40 (step 10) both give 4 intervals -> gridlines coincide.
 BANDS = {
     "Indoor Storage": dict(temp=(0, 20, 5),   hum=(20, 60, 10), thermostat=6),
-    "Outdoors":       dict(temp=(10, 30, 5),  hum=(30, 70, 10), thermostat=20),
+    "Outdoors":       dict(temp=(10, 30, 5),  hum=(30, 70, 10), thermostat=None, thermostat_f=70),
     "Fridge":         dict(temp=(0, 20, 5),   hum=(30, 70, 10), thermostat=None),
     "Freezer":        dict(temp=(-20, 0, 5),  hum=(30, 70, 10), thermostat=None),
 }
@@ -100,8 +100,12 @@ def esc(s): return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;"
 
 def build_svg(times, series, cfg, anchor):
     L, R = cfg["left"], cfg["right"]
-    wmin = math.floor(times[0]  / 12) * 12      # tick at/left of the first point
-    wmax = math.ceil (times[-1] / 12) * 12      # tick at/right of the last point
+    # Axis range: honor an explicit WIN_START/WIN_END exactly; otherwise snap the
+    # data range out to the enclosing 12h ticks.
+    wmin = (WIN_START - anchor).total_seconds() / 3600 if WIN_START else math.floor(times[0]  / 12) * 12
+    wmax = (WIN_END   - anchor).total_seconds() / 3600 if WIN_END   else math.ceil (times[-1] / 12) * 12
+    span = wmax - wmin
+    tstep = 12 if span >= 24 else (2 if span > 8 else 1)   # finer ticks for short windows
     def X(t): return PL + (t - wmin) / (wmax - wmin) * PW
     def scaleY(ax):
         lo, hi = ax["lo"], ax["hi"]
@@ -127,15 +131,15 @@ def build_svg(times, series, cfg, anchor):
 
     # vertical gridlines every 12h; 24h time + real weekday name at midnight
     def fmt_clock(h): return "%02d:00" % (int(round(h)) % 24)
-    t = wmin                                     # edges are already on 12h ticks
-    while t <= wmax:
+    t = wmin
+    while t <= wmax + 1e-9:
         x = X(t)
         p.append('<line x1="%.2f" y1="%.1f" x2="%.2f" y2="%.1f" stroke="%s"/>' % (x, PT, x, PB, GRID))
         p.append('<text x="%.2f" y="%.1f" text-anchor="middle" font-size="14" fill="%s">%s</text>' % (x, PB+18, INK, fmt_clock(t)))
         if t % 24 == 0:
             day = (anchor + datetime.timedelta(hours=t)).strftime("%a")
             p.append('<text x="%.2f" y="%.1f" text-anchor="middle" font-size="14" fill="%s">%s</text>' % (x, PB+35, INK, day))
-        t += 12
+        t += tstep
 
     # axis borders: left, right, bottom
     for xb in (PL, PR):
@@ -148,12 +152,18 @@ def build_svg(times, series, cfg, anchor):
         p.append('<polyline points="%s" fill="none" stroke="%s" stroke-width="3" '
                  'stroke-linejoin="round" stroke-linecap="round"/>' % (pts, ax["color"]))
 
-    # thermostat setpoint — solid bold green reference line on the temperature axis
-    ts = cfg.get("thermostat")
-    if ts is not None:
-        ty = YL(ts)
+    # thermostat setpoint — solid bold green reference line on the temperature axis.
+    # thermostat_f (°F) takes priority; positioned via °C conversion, labeled °F.
+    ts, tf = cfg.get("thermostat"), cfg.get("thermostat_f")
+    if tf is not None:
+        ty, label = YL((tf - 32) * 5 / 9), "Thermostat %d °F" % tf
+    elif ts is not None:
+        ty, label = YL(ts), "Thermostat %d °C" % ts
+    else:
+        ty = None
+    if ty is not None:
         p.append('<line x1="%d" y1="%.2f" x2="%d" y2="%.2f" stroke="%s" stroke-width="3.5"/>' % (PL, ty, PR, ty, GREEN))
-        p.append('<text x="%d" y="%.2f" text-anchor="end" font-size="14" fill="%s">Thermostat %d °C</text>' % (PR-6, ty-5, GREEN, ts))
+        p.append('<text x="%d" y="%.2f" text-anchor="end" font-size="14" fill="%s">%s</text>' % (PR-6, ty-5, GREEN, label))
 
     # title + subtitle
     p.append('<text x="%d" y="30" text-anchor="middle" font-size="24" font-weight="bold" fill="%s">%s</text>' % (W//2, INK, esc(cfg["title"])))
@@ -196,6 +206,7 @@ b = BANDS[CFG["location"]]
 CFG["left"]  = dict(title="Temperature (°C)", lo=b["temp"][0], hi=b["temp"][1], step=b["temp"][2], suffix="°", color="#d62728", src="temp")
 CFG["right"] = dict(title="Humidity (%RH)",   lo=b["hum"][0],  hi=b["hum"][1],  step=b["hum"][2],  suffix="%", color="#2166c4", src="hum")
 CFG["thermostat"] = b["thermostat"]
+CFG["thermostat_f"] = b.get("thermostat_f")
 
 # title + subtitle
 if CFG["location"] in ("Fridge", "Freezer"):
