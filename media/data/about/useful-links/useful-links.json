@@ -3,7 +3,7 @@
 	"wpSettings": {"published": true, "comments": "open"},
 	"notes": [
 		{
-			"sectionName": "Camping",
+			"sectionName": "Camping, general information",
 			"list": [
 				{
 					"name": "The Campers Code",
@@ -24,7 +24,7 @@
 			]
 		},
 		{
-			"sectionName": "Camping",
+			"sectionName": "Camping reviews",
 			"list": [
 				{
 					"name": "Go Hiking",
@@ -40,24 +40,37 @@
 						"A guide to the campsites and van life."
 					]
 				},
-				{
-					"name": "Campspot",
-					"url": "https://www.campspot.com/",
+				{"name": "Vancouver Island Camping",
+					"url": "https://www.vancouverislandcamping.net/category/vancouver-island//",
 					"description": [
-						"A campground search and booking platform covering campgrounds,",
-						"RV parks, and glamping sites across North America."
+						"Vancouver Island Camping provides first-hand campground information, camping guides and campground walk-through videos for campers exploring Vancouver Island, British Columbia."
 					]
 				}
 			]
 		},
 		{
-			"sectionName": "RV",
+			"sectionName": "Camping, general information",
 			"list": [
 				{
 					"name": "Coachmen Beyond",
 					"url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
 					"description": [
 						"Index to all the manuals and videos."
+					]
+				},
+				{
+					"name": "BC Parks Reservations",
+					"url": "https://camping.bcparks.ca/",
+					"description": [
+						"Book campsites for BC provincial parks online."
+					]
+				},
+				{
+					"name": "Campspot",
+					"url": "https://www.campspot.com/",
+					"description": [
+						"A campground search and booking platform covering campgrounds,",
+						"RV parks, and glamping sites across North America."
 					]
 				}
 			]
