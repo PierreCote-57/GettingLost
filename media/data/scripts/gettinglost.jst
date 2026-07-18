@@ -647,20 +647,14 @@
           var item = itemById[pin.id];
           if (!item) return;
           marker.addListener("click", function () {
-            var box = document.createElement("div");
-            var caption = document.createElement("div");
-            caption.textContent = item.label || "";
-            caption.style.fontWeight = "600";
-            caption.style.margin = "0 0 0.35rem";
             var img = document.createElement("img");
             img.src = formatImageUrl(item.img, 320, 240);
             img.alt = item.label || "";
             img.style.display = "block";
             img.style.maxWidth = "320px";
             img.style.maxHeight = "240px";
-            box.appendChild(caption);
-            box.appendChild(img);
-            infoWindow.setContent(box);
+            infoWindow.setHeaderContent(item.label || "");
+            infoWindow.setContent(img);
             infoWindow.open(map, marker);
           });
         });
