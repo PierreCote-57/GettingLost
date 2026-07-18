@@ -1,0 +1,83 @@
+{
+	"title": "Goose Lake Trail",
+	"featuredImage": "MortonLakeCampground.jpg",
+	"excerpt": "Under construction",
+	"badges": {
+		"tags": [
+			"fishing"
+		],
+		"road": "gravel"
+	},
+	"wpSettings": {"published": true, "comments": "open"},
+	"location": {
+		"lat": 50.12631,
+		"lng": -125.47977,
+		"pin": "campground",
+		"zoom": 15
+	},
+	"campground": {
+		"website": "https://bcparks.ca/morton-lake-park/",
+		"siteMap": "",
+		"reservation": "Reservable; open April 30–Sept 27 plus year-round winter camping"
+	},
+	"roadMap": {
+		"zoom": 11,
+		"pins": [
+			{ "id": "img_0499", "lat": 50.120322, "lng": -125.387839 },
+			{ "id": "img_0561", "lat": 50.097947, "lng": -125.492547 },
+			{ "id": "img_0558", "lat": 50.089439, "lng": -125.495414 },
+			{ "id": "img_0555", "lat": 50.085275, "lng": -125.489886 },
+			{ "id": "img_0602", "lat": 50.088161, "lng": -125.542283 },
+			{ "id": "img_0608", "lat": 50.085442, "lng": -125.567794 }
+		]
+	},
+	"photoGalleries": {
+		"atSite": {
+			"name": "At the rec site",
+			"items": [
+				{ "id": "img_0566", "img": "IMG_0566.jpg", "label": "img_0566" },
+				{ "id": "img_0568", "img": "IMG_0568.jpg", "label": "img_0568" },
+				{ "id": "img_0570", "img": "IMG_0570.jpg", "label": "img_0570" },
+				{ "id": "img_0571", "img": "IMG_0571.jpg", "label": "img_0571" },
+				{ "id": "img_0577", "img": "IMG_0577.jpg", "label": "img_0577" },
+				{ "id": "img_0578", "img": "IMG_0578.jpg", "label": "img_0578" },
+				{ "id": "img_0579", "img": "IMG_0579.jpg", "label": "img_0579" },
+				{ "id": "img_0580", "img": "IMG_0580.jpg", "label": "img_0580" },
+				{ "id": "img_0581", "img": "IMG_0581.jpg", "label": "img_0581" },
+				{ "id": "img_0582", "img": "IMG_0582.jpg", "label": "img_0582" },
+				{ "id": "img_0583", "img": "IMG_0583.jpg", "label": "img_0583" },
+				{ "id": "img_0584", "img": "IMG_0584.jpg", "label": "img_0584" },
+				{ "id": "img_0585", "img": "IMG_0585.jpg", "label": "img_0585" },
+				{ "id": "img_0586", "img": "IMG_0586.jpg", "label": "img_0586" },
+				{ "id": "img_0587", "img": "IMG_0587.jpg", "label": "img_0587" },
+				{ "id": "img_0588", "img": "IMG_0588.jpg", "label": "img_0588" },
+				{ "id": "img_0589", "img": "IMG_0589.jpg", "label": "img_0589" },
+				{ "id": "img_0590", "img": "IMG_0590.jpg", "label": "img_0590" },
+				{ "id": "img_0591", "img": "IMG_0591.jpg", "label": "img_0591" },
+				{ "id": "img_0592", "img": "IMG_0592.jpg", "label": "img_0592" },
+				{ "id": "img_0593", "img": "IMG_0593.jpg", "label": "img_0593" }
+			]
+		},
+		"onTheWay": {
+			"name": "On the way",
+			"items": [
+				{ "id": "img_0499", "img": "IMG_0499.jpg", "label": "img_0499" },
+				{ "id": "img_0501", "img": "IMG_0501.jpg", "label": "img_0501" },
+				{ "id": "img_0554", "img": "IMG_0554.jpg", "label": "img_0554" },
+				{ "id": "img_0555", "img": "IMG_0555.jpg", "label": "img_0555" },
+				{ "id": "img_0558", "img": "IMG_0558.jpg", "label": "img_0558" },
+				{ "id": "img_0561", "img": "IMG_0561.jpg", "label": "img_0561" },
+				{ "id": "img_0594", "img": "IMG_0594.jpg", "label": "img_0594" },
+				{ "id": "img_0599", "img": "IMG_0599.jpg", "label": "img_0599" },
+				{ "id": "img_0601", "img": "IMG_0601.jpg", "label": "img_0601" },
+				{ "id": "img_0602", "img": "IMG_0602.jpg", "label": "img_0602" },
+				{ "id": "img_0603", "img": "IMG_0603.jpg", "label": "img_0603" },
+				{ "id": "img_0604", "img": "IMG_0604.jpg", "label": "img_0604" },
+				{ "id": "img_0605", "img": "IMG_0605.jpg", "label": "img_0605" },
+				{ "id": "img_0606", "img": "IMG_0606.jpg", "label": "img_0606" },
+				{ "id": "img_0607", "img": "IMG_0607.jpg", "label": "img_0607" },
+				{ "id": "img_0608", "img": "IMG_0608.jpg", "label": "img_0608" }
+			]
+		}
+	}
+}
