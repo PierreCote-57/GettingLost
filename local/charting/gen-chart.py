@@ -5,30 +5,28 @@ Pierre converts the SVG -> PNG in IntelliJ (~1 s) for the howto-climate gallery.
 
 Dual-axis: Temperature (left, red) + Humidity (right, blue), 900x520.
 
-BEFORE each generation, Claude asks Pierre (clickable AskUserQuestion), then sets
-CFG["location"] / CFG["dehumidifier"] from the answers:
-  1. Location?  ->  Indoor Storage | Outdoors | Fridge | Freezer
-  2. How many Eva-dry?  (1 -> "Single Eva-dry", 2 -> "Double Eva-dry")
-     — ASKED ONLY when Location == Indoor Storage.
+Usage:  python3 gen-chart.py <csv> [eva:1|2]
+  <csv>  logger CSV; LOCATION is inferred from its filename prefix
+         (cabin-indoor | cabin-outdoor | fridge | freezer). Fails loudly otherwise.
+  [eva]  1|2 -> Single|Double Eva-dry; REQUIRED for cabin-indoor, ignored elsewhere.
+Claude asks the Eva-dry count once per CSV per session (clickable) and passes it here.
 
 Per-location axis bands + thermostat live in BANDS below. Temp & humidity both
 span 4 intervals so their gridlines coincide. All values clamp to their band; the
 10-min cadence is dense enough that no band-edge interpolation is needed.
 
-X axis = the data's own range (WIN_START/WIN_END = None). To focus one chart on a
-sub-range, set those two datetimes; day-name ticks come from the real weekdays.
+X axis default = data range snapped out to the enclosing 12h ticks. Focus one chart
+by setting WIN_START/WIN_END; weekday ticks come from the real dates.
 
-Title rules:   Indoor Storage / Outdoors  ->  "Cabin climate (<Location>)"
-               Fridge / Freezer           ->  just "<Location>"
-Subtitle:      Indoor Storage  ->  "<Single|Double> Eva-dry, <date range>"
-               everything else ->  "<date range>"   (range derived from the data)
-Filename:      "<base>-<startdate>.svg", lowercase, ISO start date.
+Title:    cabin-indoor/outdoor -> "Cabin climate (<Location>)"; fridge/freezer -> "<Location>".
+Subtitle: cabin-indoor -> "<Single|Double> Eva-dry, <date range>"; else "<date range>".
+Output:   <same base>.svg written beside the CSV. Only the CSV persists — the svg (and
+          the PNG Pierre makes from it) are deleted after the PNG is uploaded to WP.
 """
-import csv, datetime, math
+import csv, datetime, math, os, sys
 
-# ---------- data ----------
-SRC = "/Users/pierrecote/src/github/GettingLost/local/charting/cabin-indoor-2026-07-13.csv"
-# Date/time window — None,None = the full data range (default). Tweak per chart, e.g.
+# ---------- window (optional per-chart tweak) ----------
+# None,None = full data range (default). Set to focus one chart on a sub-range, e.g.
 #   WIN_START = datetime.datetime(2026, 7, 13, 5, 0)
 #   WIN_END   = datetime.datetime(2026, 7, 17, 12, 0)
 WIN_START = None
@@ -80,11 +78,16 @@ BANDS = {
 }
 
 # ---------- config ----------
-CFG = dict(
-    brand="Cabin climate",          # title base; the Location fills the (parenthetical)
-    location="Indoor Storage",      # set from the Location question
-    dehumidifier="Single Eva-dry",  # set from the Eva-dry question; only used for Indoor Storage
-)
+# location + dehumidifier are filled from the CLI (see bottom); brand is the title base.
+CFG = dict(brand="Cabin climate")
+
+# CSV filename prefix -> location. Location is inferred from the name, not asked.
+PREFIX_TO_LOCATION = {
+    "cabin-indoor":  "Indoor Storage",
+    "cabin-outdoor": "Outdoors",
+    "fridge":        "Fridge",
+    "freezer":       "Freezer",
+}
 
 # ---------- geometry ----------
 W, H = 900, 520
@@ -170,6 +173,22 @@ def build_svg(times, series, cfg, anchor):
     p.append('</svg>')
     return "\n".join(p)
 
+# ---- CLI: python3 gen-chart.py <csv> [eva:1|2] ----
+if len(sys.argv) < 2:
+    sys.exit("usage: gen-chart.py <csv> [eva:1|2]   (eva required for cabin-indoor)")
+SRC = sys.argv[1]
+
+stem = os.path.splitext(os.path.basename(SRC))[0]
+CFG["location"] = next((loc for pre, loc in PREFIX_TO_LOCATION.items() if stem.startswith(pre)), None)
+if CFG["location"] is None:
+    sys.exit("gen-chart.py: can't infer location from '%s' — name it one of %s + '-<date>.csv'"
+             % (os.path.basename(SRC), " | ".join(PREFIX_TO_LOCATION)))
+
+if CFG["location"] == "Indoor Storage":
+    if len(sys.argv) < 3 or sys.argv[2] not in ("1", "2"):
+        sys.exit("gen-chart.py: Indoor Storage needs the Eva-dry count — pass 1 or 2")
+    CFG["dehumidifier"] = "Single Eva-dry" if sys.argv[2] == "1" else "Double Eva-dry"
+
 times, temps, hums, d0, d1, anchor = load(SRC, WIN_START, WIN_END)
 
 # per-location axis bands + thermostat
@@ -190,12 +209,7 @@ else:
 
 svg = build_svg(times, {"temp": temps, "hum": hums}, CFG, anchor)
 
-# Filename: lowercase location base + start date (ISO). One Eva-dry config per
-# start date, so the count is not encoded. Pierre renames IntelliJ's ".svg.png"
-# to "<base>-<date>.png" for the gallery.
-BASE = {"Indoor Storage": "cabin-indoor", "Outdoors": "cabin-outdoor",
-        "Fridge": "fridge", "Freezer": "freezer"}
-fname = "%s-%s.svg" % (BASE[CFG["location"]], d0.strftime("%Y-%m-%d"))
-OUT = "/Users/pierrecote/src/github/GettingLost/local/charting/" + fname
+# Output: SVG beside the CSV, same base name (cabin-indoor-2026-07-13.csv -> .svg).
+OUT = os.path.splitext(SRC)[0] + ".svg"
 with open(OUT, "w") as f: f.write(svg)
 print("points:", len(times), "range:", d0, "->", d1, "-> wrote", OUT)

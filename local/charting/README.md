@@ -8,34 +8,23 @@ Chrome, no Pillow. The `.svg` is the source of truth; the `.png` is the gallery
 deliverable (the gallery serves raster via Jetpack Photon, which can't resize SVG).
 
 ## Files here
-- `gen-chart.py` — **the generator.** `python3 gen-chart.py` → writes `<base>-<start-date>.svg`.
-- `cabin-indoor-*.svg` etc. — current output (dual-axis cabin climate chart).
-- `TZ0325122310_*.csv` — source data (TempU03, one point every 10 min).
-- `Calibration Certificate_*.pdf` — logger calibration.
-- `cabin-temperature.html`, `cabin-temperature.template.html`, `cabin-temperature.png` —
-  **legacy Chart.js** temp chart, fully superseded by `gen-chart.py` (thermostat line
-  ported; clamp is universal; red-out-of-range was dropped by design). Safe to retire
-  once the temp chart is confirmed uploaded to the gallery.
+- `gen-chart.py` — **the generator.** `python3 gen-chart.py <csv> [eva]`.
+- `<location>-<startdate>.csv` — logger data; **the only file that persists.**
 
 ## How to draw a chart
-1. **Ask Pierre (clickable), then set `CFG` in `gen-chart.py`:**
-   - **Location?** → Indoor Storage | Outdoors | Fridge | Freezer → `CFG["location"]`
-   - **How many Eva-dry?** (1/2) → `CFG["dehumidifier"]` — **only for Indoor Storage.**
-2. `python3 gen-chart.py` → writes `<base>-<start-date>.svg` (auto-named, below).
-3. Pierre: SVG→PNG in IntelliJ (makes `<name>.svg.png`), rename to `<name>.png`, drop
-   into the howto-climate gallery.
+1. **Name the CSV** with a location prefix + start date: `<base>-<YYYY-MM-DD>.csv`,
+   base ∈ `cabin-indoor` | `cabin-outdoor` | `fridge` | `freezer`.
+2. **Run it** (one CSV per session; the path stays in shell history — no `.py` edits):
 
-## Filename (auto-derived — never typed)
-Lowercase `<location-base>-<start-date>.svg`, start date ISO `YYYY-MM-DD` (sortable;
-the full range lives in the subtitle). One Eva-dry config per start date, so the
-count is not in the name.
-
-| Location | Base | Example |
-|---|---|---|
-| Indoor Storage | `cabin-indoor` | `cabin-indoor-2026-07-13.svg` |
-| Outdoors | `cabin-outdoor` | `cabin-outdoor-2026-07-13.svg` |
-| Fridge | `fridge` | `fridge-2026-07-13.svg` |
-| Freezer | `freezer` | `freezer-2026-07-13.svg` |
+   ```
+   python3 gen-chart.py cabin-indoor-2026-07-13.csv 1
+   ```
+   - **Location is inferred** from the filename prefix (fails loudly on an unknown name).
+   - **Eva-dry count** is the 2nd arg (`1`=Single, `2`=Double) — **required for
+     `cabin-indoor`, ignored otherwise.** Claude asks it once per CSV per session (clickable).
+   - Writes `<same base>.svg` **beside the CSV**.
+3. Tweak; then Pierre makes the PNG in IntelliJ, uploads it to WP, and **deletes the
+   svg + png** — only the CSV stays. (Deletions are Pierre's call; no gitignore.)
 
 ## Locked format (cabin climate, dual-axis) — finalized 2026-07-18
 - **900 × 520**, white bg, black L+R+bottom axis borders, `#e1e0d9` gridlines.
