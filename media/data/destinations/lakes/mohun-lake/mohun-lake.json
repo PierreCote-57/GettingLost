@@ -15,7 +15,7 @@
 		"pin": "lake",
 		"zoom": 12
 	},
-	"recSites": [
+	"destinations": [
 		{
 			"name": "Mohun Lake",
 			"recId": "REC0184",

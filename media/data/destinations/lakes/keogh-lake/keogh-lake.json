@@ -9,12 +9,11 @@
     "lng": -127.1664,
     "pin": "lake"
   },
-  "recSites": [
+  "destinations": [
     {
       "name": "Clint Beek (Keogh Lake)",
       "recId": "REC16077",
       "siteMap": "https://www.sitesandtrailsbc.ca/resource/REC16077#maps-and-location",
-      "reservationUrl": "https://letscamp.ca/camps/clint-beek-recreation-site",
       "references": [
         {
           "name": "Sites & Trails BC",
@@ -40,7 +39,15 @@
   "notes": [
     {
       "sectionName": "Further readings",
-      "list": []
+      "list": [
+        {
+          "name": "Reservations (Let's Camp)",
+          "url": "https://letscamp.ca/camps/clint-beek-recreation-site",
+          "description": [
+            "Book an overnight campsite at the Clint Beek Recreation Site."
+          ]
+        }
+      ]
     }
   ]
 }

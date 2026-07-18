@@ -3,7 +3,7 @@
   "wpSettings": {"published": false, "comments": "open"},
   "lat": 0,
   "lng": 0,
-  "recSites": [],
+  "destinations": [],
   "fishingReferences": {
     "bcIdentifier": "",
     "areaKm2": 0,

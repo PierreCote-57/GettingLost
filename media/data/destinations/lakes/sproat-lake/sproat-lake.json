@@ -9,10 +9,10 @@
     "lng": -124.9153,
     "pin": "lake"
   },
-  "recSites": [
+  "destinations": [
     {
       "name": "Sproat Lake Camping",
-      "recId": "Private",
+      "type": "Private",
       "siteMap": null,
       "references": [
         {
@@ -26,12 +26,16 @@
     },
     {
       "name": "Sproat Lake Provincial Park",
-      "recId": "NA",
+      "type": "Park",
       "siteMap": null,
       "references": [
         {
           "name": "BC Parks",
           "url": "https://bcparks.ca/sproat-lake-park/"
+        },
+        {
+          "name": "Getting Lost page",
+          "file": "sproat-lake-provincial-park.html"
         }
       ],
       "description": "",

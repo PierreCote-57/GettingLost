@@ -15,7 +15,7 @@
 		"lng": -125.5033,
 		"pin": "lake"
 	},
-	"recSites": [
+	"destinations": [
 		{
 			"name": "Beavertail Lake Day Use",
 			"recId": null,

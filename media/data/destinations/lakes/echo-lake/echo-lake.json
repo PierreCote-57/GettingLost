@@ -16,7 +16,7 @@
 		"pin": "lake",
 		"Zoom": 14
 	},
-	"recSites": [
+	"destinations": [
 		{
 			"name": "Echo Lake Day Use",
 			"recId": null,

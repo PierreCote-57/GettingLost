@@ -14,7 +14,7 @@
  *
  * This file adds the two renderers specific to lake pages:
  *
- *   <div data-block-type="recSites"></div>
+ *   <div data-block-type="destinations"></div>
  *   <div data-block-type="fishingReferences"></div>
  *
  * Both read directly from the page's own JSON — no data-lake-id
@@ -102,15 +102,6 @@
     return link;
   }
 
-  function buildLinkOrNaCell(url, label) {
-    if (!url) {
-      return buildBodyCell(CONFIG.naLabel);
-    }
-    var cell = buildBodyCell("");
-    cell.appendChild(buildExternalLink(url, label));
-    return cell;
-  }
-
   function buildLabelValueRow(label, value) {
     var row = document.createElement("tr");
     row.appendChild(buildLabelCell(label));
@@ -164,26 +155,27 @@
   }
 
   // ---------------------------------------------------------------------
-  // Generic block renderer: "recSites"
+  // Generic block renderer: "destinations"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.recSites = [{ name, recId, siteMap, reservationUrl,
-  // reservationLabel, references, description, lat, lng }, ...] and
-  // renders the Name/ID/Site map/Reservation/References table.
+  // Reads pageData.destinations = [{ name, type, references, description,
+  // lat, lng }, ...] and renders the Name/Type/References table. A
+  // destination is a rec site by default; set "type" to "Park" (or any
+  // other label) to override — absent/empty renders as "Rec site".
   //
-  // lat/lng per site are currently unused (rec-site map markers are on
+  // lat/lng per destination are currently unused (map markers are on
   // hold) but are left in the schema for when that work resumes — extra
   // fields in the JSON are always ignored rather than treated as errors.
 
-  window.GL.blockRenderers.recSites = function (el, pageData) {
-    var recSites = pageData.recSites || [];
+  window.GL.blockRenderers.destinations = function (el, pageData) {
+    var destinations = pageData.destinations || [];
 
     el.textContent = "";
-    el.appendChild(window.GL.buildGlHeading("Recreational sites"));
+    el.appendChild(window.GL.buildGlHeading("Destinations"));
 
-    if (recSites.length === 0) {
+    if (destinations.length === 0) {
       var notice = document.createElement("p");
-      notice.textContent = "No recreational site";
+      notice.textContent = "No destination";
       el.appendChild(notice);
       return;
     }
@@ -194,9 +186,7 @@
     var headerRow = document.createElement("tr");
     [
       { label: "Name", width: "200px" },
-      { label: "ID", width: "90px" },
-      { label: "Site map", width: "80px" },
-      { label: "Reservation", width: "90px" },
+      { label: "Type", width: "90px" },
       { label: "References", width: "100px" }
     ].forEach(function (column) {
       headerRow.appendChild(buildHeaderCell(column.label, column.width));
@@ -205,19 +195,17 @@
     table.appendChild(thead);
 
     var tbody = document.createElement("tbody");
-    recSites.forEach(function (site) {
+    destinations.forEach(function (dest) {
       var row = document.createElement("tr");
 
-      var nameCell = buildBodyCell(site.name);
-      if (site.description) {
-        nameCell.setAttribute("title", site.description);
+      var nameCell = buildBodyCell(dest.name);
+      if (dest.description) {
+        nameCell.setAttribute("title", dest.description);
       }
       row.appendChild(nameCell);
 
-      row.appendChild(buildBodyCell(site.recId));
-      row.appendChild(buildLinkOrNaCell(site.siteMap, "Site map"));
-      row.appendChild(buildReservationCell(site));
-      row.appendChild(buildReferencesCell(site.references));
+      row.appendChild(buildBodyCell(dest.type || "Rec site"));
+      row.appendChild(buildReferencesCell(dest.references));
 
       tbody.appendChild(row);
     });
@@ -225,25 +213,6 @@
 
     el.appendChild(table);
   };
-
-  /**
-   * Renders the Reservation cell. A rec site may carry a reservationUrl
-   * (renders as a link, labeled by reservationLabel or "Reservations" if
-   * no label is given), a reservationLabel with no URL (renders as plain
-   * text, e.g. "First come, first served"), or neither (renders "NA").
-   */
-  function buildReservationCell(site) {
-    if (site.reservationUrl) {
-      var label = site.reservationLabel || "Reservations";
-      var cell = buildBodyCell("");
-      cell.appendChild(buildExternalLink(site.reservationUrl, label));
-      return cell;
-    }
-    if (site.reservationLabel) {
-      return buildBodyCell(site.reservationLabel);
-    }
-    return buildBodyCell(CONFIG.naLabel);
-  }
 
   // ---------------------------------------------------------------------
   // Generic block renderer: "fishingReferences"
