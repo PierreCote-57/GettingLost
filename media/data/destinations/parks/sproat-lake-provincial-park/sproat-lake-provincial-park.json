@@ -3,7 +3,7 @@
 	"featuredImage": "under-construction.png",
 	"excerpt": "Warm-water lakeside camping, boat launch and the K'ak'awin petroglyphs near Port Alberni.",
 	"badges": {
-		"tags": ["camping", "fishing"],
+		"tags": ["camping", "fishing", "hiking"],
 		"road": "pavement"
 	},
 	"wpSettings": {"published": true, "comments": "open"},
@@ -15,27 +15,13 @@
 	},
 	"campground": {
 		"website": "https://bcparks.ca/sproat-lake-park/",
-		"siteMap": "",
+		"siteMap": "https://nrs.objectstore.gov.bc.ca/kuwyyf/sproat_lake_map_ec757653ce.pdf",
 		"reservation": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&mapId=-2147483402&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
 	},
 	"notes": [
 		{
 			"sectionName": "Further readings",
 			"list": [
-				{
-					"name": "Sproat Lake Park (BC Parks)",
-					"url": "https://bcparks.ca/sproat-lake-park/",
-					"description": [
-						"Official park page: camping, day-use, boat launch, swimming and the K'ak'awin petroglyphs."
-					]
-				},
-				{
-					"name": "Park map (PDF)",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/sproat_lake_map_ec757653ce.pdf",
-					"description": [
-						"BC Parks map of the campgrounds, day-use area and boat launch."
-					]
-				},
 				{
 					"name": "Sproat Lake Provincial Park (Camping RV BC)",
 					"url": "https://www.campingrvbc.com/sites/bc/sproat-lake-provincial-park-port-alberni/",
