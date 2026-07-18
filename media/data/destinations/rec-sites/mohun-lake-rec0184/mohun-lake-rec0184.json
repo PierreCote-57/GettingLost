@@ -20,6 +20,18 @@
 		"siteMap": "",
 		"reservation": ""
 	},
+	"roadMap": {
+		"zoom": 11,
+		"pins": [
+			{ "id": "img_0421", "lat": 50.084797, "lng": -125.515556 },
+			{ "id": "img_0423", "lat": 50.085250, "lng": -125.516639 },
+			{ "id": "img_0437", "lat": 50.084808, "lng": -125.515900 },
+			{ "id": "img_0441", "lat": 50.084794, "lng": -125.514969 },
+			{ "id": "img_0445", "lat": 50.086433, "lng": -125.482017 },
+			{ "id": "img_0562", "lat": 50.098217, "lng": -125.491906 },
+			{ "id": "img_0574", "lat": 50.126522, "lng": -125.486175 }
+		]
+	},
 	"photoGalleries": {
 		"atSite": {
 			"name": "At the rec site",
@@ -45,15 +57,15 @@
 		"onTheWay": {
 			"name": "On the way",
 			"items": [
-				{ "id": "img_0420", "img": "IMG_0420.jpg", "label": "TBD" },
-				{ "id": "img_0445", "img": "IMG_0445.jpg", "label": "TBD" },
-				{ "id": "img_0449", "img": "IMG_0449.jpg", "label": "TBD" },
-				{ "id": "img_0562", "img": "IMG_0562.jpg", "label": "TBD" },
-				{ "id": "img_0563", "img": "IMG_0563.jpg", "label": "TBD" },
-				{ "id": "img_0571", "img": "IMG_0571.jpg", "label": "TBD" },
-				{ "id": "img_0573", "img": "IMG_0573.jpg", "label": "TBD" },
-				{ "id": "img_0574", "img": "IMG_0574.jpg", "label": "TBD" },
-				{ "id": "img_0575", "img": "IMG_0575.jpg", "label": "TBD" }
+				{ "id": "img_0420", "img": "IMG_0420.jpg", "label": "img_0420" },
+				{ "id": "img_0445", "img": "IMG_0445.jpg", "label": "img_0445" },
+				{ "id": "img_0449", "img": "IMG_0449.jpg", "label": "img_0449" },
+				{ "id": "img_0562", "img": "IMG_0562.jpg", "label": "img_0562" },
+				{ "id": "img_0563", "img": "IMG_0563.jpg", "label": "img_0563" },
+				{ "id": "img_0571", "img": "IMG_0571.jpg", "label": "img_0571" },
+				{ "id": "img_0573", "img": "IMG_0573.jpg", "label": "img_0573" },
+				{ "id": "img_0574", "img": "IMG_0574.jpg", "label": "img_0574" },
+				{ "id": "img_0575", "img": "IMG_0575.jpg", "label": "img_0575" }
 			]
 		}
 	}

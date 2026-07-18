@@ -593,6 +593,77 @@
   };
 
   // ---------------------------------------------------------------------
+  // Generic block renderer: "googleRoadMap"
+  // ---------------------------------------------------------------------
+  //
+  // A left-floated companion map centered on the page's primary location
+  // (reusing resolveLocation) but at its OWN zoom (roadMap.zoom), showing
+  // a set of photo pins. Reads pageData.roadMap = { zoom, pins: [ { id,
+  // lat, lng }, ... ] }. Each pin's id is matched against the id of an
+  // item in pageData.photoGalleries (across all mini-galleries); clicking
+  // the pin opens an InfoWindow with that photo. Pins whose id has no
+  // matching gallery item still drop a plain marker (no image on click).
+
+  window.GL.blockRenderers.googleRoadMap = function (el, pageData) {
+    var road = pageData.roadMap;
+    if (!road) {
+      throw new Error('No "roadMap" block found in page JSON.');
+    }
+
+    // id -> gallery item ({img,label}) across every mini-gallery. First
+    // occurrence wins (ids are only unique within a gallery).
+    var itemById = {};
+    var galleries = pageData.photoGalleries || {};
+    Object.keys(galleries).forEach(function (key) {
+      ((galleries[key] && galleries[key].items) || []).forEach(function (item) {
+        if (item && item.id && !(item.id in itemById)) itemById[item.id] = item;
+      });
+    });
+
+    resolveLocation(pageData.location).then(function (r) {
+      el.textContent = "";
+      if (!el.style.width) el.style.width = "45%";
+      if (!el.style.height) el.style.height = "400px";
+      if (!el.style.float) el.style.float = "left";
+      if (!el.style.margin) el.style.margin = "0 1.5rem 1rem 0";
+
+      loadGoogleMapsApi(function () {
+        var map = new google.maps.Map(el, {
+          zoom: (typeof road.zoom === "number") ? road.zoom
+            : (typeof r.zoom === "number") ? r.zoom : MAP_CONFIG.mapZoom,
+          center: { lat: r.lat, lng: r.lng },
+          mapTypeId: MAP_CONFIG.mapTypeId,
+          styles: MAP_CONFIG.mapStyles
+        });
+
+        var infoWindow = new google.maps.InfoWindow();
+
+        (road.pins || []).forEach(function (pin) {
+          if (typeof pin.lat !== "number" || typeof pin.lng !== "number") return;
+          var marker = new google.maps.Marker({
+            position: { lat: pin.lat, lng: pin.lng },
+            map: map
+          });
+          var item = itemById[pin.id];
+          if (!item) return;
+          marker.addListener("click", function () {
+            var img = document.createElement("img");
+            img.src = formatImageUrl(item.img, 320, 240);
+            img.alt = item.label || "";
+            img.style.display = "block";
+            img.style.maxWidth = "320px";
+            img.style.maxHeight = "240px";
+            infoWindow.setContent(img);
+            infoWindow.open(map, marker);
+          });
+        });
+      });
+    }).catch(function (err) {
+      console.error('[gettinglost] Error rendering block type "googleRoadMap":', err);
+    });
+  };
+
+  // ---------------------------------------------------------------------
   // Shared helper: buildGlHeading
   // ---------------------------------------------------------------------
   //
