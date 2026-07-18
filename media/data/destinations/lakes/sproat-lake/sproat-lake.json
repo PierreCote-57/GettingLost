@@ -2,7 +2,7 @@
   "title": "Sproat Lake",
   "featuredImage": "under-construction.png",
   "excerpt": "A massive lake near Port Alberni with provincial parks, private campgrounds, and great fishing.",
-  "badges": { "tags": ["fishing", "camping"] },
+  "badges": { "tags": ["fishing", "camping"], "road": "pavement" },
   "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.2901,
@@ -30,27 +30,13 @@
       "siteMap": null,
       "references": [
         {
-          "name": "Website",
-          "url": "https://www.campingrvbc.com/sites/bc/sproat-lake-provincial-park-port-alberni/"
-        }
-      ],
-      "description": "",
-      "lat": null,
-      "lng": null
-    },
-    {
-      "name": "Taylor Arm Provincial Park",
-      "recId": "NA",
-      "siteMap": null,
-      "references": [
-        {
           "name": "BC Parks",
           "url": "https://bcparks.ca/sproat-lake-park/"
         }
       ],
       "description": "",
-      "lat": null,
-      "lng": null
+      "lat": 49.2986,
+      "lng": -124.9294
     }
   ],
   "fishingReferences": {
@@ -58,15 +44,15 @@
     "areaKm2": 42.33,
     "lakeChartList": [
       {
-        "name": "BC Bathymetric # 1",
+        "name": "BC Bathymetric (1985) 1 of 3",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215801.pdf"
       },
       {
-        "name": "BC Bathymetric # 2",
+        "name": "BC Bathymetric (1985) 2 of 3",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215802.pdf"
       },
       {
-        "name": "BC Bathymetric # 3",
+        "name": "BC Bathymetric (1985) 3 of 3",
         "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215803.pdf"
       }
     ],
@@ -75,7 +61,27 @@
   "notes": [
     {
       "sectionName": "Further readings",
-      "list": []
+      "list": [
+        {
+          "name": "Sproat Lake Provincial Park",
+          "file": "sproat-lake-provincial-park.html",
+          "description": [
+            "Our page on the park: lakeside camping, boat launch and the K'ak'awin petroglyphs."
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "photoGalleries": {
+    "photos": {
+      "name": "Photos",
+      "items": [
+        {
+          "id": "under-construction",
+          "img": "under-construction.png",
+          "label": "Under construction"
+        }
+      ]
+    }
+  }
 }
