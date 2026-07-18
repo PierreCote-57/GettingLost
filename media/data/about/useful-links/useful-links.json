@@ -6,6 +6,13 @@
 			"sectionName": "Camping, general information",
 			"list": [
 				{
+					"name": "Coachmen Beyond",
+					"url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
+					"description": [
+						"Index to all the manuals and videos."
+					]
+				},
+				{
 					"name": "The Campers Code",
 					"url": "https://www.camperscode.com/",
 					"description": [
@@ -51,13 +58,6 @@
 		{
 			"sectionName": "Camping, reservations",
 			"list": [
-				{
-					"name": "Coachmen Beyond",
-					"url": "https://forestriverinc.help/#/coachmenrv/guide/2026/3842-beyond/browse",
-					"description": [
-						"Index to all the manuals and videos."
-					]
-				},
 				{
 					"name": "BC Parks Reservations",
 					"url": "https://camping.bcparks.ca/",
