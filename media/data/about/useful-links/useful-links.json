@@ -49,7 +49,7 @@
 			]
 		},
 		{
-			"sectionName": "Camping, general information",
+			"sectionName": "Camping, reservations",
 			"list": [
 				{
 					"name": "Coachmen Beyond",
@@ -63,6 +63,13 @@
 					"url": "https://camping.bcparks.ca/",
 					"description": [
 						"Book campsites for BC provincial parks online."
+					]
+				},
+				{
+					"name": "Canada Parks Reservations",
+					"url": "https://reservation.pc.gc.ca",
+					"description": [
+						"Reserve your campsite in a Canadian park"
 					]
 				},
 				{
