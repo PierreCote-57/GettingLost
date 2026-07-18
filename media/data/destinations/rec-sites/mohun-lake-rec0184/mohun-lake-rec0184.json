@@ -59,7 +59,7 @@
 				{ "id": "img_0420", "img": "IMG_0420.jpg", "label": "img_0420" },
 				{ "id": "img_0445", "img": "IMG_0445.jpg", "label": "img_0445" },
 				{ "id": "img_0449", "img": "IMG_0449.jpg", "label": "img_0449" },
-				{ "id": "img_0562", "img": "IMG_0562.jpg", "label": "img_0562" },
+				{ "id": "img_0562", "img": "IMG_0562.jpg", "label": "A multi-line label for beautiful img_0562" },
 				{ "id": "img_0563", "img": "IMG_0563.jpg", "label": "img_0563" },
 				{ "id": "img_0571", "img": "IMG_0571.jpg", "label": "img_0571" },
 				{ "id": "img_0573", "img": "IMG_0573.jpg", "label": "img_0573" },
