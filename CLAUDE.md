@@ -77,6 +77,9 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
   the permission allow-match). **curl is URL-first:** `curl "<url>" <flags>`.
 - **Mark unvalidated numbers "to be validated"; never fabricate specs or URLs.**
 - **Render, don't second-guess; fix the data, not with legacy-tolerant code.**
+- **URLs are always `https://`.** When copying a URL from any source into the
+  site data, rewrite `http://` → `https://`. Never curl/fetch/test a plain
+  `http://` URL — upgrade the scheme first.
 
 ---
 See the memory `feedback-working-style` for the *why*/history behind these rules
