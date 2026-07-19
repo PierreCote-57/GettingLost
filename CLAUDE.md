@@ -75,6 +75,10 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
   item-by-item. Direct answer first.
 - **One command per Bash call** — no `&&`/`;`/pipes/loops/inline scripts (they defeat
   the permission allow-match). **curl is URL-first:** `curl "<url>" <flags>`.
+- **Don't shell out to `awk` / `sed` / `date`** — use the alternatives: `python3` for
+  CSV/text parsing and date math, the `Edit` tool for in-file changes, and the
+  session-provided date for "now." These are deliberately kept out of the permission
+  allow-list; reaching for them means an avoidable prompt.
 - **Mark unvalidated numbers "to be validated"; never fabricate specs or URLs.**
 - **Render, don't second-guess; fix the data, not with legacy-tolerant code.**
 - **URLs are always `https://`.** When copying a URL from any source into the

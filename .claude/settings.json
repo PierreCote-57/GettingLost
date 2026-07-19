@@ -1,15 +1,16 @@
 {
 	"permissions": {
+		"additionalDirectories": [
+			"~/Pictures/GettingLost"
+		],
 		"allow": [
 			"Read",
 			"Edit",
 			"Write",
-			"Bash(curl 'https://gettinglostonvi.wpcomstaging.com*)",
-			"Bash(python3:*)",
-			"Bash(cd:*)",
-			"Bash(ls:*)",
-			"Bash(grep:*)",
-			"Bash(git:*)"
+
+			"Bash(cp ~/Pictures/GettingLost*)",
+			"Bash(mv ~/Pictures/GettingLost*)",
+			"Bash(rm ~/Pictures/GettingLost*)"
 		]
 	}
 }

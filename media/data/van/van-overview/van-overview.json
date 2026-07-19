@@ -35,6 +35,11 @@
 					"id": "1",
 					"img": "IMG_2769_crop.jpg",
 					"label": "Top"
+				},
+				{
+					"id": "Tires",
+					"img": "IMG_2814.jpg",
+					"label": "Original tires"
 				}
 			]
 		},
