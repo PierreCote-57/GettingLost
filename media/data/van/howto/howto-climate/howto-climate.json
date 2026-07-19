@@ -1,116 +1,159 @@
 {
-  "title": "How To: Climate Control",
-  "featuredImage": "garmin-temp-panel.png",
-  "excerpt": "Set up and operate the Truma heating and air conditioning system.",
-  "tags": [],
-  "wpSettings": {"published": true, "comments": "open"},
-  "photoGalleries": {
-    "howto": {
-      "name": "How to images",
-      "items": [
-        { "id": "truma-location", "img": "control-panel.png", "label": "Truma panel, far left"},
-        { "id": "garmin-temp-select", "img": "garmin-temp-select.png", "label": "Garmin temperature select screen" },
-        { "id": "garmin-temp-panel", "img": "garmin-temp-panel.png", "label": "Garmin SERV panel" },
-        { "id": "truma-on-panel", "img": "truma-on-panel.png", "label": "Truma touchscreen — AC on" },
-        { "id": "truma-acc", "img": "truma-ACC.png", "label": "Truma touchscreen — ACC/Auto mode" },
-        { "id": "truma-tools", "img": "truma-tools.png", "label": "Truma touchscreen — tool icons" },
-		  { "id": "cabin-indoor", "img": "cabin-indoor-2026-07-13.png", "label": "Cabin climate in storage" },
-		  { "id": "cabin-outdoor", "img": "cabin-outdoor-2026-07-18b.png", "label": "Cabin climate outdoors" }
-      ]
-    },
-    "details": {
-      "name": "Details images",
-      "items": [
-        { "id": "garmin-temp-panel", "img": "garmin-temp-panel.png", "label": "Garmin SERV panel" },
-        { "id": "garmin-temp-select", "img": "garmin-temp-select.png", "label": "Garmin temperature select screen" }
-      ]
-    }
-  },
-  "notes": [
-    {
-      "sectionName": "Truma CP plus",
-      "list": [
-        {
-          "name": "Product page",
-          "url": "https://www.truma.com/us/products/operating-systems-us/truma-cp-plus/",
-          "description": [
-            "The physical control panel that drives the thermostat loop using its own CP plus temperature sensor, independent of the Garmin display."
-          ]
-        },
-        {
-          "name": "Operating instructions",
-          "url": "https://www.truma.com/us/download/truma-cp-plus-aventa-combi-operating-instructions/",
-          "description": [
-            "This edition covers the exact Aventa + Combi pairing installed in this van. Includes the rotary push-button menu and the ACC (Automatic Climate Control) setting, which must be ON for the Garmin panel to be able to issue temperature commands."
-          ]
-        }
-      ]
-    },
-    {
-      "sectionName": "Truma Aventa eco + soft start",
-      "list": [
-        {
-          "name": "Product page",
-          "url": "https://www.truma.com/us/products/air-conditioning-systems-us/aventa-us/truma-aventa-eco-soft-start/",
-          "description": [
-            "The 13,500 BTU/h rooftop air conditioner installed in this van, with the SoftStartRV module pre-installed to reduce start-up amp draw on inverter power. Cooling only — this model has no heat pump."
-          ]
-        },
-        {
-          "name": "Product guide",
-          "url": "https://www.truma.com/us/download/aventa-product-guide-2026/",
-          "description": [
-            "Manufacturer's feature and specification summary for the Aventa line."
-          ]
-        },
-        {
-          "name": "Operating instructions",
-          "url": "https://www.truma.com/us/download/truma-aventa-operating-instructions/",
-          "description": [
-            "Full operating instructions, including the automatic, manual, and dehumidification fan modes shown on the touchscreen."
-          ]
-        },
-        {
-          "name": "Quick start guide",
-          "url": "https://www.truma.com/us/download/truma-aventa-quick-start-guide/",
-          "description": [
-            "A condensed setup/first-use reference."
-          ]
-        }
-      ]
-    },
-    {
-      "sectionName": "Truma Combi G comfort",
-      "list": [
-        {
-          "name": "Product page",
-          "url": "https://www.truma.com/us/products/heating-systems-us/combi-us/truma-combi-g-comfort/",
-          "description": [
-            "The gasoline-fired furnace and hot water heater installed in this van — a separate unit from the roof-mounted Aventa, mounted low inside the van and ducted to floor-level vents. Runs on gas, electric, or a mix of both."
-          ]
-        },
-        {
-          "name": "One sheet",
-          "url": "https://www.truma.com/us/download/truma-combi-g-one-sheet/",
-          "description": [
-            "A single-page specification and feature summary."
-          ]
-        },
-        {
-          "name": "Operating instructions",
-          "url": "https://www.truma.com/us/download/truma-combi-g-operating-instructions/",
-          "description": [
-            "Covers initial start-up, filling the water container, and the gas/electric/mix energy-source modes for cabin heat and hot water."
-          ]
-        },
-        {
-          "name": "Quick start guide",
-          "url": "https://www.truma.com/us/download/truma-combi-quick-start-guide/",
-          "description": [
-            "Truma's general Combi-family quick-start reference — no Combi G-specific edition was published separately, but the gas/electric/mix controls are the same across the family."
-          ]
-        }
-      ]
-    }
-  ]
+	"title": "How To: Climate Control",
+	"featuredImage": "garmin-temp-panel.png",
+	"excerpt": "Set up and operate the Truma heating and air conditioning system.",
+	"tags": [],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"photoGalleries": {
+		"howto": {
+			"name": "How to images",
+			"items": [
+				{
+					"id": "truma-location",
+					"img": "control-panel.png",
+					"label": "Truma panel, far left"
+				},
+				{
+					"id": "truma-tools",
+					"img": "truma-tools.png",
+					"label": "Truma touchscreen — tool icons"
+				},
+				{
+					"id": "truma-acc",
+					"img": "truma-ACC.png",
+					"label": "Truma touchscreen — ACC/Auto mode"
+				},
+				{
+					"id": "truma-on-panel",
+					"img": "truma-on-panel.png",
+					"label": "Truma touchscreen — ACC on"
+				},
+				{
+					"id": "garmin-temp-select",
+					"img": "garmin-temp-select.png",
+					"label": "Garmin temperature select screen"
+				},
+				{
+					"id": "garmin-temp-panel",
+					"img": "garmin-temp-panel.png",
+					"label": "Garmin SERV panel"
+				},
+				{
+					"id": "cabin-indoor",
+					"img": "cabin-indoor-2026-07-13.png",
+					"label": "Cabin climate in storage"
+				},
+				{
+					"id": "cabin-outdoor",
+					"img": "cabin-outdoor-2026-07-18b.png",
+					"label": "Cabin climate outdoors"
+				}
+			]
+		},
+		"details": {
+			"name": "Details images",
+			"items": [
+				{
+					"id": "garmin-temp-panel",
+					"img": "garmin-temp-panel.png",
+					"label": "Garmin SERV panel"
+				},
+				{
+					"id": "garmin-temp-select",
+					"img": "garmin-temp-select.png",
+					"label": "Garmin temperature select screen"
+				}
+			]
+		}
+	},
+	"notes": [
+		{
+			"sectionName": "Truma CP plus",
+			"list": [
+				{
+					"name": "Product page",
+					"url": "https://www.truma.com/us/products/operating-systems-us/truma-cp-plus/",
+					"description": [
+						"The physical control panel that drives the thermostat loop using its own CP plus temperature sensor, independent of the Garmin display."
+					]
+				},
+				{
+					"name": "Operating instructions",
+					"url": "https://www.truma.com/us/download/truma-cp-plus-aventa-combi-operating-instructions/",
+					"description": [
+						"This edition covers the exact Aventa + Combi pairing installed in this van. Includes the rotary push-button menu and the ACC (Automatic Climate Control) setting, which must be ON for the Garmin panel to be able to issue temperature commands."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Truma Aventa eco + soft start",
+			"list": [
+				{
+					"name": "Product page",
+					"url": "https://www.truma.com/us/products/air-conditioning-systems-us/aventa-us/truma-aventa-eco-soft-start/",
+					"description": [
+						"The 13,500 BTU/h rooftop air conditioner installed in this van, with the SoftStartRV module pre-installed to reduce start-up amp draw on inverter power. Cooling only — this model has no heat pump."
+					]
+				},
+				{
+					"name": "Product guide",
+					"url": "https://www.truma.com/us/download/aventa-product-guide-2026/",
+					"description": [
+						"Manufacturer's feature and specification summary for the Aventa line."
+					]
+				},
+				{
+					"name": "Operating instructions",
+					"url": "https://www.truma.com/us/download/truma-aventa-operating-instructions/",
+					"description": [
+						"Full operating instructions, including the automatic, manual, and dehumidification fan modes shown on the touchscreen."
+					]
+				},
+				{
+					"name": "Quick start guide",
+					"url": "https://www.truma.com/us/download/truma-aventa-quick-start-guide/",
+					"description": [
+						"A condensed setup/first-use reference."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Truma Combi G comfort",
+			"list": [
+				{
+					"name": "Product page",
+					"url": "https://www.truma.com/us/products/heating-systems-us/combi-us/truma-combi-g-comfort/",
+					"description": [
+						"The gasoline-fired furnace and hot water heater installed in this van — a separate unit from the roof-mounted Aventa, mounted low inside the van and ducted to floor-level vents. Runs on gas, electric, or a mix of both."
+					]
+				},
+				{
+					"name": "One sheet",
+					"url": "https://www.truma.com/us/download/truma-combi-g-one-sheet/",
+					"description": [
+						"A single-page specification and feature summary."
+					]
+				},
+				{
+					"name": "Operating instructions",
+					"url": "https://www.truma.com/us/download/truma-combi-g-operating-instructions/",
+					"description": [
+						"Covers initial start-up, filling the water container, and the gas/electric/mix energy-source modes for cabin heat and hot water."
+					]
+				},
+				{
+					"name": "Quick start guide",
+					"url": "https://www.truma.com/us/download/truma-combi-quick-start-guide/",
+					"description": [
+						"Truma's general Combi-family quick-start reference — no Combi G-specific edition was published separately, but the gas/electric/mix controls are the same across the family."
+					]
+				}
+			]
+		}
+	]
 }
