@@ -42,14 +42,14 @@
 					"label": "Garmin climate panel"
 				},
 				{
+					"id": "cabin-outdoor",
+					"img": "cabin-outdoor-2026-07-18b.png",
+					"label": "Cabin temperature overnight"
+				},
+				{
 					"id": "cabin-indoor",
 					"img": "cabin-indoor-2026-07-13.png",
 					"label": "Cabin climate in storage"
-				},
-				{
-					"id": "cabin-outdoor",
-					"img": "cabin-outdoor-2026-07-18b.png",
-					"label": "Cabin climate outdoors"
 				}
 			]
 		},
