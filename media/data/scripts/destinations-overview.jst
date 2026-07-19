@@ -12,7 +12,7 @@
  *   <div data-block-type="placesTable"></div>
  *
  * It reads pageData.places = [ { group, list: [ { name, operator,
- * location, site_count, amenities, reservation_status }, ... ] }, ... ]
+ * location, sites, amenities, reservation }, ... ] }, ... ]
  * and renders each group as its own collapsible <details> block (summary
  * = group name + count), with one table per group, one row per place.
  *
@@ -58,7 +58,7 @@
     { label: "Access", field: "access", width: 80 },
     { label: "Sites", field: "sites", width: 70 },
     { label: "Amenities", field: "amenities", width: 190 },
-    { label: "Reservation", field: "reservation_status" }
+    { label: "Reservation", field: "reservation" }
   ];
 
   function totalWidth() {
@@ -104,29 +104,50 @@
 
   // Internal link to another page on the site. `file` is the github
   // filename; the slug is derived from it (shared GL.fileToSlug), same tab.
-  function internalLink(file, text) {
+  function internalLink(file, text, tip) {
     var a = document.createElement("a");
     a.href = "/" + window.GL.fileToSlug(file) + "/";
     a.textContent = text;
+    if (tip) a.title = tip;
     return a;
   }
 
-  // External link (site maps, etc.) — new tab, safe rel.
-  function externalLink(url, text) {
+  // External link (site maps, etc.) — new tab, safe rel. `tip` is the hover
+  // tooltip saying where the link goes; tooltips live on the link itself, so a
+  // cell with no link has no tooltip.
+  function externalLink(url, text, tip) {
     var a = document.createElement("a");
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
     a.textContent = text;
+    if (tip) a.title = tip;
     return a;
+  }
+
+  // Renders a list of { label, url } entries into a cell, one per line, each
+  // linked when it has a url. `fallback` supplies the display text for an entry
+  // that has a url but no label (the Sites column's "Map"). Without a fallback,
+  // a url with no label is a DATA BUG — we render nothing rather than invent a
+  // label, and it should be fixed in the JSON.
+  function fillLinkList(cell, entries, tip, fallback) {
+    (entries || []).forEach(function (entry, i) {
+      var text = cellText(entry.label) || fallback || "";
+      if (i > 0) cell.appendChild(document.createElement("br"));
+      if (entry.url && text) {
+        cell.appendChild(externalLink(entry.url, text, tip));
+      } else {
+        cell.appendChild(document.createTextNode(text));
+      }
+    });
   }
 
   // Fills a data cell for one column of one place, applying the per-column
   // link behaviors:
   //   - name: always links to the campground's own home page (external
   //     `url`, e.g. a bcparks.ca or private-resort page). Plain text when
-  //     there's no url. The operator (no longer its own column) is shown as
-  //     a hover tooltip on the cell, e.g. "Operator: Quality Recreation Ltd."
+  //     there's no url. (`operator` is carried in the JSON but no longer
+  //     displayed — the JSON holds more than the table shows, by design.)
   //   - on_lost ("On lost"): internal link to this campground's page on
   //     Getting Lost, when it has a `file`. Empty otherwise.
   //   - location: the location is now a block { lat, lng, pin, zoom, notes };
@@ -136,14 +157,28 @@
   //     (<br> between). Each entry with a url is a link (label as text, or
   //     "Map" if the label is empty); a label with no url is plain text.
   //     Empty list -> empty cell.
+  //   - reservation ("Reservation"): same { label, url } list shape as sites
+  //     (renamed from the old plain-string `reservation_status`), so a row can
+  //     carry its status text plus a link to the booking site, one per line.
+  //     No "Map"-style fallback here: a url with no label renders nothing and
+  //     is a data bug to fix in the JSON.
   //   - everything else: plain text.
+  //
+  // Links carry a `title` tooltip naming where they go. Tooltips sit on the
+  // <a>, never the cell, so an unlinked cell has no tooltip.
   function fillDataCell(cell, place, field) {
     if (field === "name") {
-      if (place.url) cell.appendChild(externalLink(place.url, cellText(place.name)));
-      else cell.textContent = cellText(place.name);
-      if (place.operator) cell.title = "Operator: " + cellText(place.operator);
+      if (place.url) {
+        cell.appendChild(
+          externalLink(place.url, cellText(place.name), "Open the destination's web site")
+        );
+      } else {
+        cell.textContent = cellText(place.name);
+      }
     } else if (field === "on_lost") {
-      if (place.file) cell.appendChild(internalLink(place.file, "View"));
+      if (place.file) {
+        cell.appendChild(internalLink(place.file, "View", "Open the page on this web site"));
+      }
     } else if (field === "location") {
       // The notes text links to Google Maps at the place's coordinates (new
       // tab). Plain text when there are no coordinates (only the Horne Lake
@@ -151,12 +186,11 @@
       var loc = place.location || {};
       var notes = cellText(loc.notes);
       if (loc.lat != null && loc.lng != null && notes) {
-        var mapLink = externalLink(
+        cell.appendChild(externalLink(
           "https://www.google.com/maps/search/?api=1&query=" + loc.lat + "," + loc.lng,
-          notes
-        );
-        mapLink.title = "Open in Google Maps";
-        cell.appendChild(mapLink);
+          notes,
+          "Open in Google Maps"
+        ));
       } else {
         cell.textContent = notes;
       }
@@ -166,14 +200,9 @@
       var km = campbellRiverKm(place);
       if (km !== null && km !== undefined) cell.textContent = km + " km";
     } else if (field === "sites") {
-      (place.sites || []).forEach(function (site, i) {
-        if (i > 0) cell.appendChild(document.createElement("br"));
-        if (site.url) {
-          cell.appendChild(externalLink(site.url, cellText(site.label) || "Map"));
-        } else {
-          cell.appendChild(document.createTextNode(cellText(site.label)));
-        }
-      });
+      fillLinkList(cell, place.sites, "Open the site map", "Map");
+    } else if (field === "reservation") {
+      fillLinkList(cell, place.reservation, "Open the reservation web site", null);
     } else {
       cell.textContent = cellText(place[field]);
     }
