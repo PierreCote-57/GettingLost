@@ -50,6 +50,11 @@
 					"id": "cabin-indoor",
 					"img": "cabin-indoor-2026-07-13.png",
 					"label": "Cabin climate in storage"
+				},
+				{
+					"id": "freezer",
+					"img": "freezer-3-2026-07-19.png",
+					"label": "Freezer settling time (level 3)"
 				}
 			]
 		},

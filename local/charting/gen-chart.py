@@ -136,7 +136,9 @@ def build_svg(times, series, cfg, anchor):
                  'font-size="14" fill="%s">%d%s</text>' % (PR+8, y, INK, vr, R["suffix"]))
 
     # vertical gridlines every 12h; 24h time + real weekday name at midnight
-    def fmt_clock(h): return "%02d:00" % (int(round(h)) % 24)
+    def fmt_clock(h):
+        m = int(round(h * 60)) % 1440
+        return "%02d:%02d" % (m // 60, m % 60)
     t = wmin
     while t <= wmax + 1e-9:
         x = X(t)
@@ -195,6 +197,7 @@ ap.add_argument("csv", help="logger CSV; location inferred from filename prefix"
 ap.add_argument("eva", nargs="?", choices=["1", "2"], help="Eva-dry count (required for cabin-indoor)")
 ap.add_argument("--win", metavar="START-END", help="X-axis window, e.g. 18:00-06:00 (end <= start rolls next day)")
 ap.add_argument("--xstep", type=float, metavar="HOURS", help="hours between X-axis ticks (default: auto by span)")
+ap.add_argument("--title", metavar="TEXT", help="override the chart title, e.g. 'Freezer (Level 3)'")
 args = ap.parse_args()
 SRC = args.csv
 
@@ -244,6 +247,8 @@ if CFG["location"] in ("Fridge", "Freezer"):
     CFG["title"] = CFG["location"]                       # equipment: the location name IS the title
 else:
     CFG["title"] = "%s (%s)" % (CFG["brand"], CFG["location"])
+if args.title:
+    CFG["title"] = args.title                            # per-run override (e.g. thermostat level)
 if CFG["location"] == "Indoor Storage":
     CFG["subtitle"] = "%s, %s" % (CFG["dehumidifier"], date_range(d0, d1))
 else:
