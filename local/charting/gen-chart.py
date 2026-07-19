@@ -5,10 +5,14 @@ Pierre converts the SVG -> PNG in IntelliJ (~1 s) for the howto-climate gallery.
 
 Dual-axis: Temperature (left, red) + Humidity (right, blue), 900x520.
 
-Usage:  python3 gen-chart.py <csv> [eva:1|2]
-  <csv>  logger CSV; LOCATION is inferred from its filename prefix
-         (cabin-indoor | cabin-outdoor | fridge | freezer). Fails loudly otherwise.
-  [eva]  1|2 -> Single|Double Eva-dry; REQUIRED for cabin-indoor, ignored elsewhere.
+Usage:  python3 gen-chart.py <csv> [eva:1|2] [--win HH:MM-HH:MM] [--xstep HOURS]
+  <csv>     logger CSV; LOCATION is inferred from its filename prefix
+            (cabin-indoor | cabin-outdoor | fridge | freezer). Fails loudly otherwise.
+  [eva]     1|2 -> Single|Double Eva-dry; REQUIRED for cabin-indoor, ignored elsewhere.
+  --win     X-axis window as START-END clock times, e.g. 18:00-06:00. Anchored to the
+            first data date; end <= start rolls to the next day (overnight). Overrides
+            the in-source WIN_START/WIN_END. Omit -> data range snapped to 12h ticks.
+  --xstep   hours between X-axis ticks (e.g. 1 or 2). Omit -> auto by span (12/2/1h).
 Claude asks the Eva-dry count once per CSV per session (clickable) and passes it here.
 
 Per-location axis bands + thermostat live in BANDS below. Temp & humidity both
@@ -23,14 +27,15 @@ Subtitle: cabin-indoor -> "<Single|Double> Eva-dry, <date range>"; else "<date r
 Output:   <same base>.svg written beside the CSV. Only the CSV persists — the svg (and
           the PNG Pierre makes from it) are deleted after the PNG is uploaded to WP.
 """
-import csv, datetime, math, os, sys
+import argparse, csv, datetime, math, os, sys
 
 # ---------- window (optional per-chart tweak) ----------
-# None,None = full data range (default). Set to focus one chart on a sub-range, e.g.
+# None,None = full data range (default). The --win CLI flag overrides these per run;
+# set them here only for a hard-coded default. e.g.
 #   WIN_START = datetime.datetime(2026, 7, 13, 5, 0)
 #   WIN_END   = datetime.datetime(2026, 7, 17, 12, 0)
-WIN_START = datetime.datetime(2026, 7, 19, 0, 0)
-WIN_END   = datetime.datetime(2026, 7, 19, 6, 0)
+WIN_START = None
+WIN_END   = None
 
 def load(src, win_start=None, win_end=None):
     """Read all rows within the window; times = decimal hours from the first
@@ -105,7 +110,8 @@ def build_svg(times, series, cfg, anchor):
     wmin = (WIN_START - anchor).total_seconds() / 3600 if WIN_START else math.floor(times[0]  / 12) * 12
     wmax = (WIN_END   - anchor).total_seconds() / 3600 if WIN_END   else math.ceil (times[-1] / 12) * 12
     span = wmax - wmin
-    tstep = 12 if span >= 24 else (2 if span > 8 else 1)   # finer ticks for short windows
+    # tick spacing: explicit --xstep wins, else auto (finer ticks for short windows).
+    tstep = cfg["xstep"] if cfg.get("xstep") else (12 if span >= 24 else (2 if span > 8 else 1))
     def X(t): return PL + (t - wmin) / (wmax - wmin) * PW
     def scaleY(ax):
         lo, hi = ax["lo"], ax["hi"]
@@ -183,10 +189,14 @@ def build_svg(times, series, cfg, anchor):
     p.append('</svg>')
     return "\n".join(p)
 
-# ---- CLI: python3 gen-chart.py <csv> [eva:1|2] ----
-if len(sys.argv) < 2:
-    sys.exit("usage: gen-chart.py <csv> [eva:1|2]   (eva required for cabin-indoor)")
-SRC = sys.argv[1]
+# ---- CLI: python3 gen-chart.py <csv> [eva:1|2] [--win HH:MM-HH:MM] [--xstep HOURS] ----
+ap = argparse.ArgumentParser(usage="gen-chart.py <csv> [eva:1|2] [--win HH:MM-HH:MM] [--xstep HOURS]")
+ap.add_argument("csv", help="logger CSV; location inferred from filename prefix")
+ap.add_argument("eva", nargs="?", choices=["1", "2"], help="Eva-dry count (required for cabin-indoor)")
+ap.add_argument("--win", metavar="START-END", help="X-axis window, e.g. 18:00-06:00 (end <= start rolls next day)")
+ap.add_argument("--xstep", type=float, metavar="HOURS", help="hours between X-axis ticks (default: auto by span)")
+args = ap.parse_args()
+SRC = args.csv
 
 stem = os.path.splitext(os.path.basename(SRC))[0]
 CFG["location"] = next((loc for pre, loc in PREFIX_TO_LOCATION.items() if stem.startswith(pre)), None)
@@ -195,9 +205,30 @@ if CFG["location"] is None:
              % (os.path.basename(SRC), " | ".join(PREFIX_TO_LOCATION)))
 
 if CFG["location"] == "Indoor Storage":
-    if len(sys.argv) < 3 or sys.argv[2] not in ("1", "2"):
+    if args.eva is None:
         sys.exit("gen-chart.py: Indoor Storage needs the Eva-dry count — pass 1 or 2")
-    CFG["dehumidifier"] = "Single Eva-dry" if sys.argv[2] == "1" else "Double Eva-dry"
+    CFG["dehumidifier"] = "Single Eva-dry" if args.eva == "1" else "Double Eva-dry"
+
+# --win overrides the in-source WIN_START/WIN_END, anchored to the data.
+if args.win:
+    try:
+        s_str, e_str = args.win.split("-")
+        s_h, s_m = [int(x) for x in s_str.strip().split(":")]
+        e_h, e_m = [int(x) for x in e_str.strip().split(":")]
+    except ValueError:
+        sys.exit("gen-chart.py: --win must look like 18:00-06:00")
+    peek = load(SRC)                                # unfiltered peek to place the window
+    fd = peek[3]                                    # first data date
+    first_dt = peek[5] + datetime.timedelta(hours=peek[0][0])   # first data timestamp
+    WIN_START = datetime.datetime(fd.year, fd.month, fd.day, s_h, s_m)
+    WIN_END   = datetime.datetime(fd.year, fd.month, fd.day, e_h, e_m)
+    if WIN_END <= WIN_START:                        # overnight window rolls to the next day
+        WIN_END += datetime.timedelta(days=1)
+    while WIN_END < first_dt:                        # window sits before the data — roll forward
+        WIN_START += datetime.timedelta(days=1)
+        WIN_END   += datetime.timedelta(days=1)
+
+CFG["xstep"] = args.xstep
 
 times, temps, hums, d0, d1, anchor = load(SRC, WIN_START, WIN_END)
 
