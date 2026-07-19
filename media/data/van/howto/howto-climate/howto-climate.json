@@ -15,7 +15,7 @@
         { "id": "truma-acc", "img": "truma-ACC.png", "label": "Truma touchscreen — ACC/Auto mode" },
         { "id": "truma-tools", "img": "truma-tools.png", "label": "Truma touchscreen — tool icons" },
 		  { "id": "cabin-indoor", "img": "cabin-indoor-2026-07-13.png", "label": "Cabin climate in storage" },
-		  { "id": "cabin-outdoor", "img": "cabin-outdoor-2026-07-18.png", "label": "Cabin climate outdoors" }
+		  { "id": "cabin-outdoor", "img": "cabin-outdoor-2026-07-18b.png", "label": "Cabin climate outdoors" }
       ]
     },
     "details": {

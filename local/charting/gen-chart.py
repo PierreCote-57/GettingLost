@@ -29,8 +29,8 @@ import csv, datetime, math, os, sys
 # None,None = full data range (default). Set to focus one chart on a sub-range, e.g.
 #   WIN_START = datetime.datetime(2026, 7, 13, 5, 0)
 #   WIN_END   = datetime.datetime(2026, 7, 17, 12, 0)
-WIN_START = datetime.datetime(2026, 7, 18, 7, 0)
-WIN_END   = None
+WIN_START = datetime.datetime(2026, 7, 19, 0, 0)
+WIN_END   = datetime.datetime(2026, 7, 19, 6, 0)
 
 def load(src, win_start=None, win_end=None):
     """Read all rows within the window; times = decimal hours from the first
