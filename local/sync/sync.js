@@ -77,7 +77,14 @@ const GALLERY_RULES = [
 // Valid road-condition values for the lower-left gallery badge. Mirrors the
 // GL.ROAD_COLORS keys in gl-constants.jst (browser side); duplicated here
 // because that file is browser code and can't be required. Keep the two in sync.
-const ROAD_VALUES = ["pavement", "gravel", "potholes", "rugged"];
+const ROAD_VALUES = [
+  "pavement",
+  "dirt",
+  "potholes",
+  "sharp_rock",
+  "rugged",
+  "back_country",
+];
 
 // ---------------------------------------------------------------------
 // Incremental mode

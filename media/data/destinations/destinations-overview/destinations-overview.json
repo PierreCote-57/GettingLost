@@ -906,7 +906,7 @@
 							"km": 25
 						}
 					],
-					"access": "BackCountry",
+					"access": "back_country",
 					"sites": [
 						{
 							"label": 8,
@@ -1230,7 +1230,7 @@
 							"km": 20
 						}
 					],
-					"access": "gravel",
+					"access": "dirt",
 					"sites": [
 						{
 							"label": 60,
@@ -2143,7 +2143,7 @@
 							"km": 100
 						}
 					],
-					"access": "gravel",
+					"access": "dirt",
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2509,7 +2509,7 @@
 							"km": 125
 						}
 					],
-					"access": "gravel",
+					"access": "dirt",
 					"sites": [],
 					"amenities": [],
 					"reservation": [],

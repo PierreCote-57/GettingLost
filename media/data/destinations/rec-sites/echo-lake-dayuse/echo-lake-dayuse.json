@@ -2,7 +2,7 @@
   "title": "Echo Lake Day Use",
   "featuredImage": "IMG_0529-rotated.jpg",
   "excerpt": "FIshing pier at echo lake",
-  "badges": { "tags": ["fishing", "picnic"], "road": "gravel" },
+  "badges": { "tags": ["fishing", "picnic"], "road": "dirt" },
   "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.98480,
