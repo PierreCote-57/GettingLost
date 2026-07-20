@@ -82,12 +82,19 @@ const GALLERY_RULES = [
 ];
 
 // Leg types that may be AUTHORED in a page's access.legs. The drive list is
-// ordered easiest -> hardest and doubles as the severity rank; it is
-// GL.ROAD_RANK in gl-constants.jst minus back_country, which is derived rather
-// than ranked (browser code, can't be required here, so keep the two in sync).
+// ordered easiest -> hardest and doubles as the severity rank; it mirrors
+// GL.ROAD_RANK in gl-constants.jst (browser code, can't be required here, so
+// keep the two in sync).
+//
+// pavement and back_country are absent because neither is ever authored:
+// pavement is derived from legs: [] — pavement segments are excluded from legs
+// altogether — and back_country is derived from any non-drive leg. unpaved is
+// a measured non-paved tail whose character is not yet refined; it ranks
+// mildest so that any known type outranks it and takes the badge.
+//
 // Non-drive legs have no rank — any one of them means you leave the van, which
 // is the whole distinction.
-const DRIVE_LEG_TYPES = ["pavement", "dirt", "potholes", "sharp_rock", "rugged"];
+const DRIVE_LEG_TYPES = ["unpaved", "dirt", "potholes", "sharp_rock", "rugged"];
 const NON_DRIVE_LEG_TYPES = ["walk", "hike", "boat"];
 const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
 
@@ -100,7 +107,10 @@ const BACK_COUNTRY = "back_country";
 //   any non-drive leg -> "back_country"
 //   otherwise    -> the hardest drive leg
 // An unknown leg type is a data error: warn, name the file, and skip the leg
-// rather than silently ranking it.
+// rather than silently ranking it. So is an unpaved leg with no km: unpaved
+// asserts a MEASURED non-paved tail, so without a km it claims nothing that
+// absent legs don't already say. Skipping it lands the badge back on "don't
+// know", which is what such a leg actually means.
 function deriveRoadBadge(access, filename) {
   const legs = access && access.legs;
   if (!Array.isArray(legs)) return undefined;
@@ -111,6 +121,12 @@ function deriveRoadBadge(access, filename) {
     const type = leg && leg.type;
     if (!LEG_TYPES.includes(type)) {
       const msg = `[gallery] ${filename}: unknown leg type "${type}" — leg ignored.`;
+      console.warn(msg);
+      annotateWarning(msg);
+      continue;
+    }
+    if (type === "unpaved" && !(typeof leg.km === "number" && leg.km > 0)) {
+      const msg = `[gallery] ${filename}: unpaved leg has no km — unpaved states a measured tail, so it is meaningless without one. Leg ignored.`;
       console.warn(msg);
       annotateWarning(msg);
       continue;

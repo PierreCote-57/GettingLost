@@ -30,12 +30,15 @@
   GL.TAG_FALLBACK = { bg: "rgba(95, 94, 90, 0.88)", text: "#F1EFE8" };
 
   // Road-condition badge colors (used by renderRoad). Severity ramp,
-  // easy -> hard: blue -> green -> orange -> rust -> red, then black for
-  // back_country, which is off the ramp: it is the absence of a road, not
-  // the worst one. Strict 6-value vocabulary, so there is intentionally NO
-  // fallback — an unknown value renders nothing.
+  // easy -> hard: blue -> green -> orange -> rust -> red. Two values sit OFF
+  // that ramp, for opposite reasons: black back_country is the absence of a
+  // ROAD, not the worst one; grey unpaved is the absence of a JUDGEMENT — a
+  // non-paved tail has been measured, but nobody has driven it and said what
+  // it does to the van. Strict 7-value vocabulary, so there is intentionally
+  // NO fallback — an unknown value renders nothing.
   GL.ROAD_COLORS = {
     pavement:     { bg: "rgba(45, 110, 200, 0.9)",  text: "#E6F0FB" },
+    unpaved:      { bg: "rgba(120, 118, 112, 0.9)", text: "#F1EFE8" },
     dirt:         { bg: "rgba(46, 133, 85, 0.9)",   text: "#E4F5EC" },
     potholes:     { bg: "rgba(196, 100, 28, 0.95)", text: "#FCEDE0" },
     sharp_rock:   { bg: "rgba(190, 76, 34, 0.94)",  text: "#FBE8DF" },
@@ -43,16 +46,25 @@
     back_country: { bg: "rgba(20, 20, 20, 0.94)",   text: "#EDEDED" }
   };
 
-  // Severity order of the DRIVE leg types, easiest -> hardest, as experienced
-  // by THE van. This is configuration, not truth: the ranking follows from the
-  // vehicle, so a different van (or an upgrade) can reorder it.
+  // Severity order of the AUTHORABLE drive leg types, easiest -> hardest, as
+  // experienced by THE van. This is configuration, not truth: the ranking
+  // follows from the vehicle, so a different van (or an upgrade) can reorder it.
   //
-  // back_country is deliberately absent. It is not "worse road" but "no road",
-  // so it is never ranked and never authored — sync.js derives it whenever a
-  // leg is non-drive (walk/hike/boat). It lives in ROAD_COLORS only, to be
-  // painted. Mirrored as DRIVE_LEG_TYPES in sync.js; keep the two in sync.
+  // Two badge values are deliberately absent, because this list doubles as the
+  // set of leg types that may be AUTHORED, and neither of them ever is:
+  //   pavement     — derived from legs: [] ("paved all the way"). Pavement
+  //                  segments are excluded from legs entirely, which is what
+  //                  lets one page's legs hold true for several origin towns.
+  //   back_country — derived whenever a leg is non-drive (walk/hike/boat). Not
+  //                  "worse road" but "no road", so it is never ranked.
+  // Both live in ROAD_COLORS only, to be painted.
+  //
+  // unpaved ranks mildest ON PURPOSE. It means a non-paved tail was measured
+  // but its character is not yet refined, so any known type must outrank it and
+  // take the badge; its grey, not its position, is what says "unknown".
+  // Mirrored as DRIVE_LEG_TYPES in sync.js; keep the two in sync.
   GL.ROAD_RANK = [
-    "pavement",
+    "unpaved",
     "dirt",
     "potholes",
     "sharp_rock",
