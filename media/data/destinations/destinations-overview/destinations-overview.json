@@ -34,7 +34,8 @@
 								"town": "Victoria",
 								"km": 225
 							}
-						]
+						],
+						"legs": []
 					},
 					"sites": [
 						{
@@ -426,6 +427,7 @@
 				{
 					"name": "Morton Lake Provincial Park",
 					"url": "https://bcparks.ca/morton-lake-park/",
+					"file": "morton-lake-rec3104.html",
 					"operator": "Quality Recreation Ltd.",
 					"location": {
 						"lat": 50.1244276,
@@ -447,6 +449,16 @@
 							{
 								"town": "Victoria",
 								"km": 245
+							}
+						],
+						"legs": [
+							{
+								"type": "potholes",
+								"km": 10
+							},
+							{
+								"type": "sharp_rock",
+								"km": 5
 							}
 						]
 					},
@@ -594,6 +606,7 @@
 				{
 					"name": "Sproat Lake Provincial Park",
 					"url": "https://bcparks.ca/sproat-lake-park/",
+					"file": "sproat-lake-provincial-park.html",
 					"operator": "RLC Park Services",
 					"location": {
 						"lat": 49.295918,
@@ -616,7 +629,8 @@
 								"town": "Victoria",
 								"km": 150
 							}
-						]
+						],
+						"legs": []
 					},
 					"sites": [
 						{
@@ -2248,6 +2262,7 @@
 				{
 					"name": "Pacific Playgrounds International",
 					"url": "https://pacificplaygrounds.ca",
+					"file": "pacific-playgrounds-resort.html",
 					"operator": null,
 					"location": {
 						"lat": 49.8705759,
@@ -2270,7 +2285,8 @@
 								"town": "Victoria",
 								"km": 205
 							}
-						]
+						],
+						"legs": []
 					},
 					"sites": [
 						{
@@ -2632,6 +2648,7 @@
 				{
 					"name": "Salmon Point Resort & RV Park",
 					"url": "https://salmonpoint.com",
+					"file": "salmon-point-resort.html",
 					"operator": null,
 					"location": {
 						"lat": 49.889183,
@@ -2654,7 +2671,8 @@
 								"town": "Victoria",
 								"km": 205
 							}
-						]
+						],
+						"legs": []
 					},
 					"sites": [
 						{

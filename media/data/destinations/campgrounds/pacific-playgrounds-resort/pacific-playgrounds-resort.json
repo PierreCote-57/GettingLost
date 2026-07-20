@@ -14,7 +14,8 @@
       { "town": "Campbell River", "km": 20 },
       { "town": "Nanaimo", "km": 115 },
       { "town": "Victoria", "km": 205 }
-    ]
+    ],
+    "legs": []
   },
   "campground": {
     "website": "https://pacificplaygrounds.ca",

@@ -63,6 +63,13 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
 - **Work from fresh data — never trust cached or snapshot state.** Pierre edits files
   in IntelliJ, moves things in WP/FileBird, and syncs between prompts. Re-fetch
   (`Read`, `git`, `curl`, MCP) before acting on or asserting any state.
+- **Park small findings; don't interrupt the big issue with them.** Pierre's method:
+  solve the big thing; the little things it turns up get **noted and deferred**, not
+  resolved inline. Raising each one as a question is not thoroughness — it derails
+  him, costs continuity, and forces him to re-enter the main problem every time.
+  So: when a side issue surfaces mid-task, **write it to `docs/todo.md` and keep
+  going**. Hand him the list when the current thing is done, or when he asks. Only
+  stop for something that actually blocks the current step or would corrupt data.
 - **Never down-talk or condescend.** Pierre is a senior engineer who designed this
   system. Don't re-explain his own architecture or already-established context —
   give the one-line answer and stop. No "as you know" filler, no re-teaching basics.
