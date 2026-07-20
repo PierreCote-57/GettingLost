@@ -479,8 +479,8 @@
 					"url": "https://bcparks.ca/sproat-lake-park/",
 					"operator": "RLC Park Services",
 					"location": {
-						"lat": 49.2986311,
-						"lng": -124.9294014,
+						"lat": 49.295918,
+						"lng": -124.928857,
 						"pin": null,
 						"zoom": 13,
 						"notes": "Near Port Alberni"
@@ -492,7 +492,12 @@
 						}
 					],
 					"access": "pavement",
-					"sites": [],
+					"sites": [
+						{
+							"label": 59,
+							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/sproat_lake_map_ec757653ce.pdf"
+						}
+					],
 					"amenities": [
 						"two separate campgrounds",
 						"day-use area",
@@ -501,7 +506,7 @@
 					"reservation": [
 						{
 							"label": "Reservable",
-							"url": null
+							"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&equipmentId=-32768&subEquipmentId=-32765"
 						}
 					]
 				},
