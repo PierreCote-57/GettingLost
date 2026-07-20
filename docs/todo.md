@@ -28,6 +28,22 @@ planned passes. Noted, not fixed. Delete a line when it's done.
    rec-sites, while its overview entry is "Morton Lake Provincial Park". Same place,
    two identities.
 
+## Overview hydration (2026-07-20)
+
+9. **Unpublished-page handling in the hydrated overview — display's job, not
+   sync.js.** Once overview `{file}` entries hydrate from page JSONs, an entry
+   pointing at an unpublished page needs a defined behavior (skip / grey out).
+   Short term the renderer ignores `wpSettings` and shows it anyway; revisit when
+   the list/table renderers are reworked.
+
+## Stray files (2026-07-20)
+
+8. **`rec-sites/beavertail-lake-dayuse/Destinations.json` is a generated gallery
+   file sitting in a page folder.** It holds gallery entries (Beavertail Day Use,
+   Destinations Overview, …), not page data. sync.js constructs `<base>.json` from
+   the page filename, so it is never read — dead weight, and confusing next to the
+   real `beavertail-lake-dayuse.json`.
+
 ## DRA pavement-distance prototype (2026-07-20)
 
 6. **The DRA walk can't seed `km` unsupervised** — validated 1 of 3. Echo 0.6 km was
