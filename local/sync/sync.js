@@ -418,17 +418,18 @@ function generateGalleryJsons(pageFileMap, perPageDataMap) {
         console.warn(msg);
         annotateWarning(msg);
       }
-      const road = deriveRoadBadge(data.access, filename);
-      const badges = { tags: badgesIn.tags || [] };
-      if (road) badges.road = road;
+      // The road badge is now derived at RENDER time (one shared copy in
+      // gettinglost.jst, from access.legs). sync.js no longer emits it — but it
+      // still runs the same derivation here purely to VALIDATE the legs (warn /
+      // annotate on an unknown type or an unpaved leg with no km); the result is
+      // discarded.
+      deriveRoadBadge(data.access, filename);
 
-      entries.push({
-        title: data.title || base,
-        file: filename,
-        image: data.featuredImage ?? "under-construction.png",
-        teaser: data.excerpt || "",
-        badges,
-      });
+      // Verbatim: the gallery entry IS the page JSON, plus the sync-injected
+      // `file` (the master — the renderer derives the slug from it). No field
+      // projection and no renames; renderers read the page JSON's own field
+      // names (featuredImage/excerpt/…) and apply defaults at render time.
+      entries.push({ ...data, file: filename });
     }
 
     entries.sort((a, b) => a.title.localeCompare(b.title));

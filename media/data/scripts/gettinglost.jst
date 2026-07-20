@@ -142,12 +142,52 @@
     return html;
   }
 
-  // Single road-condition badge for the lower-left corner. The value arrives
-  // already derived from access.legs by sync.js — it is never authored — so
-  // this only has to paint it. Falsy road (absent, i.e. legs not filled in
-  // yet) renders nothing, exactly like an empty tag list. An unknown value is
-  // treated as a data error: render nothing and log it (sync.js catches the
-  // same case at build time and names the offending file).
+  // The single render-time road-badge derivation, from access.legs. This is
+  // the one copy — renderCard (gallery cards + .gl-featured) and
+  // destinations-overview.jst both call it, so the badge word is computed one
+  // way everywhere. It mirrors sync.js's build-time validation (which now only
+  // validates, no longer emits the badge), kept in step through the shared
+  // vocabulary in gl-constants.jst:
+  //   legs absent           -> null      (not filled in yet: no badge)
+  //   legs []               -> "pavement" (deliberate: paved all the way)
+  //   any non-drive leg     -> "back_country"
+  //   otherwise             -> the hardest drive leg
+  // An unknown leg type, or an unpaved leg with no km (unpaved asserts a
+  // MEASURED tail, so it claims nothing without one), is a data error: log it
+  // and skip the leg — sync.js catches the same cases at build time and names
+  // the offending file.
+  function deriveRoadBadge(access) {
+    var legs = access && access.legs;
+    if (!Array.isArray(legs)) return null;
+    if (legs.length === 0) return "pavement";
+
+    var DRIVE = GL.ROAD_RANK;
+    var NON_DRIVE = GL.NON_DRIVE_LEG_TYPES;
+    var worst = -1;
+    for (var i = 0; i < legs.length; i++) {
+      var leg = legs[i];
+      var type = leg && leg.type;
+      var driveRank = DRIVE.indexOf(type);
+      var isNonDrive = NON_DRIVE.indexOf(type) !== -1;
+      if (driveRank === -1 && !isNonDrive) {
+        console.error('Unknown leg type "' + type + '" — leg ignored.');
+        continue;
+      }
+      if (type === "unpaved" && !(typeof leg.km === "number" && leg.km > 0)) {
+        console.error("unpaved leg has no km — leg ignored.");
+        continue;
+      }
+      if (isNonDrive) return "back_country";
+      if (driveRank > worst) worst = driveRank;
+    }
+    return worst < 0 ? null : DRIVE[worst];
+  }
+
+  // Single road-condition badge for the lower-left corner. The value is derived
+  // from access.legs by deriveRoadBadge above; this only has to paint it. Falsy
+  // road (absent, i.e. legs not filled in yet) renders nothing, exactly like an
+  // empty tag list. An unknown value is treated as a data error: render nothing
+  // and log it (sync.js catches the same case at build time and names the file).
   //
   // Values are snake_case identifiers; the underscore is an id convention, not
   // something to show a reader, so it becomes a space on the way to the badge.
@@ -191,8 +231,8 @@
 
   function renderCard(entry) {
     var title = escapeHtml(entry.title || "");
-    var image = escapeHtml(formatImageUrl(entry.image, 600, 400));
-    var teaser = escapeHtml(entry.teaser || "");
+    var image = escapeHtml(formatImageUrl(entry.featuredImage || "under-construction.png", 600, 400));
+    var teaser = escapeHtml(entry.excerpt || "");
     var href = "/" + escapeAttr(fileToSlug(entry.file || "")) + "/";
 
     return (
@@ -200,7 +240,7 @@
       '<div class="gl-gallery-card-img-wrap">' +
       '<img class="gl-gallery-card-img" src="' + image + '" alt="' + title + '" loading="lazy">' +
       renderTags(entry.badges && entry.badges.tags) +
-      renderRoad(entry.badges && entry.badges.road) +
+      renderRoad(deriveRoadBadge(entry.access)) +
       "</div>" +
       '<h3 class="gl-gallery-card-title">' + title + "</h3>" +
       '<p class="gl-gallery-card-teaser">' + teaser + "</p>" +
@@ -211,6 +251,7 @@
   window.GL = window.GL || {};
   window.GL.escapeHtml = escapeHtml;
   window.GL.renderCard = renderCard;
+  window.GL.deriveRoadBadge = deriveRoadBadge; // shared render-time road badge (overview table)
   window.GL.fileToSlug = fileToSlug; // shared so lakes.jst can derive slugs
   window.GL.blockRenderers = window.GL.blockRenderers || {};
 

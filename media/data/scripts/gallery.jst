@@ -7,7 +7,8 @@
  *   ?file=FILENAME  loads /wp-content/uploads/FILENAME (default "Destinations.json")
  *   ?title=TEXT     sets the page heading + browser tab title (default "Destinations")
  *
- * Each JSON entry is {title, file, image, teaser}.
+ * Each JSON entry is the destination's page JSON verbatim plus a sync-injected
+ * `file` (the master filename); renderCard reads featuredImage/excerpt/title.
  *
  * Card markup/CSS and escapeHtml() now live in gettinglost.jst
  * (window.GL.renderCard / window.GL.escapeHtml), shared with the

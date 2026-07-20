@@ -78,32 +78,10 @@
     return null;
   }
 
-  // The road badge is DERIVED from access.legs, never authored — same rules as
-  // sync.js uses for the gallery badges, kept in step through the shared
-  // vocabulary in gl-constants.jst:
-  //   legs absent  -> null   (not filled in yet: blank cell)
-  //   legs []      -> pavement (a deliberate statement: paved all the way)
-  //   any non-drive leg -> back_country
-  //   otherwise    -> the hardest drive leg
-  function roadBadge(place) {
-    var access = place.access || {};
-    var legs = access.legs;
-    if (!Array.isArray(legs)) return null;
-    if (legs.length === 0) return "pavement";
-
-    var worst = -1;
-    for (var i = 0; i < legs.length; i++) {
-      var type = legs[i] && legs[i].type;
-      if (GL.NON_DRIVE_LEG_TYPES.indexOf(type) !== -1) return "back_country";
-      var rank = GL.ROAD_RANK.indexOf(type);
-      if (rank === -1) {
-        console.error('Unknown leg type "' + type + '" — leg ignored.');
-        continue;
-      }
-      if (rank > worst) worst = rank;
-    }
-    return worst < 0 ? null : GL.ROAD_RANK[worst];
-  }
+  // The road badge is DERIVED from access.legs at render time by the single
+  // shared GL.deriveRoadBadge (defined in gettinglost.jst); the overview table
+  // just calls it (see the "roadBadge" field below). Its local copy is gone so
+  // there is one derivation for gallery cards and this table alike.
 
   // Missing values (null / undefined / "") render as an empty cell.
   // Arrays (e.g. amenities) join with ", ".
@@ -231,7 +209,7 @@
     } else if (field === "roadBadge") {
       // Derived badge word. Underscores are an id convention, not something to
       // show a reader. Blank until the place's legs are filled in.
-      var badge = roadBadge(place);
+      var badge = GL.deriveRoadBadge(place.access);
       if (badge) cell.textContent = badge.replace(/_/g, " ");
     } else if (field === "sites") {
       fillLinkList(cell, place.sites, "Open the site map", "Map");
