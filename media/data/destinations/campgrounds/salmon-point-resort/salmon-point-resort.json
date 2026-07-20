@@ -9,6 +9,13 @@
     "lng": -125.1282272,
     "pin": "campground"
   },
+  "access": {
+    "haversine": [
+      { "town": "Campbell River", "km": 15 },
+      { "town": "Nanaimo", "km": 120 },
+      { "town": "Victoria", "km": 205 }
+    ]
+  },
   "campground": {
     "website": "https://salmonpoint.com",
     "siteMap": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf",

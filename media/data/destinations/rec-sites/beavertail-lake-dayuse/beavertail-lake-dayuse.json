@@ -15,6 +15,13 @@
 		"pin": "picnic",
 		"zoom": 15
 	},
+	"access": {
+		"haversine": [
+			{ "town": "Campbell River", "km": 20 },
+			{ "town": "Nanaimo", "km": 145 },
+			{ "town": "Victoria", "km": 230 }
+		]
+	},
 	"campground": {
 		"website": "",
 		"siteMap": "",

@@ -54,8 +54,8 @@
     { label: "Name", field: "name", width: 170 },
     { label: "On lost", field: "on_lost", width: 65 },
     { label: "Location", field: "location", width: 160 },
-    { label: "Distance", field: "distanceKM", width: 80 },
-    { label: "Access", field: "access", width: 80 },
+    { label: "Distance", field: "haversine", width: 80 },
+    { label: "Access", field: "roadBadge", width: 80 },
     { label: "Sites", field: "sites", width: 70 },
     { label: "Amenities", field: "amenities", width: 190 },
     { label: "Reservation", field: "reservation" }
@@ -65,15 +65,44 @@
     return COLUMNS.reduce(function (sum, col) { return sum + col.width; }, 0);
   }
 
-  // Pulls the "Campbell River" straight-line distance (km) for a place, or
-  // null when it has none (e.g. a place with no coordinates). The distanceKM
-  // list is structured so more origin cities can be added later.
+  // Pulls the "Campbell River" great-circle distance (km) for a place, or null
+  // when it has none. access.haversine holds one entry per origin town; only
+  // Campbell River is shown for now, the others are carried in the data until
+  // the column can present them.
   function campbellRiverKm(place) {
-    var list = place.distanceKM || [];
+    var access = place.access || {};
+    var list = access.haversine || [];
     for (var i = 0; i < list.length; i++) {
-      if (list[i] && list[i].from === "Campbell River") return list[i].km;
+      if (list[i] && list[i].town === "Campbell River") return list[i].km;
     }
     return null;
+  }
+
+  // The road badge is DERIVED from access.legs, never authored — same rules as
+  // sync.js uses for the gallery badges, kept in step through the shared
+  // vocabulary in gl-constants.jst:
+  //   legs absent  -> null   (not filled in yet: blank cell)
+  //   legs []      -> pavement (a deliberate statement: paved all the way)
+  //   any non-drive leg -> back_country
+  //   otherwise    -> the hardest drive leg
+  function roadBadge(place) {
+    var access = place.access || {};
+    var legs = access.legs;
+    if (!Array.isArray(legs)) return null;
+    if (legs.length === 0) return "pavement";
+
+    var worst = -1;
+    for (var i = 0; i < legs.length; i++) {
+      var type = legs[i] && legs[i].type;
+      if (GL.NON_DRIVE_LEG_TYPES.indexOf(type) !== -1) return "back_country";
+      var rank = GL.ROAD_RANK.indexOf(type);
+      if (rank === -1) {
+        console.error('Unknown leg type "' + type + '" — leg ignored.');
+        continue;
+      }
+      if (rank > worst) worst = rank;
+    }
+    return worst < 0 ? null : GL.ROAD_RANK[worst];
   }
 
   // Missing values (null / undefined / "") render as an empty cell.
@@ -194,11 +223,16 @@
       } else {
         cell.textContent = notes;
       }
-    } else if (field === "distanceKM") {
-      // Straight-line km from Campbell River (see column footnote). Blank when
+    } else if (field === "haversine") {
+      // Great-circle km from Campbell River (see column footnote). Blank when
       // the place has no distance (no coordinates).
       var km = campbellRiverKm(place);
       if (km !== null && km !== undefined) cell.textContent = km + " km";
+    } else if (field === "roadBadge") {
+      // Derived badge word. Underscores are an id convention, not something to
+      // show a reader. Blank until the place's legs are filled in.
+      var badge = roadBadge(place);
+      if (badge) cell.textContent = badge.replace(/_/g, " ");
     } else if (field === "sites") {
       fillLinkList(cell, place.sites, "Open the site map", "Map");
     } else if (field === "reservation") {
@@ -268,8 +302,8 @@
       // The Distance column carries a header caveat (straight-line, not road
       // distance), surfaced through the same numbered-footnote mechanism as
       // the per-cell notes so it dedupes to one entry per group table.
-      if (col.field === "distanceKM") {
-        var caveat = "Straight-line distance from Campbell River, approximate.";
+      if (col.field === "haversine") {
+        var caveat = "Straight-line distance from Campbell River, approximate — not road distance.";
         var idx = footnotes.indexOf(caveat);
         if (idx === -1) { footnotes.push(caveat); idx = footnotes.length - 1; }
         appendNoteMarker(th, idx + 1);

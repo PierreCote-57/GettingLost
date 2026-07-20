@@ -9,6 +9,13 @@
     "lng": -125.118066,
     "pin": "campground"
   },
+  "access": {
+    "haversine": [
+      { "town": "Campbell River", "km": 20 },
+      { "town": "Nanaimo", "km": 115 },
+      { "town": "Victoria", "km": 205 }
+    ]
+  },
   "campground": {
     "website": "https://pacificplaygrounds.ca",
     "siteMap": "https://pacificplaygrounds.ca/wp-content/uploads/2025/03/0372501-Pacific-Playground-site-map.pdf",

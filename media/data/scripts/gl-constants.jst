@@ -59,6 +59,12 @@
     "rugged"
   ];
 
+  // Leg types where you are no longer in the van. They carry no severity rank —
+  // any one of them derives the back_country badge, which is the whole point of
+  // the distinction. walk vs hike is about footing, not distance: walk is an
+  // improved surface, hike is trail. Mirrored as NON_DRIVE_LEG_TYPES in sync.js.
+  GL.NON_DRIVE_LEG_TYPES = ["walk", "hike", "boat"];
+
   GL.MAP_CONFIG = {
     mapApiKey: "AIzaSyBHN5E9rVPW6wqbMXEzFE5nDc-TH58gKQ8",
     mapZoom: 13,
