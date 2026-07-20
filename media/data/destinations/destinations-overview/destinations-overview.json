@@ -431,7 +431,7 @@
 					"sites": [
 						{
 							"label": "226 + 25",
-							"url": null
+							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
 						}
 					],
 					"footnotes": [
@@ -448,7 +448,7 @@
 					"reservation": [
 						{
 							"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
-							"url": null
+							"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
 						}
 					]
 				},
@@ -557,6 +557,10 @@
 						{
 							"label": "85–88",
 							"url": null
+						},
+						{
+							"label": "Park",
+							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
 						}
 					],
 					"amenities": [
@@ -596,7 +600,11 @@
 					"sites": [
 						{
 							"label": "74–75",
-							"url": null
+							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+						},
+						{
+							"label": "Park",
+							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
 						}
 					],
 					"amenities": [
@@ -609,7 +617,7 @@
 					"reservation": [
 						{
 							"label": "Partially reservable, remainder first-come-first-served",
-							"url": null
+							"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
 						}
 					],
 					"footnotes": [
