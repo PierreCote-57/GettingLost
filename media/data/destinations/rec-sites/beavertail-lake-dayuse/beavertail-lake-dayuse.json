@@ -20,6 +20,9 @@
 			{ "town": "Campbell River", "km": 20 },
 			{ "town": "Nanaimo", "km": 145 },
 			{ "town": "Victoria", "km": 230 }
+		],
+		"legs": [
+			{ "type": "potholes", "km": 6 }
 		]
 	},
 	"campground": {
