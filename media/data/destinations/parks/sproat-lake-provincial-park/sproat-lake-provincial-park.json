@@ -3,8 +3,7 @@
 	"featuredImage": "under-construction.png",
 	"excerpt": "Warm-water lakeside camping, boat launch and the K'ak'awin petroglyphs near Port Alberni.",
 	"badges": {
-		"tags": ["camping", "fishing", "hiking"],
-		"road": "pavement"
+		"tags": ["camping", "fishing", "hiking"]
 	},
 	"wpSettings": {"published": true, "comments": "open"},
 	"location": {

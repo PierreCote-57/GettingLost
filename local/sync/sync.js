@@ -64,27 +64,63 @@ const FILEBIRD_TOKEN = process.env.FILEBIRD_TOKEN || null;
 
 const FALLBACK_FEATURED_IMAGE_ID = 1751;
 
+// `exclude` drops sub-paths that `path` would otherwise sweep in.
+//
+// Lakes are excluded from the Destinations gallery on purpose: a destination
+// is somewhere you arrive at, a lake is a feature you look at. You don't drive
+// to a lake, you drive to a rec site or campground on its shore — which is why
+// lake pages carry no access/legs either. Lakes stay reachable through their
+// own Lakes gallery and through cross-references from the sites on them.
 const GALLERY_RULES = [
   { name: "Lakes", path: "destinations/lakes/" },
   { name: "Campgrounds", path: "destinations/campgrounds/" },
   { name: "Parks", path: "destinations/parks/" },
   { name: "RecSites", path: "destinations/rec-sites/" },
-  { name: "Destinations", path: "destinations/" },
+  { name: "Destinations", path: "destinations/", exclude: ["destinations/lakes/"] },
   { name: "VanHowTo", path: "van/howto/" },
   { name: "VanChecklist", path: "van/checklists/" },
 ];
 
-// Valid road-condition values for the lower-left gallery badge. Mirrors the
-// GL.ROAD_COLORS keys in gl-constants.jst (browser side); duplicated here
-// because that file is browser code and can't be required. Keep the two in sync.
-const ROAD_VALUES = [
-  "pavement",
-  "dirt",
-  "potholes",
-  "sharp_rock",
-  "rugged",
-  "back_country",
-];
+// Leg types that may be AUTHORED in a page's access.legs. The drive list is
+// ordered easiest -> hardest and doubles as the severity rank; it is
+// GL.ROAD_RANK in gl-constants.jst minus back_country, which is derived rather
+// than ranked (browser code, can't be required here, so keep the two in sync).
+// Non-drive legs have no rank — any one of them means you leave the van, which
+// is the whole distinction.
+const DRIVE_LEG_TYPES = ["pavement", "dirt", "potholes", "sharp_rock", "rugged"];
+const NON_DRIVE_LEG_TYPES = ["walk", "hike", "boat"];
+const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
+
+// Badge-only value: derived from the legs, never authored.
+const BACK_COUNTRY = "back_country";
+
+// Derive the lower-left gallery badge from access.legs.
+//   legs absent  -> undefined (not filled in yet: render no badge)
+//   legs []      -> "pavement" (a deliberate statement: paved all the way)
+//   any non-drive leg -> "back_country"
+//   otherwise    -> the hardest drive leg
+// An unknown leg type is a data error: warn, name the file, and skip the leg
+// rather than silently ranking it.
+function deriveRoadBadge(access, filename) {
+  const legs = access && access.legs;
+  if (!Array.isArray(legs)) return undefined;
+  if (legs.length === 0) return "pavement";
+
+  let worst = -1;
+  for (const leg of legs) {
+    const type = leg && leg.type;
+    if (!LEG_TYPES.includes(type)) {
+      const msg = `[gallery] ${filename}: unknown leg type "${type}" — leg ignored.`;
+      console.warn(msg);
+      annotateWarning(msg);
+      continue;
+    }
+    if (NON_DRIVE_LEG_TYPES.includes(type)) return BACK_COUNTRY;
+    worst = Math.max(worst, DRIVE_LEG_TYPES.indexOf(type));
+  }
+
+  return worst < 0 ? undefined : DRIVE_LEG_TYPES[worst];
+}
 
 // ---------------------------------------------------------------------
 // Incremental mode
@@ -353,16 +389,16 @@ function generateGalleryJsons(pageFileMap, perPageDataMap) {
       if (!pd) continue;
       const { data, repoPath } = pd;
       if (!repoPath.startsWith(rule.path)) continue;
+      if (rule.exclude && rule.exclude.some((p) => repoPath.startsWith(p))) continue;
       if (wpStatusFromData(data) !== "publish") continue;
 
       const badgesIn = data.badges || {};
-      let road = badgesIn.road;
-      if (road && !ROAD_VALUES.includes(road)) {
-        const msg = `[gallery] ${filename}: unknown road value "${road}" — omitting road badge.`;
+      if (badgesIn.road !== undefined) {
+        const msg = `[gallery] ${filename}: badges.road is derived from access.legs and must not be authored — ignoring it.`;
         console.warn(msg);
         annotateWarning(msg);
-        road = undefined;
       }
+      const road = deriveRoadBadge(data.access, filename);
       const badges = { tags: badgesIn.tags || [] };
       if (road) badges.road = road;
 

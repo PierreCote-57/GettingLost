@@ -20,13 +20,14 @@
 						"zoom": 13,
 						"notes": "Near Campbell River"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 5
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 5
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 122,
@@ -56,13 +57,14 @@
 						"zoom": 13,
 						"notes": "Between Sooke and Jordan River"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 205
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 205
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"beach access",
@@ -86,13 +88,14 @@
 						"zoom": 13,
 						"notes": "16 km NW of Victoria, Trans-Canada Hwy"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 210
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 210
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 155,
@@ -130,13 +133,14 @@
 						"zoom": 13,
 						"notes": "Cowichan Lake, north of Duncan"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 150
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 150
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 126,
@@ -168,13 +172,14 @@
 						"zoom": 13,
 						"notes": "Southwest Vancouver Island, Juan de Fuca coast"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 180
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 180
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "99 + 26",
@@ -210,13 +215,14 @@
 						"zoom": 13,
 						"notes": "Between Parksville/Qualicum and Port Alberni"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 90
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 90
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"hiking trails to waterfalls"
@@ -239,13 +245,14 @@
 						"zoom": 13,
 						"notes": "Campbell Lake, near Campbell River"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 15
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 15
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 50,
@@ -279,13 +286,14 @@
 						"zoom": 13,
 						"notes": "Lower Nimpkish River, Nimpkish Valley"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 140
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 140
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -311,13 +319,14 @@
 						"zoom": 13,
 						"notes": "Black Creek, between Campbell River and Courtenay"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 20
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 20
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 201,
@@ -353,13 +362,14 @@
 						"zoom": 13,
 						"notes": "Near Campbell River"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 20
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 20
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"rustic wilderness lakeside camping",
@@ -389,13 +399,14 @@
 						"zoom": 13,
 						"notes": "Nimpkish Lake, Nimpkish Valley"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 130
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 130
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -421,13 +432,14 @@
 						"zoom": 13,
 						"notes": "Parksville"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "226 + 25",
@@ -463,13 +475,14 @@
 						"zoom": 13,
 						"notes": "Schoen Lake, near Woss"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 75
-						}
-					],
-					"access": "rugged",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 75
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -485,13 +498,14 @@
 						"zoom": 13,
 						"notes": "Near Port Alberni"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 85
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 85
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 59,
@@ -521,13 +535,14 @@
 						"zoom": 13,
 						"notes": "Near Port Alberni"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 80
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 80
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"salmon-viewing trail",
@@ -551,13 +566,14 @@
 						"zoom": 13,
 						"notes": "Highway 28, ~48 km west of Campbell River"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 40
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 40
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "85–88",
@@ -595,13 +611,14 @@
 						"zoom": 13,
 						"notes": "35 km south of Buttle Lake along Buttle Lake (Western Mines) Road"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 45
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 45
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "74–75",
@@ -643,13 +660,14 @@
 						"zoom": 13,
 						"notes": "West of Sproat Lake"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 85
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 85
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "3 group sites",
@@ -683,13 +701,14 @@
 						"zoom": 13,
 						"notes": "Alberni Inlet, outside Port Alberni"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "2 + 4",
@@ -731,13 +750,14 @@
 						"zoom": 13,
 						"notes": "Backroads toward Nahmint Lake, near Sproat Lake"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 100
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 100
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 6,
@@ -773,13 +793,14 @@
 						"zoom": 13,
 						"notes": "Leiner River, near Tahsis"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 100
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 100
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 8,
@@ -811,13 +832,14 @@
 						"zoom": 13,
 						"notes": "~20 min drive from Port Renfrew"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 175
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 175
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "19 + 8",
@@ -858,13 +880,14 @@
 						"zoom": 13,
 						"notes": "40 min drive from Port McNeill, adjacent to Marble River Provincial Park"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 170
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 170
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 35,
@@ -900,13 +923,14 @@
 						"zoom": 13,
 						"notes": "Sayward Forest Canoe Route, between Amor Lake and Surprise Lake"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 25
-						}
-					],
-					"access": "back_country",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 25
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 8,
@@ -936,13 +960,14 @@
 						"zoom": 13,
 						"notes": "En route to/from Cape Scott Provincial Park, North Island"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 200
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 200
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 8,
@@ -976,13 +1001,14 @@
 						"zoom": 13,
 						"notes": "Mohun Lake, Sayward Canoe Route, north of Campbell River"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 20
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 20
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 30,
@@ -1022,13 +1048,14 @@
 						"zoom": 13,
 						"notes": "Great Central Lake, near Port Alberni"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 75
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 75
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 12,
@@ -1065,13 +1092,14 @@
 						"zoom": 13,
 						"notes": "Upper Campbell Lake, near Strathcona Park"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 30
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 30
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 40,
@@ -1114,13 +1142,14 @@
 						"zoom": 13,
 						"notes": "Port McNeill, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 145
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 145
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1136,13 +1165,14 @@
 						"zoom": 13,
 						"notes": "Langford, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 215
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 215
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1158,13 +1188,14 @@
 						"zoom": 13,
 						"notes": "Chemainus, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 165
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 165
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1180,13 +1211,14 @@
 						"zoom": 13,
 						"notes": "Tofino, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 110
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 110
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1202,13 +1234,14 @@
 						"zoom": 13,
 						"notes": "Nanaimo, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 135
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 135
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1224,13 +1257,14 @@
 						"zoom": 13,
 						"notes": "Campbell River, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 20
-						}
-					],
-					"access": "dirt",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 20
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 60,
@@ -1251,13 +1285,14 @@
 						"zoom": 13,
 						"notes": "Qualicum Beach, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1273,13 +1308,14 @@
 						"zoom": 13,
 						"notes": "Comox, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 45
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 45
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 62,
@@ -1312,13 +1348,14 @@
 						"zoom": 13,
 						"notes": "Qualicum Beach, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1334,13 +1371,14 @@
 						"zoom": 13,
 						"notes": "Malahat, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 205
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 205
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1356,13 +1394,14 @@
 						"zoom": 13,
 						"notes": "Chemainus, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 165
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 165
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1378,13 +1417,14 @@
 						"zoom": 13,
 						"notes": "Port Alberni, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1400,13 +1440,14 @@
 						"zoom": 13,
 						"notes": "Chemainus, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 165
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 165
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1422,13 +1463,14 @@
 						"zoom": 13,
 						"notes": "Tofino, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 110
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 110
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1444,13 +1486,14 @@
 						"zoom": 13,
 						"notes": "Bowser, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 75
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 75
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1466,13 +1509,14 @@
 						"zoom": 13,
 						"notes": "Campbell River, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 1
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 1
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1488,13 +1532,14 @@
 						"zoom": 13,
 						"notes": "Sayward, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 65
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 65
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1510,13 +1555,14 @@
 						"zoom": 13,
 						"notes": "Victoria, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 225
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 225
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1532,13 +1578,14 @@
 						"zoom": 13,
 						"notes": "Sointula, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 145
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 145
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1554,13 +1601,14 @@
 						"zoom": 13,
 						"notes": "Parksville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1576,13 +1624,14 @@
 						"zoom": 13,
 						"notes": "Ucluelet, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 120
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 120
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1598,13 +1647,14 @@
 						"zoom": 13,
 						"notes": "Nanaimo, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 135
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 135
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1620,13 +1670,14 @@
 						"zoom": 13,
 						"notes": "Nanaimo, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 135
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 135
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1642,13 +1693,14 @@
 						"zoom": 13,
 						"notes": "Nanaimo, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 135
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 135
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1664,13 +1716,14 @@
 						"zoom": 13,
 						"notes": "Nanoose Bay, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 115
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 115
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1686,13 +1739,14 @@
 						"zoom": 13,
 						"notes": "Saanichton, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 210
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 210
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1708,13 +1762,14 @@
 						"zoom": 13,
 						"notes": "Crofton, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 175
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 175
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1730,13 +1785,14 @@
 						"zoom": 13,
 						"notes": "Parksville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1752,13 +1808,14 @@
 						"zoom": 13,
 						"notes": "Black Creek, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 20
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 20
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": null,
@@ -1786,13 +1843,14 @@
 						"zoom": 13,
 						"notes": "Parksville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1808,13 +1866,14 @@
 						"zoom": 13,
 						"notes": "Parksville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1830,13 +1889,14 @@
 						"zoom": 13,
 						"notes": "Metchosin, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 220
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 220
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1852,13 +1912,14 @@
 						"zoom": 13,
 						"notes": "Port Hardy, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 180
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 180
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1874,13 +1935,14 @@
 						"zoom": 13,
 						"notes": "Port Alice, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 165
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 165
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1896,13 +1958,14 @@
 						"zoom": 13,
 						"notes": "Qualicum Beach, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1918,13 +1981,14 @@
 						"zoom": 13,
 						"notes": "Parksville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1940,13 +2004,14 @@
 						"zoom": 13,
 						"notes": "Duncan, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 175
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 175
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1962,13 +2027,14 @@
 						"zoom": 13,
 						"notes": "Qualicum Beach, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -1984,13 +2050,14 @@
 						"zoom": 13,
 						"notes": "Ladysmith, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 155
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 155
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2006,13 +2073,14 @@
 						"zoom": 13,
 						"notes": "Victoria, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 225
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 225
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2028,13 +2096,14 @@
 						"zoom": 13,
 						"notes": "Campbell River, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 15
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 15
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": null,
@@ -2068,13 +2137,14 @@
 						"zoom": 13,
 						"notes": "Black Creek, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 25
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 25
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"30 amp power, water, cable, sewer",
@@ -2096,13 +2166,14 @@
 						"zoom": 13,
 						"notes": "Courtenay, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 40
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 40
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": "140 + 10",
@@ -2137,13 +2208,14 @@
 						"zoom": 13,
 						"notes": "Tahsis, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 100
-						}
-					],
-					"access": "dirt",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 100
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2159,13 +2231,14 @@
 						"zoom": 13,
 						"notes": "Qualicum Beach, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 95
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 95
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2181,13 +2254,14 @@
 						"zoom": 13,
 						"notes": "Campbell River, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 10
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 10
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 50,
@@ -2214,13 +2288,14 @@
 						"zoom": 13,
 						"notes": "Sooke, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 215
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 215
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2236,13 +2311,14 @@
 						"zoom": 13,
 						"notes": "Black Creek, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 25
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 25
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": null,
@@ -2276,13 +2352,14 @@
 						"zoom": 13,
 						"notes": "Port Hardy, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 180
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 180
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2298,13 +2375,14 @@
 						"zoom": 13,
 						"notes": "Tofino, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 110
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 110
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2320,13 +2398,14 @@
 						"zoom": 13,
 						"notes": "Ucluelet, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 120
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 120
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2342,13 +2421,14 @@
 						"zoom": 13,
 						"notes": "Parksville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2364,13 +2444,14 @@
 						"zoom": 13,
 						"notes": "Telegraph Cove, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 125
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 125
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2386,13 +2467,14 @@
 						"zoom": 13,
 						"notes": "Campbell River, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 0
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 0
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"full hookups (30/50 amp)",
@@ -2415,13 +2497,14 @@
 						"zoom": 13,
 						"notes": "Errington, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 105
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 105
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2437,13 +2520,14 @@
 						"zoom": 13,
 						"notes": "Ucluelet, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 120
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 120
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2459,13 +2543,14 @@
 						"zoom": 13,
 						"notes": "Nanaimo, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 135
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 135
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2481,13 +2566,14 @@
 						"zoom": 13,
 						"notes": "Sayward, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 65
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 65
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2503,13 +2589,14 @@
 						"zoom": 13,
 						"notes": "Nimpkish Lake, Nimpkish Valley"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 125
-						}
-					],
-					"access": "dirt",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 125
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2531,13 +2618,14 @@
 						"zoom": 13,
 						"notes": "Cedar, BC (near Nanaimo)"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 145
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 145
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": []
@@ -2558,13 +2646,14 @@
 						"zoom": 13,
 						"notes": "Ucluelet, BC (Long Beach area)"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 120
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 120
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2586,13 +2675,14 @@
 						"zoom": 13,
 						"notes": "near Qualicum Beach, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 85
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 85
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2622,13 +2712,14 @@
 						"zoom": 13,
 						"notes": "Saanich Peninsula, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 205
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 205
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2650,13 +2741,14 @@
 						"zoom": 13,
 						"notes": "Jordan River, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 195
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 195
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2678,13 +2770,14 @@
 						"zoom": 13,
 						"notes": "near Winter Harbour, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 205
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 205
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [
 						"7 rustic sites",
@@ -2714,13 +2807,14 @@
 						"zoom": 13,
 						"notes": "near Port Alice, BC (Alice Lake)"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 165
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 165
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 23,
@@ -2750,13 +2844,14 @@
 						"zoom": 13,
 						"notes": "Nitinaht Lake, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 145
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 145
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2782,13 +2877,14 @@
 						"zoom": 13,
 						"notes": "Port Renfrew, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 175
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 175
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2810,13 +2906,14 @@
 						"zoom": 13,
 						"notes": "Bamfield, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 135
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 135
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2842,13 +2939,14 @@
 						"zoom": 13,
 						"notes": "4624 Condensory Rd, Courtenay, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 40
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 40
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 120,
@@ -2875,13 +2973,14 @@
 						"zoom": 13,
 						"notes": "Bowser, BC (near Qualicum Beach)"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 75
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 75
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2903,13 +3002,14 @@
 						"zoom": 13,
 						"notes": "Ucluelet, BC (Toquaht Bay, 13km gravel off Hwy 4)"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 120
-						}
-					],
-					"access": "potholes",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 120
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2935,13 +3035,14 @@
 						"zoom": 13,
 						"notes": "Lantzville, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 120
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 120
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],
@@ -2963,13 +3064,14 @@
 						"zoom": 13,
 						"notes": "Sooke, BC"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 205
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 205
+							}
+						]
+					},
 					"sites": [
 						{
 							"label": 67,
@@ -3000,13 +3102,14 @@
 						"zoom": 13,
 						"notes": "Tofino, BC (near MacKenzie Beach)"
 					},
-					"distanceKM": [
-						{
-							"from": "Campbell River",
-							"km": 110
-						}
-					],
-					"access": "pavement",
+					"access": {
+						"from": [
+							{
+								"town": "Campbell River",
+								"km": 110
+							}
+						]
+					},
 					"sites": [],
 					"amenities": [],
 					"reservation": [],

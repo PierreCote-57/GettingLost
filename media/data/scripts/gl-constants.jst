@@ -43,18 +43,20 @@
     back_country: { bg: "rgba(20, 20, 20, 0.94)",   text: "#EDEDED" }
   };
 
-  // Severity order, easiest -> hardest, as experienced by THE van. This is
-  // configuration, not truth: the ranking follows from the vehicle, so a
-  // different van (or an upgrade) can reorder it. back_country is last by
-  // convention — it is not "worse road" but "no road", so treat it as a
-  // category of its own rather than the top of the scale.
+  // Severity order of the DRIVE leg types, easiest -> hardest, as experienced
+  // by THE van. This is configuration, not truth: the ranking follows from the
+  // vehicle, so a different van (or an upgrade) can reorder it.
+  //
+  // back_country is deliberately absent. It is not "worse road" but "no road",
+  // so it is never ranked and never authored — sync.js derives it whenever a
+  // leg is non-drive (walk/hike/boat). It lives in ROAD_COLORS only, to be
+  // painted. Mirrored as DRIVE_LEG_TYPES in sync.js; keep the two in sync.
   GL.ROAD_RANK = [
     "pavement",
     "dirt",
     "potholes",
     "sharp_rock",
-    "rugged",
-    "back_country"
+    "rugged"
   ];
 
   GL.MAP_CONFIG = {

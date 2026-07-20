@@ -2,7 +2,7 @@
   "title": "Sproat Lake",
   "featuredImage": "under-construction.png",
   "excerpt": "A massive lake near Port Alberni with provincial parks, private campgrounds, and great fishing.",
-  "badges": { "tags": ["fishing", "camping"], "road": "pavement" },
+  "badges": { "tags": ["fishing", "camping"] },
   "wpSettings": {"published": true, "comments": "open"},
   "location": {
     "lat": 49.2901,
