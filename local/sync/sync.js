@@ -71,12 +71,16 @@ const FALLBACK_FEATURED_IMAGE_ID = 1751;
 // to a lake, you drive to a rec site or campground on its shore — which is why
 // lake pages carry no access/legs either. Lakes stay reachable through their
 // own Lakes gallery and through cross-references from the sites on them.
+//
+// destinations-overview is excluded for a different reason: it is not a place at
+// all, it is the table that lists them. A gallery card for it would advertise a
+// destination that cannot be visited.
 const GALLERY_RULES = [
   { name: "Lakes", path: "destinations/lakes/" },
   { name: "Campgrounds", path: "destinations/campgrounds/" },
   { name: "Parks", path: "destinations/parks/" },
   { name: "RecSites", path: "destinations/rec-sites/" },
-  { name: "Destinations", path: "destinations/", exclude: ["destinations/lakes/"] },
+  { name: "Destinations", path: "destinations/", exclude: ["destinations/lakes/", "destinations/destinations-overview/"] },
   { name: "VanHowTo", path: "van/howto/" },
   { name: "VanChecklist", path: "van/checklists/" },
 ];
