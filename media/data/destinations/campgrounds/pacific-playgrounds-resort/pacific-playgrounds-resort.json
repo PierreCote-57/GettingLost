@@ -31,10 +31,23 @@
 		],
 		"legs": []
 	},
+	"links": [
+		{
+			"label": "HomePage",
+			"url": "https://pacificplaygrounds.ca"
+		}
+	],
 	"campground": {
-		"website": "https://pacificplaygrounds.ca",
-		"siteMap": "https://pacificplaygrounds.ca/wp-content/uploads/2025/03/0372501-Pacific-Playground-site-map.pdf",
-		"reservation": "https://pacificplaygrounds.ca/about-us/pacific-playgrounds-key-policies/"
+		"links": [
+			{
+				"label": "Campground map",
+				"url": "https://pacificplaygrounds.ca/wp-content/uploads/2025/03/0372501-Pacific-Playground-site-map.pdf"
+			},
+			{
+				"label": "Reservation",
+				"url": "https://pacificplaygrounds.ca/about-us/pacific-playgrounds-key-policies/"
+			}
+		]
 	},
 	"notes": [
 		{

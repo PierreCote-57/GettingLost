@@ -15,22 +15,6 @@
 		"lng": -127.1664,
 		"pin": "lake"
 	},
-	"destinations": [
-		{
-			"name": "Clint Beek (Keogh Lake)",
-			"recId": "REC16077",
-			"siteMap": "https://www.sitesandtrailsbc.ca/resource/REC16077#maps-and-location",
-			"references": [
-				{
-					"name": "Sites & Trails BC",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC16077"
-				}
-			],
-			"description": "Just 25 minutes from Port McNeill, this recreation site is a popular summer destination for island residents. A grassy area and sandy beach provide for plenty of day use opportunities with a rough boat launch into Keogh Lake. There is a host on site during the summer months with 14 campsites available for overnight use. Please pack out what you pack in as there are no garbage disposal services at Clint Beek. This site was built by MacMillan Bloedel in the late 1990's and named after Clint Beek, a prominent member of the community and long-time employee of M&B.",
-			"lat": 50.49391,
-			"lng": -127.172186
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "00216NIMP",
 		"areaKm2": 0.798,
@@ -43,6 +27,18 @@
 		"stockingName": ""
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Clint Beek (Keogh Lake)",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC16077",
+					"description": [
+						"Sites & Trails BC"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": [

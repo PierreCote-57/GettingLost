@@ -9,22 +9,20 @@
  *   - dispatching each [data-block-type] element to its renderer
  *   - per-block error handling (a renderer that throws just skips that
  *     one block; other blocks on the page still render normally)
- *   - the generic, page-type-agnostic renderers ("campground",
- *     "googleMap", "furtherReading", "backToGallery")
+ *   - the generic, page-type-agnostic renderers ("campground", "links",
+ *     "googleMap", "notes", "backToGallery")
  *
- * This file adds the two renderers specific to lake pages:
+ * This file adds one renderer specific to lake pages:
  *
- *   <div data-block-type="destinations"></div>
  *   <div data-block-type="fishingReferences"></div>
  *
- * Both read directly from the page's own JSON — no data-lake-id
- * attribute, no separate fetch, no #lake-id element needed anymore.
+ * It reads directly from the page's own JSON — no data-lake-id attribute,
+ * no separate fetch, no #lake-id element needed.
  *
- * The lake's general-purpose links (what used to be the fishing table's
- * "References" row, fed by lakeData.fishing.references) now live in the
- * page's top-level pageData.furtherReading and are rendered by the
- * generic furtherReading renderer in gettinglost.jst — not duplicated
- * here.
+ * The old "destinations" (rec-sites) table renderer was retired in the
+ * schema-unification pass (2026-07-20): a lake's nearby rec sites now live in
+ * a "Destinations" section of the shared top-level `notes` block, rendered by
+ * the generic notes renderer in gettinglost.jst.
  *
  * NOTE: the richer lake + rec-site multi-marker map from the old
  * version of this file is intentionally NOT carried over in this pass.
@@ -61,18 +59,6 @@
     return table;
   }
 
-  function buildHeaderCell(label, width) {
-    var cell = document.createElement("th");
-    cell.textContent = label;
-    cell.style.fontSize = "0.9rem";
-    cell.style.fontWeight = "700";
-    cell.style.textAlign = "left";
-    cell.style.padding = "0.2rem 1rem 0.2rem 0";
-    if (width) {
-      cell.style.width = width;
-    }
-    return cell;
-  }
 
   function buildLabelCell(label) {
     var cell = document.createElement("td");
@@ -109,110 +95,6 @@
     return row;
   }
 
-  /**
-   * Renders a list of { name, url } references as links separated by
-   * <br>, inside a single table cell. An empty/missing reference name
-   * falls back to a label derived from the URL's domain.
-   */
-  function buildReferencesCell(references) {
-    if (!references || references.length === 0) {
-      return buildBodyCell(CONFIG.naLabel);
-    }
-
-    var cell = buildBodyCell("");
-
-    references.forEach(function (reference, index) {
-      if (index > 0) {
-        cell.appendChild(document.createElement("br"));
-      }
-      if (reference.file) {
-        // Internal page link — derive the slug from the filename, same tab.
-        var link = document.createElement("a");
-        link.href = "/" + window.GL.fileToSlug(reference.file) + "/";
-        link.textContent = reference.name || reference.file;
-        cell.appendChild(link);
-      } else {
-        var label = reference.name || deriveLabelFromUrl(reference.url);
-        cell.appendChild(buildExternalLink(reference.url, label));
-      }
-    });
-
-    return cell;
-  }
-
-  /**
-   * Falls back to a short, readable label based on a URL's hostname when
-   * no explicit reference name is given, e.g.
-   * "https://www.sitesandtrailsbc.ca/resource/REC0174" -> "sitesandtrailsbc.ca".
-   */
-  function deriveLabelFromUrl(url) {
-    try {
-      var hostname = new URL(url).hostname;
-      return hostname.replace(/^www\./, "");
-    } catch (e) {
-      return url;
-    }
-  }
-
-  // ---------------------------------------------------------------------
-  // Generic block renderer: "destinations"
-  // ---------------------------------------------------------------------
-  //
-  // Reads pageData.destinations = [{ name, type, references, description,
-  // lat, lng }, ...] and renders the Name/Type/References table. A
-  // destination is a rec site by default; set "type" to "Park" (or any
-  // other label) to override — absent/empty renders as "Rec site".
-  //
-  // lat/lng per destination are currently unused (map markers are on
-  // hold) but are left in the schema for when that work resumes — extra
-  // fields in the JSON are always ignored rather than treated as errors.
-
-  window.GL.blockRenderers.destinations = function (el, pageData) {
-    var destinations = pageData.destinations || [];
-
-    el.textContent = "";
-    el.appendChild(window.GL.buildGlHeading("Destinations"));
-
-    if (destinations.length === 0) {
-      var notice = document.createElement("p");
-      notice.textContent = "No destination";
-      el.appendChild(notice);
-      return;
-    }
-
-    var table = createStyledTable();
-
-    var thead = document.createElement("thead");
-    var headerRow = document.createElement("tr");
-    [
-      { label: "Name", width: "200px" },
-      { label: "Type", width: "90px" },
-      { label: "References", width: "100px" }
-    ].forEach(function (column) {
-      headerRow.appendChild(buildHeaderCell(column.label, column.width));
-    });
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    var tbody = document.createElement("tbody");
-    destinations.forEach(function (dest) {
-      var row = document.createElement("tr");
-
-      var nameCell = buildBodyCell(dest.name);
-      if (dest.description) {
-        nameCell.setAttribute("title", dest.description);
-      }
-      row.appendChild(nameCell);
-
-      row.appendChild(buildBodyCell(dest.type || "Rec site"));
-      row.appendChild(buildReferencesCell(dest.references));
-
-      tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-
-    el.appendChild(table);
-  };
 
   // ---------------------------------------------------------------------
   // Generic block renderer: "fishingReferences"

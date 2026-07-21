@@ -31,11 +31,6 @@
 			}
 		]
 	},
-	"campground": {
-		"website": "",
-		"siteMap": "",
-		"reservation": ""
-	},
 	"roadMap": {
 		"zoom": 11,
 		"pins": [

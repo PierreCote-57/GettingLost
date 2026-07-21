@@ -15,19 +15,6 @@
 		"pin": "lake",
 		"zoom": 12
 	},
-	"destinations": [
-		{
-			"name": "Goose Lake Trail",
-			"recId": "REC3104",
-			"siteMap": null,
-			"references": [
-				{
-					"name": "Rec site page",
-					"file": "morton-lake-rec3104.html"
-				}
-			]
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "00517SALM",
 		"areaKm2": 0.211,
@@ -40,6 +27,18 @@
 		"stockingName": ""
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Goose Lake Trail",
+					"url": "morton-lake-rec3104.html",
+					"description": [
+						"On Getting Lost"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": []

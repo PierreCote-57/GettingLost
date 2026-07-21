@@ -33,10 +33,23 @@
 		],
 		"legs": []
 	},
+	"links": [
+		{
+			"label": "HomePage",
+			"url": "https://bcparks.ca/elk-falls-park/#camping"
+		}
+	],
 	"campground": {
-		"website": "https://bcparks.ca/elk-falls-park/#camping",
-		"siteMap": "https://nrs.objectstore.gov.bc.ca/kuwyyf/elk_falls_quinsam_campground_map_21bba6d02b.pdf",
-		"reservation": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483617&mapId=-2147483593&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
+		"links": [
+			{
+				"label": "Park map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/elk_falls_quinsam_campground_map_21bba6d02b.pdf"
+			},
+			{
+				"label": "Reservation",
+				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483617&mapId=-2147483593&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
+			}
+		]
 	},
 	"notes": [
 		{

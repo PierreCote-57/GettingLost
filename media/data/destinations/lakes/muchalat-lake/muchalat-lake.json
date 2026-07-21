@@ -15,26 +15,6 @@
 		"lng": -126.1828,
 		"pin": "lake"
 	},
-	"destinations": [
-		{
-			"name": "Muchalat Lake",
-			"recId": "REC0258",
-			"siteMap": "https://sitesandtrailsbc.ca/resource/REC0258#maps-and-location",
-			"references": [
-				{
-					"name": "Sites & Trails BC",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0258"
-				},
-				{
-					"name": "BC Parks",
-					"url": "https://bcparks.ca/gold-muchalat-park/"
-				}
-			],
-			"description": "A large, treed site at the east end of Muchalat Lake. Site includes a boat ramp, dock, beach and swimming area, lots to see and do! Muchalat Lake will remain open for public use during the off-season.",
-			"lat": 49.873601,
-			"lng": -126.162778
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "00197GOLD",
 		"areaKm2": 5.314,
@@ -47,6 +27,25 @@
 		"stockingName": ""
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Muchalat Lake",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0258",
+					"description": [
+						"Sites & Trails BC"
+					]
+				},
+				{
+					"name": "Muchalat Lake",
+					"url": "https://bcparks.ca/gold-muchalat-park/",
+					"description": [
+						"BC Parks"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": []

@@ -229,6 +229,19 @@
     return i === -1 ? slug : slug.slice(0, i) + "." + slug.slice(i + 1);
   }
 
+  // OnLost convention: a scheme-less "*.html" url is a link to another page ON
+  // this site (e.g. "morton-lake-rec3104.html"), not an external address.
+  // Returns the internal "/slug/" href for such a url, else null (external
+  // "https://…", an absolute "/path", or anything not ending in .html). Shared
+  // by the links, campground, and notes renderers so the rule lives in one place.
+  function onLostHref(url) {
+    if (typeof url !== "string") return null;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return null; // has a scheme -> external
+    if (url.charAt(0) === "/" || url.charAt(0) === "#") return null;
+    if (!/\.html$/i.test(url)) return null;
+    return "/" + fileToSlug(url) + "/";
+  }
+
   function renderCard(entry) {
     var title = escapeHtml(entry.name || "");
     var image = escapeHtml(formatImageUrl(entry.featuredImage || "under-construction.png", 600, 400));
@@ -505,36 +518,76 @@
   }
 
   // ---------------------------------------------------------------------
+  // Shared: the "· "-separated link row (campground + links blocks)
+  // ---------------------------------------------------------------------
+  //
+  // Renders a list of { label, url } as one styled <p> of links joined by
+  // "&nbsp;·&nbsp;". `labelToText` maps a stored label to its shown text
+  // (identity when omitted). Each entry:
+  //   - OnLost url (scheme-less *.html) -> internal "/slug/" link, same tab
+  //   - other url                       -> external link, new tab
+  //   - url null/empty                  -> plain text (informational, e.g. a
+  //                                        reservation status with no booking url)
+  // Empty/absent list -> "".
+  function linkRow(links, labelToText) {
+    if (!Array.isArray(links) || !links.length) return "";
+    var parts = [];
+    for (var i = 0; i < links.length; i++) {
+      var it = links[i] || {};
+      var text = labelToText ? labelToText(it.label) : it.label;
+      var onlost = onLostHref(it.url);
+      if (onlost) {
+        parts.push('<a href="' + escapeAttr(onlost) + '">' + escapeHtml(text) + "</a>");
+      } else if (it.url) {
+        parts.push('<a href="' + escapeAttr(it.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(text) + "</a>");
+      } else {
+        parts.push(escapeHtml(text));
+      }
+    }
+    return (
+      '<p style="font-size:1.1rem;margin-top:0;margin-bottom:1.5rem;">' +
+      parts.join("&nbsp;·&nbsp; ") +
+      "</p>"
+    );
+  }
+
+  // ---------------------------------------------------------------------
   // Generic block renderer: "campground"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.campground = { website, siteMap, reservation }
-  // (any of the three may be omitted) and renders the familiar
-  // "Website · Site map · Reservations" link row.
+  // Reads pageData.campground = { links: [ { label, url }, ... ] } — the
+  // campground's logistics links (site/park map, reservation). Labels show
+  // verbatim; a reservation with no booking url carries its status text as the
+  // label with url:null (plain text). Same "· " row as before.
 
   window.GL.blockRenderers.campground = function (el, pageData) {
     var data = pageData.campground;
     if (!data) {
       throw new Error('No "campground" block found in page JSON.');
     }
-
     if (!el.style.marginTop) el.style.marginTop = "0";
+    el.innerHTML = linkRow(data.links, null);
+  };
 
-    var parts = [];
-    if (data.website) {
-      parts.push('<a href="' + escapeAttr(data.website) + '" target="_blank" rel="noopener noreferrer">Website</a>');
-    }
-    if (data.siteMap) {
-      parts.push('<a href="' + escapeAttr(data.siteMap) + '" target="_blank" rel="noopener noreferrer">Site map</a>');
-    }
-    if (data.reservation) {
-      parts.push('<a href="' + escapeAttr(data.reservation) + '" target="_blank" rel="noopener noreferrer">Reservations</a>');
-    }
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "links"
+  // ---------------------------------------------------------------------
+  //
+  // Reads pageData.links = [ { label, url }, ... ] \u2014 the destination's own
+  // links: its official HomePage, plus any OnLost cross-links to other pages
+  // on this site. Two label conventions get a friendly display word:
+  // "HomePage" -> "Website", "OnLost" -> "On Getting Lost" (its url is a
+  // scheme-less *.html, resolved to an internal link by linkRow). Any other
+  // label is shown verbatim. Absent key -> renders nothing.
 
-    el.innerHTML =
-      '<p style="font-size:1.1rem;margin-top:0;margin-bottom:1.5rem;">' +
-      parts.join("&nbsp;\u00b7&nbsp; ") +
-      "</p>";
+  window.GL.blockRenderers.links = function (el, pageData) {
+    if (!pageData.links) return;
+    if (!el.style.marginTop) el.style.marginTop = "0";
+    el.innerHTML = linkRow(pageData.links, function (label) {
+      if (label === "HomePage") return "Website";
+      if (label === "OnLost") return "On Getting Lost";
+      return label;
+    });
   };
 
   // ---------------------------------------------------------------------
@@ -865,10 +918,12 @@
         nameCell.style.verticalAlign = "top";
         nameCell.style.fontWeight = "600";
 
-        if (item.file) {
-          // Internal page link — derive the slug from the filename, same tab.
+        var onlost = onLostHref(item.url);
+        if (item.file || onlost) {
+          // Internal page link (legacy item.file, or an OnLost scheme-less
+          // *.html url) — derive the slug, same tab.
           var ilink = document.createElement("a");
-          ilink.href = "/" + fileToSlug(item.file) + "/";
+          ilink.href = item.file ? "/" + fileToSlug(item.file) + "/" : onlost;
           ilink.textContent = item.name || "";
           nameCell.appendChild(ilink);
         } else if (item.url) {

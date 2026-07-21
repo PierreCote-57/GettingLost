@@ -41,10 +41,19 @@
 			}
 		]
 	},
+	"links": [
+		{
+			"label": "HomePage",
+			"url": "https://bcparks.ca/morton-lake-park/"
+		}
+	],
 	"campground": {
-		"website": "https://bcparks.ca/morton-lake-park/",
-		"siteMap": "",
-		"reservation": "Reservable; open April 30–Sept 27 plus year-round winter camping"
+		"links": [
+			{
+				"label": "Reservable; open April 30–Sept 27 plus year-round winter camping",
+				"url": null
+			}
+		]
 	},
 	"roadMap": {
 		"zoom": 11,

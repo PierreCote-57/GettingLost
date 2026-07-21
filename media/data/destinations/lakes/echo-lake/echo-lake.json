@@ -16,19 +16,6 @@
 		"pin": "lake",
 		"Zoom": 14
 	},
-	"destinations": [
-		{
-			"name": "Echo Lake Day Use",
-			"recId": null,
-			"siteMap": null,
-			"references": [
-				{
-					"name": "Day-use page",
-					"file": "echo-lake-dayuse.html"
-				}
-			]
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "00126CAMB",
 		"areaKm2": 0.23,
@@ -41,6 +28,18 @@
 		"stockingName": "ECHO"
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Echo Lake Day Use",
+					"url": "echo-lake-dayuse.html",
+					"description": [
+						"On Getting Lost"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": []

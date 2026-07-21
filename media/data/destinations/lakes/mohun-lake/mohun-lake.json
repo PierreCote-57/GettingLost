@@ -15,61 +15,6 @@
 		"pin": "lake",
 		"zoom": 12
 	},
-	"destinations": [
-		{
-			"name": "Mohun Lake",
-			"recId": "REC0184",
-			"siteMap": null,
-			"references": [
-				{
-					"name": "Rec site page",
-					"file": "mohun-lake-rec0184.html"
-				}
-			]
-		},
-		{
-			"name": "Twin Lake",
-			"recId": "REC0185",
-			"siteMap": null,
-			"references": []
-		},
-		{
-			"name": "Sayward Forest Canoe Route",
-			"recId": "REC0197",
-			"siteMap": "https://www.sitesandtrailsbc.ca/resources/REC0197/sitemaps/Sayward%20Canoe%20Route%20Brochure%20and%20Map.pdf",
-			"references": []
-		},
-		{
-			"name": "Seagull Bay",
-			"recId": "REC0300",
-			"siteMap": null,
-			"references": []
-		},
-		{
-			"name": "Mohun Island",
-			"recId": "REC0429",
-			"siteMap": null,
-			"references": []
-		},
-		{
-			"name": "Goose Lake Trail",
-			"recId": "REC3104",
-			"siteMap": null,
-			"references": []
-		},
-		{
-			"name": "Mohun Beach",
-			"recId": "REC6787",
-			"siteMap": null,
-			"references": []
-		},
-		{
-			"name": "Bedrock City",
-			"recId": "REC6788",
-			"siteMap": null,
-			"references": []
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "00385SALM",
 		"areaKm2": 6.117,
@@ -86,6 +31,53 @@
 		"stockingName": ""
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Mohun Lake",
+					"url": "mohun-lake-rec0184.html",
+					"description": [
+						"On Getting Lost"
+					]
+				},
+				{
+					"name": "Twin Lake",
+					"url": null,
+					"description": []
+				},
+				{
+					"name": "Sayward Forest Canoe Route",
+					"url": null,
+					"description": []
+				},
+				{
+					"name": "Seagull Bay",
+					"url": null,
+					"description": []
+				},
+				{
+					"name": "Mohun Island",
+					"url": null,
+					"description": []
+				},
+				{
+					"name": "Goose Lake Trail",
+					"url": null,
+					"description": []
+				},
+				{
+					"name": "Mohun Beach",
+					"url": null,
+					"description": []
+				},
+				{
+					"name": "Bedrock City",
+					"url": null,
+					"description": []
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": []

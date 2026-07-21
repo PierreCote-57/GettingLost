@@ -6,10 +6,9 @@
 	},
 	"lat": 0,
 	"lng": 0,
+	"links": [],
 	"campground": {
-		"website": "",
-		"siteMap": "",
-		"reservation": ""
+		"links": []
 	},
 	"notes": []
 }

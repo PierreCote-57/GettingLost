@@ -15,40 +15,6 @@
 		"lng": -124.9153,
 		"pin": "lake"
 	},
-	"destinations": [
-		{
-			"name": "Sproat Lake Camping",
-			"type": "Private",
-			"siteMap": null,
-			"references": [
-				{
-					"name": "Website",
-					"url": "https://www.sproatlakecamping.com"
-				}
-			],
-			"description": "",
-			"lat": null,
-			"lng": null
-		},
-		{
-			"name": "Sproat Lake Provincial Park",
-			"type": "Park",
-			"siteMap": null,
-			"references": [
-				{
-					"name": "BC Parks",
-					"url": "https://bcparks.ca/sproat-lake-park/"
-				},
-				{
-					"name": "Getting Lost page",
-					"file": "sproat-lake-provincial-park.html"
-				}
-			],
-			"description": "",
-			"lat": 49.2986,
-			"lng": -124.9294
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "01128ALBN",
 		"areaKm2": 42.33,
@@ -69,6 +35,32 @@
 		"stockingName": ""
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Sproat Lake Camping",
+					"url": "https://www.sproatlakecamping.com",
+					"description": [
+						"Website"
+					]
+				},
+				{
+					"name": "Sproat Lake Provincial Park",
+					"url": "https://bcparks.ca/sproat-lake-park/",
+					"description": [
+						"BC Parks"
+					]
+				},
+				{
+					"name": "Sproat Lake Provincial Park",
+					"url": "sproat-lake-provincial-park.html",
+					"description": [
+						"On Getting Lost"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": [

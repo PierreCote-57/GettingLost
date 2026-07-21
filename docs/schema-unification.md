@@ -16,22 +16,37 @@ build reference.** Each phase is its own go.
 - **Phase 3b — `badges {tags}` → flat array.** DONE. 22 files (18 destinations +
   4 posts); renderCard reads the flat array; sync's defunct `badges.road` guard
   removed.
-- **Phase 3c/3d/3e, Phase 4, Phase 5.2 — DEFERRED, need Pierre.** Reasons:
-  - **3c/3d (campground restructure + top-level `links`)** — requires live-site
-    display-layout decisions the plan doesn't pin (where the `links`/HomePage block
-    sits vs the `campground` block; HomePage display wording) plus a new renderer
-    and ~7 page-HTML edits, none verifiable without a deploy.
-  - **3e (`destinations` → `notes` "Destinations")** — bulk-deletes the curated
-    per-rec-site prose across 10 lake pages (§5 drops it "to be re-added during the
-    per-page content pass"); a destructive + visible change best confirmed live.
-  - **Phase 4 (overview hydration)** — reshaping the ~98 curated *unknown* overview
-    entries from the flat shape to the unified nested `campground`/`links` schema
-    requires reinterpreting curated values (e.g. a `sites` entry's `label: 122` is a
-    site count, not a map label) that can't be validated blind — fabrication risk.
-    It is also all-or-nothing with the overview-renderer rewrite.
+- **Phase 3c — campground restructure.** DONE. `campground {website,siteMap,
+  reservation}` → `website`→top-level `links[]` HomePage; `siteMap`→`campground.links`
+  ("Campground map"; "Park map" on park pages — label choice, review); `reservation`
+  → `campground.links` ("Reservation" when a URL; the status prose as the label with
+  url:null when informational). Empty-campground day-use sites drop the block entirely.
+- **Phase 3d — top-level `links` + OnLost.** DONE. New shared `onLostHref` (scheme-less
+  `*.html` → internal `/slug/`) + `linkRow`; new `links` block renderer (HomePage→
+  "Website", OnLost→"On Getting Lost"); `campground` renderer now reads
+  `campground.links`; `notes` renderer resolves OnLost urls. Page HTML: added a `links`
+  block to the 5 pages with a homepage; removed the empty `campground` block from the 3
+  day-use pages. **Display choice to review:** homepage now renders as its own `links`
+  row above the campground (map/reservation) row, rather than one combined row.
+- **Phase 3e — `destinations` → `notes` "Destinations".** DONE. 10 lake pages: each
+  `destinations[]` folded into a prepended `notes` "Destinations" section (one entry
+  per reference; `file` refs → OnLost; ref-less named sites preserved as bare-name
+  rows). Dropped per §5 (in git, re-add in content pass): recId, siteMap, lat/lng,
+  prose. Removed the `destinations` renderer + helpers from lakes.jst and the block
+  from all 10 lake HTMLs. Templates updated to the new schema.
+  - **Flag:** mohun-lake degrades most — 1 OnLost link + 7 bare-name rows (its
+    rec sites had recIds but no reference links; the Sayward Canoe Route siteMap PDF
+    was dropped). Offer: synthesize `sitesandtrailsbc.ca/resource/<recId>` links from
+    the recIds (a template already used elsewhere in the data) to restore links — needs
+    Pierre's go.
+- **Phase 4 (overview hydration) + 5.2 — STILL DEFERRED.** Reshaping the ~98 curated
+  *unknown* overview entries (flat → nested `campground`/`links`) requires
+  reinterpreting curated values (e.g. a `sites` entry's `label: 122` is a site count,
+  not a map label) — fabrication risk, and all-or-nothing with the overview-renderer
+  rewrite. Overview still renders off its own inline flat entries, unaffected.
 - **Phase 5.1 (stray `Destinations.json`)** — already gone; nothing to delete.
-- Site is coherent at this checkpoint: pages/posts use `name` + flat `badges`,
-  renderers read them, the overview still renders off its own inline entries.
+- Site is coherent at this checkpoint: pages use the full unified schema; renderers
+  read it; the overview is the one remaining old-shape reader (its own inline entries).
 
 ## 1. Goal
 

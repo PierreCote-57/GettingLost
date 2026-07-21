@@ -15,19 +15,6 @@
 		"lng": -125.5033,
 		"pin": "lake"
 	},
-	"destinations": [
-		{
-			"name": "Beavertail Lake Day Use",
-			"recId": null,
-			"siteMap": null,
-			"references": [
-				{
-					"name": "Day-use page",
-					"file": "beavertail-lake-dayuse.html"
-				}
-			]
-		}
-	],
 	"fishingReferences": {
 		"bcIdentifier": "00121CAMB",
 		"areaKm2": 1.076,
@@ -40,6 +27,18 @@
 		"stockingName": "BEAVERTAIL"
 	},
 	"notes": [
+		{
+			"sectionName": "Destinations",
+			"list": [
+				{
+					"name": "Beavertail Lake Day Use",
+					"url": "beavertail-lake-dayuse.html",
+					"description": [
+						"On Getting Lost"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": [

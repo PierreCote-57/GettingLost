@@ -32,10 +32,23 @@
 		],
 		"legs": []
 	},
+	"links": [
+		{
+			"label": "HomePage",
+			"url": "https://salmonpoint.com"
+		}
+	],
 	"campground": {
-		"website": "https://salmonpoint.com",
-		"siteMap": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf",
-		"reservation": "https://www.campspot.com/book/salmon-point"
+		"links": [
+			{
+				"label": "Campground map",
+				"url": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf"
+			},
+			{
+				"label": "Reservation",
+				"url": "https://www.campspot.com/book/salmon-point"
+			}
+		]
 	},
 	"notes": [
 		{
