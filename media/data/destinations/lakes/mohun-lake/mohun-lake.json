@@ -43,44 +43,66 @@
 				},
 				{
 					"name": "Twin Lake",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0185",
+					"description": [
+						"Sites & Trails BC"
+					]
 				},
 				{
 					"name": "Sayward Forest Canoe Route",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0197",
+					"description": [
+						"Sites & Trails BC"
+					]
 				},
 				{
 					"name": "Seagull Bay",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0300",
+					"description": [
+						"Sites & Trails BC"
+					]
 				},
 				{
 					"name": "Mohun Island",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0429",
+					"description": [
+						"Sites & Trails BC"
+					]
 				},
 				{
 					"name": "Goose Lake Trail",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC3104",
+					"description": [
+						"Sites & Trails BC"
+					]
 				},
 				{
 					"name": "Mohun Beach",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC6787",
+					"description": [
+						"Sites & Trails BC"
+					]
 				},
 				{
 					"name": "Bedrock City",
-					"url": null,
-					"description": []
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC6788",
+					"description": [
+						"Sites & Trails BC"
+					]
 				}
 			]
 		},
 		{
 			"sectionName": "Further readings",
-			"list": []
+			"list": [
+				{
+					"name": "Sayward Forest Canoe Route",
+					"url": "https://www.sitesandtrailsbc.ca/resources/REC0197/sitemaps/Sayward%20Canoe%20Route%20Brochure%20and%20Map.pdf",
+					"description": [
+						"Route brochure & map"
+					]
+				}
+			]
 		}
 	]
 }

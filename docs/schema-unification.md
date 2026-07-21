@@ -3,7 +3,12 @@
 Consolidates the 2026-07-20 design conversation. **Design is settled; this is the
 build reference.** Each phase is its own go.
 
-## Migration status (2026-07-20, working tree — not yet reviewed/pushed)
+## Migration status (2026-07-20 — COMPLETE)
+
+All phases done and pushed (verify the newest tweak with `git status`). What remains is
+optional: the **review-flags** noted per phase below (design calls worth an eyeball, not
+bugs) and the **future follow-ons** in §8. The migration itself is finished.
+
 
 - **Phase 1 — road badge unified at render.** DONE. One `deriveRoadBadge` in
   gettinglost.jst; gallery cards + overview both call it; sync validates legs only.
@@ -34,11 +39,10 @@ build reference.** Each phase is its own go.
   rows). Dropped per §5 (in git, re-add in content pass): recId, siteMap, lat/lng,
   prose. Removed the `destinations` renderer + helpers from lakes.jst and the block
   from all 10 lake HTMLs. Templates updated to the new schema.
-  - **Flag:** mohun-lake degrades most — 1 OnLost link + 7 bare-name rows (its
-    rec sites had recIds but no reference links; the Sayward Canoe Route siteMap PDF
-    was dropped). Offer: synthesize `sitesandtrailsbc.ca/resource/<recId>` links from
-    the recIds (a template already used elsewhere in the data) to restore links — needs
-    Pierre's go.
+  - **mohun-lake — RESOLVED.** Its 7 bare rec-site rows were re-linked to
+    `sitesandtrailsbc.ca/resource/<recId>` (description "Sites & Trails BC"), matching
+    amor's convention; the dropped Sayward Canoe Route brochure PDF was re-added as a
+    "Further readings" entry.
 - **Phase 4 — overview hydration.** DONE (node-verified: reshape integrity + a DOM-shim
   render). All 103 entries reshaped to the unified schema; the `sites`→`siteCount`
   mapping for the 16 heterogeneous labels was resolved one-at-a-time with Pierre
@@ -54,11 +58,17 @@ build reference.** Each phase is its own go.
   - **Known pages' campground block** now also shows the migrated reservation *status
     prose* as a plain-text item in its link row (non-lossy merge) — a small page-display
     change to eyeball.
-  - **morton-lake-rec3104** page is still titled "Goose Lake Trail" (todo #5); the
-    listing sidesteps it by keeping the overview name "Morton Lake Provincial Park".
-- **Phase 5.1 (stray `Destinations.json`)** — already gone; nothing to delete.
-- Site is coherent at this checkpoint: pages use the full unified schema; renderers
-  read it; the overview is the one remaining old-shape reader (its own inline entries).
+  - **morton-lake-rec3104 — RESOLVED (identity fix).** The page was Morton Lake Park all
+    along: renamed `name` "Goose Lake Trail" → "Morton Lake Park", moved rec-sites →
+    parks as `morton-lake-park`, refs updated (morton-lake Destinations note + overview
+    `{file}`), old WP page removed. Goose Lake Trail is a rec site *within* the park (no
+    GL page; it stays a linked row in mohun-lake's list).
+- **Phase 5 — cleanups/data.** DONE. 5.1 stray `Destinations.json` was already gone.
+  5.2: Echo Lake Day Use + Beavertail Lake Day Use added to the overview (RSTBC group,
+  bare `{file}` — day-use, so no homepage/campground). 5.3: docs/memory updated inline.
+- Site is coherent: pages AND the overview use the unified schema; every renderer reads
+  it; the overview hydrates its 5 (now with day-use, `{file}`-linked) known entries from
+  their pages, so there's no inline duplication left to drift.
 
 ## 1. Goal
 
