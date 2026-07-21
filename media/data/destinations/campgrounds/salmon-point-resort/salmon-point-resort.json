@@ -57,14 +57,22 @@
 			{
 				"label": "Reservation",
 				"url": "https://www.campspot.com/book/salmon-point"
-			},
-			{
-				"label": "Reservable online (Campspot)",
-				"url": null
 			}
 		]
 	},
 	"notes": [
+		{
+			"sectionName": "Additional information",
+			"list": [
+				{
+					"name": "Availability",
+					"url": null,
+					"description": [
+						"Reservable online (Campspot)"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": [

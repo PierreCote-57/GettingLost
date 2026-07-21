@@ -56,11 +56,7 @@
 			},
 			{
 				"label": "Reservation",
-				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&mapId=-2147483402&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
-			},
-			{
-				"label": "Reservable",
-				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&equipmentId=-32768&subEquipmentId=-32765"
+				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&mapId=-2147483402&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32765&partySize=1"
 			}
 		]
 	},
