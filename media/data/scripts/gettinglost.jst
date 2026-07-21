@@ -594,10 +594,19 @@
   // Generic block renderer: "googleMap"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.location = { lat, lng, pin, zoom } and renders a
-  // single-marker map centered on the primary item. pin selects the
-  // marker icon (GL.PIN_ICONS); zoom overrides MAP_CONFIG.mapZoom when
-  // present. No rec-site loop — the primary item is the only pin.
+  // One renderer, two modes, selected by the div's data-map attribute:
+  //
+  //   <div data-block-type="googleMap"></div>
+  //     No data-map — synthesizes a single plain marker from
+  //     pageData.location (icon from location.pin, hover title from name).
+  //
+  //   <div data-block-type="googleMap" data-map="road"></div>
+  //     Renders pageData.googleMap.road = { center?, zoom?, pins }. center
+  //     defaults to pageData.location, zoom to MAP_CONFIG.mapZoom. Each pin
+  //     is { pin?, label?, img?, lat, lng } — see renderPin below.
+  //
+  // Size/float live on the div's inline style; the renderer only fills in
+  // defaults for properties the div hasn't already set.
 
   // Build a marker icon from a pin type via GL.PIN_ICONS (SVG data-URI).
   // Unknown/absent type -> null, so the marker uses the default pin.
@@ -663,7 +672,67 @@
   }
 
   window.GL.blockRenderers.googleMap = function (el, pageData) {
-    resolveLocation(pageData.location).then(function (r) {
+    var mapName = el.getAttribute("data-map");
+    var galleries = pageData.photoGalleries || {};
+
+    // Resolve a pin's { img, label } from its optional "img" field:
+    //   "galleryKey/itemId" -> that photoGalleries item (img + its label)
+    //   "file.jpg"          -> a direct image file
+    // label precedence: pin.label -> gallery item's label -> the img
+    // string itself -> none.
+    function resolvePinMedia(pin) {
+      var label = pin.label || null;
+      var img = null;
+      if (pin.img) {
+        var slash = pin.img.indexOf("/");
+        if (slash >= 0) {
+          var gKey = pin.img.slice(0, slash);
+          var itemId = pin.img.slice(slash + 1);
+          var items = (galleries[gKey] && galleries[gKey].items) || [];
+          var item = null;
+          items.forEach(function (it) {
+            if (it && it.id === itemId && !item) item = it;
+          });
+          if (item) {
+            img = item.img;
+            if (!label) label = item.label || null;
+          }
+        } else {
+          img = pin.img;
+        }
+        if (!label) label = pin.img;
+      }
+      return { img: img, label: label };
+    }
+
+    // Drop one pin onto the map. pin = { pin?, label?, img?, lat, lng }.
+    //   pin.pin    -> custom icon (GL.PIN_ICONS), else the default marker
+    //   img        -> click opens an InfoWindow with the photo
+    //   label-only -> native hover title; neither -> plain marker.
+    function renderPin(map, infoWindow, pin) {
+      if (typeof pin.lat !== "number" || typeof pin.lng !== "number") return;
+      var media = resolvePinMedia(pin);
+      var markerOptions = { position: { lat: pin.lat, lng: pin.lng }, map: map };
+      var icon = pinIcon(pin.pin);
+      if (icon) markerOptions.icon = icon;
+      if (media.img == null && media.label) markerOptions.title = media.label;
+      var marker = new google.maps.Marker(markerOptions);
+      if (media.img != null) {
+        marker.addListener("click", function () {
+          var img = document.createElement("img");
+          img.src = formatImageUrl(media.img, 320, 240);
+          img.alt = media.label || "";
+          img.style.display = "block";
+          img.style.maxWidth = "320px";
+          img.style.maxHeight = "240px";
+          infoWindow.setHeaderContent(media.label || "");
+          infoWindow.setContent(img);
+          infoWindow.open(map, marker);
+        });
+      }
+    }
+
+    function drawMap(center, zoom, pins) {
       el.textContent = "";
       if (!el.style.width) el.style.width = "45%";
       if (!el.style.height) el.style.height = "400px";
@@ -672,95 +741,65 @@
 
       loadGoogleMapsApi(function () {
         var map = new google.maps.Map(el, {
-          zoom: (typeof r.zoom === "number") ? r.zoom : MAP_CONFIG.mapZoom,
-          center: { lat: r.lat, lng: r.lng },
+          zoom: (typeof zoom === "number") ? zoom : MAP_CONFIG.mapZoom,
+          center: { lat: center.lat, lng: center.lng },
           mapTypeId: MAP_CONFIG.mapTypeId,
           styles: MAP_CONFIG.mapStyles
         });
-        var markerOptions = {
-          position: { lat: r.lat, lng: r.lng },
-          map: map,
-          title: pageData.name || ""
-        };
-        var icon = pinIcon(r.pin);
-        if (icon) markerOptions.icon = icon;
-        new google.maps.Marker(markerOptions);
+        var infoWindow = new google.maps.InfoWindow();
+        (pins || []).forEach(function (pin) { renderPin(map, infoWindow, pin); });
+
+        // Live center/zoom readout under the map, on wide maps only. Follows
+        // pan/zoom via the map's "idle" event so the current values can be read
+        // straight off the map. (Public for now — hiding it from real visitors
+        // is a later revisit.)
+        if (el.getBoundingClientRect().width >= 500) {
+          var caption = document.createElement("div");
+          caption.style.textAlign = "center";
+          caption.style.margin = "0.4rem 0 1rem";
+          caption.style.fontSize = "0.9rem";
+          if (el.style.float) caption.style.float = el.style.float;
+          if (el.style.width) caption.style.width = el.style.width;
+          el.insertAdjacentElement("afterend", caption);
+          var updateCaption = function () {
+            var c = map.getCenter();
+            caption.textContent = "Center = (" + c.lat().toFixed(6) + ", " +
+              c.lng().toFixed(6) + ")   ·   Zoom = " + map.getZoom();
+          };
+          map.addListener("idle", updateCaption);
+          updateCaption();
+        }
       });
-    }).catch(function (err) {
-      console.error('[gettinglost] Error rendering block type "googleMap":', err);
-    });
-  };
-
-  // ---------------------------------------------------------------------
-  // Generic block renderer: "googleRoadMap"
-  // ---------------------------------------------------------------------
-  //
-  // A left-floated companion map centered on the page's primary location
-  // (reusing resolveLocation) but at its OWN zoom (roadMap.zoom), showing
-  // a set of photo pins. Reads pageData.roadMap = { zoom, pins: [ { id,
-  // lat, lng }, ... ] }. Each pin's id is matched against the id of an
-  // item in pageData.photoGalleries (across all mini-galleries); clicking
-  // the pin opens an InfoWindow with that photo. Pins whose id has no
-  // matching gallery item still drop a plain marker (no image on click).
-
-  window.GL.blockRenderers.googleRoadMap = function (el, pageData) {
-    var road = pageData.roadMap;
-    if (!road) {
-      throw new Error('No "roadMap" block found in page JSON.');
     }
 
-    // id -> gallery item ({img,label}) across every mini-gallery. First
-    // occurrence wins (ids are only unique within a gallery).
-    var itemById = {};
-    var galleries = pageData.photoGalleries || {};
-    Object.keys(galleries).forEach(function (key) {
-      ((galleries[key] && galleries[key].items) || []).forEach(function (item) {
-        if (item && item.id && !(item.id in itemById)) itemById[item.id] = item;
+    if (mapName) {
+      // Named map: pageData.googleMap[mapName] = { center?, zoom?, pins }.
+      // center falls back to the page location; zoom to MAP_CONFIG.mapZoom.
+      var m = pageData.googleMap && pageData.googleMap[mapName];
+      if (!m) {
+        console.error('[gettinglost] Error rendering block type "googleMap": ' +
+          'no map named "' + mapName + '" in page JSON.');
+        return;
+      }
+      var hasCenter = m.center &&
+        typeof m.center.lat === "number" && typeof m.center.lng === "number";
+      var centerPromise = hasCenter
+        ? Promise.resolve({ lat: m.center.lat, lng: m.center.lng })
+        : resolveLocation(pageData.location);
+      centerPromise.then(function (c) {
+        var zoom = (typeof m.zoom === "number") ? m.zoom : c.zoom;
+        drawMap(c, zoom, m.pins || []);
+      }).catch(function (err) {
+        console.error('[gettinglost] Error rendering block type "googleMap":', err);
       });
-    });
-
-    resolveLocation(pageData.location).then(function (r) {
-      el.textContent = "";
-      if (!el.style.width) el.style.width = "45%";
-      if (!el.style.height) el.style.height = "400px";
-      if (!el.style.float) el.style.float = "left";
-      if (!el.style.margin) el.style.margin = "0 1.5rem 1rem 0";
-
-      loadGoogleMapsApi(function () {
-        var map = new google.maps.Map(el, {
-          zoom: (typeof road.zoom === "number") ? road.zoom
-            : (typeof r.zoom === "number") ? r.zoom : MAP_CONFIG.mapZoom,
-          center: { lat: r.lat, lng: r.lng },
-          mapTypeId: MAP_CONFIG.mapTypeId,
-          styles: MAP_CONFIG.mapStyles
-        });
-
-        var infoWindow = new google.maps.InfoWindow();
-
-        (road.pins || []).forEach(function (pin) {
-          if (typeof pin.lat !== "number" || typeof pin.lng !== "number") return;
-          var marker = new google.maps.Marker({
-            position: { lat: pin.lat, lng: pin.lng },
-            map: map
-          });
-          var item = itemById[pin.id];
-          if (!item) return;
-          marker.addListener("click", function () {
-            var img = document.createElement("img");
-            img.src = formatImageUrl(item.img, 320, 240);
-            img.alt = item.label || "";
-            img.style.display = "block";
-            img.style.maxWidth = "320px";
-            img.style.maxHeight = "240px";
-            infoWindow.setHeaderContent(item.label || "");
-            infoWindow.setContent(img);
-            infoWindow.open(map, marker);
-          });
-        });
+    } else {
+      // No data-map: synthesize a single plain marker from the page location.
+      resolveLocation(pageData.location).then(function (r) {
+        drawMap(r, r.zoom, [{ lat: r.lat, lng: r.lng, pin: r.pin, label: pageData.name }]);
+      }).catch(function (err) {
+        console.error('[gettinglost] Error rendering block type "googleMap":', err);
       });
-    }).catch(function (err) {
-      console.error('[gettinglost] Error rendering block type "googleRoadMap":', err);
-    });
+    }
   };
 
   // ---------------------------------------------------------------------
