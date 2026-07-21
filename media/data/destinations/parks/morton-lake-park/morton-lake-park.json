@@ -63,7 +63,9 @@
 	},
 	"googleMap": {
 		"road": {
-			"zoom": 11,
+			"lat": 50.089026,
+			"lng": -125.384500,
+			"zoom": 12,
 			"pins": [
 				{
 					"img": "onTheWay/img_0499",
