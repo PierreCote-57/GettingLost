@@ -381,7 +381,7 @@
       .then(function (page) {
         var merged = {};
         for (var k in page) merged[k] = page[k];
-        merged.name = entry.name;   // listing name wins
+        if (entry.name) merged.name = entry.name;  // optional listing-name override
         merged.file = entry.file;
         return merged;
       })
