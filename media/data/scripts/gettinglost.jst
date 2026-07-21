@@ -601,9 +601,10 @@
   //     pageData.location (icon from location.pin, hover title from name).
   //
   //   <div data-block-type="googleMap" data-map="road"></div>
-  //     Renders pageData.googleMap.road = { center?, zoom?, pins }. center
-  //     defaults to pageData.location, zoom to MAP_CONFIG.mapZoom. Each pin
-  //     is { pin?, label?, img?, lat, lng } — see renderPin below.
+  //     Renders pageData.googleMap.road = { lat?, lng?, zoom?, pins }.
+  //     lat/lng (flat peers, like location and pins) default to
+  //     pageData.location; zoom to MAP_CONFIG.mapZoom. Each pin is
+  //     { pin?, label?, img?, lat, lng } — see renderPin below.
   //
   // Size/float live on the div's inline style; the renderer only fills in
   // defaults for properties the div hasn't already set.
@@ -771,18 +772,18 @@
     }
 
     if (mapName) {
-      // Named map: pageData.googleMap[mapName] = { center?, zoom?, pins }.
-      // center falls back to the page location; zoom to MAP_CONFIG.mapZoom.
+      // Named map: pageData.googleMap[mapName] = { lat?, lng?, zoom?, pins }.
+      // lat/lng (flat peers) fall back to the page location; zoom to
+      // MAP_CONFIG.mapZoom.
       var m = pageData.googleMap && pageData.googleMap[mapName];
       if (!m) {
         console.error('[gettinglost] Error rendering block type "googleMap": ' +
           'no map named "' + mapName + '" in page JSON.');
         return;
       }
-      var hasCenter = m.center &&
-        typeof m.center.lat === "number" && typeof m.center.lng === "number";
+      var hasCenter = typeof m.lat === "number" && typeof m.lng === "number";
       var centerPromise = hasCenter
-        ? Promise.resolve({ lat: m.center.lat, lng: m.center.lng })
+        ? Promise.resolve({ lat: m.lat, lng: m.lng })
         : resolveLocation(pageData.location);
       centerPromise.then(function (c) {
         var zoom = (typeof m.zoom === "number") ? m.zoom : c.zoom;
