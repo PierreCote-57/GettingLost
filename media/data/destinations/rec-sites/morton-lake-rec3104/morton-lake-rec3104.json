@@ -13,7 +13,8 @@
 		"lat": 50.12631,
 		"lng": -125.47977,
 		"pin": "campground",
-		"zoom": 15
+		"zoom": 15,
+		"notes": "Near Campbell River"
 	},
 	"access": {
 		"haversine": [
@@ -48,6 +49,11 @@
 		}
 	],
 	"campground": {
+		"operator": "Quality Recreation Ltd.",
+		"amenities": [
+			"rustic wilderness lakeside camping",
+			"winter camping year-round"
+		],
 		"links": [
 			{
 				"label": "Reservable; open April 30–Sept 27 plus year-round winter camping",

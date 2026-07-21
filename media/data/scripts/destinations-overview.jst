@@ -52,14 +52,40 @@
 
   var COLUMNS = [
     { label: "Name", field: "name", width: 170 },
-    { label: "On lost", field: "on_lost", width: 65 },
-    { label: "Location", field: "location", width: 160 },
-    { label: "Distance", field: "haversine", width: 80 },
-    { label: "Access", field: "roadBadge", width: 80 },
-    { label: "Sites", field: "sites", width: 70 },
-    { label: "Amenities", field: "amenities", width: 190 },
+    { label: "On lost", field: "on_lost", width: 60 },
+    { label: "Location", field: "location", width: 155 },
+    { label: "Distance", field: "haversine", width: 75 },
+    { label: "Access", field: "roadBadge", width: 75 },
+    { label: "Sites", field: "siteCount", width: 50 },
+    { label: "Maps", field: "maps", width: 95 },
+    { label: "Amenities", field: "amenities", width: 175 },
     { label: "Reservation", field: "reservation" }
   ];
+
+  // The destination's official homepage url — the "HomePage" entry of the
+  // unified top-level links[]. Used to link the Name cell.
+  function homepageUrl(place) {
+    var links = place.links || [];
+    for (var i = 0; i < links.length; i++) {
+      if (links[i] && links[i].label === "HomePage") return links[i].url;
+    }
+    return null;
+  }
+
+  // Split campground.links into map links vs reservation entries. Maps are
+  // labelled "…map" (Campground map / Park map / Trail map); everything else in
+  // campground.links is a reservation entry (a booking link, or status prose
+  // with url:null). One list feeds the Maps column, the other the Reservation
+  // column.
+  function campgroundLinks(place) {
+    var links = (place.campground || {}).links || [];
+    var maps = [], reservation = [];
+    for (var i = 0; i < links.length; i++) {
+      var l = links[i] || {};
+      (/map/i.test(l.label || "") ? maps : reservation).push(l);
+    }
+    return { maps: maps, reservation: reservation };
+  }
 
   function totalWidth() {
     return COLUMNS.reduce(function (sum, col) { return sum + col.width; }, 0);
@@ -175,9 +201,10 @@
   // <a>, never the cell, so an unlinked cell has no tooltip.
   function fillDataCell(cell, place, field) {
     if (field === "name") {
-      if (place.url) {
+      var home = homepageUrl(place);
+      if (home) {
         cell.appendChild(
-          externalLink(place.url, cellText(place.name), "Open the destination's web site")
+          externalLink(home, cellText(place.name), "Open the destination's web site")
         );
       } else {
         cell.textContent = cellText(place.name);
@@ -211,10 +238,19 @@
       // show a reader. Blank until the place's legs are filled in.
       var badge = GL.deriveRoadBadge(place.access);
       if (badge) cell.textContent = badge.replace(/_/g, " ");
-    } else if (field === "sites") {
-      fillLinkList(cell, place.sites, "Open the site map", "Map");
+    } else if (field === "siteCount") {
+      // Plain number of campsites (Option B). Blank when unknown.
+      var n = (place.campground || {}).siteCount;
+      if (n !== null && n !== undefined) cell.textContent = String(n);
+    } else if (field === "maps") {
+      // Site/park/trail map links, split out of campground.links.
+      fillLinkList(cell, campgroundLinks(place).maps, "Open the map", "Map");
+    } else if (field === "amenities") {
+      cell.textContent = cellText((place.campground || {}).amenities);
     } else if (field === "reservation") {
-      fillLinkList(cell, place.reservation, "Open the reservation web site", null);
+      // The non-map entries of campground.links: a booking link and/or status
+      // prose (url:null renders as plain text).
+      fillLinkList(cell, campgroundLinks(place).reservation, "Open the reservation web site", null);
     } else {
       cell.textContent = cellText(place[field]);
     }
@@ -328,6 +364,33 @@
     return table;
   }
 
+  // Hydrate a collapsed known entry ({name, file}) from its page JSON: the page
+  // is the single source for access/location/campground/etc., while the
+  // overview keeps control of the listing `name`. Fetches
+  // /wp-content/uploads/<base>.json (same flat path every page's data uses).
+  // On any failure the bare {name, file} entry is kept (name shows, other
+  // columns blank) so one missing page never blanks the whole table.
+  function hydratePlace(entry) {
+    if (!entry || !entry.file) return Promise.resolve(entry);
+    var dataName = entry.file.replace(/\.[^.]*$/, "") + ".json";
+    return fetch("/wp-content/uploads/" + dataName)
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (page) {
+        var merged = {};
+        for (var k in page) merged[k] = page[k];
+        merged.name = entry.name;   // listing name wins
+        merged.file = entry.file;
+        return merged;
+      })
+      .catch(function (err) {
+        console.error("[overview] could not hydrate " + entry.file + ":", err);
+        return entry;
+      });
+  }
+
   window.GL.blockRenderers.placesTable = function (el, pageData) {
     var groups = pageData.places || [];
 
@@ -341,6 +404,18 @@
 
     el.appendChild(window.GL.buildGlHeading("Campgrounds"));
 
+    // Hydrate all entries (known {file} entries fetch their page JSON; the rest
+    // pass straight through), preserving group and order, then render.
+    Promise.all(groups.map(function (group) {
+      return Promise.all((group.list || []).map(hydratePlace)).then(function (list) {
+        return { group: group.group, list: list };
+      });
+    })).then(function (hydratedGroups) {
+      renderGroups(el, hydratedGroups);
+    });
+  };
+
+  function renderGroups(el, groups) {
     groups.forEach(function (group) {
       var count = (group.list || []).length;
 

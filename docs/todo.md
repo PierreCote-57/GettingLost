@@ -13,10 +13,10 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 1. ~~**`roadBadge()` has no `km` guard.**~~ RESOLVED by Phase 1 — the overview now
    calls the single shared `GL.deriveRoadBadge`, which carries the km guard.
-2. **`access` is duplicated with nothing checking it.** Each destination JSON and its
-   `destinations-overview.json` entry both carry `access`, and they can drift
-   silently. Now that linked entries carry a `file`, sync.js could compare the two
-   sides and fail the build on mismatch, the way slug drift already does.
+2. ~~**`access` is duplicated with nothing checking it.**~~ RESOLVED by Phase 4 for the
+   5 linked entries — they collapse to `{name, file}` and hydrate from the page at
+   render time, so the page JSON is the single source (no duplication left to drift).
+   The 98 unlinked entries have no page, so nothing to duplicate.
 3. **98 of 103 overview places have no `file` link.** Only Elk Falls, Morton, Sproat,
    Pacific Playgrounds and Salmon Point are linked. Unlinked entries can't be drift-
    checked or cross-referenced.

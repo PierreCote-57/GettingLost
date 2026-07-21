@@ -12,7 +12,8 @@
 	"location": {
 		"lat": 49.8705759,
 		"lng": -125.118066,
-		"pin": "campground"
+		"pin": "campground",
+		"notes": "Black Creek, BC"
 	},
 	"access": {
 		"haversine": [
@@ -38,6 +39,14 @@
 		}
 	],
 	"campground": {
+		"amenities": [
+			"heated pool",
+			"pickleball",
+			"marina & boat charters",
+			"beach access",
+			"campfire areas",
+			"kayak & paddleboard rentals"
+		],
 		"links": [
 			{
 				"label": "Campground map",

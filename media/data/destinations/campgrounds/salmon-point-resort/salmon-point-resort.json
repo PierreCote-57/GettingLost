@@ -13,7 +13,8 @@
 	"location": {
 		"lat": 49.889183,
 		"lng": -125.1282272,
-		"pin": "campground"
+		"pin": "campground",
+		"notes": "Campbell River, BC"
 	},
 	"access": {
 		"haversine": [
@@ -39,6 +40,15 @@
 		}
 	],
 	"campground": {
+		"amenities": [
+			"full hookup RV sites",
+			"marina & boat launch",
+			"heated pool (seasonal)",
+			"hot tub",
+			"washrooms & laundry",
+			"beach access",
+			"restaurant"
+		],
 		"links": [
 			{
 				"label": "Campground map",
@@ -47,6 +57,10 @@
 			{
 				"label": "Reservation",
 				"url": "https://www.campspot.com/book/salmon-point"
+			},
+			{
+				"label": "Reservable online (Campspot)",
+				"url": null
 			}
 		]
 	},

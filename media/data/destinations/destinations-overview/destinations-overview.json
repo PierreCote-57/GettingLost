@@ -10,55 +10,16 @@
 			"list": [
 				{
 					"name": "Elk Falls Provincial Park",
-					"url": "https://bcparks.ca/elk-falls-park/",
-					"file": "elk-falls-quinsam-campground.html",
-					"operator": "Quality Recreation Ltd.",
-					"location": {
-						"lat": 50.037009,
-						"lng": -125.295734,
-						"pin": null,
-						"zoom": 13,
-						"notes": "Near Campbell River"
-					},
-					"access": {
-						"haversine": [
-							{
-								"town": "Campbell River",
-								"km": 5
-							},
-							{
-								"town": "Nanaimo",
-								"km": 140
-							},
-							{
-								"town": "Victoria",
-								"km": 225
-							}
-						],
-						"legs": []
-					},
-					"sites": [
-						{
-							"label": 122,
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/elk_falls_quinsam_campground_map_21bba6d02b.pdf"
-						}
-					],
-					"amenities": [
-						"suspension bridge",
-						"waterfall",
-						"winter camping year-round"
-					],
-					"reservation": [
-						{
-							"label": "Reservable; open March 20–Oct 31 plus year-round winter camping",
-							"url": null
-						}
-					]
+					"file": "elk-falls-quinsam-campground.html"
 				},
 				{
 					"name": "French Beach Provincial Park",
-					"url": "https://bcparks.ca/french-beach-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/french-beach-park/"
+						}
+					],
 					"location": {
 						"lat": 48.3906956,
 						"lng": -123.9416582,
@@ -82,22 +43,28 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [
-						"beach access",
-						"pit toilets"
-					],
-					"reservation": [
-						{
-							"label": "Reservable",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "RLC Park Services",
+						"amenities": [
+							"beach access",
+							"pit toilets"
+						],
+						"links": [
+							{
+								"label": "Reservable",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Goldstream Provincial Park",
-					"url": "https://bcparks.ca/goldstream-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/goldstream-park/"
+						}
+					],
 					"location": {
 						"lat": 48.4770313,
 						"lng": -123.5430354,
@@ -121,36 +88,42 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 155,
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_park_campground_map_efaee751b7.pdf"
-						},
-						{
-							"label": "Park",
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_map_5abd6693ba.pdf"
-						}
-					],
-					"amenities": [
-						"flush toilets",
-						"showers",
-						"drinking water",
-						"wheelchair accessible",
-						"group campsites",
-						"fire pits",
-						"winter camping"
-					],
-					"reservation": [
-						{
-							"label": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "RLC Park Services",
+						"siteCount": 155,
+						"amenities": [
+							"flush toilets",
+							"showers",
+							"drinking water",
+							"wheelchair accessible",
+							"group campsites",
+							"fire pits",
+							"winter camping"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_park_campground_map_efaee751b7.pdf"
+							},
+							{
+								"label": "Park map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_map_5abd6693ba.pdf"
+							},
+							{
+								"label": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Gordon Bay Provincial Park",
-					"url": "https://bcparks.ca/gordon-bay-park/",
-					"operator": "K2 Park Services Ltd.",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/gordon-bay-park/"
+						}
+					],
 					"location": {
 						"lat": 48.8335432,
 						"lng": -124.2022988,
@@ -174,30 +147,36 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 126,
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/gordon_bay_park_map_771a73ae0a.pdf"
-						}
-					],
-					"amenities": [
-						"flush toilets",
-						"outhouses",
-						"potable water taps",
-						"no cell service",
-						"sandy beach"
-					],
-					"reservation": [
-						{
-							"label": "123 of 126 sites reservable; limited winter FCFS at reduced rate",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "K2 Park Services Ltd.",
+						"siteCount": 126,
+						"amenities": [
+							"flush toilets",
+							"outhouses",
+							"potable water taps",
+							"no cell service",
+							"sandy beach"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/gordon_bay_park_map_771a73ae0a.pdf"
+							},
+							{
+								"label": "123 of 126 sites reservable; limited winter FCFS at reduced rate",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Juan de Fuca Provincial Park (China Beach Campground)",
-					"url": "https://bcparks.ca/juan-de-fuca-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/juan-de-fuca-park/"
+						}
+					],
 					"location": {
 						"lat": 48.5086267,
 						"lng": -124.3598452,
@@ -221,34 +200,36 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": "99 + 26",
-							"url": null
-						}
-					],
-					"amenities": [
-						"outhouses",
-						"potable water taps",
-						"no cell service"
-					],
-					"reservation": [
-						{
-							"label": "Nearly all sites reservable; 1 site FCFS",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RLC Park Services",
+						"siteCount": 125,
+						"amenities": [
+							"outhouses",
+							"potable water taps",
+							"no cell service"
+						],
+						"links": [
+							{
+								"label": "Nearly all sites reservable; 1 site FCFS",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
-							"field": "sites",
+							"field": "siteCount",
 							"text": "vehicle-accessible + walk-in"
 						}
 					]
 				},
 				{
 					"name": "Little Qualicum Falls Provincial Park",
-					"url": "https://bcparks.ca/little-qualicum-falls-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/little-qualicum-falls-park/"
+						}
+					],
 					"location": {
 						"lat": 49.2892711,
 						"lng": -124.6498123,
@@ -272,21 +253,27 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [
-						"hiking trails to waterfalls"
-					],
-					"reservation": [
-						{
-							"label": "Reservable",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "RLC Park Services",
+						"amenities": [
+							"hiking trails to waterfalls"
+						],
+						"links": [
+							{
+								"label": "Reservable",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Loveland Bay Provincial Park",
-					"url": "https://bcparks.ca/loveland-bay-park/",
-					"operator": "Quality Recreation Ltd.",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/loveland-bay-park/"
+						}
+					],
 					"location": {
 						"lat": 50.0496831,
 						"lng": -125.4512122,
@@ -310,21 +297,23 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 50,
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/loveland_bay_park_map_c1b9ff4f32.pdf"
-						}
-					],
-					"amenities": [
-						"rustic wilderness lakeside camping"
-					],
-					"reservation": [
-						{
-							"label": "Reservable; open April 1–Oct 12",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "Quality Recreation Ltd.",
+						"siteCount": 50,
+						"amenities": [
+							"rustic wilderness lakeside camping"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/loveland_bay_park_map_c1b9ff4f32.pdf"
+							},
+							{
+								"label": "Reservable; open April 1–Oct 12",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -334,8 +323,12 @@
 				},
 				{
 					"name": "Lower Nimpkish Lake Park",
-					"url": "https://bcparks.ca/lower-nimpkish-park/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/lower-nimpkish-park/"
+						}
+					],
 					"location": {
 						"lat": 50.536722,
 						"lng": -127.0090386,
@@ -359,9 +352,6 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
 					"footnotes": [
 						{
 							"field": "name",
@@ -375,8 +365,12 @@
 				},
 				{
 					"name": "Miracle Beach Provincial Park",
-					"url": "https://bcparks.ca/miracle-beach-park/",
-					"operator": "Quality Recreation Ltd.",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/miracle-beach-park/"
+						}
+					],
 					"location": {
 						"lat": 49.8461306,
 						"lng": -125.0972267,
@@ -400,90 +394,44 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 201,
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_map_3212db3989.pdf"
-						},
-						{
-							"label": "Trails",
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_trail_map_a3af093f06.pdf"
-						}
-					],
-					"amenities": [
-						"hot showers",
-						"flush toilets",
-						"nature house and store",
-						"adventure playground",
-						"sheltered beach"
-					],
-					"reservation": [
-						{
-							"label": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "Quality Recreation Ltd.",
+						"siteCount": 201,
+						"amenities": [
+							"hot showers",
+							"flush toilets",
+							"nature house and store",
+							"adventure playground",
+							"sheltered beach"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_map_3212db3989.pdf"
+							},
+							{
+								"label": "Trail map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_trail_map_a3af093f06.pdf"
+							},
+							{
+								"label": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Morton Lake Provincial Park",
-					"url": "https://bcparks.ca/morton-lake-park/",
-					"file": "morton-lake-rec3104.html",
-					"operator": "Quality Recreation Ltd.",
-					"location": {
-						"lat": 50.1244276,
-						"lng": -125.4801806,
-						"pin": null,
-						"zoom": 13,
-						"notes": "Near Campbell River"
-					},
-					"access": {
-						"haversine": [
-							{
-								"town": "Campbell River",
-								"km": 20
-							},
-							{
-								"town": "Nanaimo",
-								"km": 155
-							},
-							{
-								"town": "Victoria",
-								"km": 245
-							}
-						],
-						"legs": [
-							{
-								"type": "potholes",
-								"km": 10
-							},
-							{
-								"type": "sharp_rock",
-								"km": 5
-							}
-						]
-					},
-					"sites": [],
-					"amenities": [
-						"rustic wilderness lakeside camping",
-						"winter camping year-round"
-					],
-					"reservation": [
-						{
-							"label": "Reservable; open April 30–Sept 27 plus year-round winter camping",
-							"url": null
-						}
-					],
-					"footnotes": [
-						{
-							"field": "access",
-							"text": "Preliminary, to be confirmed"
-						}
-					]
+					"file": "morton-lake-rec3104.html"
 				},
 				{
 					"name": "Nimpkish Lake Park",
-					"url": "https://bcparks.ca/nimpkish-lake-park/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/nimpkish-lake-park/"
+						}
+					],
 					"location": {
 						"lat": 50.3386857,
 						"lng": -127.0217235,
@@ -507,9 +455,6 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
 					"footnotes": [
 						{
 							"field": "name",
@@ -523,8 +468,12 @@
 				},
 				{
 					"name": "Rathtrevor Beach Provincial Park",
-					"url": "https://bcparks.ca/rathtrevor-beach-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/rathtrevor-beach-park/"
+						}
+					],
 					"location": {
 						"lat": 49.3248225,
 						"lng": -124.2616978,
@@ -548,34 +497,40 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": "226 + 25",
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
-						}
-					],
+					"campground": {
+						"operator": "RLC Park Services",
+						"siteCount": 251,
+						"amenities": [
+							"sandy beach",
+							"flush toilets",
+							"showers"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
+							},
+							{
+								"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
+								"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
+							}
+						]
+					},
 					"footnotes": [
 						{
-							"field": "sites",
+							"field": "siteCount",
 							"text": "vehicle-accessible + walk-in"
-						}
-					],
-					"amenities": [
-						"sandy beach",
-						"flush toilets",
-						"showers"
-					],
-					"reservation": [
-						{
-							"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
-							"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
 						}
 					]
 				},
 				{
 					"name": "Schoen Lake Park",
-					"url": "https://bcparks.ca/schoen-lake-park/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/schoen-lake-park/"
+						}
+					],
 					"location": {
 						"lat": 50.17172,
 						"lng": -126.260722,
@@ -598,62 +553,20 @@
 								"km": 285
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Sproat Lake Provincial Park",
-					"url": "https://bcparks.ca/sproat-lake-park/",
-					"file": "sproat-lake-provincial-park.html",
-					"operator": "RLC Park Services",
-					"location": {
-						"lat": 49.295918,
-						"lng": -124.928857,
-						"pin": null,
-						"zoom": 13,
-						"notes": "Near Port Alberni"
-					},
-					"access": {
-						"haversine": [
-							{
-								"town": "Campbell River",
-								"km": 85
-							},
-							{
-								"town": "Nanaimo",
-								"km": 75
-							},
-							{
-								"town": "Victoria",
-								"km": 150
-							}
-						],
-						"legs": []
-					},
-					"sites": [
-						{
-							"label": 59,
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/sproat_lake_map_ec757653ce.pdf"
-						}
-					],
-					"amenities": [
-						"two separate campgrounds",
-						"day-use area",
-						"lake access"
-					],
-					"reservation": [
-						{
-							"label": "Reservable",
-							"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&equipmentId=-32768&subEquipmentId=-32765"
-						}
-					]
+					"file": "sproat-lake-provincial-park.html"
 				},
 				{
 					"name": "Stamp River Provincial Park",
-					"url": "https://bcparks.ca/stamp-river-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/stamp-river-park/"
+						}
+					],
 					"location": {
 						"lat": 49.3479789,
 						"lng": -124.9385453,
@@ -677,22 +590,28 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [
-						"salmon-viewing trail",
-						"fish ladder lookout"
-					],
-					"reservation": [
-						{
-							"label": "Reservable",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "RLC Park Services",
+						"amenities": [
+							"salmon-viewing trail",
+							"fish ladder lookout"
+						],
+						"links": [
+							{
+								"label": "Reservable",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Strathcona Provincial Park — Buttle Lake Campground",
-					"url": "https://bcparks.ca/strathcona-park/",
-					"operator": "BC Parks",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/strathcona-park/"
+						}
+					],
 					"location": {
 						"lat": 49.7046516,
 						"lng": -125.5602583,
@@ -716,36 +635,48 @@
 							}
 						]
 					},
-					"sites": [
+					"campground": {
+						"operator": "BC Parks",
+						"siteCount": 79,
+						"amenities": [
+							"sandy lakefront beach",
+							"washrooms",
+							"water pump",
+							"boat launch",
+							"fire rings",
+							"no RV hookups",
+							"RV length limit 32 ft"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+							},
+							{
+								"label": "Park map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+							},
+							{
+								"label": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly",
+								"url": null
+							}
+						]
+					},
+					"footnotes": [
 						{
-							"label": "85–88",
-							"url": null
-						},
-						{
-							"label": "Park",
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
-						}
-					],
-					"amenities": [
-						"sandy lakefront beach",
-						"washrooms",
-						"water pump",
-						"boat launch",
-						"fire rings",
-						"no RV hookups",
-						"RV length limit 32 ft"
-					],
-					"reservation": [
-						{
-							"label": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly",
-							"url": null
+							"field": "siteCount",
+							"text": "Back-country camping allowed"
 						}
 					]
 				},
 				{
 					"name": "Strathcona Provincial Park — Ralph River Campground",
-					"url": "https://bcparks.ca/strathcona-park/",
-					"operator": "BC Parks",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/strathcona-park/"
+						}
+					],
 					"location": {
 						"lat": 49.6537488,
 						"lng": -125.4554345,
@@ -769,29 +700,31 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": "74–75",
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
-						},
-						{
-							"label": "Park",
-							"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
-						}
-					],
-					"amenities": [
-						"old-growth forest setting",
-						"pit toilets",
-						"water pump",
-						"no RV hookups",
-						"RV length limit 32 ft"
-					],
-					"reservation": [
-						{
-							"label": "Partially reservable, remainder first-come-first-served",
-							"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
-						}
-					],
+					"campground": {
+						"operator": "BC Parks",
+						"siteCount": 75,
+						"amenities": [
+							"old-growth forest setting",
+							"pit toilets",
+							"water pump",
+							"no RV hookups",
+							"RV length limit 32 ft"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+							},
+							{
+								"label": "Park map",
+								"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+							},
+							{
+								"label": "Partially reservable, remainder first-come-first-served",
+								"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -801,8 +734,12 @@
 				},
 				{
 					"name": "Taylor Arm Provincial Park",
-					"url": "https://bcparks.ca/taylor-arm-park/",
-					"operator": "RLC Park Services",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bcparks.ca/taylor-arm-park/"
+						}
+					],
 					"location": {
 						"lat": 49.2762872,
 						"lng": -125.0435249,
@@ -826,20 +763,24 @@
 							}
 						]
 					},
-					"sites": [
+					"campground": {
+						"operator": "RLC Park Services",
+						"siteCount": 3,
+						"amenities": [
+							"group camping only",
+							"day-use"
+						],
+						"links": [
+							{
+								"label": "Group sites reservable",
+								"url": null
+							}
+						]
+					},
+					"footnotes": [
 						{
-							"label": "3 group sites",
-							"url": null
-						}
-					],
-					"amenities": [
-						"group camping only",
-						"day-use"
-					],
-					"reservation": [
-						{
-							"label": "Group sites reservable",
-							"url": null
+							"field": "siteCount",
+							"text": "group sites"
 						}
 					]
 				}
@@ -850,8 +791,12 @@
 			"list": [
 				{
 					"name": "Arden Creek Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0214",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC0214"
+						}
+					],
 					"location": {
 						"lat": 49.2343668,
 						"lng": -124.8056517,
@@ -875,29 +820,27 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": "2 + 4",
-							"url": null
-						}
-					],
-					"amenities": [
-						"picnic tables",
-						"pit toilets",
-						"fire pits",
-						"boat launch",
-						"not suitable for motorhomes"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served, free",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 6,
+						"amenities": [
+							"picnic tables",
+							"pit toilets",
+							"fire pits",
+							"boat launch",
+							"not suitable for motorhomes"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served, free",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
-							"field": "sites",
-							"text": "walk-in tent pads + vehicle pads"
+							"field": "siteCount",
+							"text": "2 walk-in pads and 4 vehicle pads"
 						},
 						{
 							"field": "access",
@@ -907,8 +850,12 @@
 				},
 				{
 					"name": "Blackies Beach Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC6407",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC6407"
+						}
+					],
 					"location": {
 						"lat": 49.1573208,
 						"lng": -125.0179231,
@@ -932,23 +879,21 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 6,
-							"url": null
-						}
-					],
-					"amenities": [
-						"tent pads",
-						"toilets",
-						"small cabin"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served, free",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 6,
+						"amenities": [
+							"tent pads",
+							"toilets",
+							"small cabin"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served, free",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -958,8 +903,12 @@
 				},
 				{
 					"name": "Leiner River Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0276",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC0276"
+						}
+					],
 					"location": {
 						"lat": 49.915881,
 						"lng": -126.625535,
@@ -983,19 +932,16 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 8,
-							"url": null
-						}
-					],
-					"amenities": [],
-					"reservation": [
-						{
-							"label": "First-come-first-served",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 8,
+						"links": [
+							{
+								"label": "First-come-first-served",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -1005,8 +951,12 @@
 				},
 				{
 					"name": "Lizard Lake Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0269",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC0269"
+						}
+					],
 					"location": {
 						"lat": 48.5542109,
 						"lng": -124.4031008,
@@ -1030,27 +980,25 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": "19 + 8",
-							"url": null
-						}
-					],
-					"amenities": [
-						"two floating docks",
-						"swimming",
-						"paddling",
-						"lake loop trail"
-					],
-					"reservation": [
-						{
-							"label": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 27,
+						"amenities": [
+							"two floating docks",
+							"swimming",
+							"paddling",
+							"lake loop trail"
+						],
+						"links": [
+							{
+								"label": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
-							"field": "sites",
+							"field": "siteCount",
 							"text": "vehicle-accessible + walk-in"
 						},
 						{
@@ -1061,8 +1009,12 @@
 				},
 				{
 					"name": "Marble River Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0242",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC0242"
+						}
+					],
 					"location": {
 						"lat": 50.5452514,
 						"lng": -127.529147,
@@ -1086,23 +1038,21 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 35,
-							"url": null
-						}
-					],
-					"amenities": [
-						"two campground loops",
-						"river access",
-						"salmon spawning viewing nearby"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served, free; closed September–May (gated)",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 35,
+						"amenities": [
+							"two campground loops",
+							"river access",
+							"salmon spawning viewing nearby"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served, free; closed September–May (gated)",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -1112,8 +1062,12 @@
 				},
 				{
 					"name": "Mr. Canoehead Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC3067",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC3067"
+						}
+					],
 					"location": {
 						"lat": 50.1670632,
 						"lng": -125.5312914,
@@ -1137,28 +1091,30 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 8,
-							"url": null
-						}
-					],
-					"amenities": [
-						"picnic tables",
-						"pit toilets",
-						"boat/canoe access only"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served, free",
-							"url": null
-						}
-					]
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 8,
+						"amenities": [
+							"picnic tables",
+							"pit toilets",
+							"boat/canoe access only"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served, free",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Nahwitti Lake Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0125",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC0125"
+						}
+					],
 					"location": {
 						"lat": 50.7046816,
 						"lng": -127.8407191,
@@ -1182,21 +1138,19 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 8,
-							"url": null
-						}
-					],
-					"amenities": [
-						"vehicle accessible"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served, free",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 8,
+						"amenities": [
+							"vehicle accessible"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served, free",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -1206,8 +1160,12 @@
 				},
 				{
 					"name": "Pacific Yew Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC261703",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC261703"
+						}
+					],
 					"location": {
 						"lat": 50.1254079,
 						"lng": -125.4946769,
@@ -1231,27 +1189,29 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 30,
-							"url": "https://www.vicamping.com/images/PacificYewRecreationSite.pdf"
-						}
-					],
-					"amenities": [
-						"large sites",
-						"outhouses",
-						"paddling/boating access"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served",
-							"url": null
-						},
-						{
-							"label": "VI Camping",
-							"url": "https://www.vicamping.com/campsites/pacificyew"
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 30,
+						"amenities": [
+							"large sites",
+							"outhouses",
+							"paddling/boating access"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://www.vicamping.com/images/PacificYewRecreationSite.pdf"
+							},
+							{
+								"label": "First-come-first-served",
+								"url": null
+							},
+							{
+								"label": "VI Camping",
+								"url": "https://www.vicamping.com/campsites/pacificyew"
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -1261,8 +1221,12 @@
 				},
 				{
 					"name": "Scout Beach Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC5750",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC5750"
+						}
+					],
 					"location": {
 						"lat": 49.356065,
 						"lng": -125.2888531,
@@ -1286,24 +1250,22 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 12,
-							"url": null
-						}
-					],
-					"amenities": [
-						"picnic tables",
-						"pit toilets",
-						"fire pits",
-						"boat launch"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served, free",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 12,
+						"amenities": [
+							"picnic tables",
+							"pit toilets",
+							"fire pits",
+							"boat launch"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served, free",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -1313,8 +1275,12 @@
 				},
 				{
 					"name": "Upper Campbell Reservoir Recreation Site",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0159",
-					"operator": "RSTBC",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sitesandtrailsbc.ca/resource/REC0159"
+						}
+					],
 					"location": {
 						"lat": 49.9177133,
 						"lng": -125.6618491,
@@ -1338,25 +1304,23 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 40,
-							"url": null
-						}
-					],
-					"amenities": [
-						"pit toilets",
-						"picnic tables",
-						"fire pits",
-						"small beach",
-						"boat launch"
-					],
-					"reservation": [
-						{
-							"label": "First-come-first-served; max stay 14 nights",
-							"url": null
-						}
-					],
+					"campground": {
+						"operator": "RSTBC",
+						"siteCount": 40,
+						"amenities": [
+							"pit toilets",
+							"picnic tables",
+							"fire pits",
+							"small beach",
+							"boat launch"
+						],
+						"links": [
+							{
+								"label": "First-come-first-served; max stay 14 nights",
+								"url": null
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -1371,8 +1335,12 @@
 			"list": [
 				{
 					"name": "Alder Bay Resort",
-					"url": "https://www.alderbay.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.alderbay.com/"
+						}
+					],
 					"location": {
 						"lat": 50.5893452,
 						"lng": -127.0839027,
@@ -1395,15 +1363,16 @@
 								"km": 360
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "All Fun Recreation RV Park",
-					"url": "https://allfun.camp.zone/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://allfun.camp.zone/"
+						}
+					],
 					"location": {
 						"lat": 48.4497693,
 						"lng": -123.504666,
@@ -1426,15 +1395,16 @@
 								"km": 10
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Bald Eagle Campground & RV Sites",
-					"url": "https://www.bc-camping.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.bc-camping.com/"
+						}
+					],
 					"location": {
 						"lat": 48.922499,
 						"lng": -123.718414,
@@ -1457,15 +1427,16 @@
 								"km": 60
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Bella Pacifica Campground",
-					"url": "https://bellapacifica.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://bellapacifica.com/"
+						}
+					],
 					"location": {
 						"lat": 49.1528473,
 						"lng": -125.9048279,
@@ -1488,15 +1459,16 @@
 								"km": 205
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Brannen Lake Campsites",
-					"url": "https://brannenlake.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://brannenlake.com/"
+						}
+					],
 					"location": {
 						"lat": 49.163877,
 						"lng": -123.938122,
@@ -1519,15 +1491,16 @@
 								"km": 90
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Brown's Bay Resort",
-					"url": "https://brownsbayresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://brownsbayresort.com/"
+						}
+					],
 					"location": {
 						"lat": 50.1594885,
 						"lng": -125.3723823,
@@ -1551,19 +1524,24 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 60,
-							"url": "https://brownsbayresort.com/resort-map/"
-						}
-					],
-					"amenities": [],
-					"reservation": []
+					"campground": {
+						"siteCount": 60,
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://brownsbayresort.com/resort-map/"
+							}
+						]
+					}
 				},
 				{
 					"name": "Cameron Lake Resort",
-					"url": "https://cameronlakeresort.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://cameronlakeresort.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.3479861,
 						"lng": -124.4439409,
@@ -1586,15 +1564,16 @@
 								"km": 130
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Cape Lazo Resort",
-					"url": "https://capelazo.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://capelazo.com/"
+						}
+					],
 					"location": {
 						"lat": 49.6858493,
 						"lng": -124.8799953,
@@ -1618,31 +1597,36 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 62,
-							"url": "https://capelazo.com/campground-map/"
-						}
-					],
-					"amenities": [
-						"full service (water/sewer/power)",
-						"30/50 amp",
-						"WiFi",
-						"pavilion with fireplace",
-						"beach access",
-						"showers"
-					],
-					"reservation": [
-						{
-							"label": "Reservations required; no drop-ins; bookable up to a year ahead",
-							"url": null
-						}
-					]
+					"campground": {
+						"siteCount": 62,
+						"amenities": [
+							"full service (water/sewer/power)",
+							"30/50 amp",
+							"WiFi",
+							"pavilion with fireplace",
+							"beach access",
+							"showers"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://capelazo.com/campground-map/"
+							},
+							{
+								"label": "Reservations required; no drop-ins; bookable up to a year ahead",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Cedar Grove RV Park & Campground",
-					"url": "https://www.cedargrovervpark.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.cedargrovervpark.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.3479861,
 						"lng": -124.4439409,
@@ -1665,15 +1649,16 @@
 								"km": 130
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Cedar Springs Ranch",
-					"url": "https://cedarspringsranch.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://cedarspringsranch.com/"
+						}
+					],
 					"location": {
 						"lat": 48.5446533,
 						"lng": -123.5680621,
@@ -1696,15 +1681,16 @@
 								"km": 20
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Chemainus Gardens RV Park",
-					"url": "https://www.metrocp.ca/chemainus-gardens/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.metrocp.ca/chemainus-gardens/"
+						}
+					],
 					"location": {
 						"lat": 48.922499,
 						"lng": -123.718414,
@@ -1727,15 +1713,16 @@
 								"km": 60
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "China Creek Marina & RV Park",
-					"url": "https://campchinacreek.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://campchinacreek.com/"
+						}
+					],
 					"location": {
 						"lat": 49.2343668,
 						"lng": -124.8056517,
@@ -1758,15 +1745,16 @@
 								"km": 140
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Country Maples RV Resort",
-					"url": "https://holidaytrailsresorts.com/country-maples-rv-resort/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://holidaytrailsresorts.com/country-maples-rv-resort/"
+						}
+					],
 					"location": {
 						"lat": 48.896078,
 						"lng": -123.7157026,
@@ -1789,15 +1777,16 @@
 								"km": 60
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Crystal Cove Beach Resort",
-					"url": "https://www.crystalcove.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.crystalcove.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.1528473,
 						"lng": -125.9048279,
@@ -1820,15 +1809,16 @@
 								"km": 205
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Deep Bay RV Park",
-					"url": "https://deepbayrvpark.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://deepbayrvpark.com/"
+						}
+					],
 					"location": {
 						"lat": 49.4402737,
 						"lng": -124.6882261,
@@ -1851,15 +1841,16 @@
 								"km": 150
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Driftwood By The Sea RV Park & Cottages",
-					"url": "https://driftwoodbythesea.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://driftwoodbythesea.com/"
+						}
+					],
 					"location": {
 						"lat": 50.004275,
 						"lng": -125.232331,
@@ -1882,15 +1873,16 @@
 								"km": 220
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Fisherboy Park",
-					"url": "https://www.fisherboypark.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.fisherboypark.com/"
+						}
+					],
 					"location": {
 						"lat": 50.3780591,
 						"lng": -125.9592773,
@@ -1913,15 +1905,16 @@
 								"km": 285
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Fort Victoria RV Park",
-					"url": "https://fortvictoria.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://fortvictoria.ca/"
+						}
+					],
 					"location": {
 						"lat": 48.4283182,
 						"lng": -123.364953,
@@ -1944,15 +1937,16 @@
 								"km": 1
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Harmony Shores Campground",
-					"url": "https://www.harmonyshorescamping.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.harmonyshorescamping.ca/"
+						}
+					],
 					"location": {
 						"lat": 50.633333,
 						"lng": -127.016667,
@@ -1975,15 +1969,16 @@
 								"km": 360
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Heart Haven RV Family Campground",
-					"url": "https://www.hearthavenrvcamping.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.hearthavenrvcamping.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.3179514,
 						"lng": -124.311739,
@@ -2006,15 +2001,16 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Island West Resort",
-					"url": "http://www.islandwestresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "http://www.islandwestresort.com/"
+						}
+					],
 					"location": {
 						"lat": 48.9426817,
 						"lng": -125.546049,
@@ -2037,15 +2033,16 @@
 								"km": 170
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Jingle Pot RV Park",
-					"url": "https://www.jinglepotrv.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.jinglepotrv.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.163877,
 						"lng": -123.938122,
@@ -2068,15 +2065,16 @@
 								"km": 90
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Living Forest Oceanside Campground",
-					"url": "https://www.livingforest.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.livingforest.com/"
+						}
+					],
 					"location": {
 						"lat": 49.163877,
 						"lng": -123.938122,
@@ -2099,15 +2097,16 @@
 								"km": 90
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Mountainaire Campground",
-					"url": "https://mountainairervpark.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://mountainairervpark.com/"
+						}
+					],
 					"location": {
 						"lat": 49.163877,
 						"lng": -123.938122,
@@ -2130,15 +2129,16 @@
 								"km": 90
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Nanoose Creek Campground",
-					"url": "https://nanoosecreekcampground.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://nanoosecreekcampground.com/"
+						}
+					],
 					"location": {
 						"lat": 49.271116,
 						"lng": -124.1925699,
@@ -2161,15 +2161,16 @@
 								"km": 110
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Oceanside RV Park",
-					"url": "https://www.parkbridge.com/en/resort/resort-detail/oceanside",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.parkbridge.com/en/resort/resort-detail/oceanside"
+						}
+					],
 					"location": {
 						"lat": 48.5937899,
 						"lng": -123.3827,
@@ -2192,15 +2193,16 @@
 								"km": 20
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Osbourne Bay Resort",
-					"url": "https://www.osbornebayresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.osbornebayresort.com/"
+						}
+					],
 					"location": {
 						"lat": 48.8630676,
 						"lng": -123.63917,
@@ -2223,15 +2225,16 @@
 								"km": 50
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Pacific Palms RV Resort",
-					"url": "https://www.pacificpalmsrvresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.pacificpalmsrvresort.com/"
+						}
+					],
 					"location": {
 						"lat": 49.3179514,
 						"lng": -124.311739,
@@ -2254,60 +2257,20 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Pacific Playgrounds International",
-					"url": "https://pacificplaygrounds.ca",
-					"file": "pacific-playgrounds-resort.html",
-					"operator": null,
-					"location": {
-						"lat": 49.8705759,
-						"lng": -125.118066,
-						"pin": null,
-						"zoom": 13,
-						"notes": "Black Creek, BC"
-					},
-					"access": {
-						"haversine": [
-							{
-								"town": "Campbell River",
-								"km": 20
-							},
-							{
-								"town": "Nanaimo",
-								"km": 115
-							},
-							{
-								"town": "Victoria",
-								"km": 205
-							}
-						],
-						"legs": []
-					},
-					"sites": [
-						{
-							"label": null,
-							"url": "https://pacificplaygrounds.ca/about-us/resort-map/"
-						}
-					],
-					"amenities": [
-						"heated pool",
-						"pickleball",
-						"marina & boat charters",
-						"beach access",
-						"campfire areas",
-						"kayak & paddleboard rentals"
-					],
-					"reservation": []
+					"file": "pacific-playgrounds-resort.html"
 				},
 				{
 					"name": "Paradise Sea-Side Resort",
-					"url": "https://www.paradiservpark.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.paradiservpark.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.3179514,
 						"lng": -124.311739,
@@ -2330,15 +2293,16 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Park Sands Beach Resort",
-					"url": "https://parksands.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://parksands.com/"
+						}
+					],
 					"location": {
 						"lat": 49.3179514,
 						"lng": -124.311739,
@@ -2361,15 +2325,16 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Pedder Bay RV Resort & Marina",
-					"url": "https://pedderbay.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://pedderbay.com/"
+						}
+					],
 					"location": {
 						"lat": 48.3796009,
 						"lng": -123.535234,
@@ -2392,15 +2357,16 @@
 								"km": 15
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Pioneer Inn",
-					"url": "https://www.pioneerinn.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.pioneerinn.ca/"
+						}
+					],
 					"location": {
 						"lat": 50.7244402,
 						"lng": -127.4976081,
@@ -2423,15 +2389,16 @@
 								"km": 390
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Port Alice RV Park & Campground",
-					"url": "https://www.portaliceoceanfrontrv.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.portaliceoceanfrontrv.com/"
+						}
+					],
 					"location": {
 						"lat": 50.426893,
 						"lng": -127.488098,
@@ -2454,15 +2421,16 @@
 								"km": 370
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Qualicum Bay Resort and RV Park",
-					"url": "https://resortbc.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://resortbc.com/"
+						}
+					],
 					"location": {
 						"lat": 49.3479861,
 						"lng": -124.4439409,
@@ -2485,15 +2453,16 @@
 								"km": 130
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Riverbend Resort",
-					"url": "https://riverbendresort.bc.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://riverbendresort.bc.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.3179514,
 						"lng": -124.311739,
@@ -2516,15 +2485,16 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Riverside Campground & RV Park",
-					"url": "https://cowichanrivercampground.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://cowichanrivercampground.ca/"
+						}
+					],
 					"location": {
 						"lat": 48.7786872,
 						"lng": -123.7080446,
@@ -2547,15 +2517,16 @@
 								"km": 45
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Riverside Resort Motel & Campground",
-					"url": "https://myriversideresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://myriversideresort.com/"
+						}
+					],
 					"location": {
 						"lat": 49.3479861,
 						"lng": -124.4439409,
@@ -2578,15 +2549,16 @@
 								"km": 130
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Rondalyn Resort",
-					"url": "https://www.parkbridge.com/en/resort/resort-detail/rondalyn",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.parkbridge.com/en/resort/resort-detail/rondalyn"
+						}
+					],
 					"location": {
 						"lat": 48.9936579,
 						"lng": -123.8157964,
@@ -2609,15 +2581,16 @@
 								"km": 70
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Salish Seaside RV Haven",
-					"url": "https://www.salishseasidervhaven.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.salishseasidervhaven.com/"
+						}
+					],
 					"location": {
 						"lat": 48.4283182,
 						"lng": -123.364953,
@@ -2640,66 +2613,20 @@
 								"km": 1
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Salmon Point Resort & RV Park",
-					"url": "https://salmonpoint.com",
-					"file": "salmon-point-resort.html",
-					"operator": null,
-					"location": {
-						"lat": 49.889183,
-						"lng": -125.1282272,
-						"pin": null,
-						"zoom": 13,
-						"notes": "Campbell River, BC"
-					},
-					"access": {
-						"haversine": [
-							{
-								"town": "Campbell River",
-								"km": 15
-							},
-							{
-								"town": "Nanaimo",
-								"km": 120
-							},
-							{
-								"town": "Victoria",
-								"km": 205
-							}
-						],
-						"legs": []
-					},
-					"sites": [
-						{
-							"label": null,
-							"url": "https://salmonpoint.com/park-map/"
-						}
-					],
-					"amenities": [
-						"full hookup RV sites",
-						"marina & boat launch",
-						"heated pool (seasonal)",
-						"hot tub",
-						"washrooms & laundry",
-						"beach access",
-						"restaurant"
-					],
-					"reservation": [
-						{
-							"label": "Reservable online (Campspot)",
-							"url": null
-						}
-					]
+					"file": "salmon-point-resort.html"
 				},
 				{
 					"name": "Saratoga Beach Resort",
-					"url": "https://saratogabeach.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://saratogabeach.com/"
+						}
+					],
 					"location": {
 						"lat": 49.8647774,
 						"lng": -125.1164871,
@@ -2723,20 +2650,24 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [
-						"30 amp power, water, cable, sewer",
-						"washrooms & showers",
-						"laundry",
-						"WiFi",
-						"beachfront"
-					],
-					"reservation": []
+					"campground": {
+						"amenities": [
+							"30 amp power, water, cable, sewer",
+							"washrooms & showers",
+							"laundry",
+							"WiFi",
+							"beachfront"
+						]
+					}
 				},
 				{
 					"name": "Seal Bay RV Park",
-					"url": "https://www.sealbayrvpark.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.sealbayrvpark.com/"
+						}
+					],
 					"location": {
 						"lat": 49.752152,
 						"lng": -124.959433,
@@ -2760,33 +2691,33 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": "140 + 10",
-							"url": null
-						}
-					],
-					"amenities": [
-						"full hookups (30/50 amp)",
-						"picnic tables & fire pits",
-						"WiFi",
-						"coin showers & laundry",
-						"picnic pavilion",
-						"outdoor kitchen",
-						"group camping"
-					],
-					"reservation": [],
+					"campground": {
+						"siteCount": 150,
+						"amenities": [
+							"full hookups (30/50 amp)",
+							"picnic tables & fire pits",
+							"WiFi",
+							"coin showers & laundry",
+							"picnic pavilion",
+							"outdoor kitchen",
+							"group camping"
+						]
+					},
 					"footnotes": [
 						{
-							"field": "sites",
+							"field": "siteCount",
 							"text": "fully serviced RV sites + wilderness tent sites"
 						}
 					]
 				},
 				{
 					"name": "Seaside RV Campground",
-					"url": "https://villageoftahsis.com",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://villageoftahsis.com"
+						}
+					],
 					"location": {
 						"lat": 49.912073,
 						"lng": -126.662932,
@@ -2809,15 +2740,16 @@
 								"km": 290
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Shalom RV Park",
-					"url": "http://shalomrv.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "http://shalomrv.com/"
+						}
+					],
 					"location": {
 						"lat": 49.3479861,
 						"lng": -124.4439409,
@@ -2840,15 +2772,16 @@
 								"km": 130
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Shelter Bay Resort",
-					"url": "https://shelterbayresort.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://shelterbayresort.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.932137,
 						"lng": -125.186201,
@@ -2872,25 +2805,25 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 50,
-							"url": null
-						}
-					],
-					"amenities": [
-						"full hookups",
-						"heated washrooms & showers",
-						"coin laundry",
-						"private beachfront",
-						"kayaks"
-					],
-					"reservation": []
+					"campground": {
+						"siteCount": 50,
+						"amenities": [
+							"full hookups",
+							"heated washrooms & showers",
+							"coin laundry",
+							"private beachfront",
+							"kayaks"
+						]
+					}
 				},
 				{
 					"name": "Sooke River Campsite",
-					"url": "https://sookecampground.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://sookecampground.com/"
+						}
+					],
 					"location": {
 						"lat": 48.3886696,
 						"lng": -123.7071955,
@@ -2913,15 +2846,16 @@
 								"km": 25
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Speedway RV Park",
-					"url": "https://speedwayrv.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://speedwayrv.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.853833,
 						"lng": -125.137988,
@@ -2945,32 +2879,37 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": null,
-							"url": "https://speedwayrv.ca/park-map/"
-						}
-					],
-					"amenities": [
-						"serviced & unserviced RV sites",
-						"tent camping",
-						"swimming pool",
-						"hot tub",
-						"WiFi",
-						"convenience store",
-						"free hot showers"
-					],
-					"reservation": [
-						{
-							"label": "Reservable online (Campspot)",
-							"url": null
-						}
-					]
+					"campground": {
+						"siteCount": 122,
+						"amenities": [
+							"serviced & unserviced RV sites",
+							"tent camping",
+							"swimming pool",
+							"hot tub",
+							"WiFi",
+							"convenience store",
+							"free hot showers"
+						],
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://speedwayrv.ca/wp-content/uploads/2025/04/Speedway-RV-Park-Map.jpg"
+							},
+							{
+								"label": "Reservable online (Campspot)",
+								"url": null
+							}
+						]
+					}
 				},
 				{
 					"name": "Sunny Sanctuary Campground / Port Hardy RV Resort",
-					"url": "https://porthardyrvresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://porthardyrvresort.com/"
+						}
+					],
 					"location": {
 						"lat": 50.7244402,
 						"lng": -127.4976081,
@@ -2993,15 +2932,16 @@
 								"km": 390
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Surf Grove Campground",
-					"url": "https://surfgrove.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://surfgrove.com/"
+						}
+					],
 					"location": {
 						"lat": 49.1528473,
 						"lng": -125.9048279,
@@ -3024,15 +2964,16 @@
 								"km": 205
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Surf Junction Campground",
-					"url": "https://www.surfjunction.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.surfjunction.com/"
+						}
+					],
 					"location": {
 						"lat": 48.9426817,
 						"lng": -125.546049,
@@ -3055,15 +2996,16 @@
 								"km": 170
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Surfside RV Park",
-					"url": "https://surfsiderv.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://surfsiderv.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.3179514,
 						"lng": -124.311739,
@@ -3086,15 +3028,16 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Telegraph Cove Marina & RV Park",
-					"url": "https://telegraphcove.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://telegraphcove.ca/"
+						}
+					],
 					"location": {
 						"lat": 50.5474331,
 						"lng": -126.831394,
@@ -3117,15 +3060,16 @@
 								"km": 345
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Thunderbird Campsite",
-					"url": "https://thunderbirdrvpark.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://thunderbirdrvpark.com/"
+						}
+					],
 					"location": {
 						"lat": 50.0420496,
 						"lng": -125.2496227,
@@ -3149,21 +3093,25 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [
-						"full hookups (30/50 amp)",
-						"WiFi",
-						"laundry",
-						"washrooms & showers",
-						"waterfront & garden sites",
-						"pet-friendly"
-					],
-					"reservation": []
+					"campground": {
+						"amenities": [
+							"full hookups (30/50 amp)",
+							"WiFi",
+							"laundry",
+							"washrooms & showers",
+							"waterfront & garden sites",
+							"pet-friendly"
+						]
+					}
 				},
 				{
 					"name": "Tranquility Woods Campground",
-					"url": "https://tranquilitywoods.ca/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://tranquilitywoods.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.2895736,
 						"lng": -124.3703961,
@@ -3186,15 +3134,16 @@
 								"km": 120
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Ucluelet Campground",
-					"url": "https://uclueletcampground.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://uclueletcampground.com/"
+						}
+					],
 					"location": {
 						"lat": 48.9426817,
 						"lng": -125.546049,
@@ -3217,15 +3166,16 @@
 								"km": 170
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Westwood Lake RV Camping & Cabins (Westwood Lake Campground Resort)",
-					"url": "https://westwoodlakecampgrounds.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://westwoodlakecampgrounds.com/"
+						}
+					],
 					"location": {
 						"lat": 49.163877,
 						"lng": -123.938122,
@@ -3248,15 +3198,16 @@
 								"km": 90
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "White River Resort",
-					"url": "https://saywardwhiteriverresort.com/",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://saywardwhiteriverresort.com/"
+						}
+					],
 					"location": {
 						"lat": 50.3780591,
 						"lng": -125.9592773,
@@ -3279,15 +3230,16 @@
 								"km": 285
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				},
 				{
 					"name": "Windy Waters Camping Ground",
-					"url": "https://www.windywaters.ca",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.windywaters.ca"
+						}
+					],
 					"location": {
 						"lat": 50.337,
 						"lng": -126.917111,
@@ -3311,9 +3263,6 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
 					"footnotes": [
 						{
 							"field": "name",
@@ -3323,8 +3272,12 @@
 				},
 				{
 					"name": "Zuiderzee Campsites",
-					"url": "https://zuiderzeecampsites.wixsite.com/zuiderzee-campsites",
-					"operator": null,
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://zuiderzeecampsites.wixsite.com/zuiderzee-campsites"
+						}
+					],
 					"location": {
 						"lat": 49.08095,
 						"lng": -123.825712,
@@ -3347,10 +3300,7 @@
 								"km": 80
 							}
 						]
-					},
-					"sites": [],
-					"amenities": [],
-					"reservation": []
+					}
 				}
 			]
 		},
@@ -3359,8 +3309,12 @@
 			"list": [
 				{
 					"name": "Green Point Campground, Pacific Rim National Park Reserve",
-					"url": "https://parks.canada.ca/pn-np/bc/pacificrim/activ/camping",
-					"operator": "Parks Canada (federal, not BC provincial)",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://parks.canada.ca/pn-np/bc/pacificrim/activ/camping"
+						}
+					],
 					"location": {
 						"lat": 48.9426817,
 						"lng": -125.546049,
@@ -3384,9 +3338,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Parks Canada (federal, not BC provincial)"
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3396,8 +3350,12 @@
 				},
 				{
 					"name": "Horne Lake Regional Park",
-					"url": "https://rdn.bc.ca/horne-lake-regional-park",
-					"operator": "Regional District of Nanaimo (RDN)",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://rdn.bc.ca/horne-lake-regional-park"
+						}
+					],
 					"location": {
 						"lat": 49.351589,
 						"lng": -124.741552,
@@ -3421,9 +3379,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Regional District of Nanaimo (RDN)"
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -3441,8 +3399,12 @@
 				},
 				{
 					"name": "Island View Beach Campground",
-					"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/island-view-beach-regional-park",
-					"operator": "Capital Regional District (CRD)",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/island-view-beach-regional-park"
+						}
+					],
 					"location": {
 						"lat": 48.5946782,
 						"lng": -123.420726,
@@ -3466,9 +3428,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Capital Regional District (CRD)"
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3478,8 +3440,12 @@
 				},
 				{
 					"name": "Jordan River Campground",
-					"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/jordan-river-regional-park",
-					"operator": "Capital Regional District (CRD)",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/jordan-river-regional-park"
+						}
+					],
 					"location": {
 						"lat": 48.5002971,
 						"lng": -123.9681842,
@@ -3503,9 +3469,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Capital Regional District (CRD)"
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3515,8 +3481,12 @@
 				},
 				{
 					"name": "Kwaksistah Regional Park Campground",
-					"url": "https://www.rdmw.bc.ca/regional-services/parks/kwaksistah-winter-harbour--camping-",
-					"operator": "Regional District of Mount Waddington",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.rdmw.bc.ca/regional-services/parks/kwaksistah-winter-harbour--camping-"
+						}
+					],
 					"location": {
 						"lat": 50.516667,
 						"lng": -128.033333,
@@ -3540,13 +3510,14 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [
-						"7 rustic sites",
-						"no services",
-						"unreliable cell service"
-					],
-					"reservation": [],
+					"campground": {
+						"operator": "Regional District of Mount Waddington",
+						"amenities": [
+							"7 rustic sites",
+							"no services",
+							"unreliable cell service"
+						]
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -3560,8 +3531,12 @@
 				},
 				{
 					"name": "Link River Regional Park Campground",
-					"url": "https://portalice.ca/visitor-info/camping/",
-					"operator": "Regional District of Mount Waddington",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://portalice.ca/visitor-info/camping/"
+						}
+					],
 					"location": {
 						"lat": 50.426893,
 						"lng": -127.488098,
@@ -3585,17 +3560,14 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 23,
-							"url": null
-						}
-					],
-					"amenities": [
-						"waterfront/wooded sites",
-						"no services except accessible outhouses"
-					],
-					"reservation": [],
+					"campground": {
+						"operator": "Regional District of Mount Waddington",
+						"siteCount": 23,
+						"amenities": [
+							"waterfront/wooded sites",
+							"no services except accessible outhouses"
+						]
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3605,8 +3577,12 @@
 				},
 				{
 					"name": "Nitinaht Lake Campground",
-					"url": "https://visitnitinaht.com/",
-					"operator": "Ditidaht First Nation (operating since 2006)",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://visitnitinaht.com/"
+						}
+					],
 					"location": {
 						"lat": 48.7524857,
 						"lng": -124.7354368,
@@ -3630,9 +3606,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Ditidaht First Nation (operating since 2006)"
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -3646,8 +3622,12 @@
 				},
 				{
 					"name": "Pacheedaht Campground",
-					"url": "https://www.visitpacheedaht.ca/",
-					"operator": "Pacheedaht First Nation",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.visitpacheedaht.ca/"
+						}
+					],
 					"location": {
 						"lat": 48.5542109,
 						"lng": -124.4031008,
@@ -3671,9 +3651,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Pacheedaht First Nation"
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3683,8 +3663,12 @@
 				},
 				{
 					"name": "Pachena Bay Campground",
-					"url": "https://pachenabaycampground.ca/",
-					"operator": "Huu-ay-aht First Nations",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://pachenabaycampground.ca/"
+						}
+					],
 					"location": {
 						"lat": 48.833086,
 						"lng": -125.141144,
@@ -3708,9 +3692,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Huu-ay-aht First Nations"
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -3724,8 +3708,12 @@
 				},
 				{
 					"name": "Puntledge RV Park & Campground",
-					"url": "https://www.puntledgerv.ca/",
-					"operator": "Commercial RV campground owned and operated by the K'ómoks First Nation",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.puntledgerv.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.697017,
 						"lng": -125.003351,
@@ -3749,14 +3737,16 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 120,
-							"url": "https://www.puntledgerv.ca/stay"
-						}
-					],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Commercial RV campground owned and operated by the K'ómoks First Nation",
+						"siteCount": 120,
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://www.puntledgerv.ca/stay"
+							}
+						]
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3766,8 +3756,12 @@
 				},
 				{
 					"name": "Qualicum First Nation Waterfront Campground, Cabins and RV Park",
-					"url": "https://www.qualicumfirstnation.com/",
-					"operator": "Qualicum First Nation",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.qualicumfirstnation.com/"
+						}
+					],
 					"location": {
 						"lat": 49.4402737,
 						"lng": -124.6882261,
@@ -3791,9 +3785,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Qualicum First Nation"
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3803,8 +3797,12 @@
 				},
 				{
 					"name": "Secret Beach Campground & Kayak Launch",
-					"url": "https://www.secretbeachcampground.com/",
-					"operator": "Toquaht First Nation",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.secretbeachcampground.com/"
+						}
+					],
 					"location": {
 						"lat": 48.9426817,
 						"lng": -125.546049,
@@ -3828,9 +3826,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Toquaht First Nation"
+					},
 					"footnotes": [
 						{
 							"field": "access",
@@ -3844,8 +3842,12 @@
 				},
 				{
 					"name": "Snaw-Naw-as Campground",
-					"url": "https://www.snawnawascampground.ca/",
-					"operator": "Snaw-Naw-as First Nation",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.snawnawascampground.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.2507112,
 						"lng": -124.0746545,
@@ -3869,9 +3871,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Snaw-Naw-as First Nation"
+					},
 					"footnotes": [
 						{
 							"field": "name",
@@ -3880,9 +3882,13 @@
 					]
 				},
 				{
-					"name": "Spring Salmon Place (KWL-UCHUN) Campground / Sooke Potholes",
-					"url": "https://tsoukenation.com/sooke-potholes-regional-park-spring-salmon-place-campground/",
-					"operator": "Managed by CRD, operated by T'Sou-ke Nation",
+					"name": "Sooke Potholes / Spring Salmon Place (KWL-UCHUN) Campground",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://tsoukenation.com/sooke-potholes-regional-park-spring-salmon-place-campground/"
+						}
+					],
 					"location": {
 						"lat": 48.462091,
 						"lng": -123.738435,
@@ -3906,29 +3912,29 @@
 							}
 						]
 					},
-					"sites": [
-						{
-							"label": 67,
-							"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-campground.pdf"
-						},
-						{
-							"label": "Park",
-							"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-regional-park.pdf"
-						}
-					],
-					"amenities": [],
-					"reservation": [],
-					"footnotes": [
-						{
-							"field": "name",
-							"text": "Regional district / municipal"
-						}
-					]
+					"campground": {
+						"operator": "Managed by CRD, operated by T'Sou-ke Nation",
+						"siteCount": 67,
+						"links": [
+							{
+								"label": "Campground map",
+								"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-campground.pdf"
+							},
+							{
+								"label": "Park map",
+								"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-regional-park.pdf"
+							}
+						]
+					}
 				},
 				{
 					"name": "Tsawaak RV Resort & Campground",
-					"url": "https://www.tsawaakrvresort.ca/",
-					"operator": "Tla-o-qui-aht First Nation",
+					"links": [
+						{
+							"label": "HomePage",
+							"url": "https://www.tsawaakrvresort.ca/"
+						}
+					],
 					"location": {
 						"lat": 49.1528473,
 						"lng": -125.9048279,
@@ -3952,9 +3958,9 @@
 							}
 						]
 					},
-					"sites": [],
-					"amenities": [],
-					"reservation": [],
+					"campground": {
+						"operator": "Tla-o-qui-aht First Nation"
+					},
 					"footnotes": [
 						{
 							"field": "name",

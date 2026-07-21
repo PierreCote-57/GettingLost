@@ -39,11 +39,23 @@ build reference.** Each phase is its own go.
     was dropped). Offer: synthesize `sitesandtrailsbc.ca/resource/<recId>` links from
     the recIds (a template already used elsewhere in the data) to restore links — needs
     Pierre's go.
-- **Phase 4 (overview hydration) + 5.2 — STILL DEFERRED.** Reshaping the ~98 curated
-  *unknown* overview entries (flat → nested `campground`/`links`) requires
-  reinterpreting curated values (e.g. a `sites` entry's `label: 122` is a site count,
-  not a map label) — fabrication risk, and all-or-nothing with the overview-renderer
-  rewrite. Overview still renders off its own inline flat entries, unaffected.
+- **Phase 4 — overview hydration.** DONE (node-verified: reshape integrity + a DOM-shim
+  render). All 103 entries reshaped to the unified schema; the `sites`→`siteCount`
+  mapping for the 16 heterogeneous labels was resolved one-at-a-time with Pierre
+  (incl. data corrections: Buttle 79, Ralph 75, Speedway 122+JPG, Sooke rename). The 5
+  known entries collapse to `{name, file}` (listing keeps the curated name; everything
+  else hydrates) and their overview-only fields (operator/siteCount/amenities/
+  location.notes, merged reservation) were migrated into the page JSONs — page/PDF wins
+  on conflict. Renderer rewritten: Option-B columns (Sites=plain `siteCount`, new Maps
+  column, Amenities/Reservation from `campground`), name links to `links` HomePage.
+  - **Hydration is RENDER-TIME** (the overview renderer fetches each `{file}` page's
+    JSON and merges), not sync-time — keeps sync a pure copier, fully node-verifiable,
+    same drift-elimination. Deviation from §6; flagged for review.
+  - **Known pages' campground block** now also shows the migrated reservation *status
+    prose* as a plain-text item in its link row (non-lossy merge) — a small page-display
+    change to eyeball.
+  - **morton-lake-rec3104** page is still titled "Goose Lake Trail" (todo #5); the
+    listing sidesteps it by keeping the overview name "Morton Lake Provincial Park".
 - **Phase 5.1 (stray `Destinations.json`)** — already gone; nothing to delete.
 - Site is coherent at this checkpoint: pages use the full unified schema; renderers
   read it; the overview is the one remaining old-shape reader (its own inline entries).
