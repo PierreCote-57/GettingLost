@@ -555,10 +555,22 @@
   // Generic block renderer: "campground"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.campground = { links: [ { label, url }, ... ] } — the
-  // campground's logistics links (site/park map, reservation). Labels show
-  // verbatim; a reservation with no booking url carries its status text as the
-  // label with url:null (plain text). Same "· " row as before.
+  // The logistics row shown immediately under the title: one line of exactly
+  //   Website · Campground map · Reservation
+  // Each is a specific, by-label lookup — nothing else in the data appears here:
+  //   - "Website"        = the "HomePage" entry of top-level links[]
+  //   - "Campground map"  = the "Campground map" entry of campground.links
+  //   - "Reservation"     = the "Reservation" entry of campground.links
+  // Other campground.links entries (e.g. the "Reservable; open …" status prose
+  // with url:null) are NOT part of this row. Same "· "-separated row as links.
+
+  function findByLabel(list, label) {
+    list = list || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] && list[i].label === label) return list[i];
+    }
+    return null;
+  }
 
   window.GL.blockRenderers.campground = function (el, pageData) {
     var data = pageData.campground;
@@ -566,7 +578,14 @@
       throw new Error('No "campground" block found in page JSON.');
     }
     if (!el.style.marginTop) el.style.marginTop = "0";
-    el.innerHTML = linkRow(data.links, null);
+    var row = [];
+    var home = findByLabel(pageData.links, "HomePage");
+    if (home) row.push({ label: "Website", url: home.url });
+    var map = findByLabel(data.links, "Campground map");
+    if (map) row.push(map);
+    var reservation = findByLabel(data.links, "Reservation");
+    if (reservation) row.push(reservation);
+    el.innerHTML = linkRow(row, null);
   };
 
   // ---------------------------------------------------------------------
