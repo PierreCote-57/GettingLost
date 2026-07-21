@@ -56,14 +56,22 @@
 			{
 				"label": "Reservation",
 				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483617&mapId=-2147483593&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
-			},
-			{
-				"label": "Reservable; open March 20–Oct 31 plus year-round winter camping",
-				"url": null
 			}
 		]
 	},
 	"notes": [
+		{
+			"sectionName": "Additional information",
+			"list": [
+				{
+					"name": "Availability",
+					"url": null,
+					"description": [
+						"Reservable; open March 20–Oct 31 plus year-round winter camping"
+					]
+				}
+			]
+		},
 		{
 			"sectionName": "Further readings",
 			"list": [

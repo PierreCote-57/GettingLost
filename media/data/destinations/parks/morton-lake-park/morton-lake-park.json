@@ -331,5 +331,32 @@
 				}
 			]
 		}
-	}
+	},
+	"notes": [
+		{
+			"sectionName": "Additional information",
+			"list": [
+				{
+					"name": "Availability",
+					"url": null,
+					"description": [
+						"Reservable; open April 30–Sept 27 plus year-round winter camping"
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Explore BC Parks",
+					"url": "https://explorebcparks.ca/morton-lake-provincial-park/",
+					"description": [
+						"General review site"
+					]
+				}
+			]
+		}
+	]
+
 }

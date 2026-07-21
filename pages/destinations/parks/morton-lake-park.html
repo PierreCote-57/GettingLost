@@ -1,4 +1,7 @@
+<!-- For destinations with campgrounds only -->
 <div data-block-type="campground"></div>
+
+<!-- one or more maps for the destination -->
 <div>
 	<details>
 		<summary><h2 style="display:inline;">Road map</h2></summary>
@@ -12,11 +15,18 @@
 			 style="width:800px;height:500px;float:none;">
 		</div>
 	</details>
+
+	<!-- Custom blurb starts here -->
 	<p>Blurb goes here</p>
-	<div data-block-type="links"></div>
-	<!-- notes would go here, replacing the links block -->
+	<!-- Custom blurb ends here -->
+
+	<!-- More stuff, in categories -->
+	<div data-block-type="notes"></div>
 </div>
+<!-- photo blocks go here, one or more -->
 <div data-block-type="photoGallery" data-gallery="atSite"></div>
 <div data-block-type="photoGallery" data-gallery="onTheWay"></div>
+
+<!-- finally, the back buttons -->
 <div data-block-type="backToGallery" data-title="Parks" data-file="Parks.json"></div>
 <div data-block-type="backToGallery" data-title="Destinations" data-file="Destinations.json"></div>
