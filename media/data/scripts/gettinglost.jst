@@ -230,7 +230,7 @@
   }
 
   function renderCard(entry) {
-    var title = escapeHtml(entry.title || "");
+    var title = escapeHtml(entry.name || "");
     var image = escapeHtml(formatImageUrl(entry.featuredImage || "under-construction.png", 600, 400));
     var teaser = escapeHtml(entry.excerpt || "");
     var href = "/" + escapeAttr(fileToSlug(entry.file || "")) + "/";
@@ -239,7 +239,7 @@
       '<a class="gl-gallery-card" href="' + href + '">' +
       '<div class="gl-gallery-card-img-wrap">' +
       '<img class="gl-gallery-card-img" src="' + image + '" alt="' + title + '" loading="lazy">' +
-      renderTags(entry.badges && entry.badges.tags) +
+      renderTags(entry.badges) +
       renderRoad(deriveRoadBadge(entry.access)) +
       "</div>" +
       '<h3 class="gl-gallery-card-title">' + title + "</h3>" +
@@ -627,7 +627,7 @@
         var markerOptions = {
           position: { lat: r.lat, lng: r.lng },
           map: map,
-          title: pageData.title || ""
+          title: pageData.name || ""
         };
         var icon = pinIcon(r.pin);
         if (icon) markerOptions.icon = icon;
@@ -1106,7 +1106,7 @@
 
     var map = window.GL.pageMap || {};
     var entry = map[file];
-    var title = (entry && entry.title) || el.textContent || file;
+    var title = (entry && entry.name) || el.textContent || file;
 
     var link = document.createElement("a");
     link.href = "/" + fileToSlug(file) + "/";

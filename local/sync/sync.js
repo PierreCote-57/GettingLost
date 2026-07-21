@@ -412,12 +412,6 @@ function generateGalleryJsons(pageFileMap, perPageDataMap) {
       if (rule.exclude && rule.exclude.some((p) => repoPath.startsWith(p))) continue;
       if (wpStatusFromData(data) !== "publish") continue;
 
-      const badgesIn = data.badges || {};
-      if (badgesIn.road !== undefined) {
-        const msg = `[gallery] ${filename}: badges.road is derived from access.legs and must not be authored — ignoring it.`;
-        console.warn(msg);
-        annotateWarning(msg);
-      }
       // The road badge is now derived at RENDER time (one shared copy in
       // gettinglost.jst, from access.legs). sync.js no longer emits it — but it
       // still runs the same derivation here purely to VALIDATE the legs (warn /
@@ -432,7 +426,7 @@ function generateGalleryJsons(pageFileMap, perPageDataMap) {
       entries.push({ ...data, file: filename });
     }
 
-    entries.sort((a, b) => a.title.localeCompare(b.title));
+    entries.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
     galleries.set(rule.name, entries);
   }
 
@@ -445,7 +439,7 @@ function generatePageMap(pageFileMap, perPageDataMap) {
     const base = path.basename(filename, path.extname(filename));
     const pd = perPageDataMap.get(`${base}.json`);
     if (!pd || wpStatusFromData(pd.data) !== "publish") continue;
-    map[filename] = { title: pd.data.title || base };
+    map[filename] = { name: pd.data.name || base };
   }
   return map;
 }
@@ -556,7 +550,7 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
     const wpPage = wpPageMap.get(filename);
 
     const body = { content };
-    if (pageData.title) body.title = pageData.title;
+    if (pageData.name) body.title = pageData.name;
     if (pageData.excerpt !== undefined) body.excerpt = pageData.excerpt || "";
     const pageStatus = wpStatusFromData(pageData);
     if (pageStatus !== undefined) body.status = pageStatus;
@@ -669,7 +663,7 @@ async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap)
     const wpPost = wpPostMap.get(filename);
 
     const body = { content };
-    if (postData.title) body.title = postData.title;
+    if (postData.name) body.title = postData.name;
     if (postData.excerpt !== undefined) body.excerpt = postData.excerpt || "";
     if (postData.date) body.date = postData.date;
     const postStatus = wpStatusFromData(postData);

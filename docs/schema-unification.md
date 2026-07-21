@@ -1,7 +1,37 @@
 # Destination schema unification — spec + migration plan
 
 Consolidates the 2026-07-20 design conversation. **Design is settled; this is the
-build reference.** Nothing here is implemented yet — each phase is its own go.
+build reference.** Each phase is its own go.
+
+## Migration status (2026-07-20, working tree — not yet reviewed/pushed)
+
+- **Phase 1 — road badge unified at render.** DONE. One `deriveRoadBadge` in
+  gettinglost.jst; gallery cards + overview both call it; sync validates legs only.
+- **Phase 2 — gallery = verbatim page JSON + injected `file`.** DONE.
+- **Phase 3a — `title` → `name`.** DONE. Sitewide (39 content JSONs); sync
+  `body.title` ← `data.name` (pages + posts); PageMap emits `name`;
+  renderCard/googleMap/pageLink/gallery-sort read `name`. (jsonio also normalized
+  every touched file to the house tab format — review with `git diff -w` to see
+  the semantic change past the reindent.)
+- **Phase 3b — `badges {tags}` → flat array.** DONE. 22 files (18 destinations +
+  4 posts); renderCard reads the flat array; sync's defunct `badges.road` guard
+  removed.
+- **Phase 3c/3d/3e, Phase 4, Phase 5.2 — DEFERRED, need Pierre.** Reasons:
+  - **3c/3d (campground restructure + top-level `links`)** — requires live-site
+    display-layout decisions the plan doesn't pin (where the `links`/HomePage block
+    sits vs the `campground` block; HomePage display wording) plus a new renderer
+    and ~7 page-HTML edits, none verifiable without a deploy.
+  - **3e (`destinations` → `notes` "Destinations")** — bulk-deletes the curated
+    per-rec-site prose across 10 lake pages (§5 drops it "to be re-added during the
+    per-page content pass"); a destructive + visible change best confirmed live.
+  - **Phase 4 (overview hydration)** — reshaping the ~98 curated *unknown* overview
+    entries from the flat shape to the unified nested `campground`/`links` schema
+    requires reinterpreting curated values (e.g. a `sites` entry's `label: 122` is a
+    site count, not a map label) that can't be validated blind — fabrication risk.
+    It is also all-or-nothing with the overview-renderer rewrite.
+- **Phase 5.1 (stray `Destinations.json`)** — already gone; nothing to delete.
+- Site is coherent at this checkpoint: pages/posts use `name` + flat `badges`,
+  renderers read them, the overview still renders off its own inline entries.
 
 ## 1. Goal
 

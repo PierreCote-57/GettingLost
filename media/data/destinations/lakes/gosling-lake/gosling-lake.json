@@ -1,82 +1,87 @@
 {
-  "title": "Gosling Lake",
-  "featuredImage": "ActiveWorksite.jpg",
-  "excerpt": "A large lake with multiple rec sites and bay access, part of the Sayward Forest area.",
-  "badges": { "tags": ["fishing"] },
-  "wpSettings": {"published": true, "comments": "open"},
-  "location": {
-    "lat": 50.0603,
-    "lng": -125.5031,
-    "pin": "lake"
-  },
-  "destinations": [
-    {
-      "name": "Gosling Lake",
-      "recId": "REC0163",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Sites & Trails BC",
-          "url": "https://www.sitesandtrailsbc.ca/resource/REC0163"
-        }
-      ],
-      "description": "",
-      "lat": 50.045022,
-      "lng": -125.500567
-    },
-    {
-      "name": "Gosling Bay",
-      "recId": "REC0167",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Sites & Trails BC",
-          "url": "https://www.sitesandtrailsbc.ca/resource/REC0167"
-        }
-      ],
-      "description": "",
-      "lat": 50.036904,
-      "lng": -125.498246
-    },
-    {
-      "name": "Petite Gosling",
-      "recId": "REC16068",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Sites & Trails BC",
-          "url": "https://www.sitesandtrailsbc.ca/resource/REC16068"
-        }
-      ],
-      "description": "",
-      "lat": 50.031957,
-      "lng": -125.499022
-    },
-    {
-      "name": "Gosling Lake North",
-      "recId": "REC6345",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Sites & Trails BC",
-          "url": "https://www.sitesandtrailsbc.ca/resource/REC6345"
-        }
-      ],
-      "description": "",
-      "lat": 50.069066,
-      "lng": -125.506402
-    }
-  ],
-  "fishingReferences": {
-    "bcIdentifier": "00040CAMB",
-    "areaKm2": 0.7,
-    "lakeChartList": [],
-    "stockingName": ""
-  },
-  "notes": [
-    {
-      "sectionName": "Further readings",
-      "list": []
-    }
-  ]
+	"name": "Gosling Lake",
+	"featuredImage": "ActiveWorksite.jpg",
+	"excerpt": "A large lake with multiple rec sites and bay access, part of the Sayward Forest area.",
+	"badges": [
+		"fishing"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"location": {
+		"lat": 50.0603,
+		"lng": -125.5031,
+		"pin": "lake"
+	},
+	"destinations": [
+		{
+			"name": "Gosling Lake",
+			"recId": "REC0163",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Sites & Trails BC",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0163"
+				}
+			],
+			"description": "",
+			"lat": 50.045022,
+			"lng": -125.500567
+		},
+		{
+			"name": "Gosling Bay",
+			"recId": "REC0167",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Sites & Trails BC",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0167"
+				}
+			],
+			"description": "",
+			"lat": 50.036904,
+			"lng": -125.498246
+		},
+		{
+			"name": "Petite Gosling",
+			"recId": "REC16068",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Sites & Trails BC",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC16068"
+				}
+			],
+			"description": "",
+			"lat": 50.031957,
+			"lng": -125.499022
+		},
+		{
+			"name": "Gosling Lake North",
+			"recId": "REC6345",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Sites & Trails BC",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC6345"
+				}
+			],
+			"description": "",
+			"lat": 50.069066,
+			"lng": -125.506402
+		}
+	],
+	"fishingReferences": {
+		"bcIdentifier": "00040CAMB",
+		"areaKm2": 0.7,
+		"lakeChartList": [],
+		"stockingName": ""
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": []
+		}
+	]
 }

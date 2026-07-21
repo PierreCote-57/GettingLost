@@ -1,14 +1,15 @@
 {
-	"title": "Beavertail Lake Day Use",
+	"name": "Beavertail Lake Day Use",
 	"featuredImage": "IMG_0866.jpg",
 	"excerpt": "Under construction",
-	"badges": {
-		"tags": [
-			"fishing",
-			"picnic"
-		]
+	"badges": [
+		"fishing",
+		"picnic"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
 	},
-	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 49.97964,
 		"lng": -125.50546,
@@ -17,12 +18,24 @@
 	},
 	"access": {
 		"haversine": [
-			{ "town": "Campbell River", "km": 20 },
-			{ "town": "Nanaimo", "km": 145 },
-			{ "town": "Victoria", "km": 230 }
+			{
+				"town": "Campbell River",
+				"km": 20
+			},
+			{
+				"town": "Nanaimo",
+				"km": 145
+			},
+			{
+				"town": "Victoria",
+				"km": 230
+			}
 		],
 		"legs": [
-			{ "type": "potholes", "km": 6 }
+			{
+				"type": "potholes",
+				"km": 6
+			}
 		]
 	},
 	"campground": {
@@ -84,7 +97,6 @@
 					"img": "IMG_0869-rotated.jpg",
 					"label": "Campbell River Fish & Wildlife Association"
 				},
-
 				{
 					"id": "img_0873",
 					"img": "IMG_0873.jpg",

@@ -1,6 +1,9 @@
 {
-	"title": "Useful Contacts",
-	"wpSettings": {"published": true, "comments": "open"},
+	"name": "Useful Contacts",
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"notes": [
 		{
 			"sectionName": "RV Dealers",

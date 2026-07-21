@@ -1,17 +1,20 @@
 {
-  "title": "Checklist: Leaving Campsite",
-  "featuredImage": "under-construction.png",
-  "excerpt": "Step-by-step checklist for packing up and leaving a campsite.",
-  "tags": [],
-  "wpSettings": {"published": true, "comments": "open"},
-  "photoGalleries": {
-    "howto": {
-      "name": "How to images",
-      "items": []
-    },
-    "details": {
-      "name": "Details images",
-      "items": []
-    }
-  }
+	"name": "Checklist: Leaving Campsite",
+	"featuredImage": "under-construction.png",
+	"excerpt": "Step-by-step checklist for packing up and leaving a campsite.",
+	"tags": [],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"photoGalleries": {
+		"howto": {
+			"name": "How to images",
+			"items": []
+		},
+		"details": {
+			"name": "Details images",
+			"items": []
+		}
+	}
 }

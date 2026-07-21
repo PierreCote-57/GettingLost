@@ -1,14 +1,15 @@
 {
-	"title": "Echo Lake",
+	"name": "Echo Lake",
 	"featuredImage": "IMG_0510.jpg",
 	"excerpt": "Beautiful fishing and picnic lake near Campbell River. Great first fishing trip for children and testing gear.",
-	"badges": {
-		"tags": [
-			"fishing",
-			"picnic"
-		]
+	"badges": [
+		"fishing",
+		"picnic"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
 	},
-	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 49.9864,
 		"lng": -125.4084,

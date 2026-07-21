@@ -1,9 +1,12 @@
 {
-	"title": "How to: Empty sewage",
+	"name": "How to: Empty sewage",
 	"featuredImage": "DumpStation.jpeg",
 	"excerpt": "Emptying the van's grey and black water tanks.",
 	"tags": [],
-	"wpSettings": {"published": true, "comments": "open"},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"photoGalleries": {
 		"howto": {
 			"name": "How to images",

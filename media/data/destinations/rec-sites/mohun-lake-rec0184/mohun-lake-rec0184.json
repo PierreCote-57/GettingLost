@@ -1,13 +1,14 @@
 {
-	"title": "Mohun Lake",
+	"name": "Mohun Lake",
 	"featuredImage": "IMG_0429.jpg",
 	"excerpt": "Under construction",
-	"badges": {
-		"tags": [
-			"fishing"
-		]
+	"badges": [
+		"fishing"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
 	},
-	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 50.085584,
 		"lng": -125.515456,
@@ -16,9 +17,18 @@
 	},
 	"access": {
 		"haversine": [
-			{ "town": "Campbell River", "km": 20 },
-			{ "town": "Nanaimo", "km": 155 },
-			{ "town": "Victoria", "km": 240 }
+			{
+				"town": "Campbell River",
+				"km": 20
+			},
+			{
+				"town": "Nanaimo",
+				"km": 155
+			},
+			{
+				"town": "Victoria",
+				"km": 240
+			}
 		]
 	},
 	"campground": {
@@ -29,48 +39,172 @@
 	"roadMap": {
 		"zoom": 11,
 		"pins": [
-			{ "id": "img_0421", "lat": 50.084797, "lng": -125.515556 },
-			{ "id": "img_0423", "lat": 50.085250, "lng": -125.516639 },
-			{ "id": "img_0441", "lat": 50.084794, "lng": -125.514969 },
-			{ "id": "img_0445", "lat": 50.086433, "lng": -125.482017 },
-			{ "id": "img_0562", "lat": 50.098217, "lng": -125.491906 },
-			{ "id": "img_0574", "lat": 50.126522, "lng": -125.486175 }
+			{
+				"id": "img_0421",
+				"lat": 50.084797,
+				"lng": -125.515556
+			},
+			{
+				"id": "img_0423",
+				"lat": 50.08525,
+				"lng": -125.516639
+			},
+			{
+				"id": "img_0441",
+				"lat": 50.084794,
+				"lng": -125.514969
+			},
+			{
+				"id": "img_0445",
+				"lat": 50.086433,
+				"lng": -125.482017
+			},
+			{
+				"id": "img_0562",
+				"lat": 50.098217,
+				"lng": -125.491906
+			},
+			{
+				"id": "img_0574",
+				"lat": 50.126522,
+				"lng": -125.486175
+			}
 		]
 	},
 	"photoGalleries": {
 		"atSite": {
 			"name": "At the rec site",
 			"items": [
-				{ "id": "img_0421", "img": "IMG_0421.jpg", "label": "img_0421" },
-				{ "id": "img_0423", "img": "IMG_0423.jpg", "label": "img_0423" },
-				{ "id": "img_0427", "img": "IMG_0427.jpg", "label": "img_0427" },
-				{ "id": "img_0429", "img": "IMG_0429.jpg", "label": "img_0429" },
-				{ "id": "img_0430", "img": "IMG_0430.jpg", "label": "img_0430" },
-				{ "id": "img_0431", "img": "IMG_0431.jpg", "label": "img_0431" },
-				{ "id": "img_0432", "img": "IMG_0432.jpg", "label": "img_0432" },
-				{ "id": "img_0433", "img": "IMG_0433.jpg", "label": "img_0433" },
-				{ "id": "img_0434", "img": "IMG_0434.jpg", "label": "img_0434" },
-				{ "id": "img_0435", "img": "IMG_0435.jpg", "label": "img_0435" },
-				{ "id": "img_0436", "img": "IMG_0436.jpg", "label": "img_0436" },
-				{ "id": "img_0437", "img": "IMG_0437.jpg", "label": "img_0437" },
-				{ "id": "img_0439", "img": "IMG_0439.jpg", "label": "img_0439" },
-				{ "id": "img_0440", "img": "IMG_0440.jpg", "label": "img_0440" },
-				{ "id": "img_0441", "img": "IMG_0441.jpg", "label": "img_0441" },
-				{ "id": "img_0442", "img": "IMG_0442.jpg", "label": "img_0442" }
+				{
+					"id": "img_0421",
+					"img": "IMG_0421.jpg",
+					"label": "img_0421"
+				},
+				{
+					"id": "img_0423",
+					"img": "IMG_0423.jpg",
+					"label": "img_0423"
+				},
+				{
+					"id": "img_0427",
+					"img": "IMG_0427.jpg",
+					"label": "img_0427"
+				},
+				{
+					"id": "img_0429",
+					"img": "IMG_0429.jpg",
+					"label": "img_0429"
+				},
+				{
+					"id": "img_0430",
+					"img": "IMG_0430.jpg",
+					"label": "img_0430"
+				},
+				{
+					"id": "img_0431",
+					"img": "IMG_0431.jpg",
+					"label": "img_0431"
+				},
+				{
+					"id": "img_0432",
+					"img": "IMG_0432.jpg",
+					"label": "img_0432"
+				},
+				{
+					"id": "img_0433",
+					"img": "IMG_0433.jpg",
+					"label": "img_0433"
+				},
+				{
+					"id": "img_0434",
+					"img": "IMG_0434.jpg",
+					"label": "img_0434"
+				},
+				{
+					"id": "img_0435",
+					"img": "IMG_0435.jpg",
+					"label": "img_0435"
+				},
+				{
+					"id": "img_0436",
+					"img": "IMG_0436.jpg",
+					"label": "img_0436"
+				},
+				{
+					"id": "img_0437",
+					"img": "IMG_0437.jpg",
+					"label": "img_0437"
+				},
+				{
+					"id": "img_0439",
+					"img": "IMG_0439.jpg",
+					"label": "img_0439"
+				},
+				{
+					"id": "img_0440",
+					"img": "IMG_0440.jpg",
+					"label": "img_0440"
+				},
+				{
+					"id": "img_0441",
+					"img": "IMG_0441.jpg",
+					"label": "img_0441"
+				},
+				{
+					"id": "img_0442",
+					"img": "IMG_0442.jpg",
+					"label": "img_0442"
+				}
 			]
 		},
 		"onTheWay": {
 			"name": "On the way",
 			"items": [
-				{ "id": "img_0420", "img": "IMG_0420.jpg", "label": "img_0420" },
-				{ "id": "img_0445", "img": "IMG_0445.jpg", "label": "img_0445" },
-				{ "id": "img_0449", "img": "IMG_0449.jpg", "label": "img_0449" },
-				{ "id": "img_0562", "img": "IMG_0562.jpg", "label": "A multi-line label for beautiful img_0562. A multi-line label for beautiful img_0562" },
-				{ "id": "img_0563", "img": "IMG_0563.jpg", "label": "img_0563" },
-				{ "id": "img_0571", "img": "IMG_0571.jpg", "label": "img_0571" },
-				{ "id": "img_0573", "img": "IMG_0573.jpg", "label": "img_0573" },
-				{ "id": "img_0574", "img": "IMG_0574.jpg", "label": "img_0574" },
-				{ "id": "img_0575", "img": "IMG_0575.jpg", "label": "img_0575" }
+				{
+					"id": "img_0420",
+					"img": "IMG_0420.jpg",
+					"label": "img_0420"
+				},
+				{
+					"id": "img_0445",
+					"img": "IMG_0445.jpg",
+					"label": "img_0445"
+				},
+				{
+					"id": "img_0449",
+					"img": "IMG_0449.jpg",
+					"label": "img_0449"
+				},
+				{
+					"id": "img_0562",
+					"img": "IMG_0562.jpg",
+					"label": "A multi-line label for beautiful img_0562. A multi-line label for beautiful img_0562"
+				},
+				{
+					"id": "img_0563",
+					"img": "IMG_0563.jpg",
+					"label": "img_0563"
+				},
+				{
+					"id": "img_0571",
+					"img": "IMG_0571.jpg",
+					"label": "img_0571"
+				},
+				{
+					"id": "img_0573",
+					"img": "IMG_0573.jpg",
+					"label": "img_0573"
+				},
+				{
+					"id": "img_0574",
+					"img": "IMG_0574.jpg",
+					"label": "img_0574"
+				},
+				{
+					"id": "img_0575",
+					"img": "IMG_0575.jpg",
+					"label": "img_0575"
+				}
 			]
 		}
 	}

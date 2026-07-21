@@ -1,4 +1,7 @@
 {
-  "title": "Home",
-  "wpSettings": {"published": true, "comments": "closed"}
+	"name": "Home",
+	"wpSettings": {
+		"published": true,
+		"comments": "closed"
+	}
 }

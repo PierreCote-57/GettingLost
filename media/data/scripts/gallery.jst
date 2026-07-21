@@ -42,7 +42,7 @@
 
   function render(container, entries) {
     entries.sort(function (a, b) {
-      return (a.title || "").localeCompare(b.title || "");
+      return (a.name || "").localeCompare(b.name || "");
     });
 
     var html = '<div class="gl-gallery-grid">';

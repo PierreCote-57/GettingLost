@@ -1,7 +1,10 @@
 {
-	"title": "Van Overview",
+	"name": "Van Overview",
 	"featuredImage": "beyond_22d_floorplan_5fx5gqbr8e.jpg",
-	"wpSettings": {"published": true, "comments": "open"},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"photoGalleries": {
 		"our-van": {
 			"name": "Our van",

@@ -1,66 +1,69 @@
 {
-  "title": "About ... stuff",
-  "wpSettings": {"published": true, "comments": "open"},
-  "notes": [
-    {
-      "sectionName": "Additional notes (so many notes!)",
-      "list": [
-        {
-          "name": "Content ownership",
-          "url": null,
-          "description": [
-            "As you know (bottom right corner), Claude (AI) was used to build these pages. ",
-            "All pictures and all text are created by Joy and I. ",
-            "Claude is used solely as the wordpress expert, helping organize the structure of the pages."
-          ]
-        },
-        {
-          "name": "Accuracy disclaimer",
-          "url": null,
-          "description": [
-            "When going fishing, my father (or so he claimed) would bring a fishing book to throw in the lake prior to starting to fish, so the fish would know how to behave. Sadly, I fear he was mistaken.",
-            "We are human (i.e. we make mistakes) and live in a dynamic world.",
-            "These and other factors combine to ensure what you read today feels inaccurate.",
-            "We do our best, but, let's face it: That trail was awesome last year, but is dangerous this year due to a land slide over the winter.",
-            "Point is, there will be inaccuracies - accept it and validate if you need a guaranteed source.",
-            "",
-            ""
-          ]
-        },
-        {
-          "name": "Work in progress",
-          "url": null,
-          "description": [
-            "This site grows as we explore.",
-            "Many destination pages are placeholders waiting for a visit.",
-            "If a page looks sparse, it just means we haven't been there yet — or haven't found the words for it.",
-            ""
-          ]
-        },
-        {
-          "name": "Photography",
-          "url": null,
-          "description": [
-            "All photography is original, unaltered and free to use.",
-            "Some are taken by me, the beautiful ones by Joy.",
-            "Virtually all of them are available as hires, just click on the picture to see the full size.",
-            "Unfortunately, while the originals are geo-tagged, wordpress removes that information."
-          ]
-        },
-        {
-          "name": "Why do I get confused",
-          "url": null,
-          "description": [
-            "There are lakes.",
-            "Near lakes (and other places) are small rustic recreational sites intended for hiking, camping, or other outdoor activities.",
-            "Also, there are parks, intended more for nature conservation than recreational use.",
-            "Campground of all sorts are peppered among recreational sites, parks as well as several private ones.",
-            "",
-            "There are also a few privately maintain sites, here classified as recreational sites, such as the day use area at Echo lake.",
-            ""
-          ]
-        }
-      ]
-    }
-  ]
+	"name": "About ... stuff",
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"notes": [
+		{
+			"sectionName": "Additional notes (so many notes!)",
+			"list": [
+				{
+					"name": "Content ownership",
+					"url": null,
+					"description": [
+						"As you know (bottom right corner), Claude (AI) was used to build these pages. ",
+						"All pictures and all text are created by Joy and I. ",
+						"Claude is used solely as the wordpress expert, helping organize the structure of the pages."
+					]
+				},
+				{
+					"name": "Accuracy disclaimer",
+					"url": null,
+					"description": [
+						"When going fishing, my father (or so he claimed) would bring a fishing book to throw in the lake prior to starting to fish, so the fish would know how to behave. Sadly, I fear he was mistaken.",
+						"We are human (i.e. we make mistakes) and live in a dynamic world.",
+						"These and other factors combine to ensure what you read today feels inaccurate.",
+						"We do our best, but, let's face it: That trail was awesome last year, but is dangerous this year due to a land slide over the winter.",
+						"Point is, there will be inaccuracies - accept it and validate if you need a guaranteed source.",
+						"",
+						""
+					]
+				},
+				{
+					"name": "Work in progress",
+					"url": null,
+					"description": [
+						"This site grows as we explore.",
+						"Many destination pages are placeholders waiting for a visit.",
+						"If a page looks sparse, it just means we haven't been there yet — or haven't found the words for it.",
+						""
+					]
+				},
+				{
+					"name": "Photography",
+					"url": null,
+					"description": [
+						"All photography is original, unaltered and free to use.",
+						"Some are taken by me, the beautiful ones by Joy.",
+						"Virtually all of them are available as hires, just click on the picture to see the full size.",
+						"Unfortunately, while the originals are geo-tagged, wordpress removes that information."
+					]
+				},
+				{
+					"name": "Why do I get confused",
+					"url": null,
+					"description": [
+						"There are lakes.",
+						"Near lakes (and other places) are small rustic recreational sites intended for hiking, camping, or other outdoor activities.",
+						"Also, there are parks, intended more for nature conservation than recreational use.",
+						"Campground of all sorts are peppered among recreational sites, parks as well as several private ones.",
+						"",
+						"There are also a few privately maintain sites, here classified as recreational sites, such as the day use area at Echo lake.",
+						""
+					]
+				}
+			]
+		}
+	]
 }

@@ -1,14 +1,15 @@
 {
-	"title": "Beavertail Lake",
+	"name": "Beavertail Lake",
 	"featuredImage": "IMG_0873.jpg",
 	"excerpt": "Under construction",
-	"badges": {
-		"tags": [
-			"fishing",
-			"picnic"
-		]
+	"badges": [
+		"fishing",
+		"picnic"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
 	},
-	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 49.9812,
 		"lng": -125.5033,

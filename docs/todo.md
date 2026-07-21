@@ -11,10 +11,8 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 ## Access / legs (2026-07-20)
 
-1. **`roadBadge()` has no `km` guard.** `deriveRoadBadge()` in `local/sync/sync.js`
-   skips an `unpaved` leg with no `km`; the browser mirror in
-   `media/data/scripts/destinations-overview.jst` does not. A malformed leg renders
-   blank on a gallery card but grey in the overview table.
+1. ~~**`roadBadge()` has no `km` guard.**~~ RESOLVED by Phase 1 — the overview now
+   calls the single shared `GL.deriveRoadBadge`, which carries the km guard.
 2. **`access` is duplicated with nothing checking it.** Each destination JSON and its
    `destinations-overview.json` entry both carry `access`, and they can drift
    silently. Now that linked entries carry a `file`, sync.js could compare the two
@@ -38,11 +36,8 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 ## Stray files (2026-07-20)
 
-8. **`rec-sites/beavertail-lake-dayuse/Destinations.json` is a generated gallery
-   file sitting in a page folder.** It holds gallery entries (Beavertail Day Use,
-   Destinations Overview, …), not page data. sync.js constructs `<base>.json` from
-   the page filename, so it is never read — dead weight, and confusing next to the
-   real `beavertail-lake-dayuse.json`.
+8. ~~**`rec-sites/beavertail-lake-dayuse/Destinations.json` stray file.**~~ RESOLVED —
+   the file is already gone from the tree (Phase 5.1 no-op).
 
 ## DRA pavement-distance prototype (2026-07-20)
 

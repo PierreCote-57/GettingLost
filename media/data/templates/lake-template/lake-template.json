@@ -1,14 +1,17 @@
 {
-  "title": "Lake Template",
-  "wpSettings": {"published": false, "comments": "open"},
-  "lat": 0,
-  "lng": 0,
-  "destinations": [],
-  "fishingReferences": {
-    "bcIdentifier": "",
-    "areaKm2": 0,
-    "lakeChartList": [],
-    "stockingName": ""
-  },
-  "notes": []
+	"name": "Lake Template",
+	"wpSettings": {
+		"published": false,
+		"comments": "open"
+	},
+	"lat": 0,
+	"lng": 0,
+	"destinations": [],
+	"fishingReferences": {
+		"bcIdentifier": "",
+		"areaKm2": 0,
+		"lakeChartList": [],
+		"stockingName": ""
+	},
+	"notes": []
 }

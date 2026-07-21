@@ -1,9 +1,12 @@
 {
-	"title": "How to: Power management",
+	"name": "How to: Power management",
 	"featuredImage": "under-construction.png",
 	"excerpt": "Understand and manage the van's power sources and loads.",
 	"tags": [],
-	"wpSettings": {"published": true, "comments": "open"},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"photoGalleries": {
 		"howto": {
 			"name": "How to images",
@@ -190,7 +193,8 @@
 					"description": [
 						"user manual for Coachmen Class B Vans."
 					]
-				}			]
+				}
+			]
 		}
 	]
 }

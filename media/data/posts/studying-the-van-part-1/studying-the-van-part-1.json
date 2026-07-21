@@ -1,11 +1,14 @@
 {
-	"title": "Studying the van, part 1",
+	"name": "Studying the van, part 1",
 	"excerpt": "Under construction",
 	"featuredImage": "open-book-icon.png",
 	"date": "2026-07-11T13:00:00",
-	"wpSettings": {"published": true, "comments": "open"},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"categories": [],
-	"badges": { "tags": [] },
+	"badges": [],
 	"location": {
 		"location_id": "oyster-bay-rest-area"
 	}

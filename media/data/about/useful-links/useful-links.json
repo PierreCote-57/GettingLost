@@ -1,6 +1,9 @@
 {
-	"title": "Useful Links",
-	"wpSettings": {"published": true, "comments": "open"},
+	"name": "Useful Links",
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"notes": [
 		{
 			"sectionName": "Camping, general information",
@@ -47,7 +50,8 @@
 						"A guide to the campsites and van life."
 					]
 				},
-				{"name": "Vancouver Island Camping",
+				{
+					"name": "Vancouver Island Camping",
 					"url": "https://www.vancouverislandcamping.net/category/vancouver-island//",
 					"description": [
 						"Vancouver Island Camping provides first-hand campground information, camping guides and campground walk-through videos for campers exploring Vancouver Island, British Columbia."

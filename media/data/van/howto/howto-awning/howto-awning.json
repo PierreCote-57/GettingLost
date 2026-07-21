@@ -1,9 +1,12 @@
 {
-	"title": "How To: Awning",
+	"name": "How To: Awning",
 	"featuredImage": "awning-control-panel.png",
 	"excerpt": "Extend and retract the Carefree Eclipse automated awning.",
 	"tags": [],
-	"wpSettings": {"published": true, "comments": "open"},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"photoGalleries": {
 		"howto": {
 			"name": "How to images",
@@ -22,8 +25,7 @@
 		},
 		"details": {
 			"name": "Details images",
-			"items": [
-			]
+			"items": []
 		}
 	},
 	"notes": [
@@ -41,7 +43,7 @@
 					"name": "Owner's manual",
 					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/052568-201r10-Eclipse-Owners-Manual-Std-.pdf",
 					"description": [
-						"Operating instructions matching the simple ON/RETRACT, OFF/EXTEND switch installed \u2014 no auto-retract."
+						"Operating instructions matching the simple ON/RETRACT, OFF/EXTEND switch installed — no auto-retract."
 					]
 				},
 				{
@@ -60,21 +62,21 @@
 					"name": "Product page",
 					"url": "https://www.carefreeofcolorado.com/rv-products/carefree-connects/",
 					"description": [
-						"Bluetooth motion-sensor auto-retract and app-control upgrade. NOT installed on this van \u2014 listed for reference only."
+						"Bluetooth motion-sensor auto-retract and app-control upgrade. NOT installed on this van — listed for reference only."
 					]
 				},
 				{
 					"name": "Owner's manual (with BT12 / Connects motion sensor)",
 					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/052568-231r12-Eclipse-Owners-Manual-with-BT12-.pdf",
 					"description": [
-						"Describes the Bluetooth motion-sensor auto-retract system. NOT installed on this van \u2014 listed for reference only."
+						"Describes the Bluetooth motion-sensor auto-retract system. NOT installed on this van — listed for reference only."
 					]
 				},
 				{
 					"name": "Mobile app manual",
 					"url": "https://www.carefreeofcolorado.com/wp-content/uploads/2022/07/070029-201r5-Carefree-Connects-Mobile-App-Manual.pdf",
 					"description": [
-						"Covers the Carefree Mobile app used to control the BT12 system from a phone. NOT installed on this van \u2014 listed for reference only."
+						"Covers the Carefree Mobile app used to control the BT12 system from a phone. NOT installed on this van — listed for reference only."
 					]
 				}
 			]

@@ -1,29 +1,32 @@
 {
-  "title": "Checklist: Arriving at Campsite",
-  "featuredImage": "under-construction.png",
-  "excerpt": "Step-by-step checklist for setting up when you arrive at a campsite.",
-  "tags": [],
-  "wpSettings": {"published": true, "comments": "open"},
-  "photoGalleries": {
-    "howto": {
-      "name": "How to images",
-      "items": [
-        {
-          "id": "campers-code",
-          "img": "CampersCode_CampfireIllustration.jpg",
-          "label": "Camper's Code"
-        }
-      ]
-    },
-    "details": {
-      "name": "Details images",
-      "items": [
-        {
-          "id": "campers-code",
-          "img": "CampersCode_CampfireIllustration.jpg",
-          "label": "Camper's Code"
-        }
-      ]
-    }
-  }
+	"name": "Checklist: Arriving at Campsite",
+	"featuredImage": "under-construction.png",
+	"excerpt": "Step-by-step checklist for setting up when you arrive at a campsite.",
+	"tags": [],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"photoGalleries": {
+		"howto": {
+			"name": "How to images",
+			"items": [
+				{
+					"id": "campers-code",
+					"img": "CampersCode_CampfireIllustration.jpg",
+					"label": "Camper's Code"
+				}
+			]
+		},
+		"details": {
+			"name": "Details images",
+			"items": [
+				{
+					"id": "campers-code",
+					"img": "CampersCode_CampfireIllustration.jpg",
+					"label": "Camper's Code"
+				}
+			]
+		}
+	}
 }

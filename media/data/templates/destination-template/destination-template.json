@@ -1,12 +1,15 @@
 {
-  "title": "Destination Template",
-  "wpSettings": {"published": false, "comments": "open"},
-  "lat": 0,
-  "lng": 0,
-  "campground": {
-    "website": "",
-    "siteMap": "",
-    "reservation": ""
-  },
-  "notes": []
+	"name": "Destination Template",
+	"wpSettings": {
+		"published": false,
+		"comments": "open"
+	},
+	"lat": 0,
+	"lng": 0,
+	"campground": {
+		"website": "",
+		"siteMap": "",
+		"reservation": ""
+	},
+	"notes": []
 }

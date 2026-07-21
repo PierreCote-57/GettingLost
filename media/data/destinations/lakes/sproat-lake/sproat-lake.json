@@ -1,91 +1,97 @@
 {
-  "title": "Sproat Lake",
-  "featuredImage": "under-construction.png",
-  "excerpt": "A massive lake near Port Alberni with provincial parks, private campgrounds, and great fishing.",
-  "badges": { "tags": ["fishing", "camping"] },
-  "wpSettings": {"published": true, "comments": "open"},
-  "location": {
-    "lat": 49.2901,
-    "lng": -124.9153,
-    "pin": "lake"
-  },
-  "destinations": [
-    {
-      "name": "Sproat Lake Camping",
-      "type": "Private",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Website",
-          "url": "https://www.sproatlakecamping.com"
-        }
-      ],
-      "description": "",
-      "lat": null,
-      "lng": null
-    },
-    {
-      "name": "Sproat Lake Provincial Park",
-      "type": "Park",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "BC Parks",
-          "url": "https://bcparks.ca/sproat-lake-park/"
-        },
-        {
-          "name": "Getting Lost page",
-          "file": "sproat-lake-provincial-park.html"
-        }
-      ],
-      "description": "",
-      "lat": 49.2986,
-      "lng": -124.9294
-    }
-  ],
-  "fishingReferences": {
-    "bcIdentifier": "01128ALBN",
-    "areaKm2": 42.33,
-    "lakeChartList": [
-      {
-        "name": "BC Bathymetric (1985) 1 of 3",
-        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215801.pdf"
-      },
-      {
-        "name": "BC Bathymetric (1985) 2 of 3",
-        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215802.pdf"
-      },
-      {
-        "name": "BC Bathymetric (1985) 3 of 3",
-        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215803.pdf"
-      }
-    ],
-    "stockingName": ""
-  },
-  "notes": [
-    {
-      "sectionName": "Further readings",
-      "list": [
-        {
-          "name": "Sproat Lake Provincial Park",
-          "file": "sproat-lake-provincial-park.html",
-          "description": [
-            "Our page on the park: lakeside camping, boat launch and the K'ak'awin petroglyphs."
-          ]
-        }
-      ]
-    }
-  ],
-  "photoGalleries": {
-    "photos": {
-      "name": "Photos",
-      "items": [
-        {
-          "id": "under-construction",
-          "img": "under-construction.png",
-          "label": "Under construction"
-        }
-      ]
-    }
-  }
+	"name": "Sproat Lake",
+	"featuredImage": "under-construction.png",
+	"excerpt": "A massive lake near Port Alberni with provincial parks, private campgrounds, and great fishing.",
+	"badges": [
+		"fishing",
+		"camping"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"location": {
+		"lat": 49.2901,
+		"lng": -124.9153,
+		"pin": "lake"
+	},
+	"destinations": [
+		{
+			"name": "Sproat Lake Camping",
+			"type": "Private",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Website",
+					"url": "https://www.sproatlakecamping.com"
+				}
+			],
+			"description": "",
+			"lat": null,
+			"lng": null
+		},
+		{
+			"name": "Sproat Lake Provincial Park",
+			"type": "Park",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "BC Parks",
+					"url": "https://bcparks.ca/sproat-lake-park/"
+				},
+				{
+					"name": "Getting Lost page",
+					"file": "sproat-lake-provincial-park.html"
+				}
+			],
+			"description": "",
+			"lat": 49.2986,
+			"lng": -124.9294
+		}
+	],
+	"fishingReferences": {
+		"bcIdentifier": "01128ALBN",
+		"areaKm2": 42.33,
+		"lakeChartList": [
+			{
+				"name": "BC Bathymetric (1985) 1 of 3",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215801.pdf"
+			},
+			{
+				"name": "BC Bathymetric (1985) 2 of 3",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215802.pdf"
+			},
+			{
+				"name": "BC Bathymetric (1985) 3 of 3",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00215803.pdf"
+			}
+		],
+		"stockingName": ""
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Sproat Lake Provincial Park",
+					"file": "sproat-lake-provincial-park.html",
+					"description": [
+						"Our page on the park: lakeside camping, boat launch and the K'ak'awin petroglyphs."
+					]
+				}
+			]
+		}
+	],
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "under-construction",
+					"img": "under-construction.png",
+					"label": "Under construction"
+				}
+			]
+		}
+	}
 }

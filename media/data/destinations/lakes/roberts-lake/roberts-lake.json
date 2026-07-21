@@ -1,45 +1,50 @@
 {
-  "title": "Roberts Lake",
-  "featuredImage": "IMG_0627.jpg",
-  "excerpt": "A wheelchair-accessible day-use site with sandy beach, popular with anglers and picnickers.",
-  "badges": { "tags": ["fishing"] },
-  "wpSettings": {"published": true, "comments": "open"},
-  "location": {
-    "lat": 50.2172,
-    "lng": -125.5387,
-    "pin": "lake"
-  },
-  "destinations": [
-    {
-      "name": "Roberts Lake",
-      "recId": "REC0191",
-      "siteMap": null,
-      "references": [
-        {
-          "name": "Sites & Trails BC",
-          "url": "https://www.sitesandtrailsbc.ca/resource/REC0191"
-        }
-      ],
-      "description": "A walk-in day use site at the south end of Roberts Lake, popular with anglers and picnickers. There is a sandy beach, a number of picnic tables and plenty of area to set up for the day. This site is wheelchair accessible.",
-      "lat": 50.211914,
-      "lng": -125.535749
-    }
-  ],
-  "fishingReferences": {
-    "bcIdentifier": "00155SALM",
-    "areaKm2": 1.676,
-    "lakeChartList": [
-      {
-        "name": "BC Bathymetric",
-        "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00202801.pdf"
-      }
-    ],
-    "stockingName": ""
-  },
-  "notes": [
-    {
-      "sectionName": "Further readings",
-      "list": []
-    }
-  ]
+	"name": "Roberts Lake",
+	"featuredImage": "IMG_0627.jpg",
+	"excerpt": "A wheelchair-accessible day-use site with sandy beach, popular with anglers and picnickers.",
+	"badges": [
+		"fishing"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"location": {
+		"lat": 50.2172,
+		"lng": -125.5387,
+		"pin": "lake"
+	},
+	"destinations": [
+		{
+			"name": "Roberts Lake",
+			"recId": "REC0191",
+			"siteMap": null,
+			"references": [
+				{
+					"name": "Sites & Trails BC",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0191"
+				}
+			],
+			"description": "A walk-in day use site at the south end of Roberts Lake, popular with anglers and picnickers. There is a sandy beach, a number of picnic tables and plenty of area to set up for the day. This site is wheelchair accessible.",
+			"lat": 50.211914,
+			"lng": -125.535749
+		}
+	],
+	"fishingReferences": {
+		"bcIdentifier": "00155SALM",
+		"areaKm2": 1.676,
+		"lakeChartList": [
+			{
+				"name": "BC Bathymetric",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00202801.pdf"
+			}
+		],
+		"stockingName": ""
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": []
+		}
+	]
 }

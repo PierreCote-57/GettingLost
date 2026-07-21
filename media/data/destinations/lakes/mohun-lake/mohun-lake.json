@@ -1,13 +1,14 @@
 {
-	"title": "Mohun Lake",
+	"name": "Mohun Lake",
 	"featuredImage": "IMG_0429.jpg",
 	"excerpt": "Large lake at the heart of the Sayward Forest Canoe Route, near Campbell River.",
-	"badges": {
-		"tags": [
-			"fishing"
-		]
+	"badges": [
+		"fishing"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
 	},
-	"wpSettings": {"published": true, "comments": "open"},
 	"location": {
 		"lat": 50.1151,
 		"lng": -125.4974,
@@ -26,20 +27,61 @@
 				}
 			]
 		},
-		{ "name": "Twin Lake", "recId": "REC0185", "siteMap": null, "references": [] },
-		{ "name": "Sayward Forest Canoe Route", "recId": "REC0197", "siteMap": "https://www.sitesandtrailsbc.ca/resources/REC0197/sitemaps/Sayward%20Canoe%20Route%20Brochure%20and%20Map.pdf", "references": [] },
-		{ "name": "Seagull Bay", "recId": "REC0300", "siteMap": null, "references": [] },
-		{ "name": "Mohun Island", "recId": "REC0429", "siteMap": null, "references": [] },
-		{ "name": "Goose Lake Trail", "recId": "REC3104", "siteMap": null, "references": [] },
-		{ "name": "Mohun Beach", "recId": "REC6787", "siteMap": null, "references": [] },
-		{ "name": "Bedrock City", "recId": "REC6788", "siteMap": null, "references": [] }
+		{
+			"name": "Twin Lake",
+			"recId": "REC0185",
+			"siteMap": null,
+			"references": []
+		},
+		{
+			"name": "Sayward Forest Canoe Route",
+			"recId": "REC0197",
+			"siteMap": "https://www.sitesandtrailsbc.ca/resources/REC0197/sitemaps/Sayward%20Canoe%20Route%20Brochure%20and%20Map.pdf",
+			"references": []
+		},
+		{
+			"name": "Seagull Bay",
+			"recId": "REC0300",
+			"siteMap": null,
+			"references": []
+		},
+		{
+			"name": "Mohun Island",
+			"recId": "REC0429",
+			"siteMap": null,
+			"references": []
+		},
+		{
+			"name": "Goose Lake Trail",
+			"recId": "REC3104",
+			"siteMap": null,
+			"references": []
+		},
+		{
+			"name": "Mohun Beach",
+			"recId": "REC6787",
+			"siteMap": null,
+			"references": []
+		},
+		{
+			"name": "Bedrock City",
+			"recId": "REC6788",
+			"siteMap": null,
+			"references": []
+		}
 	],
 	"fishingReferences": {
 		"bcIdentifier": "00385SALM",
 		"areaKm2": 6.117,
 		"lakeChartList": [
-			{ "name": "BC Bathymetric (1961)", "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00183501.pdf" },
-			{ "name": "BC Bathymetric (1977)", "url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00183801.pdf" }
+			{
+				"name": "BC Bathymetric (1961)",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00183501.pdf"
+			},
+			{
+				"name": "BC Bathymetric (1977)",
+				"url": "https://a100.gov.bc.ca/pub/fidq/downloadBathymetricMap.do?filename=00183801.pdf"
+			}
 		],
 		"stockingName": ""
 	},

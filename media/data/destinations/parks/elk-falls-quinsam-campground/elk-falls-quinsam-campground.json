@@ -1,39 +1,55 @@
 {
-  "title": "Elk Falls Park",
-  "featuredImage": "under-construction.png",
-  "excerpt": "A thundering waterfall and old-growth Douglas fir, just north of Campbell River.",
-  "badges": { "tags": ["camping", "fishing", "hiking"] },
-  "wpSettings": {"published": true, "comments": "open"},
-  "location": {
-    "lat": 50.037009,
-    "lng": -125.295734,
-    "pin": "tent"
-  },
-  "access": {
-    "haversine": [
-      { "town": "Campbell River", "km": 5 },
-      { "town": "Nanaimo", "km": 140 },
-      { "town": "Victoria", "km": 225 }
-    ],
-    "legs": []
-  },
-  "campground": {
-    "website": "https://bcparks.ca/elk-falls-park/#camping",
-    "siteMap": "https://nrs.objectstore.gov.bc.ca/kuwyyf/elk_falls_quinsam_campground_map_21bba6d02b.pdf",
-    "reservation": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483617&mapId=-2147483593&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
-  },
-  "notes": [
-    {
-      "sectionName": "Further readings",
-      "list": [
-        {
-          "name": "Explore BC Parks",
-          "url": "https://explorebcparks.ca/elk-falls-provincial-park/",
-          "description": [
-            "Quality Recreation"
-          ]
-        }
-      ]
-    }
-  ]
+	"name": "Elk Falls Park",
+	"featuredImage": "under-construction.png",
+	"excerpt": "A thundering waterfall and old-growth Douglas fir, just north of Campbell River.",
+	"badges": [
+		"camping",
+		"fishing",
+		"hiking"
+	],
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"location": {
+		"lat": 50.037009,
+		"lng": -125.295734,
+		"pin": "tent"
+	},
+	"access": {
+		"haversine": [
+			{
+				"town": "Campbell River",
+				"km": 5
+			},
+			{
+				"town": "Nanaimo",
+				"km": 140
+			},
+			{
+				"town": "Victoria",
+				"km": 225
+			}
+		],
+		"legs": []
+	},
+	"campground": {
+		"website": "https://bcparks.ca/elk-falls-park/#camping",
+		"siteMap": "https://nrs.objectstore.gov.bc.ca/kuwyyf/elk_falls_quinsam_campground_map_21bba6d02b.pdf",
+		"reservation": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483617&mapId=-2147483593&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32768&partySize=1"
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Explore BC Parks",
+					"url": "https://explorebcparks.ca/elk-falls-provincial-park/",
+					"description": [
+						"Quality Recreation"
+					]
+				}
+			]
+		}
+	]
 }

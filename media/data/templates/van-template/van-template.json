@@ -1,5 +1,8 @@
 {
-  "title": "Van Template",
-  "wpSettings": {"published": false, "comments": "open"},
-  "notes": []
+	"name": "Van Template",
+	"wpSettings": {
+		"published": false,
+		"comments": "open"
+	},
+	"notes": []
 }

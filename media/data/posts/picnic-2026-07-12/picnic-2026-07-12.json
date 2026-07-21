@@ -1,11 +1,16 @@
 {
-	"title": "Picnic at Beavertail Lake",
+	"name": "Picnic at Beavertail Lake",
 	"excerpt": "Under construction",
 	"featuredImage": "IMG_0873.jpg",
 	"date": "2026-07-12T06:00:00",
-	"wpSettings": {"published": true, "comments": "open"},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
 	"categories": [],
-	"badges": { "tags": ["picnic"] },
+	"badges": [
+		"picnic"
+	],
 	"location": {
 		"location_id": "beavertail-lake-dayuse"
 	},

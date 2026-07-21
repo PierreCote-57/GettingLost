@@ -1,26 +1,43 @@
 {
-  "title": "Howto Template",
-  "wpSettings": {"published": false, "comments": "open"},
-  "photoGalleries": {
-    "howto": {
-      "name": "How to images",
-      "items": [
-        { "id": "example", "img": "placeholder.png", "label": "Example caption" }
-      ]
-    },
-    "details": {
-      "name": "Details images",
-      "items": [
-        { "id": "example", "img": "placeholder.png", "label": "Example caption" }
-      ]
-    }
-  },
-  "notes": [
-    {
-      "sectionName": "Example section",
-      "list": [
-        { "name": "Example link", "url": "https://example.com", "description": ["Example description"] }
-      ]
-    }
-  ]
+	"name": "Howto Template",
+	"wpSettings": {
+		"published": false,
+		"comments": "open"
+	},
+	"photoGalleries": {
+		"howto": {
+			"name": "How to images",
+			"items": [
+				{
+					"id": "example",
+					"img": "placeholder.png",
+					"label": "Example caption"
+				}
+			]
+		},
+		"details": {
+			"name": "Details images",
+			"items": [
+				{
+					"id": "example",
+					"img": "placeholder.png",
+					"label": "Example caption"
+				}
+			]
+		}
+	},
+	"notes": [
+		{
+			"sectionName": "Example section",
+			"list": [
+				{
+					"name": "Example link",
+					"url": "https://example.com",
+					"description": [
+						"Example description"
+					]
+				}
+			]
+		}
+	]
 }
