@@ -848,6 +848,9 @@
 					]
 				},
 				{
+					"file": "beavertail-lake-dayuse.html"
+				},
+				{
 					"name": "Blackies Beach Recreation Site",
 					"links": [
 						{
@@ -899,6 +902,9 @@
 							"text": "Preliminary, to be confirmed"
 						}
 					]
+				},
+				{
+					"file": "echo-lake-dayuse.html"
 				},
 				{
 					"name": "Leiner River Recreation Site",

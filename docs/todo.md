@@ -20,11 +20,14 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 3. **98 of 103 overview places have no `file` link.** Only Elk Falls, Morton, Sproat,
    Pacific Playgrounds and Salmon Point are linked. Unlinked entries can't be drift-
    checked or cross-referenced.
-4. **Echo Lake Day Use and Beavertail Lake Day Use have no overview entry at all**,
-   though both have pages and filled-in `legs`.
-5. **`morton-lake-rec3104.json` is titled "Goose Lake Trail"** and filed under
-   rec-sites, while its overview entry is "Morton Lake Provincial Park". Same place,
-   two identities.
+4. ~~**Echo Lake Day Use and Beavertail Lake Day Use have no overview entry.**~~ RESOLVED
+   — added as bare `{file}` entries in the RSTBC group (day-use: no homepage/campground,
+   so Name/Distance/Access/On-lost populate, the rest blank by design).
+5. ~~**`morton-lake-rec3104.json` two identities.**~~ RESOLVED — the page is Morton
+   Lake Park: renamed `name` "Goose Lake Trail" → "Morton Lake Park", moved
+   rec-sites → parks as `morton-lake-park`, refs updated (morton-lake Destinations
+   note + overview `{file}`). Goose Lake Trail is a rec site *within* the park; GL has
+   no page for it (it remains a bare-name row in mohun-lake's list).
 
 ## Overview hydration (2026-07-20)
 
