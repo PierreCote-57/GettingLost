@@ -13,6 +13,7 @@
 		"lat": 49.8705759,
 		"lng": -125.118066,
 		"pin": "campground",
+		"zoom": 11,
 		"notes": "Black Creek, BC"
 	},
 	"access": {
