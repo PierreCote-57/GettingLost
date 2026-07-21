@@ -5,6 +5,23 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 ## Planned
 
+9. **Bring other park pages up to the new campground-block format (2026-07-21).**
+   `pages/destinations/parks/morton-lake-park.html` is the canonical target: the
+   `campground` block (`Website · Campground map · Reservation`) directly under the
+   title, then a wrapper `<div>` with the Road map + Campground map `<details>`, a
+   blurb `<p>`, and the `links` block (a `notes` block will replace `links` later).
+   Fix the data/HTML on the other parks — elk-falls-quinsam-campground, sproat-lake-
+   provincial-park (and any future ones) — to match that layout + the exact
+   `campground.links` labels (`Campground map`, `Reservation`) the renderer looks up.
+   Their HTML still has the old `links`-then-`campground` order.
+
+10. **Keep `campground.links` to just the two rendered labels (2026-07-21).** The
+    campground block renders exactly `Campground map` + `Reservation` from
+    `campground.links`. Any OTHER entry there (e.g. the `Reservable; open …` status
+    prose with `url:null`, or any stray link) should move to a `notes` section
+    instead. Cleanup pass across the park JSONs so `campground.links` carries only
+    those two labels.
+
 0. **Cross-reference validation pass — after the access/legs reorg lands.** Walk the
    cross-referenced pages against each other and confirm they agree. Items 2–5 below
    are all instances of the same class and should fold into this pass.
