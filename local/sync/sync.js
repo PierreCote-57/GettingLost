@@ -80,7 +80,7 @@ const GALLERY_RULES = [
   { name: "Campgrounds", path: "destinations/campgrounds/" },
   { name: "Parks", path: "destinations/parks/" },
   { name: "RecSites", path: "destinations/rec-sites/" },
-  { name: "Destinations", path: "destinations/", exclude: ["destinations/lakes/", "destinations/destinations-overview/"] },
+  { name: "Destinations", path: "destinations/", exclude: ["destinations/lakes/", "destinations/destinations-overview"] },
   { name: "VanHowTo", path: "van/howto/" },
   { name: "VanChecklist", path: "van/checklists/" },
 ];
