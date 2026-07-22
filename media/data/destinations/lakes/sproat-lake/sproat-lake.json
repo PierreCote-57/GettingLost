@@ -15,6 +15,19 @@
 		"lng": -124.9153,
 		"pin": "lake"
 	},
+	"googleMap": {
+		"road": {
+			"lat": 49.2901,
+			"lng": -124.9153,
+			"pins": [
+				{
+					"pin": "lake",
+					"lat": 49.2901,
+					"lng": -124.9153
+				}
+			]
+		}
+	},
 	"fishingReferences": {
 		"bcIdentifier": "01128ALBN",
 		"areaKm2": 42.33,

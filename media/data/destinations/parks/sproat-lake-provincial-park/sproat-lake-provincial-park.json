@@ -18,6 +18,20 @@
 		"zoom": 14,
 		"notes": "Near Port Alberni"
 	},
+	"googleMap": {
+		"road": {
+			"lat": 49.2986,
+			"lng": -124.9294,
+			"zoom": 14,
+			"pins": [
+				{
+					"pin": "campground",
+					"lat": 49.2986,
+					"lng": -124.9294
+				}
+			]
+		}
+	},
 	"access": {
 		"haversine": [
 			{

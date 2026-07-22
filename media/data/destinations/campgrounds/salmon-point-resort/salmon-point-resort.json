@@ -16,6 +16,19 @@
 		"pin": "campground",
 		"notes": "Campbell River, BC"
 	},
+	"googleMap": {
+		"road": {
+			"lat": 49.889183,
+			"lng": -125.1282272,
+			"pins": [
+				{
+					"pin": "campground",
+					"lat": 49.889183,
+					"lng": -125.1282272
+				}
+			]
+		}
+	},
 	"access": {
 		"haversine": [
 			{

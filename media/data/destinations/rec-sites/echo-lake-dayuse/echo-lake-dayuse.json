@@ -16,6 +16,20 @@
 		"pin": "picnic",
 		"zoom": 16
 	},
+	"googleMap": {
+		"road": {
+			"lat": 49.9848,
+			"lng": -125.41399,
+			"zoom": 16,
+			"pins": [
+				{
+					"pin": "picnic",
+					"lat": 49.9848,
+					"lng": -125.41399
+				}
+			]
+		}
+	},
 	"access": {
 		"haversine": [
 			{

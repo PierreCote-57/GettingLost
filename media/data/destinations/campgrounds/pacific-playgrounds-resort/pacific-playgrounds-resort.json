@@ -16,6 +16,20 @@
 		"zoom": 10,
 		"notes": "Black Creek, BC"
 	},
+	"googleMap": {
+		"road": {
+			"lat": 49.8705759,
+			"lng": -125.118066,
+			"zoom": 10,
+			"pins": [
+				{
+					"pin": "campground",
+					"lat": 49.8705759,
+					"lng": -125.118066
+				}
+			]
+		}
+	},
 	"access": {
 		"haversine": [
 			{

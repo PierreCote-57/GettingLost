@@ -15,6 +15,20 @@
 		"pin": "lake",
 		"zoom": 12
 	},
+	"googleMap": {
+		"road": {
+			"lat": 50.1253,
+			"lng": -125.4781,
+			"zoom": 12,
+			"pins": [
+				{
+					"pin": "lake",
+					"lat": 50.1253,
+					"lng": -125.4781
+				}
+			]
+		}
+	},
 	"fishingReferences": {
 		"bcIdentifier": "00517SALM",
 		"areaKm2": 0.211,

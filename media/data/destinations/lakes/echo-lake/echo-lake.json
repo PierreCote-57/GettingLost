@@ -16,6 +16,19 @@
 		"pin": "lake",
 		"Zoom": 14
 	},
+	"googleMap": {
+		"road": {
+			"lat": 49.9864,
+			"lng": -125.4084,
+			"pins": [
+				{
+					"pin": "lake",
+					"lat": 49.9864,
+					"lng": -125.4084
+				}
+			]
+		}
+	},
 	"fishingReferences": {
 		"bcIdentifier": "00126CAMB",
 		"areaKm2": 0.23,

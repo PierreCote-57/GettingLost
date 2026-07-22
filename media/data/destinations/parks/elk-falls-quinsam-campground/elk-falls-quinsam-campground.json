@@ -17,6 +17,19 @@
 		"pin": "tent",
 		"notes": "Near Campbell River"
 	},
+	"googleMap": {
+		"road": {
+			"lat": 50.037009,
+			"lng": -125.295734,
+			"pins": [
+				{
+					"pin": "tent",
+					"lat": 50.037009,
+					"lng": -125.295734
+				}
+			]
+		}
+	},
 	"access": {
 		"haversine": [
 			{
