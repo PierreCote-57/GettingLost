@@ -9,7 +9,6 @@
 			"group": "BC Parks",
 			"list": [
 				{
-					"name": "Elk Falls Provincial Park",
 					"file": "elk-falls-quinsam-campground.html"
 				},
 				{
@@ -552,10 +551,17 @@
 								"km": 285
 							}
 						]
+					},
+					"campground": {
+						"links": [
+							{
+								"label": "First-come-first-served",
+								"url": null
+							}
+						]
 					}
 				},
 				{
-					"name": "Sproat Lake Provincial Park",
 					"file": "sproat-lake-provincial-park.html"
 				},
 				{
@@ -848,9 +854,6 @@
 					]
 				},
 				{
-					"file": "beavertail-lake-dayuse.html"
-				},
-				{
 					"name": "Blackies Beach Recreation Site",
 					"links": [
 						{
@@ -902,9 +905,6 @@
 							"text": "Preliminary, to be confirmed"
 						}
 					]
-				},
-				{
-					"file": "echo-lake-dayuse.html"
 				},
 				{
 					"name": "Leiner River Recreation Site",
@@ -2265,7 +2265,6 @@
 					}
 				},
 				{
-					"name": "Pacific Playgrounds International",
 					"file": "pacific-playgrounds-resort.html"
 				},
 				{
@@ -2621,7 +2620,6 @@
 					}
 				},
 				{
-					"name": "Salmon Point Resort & RV Park",
 					"file": "salmon-point-resort.html"
 				},
 				{
