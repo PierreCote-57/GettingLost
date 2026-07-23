@@ -1,0 +1,541 @@
+[
+	{
+		"name": "Arden Creek Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0214"
+			}
+		],
+		"location": {
+			"lat": 49.2343668,
+			"lng": -124.8056517,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Alberni Inlet, outside Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 65
+				},
+				{
+					"town": "Victoria",
+					"km": 140
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 6,
+			"amenities": [
+				"picnic tables",
+				"pit toilets",
+				"fire pits",
+				"boat launch",
+				"not suitable for motorhomes"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "2 walk-in pads and 4 vehicle pads"
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Blackies Beach Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6407"
+			}
+		],
+		"location": {
+			"lat": 49.1573208,
+			"lng": -125.0179231,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Backroads toward Nahmint Lake, near Sproat Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 145
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 6,
+			"amenities": [
+				"tent pads",
+				"toilets",
+				"small cabin"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Leiner River Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0276"
+			}
+		],
+		"location": {
+			"lat": 49.915881,
+			"lng": -126.625535,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Leiner River, near Tahsis"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 210
+				},
+				{
+					"town": "Victoria",
+					"km": 290
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 8,
+			"links": [
+				{
+					"label": "First-come-first-served",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Lizard Lake Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0269"
+			}
+		],
+		"location": {
+			"lat": 48.5542109,
+			"lng": -124.4031008,
+			"pin": null,
+			"zoom": 13,
+			"notes": "~20 min drive from Port Renfrew"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 175
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 80
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 27,
+			"amenities": [
+				"two floating docks",
+				"swimming",
+				"paddling",
+				"lake loop trail"
+			],
+			"links": [
+				{
+					"label": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "vehicle-accessible + walk-in"
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Marble River Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0242"
+			}
+		],
+		"location": {
+			"lat": 50.5452514,
+			"lng": -127.529147,
+			"pin": null,
+			"zoom": 13,
+			"notes": "40 min drive from Port McNeill, adjacent to Marble River Provincial Park"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 170
+				},
+				{
+					"town": "Nanaimo",
+					"km": 300
+				},
+				{
+					"town": "Victoria",
+					"km": 380
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 35,
+			"amenities": [
+				"two campground loops",
+				"river access",
+				"salmon spawning viewing nearby"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free; closed September–May (gated)",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Mr. Canoehead Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3067"
+			}
+		],
+		"location": {
+			"lat": 50.1670632,
+			"lng": -125.5312914,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward Forest Canoe Route, between Amor Lake and Surprise Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 8,
+			"amenities": [
+				"picnic tables",
+				"pit toilets",
+				"boat/canoe access only"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Nahwitti Lake Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0125"
+			}
+		],
+		"location": {
+			"lat": 50.7046816,
+			"lng": -127.8407191,
+			"pin": null,
+			"zoom": 13,
+			"notes": "En route to/from Cape Scott Provincial Park, North Island"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 200
+				},
+				{
+					"town": "Nanaimo",
+					"km": 325
+				},
+				{
+					"town": "Victoria",
+					"km": 410
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 8,
+			"amenities": [
+				"vehicle accessible"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Pacific Yew Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC261703"
+			}
+		],
+		"location": {
+			"lat": 50.1254079,
+			"lng": -125.4946769,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Mohun Lake, Sayward Canoe Route, north of Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 30,
+			"amenities": [
+				"large sites",
+				"outhouses",
+				"paddling/boating access"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://www.vicamping.com/images/PacificYewRecreationSite.pdf"
+				},
+				{
+					"label": "First-come-first-served",
+					"url": null
+				},
+				{
+					"label": "VI Camping",
+					"url": "https://www.vicamping.com/campsites/pacificyew"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Scout Beach Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5750"
+			}
+		],
+		"location": {
+			"lat": 49.356065,
+			"lng": -125.2888531,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Great Central Lake, near Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 100
+				},
+				{
+					"town": "Victoria",
+					"km": 175
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 12,
+			"amenities": [
+				"picnic tables",
+				"pit toilets",
+				"fire pits",
+				"boat launch"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Upper Campbell Reservoir Recreation Site",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0159"
+			}
+		],
+		"location": {
+			"lat": 49.9177133,
+			"lng": -125.6618491,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Upper Campbell Lake, near Strathcona Park"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 40,
+			"amenities": [
+				"pit toilets",
+				"picnic tables",
+				"fire pits",
+				"small beach",
+				"boat launch"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served; max stay 14 nights",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	}
+]

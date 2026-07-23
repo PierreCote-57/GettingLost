@@ -1,0 +1,38 @@
+[
+	{
+		"file": "all/all-bc-parks.json",
+		"title": "BC Parks"
+	},
+	{
+		"file": "all/all-government.json",
+		"title": "Government (others)"
+	},
+	{
+		"file": "all/all-private-rv.json",
+		"title": "Private RV parks/resorts"
+	},
+	{
+		"file": "all/all-rstbc.json",
+		"title": "Recreation Sites and Trails BC (RSTBC)"
+	},
+	{
+		"file": "known/known-campgrounds.json",
+		"title": "Campgrounds"
+	},
+	{
+		"file": "known/known-destinations.json",
+		"title": "Destinations"
+	},
+	{
+		"file": "known/known-lakes.json",
+		"title": "Lakes"
+	},
+	{
+		"file": "known/known-parks.json",
+		"title": "Parks"
+	},
+	{
+		"file": "known/known-rec-sites.json",
+		"title": "Rec Sites"
+	}
+]

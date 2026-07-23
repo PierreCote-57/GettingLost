@@ -1,0 +1,783 @@
+[
+	{
+		"file": "elk-falls-quinsam-campground.html"
+	},
+	{
+		"name": "French Beach Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/french-beach-park/"
+			}
+		],
+		"location": {
+			"lat": 48.3906956,
+			"lng": -123.9416582,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Between Sooke and Jordan River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 85
+				},
+				{
+					"town": "Victoria",
+					"km": 45
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"amenities": [
+				"beach access",
+				"pit toilets"
+			],
+			"links": [
+				{
+					"label": "Reservable",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Goldstream Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/goldstream-park/"
+			}
+		],
+		"location": {
+			"lat": 48.4770313,
+			"lng": -123.5430354,
+			"pin": null,
+			"zoom": 13,
+			"notes": "16 km NW of Victoria, Trans-Canada Hwy"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 210
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 15
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 155,
+			"amenities": [
+				"flush toilets",
+				"showers",
+				"drinking water",
+				"wheelchair accessible",
+				"group campsites",
+				"fire pits",
+				"winter camping"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_park_campground_map_efaee751b7.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_map_5abd6693ba.pdf"
+				},
+				{
+					"label": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Gordon Bay Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/gordon-bay-park/"
+			}
+		],
+		"location": {
+			"lat": 48.8335432,
+			"lng": -124.2022988,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cowichan Lake, north of Duncan"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 150
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 75
+				}
+			]
+		},
+		"campground": {
+			"operator": "K2 Park Services Ltd.",
+			"siteCount": 126,
+			"amenities": [
+				"flush toilets",
+				"outhouses",
+				"potable water taps",
+				"no cell service",
+				"sandy beach"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/gordon_bay_park_map_771a73ae0a.pdf"
+				},
+				{
+					"label": "123 of 126 sites reservable; limited winter FCFS at reduced rate",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Juan de Fuca Provincial Park (China Beach Campground)",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/juan-de-fuca-park/"
+			}
+		],
+		"location": {
+			"lat": 48.5086267,
+			"lng": -124.3598452,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Southwest Vancouver Island, Juan de Fuca coast"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 180
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 75
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 125,
+			"amenities": [
+				"outhouses",
+				"potable water taps",
+				"no cell service"
+			],
+			"links": [
+				{
+					"label": "Nearly all sites reservable; 1 site FCFS",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "vehicle-accessible + walk-in"
+			}
+		]
+	},
+	{
+		"name": "Little Qualicum Falls Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/little-qualicum-falls-park/"
+			}
+		],
+		"location": {
+			"lat": 49.2892711,
+			"lng": -124.6498123,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Between Parksville/Qualicum and Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 90
+				},
+				{
+					"town": "Nanaimo",
+					"km": 55
+				},
+				{
+					"town": "Victoria",
+					"km": 135
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"amenities": [
+				"hiking trails to waterfalls"
+			],
+			"links": [
+				{
+					"label": "Reservable",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Loveland Bay Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/loveland-bay-park/"
+			}
+		],
+		"location": {
+			"lat": 50.0496831,
+			"lng": -125.4512122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell Lake, near Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 15
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "Quality Recreation Ltd.",
+			"siteCount": 50,
+			"amenities": [
+				"rustic wilderness lakeside camping"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/loveland_bay_park_map_c1b9ff4f32.pdf"
+				},
+				{
+					"label": "Reservable; open April 1–Oct 12",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Lower Nimpkish Lake Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/lower-nimpkish-park/"
+			}
+		],
+		"location": {
+			"lat": 50.536722,
+			"lng": -127.0090386,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Lower Nimpkish River, Nimpkish Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 140
+				},
+				{
+					"town": "Nanaimo",
+					"km": 270
+				},
+				{
+					"town": "Victoria",
+					"km": 350
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Wilderness camping is allowed and no facilities are provided."
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Miracle Beach Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/miracle-beach-park/"
+			}
+		],
+		"location": {
+			"lat": 49.8461306,
+			"lng": -125.0972267,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Black Creek, between Campbell River and Courtenay"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 115
+				},
+				{
+					"town": "Victoria",
+					"km": 200
+				}
+			]
+		},
+		"campground": {
+			"operator": "Quality Recreation Ltd.",
+			"siteCount": 201,
+			"amenities": [
+				"hot showers",
+				"flush toilets",
+				"nature house and store",
+				"adventure playground",
+				"sheltered beach"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_map_3212db3989.pdf"
+				},
+				{
+					"label": "Trail map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_trail_map_a3af093f06.pdf"
+				},
+				{
+					"label": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"file": "morton-lake-park.html"
+	},
+	{
+		"name": "Nimpkish Lake Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/nimpkish-lake-park/"
+			}
+		],
+		"location": {
+			"lat": 50.3386857,
+			"lng": -127.0217235,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nimpkish Lake, Nimpkish Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 130
+				},
+				{
+					"town": "Nanaimo",
+					"km": 255
+				},
+				{
+					"town": "Victoria",
+					"km": 340
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Wilderness camping is allowed and no facilities are provided."
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Rathtrevor Beach Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/rathtrevor-beach-park/"
+			}
+		],
+		"location": {
+			"lat": 49.3248225,
+			"lng": -124.2616978,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 251,
+			"amenities": [
+				"sandy beach",
+				"flush toilets",
+				"showers"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
+				},
+				{
+					"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
+					"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "vehicle-accessible + walk-in"
+			}
+		]
+	},
+	{
+		"name": "Schoen Lake Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/schoen-lake-park/"
+			}
+		],
+		"location": {
+			"lat": 50.17172,
+			"lng": -126.260722,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Schoen Lake, near Woss"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 200
+				},
+				{
+					"town": "Victoria",
+					"km": 285
+				}
+			]
+		},
+		"campground": {
+			"links": [
+				{
+					"label": "First-come-first-served",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"file": "sproat-lake-provincial-park.html"
+	},
+	{
+		"name": "Stamp River Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/stamp-river-park/"
+			}
+		],
+		"location": {
+			"lat": 49.3479789,
+			"lng": -124.9385453,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Near Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 80
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 155
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"amenities": [
+				"salmon-viewing trail",
+				"fish ladder lookout"
+			],
+			"links": [
+				{
+					"label": "Reservable",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Strathcona Provincial Park — Buttle Lake Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/strathcona-park/"
+			}
+		],
+		"location": {
+			"lat": 49.7046516,
+			"lng": -125.5602583,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Highway 28, ~48 km west of Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 130
+				},
+				{
+					"town": "Victoria",
+					"km": 215
+				}
+			]
+		},
+		"campground": {
+			"operator": "BC Parks",
+			"siteCount": 79,
+			"amenities": [
+				"sandy lakefront beach",
+				"washrooms",
+				"water pump",
+				"boat launch",
+				"fire rings",
+				"no RV hookups",
+				"RV length limit 32 ft"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+				},
+				{
+					"label": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "Back-country camping allowed"
+			}
+		]
+	},
+	{
+		"name": "Strathcona Provincial Park — Ralph River Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/strathcona-park/"
+			}
+		],
+		"location": {
+			"lat": 49.6537488,
+			"lng": -125.4554345,
+			"pin": null,
+			"zoom": 13,
+			"notes": "35 km south of Buttle Lake along Buttle Lake (Western Mines) Road"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 45
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		},
+		"campground": {
+			"operator": "BC Parks",
+			"siteCount": 75,
+			"amenities": [
+				"old-growth forest setting",
+				"pit toilets",
+				"water pump",
+				"no RV hookups",
+				"RV length limit 32 ft"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+				},
+				{
+					"label": "Partially reservable, remainder first-come-first-served",
+					"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Taylor Arm Provincial Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/taylor-arm-park/"
+			}
+		],
+		"location": {
+			"lat": 49.2762872,
+			"lng": -125.0435249,
+			"pin": null,
+			"zoom": 13,
+			"notes": "West of Sproat Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 155
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 3,
+			"amenities": [
+				"group camping only",
+				"day-use"
+			],
+			"links": [
+				{
+					"label": "Group sites reservable",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "group sites"
+			}
+		]
+	}
+]

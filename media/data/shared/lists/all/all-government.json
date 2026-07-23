@@ -1,0 +1,663 @@
+[
+	{
+		"name": "Green Point Campground, Pacific Rim National Park Reserve",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://parks.canada.ca/pn-np/bc/pacificrim/activ/camping"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC (Long Beach area)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		},
+		"campground": {
+			"operator": "Parks Canada (federal, not BC provincial)"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Parks Canada (federal)"
+			}
+		]
+	},
+	{
+		"name": "Horne Lake Regional Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://rdn.bc.ca/horne-lake-regional-park"
+			}
+		],
+		"location": {
+			"lat": 49.351589,
+			"lng": -124.741552,
+			"pin": null,
+			"zoom": 13,
+			"notes": "near Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 145
+				}
+			]
+		},
+		"campground": {
+			"operator": "Regional District of Nanaimo (RDN)"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			},
+			{
+				"field": "name",
+				"text": "Home to Horne Lake Caves — guided cave tours (hornelake.com)."
+			}
+		]
+	},
+	{
+		"name": "Island View Beach Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/island-view-beach-regional-park"
+			}
+		],
+		"location": {
+			"lat": 48.5946782,
+			"lng": -123.420726,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Saanich Peninsula, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 20
+				}
+			]
+		},
+		"campground": {
+			"operator": "Capital Regional District (CRD)"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Jordan River Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/jordan-river-regional-park"
+			}
+		],
+		"location": {
+			"lat": 48.5002971,
+			"lng": -123.9681842,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Jordan River, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 195
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 45
+				}
+			]
+		},
+		"campground": {
+			"operator": "Capital Regional District (CRD)"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Kwaksistah Regional Park Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.rdmw.bc.ca/regional-services/parks/kwaksistah-winter-harbour--camping-"
+			}
+		],
+		"location": {
+			"lat": 50.516667,
+			"lng": -128.033333,
+			"pin": null,
+			"zoom": 13,
+			"notes": "near Winter Harbour, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 330
+				},
+				{
+					"town": "Victoria",
+					"km": 410
+				}
+			]
+		},
+		"campground": {
+			"operator": "Regional District of Mount Waddington",
+			"amenities": [
+				"7 rustic sites",
+				"no services",
+				"unreliable cell service"
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Link River Regional Park Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://portalice.ca/visitor-info/camping/"
+			}
+		],
+		"location": {
+			"lat": 50.426893,
+			"lng": -127.488098,
+			"pin": null,
+			"zoom": 13,
+			"notes": "near Port Alice, BC (Alice Lake)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 290
+				},
+				{
+					"town": "Victoria",
+					"km": 370
+				}
+			]
+		},
+		"campground": {
+			"operator": "Regional District of Mount Waddington",
+			"siteCount": 23,
+			"amenities": [
+				"waterfront/wooded sites",
+				"no services except accessible outhouses"
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Nitinaht Lake Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://visitnitinaht.com/"
+			}
+		],
+		"location": {
+			"lat": 48.7524857,
+			"lng": -124.7354368,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nitinaht Lake, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 105
+				}
+			]
+		},
+		"campground": {
+			"operator": "Ditidaht First Nation (operating since 2006)"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Pacheedaht Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.visitpacheedaht.ca/"
+			}
+		],
+		"location": {
+			"lat": 48.5542109,
+			"lng": -124.4031008,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Renfrew, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 175
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 80
+				}
+			]
+		},
+		"campground": {
+			"operator": "Pacheedaht First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Pachena Bay Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://pachenabaycampground.ca/"
+			}
+		],
+		"location": {
+			"lat": 48.833086,
+			"lng": -125.141144,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bamfield, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 95
+				},
+				{
+					"town": "Victoria",
+					"km": 140
+				}
+			]
+		},
+		"campground": {
+			"operator": "Huu-ay-aht First Nations"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Puntledge RV Park & Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.puntledgerv.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.697017,
+			"lng": -125.003351,
+			"pin": null,
+			"zoom": 13,
+			"notes": "4624 Condensory Rd, Courtenay, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 95
+				},
+				{
+					"town": "Victoria",
+					"km": 185
+				}
+			]
+		},
+		"campground": {
+			"operator": "Commercial RV campground owned and operated by the K'ómoks First Nation",
+			"siteCount": 120,
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://www.puntledgerv.ca/stay"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Qualicum First Nation Waterfront Campground, Cabins and RV Park",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.qualicumfirstnation.com/"
+			}
+		],
+		"location": {
+			"lat": 49.4402737,
+			"lng": -124.6882261,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bowser, BC (near Qualicum Beach)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 150
+				}
+			]
+		},
+		"campground": {
+			"operator": "Qualicum First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Secret Beach Campground & Kayak Launch",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.secretbeachcampground.com/"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC (Toquaht Bay, 13km gravel off Hwy 4)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		},
+		"campground": {
+			"operator": "Toquaht First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Snaw-Naw-as Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.snawnawascampground.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.2507112,
+			"lng": -124.0746545,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Lantzville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 15
+				},
+				{
+					"town": "Victoria",
+					"km": 105
+				}
+			]
+		},
+		"campground": {
+			"operator": "Snaw-Naw-as First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Sooke Potholes / Spring Salmon Place (KWL-UCHUN) Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://tsoukenation.com/sooke-potholes-regional-park-spring-salmon-place-campground/"
+			}
+		],
+		"location": {
+			"lat": 48.462091,
+			"lng": -123.738435,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sooke, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 30
+				}
+			]
+		},
+		"campground": {
+			"operator": "Managed by CRD, operated by T'Sou-ke Nation",
+			"siteCount": 67,
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-campground.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-regional-park.pdf"
+				}
+			]
+		}
+	},
+	{
+		"name": "Tsawaak RV Resort & Campground",
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.tsawaakrvresort.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.1528473,
+			"lng": -125.9048279,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tofino, BC (near MacKenzie Beach)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 110
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		},
+		"campground": {
+			"operator": "Tla-o-qui-aht First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	}
+]
