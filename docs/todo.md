@@ -33,6 +33,12 @@ planned passes. Noted, not fixed. Delete a line when it's done.
     hold until cutover: treat `lists/all/` as the SOLE master and `destinations-overview.json`
     as frozen/legacy — do not author it — until Phase 4/5 deletes the old page.
 
+16. **Create the van list sources.** `datasets.json` now has `van-howto`/`van-checklist`
+    entries pointing at `VanHowTo.json`/`VanChecklist.json`, but those are FROZEN on WP
+    (gallery generation is gone) and have no `lists/` source. Build hydrated van list
+    sources (like `known/`) so the van datasets are live, not stale. Part of the Phase 4
+    van migration into `list_browser`.
+
 ## Planned
 
 9. ~~**Bring other campground/park pages up to the new campground-block format

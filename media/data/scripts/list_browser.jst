@@ -1,24 +1,28 @@
 /**
  * list_browser.jst
  *
- * Shell for the unified list browser (replaces gallery + destinations-overview).
- * Reads the dataset manifest and marks the two regions present. Does nothing
- * with the manifest yet — filter UI and data rendering come in later steps.
+ * Unified list browser (replaces gallery + destinations-overview). Driven by two
+ * URL query parameters:
+ *   ?dataset=<id>   one of the `id`s in datasets.json -> its file/title/filter
+ *   ?view=<mode>    table | grid
  *
  * The page HTML supplies two empty divs; this script fills them:
- *   <div data-lb-filter></div>   -> the control/filter section
+ *   <div data-lb-options></div>  -> the controls (view + filter). Shows `view`.
  *   <div data-lb-data></div>     -> the rendered dataset (table or grid)
+ *
+ * This step wires the params: parse them, resolve `dataset` to its manifest
+ * entry, and show the resolved values as text. Real rendering comes next.
  */
 (function () {
   var DATASETS_URL = "/wp-content/uploads/datasets.json";
+  var VALID_VIEWS = ["table", "grid"];
 
-  var filterEl = document.querySelector("[data-lb-filter]");
+  var optionsEl = document.querySelector("[data-lb-options]");
   var dataEl = document.querySelector("[data-lb-data]");
 
-  // Placeholder text now, independent of the fetch, so both regions are
-  // visibly present even if the manifest fails to load.
-  if (filterEl) filterEl.textContent = "*** filter goes here ***";
-  if (dataEl) dataEl.textContent = "*** data goes here ***";
+  var params = new URLSearchParams(window.location.search);
+  var datasetId = params.get("dataset");
+  var view = params.get("view");
 
   fetch(DATASETS_URL)
     .then(function (res) {
@@ -26,10 +30,32 @@
       return res.json();
     })
     .then(function (datasets) {
-      // Manifest loaded. Nothing done with it yet (shell only).
-      console.log("[list_browser] datasets.json loaded — " + datasets.length + " entries.");
+      // View: graceful on bad/missing input.
+      var viewOk = VALID_VIEWS.indexOf(view) !== -1;
+      if (optionsEl) {
+        optionsEl.textContent = viewOk
+          ? "view: " + view
+          : "view: (none — expected " + VALID_VIEWS.join(" | ") + ")";
+      }
+
+      // Dataset: resolve id -> manifest entry; graceful on bad/missing input.
+      var entry = datasetId
+        ? datasets.filter(function (d) { return d.id === datasetId; })[0]
+        : null;
+
+      if (!dataEl) return;
+      if (!datasetId) {
+        dataEl.textContent = "no dataset selected";
+      } else if (!entry) {
+        dataEl.textContent = "unknown dataset: " + datasetId;
+      } else {
+        dataEl.textContent =
+          "dataset: " + entry.id + " → " + entry.file + " (" + entry.title + ")";
+      }
     })
     .catch(function (err) {
       console.error("[list_browser] failed to load datasets.json:", err);
+      if (optionsEl) optionsEl.textContent = "";
+      if (dataEl) dataEl.textContent = "Content is temporarily unavailable.";
     });
 })();
