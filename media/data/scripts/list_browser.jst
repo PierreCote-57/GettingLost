@@ -69,8 +69,12 @@
     return { maps: maps, reservation: reservation };
   }
 
+  // Sum of the columns that HAVE a fixed width (the flexible last column has
+  // none and is excluded on purpose). Informational only — the table is 100%
+  // wide; this just says how much horizontal room the sized columns want, for
+  // tuning the div's max-width and column widths.
   function totalWidth() {
-    return COLUMNS.reduce(function (sum, col) { return sum + col.width; }, 0);
+    return COLUMNS.reduce(function (sum, col) { return sum + (col.width || 0); }, 0);
   }
 
   function campbellRiverKm(place) {
@@ -243,9 +247,13 @@
 
     var table = document.createElement("table");
     table.style.borderCollapse = "collapse";
-    table.style.width = totalWidth() + "px";
+    table.style.width = "100%";
     table.style.tableLayout = "fixed";
     table.style.marginTop = "0.25rem";
+
+    // Informational: how much width the fixed columns want (flexible last
+    // column excluded). Handy for tuning column widths and the div max-width.
+    console.log("[list_browser] fixed columns total width: " + totalWidth() + "px");
 
     table.appendChild(buildColGroup());
 
