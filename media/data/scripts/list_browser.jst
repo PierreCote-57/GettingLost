@@ -296,6 +296,24 @@
     return wrap;
   }
 
+  // ---- per-view data-div styling --------------------------------------------
+
+  // Grid keeps the theme's default content width; clear any table override so
+  // switching back from table resets cleanly.
+  function getGridStyle() {
+    return { maxWidth: "" };
+  }
+
+  // Table breaks out of the theme's ~900px content cap so the wide table has
+  // room (max-width does the work; width is left at the block default).
+  function getTableStyle() {
+    return { maxWidth: "1180px" };
+  }
+
+  function applyStyle(el, style) {
+    for (var prop in style) el.style[prop] = style[prop];
+  }
+
   // ---- load + fill (view-agnostic) ------------------------------------------
 
   function showDataset(entry) {
@@ -305,8 +323,11 @@
         return res.json();
       })
       .then(function (entries) {
-        var node = view === "grid" ? renderGrid(entries) : renderTable(entries);
+        var isGrid = view === "grid";
+        var node = isGrid ? renderGrid(entries) : renderTable(entries);
+        var style = isGrid ? getGridStyle() : getTableStyle();
         dataEl.innerHTML = "";
+        applyStyle(dataEl, style);
         dataEl.appendChild(node);
       })
       .catch(function (err) {
