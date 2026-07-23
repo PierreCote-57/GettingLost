@@ -38,12 +38,10 @@
 const fs = require("fs");
 const path = require("path");
 
-// DIAGNOSTIC: prefix every log line with a PDT wall-clock timestamp (HH:MM:SS.mmm,
-// no zone label). This does NOT change streaming behavior — it records WHEN each
-// line was produced, independent of when the Actions UI displays it. In a
-// completed run, spread-out timestamps mean the work ran progressively and any
-// batching is GitHub's display; bunched-at-the-end timestamps mean the process
-// genuinely stalled and emitted everything at once. Remove once diagnosed.
+// Prefix every log line with a PDT wall-clock timestamp (HH:MM:SS.mmm, no zone
+// label), applied once here so no call site has to. On a long run the stamps let
+// you validate progress and spot where time is being spent (e.g. a slow phase
+// between two lines).
 for (const m of ["log", "warn", "error"]) {
   const orig = console[m];
   console[m] = (...a) =>
@@ -929,6 +927,7 @@ async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
   const segments = path.posix.dirname(relSubPath).split("/").filter(Boolean);
   if (segments.length === 0) return;
 
+    console.log(`[filebird:media] Trying ${relSubPath} -> ${segments.join("/")}`);
   try {
     const folderId = await ensureFileBirdFolderPath(folderCache, segments);
     const res = await fbFetch("/folder/set-attachment", {
