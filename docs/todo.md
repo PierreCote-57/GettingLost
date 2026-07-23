@@ -8,10 +8,12 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 13. **Cut the live site over to the hydrated `lists/` files, then delete dead gallery
     code.** sync.js no longer generates the old gallery JSONs (`Lakes.json`,
     `Campgrounds.json`, `Parks.json`, `RecSites.json`, `Destinations.json`) — it now
-    hydrates `data/shared/lists/{all,known}/*.json` instead. **This BREAKS the live
-    galleries** until cutover: the menu links (`?file=Lakes.json` …), gallery.jst's
-    `Destinations.json` default, and every `backToGallery` `data-file` still point at
-    the old filenames. Cutover = unified `destinations.html` + dropdowns + menu/back-link
+    hydrates `data/shared/lists/{all,known}/*.json` instead. **This FREEZES the live
+    galleries** until cutover (stale, not 404): sync never deletes, so the old
+    `Lakes.json`/etc. persist on WP from the last gallery-gen run and keep serving the
+    menu links (`?file=Lakes.json` …), gallery.jst's `Destinations.json` default, and
+    every `backToGallery` `data-file` — they just stop updating when page data changes.
+    A full sync.yml run won't refresh or remove them either. Cutover = unified `destinations.html` + dropdowns + menu/back-link
     repoint at the new files (Phase 4/5). Also the new `known-*.json` aren't drop-in
     identical: no publish filter (moved to render time), sorted by `file` not `name`.
 

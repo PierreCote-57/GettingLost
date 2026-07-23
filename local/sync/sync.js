@@ -187,17 +187,27 @@ if (INCREMENTAL) {
     );
   }
 
+  // A change under local/ is a change to the sync ENGINE/config, not to content.
+  // Most such changes (logging, refactors, hydration/gallery structure) don't
+  // require re-pushing existing content, so we no longer force a full sync — we
+  // just WARN. The narrow exception is a change to the page/post TRANSFORM logic
+  // (featured_media resolution, wpSettings→status mapping, slug derivation,
+  // formatImageUrl): that affects already-synced pages whose files didn't change,
+  // and incremental mode will skip them. When you make one of those, run sync.yml
+  // manually. (The hydrated lists + PageMap run unconditionally every push, so
+  // page-data-derived outputs stay fresh regardless.)
   const localChanged = changedList.some((f) => f.startsWith("local/"));
 
   if (localChanged) {
-    console.log(
-      "[incremental] A file under local/ changed (config and/or sync script) — falling back to a full sync instead of incremental, to be safe."
+    console.warn(
+      "[incremental] A file under local/ changed (sync engine/config) — running INCREMENTAL only.\n" +
+        "  If this was a transform-logic change (pages/posts featured_media/status/slug/image URL),\n" +
+        "  run the full sync (sync.yml) manually, or the affected pages will stay stale on WP."
     );
-    CHANGED = null;
-  } else {
-    CHANGED = { files: new Set(changedList) };
-    console.log(`[incremental] Running in incremental mode — ${CHANGED.files.size} changed file(s).`);
   }
+
+  CHANGED = { files: new Set(changedList) };
+  console.log(`[incremental] Running in incremental mode — ${CHANGED.files.size} changed file(s).`);
 } else {
   console.log("Running in full-overwrite mode (no --changed-files/--removed-files supplied).");
 }
