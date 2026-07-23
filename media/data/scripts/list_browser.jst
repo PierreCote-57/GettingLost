@@ -1,0 +1,35 @@
+/**
+ * list_browser.jst
+ *
+ * Shell for the unified list browser (replaces gallery + destinations-overview).
+ * Reads the dataset manifest and marks the two regions present. Does nothing
+ * with the manifest yet — filter UI and data rendering come in later steps.
+ *
+ * The page HTML supplies two empty divs; this script fills them:
+ *   <div data-lb-filter></div>   -> the control/filter section
+ *   <div data-lb-data></div>     -> the rendered dataset (table or grid)
+ */
+(function () {
+  var DATASETS_URL = "/wp-content/uploads/datasets.json";
+
+  var filterEl = document.querySelector("[data-lb-filter]");
+  var dataEl = document.querySelector("[data-lb-data]");
+
+  // Placeholder text now, independent of the fetch, so both regions are
+  // visibly present even if the manifest fails to load.
+  if (filterEl) filterEl.textContent = "*** filter goes here ***";
+  if (dataEl) dataEl.textContent = "*** data goes here ***";
+
+  fetch(DATASETS_URL)
+    .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(function (datasets) {
+      // Manifest loaded. Nothing done with it yet (shell only).
+      console.log("[list_browser] datasets.json loaded — " + datasets.length + " entries.");
+    })
+    .catch(function (err) {
+      console.error("[list_browser] failed to load datasets.json:", err);
+    });
+})();

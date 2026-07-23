@@ -25,6 +25,14 @@ planned passes. Noted, not fixed. Delete a line when it's done.
     warn on unknown leg types / unpaved-no-km). Decide whether to re-home that validation
     (e.g. into hydration or a dedicated pass) or drop it, then delete the dead code.
 
+15. **Dual-master drift: `destinations-overview.json` vs `lists/all/*.json`.** The
+    registry data now lives in two places — the old `destinations-overview.json` (still
+    the live overview page's render-time source, still copied to WP) and the new
+    `lists/all/*.json` (the intended master, hydrated to WP). They started identical (a
+    split) but nothing keeps them synced: editing one leaves the other stale. Decision to
+    hold until cutover: treat `lists/all/` as the SOLE master and `destinations-overview.json`
+    as frozen/legacy — do not author it — until Phase 4/5 deletes the old page.
+
 ## Planned
 
 9. ~~**Bring other campground/park pages up to the new campground-block format
