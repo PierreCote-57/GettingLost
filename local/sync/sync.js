@@ -53,6 +53,16 @@ for (const stream of [process.stdout, process.stderr]) {
   }
 }
 
+// Diagnostic: confirm whether the blocking-mode fix above actually applied in
+// the Actions environment. If a run shows setBlocking=false, the guard no-opped
+// (stdout is not the handle type we assumed) and the fix never took effect; if
+// it shows true and logs STILL batch, the delay is GitHub-side (runner log
+// grouping / UI rendering), not our process. Remove once diagnosed.
+console.log(
+  `[diag] stdout isTTY=${process.stdout.isTTY} ` +
+    `setBlocking=${!!(process.stdout._handle && process.stdout._handle.setBlocking)}`
+);
+
 // ---------------------------------------------------------------------
 // Top-level constants
 // ---------------------------------------------------------------------
