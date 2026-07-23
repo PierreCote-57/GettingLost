@@ -38,6 +38,21 @@
 const fs = require("fs");
 const path = require("path");
 
+// Force stdout/stderr into synchronous (blocking) mode. On a non-TTY pipe (how
+// GitHub Actions captures this step) Node writes stdout asynchronously, so log
+// lines queue behind the long chain of `await wpFetch(...)` I/O and only flush
+// in batches — the "output all appears at once when the step finishes" effect.
+// Blocking writes make each console.log land immediately, so the Actions log
+// streams live. It also means no stdout is left pending when process.exit(1)
+// fires on the failure path, so the trailing ::error:: annotations can't be
+// truncated. `_handle` is internal, so this is feature-detected and no-ops
+// (harmlessly, back to async) if a future Node changes it.
+for (const stream of [process.stdout, process.stderr]) {
+  if (stream._handle && typeof stream._handle.setBlocking === "function") {
+    stream._handle.setBlocking(true);
+  }
+}
+
 // ---------------------------------------------------------------------
 // Top-level constants
 // ---------------------------------------------------------------------
