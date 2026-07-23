@@ -29,12 +29,17 @@
   // ---- renderers: pure (entries -> HTML string) -----------------------------
 
   // Card grid — same wrapper + renderCard as gallery.jst, so it inherits the
-  // existing card CSS with no new styling.
+  // existing card CSS with no new styling. Grid shows only PUBLISHED entries
+  // (a card advertises a live page); inline entries with no wpSettings, and
+  // unpublished pages, are dropped. The table (renderTable) shows everything.
   function renderGrid(entries) {
-    if (!entries.length) return "nothing here";
+    var published = entries.filter(function (e) {
+      return e.wpSettings && e.wpSettings.published === true;
+    });
+    if (!published.length) return "nothing here";
     var html = '<div class="gl-gallery-grid">';
-    for (var i = 0; i < entries.length; i++) {
-      html += window.GL.renderCard(entries[i]);
+    for (var i = 0; i < published.length; i++) {
+      html += window.GL.renderCard(published[i]);
     }
     return html + "</div>";
   }
