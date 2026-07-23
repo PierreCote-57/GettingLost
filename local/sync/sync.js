@@ -38,6 +38,21 @@
 const fs = require("fs");
 const path = require("path");
 
+// DIAGNOSTIC: prefix every log line with a PDT wall-clock timestamp (HH:MM:SS.mmm,
+// no zone label). This does NOT change streaming behavior — it records WHEN each
+// line was produced, independent of when the Actions UI displays it. In a
+// completed run, spread-out timestamps mean the work ran progressively and any
+// batching is GitHub's display; bunched-at-the-end timestamps mean the process
+// genuinely stalled and emitted everything at once. Remove once diagnosed.
+for (const m of ["log", "warn", "error"]) {
+  const orig = console[m];
+  console[m] = (...a) =>
+    orig(
+      `[${new Date().toLocaleTimeString("en-GB", { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3, hour12: false })}]`,
+      ...a
+    );
+}
+
 // ---------------------------------------------------------------------
 // Top-level constants
 // ---------------------------------------------------------------------
