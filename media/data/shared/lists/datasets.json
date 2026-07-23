@@ -3,66 +3,66 @@
 		"id": "all-bc-parks",
 		"file": "all-bc-parks.json",
 		"title": "BC Parks",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "all-rstbc",
 		"file": "all-rstbc.json",
 		"title": "Recreation Sites and Trails BC (RSTBC)",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "all-private-rv",
 		"file": "all-private-rv.json",
 		"title": "Private RV parks/resorts",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "all-government",
 		"file": "all-government.json",
 		"title": "Government (others)",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "known-campgrounds",
 		"file": "known-campgrounds.json",
 		"title": "Campgrounds",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "known-destinations",
 		"file": "known-destinations.json",
 		"title": "Destinations",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "known-lakes",
 		"file": "known-lakes.json",
 		"title": "Lakes",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "known-parks",
 		"file": "known-parks.json",
 		"title": "Parks",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "known-rec-sites",
 		"file": "known-rec-sites.json",
 		"title": "Rec Sites",
-		"filter": "destinations"
+		"options": ["destinations"]
 	},
 	{
 		"id": "van-howto",
 		"file": "VanHowTo.json",
 		"title": "How to",
-		"filter": null
+		"options": []
 	},
 	{
 		"id": "van-checklist",
 		"file": "VanChecklist.json",
 		"title": "Checklists",
-		"filter": null
+		"options": []
 	}
 ]
