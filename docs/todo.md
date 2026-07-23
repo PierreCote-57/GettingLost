@@ -3,6 +3,26 @@
 Work parked for later: small issues found while working on something bigger, plus
 planned passes. Noted, not fixed. Delete a line when it's done.
 
+## Datasets / display×data refactor (2026-07-23)
+
+13. **Cut the live site over to the hydrated `lists/` files, then delete dead gallery
+    code.** sync.js no longer generates the old gallery JSONs (`Lakes.json`,
+    `Campgrounds.json`, `Parks.json`, `RecSites.json`, `Destinations.json`) — it now
+    hydrates `data/shared/lists/{all,known}/*.json` instead. **This BREAKS the live
+    galleries** until cutover: the menu links (`?file=Lakes.json` …), gallery.jst's
+    `Destinations.json` default, and every `backToGallery` `data-file` still point at
+    the old filenames. Cutover = unified `destinations.html` + dropdowns + menu/back-link
+    repoint at the new files (Phase 4/5). Also the new `known-*.json` aren't drop-in
+    identical: no publish filter (moved to render time), sorted by `file` not `name`.
+
+14. **Remove now-dead gallery helpers in sync.js.** After gallery-gen removal,
+    `GALLERY_RULES` (~L91) and `deriveRoadBadge` + its leg constants
+    (`DRIVE_LEG_TYPES`/`NON_DRIVE_LEG_TYPES`/`LEG_TYPES`/`BACK_COUNTRY`, ~L114-155) are
+    unused. Left in place to keep the edit focused. **Also lost with them: the build-time
+    leg validation** (`deriveRoadBadge` used to run per page during gallery-gen purely to
+    warn on unknown leg types / unpaved-no-km). Decide whether to re-home that validation
+    (e.g. into hydration or a dedicated pass) or drop it, then delete the dead code.
+
 ## Planned
 
 9. ~~**Bring other campground/park pages up to the new campground-block format

@@ -403,49 +403,13 @@ async function loadWpMediaMap() {
 }
 
 // ---------------------------------------------------------------------
-// Gallery JSON generation
+// PageMap generation
 // ---------------------------------------------------------------------
 
-// Both generators are driven by the PAGE files (keyed by filename — the
-// master). Each page's data is its "<base>.json" — constructed from the page
-// filename, never looked up by base. The emitted `file` is the master; the
-// consumer (gettinglost.jst) derives the URL slug from it via fileToSlug.
-function generateGalleryJsons(pageFileMap, perPageDataMap) {
-  const galleries = new Map();
-
-  for (const rule of GALLERY_RULES) {
-    const entries = [];
-
-    for (const [filename] of pageFileMap) {
-      const base = path.basename(filename, path.extname(filename));
-      const pd = perPageDataMap.get(`${base}.json`);
-      if (!pd) continue;
-      const { data, repoPath } = pd;
-      if (!repoPath.startsWith(rule.path)) continue;
-      if (rule.exclude && rule.exclude.some((p) => repoPath.startsWith(p))) continue;
-      if (wpStatusFromData(data) !== "publish") continue;
-
-      // The road badge is now derived at RENDER time (one shared copy in
-      // gettinglost.jst, from access.legs). sync.js no longer emits it — but it
-      // still runs the same derivation here purely to VALIDATE the legs (warn /
-      // annotate on an unknown type or an unpaved leg with no km); the result is
-      // discarded.
-      deriveRoadBadge(data.access, filename);
-
-      // Verbatim: the gallery entry IS the page JSON, plus the sync-injected
-      // `file` (the master — the renderer derives the slug from it). No field
-      // projection and no renames; renderers read the page JSON's own field
-      // names (featuredImage/excerpt/…) and apply defaults at render time.
-      entries.push({ ...data, file: filename });
-    }
-
-    entries.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-    galleries.set(rule.name, entries);
-  }
-
-  return galleries;
-}
-
+// Driven by the PAGE files (keyed by filename — the master). Each page's data is
+// its "<base>.json" — constructed from the page filename, never looked up by
+// base. The emitted `file` is the master; the consumer (gettinglost.jst) derives
+// the URL slug from it via fileToSlug.
 function generatePageMap(pageFileMap, perPageDataMap) {
   const map = {};
   for (const [filename] of pageFileMap) {
@@ -457,24 +421,9 @@ function generatePageMap(pageFileMap, perPageDataMap) {
   return map;
 }
 
-async function syncGalleryJsons(galleries, pageMap, fileBirdFolderCache) {
+async function syncPageMap(pageMap, fileBirdFolderCache) {
   let successCount = 0;
   let failCount = 0;
-
-  for (const [name, entries] of galleries) {
-    const filename = `${name}.json`;
-    const fileBuffer = Buffer.from(JSON.stringify(entries, null, 2));
-    const relSubPath = `data/shared/gallery/${filename}`;
-    const mediaId = await syncOneFileToWordPress(relSubPath, filename, fileBuffer, "application/json");
-    if (mediaId) {
-      successCount++;
-      if (fileBirdFolderCache) {
-        await syncOneFileToFileBird(fileBirdFolderCache, mediaId, relSubPath);
-      }
-    } else {
-      failCount++;
-    }
-  }
 
   // PageMap.json — slug-to-metadata lookup for cross-page references
   const pmBuffer = Buffer.from(JSON.stringify(pageMap, null, 2));
@@ -927,7 +876,6 @@ async function syncOneFileToFileBird(folderCache, mediaId, relSubPath) {
   const segments = path.posix.dirname(relSubPath).split("/").filter(Boolean);
   if (segments.length === 0) return;
 
-    console.log(`[filebird:media] Trying ${relSubPath} -> ${segments.join("/")}`);
   try {
     const folderId = await ensureFileBirdFolderPath(folderCache, segments);
     const res = await fbFetch("/folder/set-attachment", {
@@ -1083,7 +1031,7 @@ function hydrateList(entries, relPath, perPageDataMap) {
   return { hydrated, failCount };
 }
 
-async function syncFiles(fileBirdFolderCache, perPageDataMap) {
+async function syncFiles(fileBirdFolderCache) {
   let successCount = 0;
   let failCount = 0;
 
@@ -1095,23 +1043,13 @@ async function syncFiles(fileBirdFolderCache, perPageDataMap) {
   const allEntries = fs.readdirSync(MEDIA_ROOT, { recursive: true });
   const filenames = allEntries.filter((f) => f.endsWith(".json") || f.endsWith(".jst") || f.endsWith(".cst") || f.endsWith(".pdf"));
 
-  // Loop 2 work, deferred: hydrated dataset lists are handled unconditionally
-  // below (every run, like the galleries), so they bypass the CHANGED gate here.
-  const listFiles = [];
-
-  // Loop 1 — copy every file verbatim, as before (CHANGED-gated in incremental
-  // mode). Skips the auto-generated gallery indexes and the hydrated lists.
+  // Copy every file verbatim (CHANGED-gated in incremental mode). The hydrated
+  // dataset lists are skipped here — they're handled by syncHydratedLists(),
+  // which transforms them and runs unconditionally.
   for (const relSubPath of filenames) {
     const normalized = relSubPath.split(path.sep).join("/");
 
-    // Skip gallery index JSONs — auto-generated by generateGalleryJsons()
-    if (normalized.startsWith("data/shared/gallery/") && normalized.endsWith(".json")) {
-      continue;
-    }
-
-    // Defer hydrated dataset lists to loop 2 (published every run, not gated).
     if (isHydratedList(normalized)) {
-      listFiles.push(relSubPath);
       continue;
     }
 
@@ -1136,12 +1074,28 @@ async function syncFiles(fileBirdFolderCache, perPageDataMap) {
     }
   }
 
-  // Loop 2 — hydrate and publish the dataset lists. UNCONDITIONAL every run
-  // (like generateGalleryJsons), so a changed page is always reflected without
-  // the list file itself having changed.
-  for (const relSubPath of listFiles) {
-    const normalized = relSubPath.split(path.sep).join("/");
-    const filePath = path.join(MEDIA_ROOT, relSubPath);
+  return { successCount, failCount };
+}
+
+// Hydrate the dataset lists under data/shared/lists/{all,known}/ and publish the
+// merged result. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
+// changed page is always reflected in the hydrated output even when the list
+// file itself didn't change. An unresolvable pointer is a hard failure
+// (annotated + counted in hydrateList); the partial list is not published.
+async function syncHydratedLists(fileBirdFolderCache, perPageDataMap) {
+  let successCount = 0;
+  let failCount = 0;
+
+  if (!fs.existsSync(MEDIA_ROOT)) {
+    console.warn(`[lists] media root not found at ${MEDIA_ROOT} — nothing to hydrate.`);
+    return { successCount, failCount };
+  }
+
+  const allEntries = fs.readdirSync(MEDIA_ROOT, { recursive: true });
+  const listFiles = allEntries.map((f) => f.split(path.sep).join("/")).filter(isHydratedList);
+
+  for (const normalized of listFiles) {
+    const filePath = path.join(MEDIA_ROOT, normalized);
     const filename = path.basename(filePath);
 
     let entries;
@@ -1155,15 +1109,12 @@ async function syncFiles(fileBirdFolderCache, perPageDataMap) {
 
     const { hydrated, failCount: hfails } = hydrateList(entries, normalized, perPageDataMap);
     if (hfails > 0) {
-      // Hard failure already annotated + counted; don't publish a partial list.
       failCount += hfails;
       continue;
     }
 
     const fileBuffer = Buffer.from(JSON.stringify(hydrated, null, 2));
-    const mimeType = guessMimeFromExt(filename);
-
-    const mediaId = await syncOneFileToWordPress(normalized, filename, fileBuffer, mimeType);
+    const mediaId = await syncOneFileToWordPress(normalized, filename, fileBuffer, guessMimeFromExt(filename));
 
     if (mediaId) {
       successCount++;
@@ -1267,12 +1218,6 @@ async function main() {
 
   const pageFileMap = buildPageFileMap();
 
-  console.log("=== Generating gallery JSONs ===");
-  const galleries = generateGalleryJsons(pageFileMap, perPageDataMap);
-  for (const [name, entries] of galleries) {
-    console.log(`[gallery] ${name}.json: ${entries.length} entries`);
-  }
-
   const pageMap = generatePageMap(pageFileMap, perPageDataMap);
   console.log(`[pageMap] PageMap.json: ${Object.keys(pageMap).length} entries`);
 
@@ -1283,22 +1228,26 @@ async function main() {
   const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
 
   console.log("\n=== Syncing files (Media) ===");
-  const filesResult = await syncFiles(fileBirdFolderCache, perPageDataMap);
+  const filesResult = await syncFiles(fileBirdFolderCache);
+
+  console.log("\n=== Syncing hydrated lists ===");
+  const listsResult = await syncHydratedLists(fileBirdFolderCache, perPageDataMap);
 
   console.log("\n=== Syncing logs ===");
   const logsResult = await syncLogs(fileBirdFolderCache);
 
-  console.log("\n=== Syncing gallery JSONs ===");
-  const galleryResult = await syncGalleryJsons(galleries, pageMap, fileBirdFolderCache);
+  console.log("\n=== Syncing PageMap ===");
+  const pageMapResult = await syncPageMap(pageMap, fileBirdFolderCache);
 
   console.log("\n=== Summary ===");
   console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
+  console.log(`Lists:     ${listsResult.successCount} ok, ${listsResult.failCount} failed`);
   console.log(`Logs:      ${logsResult.successCount} ok, ${logsResult.failCount} failed`);
-  console.log(`Galleries: ${galleryResult.successCount} ok, ${galleryResult.failCount} failed`);
+  console.log(`PageMap:   ${pageMapResult.successCount} ok, ${pageMapResult.failCount} failed`);
   console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
   console.log(`Posts:     ${postsResult.successCount} ok, ${postsResult.failCount} failed`);
 
-  const totalFails = filesResult.failCount + logsResult.failCount + galleryResult.failCount + pagesResult.failCount + postsResult.failCount;
+  const totalFails = filesResult.failCount + listsResult.failCount + logsResult.failCount + pageMapResult.failCount + pagesResult.failCount + postsResult.failCount;
   if (totalFails > 0) {
     process.exit(1);
   }
