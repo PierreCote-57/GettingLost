@@ -26,12 +26,17 @@
   var UPLOADS = "/wp-content/uploads/";
   var VALID_VIEWS = ["table", "grid"];
 
+  // Defaults for a bare URL (no params). A present-but-invalid value is NOT
+  // defaulted over — it falls through to the graceful "unknown …" handling.
+  var DEFAULT_DATASET = "known-destinations";
+  var DEFAULT_VIEW = "grid";
+
   var optionsEl = document.querySelector("[data-lb-options]");
   var dataEl = document.querySelector("[data-lb-data]");
 
   var params = new URLSearchParams(window.location.search);
-  var datasetId = params.get("dataset");
-  var view = params.get("view");
+  var datasetId = params.get("dataset") || DEFAULT_DATASET;
+  var view = params.get("view") || DEFAULT_VIEW;
 
   // ---- table columns --------------------------------------------------------
 
