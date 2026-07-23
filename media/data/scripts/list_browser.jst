@@ -12,9 +12,16 @@
  *
  * Flow: resolve `dataset` to its manifest entry, load that entry's data file,
  * then fill the data div. The ONLY view-dependent step is choosing renderGrid
- * vs renderTable — load and fill are identical for both.
+ * vs renderTable — load and fill are identical for both. Both renderers are pure
+ * (entries -> DOM node).
+ *
+ * The table logic (COLUMNS + fillDataCell + helpers) is ported from
+ * destinations-overview.jst, flattened (no groups / no <details>). That page is
+ * being retired; this is the code's final home.
  */
 (function () {
+  "use strict";
+
   var DATASETS_URL = "/wp-content/uploads/datasets.json";
   var UPLOADS = "/wp-content/uploads/";
   var VALID_VIEWS = ["table", "grid"];
@@ -26,27 +33,267 @@
   var datasetId = params.get("dataset");
   var view = params.get("view");
 
-  // ---- renderers: pure (entries -> HTML string) -----------------------------
+  // ---- table columns --------------------------------------------------------
+
+  var COLUMNS = [
+    { label: "Name", field: "name", width: 170 },
+    { label: "On lost", field: "on_lost", width: 60 },
+    { label: "Location", field: "location", width: 155 },
+    { label: "Distance", field: "haversine", width: 75 },
+    { label: "Access", field: "roadBadge", width: 75 },
+    { label: "Sites", field: "siteCount", width: 50 },
+    { label: "Maps", field: "maps", width: 95 },
+    { label: "Amenities", field: "amenities", width: 175 },
+    { label: "Reservation", field: "reservation" }
+  ];
+
+  // ---- table cell helpers (ported from destinations-overview.jst) -----------
+
+  function homepageUrl(place) {
+    var links = place.links || [];
+    for (var i = 0; i < links.length; i++) {
+      if (links[i] && links[i].label === "HomePage") return links[i].url;
+    }
+    return null;
+  }
+
+  // Split campground.links into map links vs reservation entries. Maps are
+  // labelled "…map"; everything else is a reservation entry.
+  function campgroundLinks(place) {
+    var links = (place.campground || {}).links || [];
+    var maps = [], reservation = [];
+    for (var i = 0; i < links.length; i++) {
+      var l = links[i] || {};
+      (/map/i.test(l.label || "") ? maps : reservation).push(l);
+    }
+    return { maps: maps, reservation: reservation };
+  }
+
+  function totalWidth() {
+    return COLUMNS.reduce(function (sum, col) { return sum + col.width; }, 0);
+  }
+
+  function campbellRiverKm(place) {
+    var access = place.access || {};
+    var list = access.haversine || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] && list[i].town === "Campbell River") return list[i].km;
+    }
+    return null;
+  }
+
+  // Missing values render as an empty cell; arrays join with ", ".
+  function cellText(value) {
+    if (value === null || value === undefined || value === "") return "";
+    if (Array.isArray(value)) return value.join(", ");
+    return String(value);
+  }
+
+  function buildCell(tag) {
+    var cell = document.createElement(tag);
+    cell.style.border = "1px solid #ddd";
+    cell.style.padding = "0.3rem 0.6rem";
+    cell.style.verticalAlign = "top";
+    cell.style.fontSize = "0.9rem";
+    cell.style.overflowWrap = "break-word";
+    cell.style.wordWrap = "break-word";
+    if (tag === "th") {
+      cell.style.textAlign = "left";
+      cell.style.fontWeight = "700";
+    }
+    return cell;
+  }
+
+  // Internal link (github filename -> slug via shared GL.fileToSlug), same tab.
+  function internalLink(file, text, tip) {
+    var a = document.createElement("a");
+    a.href = "/" + window.GL.fileToSlug(file) + "/";
+    a.textContent = text;
+    if (tip) a.title = tip;
+    return a;
+  }
+
+  // External link — new tab, safe rel.
+  function externalLink(url, text, tip) {
+    var a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = text;
+    if (tip) a.title = tip;
+    return a;
+  }
+
+  // Renders a list of { label, url } into a cell, one per line, linked when it
+  // has a url. `fallback` is the display text for a url with no label.
+  function fillLinkList(cell, entries, tip, fallback) {
+    (entries || []).forEach(function (entry, i) {
+      var text = cellText(entry.label) || fallback || "";
+      if (i > 0) cell.appendChild(document.createElement("br"));
+      if (entry.url && text) {
+        cell.appendChild(externalLink(entry.url, text, tip));
+      } else {
+        cell.appendChild(document.createTextNode(text));
+      }
+    });
+  }
+
+  // Fills one column of one place. Per-column link behaviors mirror the overview.
+  function fillDataCell(cell, place, field) {
+    if (field === "name") {
+      var home = homepageUrl(place);
+      if (home) {
+        cell.appendChild(externalLink(home, cellText(place.name), "Open the destination's web site"));
+      } else {
+        cell.textContent = cellText(place.name);
+      }
+    } else if (field === "on_lost") {
+      if (place.file) {
+        cell.appendChild(internalLink(place.file, "View", "Open the page on this web site"));
+      }
+    } else if (field === "location") {
+      var loc = place.location || {};
+      var notes = cellText(loc.notes);
+      if (loc.lat != null && loc.lng != null && notes) {
+        cell.appendChild(externalLink(
+          "https://www.google.com/maps/search/?api=1&query=" + loc.lat + "," + loc.lng,
+          notes,
+          "Open in Google Maps"
+        ));
+      } else {
+        cell.textContent = notes;
+      }
+    } else if (field === "haversine") {
+      var km = campbellRiverKm(place);
+      if (km !== null && km !== undefined) cell.textContent = km + " km";
+    } else if (field === "roadBadge") {
+      var badge = window.GL.deriveRoadBadge(place.access);
+      if (badge) cell.textContent = badge.replace(/_/g, " ");
+    } else if (field === "siteCount") {
+      var n = (place.campground || {}).siteCount;
+      if (n !== null && n !== undefined) cell.textContent = String(n);
+    } else if (field === "maps") {
+      fillLinkList(cell, campgroundLinks(place).maps, "Open the map", "Map");
+    } else if (field === "amenities") {
+      cell.textContent = cellText((place.campground || {}).amenities);
+    } else if (field === "reservation") {
+      fillLinkList(cell, campgroundLinks(place).reservation, "Open the reservation web site", null);
+    } else {
+      cell.textContent = cellText(place[field]);
+    }
+  }
+
+  function buildColGroup() {
+    var colgroup = document.createElement("colgroup");
+    COLUMNS.forEach(function (col) {
+      var colEl = document.createElement("col");
+      colEl.style.width = col.width + "px";
+      colgroup.appendChild(colEl);
+    });
+    return colgroup;
+  }
+
+  function appendNoteMarker(cell, number) {
+    var sup = document.createElement("sup");
+    sup.textContent = String(number);
+    sup.style.marginLeft = "1px";
+    cell.appendChild(sup);
+  }
+
+  function buildFootnotesList(footnotes) {
+    var ol = document.createElement("ol");
+    ol.style.fontSize = "0.8rem";
+    ol.style.color = "#666";
+    ol.style.margin = "0.4rem 0 0";
+    ol.style.paddingLeft = "1.5rem";
+    footnotes.forEach(function (text) {
+      var li = document.createElement("li");
+      li.textContent = text;
+      ol.appendChild(li);
+    });
+    return ol;
+  }
+
+  // ---- renderers: pure (entries -> DOM node) --------------------------------
 
   // Card grid — same wrapper + renderCard as gallery.jst, so it inherits the
-  // existing card CSS with no new styling. Grid shows only PUBLISHED entries
-  // (a card advertises a live page); inline entries with no wpSettings, and
-  // unpublished pages, are dropped. The table (renderTable) shows everything.
+  // existing card CSS. Grid shows only PUBLISHED entries (a card advertises a
+  // live page); inline entries with no wpSettings, and unpublished pages, drop
+  // out. The table shows everything.
   function renderGrid(entries) {
     var published = entries.filter(function (e) {
       return e.wpSettings && e.wpSettings.published === true;
     });
-    if (!published.length) return "nothing here";
-    var html = '<div class="gl-gallery-grid">';
+    if (!published.length) return document.createTextNode("nothing here");
+    var grid = document.createElement("div");
+    grid.className = "gl-gallery-grid";
+    var html = "";
     for (var i = 0; i < published.length; i++) {
       html += window.GL.renderCard(published[i]);
     }
-    return html + "</div>";
+    grid.innerHTML = html;
+    return grid;
   }
 
-  // Stub until Step 3.
+  // One flat table (no groups): colgroup + thead + tbody + numbered footnotes.
+  // Shows ALL entries (no publish filter). Per-place footnotes become numbered
+  // superscripts on the matching cell, dedup'd into the list below the table.
   function renderTable(entries) {
-    return "*** table goes here (" + entries.length + " entries) ***";
+    var footnotes = [];
+
+    var table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.width = totalWidth() + "px";
+    table.style.tableLayout = "fixed";
+    table.style.marginTop = "0.25rem";
+
+    table.appendChild(buildColGroup());
+
+    var thead = document.createElement("thead");
+    var headerRow = document.createElement("tr");
+    COLUMNS.forEach(function (col) {
+      var th = buildCell("th");
+      th.textContent = col.label;
+      if (col.field === "haversine") {
+        var caveat = "Straight-line distance from Campbell River, approximate — not road distance.";
+        var idx = footnotes.indexOf(caveat);
+        if (idx === -1) { footnotes.push(caveat); idx = footnotes.length - 1; }
+        appendNoteMarker(th, idx + 1);
+      }
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Sort by name (a copy — never mutate the source).
+    var places = entries.slice().sort(function (a, b) {
+      return (a.name || "").localeCompare(b.name || "");
+    });
+
+    var tbody = document.createElement("tbody");
+    places.forEach(function (place) {
+      var row = document.createElement("tr");
+      COLUMNS.forEach(function (col) {
+        var cell = buildCell("td");
+        fillDataCell(cell, place, col.field);
+        (place.footnotes || []).forEach(function (fn) {
+          if (fn.field !== col.field) return;
+          var idx = footnotes.indexOf(fn.text);
+          if (idx === -1) { footnotes.push(fn.text); idx = footnotes.length - 1; }
+          appendNoteMarker(cell, idx + 1);
+        });
+        row.appendChild(cell);
+      });
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+
+    // Wrap so a wide table scrolls sideways instead of breaking the page.
+    var wrap = document.createElement("div");
+    wrap.style.overflowX = "auto";
+    wrap.appendChild(table);
+    if (footnotes.length) wrap.appendChild(buildFootnotesList(footnotes));
+    return wrap;
   }
 
   // ---- load + fill (view-agnostic) ------------------------------------------
@@ -58,7 +305,9 @@
         return res.json();
       })
       .then(function (entries) {
-        dataEl.innerHTML = view === "grid" ? renderGrid(entries) : renderTable(entries);
+        var node = view === "grid" ? renderGrid(entries) : renderTable(entries);
+        dataEl.innerHTML = "";
+        dataEl.appendChild(node);
       })
       .catch(function (err) {
         console.error("[list_browser] failed to load " + entry.file + ":", err);
