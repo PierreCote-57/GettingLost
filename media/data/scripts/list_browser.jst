@@ -10,11 +10,13 @@
  *   <div data-lb-options></div>  -> the controls (view + filter). Shows `view`.
  *   <div data-lb-data></div>     -> the rendered dataset (table or grid)
  *
- * This step wires the params: parse them, resolve `dataset` to its manifest
- * entry, and show the resolved values as text. Real rendering comes next.
+ * Flow: resolve `dataset` to its manifest entry, load that entry's data file,
+ * then fill the data div. The ONLY view-dependent step is choosing renderGrid
+ * vs renderTable — load and fill are identical for both.
  */
 (function () {
   var DATASETS_URL = "/wp-content/uploads/datasets.json";
+  var UPLOADS = "/wp-content/uploads/";
   var VALID_VIEWS = ["table", "grid"];
 
   var optionsEl = document.querySelector("[data-lb-options]");
@@ -23,6 +25,43 @@
   var params = new URLSearchParams(window.location.search);
   var datasetId = params.get("dataset");
   var view = params.get("view");
+
+  // ---- renderers: pure (entries -> HTML string) -----------------------------
+
+  // Card grid — same wrapper + renderCard as gallery.jst, so it inherits the
+  // existing card CSS with no new styling.
+  function renderGrid(entries) {
+    if (!entries.length) return "nothing here";
+    var html = '<div class="gl-gallery-grid">';
+    for (var i = 0; i < entries.length; i++) {
+      html += window.GL.renderCard(entries[i]);
+    }
+    return html + "</div>";
+  }
+
+  // Stub until Step 3.
+  function renderTable(entries) {
+    return "*** table goes here (" + entries.length + " entries) ***";
+  }
+
+  // ---- load + fill (view-agnostic) ------------------------------------------
+
+  function showDataset(entry) {
+    fetch(UPLOADS + entry.file)
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (entries) {
+        dataEl.innerHTML = view === "grid" ? renderGrid(entries) : renderTable(entries);
+      })
+      .catch(function (err) {
+        console.error("[list_browser] failed to load " + entry.file + ":", err);
+        dataEl.textContent = "Content is temporarily unavailable.";
+      });
+  }
+
+  // ---- resolve params, then dispatch ----------------------------------------
 
   fetch(DATASETS_URL)
     .then(function (res) {
@@ -49,8 +88,7 @@
       } else if (!entry) {
         dataEl.textContent = "unknown dataset: " + datasetId;
       } else {
-        dataEl.textContent =
-          "dataset: " + entry.id + " → " + entry.file + " (" + entry.title + ")";
+        showDataset(entry);
       }
     })
     .catch(function (err) {
