@@ -411,11 +411,12 @@
     return details;
   }
 
-  // Distinct values across the dataset, for each filter's vocabulary.
+  // Distinct values across the dataset, for each filter's vocabulary. Reads from
+  // the entry's `tags` object (tags.keywords, tags.badges), the new home for both.
   function fieldVocab(entries, field) {
     var set = {};
     entries.forEach(function (e) {
-      (e[field] || []).forEach(function (v) { set[v] = true; });
+      ((e.tags || {})[field] || []).forEach(function (v) { set[v] = true; });
     });
     return Object.keys(set).sort();
   }
