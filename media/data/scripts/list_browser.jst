@@ -385,49 +385,67 @@
     return sel;
   }
 
-  // Multi-select checkbox dropdown (<details>/<summary> disclosure). Vocabulary
-  // is the union of every entry's `keywords` array in THIS dataset; boxes already
-  // in the URL are pre-checked.
-  function buildKeywordDropdown(entries) {
-    var selected = (params.get("keywords") || "").split(",").filter(Boolean);
-    var vocab = {};
-    entries.forEach(function (e) {
-      (e.keywords || []).forEach(function (k) { vocab[k] = true; });
-    });
-    var keywords = Object.keys(vocab).sort();
+  // One multi-select checkbox dropdown (<details>/<summary> disclosure) over
+  // `values`, with the ?<paramName>= values pre-checked. Shared by the keyword,
+  // badge, and road filters — they differ only in label, param, and vocabulary.
+  // snake_case values (road: sharp_rock, back_country) show with spaces.
+  function buildCheckboxDropdown(label, paramName, values) {
+    var selected = (params.get(paramName) || "").split(",").filter(Boolean);
+    var chosen = values.filter(function (v) { return selected.indexOf(v) !== -1; });
 
     var details = document.createElement("details");
     details.className = "gl-lb-dropdown";
 
     var summary = document.createElement("summary");
-    summary.textContent = selected.length
-      ? "Keywords (" + selected.length + ")"
-      : "Keywords";
+    summary.textContent = chosen.length ? label + " (" + chosen.length + ")" : label;
     details.appendChild(summary);
 
     var panel = document.createElement("div");
     panel.className = "gl-lb-panel";
 
-    if (!keywords.length) {
+    if (!values.length) {
       var none = document.createElement("div");
       none.className = "gl-lb-empty";
-      none.textContent = "no keywords in this dataset";
+      none.textContent = "none in this dataset";
       panel.appendChild(none);
     }
 
-    keywords.forEach(function (k) {
-      var label = document.createElement("label");
+    values.forEach(function (v) {
+      var lab = document.createElement("label");
       var cb = document.createElement("input");
       cb.type = "checkbox";
-      cb.value = k;
-      if (selected.indexOf(k) !== -1) cb.checked = true;
-      label.appendChild(cb);
-      label.appendChild(document.createTextNode(k));
-      panel.appendChild(label);
+      cb.value = v;
+      if (selected.indexOf(v) !== -1) cb.checked = true;
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(v.replace(/_/g, " ")));
+      panel.appendChild(lab);
     });
 
     details.appendChild(panel);
     return details;
+  }
+
+  // Distinct values across the dataset, for each filter's vocabulary.
+  function fieldVocab(entries, field) {
+    var set = {};
+    entries.forEach(function (e) {
+      (e[field] || []).forEach(function (v) { set[v] = true; });
+    });
+    return Object.keys(set).sort();
+  }
+
+  // Worst-road values PRESENT in the dataset, ordered by severity (ROAD_COLORS
+  // key order: pavement -> ... -> back_country). Derived per entry from
+  // access.legs, so it mirrors the road badge on the card/table.
+  function roadVocab(entries) {
+    var present = {};
+    entries.forEach(function (e) {
+      var r = window.GL.deriveRoadBadge(e.access);
+      if (r) present[r] = true;
+    });
+    return Object.keys(window.GL.ROAD_COLORS).filter(function (r) {
+      return present[r];
+    });
   }
 
   // Free-text search box; prefilled with the current ?text= value.
@@ -440,13 +458,15 @@
     return input;
   }
 
-  // Assemble the bar. Order = dataset | view | keywords | text.
+  // Assemble the bar. Order = dataset | view | keywords | badges | road | text.
   function buildOptionsBar(datasets, entries) {
     var bar = document.createElement("div");
     bar.className = "gl-lb-bar";
     bar.appendChild(buildDatasetSelect(datasets));
     bar.appendChild(buildViewToggle());
-    bar.appendChild(buildKeywordDropdown(entries));
+    bar.appendChild(buildCheckboxDropdown("Keywords", "keywords", fieldVocab(entries, "keywords")));
+    bar.appendChild(buildCheckboxDropdown("Badges", "badges", fieldVocab(entries, "badges")));
+    bar.appendChild(buildCheckboxDropdown("Road", "road", roadVocab(entries)));
     bar.appendChild(buildTextSearch());
     return bar;
   }
