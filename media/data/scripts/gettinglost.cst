@@ -346,3 +346,79 @@ summary:focus:not(:focus-visible) {
 .gl-lightbox-next {
   right: 0.75rem;
 }
+
+/* ---- list_browser options bar (list_browser.jst) ------------------------- */
+.gl-lb-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 1rem;
+}
+.gl-lb-select,
+.gl-lb-search {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+/* Segmented table|grid toggle; the active view carries .is-active. */
+.gl-lb-view {
+  display: inline-flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.gl-lb-view button {
+  padding: 6px 14px;
+  border: none;
+  background: #fff;
+  color: #5e442c;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.gl-lb-view button.is-active {
+  background: #5e442c;
+  color: #fff;
+}
+/* Keyword multi-select: <details> disclosure + absolutely-positioned panel. */
+.gl-lb-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.gl-lb-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  user-select: none;
+}
+.gl-lb-panel {
+  position: absolute;
+  z-index: 5;
+  margin-top: 4px;
+  min-width: 180px;
+  max-height: 260px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+}
+.gl-lb-panel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+.gl-lb-panel input[type="checkbox"] {
+  accent-color: #c98a3e;
+  cursor: pointer;
+}
+.gl-lb-empty {
+  padding: 6px 8px;
+  color: #999;
+}

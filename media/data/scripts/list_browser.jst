@@ -349,6 +349,126 @@
       });
   }
 
+  // ---- options bar (controls) -----------------------------------------------
+  //
+  // DISPLAY ONLY for now: renders the control surface and reflects the current
+  // URL state. No change handlers, no redirect-URL building yet — that's a later
+  // step. Keyword vocabulary is derived client-side from the selected dataset, so
+  // showOptions fetches the same file showDataset does (browser-cached), mirroring
+  // showDataset's shape.
+
+  // Segmented table|grid toggle; the current view carries .is-active.
+  function buildViewToggle() {
+    var wrap = document.createElement("div");
+    wrap.className = "gl-lb-view";
+    VALID_VIEWS.forEach(function (v) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = v;
+      if (v === view) b.className = "is-active";
+      wrap.appendChild(b);
+    });
+    return wrap;
+  }
+
+  // Dataset selector; the current dataset is pre-selected.
+  function buildDatasetSelect(datasets) {
+    var sel = document.createElement("select");
+    sel.className = "gl-lb-select";
+    datasets.forEach(function (d) {
+      var opt = document.createElement("option");
+      opt.value = d.id;
+      opt.textContent = d.title || d.id;
+      if (d.id === datasetId) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    return sel;
+  }
+
+  // Multi-select checkbox dropdown (<details>/<summary> disclosure). Vocabulary
+  // is the union of every entry's `keywords` array in THIS dataset; boxes already
+  // in the URL are pre-checked.
+  function buildKeywordDropdown(entries) {
+    var selected = (params.get("keywords") || "").split(",").filter(Boolean);
+    var vocab = {};
+    entries.forEach(function (e) {
+      (e.keywords || []).forEach(function (k) { vocab[k] = true; });
+    });
+    var keywords = Object.keys(vocab).sort();
+
+    var details = document.createElement("details");
+    details.className = "gl-lb-dropdown";
+
+    var summary = document.createElement("summary");
+    summary.textContent = selected.length
+      ? "Keywords (" + selected.length + ")"
+      : "Keywords";
+    details.appendChild(summary);
+
+    var panel = document.createElement("div");
+    panel.className = "gl-lb-panel";
+
+    if (!keywords.length) {
+      var none = document.createElement("div");
+      none.className = "gl-lb-empty";
+      none.textContent = "no keywords in this dataset";
+      panel.appendChild(none);
+    }
+
+    keywords.forEach(function (k) {
+      var label = document.createElement("label");
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.value = k;
+      if (selected.indexOf(k) !== -1) cb.checked = true;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(k));
+      panel.appendChild(label);
+    });
+
+    details.appendChild(panel);
+    return details;
+  }
+
+  // Free-text search box; prefilled with the current ?text= value.
+  function buildTextSearch() {
+    var input = document.createElement("input");
+    input.type = "text";
+    input.className = "gl-lb-search";
+    input.placeholder = "Search text";
+    input.value = params.get("text") || "";
+    return input;
+  }
+
+  // Assemble the bar. Order = dataset | view | keywords | text.
+  function buildOptionsBar(datasets, entries) {
+    var bar = document.createElement("div");
+    bar.className = "gl-lb-bar";
+    bar.appendChild(buildDatasetSelect(datasets));
+    bar.appendChild(buildViewToggle());
+    bar.appendChild(buildKeywordDropdown(entries));
+    bar.appendChild(buildTextSearch());
+    return bar;
+  }
+
+  // Parallel to showDataset: fetch the entry's file, then fill the options div.
+  function showOptions(datasets, entry) {
+    if (!optionsEl) return;
+    fetch(UPLOADS + entry.file)
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (entries) {
+        optionsEl.innerHTML = "";
+        optionsEl.appendChild(buildOptionsBar(datasets, entries));
+      })
+      .catch(function (err) {
+        console.error("[list_browser] failed to build options for " + entry.file + ":", err);
+        optionsEl.textContent = "";
+      });
+  }
+
   // ---- resolve params, then dispatch ----------------------------------------
 
   fetch(DATASETS_URL)
@@ -357,18 +477,16 @@
       return res.json();
     })
     .then(function (datasets) {
-      // View: graceful on bad/missing input.
-      var viewOk = VALID_VIEWS.indexOf(view) !== -1;
-      if (optionsEl) {
-        optionsEl.textContent = viewOk
-          ? "view: " + view
-          : "view: (none — expected " + VALID_VIEWS.join(" | ") + ")";
-      }
-
-      // Dataset: resolve id -> manifest entry; graceful on bad/missing input.
+      // Resolve id -> manifest entry; graceful on bad/missing input.
       var entry = datasetId
         ? datasets.filter(function (d) { return d.id === datasetId; })[0]
         : null;
+
+      // Options bar (controls). Display only for now — no change handlers yet.
+      if (optionsEl) {
+        if (entry) showOptions(datasets, entry);
+        else optionsEl.textContent = "";
+      }
 
       if (!dataEl) return;
       if (!datasetId) {
