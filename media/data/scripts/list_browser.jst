@@ -434,18 +434,28 @@
     return Object.keys(set).sort();
   }
 
-  // Worst-road values PRESENT in the dataset, ordered by severity (ROAD_COLORS
-  // key order: pavement -> ... -> back_country). Derived per entry from
-  // access.legs, so it mirrors the road badge on the card/table.
-  function roadVocab(entries) {
-    var present = {};
-    entries.forEach(function (e) {
-      var r = window.GL.deriveRoadBadge(e.access);
-      if (r) present[r] = true;
+  // Access filter — a SINGLE-choice threshold over the known, severity-ordered
+  // road set (ROAD_COLORS key order: pavement -> ... -> back_country). You pick
+  // the WORST road you'll accept; "any" (the default) applies no filter. A plain
+  // <select>, not checkboxes — the set is fixed and only one value applies.
+  function buildAccessSelect() {
+    var current = params.get("road") || "";
+    var sel = document.createElement("select");
+    sel.className = "gl-lb-select";
+
+    var any = document.createElement("option");
+    any.value = "";
+    any.textContent = "Access: any";
+    sel.appendChild(any);
+
+    Object.keys(window.GL.ROAD_COLORS).forEach(function (r) {
+      var opt = document.createElement("option");
+      opt.value = r;
+      opt.textContent = r.replace(/_/g, " ");
+      if (r === current) opt.selected = true;
+      sel.appendChild(opt);
     });
-    return Object.keys(window.GL.ROAD_COLORS).filter(function (r) {
-      return present[r];
-    });
+    return sel;
   }
 
   // Free-text search box; prefilled with the current ?text= value.
@@ -458,15 +468,17 @@
     return input;
   }
 
-  // Assemble the bar. Order = dataset | view | keywords | badges | road | text.
+  // Assemble the bar. Order = dataset | view | keywords | badges | access | text.
+  // Three filter shapes: keywords (from data, multi), badges (known set, multi),
+  // access (known ordered set, single/threshold).
   function buildOptionsBar(datasets, entries) {
     var bar = document.createElement("div");
     bar.className = "gl-lb-bar";
     bar.appendChild(buildDatasetSelect(datasets));
     bar.appendChild(buildViewToggle());
     bar.appendChild(buildCheckboxDropdown("Keywords", "keywords", fieldVocab(entries, "keywords")));
-    bar.appendChild(buildCheckboxDropdown("Badges", "badges", fieldVocab(entries, "badges")));
-    bar.appendChild(buildCheckboxDropdown("Road", "road", roadVocab(entries)));
+    bar.appendChild(buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS)));
+    bar.appendChild(buildAccessSelect());
     bar.appendChild(buildTextSearch());
     return bar;
   }

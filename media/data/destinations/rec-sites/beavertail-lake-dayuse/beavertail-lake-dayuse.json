@@ -2,10 +2,16 @@
 	"name": "Beavertail Lake Day Use",
 	"featuredImage": "IMG_0866.jpg",
 	"excerpt": "Under construction",
-	"badges": [
-		"fishing",
-		"picnic"
-	],
+	"tags": {
+		"badges": [
+			"fishing",
+			"picnic"
+		],
+		"keywords": [
+			"picnic",
+			"trout"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"
