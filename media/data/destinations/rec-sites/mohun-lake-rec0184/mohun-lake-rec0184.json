@@ -2,9 +2,11 @@
 	"name": "Mohun Lake",
 	"featuredImage": "IMG_0429.jpg",
 	"excerpt": "Under construction",
-	"badges": [
-		"fishing"
-	],
+	"tags": {
+		"badges": [
+			"fishing"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

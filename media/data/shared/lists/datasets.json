@@ -55,14 +55,14 @@
 	},
 	{
 		"id": "van-howto",
-		"file": "VanHowTo.json",
+		"file": "van-howto.json",
 		"title": "How to",
-		"options": []
+		"options": ["keywords", "search"]
 	},
 	{
 		"id": "van-checklist",
-		"file": "VanChecklist.json",
+		"file": "van-checklist.json",
 		"title": "Checklists",
-		"options": []
+		"options": ["keywords", "search"]
 	}
 ]

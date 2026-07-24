@@ -2,10 +2,12 @@
 	"name": "Amor Lake",
 	"featuredImage": "IMG_0706.jpg",
 	"excerpt": "Part of the Sayward Forest Canoe Route, with sandy beaches, rocky islets, and multiple rec sites to explore.",
-	"badges": [
-		"fishing",
-		"camping"
-	],
+	"tags": {
+		"badges": [
+			"fishing",
+			"camping"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

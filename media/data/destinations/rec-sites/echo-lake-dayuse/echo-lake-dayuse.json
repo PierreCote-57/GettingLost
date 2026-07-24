@@ -2,10 +2,12 @@
 	"name": "Echo Lake Day Use",
 	"featuredImage": "IMG_0529-rotated.jpg",
 	"excerpt": "FIshing pier at echo lake",
-	"badges": [
-		"fishing",
-		"picnic"
-	],
+	"tags": {
+		"badges": [
+			"fishing",
+			"picnic"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

@@ -2,9 +2,11 @@
 	"name": "Pacific Playgrounds Resort",
 	"featuredImage": "under-construction.png",
 	"excerpt": "An oceanside resort and campground near Black Creek on Vancouver Island's east coast.",
-	"badges": [
-		"camping"
-	],
+	"tags": {
+		"badges": [
+			"camping"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

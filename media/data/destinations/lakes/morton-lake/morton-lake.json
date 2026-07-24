@@ -2,9 +2,11 @@
 	"name": "Morton Lake",
 	"featuredImage": "MortonLakeCampground.jpg",
 	"excerpt": "Small lake in Morton Lake Provincial Park north of Campbell River, with a rustic lakeside campground.",
-	"badges": [
-		"fishing"
-	],
+	"tags": {
+		"badges": [
+			"fishing"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

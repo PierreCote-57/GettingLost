@@ -2,9 +2,11 @@
 	"name": "Morton Lake Park",
 	"featuredImage": "IMG_0578.jpg",
 	"excerpt": "Under some construction",
-	"badges": [
-		"fishing"
-	],
+	"tags": {
+		"badges": [
+			"fishing"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"
@@ -68,7 +70,7 @@
 	"googleMap": {
 		"road": {
 			"lat": 50.089026,
-			"lng": -125.384500,
+			"lng": -125.3845,
 			"zoom": 12,
 			"pins": [
 				{
@@ -354,5 +356,4 @@
 			]
 		}
 	]
-
 }

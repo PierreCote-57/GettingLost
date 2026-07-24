@@ -2,9 +2,11 @@
 	"name": "Gosling Lake",
 	"featuredImage": "ActiveWorksite.jpg",
 	"excerpt": "A large lake with multiple rec sites and bay access, part of the Sayward Forest area.",
-	"badges": [
-		"fishing"
-	],
+	"tags": {
+		"badges": [
+			"fishing"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

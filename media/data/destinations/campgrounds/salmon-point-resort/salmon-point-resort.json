@@ -2,10 +2,12 @@
 	"name": "Salmon Point Resort",
 	"featuredImage": "under-construction.png",
 	"excerpt": "An RV park and marina near Campbell River, popular for salmon fishing.",
-	"badges": [
-		"camping",
-		"fishing"
-	],
+	"tags": {
+		"badges": [
+			"camping",
+			"fishing"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

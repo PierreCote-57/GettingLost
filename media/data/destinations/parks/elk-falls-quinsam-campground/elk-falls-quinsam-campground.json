@@ -2,11 +2,13 @@
 	"name": "Elk Falls Park",
 	"featuredImage": "under-construction.png",
 	"excerpt": "A thundering waterfall and old-growth Douglas fir, just north of Campbell River.",
-	"badges": [
-		"camping",
-		"fishing",
-		"hiking"
-	],
+	"tags": {
+		"badges": [
+			"camping",
+			"fishing",
+			"hiking"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"

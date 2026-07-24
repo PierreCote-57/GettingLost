@@ -2,9 +2,11 @@
 	"name": "Mohun Lake",
 	"featuredImage": "IMG_0429.jpg",
 	"excerpt": "Large lake at the heart of the Sayward Forest Canoe Route, near Campbell River.",
-	"badges": [
-		"fishing"
-	],
+	"tags": {
+		"badges": [
+			"fishing"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"
