@@ -33,13 +33,13 @@
 		"id": "known-destinations",
 		"file": "known-destinations.json",
 		"title": "Destinations",
-		"options": ["destinations"]
+		"options": ["view", "keywords", "badges", "access", "search"]
 	},
 	{
 		"id": "known-lakes",
 		"file": "known-lakes.json",
 		"title": "Lakes",
-		"options": ["destinations"]
+		"options": ["view", "keywords", "badges", "search"]
 	},
 	{
 		"id": "known-parks",

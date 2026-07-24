@@ -371,20 +371,6 @@
     return wrap;
   }
 
-  // Dataset selector; the current dataset is pre-selected.
-  function buildDatasetSelect(datasets) {
-    var sel = document.createElement("select");
-    sel.className = "gl-lb-select";
-    datasets.forEach(function (d) {
-      var opt = document.createElement("option");
-      opt.value = d.id;
-      opt.textContent = d.title || d.id;
-      if (d.id === datasetId) opt.selected = true;
-      sel.appendChild(opt);
-    });
-    return sel;
-  }
-
   // One multi-select checkbox dropdown (<details>/<summary> disclosure) over
   // `values`, with the ?<paramName>= values pre-checked. Shared by the keyword,
   // badge, and road filters — they differ only in label, param, and vocabulary.
@@ -439,7 +425,7 @@
   // the WORST road you'll accept; "any" (the default) applies no filter. A plain
   // <select>, not checkboxes — the set is fixed and only one value applies.
   function buildAccessSelect() {
-    var current = params.get("road") || "";
+    var current = params.get("access") || "";
     var sel = document.createElement("select");
     sel.className = "gl-lb-select";
 
@@ -458,33 +444,51 @@
     return sel;
   }
 
-  // Free-text search box; prefilled with the current ?text= value.
-  function buildTextSearch() {
+  // Free-text search box; prefilled with the current ?search= value.
+  function buildSearchBox() {
     var input = document.createElement("input");
     input.type = "text";
     input.className = "gl-lb-search";
-    input.placeholder = "Search text";
-    input.value = params.get("text") || "";
+    input.placeholder = "Search";
+    input.value = params.get("search") || "";
     return input;
   }
 
-  // Assemble the bar. Order = dataset | view | keywords | badges | access | text.
-  // Three filter shapes: keywords (from data, multi), badges (known set, multi),
-  // access (known ordered set, single/threshold).
-  function buildOptionsBar(datasets, entries) {
+  // Token -> control builder. datasets.json's `options` array names which controls
+  // a dataset shows, and in what order; buildOptionsBar walks it through this map.
+  // Every builder takes `entries` for a uniform signature, even those that ignore
+  // it (only keywords needs the data, for its from-data vocabulary).
+  var CONTROL_BUILDERS = {
+    view: function () { return buildViewToggle(); },
+    keywords: function (entries) {
+      return buildCheckboxDropdown("Keywords", "keywords", fieldVocab(entries, "keywords"));
+    },
+    badges: function () {
+      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS));
+    },
+    access: function () { return buildAccessSelect(); },
+    search: function () { return buildSearchBox(); }
+  };
+
+  // Assemble the bar from the dataset's `options` recipe (order preserved). An
+  // unknown token is a data error: log it and skip. The dataset is fixed by
+  // ?dataset= (menu-driven), so it is never a control here.
+  function buildOptionsBar(options, entries) {
     var bar = document.createElement("div");
     bar.className = "gl-lb-bar";
-    bar.appendChild(buildDatasetSelect(datasets));
-    bar.appendChild(buildViewToggle());
-    bar.appendChild(buildCheckboxDropdown("Keywords", "keywords", fieldVocab(entries, "keywords")));
-    bar.appendChild(buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS)));
-    bar.appendChild(buildAccessSelect());
-    bar.appendChild(buildTextSearch());
+    (options || []).forEach(function (token) {
+      var build = CONTROL_BUILDERS[token];
+      if (!build) {
+        console.error('[list_browser] unknown option token "' + token + '" — skipped.');
+        return;
+      }
+      bar.appendChild(build(entries));
+    });
     return bar;
   }
 
   // Parallel to showDataset: fetch the entry's file, then fill the options div.
-  function showOptions(datasets, entry) {
+  function showOptions(entry) {
     if (!optionsEl) return;
     fetch(UPLOADS + entry.file)
       .then(function (res) {
@@ -493,7 +497,7 @@
       })
       .then(function (entries) {
         optionsEl.innerHTML = "";
-        optionsEl.appendChild(buildOptionsBar(datasets, entries));
+        optionsEl.appendChild(buildOptionsBar(entry.options, entries));
       })
       .catch(function (err) {
         console.error("[list_browser] failed to build options for " + entry.file + ":", err);
@@ -516,7 +520,7 @@
 
       // Options bar (controls). Display only for now — no change handlers yet.
       if (optionsEl) {
-        if (entry) showOptions(datasets, entry);
+        if (entry) showOptions(entry);
         else optionsEl.textContent = "";
       }
 
