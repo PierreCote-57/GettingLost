@@ -4,6 +4,11 @@
 	},
 	{
 		"name": "French Beach Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -49,6 +54,11 @@
 	},
 	{
 		"name": "Goldstream Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -108,6 +118,11 @@
 	},
 	{
 		"name": "Gordon Bay Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -161,6 +176,11 @@
 	},
 	{
 		"name": "Juan de Fuca Provincial Park (China Beach Campground)",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -214,6 +234,11 @@
 	},
 	{
 		"name": "Little Qualicum Falls Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -258,6 +283,11 @@
 	},
 	{
 		"name": "Loveland Bay Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -313,6 +343,11 @@
 	},
 	{
 		"name": "Lower Nimpkish Lake Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -355,6 +390,11 @@
 	},
 	{
 		"name": "Miracle Beach Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -415,6 +455,11 @@
 	},
 	{
 		"name": "Nimpkish Lake Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -457,6 +502,11 @@
 	},
 	{
 		"name": "Rathtrevor Beach Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -514,6 +564,11 @@
 	},
 	{
 		"name": "Schoen Lake Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -557,6 +612,11 @@
 	},
 	{
 		"name": "Stamp River Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -602,6 +662,11 @@
 	},
 	{
 		"name": "Strathcona Provincial Park — Buttle Lake Campground",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -667,6 +732,11 @@
 	},
 	{
 		"name": "Strathcona Provincial Park — Ralph River Campground",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -730,6 +800,11 @@
 	},
 	{
 		"name": "Taylor Arm Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",

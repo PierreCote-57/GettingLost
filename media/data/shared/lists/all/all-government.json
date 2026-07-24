@@ -1,6 +1,11 @@
 [
 	{
 		"name": "Green Point Campground, Pacific Rim National Park Reserve",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -42,6 +47,11 @@
 	},
 	{
 		"name": "Horne Lake Regional Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -91,6 +101,11 @@
 	},
 	{
 		"name": "Island View Beach Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -132,6 +147,11 @@
 	},
 	{
 		"name": "Jordan River Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -173,6 +193,11 @@
 	},
 	{
 		"name": "Kwaksistah Regional Park Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -223,6 +248,11 @@
 	},
 	{
 		"name": "Link River Regional Park Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -269,6 +299,11 @@
 	},
 	{
 		"name": "Nitinaht Lake Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -314,6 +349,11 @@
 	},
 	{
 		"name": "Pacheedaht Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -355,6 +395,11 @@
 	},
 	{
 		"name": "Pachena Bay Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -400,6 +445,11 @@
 	},
 	{
 		"name": "Puntledge RV Park & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -448,6 +498,11 @@
 	},
 	{
 		"name": "Qualicum First Nation Waterfront Campground, Cabins and RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -489,6 +544,11 @@
 	},
 	{
 		"name": "Secret Beach Campground & Kayak Launch",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -534,6 +594,11 @@
 	},
 	{
 		"name": "Snaw-Naw-as Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -575,6 +640,11 @@
 	},
 	{
 		"name": "Sooke Potholes / Spring Salmon Place (KWL-UCHUN) Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -621,6 +691,11 @@
 	},
 	{
 		"name": "Tsawaak RV Resort & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",

@@ -1,6 +1,11 @@
 [
 	{
 		"name": "Arden Creek Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -60,6 +65,11 @@
 	},
 	{
 		"name": "Blackies Beach Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -113,6 +123,11 @@
 	},
 	{
 		"name": "Leiner River Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -161,6 +176,11 @@
 	},
 	{
 		"name": "Lizard Lake Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -219,6 +239,11 @@
 	},
 	{
 		"name": "Marble River Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -272,6 +297,11 @@
 	},
 	{
 		"name": "Mr. Canoehead Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -319,6 +349,11 @@
 	},
 	{
 		"name": "Nahwitti Lake Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -370,6 +405,11 @@
 	},
 	{
 		"name": "Pacific Yew Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -431,6 +471,11 @@
 	},
 	{
 		"name": "Scout Beach Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -485,6 +530,11 @@
 	},
 	{
 		"name": "Upper Campbell Reservoir Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",

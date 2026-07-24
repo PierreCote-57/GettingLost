@@ -1,6 +1,11 @@
 [
 	{
 		"name": "Alder Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -33,6 +38,11 @@
 	},
 	{
 		"name": "All Fun Recreation RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -65,6 +75,11 @@
 	},
 	{
 		"name": "Bald Eagle Campground & RV Sites",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -97,6 +112,11 @@
 	},
 	{
 		"name": "Bella Pacifica Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -129,6 +149,11 @@
 	},
 	{
 		"name": "Brannen Lake Campsites",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -161,6 +186,11 @@
 	},
 	{
 		"name": "Brown's Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -202,6 +232,11 @@
 	},
 	{
 		"name": "Cameron Lake Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -234,6 +269,11 @@
 	},
 	{
 		"name": "Cape Lazo Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -287,6 +327,11 @@
 	},
 	{
 		"name": "Cedar Grove RV Park & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -319,6 +364,11 @@
 	},
 	{
 		"name": "Cedar Springs Ranch",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -351,6 +401,11 @@
 	},
 	{
 		"name": "Chemainus Gardens RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -383,6 +438,11 @@
 	},
 	{
 		"name": "China Creek Marina & RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -415,6 +475,11 @@
 	},
 	{
 		"name": "Country Maples RV Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -447,6 +512,11 @@
 	},
 	{
 		"name": "Crystal Cove Beach Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -479,6 +549,11 @@
 	},
 	{
 		"name": "Deep Bay RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -511,6 +586,11 @@
 	},
 	{
 		"name": "Driftwood By The Sea RV Park & Cottages",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -543,6 +623,11 @@
 	},
 	{
 		"name": "Fisherboy Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -575,6 +660,11 @@
 	},
 	{
 		"name": "Fort Victoria RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -607,6 +697,11 @@
 	},
 	{
 		"name": "Harmony Shores Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -639,6 +734,11 @@
 	},
 	{
 		"name": "Heart Haven RV Family Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -671,6 +771,11 @@
 	},
 	{
 		"name": "Island West Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -703,6 +808,11 @@
 	},
 	{
 		"name": "Jingle Pot RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -735,6 +845,11 @@
 	},
 	{
 		"name": "Living Forest Oceanside Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -767,6 +882,11 @@
 	},
 	{
 		"name": "Mountainaire Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -799,6 +919,11 @@
 	},
 	{
 		"name": "Nanoose Creek Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -831,6 +956,11 @@
 	},
 	{
 		"name": "Oceanside RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -863,6 +993,11 @@
 	},
 	{
 		"name": "Osbourne Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -895,6 +1030,11 @@
 	},
 	{
 		"name": "Pacific Palms RV Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -930,6 +1070,11 @@
 	},
 	{
 		"name": "Paradise Sea-Side Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -962,6 +1107,11 @@
 	},
 	{
 		"name": "Park Sands Beach Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -994,6 +1144,11 @@
 	},
 	{
 		"name": "Pedder Bay RV Resort & Marina",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1026,6 +1181,11 @@
 	},
 	{
 		"name": "Pioneer Inn",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1058,6 +1218,11 @@
 	},
 	{
 		"name": "Port Alice RV Park & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1090,6 +1255,11 @@
 	},
 	{
 		"name": "Qualicum Bay Resort and RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1122,6 +1292,11 @@
 	},
 	{
 		"name": "Riverbend Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1154,6 +1329,11 @@
 	},
 	{
 		"name": "Riverside Campground & RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1186,6 +1366,11 @@
 	},
 	{
 		"name": "Riverside Resort Motel & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1218,6 +1403,11 @@
 	},
 	{
 		"name": "Rondalyn Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1250,6 +1440,11 @@
 	},
 	{
 		"name": "Salish Seaside RV Haven",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1285,6 +1480,11 @@
 	},
 	{
 		"name": "Saratoga Beach Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1326,6 +1526,11 @@
 	},
 	{
 		"name": "Seal Bay RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1376,6 +1581,11 @@
 	},
 	{
 		"name": "Seaside RV Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1408,6 +1618,11 @@
 	},
 	{
 		"name": "Shalom RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1440,6 +1655,11 @@
 	},
 	{
 		"name": "Shelter Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1482,6 +1702,11 @@
 	},
 	{
 		"name": "Sooke River Campsite",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1514,6 +1739,11 @@
 	},
 	{
 		"name": "Speedway RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1568,6 +1798,11 @@
 	},
 	{
 		"name": "Sunny Sanctuary Campground / Port Hardy RV Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1600,6 +1835,11 @@
 	},
 	{
 		"name": "Surf Grove Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1632,6 +1872,11 @@
 	},
 	{
 		"name": "Surf Junction Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1664,6 +1909,11 @@
 	},
 	{
 		"name": "Surfside RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1696,6 +1946,11 @@
 	},
 	{
 		"name": "Telegraph Cove Marina & RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1728,6 +1983,11 @@
 	},
 	{
 		"name": "Thunderbird Campsite",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1770,6 +2030,11 @@
 	},
 	{
 		"name": "Tranquility Woods Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1802,6 +2067,11 @@
 	},
 	{
 		"name": "Ucluelet Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1834,6 +2104,11 @@
 	},
 	{
 		"name": "Westwood Lake RV Camping & Cabins (Westwood Lake Campground Resort)",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1866,6 +2141,11 @@
 	},
 	{
 		"name": "White River Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1898,6 +2178,11 @@
 	},
 	{
 		"name": "Windy Waters Camping Ground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",
@@ -1936,6 +2221,11 @@
 	},
 	{
 		"name": "Zuiderzee Campsites",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
 		"links": [
 			{
 				"label": "HomePage",

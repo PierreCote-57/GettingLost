@@ -7,6 +7,9 @@
 			"camping",
 			"fishing",
 			"hiking"
+		],
+		"keywords": [
+			"park"
 		]
 	},
 	"wpSettings": {
