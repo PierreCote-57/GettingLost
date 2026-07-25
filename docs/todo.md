@@ -5,39 +5,30 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 ## Datasets / display×data refactor (2026-07-23)
 
-13. **Cut the live site over to the hydrated `lists/` files, then delete dead gallery
-    code.** sync.js no longer generates the old gallery JSONs (`Lakes.json`,
-    `Campgrounds.json`, `Parks.json`, `RecSites.json`, `Destinations.json`) — it now
-    hydrates `data/shared/lists/{all,known}/*.json` instead. **This FREEZES the live
-    galleries** until cutover (stale, not 404): sync never deletes, so the old
-    `Lakes.json`/etc. persist on WP from the last gallery-gen run and keep serving the
-    menu links (`?file=Lakes.json` …), gallery.jst's `Destinations.json` default, and
-    every `backToGallery` `data-file` — they just stop updating when page data changes.
-    A full sync.yml run won't refresh or remove them either. Cutover = unified `destinations.html` + dropdowns + menu/back-link
-    repoint at the new files (Phase 4/5). Also the new `known-*.json` aren't drop-in
-    identical: no publish filter (moved to render time), sorted by `file` not `name`.
+13. **Cutover to `list_browser` — WP menu is all that's left.** Mostly DONE 2026-07-25:
+    back-links repointed (`backToGallery` renderer + 29 pages → a single `data-dataset`
+    block); old surface files retired (`gallery.jst`/`gallery.html`,
+    `destinations-overview.jst`/`.html`); frozen gallery JSONs deleted on WP
+    (`Lakes`/`Parks`/`Campgrounds`/`RecSites`/`Destinations`/`VanHowTo`/`VanChecklist` —
+    all 404). **REMAINING: repoint the WP nav menu item to the `list_browser` page.**
 
-14. **Remove now-dead gallery helpers in sync.js.** After gallery-gen removal,
-    `GALLERY_RULES` (~L91) and `deriveRoadBadge` + its leg constants
-    (`DRIVE_LEG_TYPES`/`NON_DRIVE_LEG_TYPES`/`LEG_TYPES`/`BACK_COUNTRY`, ~L114-155) are
-    unused. Left in place to keep the edit focused. **Also lost with them: the build-time
-    leg validation** (`deriveRoadBadge` used to run per page during gallery-gen purely to
-    warn on unknown leg types / unpaved-no-km). Decide whether to re-home that validation
-    (e.g. into hydration or a dedicated pass) or drop it, then delete the dead code.
+14. ~~Remove dead gallery helpers + re-home leg validation.~~ DONE 2026-07-24 —
+    `GALLERY_RULES`/`deriveRoadBadge`/`BACK_COUNTRY` deleted; `validateLegs` added as a
+    build-time pass (fails on unknown leg type / unpaved-no-km, reported in `=== Summary ===`).
 
-15. **Dual-master drift: `destinations-overview.json` vs `lists/all/*.json`.** The
-    registry data now lives in two places — the old `destinations-overview.json` (still
-    the live overview page's render-time source, still copied to WP) and the new
-    `lists/all/*.json` (the intended master, hydrated to WP). They started identical (a
-    split) but nothing keeps them synced: editing one leaves the other stale. Decision to
-    hold until cutover: treat `lists/all/` as the SOLE master and `destinations-overview.json`
-    as frozen/legacy — do not author it — until Phase 4/5 deletes the old page.
+15. ~~Dual-master drift `destinations-overview.json` vs `lists/all`.~~ MOOT — `lists/all`
+    deleted; `destinations.json` is the sole master. (destinations-overview page retires in #13.)
 
-16. **Create the van list sources.** `datasets.json` now has `van-howto`/`van-checklist`
-    entries pointing at `VanHowTo.json`/`VanChecklist.json`, but those are FROZEN on WP
-    (gallery generation is gone) and have no `lists/` source. Build hydrated van list
-    sources (like `known/`) so the van datasets are live, not stale. Part of the Phase 4
-    van migration into `list_browser`.
+16. ~~Create the van list sources.~~ DONE 2026-07-24 — `van-howto.json` /
+    `van-checklist.json` created in list_browser/, hydrating via the manifest.
+
+17. **Is "Gallery" the right display word for the back-link label?** The `backToGallery`
+    block now shows a fixed "← Back to gallery" (grid of cards = a gallery, to a visitor).
+    Revisit the wording later; low stakes, deferred deliberately.
+
+18. **Stale `DEFAULT_DATASET` in `list_browser.jst`.** [`list_browser.jst:31`] still defaults
+    to `known-destinations`, an id that no longer exists — so a bare `/list_browser_html/`
+    resolves to "unknown dataset". Fix to `destinations`; folds into task 2 (apply URL as filter).
 
 ## Planned
 
@@ -56,10 +47,8 @@ planned passes. Noted, not fixed. Delete a line when it's done.
     Next: hang real "on the way" photo pins on them, like Morton already has
     (`{img:"onTheWay/img_xxxx", lat, lng}` pins pulling from `photoGalleries`).
 
-12. **Verify Morton's Explore BC Parks slug (2026-07-21).** `morton-lake-park.json`
-    Further-readings link `https://explorebcparks.ca/morton-lake-provincial-park/` —
-    confirm it resolves; the BC Parks HomePage uses `morton-lake-park`, so the slug
-    was a guess.
+12. ~~Verify Morton's Explore BC Parks slug (2026-07-21).~~ DONE 2026-07-24 —
+    `https://explorebcparks.ca/morton-lake-provincial-park/` resolves; the guess was correct.
 
 0. **Cross-reference validation pass — after the access/legs reorg lands.** Walk the
    cross-referenced pages against each other and confirm they agree. Items 2–5 below

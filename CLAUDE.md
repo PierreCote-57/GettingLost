@@ -70,6 +70,12 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
   So: when a side issue surfaces mid-task, **write it to `docs/todo.md` and keep
   going**. Hand him the list when the current thing is done, or when he asks. Only
   stop for something that actually blocks the current step or would corrupt data.
+- **Don't let a minor decision stall the main task.** When a small, low-stakes
+  choice surfaces mid-task (a display label, a name, a default), **pick the obvious
+  option, drop a "revisit later" line in `docs/todo.md`, and keep going.** Grinding a
+  big-picture task to a halt over a one-word detail — and re-deriving it across several
+  turns — is the same continuity-killing pattern as the bullet above. The task finishing
+  is worth more than the detail being perfect on the first pass.
 - **Never down-talk or condescend.** Pierre is a senior engineer who designed this
   system. Don't re-explain his own architecture or already-established context —
   give the one-line answer and stop. No "as you know" filler, no re-teaching basics.

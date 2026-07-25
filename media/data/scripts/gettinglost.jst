@@ -841,40 +841,36 @@
   // Generic block renderer: "backToGallery"
   // ---------------------------------------------------------------------
   //
-  // Renders a "← Back to <title>" link. Fully driven by the element's
-  // own attributes (not pageData), so multiple instances can coexist on
-  // one page, each pointing at a different gallery filter:
+  // Renders a "← Back to gallery" link back to the list_browser page,
+  // scoped to one dataset and shown in grid view. Fully driven by the
+  // element's own attribute (not pageData):
   //
-  //   <div class="gl-dest-back" data-block-type="backToGallery"
-  //        data-title="Parks" data-file="Parks.json"></div>
-  //   <div class="gl-dest-back" data-block-type="backToGallery"
-  //        data-title="Destinations" data-file="Destinations.json"></div>
+  //   <div data-block-type="backToGallery" data-dataset="destinations"></div>
   //
-  //   - data-title is optional, defaults to "Destinations" — used both in
-  //     the "Back to <title>" label and as the gallery page's ?title=.
-  //   - data-file is the gallery JSON's full filename (e.g. "Lakes.json"),
-  //     passed through as the gallery page's ?file=. When omitted, the link
-  //     goes to the gallery page (URL derived from gallery.html) unfiltered.
-  //   - Centralizing this here means the link style/wording can change
-  //     sitewide from one place.
+  //   - data-dataset is the list_browser dataset id (e.g. "destinations",
+  //     "van-howto", "van-checklist"), passed through as ?dataset=. When
+  //     omitted, the link goes to list_browser unscoped.
+  //   - The label is a fixed, generic "Back to gallery"; the target dataset
+  //     is carried by data-dataset, so there is no per-dataset title lookup
+  //     (and no extra fetch). Centralizing this here means the link
+  //     style/wording can change sitewide from one place.
 
-  window.GL.blockRenderers.backToGallery = function (el, pageData) {
-    var title = el.getAttribute("data-title") || "Destinations";
-    var file = el.getAttribute("data-file") || "";
+  window.GL.blockRenderers.backToGallery = function (el) {
+    var dataset = el.getAttribute("data-dataset") || "";
 
     if (!el.className) {
       el.className = "gl-dest-back";
     }
 
-    // The gallery listing page is gallery.html — derive its URL slug so we
+    // The listing page is list_browser.html — derive its URL slug so we
     // never hardcode the slug form.
-    var href = "/" + fileToSlug("gallery.html") + "/";
-    if (file) {
-      href += "?file=" + encodeURIComponent(file) + "&title=" + encodeURIComponent(title);
+    var href = "/" + fileToSlug("list_browser.html") + "/";
+    if (dataset) {
+      href += "?dataset=" + encodeURIComponent(dataset) + "&view=grid";
     }
 
     el.innerHTML =
-      '<a href="' + escapeAttr(href) + '">\u2190 Back to ' + escapeHtml(title) + "</a>";
+      '<a href="' + escapeAttr(href) + '">\u2190 Back to gallery</a>';
   };
 
   // ---------------------------------------------------------------------
