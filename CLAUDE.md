@@ -55,6 +55,13 @@ memory. Memory loads as background context and does not reliably govern behavior
 So: **when Pierre corrects how I work with him, the fix goes into this file as a hard
 rule** — not a new memory note. Memory keeps only the *why*/history.
 
+- **"Let's plan" / "let's discuss" means a CONVERSATION, not a deliverable.** We talk
+  until the plan is solid and Pierre says go. Do NOT go away and produce a plan document,
+  and do NOT end the exchange with an approve/reject gate (`ExitPlanMode`) unless he asks
+  for one. A gate front-loads decisions he hasn't weighed in on yet — backwards.
+- **Pierre organizes the work; Claude executes and reports.** He designed this system and
+  he sequences it. Findings go to him or to `docs/todo.md` — a finding never becomes a
+  proposed reorganization of his plan.
 - **Git state — never assert it without checking, that same turn.** Do not say a
   change is "pushed" / "still needs pushing" / "committed" / "uncommitted" without
   running `git status` / `git log` in the same turn. The session-start git snapshot
@@ -92,6 +99,11 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
   CSV/text parsing and date math, the `Edit` tool for in-file changes, and the
   session-provided date for "now." These are deliberately kept out of the permission
   allow-list; reaching for them means an avoidable prompt.
+- **Reach for `Read`/`Grep` before the shell, and never write a long inline
+  `python3 -c`.** Multi-line commands don't match the `Bash(python3:*)` allow rule, so
+  they prompt every single time — and each approval appends a dead exact-command entry
+  to `.claude/settings.local.json`. If `Read`/`Grep` genuinely can't do it, keep the
+  one-liner short or put a script in the scratchpad and run it by path.
 - **Mark unvalidated numbers "to be validated"; never fabricate specs or URLs.**
 - **Render, don't second-guess; fix the data, not with legacy-tolerant code.**
 - **URLs are always `https://`.** When copying a URL from any source into the

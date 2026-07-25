@@ -5,12 +5,14 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 ## Datasets / display×data refactor (2026-07-23)
 
-13. **Cutover to `list_browser` — WP menu is all that's left.** Mostly DONE 2026-07-25:
-    back-links repointed (`backToGallery` renderer + 29 pages → a single `data-dataset`
-    block); old surface files retired (`gallery.jst`/`gallery.html`,
-    `destinations-overview.jst`/`.html`); frozen gallery JSONs deleted on WP
-    (`Lakes`/`Parks`/`Campgrounds`/`RecSites`/`Destinations`/`VanHowTo`/`VanChecklist` —
-    all 404). **REMAINING: repoint the WP nav menu item to the `list_browser` page.**
+13. ~~**Cutover to `list_browser`.**~~ DONE 2026-07-25 — back-links repointed
+    (`backToGallery` renderer + 29 pages → a single `data-dataset` block); old surface
+    files retired (`gallery.jst`/`gallery.html`, `destinations-overview.jst`/`.html`);
+    frozen gallery JSONs deleted on WP (all 404); **WP nav menu repointed** (`wp_navigation`
+    post 5, rev 26): Destinations collapsed from a 6-child submenu to one top-level link
+    `?dataset=destinations&view=grid`, the two Van items → `?dataset=van-checklist|van-howto&view=grid`.
+    Verified live: 3 new hrefs render, no `/gallery/` or `/destinations-overview/` survives,
+    grids show 18 / 2 / 5 cards.
 
 14. ~~Remove dead gallery helpers + re-home leg validation.~~ DONE 2026-07-24 —
     `GALLERY_RULES`/`deriveRoadBadge`/`BACK_COUNTRY` deleted; `validateLegs` added as a
@@ -26,9 +28,9 @@ planned passes. Noted, not fixed. Delete a line when it's done.
     block now shows a fixed "← Back to gallery" (grid of cards = a gallery, to a visitor).
     Revisit the wording later; low stakes, deferred deliberately.
 
-18. **Stale `DEFAULT_DATASET` in `list_browser.jst`.** [`list_browser.jst:31`] still defaults
-    to `known-destinations`, an id that no longer exists — so a bare `/list_browser_html/`
-    resolves to "unknown dataset". Fix to `destinations`; folds into task 2 (apply URL as filter).
+18. ~~**Stale `DEFAULT_DATASET` in `list_browser.jst`.**~~ DONE 2026-07-25 — `known-destinations`
+    → `destinations`, so a bare `/list_browser_html/` resolves instead of rendering
+    "unknown dataset".
 
 ## Planned
 
@@ -49,6 +51,10 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 12. ~~Verify Morton's Explore BC Parks slug (2026-07-21).~~ DONE 2026-07-24 —
     `https://explorebcparks.ca/morton-lake-provincial-park/` resolves; the guess was correct.
+
+19. **Home template shows "Block contains unexpected or invalid content" (2026-07-25).**
+    Seen in the Site Editor preview of the Home template, over the hero image, with an
+    "Attempt recovery" button. Not investigated, not clicked. Unrelated to the menu work.
 
 0. **Cross-reference validation pass — after the access/legs reorg lands.** Walk the
    cross-referenced pages against each other and confirm they agree. Items 2–5 below
