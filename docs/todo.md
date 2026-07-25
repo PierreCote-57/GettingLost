@@ -32,6 +32,20 @@ planned passes. Noted, not fixed. Delete a line when it's done.
     → `destinations`, so a bare `/list_browser_html/` resolves instead of rendering
     "unknown dataset".
 
+20. **⚠️ DELETE the TESTING `alert()` in `list_browser.jst`.** `navigate()` pops
+    `window.alert(next.toString())` before doing the real `location.search = …`. It is
+    committed and pushed, so it fires on the LIVE site on every filter commit. Deliberate
+    (Pierre asked for it, to see the query string), but it must not survive testing.
+    Grep `TESTING`. The assignment below it stays.
+
+21. **Native `<details>` has no light-dismiss (2026-07-25).** Clicking elsewhere doesn't
+    close the Keywords/Badges panel — you must click its summary again, which is also what
+    commits it. Fix if it annoys in use: a document click listener that closes any open
+    panel. Trying it as-is first.
+
+22. **`.gl-lb-search` has no explicit width (2026-07-25).** It takes the browser's default
+    input size. One-line fix if it reads too narrow/wide beside the other controls.
+
 ## Planned
 
 9. ~~**Bring other campground/park pages up to the new campground-block format

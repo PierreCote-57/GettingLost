@@ -93,6 +93,10 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
   site). Don't spin one up, and don't offer to.
 - **Response style:** numbered lists (`1. 2. 3.`), not bullets, so he can reply
   item-by-item. Direct answer first.
+- **Always give times in Pierre's local time (PDT).** When a source reports UTC —
+  GitHub status/incidents, API timestamps, logs — convert before showing it. Don't
+  print UTC and make him do the math; don't show both unless the UTC value is itself
+  the thing being discussed.
 - **One command per Bash call** — no `&&`/`;`/pipes/loops/inline scripts (they defeat
   the permission allow-match). **curl is URL-first:** `curl "<url>" <flags>`.
 - **Don't shell out to `awk` / `sed` / `date`** — use the alternatives: `python3` for
