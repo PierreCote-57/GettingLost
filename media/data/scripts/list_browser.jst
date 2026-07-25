@@ -5,9 +5,7 @@
  * query parameters:
  *   ?dataset=<id>   one of the `id`s in datasets.json -> its file/title/options
  *   ?view=<mode>    table | grid
- *   ?keywords= ?badges= ?access= ?search=   the filters — written by the options
- *                   bar and read back to pre-populate it, but NOT yet applied to
- *                   the rendered entries (that's the next step).
+ *   ?keywords= ?badges= ?access= ?search=   the filters
  *
  * The URL is the whole state: every control commits by navigating to a new one
  * (see navigate()), so the page re-renders from scratch and Back/Forward work.
@@ -16,10 +14,22 @@
  *   <div data-lb-options></div>  -> the controls (view + filters)
  *   <div data-lb-data></div>     -> the rendered dataset (table or grid)
  *
- * Flow: resolve `dataset` to its manifest entry, load that entry's data file,
- * then fill the data div. The ONLY view-dependent step is choosing renderGrid
- * vs renderTable — load and fill are identical for both. Both renderers are pure
- * (entries -> DOM node).
+ * Rendering a page is four steps:
+ *   1. processParams()  — the raw query string becomes what the page acts on
+ *   2. filterRows()     — narrow the rows, one filter per query parameter
+ *   3. options row      — which controls, from the dataset's `options` recipe
+ *   4. render           — table or grid per `view`, plus the match count
+ *
+ * Steps 2 and 3 are the same idea twice: walk a list, switch on each element,
+ * do the thing you know how to do with it, silently ignore the rest. Their
+ * switches are deliberately NOT the same vocabulary — one option can produce
+ * several query parameters, or none at all (`view` filters AND displays).
+ * A token with no builder, or a parameter with no filter, is a legitimate
+ * state (staged rollout, testing, retired-but-kept), never an error.
+ *
+ * Both renderers are pure (rows -> DOM node): the publish rule that used to
+ * live inside renderGrid is now filterView, so what the count says and what
+ * you see cannot disagree.
  *
  * The table logic (COLUMNS + fillDataCell + helpers) is ported from
  * destinations-overview.jst, flattened (no groups / no <details>). That page is
@@ -37,12 +47,34 @@
   var DEFAULT_DATASET = "destinations";
   var DEFAULT_VIEW = "grid";
 
+  // Severity ramp for the access threshold, easiest -> hardest. The access
+  // <select> is built from the same array, so the control and the filter cannot
+  // drift apart.
+  var ROAD_ORDER = Object.keys(window.GL.ROAD_COLORS);
+
   var optionsEl = document.querySelector("[data-lb-options]");
   var dataEl = document.querySelector("[data-lb-data]");
 
-  var params = new URLSearchParams(window.location.search);
-  var datasetId = params.get("dataset") || DEFAULT_DATASET;
-  var view = params.get("view") || DEFAULT_VIEW;
+  // The ONE place the raw query string becomes what the page acts on. Today it
+  // only fills in the defaults; it is also where any parameter validation would
+  // go (docs/todo.md #25), so nothing downstream has to defend itself.
+  //
+  // Everything reads the result — filters, controls, and navigate(). One side
+  // effect, accepted deliberately: because navigate() patches this object, a
+  // default it filled in lands in the next URL. That matches what the site's
+  // nav menu already emits (every menu link carries an explicit view=grid), and
+  // it makes a shared link say exactly what it will render instead of inheriting
+  // whatever the default happens to be later.
+  function processParams(search) {
+    var p = new URLSearchParams(search);
+    if (!p.get("dataset")) p.set("dataset", DEFAULT_DATASET);
+    if (!p.get("view")) p.set("view", DEFAULT_VIEW);
+    return p;
+  }
+
+  var effectiveParams = processParams(window.location.search);
+  var datasetId = effectiveParams.get("dataset");
+  var view = effectiveParams.get("view");
 
   // ---- table columns --------------------------------------------------------
 
@@ -229,31 +261,128 @@
     return ol;
   }
 
-  // ---- renderers: pure (entries -> DOM node) --------------------------------
+  // ---- the filters ----------------------------------------------------------
+  //
+  // One function per query parameter, all the same shape:
+  //     filterX(value, shortList) -> shortList
+  // Each takes its own parameter's value and the list so far, and returns the
+  // list narrowed. Chaining them through filterRows() is what produces AND
+  // ACROSS controls; OR WITHIN a control is internal to each filter. Adding a
+  // filter later is one function plus one line in the switch.
+
+  // A comma-separated parameter value -> array, empties dropped.
+  function splitList(value) {
+    return (value || "").split(",").filter(Boolean);
+  }
+
+  // `view` both displays AND filters: a card advertises a live page, so the grid
+  // shows published rows only. Living here rather than inside renderGrid is what
+  // keeps the match count honest — it counts what you actually see.
+  function filterView(value, shortList) {
+    if (value !== "grid") return shortList;
+    return shortList.filter(function (row) {
+      return !!(row.wpSettings && row.wpSettings.published === true);
+    });
+  }
+
+  // Tag membership, OR within the field: keep a row carrying at least one of the
+  // wanted values. A row with none of that tag FAILS — badges and keywords are
+  // authored claims, and absence is not a match. (Consequence worth knowing: no
+  // catalog row carries badges, so any badge filter narrows to the GL pages.)
+  function filterByWord(field, wanted, shortList) {
+    if (!wanted.length) return shortList;
+    return shortList.filter(function (row) {
+      var have = (row.tags || {})[field] || [];
+      for (var i = 0; i < wanted.length; i++) {
+        if (have.indexOf(wanted[i]) !== -1) return true;
+      }
+      return false;
+    });
+  }
+
+  function filterKeywords(value, shortList) {
+    return filterByWord("keywords", splitList(value), shortList);
+  }
+
+  function filterBadges(value, shortList) {
+    return filterByWord("badges", splitList(value), shortList);
+  }
+
+  // Ordinal threshold, not membership: you pick the worst road you will accept,
+  // and a row is kept when its derived badge is no worse. UNKNOWN PASSES — only
+  // rows with authored legs derive a badge at all, and an unmeasured road is not
+  // evidence of a bad one. An unknown threshold value filters nothing.
+  function filterAccess(value, shortList) {
+    var limit = ROAD_ORDER.indexOf(value);
+    if (limit === -1) return shortList;
+    return shortList.filter(function (row) {
+      var rank = ROAD_ORDER.indexOf(window.GL.deriveRoadBadge(row.access));
+      return rank === -1 || rank <= limit;
+    });
+  }
+
+  // Free text over the WHOLE row, serialized. Deliberately broad: it sees every
+  // field without a list to maintain, at the cost of also seeing keys and URLs
+  // (so "map" matches every row carrying a map link). Trade recall for precision
+  // later by searching a named field list instead.
+  function filterSearch(value, shortList) {
+    var needle = (value || "").toLowerCase();
+    if (!needle) return shortList;
+    return shortList.filter(function (row) {
+      return JSON.stringify(row).toLowerCase().indexOf(needle) !== -1;
+    });
+  }
+
+  // Walk the parameters we are acting on and let each one narrow the list. The
+  // loop is driven by the URL, not by the dataset's `options` — a parameter for
+  // a control this dataset doesn't show still filters, which is what makes a
+  // hand-typed or shared URL work. A key with no case is not an error: it is
+  // `dataset`, or a control that doesn't filter, or a filter not built yet.
+  function filterRows(rows, p) {
+    var shortList = rows;
+    p.forEach(function (value, key) {
+      switch (key) {
+        case "view":     shortList = filterView(value, shortList); break;
+        case "keywords": shortList = filterKeywords(value, shortList); break;
+        case "badges":   shortList = filterBadges(value, shortList); break;
+        case "access":   shortList = filterAccess(value, shortList); break;
+        case "search":   shortList = filterSearch(value, shortList); break;
+        default: break; // not a filter — see the comment above
+      }
+    });
+    return shortList;
+  }
+
+  // ---- renderers: pure (rows -> DOM node) -----------------------------------
 
   // Card grid — same wrapper + renderCard as gallery.jst, so it inherits the
-  // existing card CSS. Grid shows only PUBLISHED entries (a card advertises a
-  // live page); inline entries with no wpSettings, and unpublished pages, drop
-  // out. The table shows everything.
-  function renderGrid(entries) {
-    var published = entries.filter(function (e) {
-      return e.wpSettings && e.wpSettings.published === true;
-    });
-    if (!published.length) return document.createTextNode("nothing here");
+  // existing card CSS. Renders exactly what it is handed; the published rule is
+  // filterView's job now.
+  function renderGrid(rows) {
     var grid = document.createElement("div");
     grid.className = "gl-gallery-grid";
     var html = "";
-    for (var i = 0; i < published.length; i++) {
-      html += window.GL.renderCard(published[i]);
+    for (var i = 0; i < rows.length; i++) {
+      html += window.GL.renderCard(rows[i]);
     }
     grid.innerHTML = html;
     return grid;
   }
 
+  // The match count, and the empty state at the same time: 0 rows reads "0 found".
+  function buildCount(n) {
+    var el = document.createElement("div");
+    el.textContent = n + " found";
+    el.style.fontSize = "0.85rem";
+    el.style.color = "#666";
+    el.style.margin = "0 0 0.5rem";
+    return el;
+  }
+
   // One flat table (no groups): colgroup + thead + tbody + numbered footnotes.
-  // Shows ALL entries (no publish filter). Per-place footnotes become numbered
+  // Renders exactly what it is handed. Per-place footnotes become numbered
   // superscripts on the matching cell, dedup'd into the list below the table.
-  function renderTable(entries) {
+  function renderTable(rows) {
     var footnotes = [];
 
     var table = document.createElement("table");
@@ -285,7 +414,7 @@
     table.appendChild(thead);
 
     // Source order is authoritative (the dataset file is pre-sorted); render as-is.
-    var places = entries;
+    var places = rows;
 
     var tbody = document.createElement("tbody");
     places.forEach(function (place) {
@@ -339,12 +468,14 @@
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       })
-      .then(function (entries) {
+      .then(function (rows) {
+        var shortList = filterRows(rows, effectiveParams);
         var isGrid = view === "grid";
-        var node = isGrid ? renderGrid(entries) : renderTable(entries);
+        var node = isGrid ? renderGrid(shortList) : renderTable(shortList);
         var style = isGrid ? getGridStyle() : getTableStyle();
         dataEl.innerHTML = "";
         applyStyle(dataEl, style);
+        dataEl.appendChild(buildCount(shortList.length));
         dataEl.appendChild(node);
       })
       .catch(function (err) {
@@ -355,25 +486,29 @@
 
   // ---- options bar (controls) -----------------------------------------------
   //
-  // Each control reflects the current URL state and, on commit, writes its param
-  // back to the URL through navigate(). Keyword vocabulary is derived client-side
-  // from the selected dataset, so showOptions fetches the same file showDataset
-  // does (browser-cached), mirroring showDataset's shape.
+  // Every control has the same signature — build(p) -> DOM node — reads its own
+  // current value out of `p`, and commits through navigate(). A control that
+  // needs two parameters just reads two; one that needs none ignores the object.
   //
-  // NOTE: only `view` is consumed so far. The filter params (keywords, badges,
-  // access, search) round-trip through the URL but nothing filters on them yet —
-  // that's the next step.
+  // The rows are NOT passed in. Only Keywords needs data at all (its choice list
+  // is derived from the rows, because unlike badges/access/view its vocabulary
+  // is open), and by the time the options row is built, the list in hand is the
+  // FILTERED one — deriving choices from that would drop the very values you
+  // need to widen the search next. So it reads the full set from vocabRows,
+  // which showOptions fills from its own unfiltered fetch, and no filtered list
+  // is ever within reach. (docs/todo.md #26: materialize the vocabulary at build
+  // time and both the fetch and the variable go away.)
+  var vocabRows = [];
 
-  // The single seam every control commits through: clone the CURRENT query,
-  // apply the patch, drop empty values (so a cleared filter leaves no param),
+  // The single seam every control commits through: clone what the page is acting
+  // on, apply the patch, drop empty values (so a cleared filter leaves no param),
   // and move to the new URL. Assigning location.search keeps path and hash and
   // is a real navigation, so Back/Forward restore prior filter states with no
   // extra machinery — the state lives entirely in the URL. Params this control
   // doesn't own (notably `dataset`) survive because we clone rather than rebuild.
-  // The module-level `params` is deliberately NOT mutated; the builders read it
-  // to pre-populate themselves.
+  // effectiveParams is never mutated: the patch goes onto a copy.
   function navigate(patch) {
-    var next = new URLSearchParams(window.location.search);
+    var next = new URLSearchParams(effectiveParams);
     for (var key in patch) {
       var value = patch[key];
       if (value === null || value === undefined || value === "") next.delete(key);
@@ -382,20 +517,21 @@
     // TESTING — the alert shows the query string being committed, then the
     // navigation actually happens on dismiss. Delete the alert line before this
     // goes live; the assignment below is the real behavior and stays.
-    window.alert(next.toString());
+//    window.alert(next.toString());
     location.search = next.toString();
   }
 
   // Segmented table|grid toggle; the current view carries .is-active. Commits
   // immediately on click — a single unambiguous choice, nothing to accumulate.
-  function buildViewToggle() {
+  function buildViewToggle(p) {
+    var current = p.get("view");
     var wrap = document.createElement("div");
     wrap.className = "gl-lb-view";
     VALID_VIEWS.forEach(function (v) {
       var b = document.createElement("button");
       b.type = "button";
       b.textContent = v;
-      if (v === view) b.className = "is-active";
+      if (v === current) b.className = "is-active";
       b.addEventListener("click", function () { navigate({ view: v }); });
       wrap.appendChild(b);
     });
@@ -411,8 +547,8 @@
   // picked per visit. `chosen` is the canonical (values-ordered) form of what the
   // URL currently holds, which is what the close handler compares against so a
   // panel opened and closed untouched commits nothing.
-  function buildCheckboxDropdown(label, paramName, values) {
-    var selected = (params.get(paramName) || "").split(",").filter(Boolean);
+  function buildCheckboxDropdown(label, paramName, values, p) {
+    var selected = splitList(p.get(paramName));
     var chosen = values.filter(function (v) { return selected.indexOf(v) !== -1; });
     var boxes = [];
 
@@ -467,12 +603,13 @@
     return details;
   }
 
-  // Distinct values across the dataset, for each filter's vocabulary. Reads from
-  // the entry's `tags` object (tags.keywords, tags.badges), the new home for both.
-  function fieldVocab(entries, field) {
+  // Distinct values across the dataset, for a control whose vocabulary is open
+  // rather than fixed. Reads each row's `tags` object (tags.keywords, tags.badges).
+  // Must always be given the UNFILTERED rows — see the section comment.
+  function fieldVocab(rows, field) {
     var set = {};
-    entries.forEach(function (e) {
-      ((e.tags || {})[field] || []).forEach(function (v) { set[v] = true; });
+    rows.forEach(function (r) {
+      ((r.tags || {})[field] || []).forEach(function (v) { set[v] = true; });
     });
     return Object.keys(set).sort();
   }
@@ -481,8 +618,8 @@
   // road set (ROAD_COLORS key order: pavement -> ... -> back_country). You pick
   // the WORST road you'll accept; "any" (the default) applies no filter. A plain
   // <select>, not checkboxes — the set is fixed and only one value applies.
-  function buildAccessSelect() {
-    var current = params.get("access") || "";
+  function buildAccessSelect(p) {
+    var current = p.get("access") || "";
     var sel = document.createElement("select");
     sel.className = "gl-lb-select";
 
@@ -491,7 +628,7 @@
     any.textContent = "Access: any";
     sel.appendChild(any);
 
-    Object.keys(window.GL.ROAD_COLORS).forEach(function (r) {
+    ROAD_ORDER.forEach(function (r) {
       var opt = document.createElement("option");
       opt.value = r;
       opt.textContent = r.replace(/_/g, " ");
@@ -508,12 +645,12 @@
   // bar navigates nothing. `committed` is updated BEFORE navigate() because
   // anything that steals focus (the TESTING alert) can re-enter this handler —
   // the guard has to already be closed by then.
-  function buildSearchBox() {
+  function buildSearchBox(p) {
     var input = document.createElement("input");
     input.type = "text";
     input.className = "gl-lb-search";
     input.placeholder = "Search";
-    input.value = params.get("search") || "";
+    input.value = p.get("search") || "";
 
     var committed = input.value;
     input.addEventListener("blur", function () {
@@ -530,40 +667,42 @@
     return input;
   }
 
-  // Token -> control builder. datasets.json's `options` array names which controls
-  // a dataset shows, and in what order; buildOptionsBar walks it through this map.
-  // Every builder takes `entries` for a uniform signature, even those that ignore
-  // it (only keywords needs the data, for its from-data vocabulary).
+  // Token -> control builder, all sharing one signature: build(p) -> DOM node.
+  // datasets.json's `options` array names which controls a dataset shows, and in
+  // what order; buildOptionsBar walks it through this map.
   var CONTROL_BUILDERS = {
-    view: function () { return buildViewToggle(); },
-    keywords: function (entries) {
-      return buildCheckboxDropdown("Keywords", "keywords", fieldVocab(entries, "keywords"));
+    view: function (p) { return buildViewToggle(p); },
+    keywords: function (p) {
+      return buildCheckboxDropdown("Keywords", "keywords", fieldVocab(vocabRows, "keywords"), p);
     },
-    badges: function () {
-      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS));
+    badges: function (p) {
+      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS), p);
     },
-    access: function () { return buildAccessSelect(); },
-    search: function () { return buildSearchBox(); }
+    access: function (p) { return buildAccessSelect(p); },
+    search: function (p) { return buildSearchBox(p); }
   };
 
-  // Assemble the bar from the dataset's `options` recipe (order preserved). An
-  // unknown token is a data error: log it and skip. The dataset is fixed by
-  // ?dataset= (menu-driven), so it is never a control here.
-  function buildOptionsBar(options, entries) {
+  // Assemble the bar from the dataset's `options` recipe (order preserved).
+  //
+  // A token with no builder builds NOTHING, silently — the mirror of the filter
+  // switch's default. It is a legitimate state, not an error: a control can be
+  // designed before it is built, and a token need not be about controls at all.
+  // The two switches are related but not the same vocabulary — one option can
+  // emit several query parameters (a shortcut preset) or none (a display mode).
+  function buildOptionsBar(options, p) {
     var bar = document.createElement("div");
     bar.className = "gl-lb-bar";
     (options || []).forEach(function (token) {
       var build = CONTROL_BUILDERS[token];
-      if (!build) {
-        console.error('[list_browser] unknown option token "' + token + '" — skipped.');
-        return;
-      }
-      bar.appendChild(build(entries));
+      if (!build) return;
+      bar.appendChild(build(p));
     });
     return bar;
   }
 
   // Parallel to showDataset: fetch the entry's file, then fill the options div.
+  // The rows land in vocabRows UNFILTERED — that is the whole point of fetching
+  // here rather than reusing showDataset's list (see the section comment).
   function showOptions(entry) {
     if (!optionsEl) return;
     fetch(UPLOADS + entry.file)
@@ -571,9 +710,10 @@
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       })
-      .then(function (entries) {
+      .then(function (rows) {
+        vocabRows = rows;
         optionsEl.innerHTML = "";
-        optionsEl.appendChild(buildOptionsBar(entry.options, entries));
+        optionsEl.appendChild(buildOptionsBar(entry.options, effectiveParams));
       })
       .catch(function (err) {
         console.error("[list_browser] failed to build options for " + entry.file + ":", err);
@@ -589,25 +729,18 @@
       return res.json();
     })
     .then(function (datasets) {
-      // Resolve id -> manifest entry; graceful on bad/missing input.
-      var entry = datasetId
-        ? datasets.filter(function (d) { return d.id === datasetId; })[0]
-        : null;
+      // Resolve id -> dataset entry. processParams() guarantees an id, so the
+      // only failure left is a bad one — handled gracefully, not defended against.
+      var entry = datasets.filter(function (d) { return d.id === datasetId; })[0];
 
-      // Options bar (controls). Display only for now — no change handlers yet.
       if (optionsEl) {
         if (entry) showOptions(entry);
         else optionsEl.textContent = "";
       }
 
       if (!dataEl) return;
-      if (!datasetId) {
-        dataEl.textContent = "no dataset selected";
-      } else if (!entry) {
-        dataEl.textContent = "unknown dataset: " + datasetId;
-      } else {
-        showDataset(entry);
-      }
+      if (!entry) dataEl.textContent = "unknown dataset: " + datasetId;
+      else showDataset(entry);
     })
     .catch(function (err) {
       console.error("[list_browser] failed to load datasets.json:", err);
