@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * sync.js
+ * sync.js, a github-action-based WordPress sync script.
  *
  * Pushes this repo's content to WordPress, overwriting whatever is
  * currently live — no diffing, no confirmation prompt. This is the
