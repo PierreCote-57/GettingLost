@@ -46,6 +46,40 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 22. **`.gl-lb-search` has no explicit width (2026-07-25).** It takes the browser's default
     input size. One-line fix if it reads too narrow/wide beside the other controls.
 
+23. **On-demand keyword validation pass (2026-07-25).** Unlike badges and access, the
+    keyword vocabulary is open and derived from the data, so it drifts. Loose authoring
+    rules: singular/plural are the same word — pick one; synonyms are the same word —
+    pick one. Wanted: a pass, run on demand (not in the build, not in the filter), that
+    walks every `tags.keywords` value across the datasets and SURFACES suspects — near-
+    duplicates, plural/singular pairs, one-off values used a single time. It reports; a
+    human decides. Do NOT normalize in the filter (stemming/synonym maps) — that would
+    hide exactly the drift this is meant to expose.
+
+24. **Revisit: badges any/all match toggle (2026-07-25).** First pass ships ONE rule —
+    multiple values on the same control = OR, control to control = AND. The designed-but-
+    deferred refinement: a two-button any/all segmented control inside the Badges panel,
+    committing a separate `badgesMatch=all` param on the `<details>` close edge (default
+    "any", so the param is absent unless changed). Badges only — keywords are types, and
+    "all of" there just generates empty results. Naming it `<param>Match` leaves room for
+    other controls to adopt it. Deferred to keep the first filter pass simple.
+
+25. **More param validation in `processParams()` (2026-07-25).** The normalization step
+    is the single place the raw query string becomes what the page acts on (trim + apply
+    defaults, as built). It is also the natural home for validation we deliberately did
+    NOT do in the first filter pass: unknown `view`/`access` values, values not in the
+    known vocabulary, malformed comma lists, unknown keys. Decide per case whether the
+    answer is "drop it", "fall back to the default", or "leave it and let it match
+    nothing" — today everything downstream just fails gracefully.
+
+26. **Options row shouldn't need the dataset rows (2026-07-25).** Four of the five
+    controls (view/badges/access/search) need only their current value. Keywords needs
+    the rows solely because its choice list is derived client-side by scanning every
+    record's `tags.keywords` — which is also why `showOptions` fetches the dataset file a
+    second time, on top of `showDataset`'s fetch. If the distinct keyword values were
+    materialized at build time, the options row would need nothing but the params and
+    `datasets.json`, the second fetch would go away, and the control signature would lose
+    an argument. Works as-is short term; deferred deliberately.
+
 ## Planned
 
 9. ~~**Bring other campground/park pages up to the new campground-block format

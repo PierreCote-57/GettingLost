@@ -49,8 +49,12 @@
 
   // Severity ramp for the access threshold, easiest -> hardest. The access
   // <select> is built from the same array, so the control and the filter cannot
-  // drift apart.
-  var ROAD_ORDER = Object.keys(window.GL.ROAD_COLORS);
+  // drift apart. Read through a function, not a top-level constant: this script
+  // executes before gl-constants.jst defines window.GL, and every caller runs
+  // later (after a fetch), by which time GL is there.
+  function roadOrder() {
+    return GL.ROAD_COLORS;
+  }
 
   var optionsEl = document.querySelector("[data-lb-options]");
   var dataEl = document.querySelector("[data-lb-data]");
@@ -313,10 +317,11 @@
   // rows with authored legs derive a badge at all, and an unmeasured road is not
   // evidence of a bad one. An unknown threshold value filters nothing.
   function filterAccess(value, shortList) {
-    var limit = ROAD_ORDER.indexOf(value);
+    var order = roadOrder();
+    var limit = order.indexOf(value);
     if (limit === -1) return shortList;
     return shortList.filter(function (row) {
-      var rank = ROAD_ORDER.indexOf(window.GL.deriveRoadBadge(row.access));
+      var rank = order.indexOf(window.GL.deriveRoadBadge(row.access));
       return rank === -1 || rank <= limit;
     });
   }
@@ -628,7 +633,7 @@
     any.textContent = "Access: any";
     sel.appendChild(any);
 
-    ROAD_ORDER.forEach(function (r) {
+    roadOrder().forEach(function (r) {
       var opt = document.createElement("option");
       opt.value = r;
       opt.textContent = r.replace(/_/g, " ");
