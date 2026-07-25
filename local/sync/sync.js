@@ -1005,15 +1005,18 @@ async function syncOnePageToFileBird(pageFolderCache, pageId, relPath) {
   }
 }
 
-// The dataset lists under these two folders are HYDRATED at sync time (their
-// `{file}` pointer entries are replaced with the referenced page's JSON) rather
-// than copied verbatim. datasets.json (the manifest, one level up in lists/) is
-// deliberately NOT here — its `file` values point at datasets, not pages, so it
-// copies like any other file.
-const HYDRATED_LIST_PREFIXES = ["data/shared/lists/all/", "data/shared/lists/known/"];
+// The manifest (list_browser/datasets.json) is the single source of truth for
+// which files get HYDRATED at sync time: each entry's `file` is a pointer/inline
+// list whose `{file}` pointers are replaced with the referenced page's JSON.
+// datasets.json itself and list_browser.json aren't listed there, so they copy
+// verbatim like any other file.
+const LIST_BROWSER_DIR = "data/shared/list_browser";
 
-function isHydratedList(normalized) {
-  return normalized.endsWith(".json") && HYDRATED_LIST_PREFIXES.some((p) => normalized.startsWith(p));
+// Set of normalized (MEDIA_ROOT-relative) paths to hydrate, read from the manifest.
+function loadHydratedListSet() {
+  const manifest = path.join(MEDIA_ROOT, LIST_BROWSER_DIR, "datasets.json");
+  const datasets = JSON.parse(fs.readFileSync(manifest, "utf8"));
+  return new Set(datasets.map((d) => `${LIST_BROWSER_DIR}/${d.file}`));
 }
 
 // Replace each `{file}` pointer entry with the referenced page's JSON, matching
@@ -1041,7 +1044,7 @@ function hydrateList(entries, relPath, perPageDataMap) {
   return { hydrated, failCount };
 }
 
-async function syncFiles(fileBirdFolderCache) {
+async function syncFiles(fileBirdFolderCache, hydratedSet) {
   let successCount = 0;
   let failCount = 0;
 
@@ -1059,7 +1062,7 @@ async function syncFiles(fileBirdFolderCache) {
   for (const relSubPath of filenames) {
     const normalized = relSubPath.split(path.sep).join("/");
 
-    if (isHydratedList(normalized)) {
+    if (hydratedSet.has(normalized)) {
       continue;
     }
 
@@ -1087,12 +1090,12 @@ async function syncFiles(fileBirdFolderCache) {
   return { successCount, failCount };
 }
 
-// Hydrate the dataset lists under data/shared/lists/{all,known}/ and publish the
-// merged result. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
+// Hydrate the manifest-listed dataset files (see loadHydratedListSet) and publish
+// the merged result. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
 // changed page is always reflected in the hydrated output even when the list
 // file itself didn't change. An unresolvable pointer is a hard failure
 // (annotated + counted in hydrateList); the partial list is not published.
-async function syncHydratedLists(fileBirdFolderCache, perPageDataMap) {
+async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, hydratedSet) {
   let successCount = 0;
   let failCount = 0;
 
@@ -1101,8 +1104,7 @@ async function syncHydratedLists(fileBirdFolderCache, perPageDataMap) {
     return { successCount, failCount };
   }
 
-  const allEntries = fs.readdirSync(MEDIA_ROOT, { recursive: true });
-  const listFiles = allEntries.map((f) => f.split(path.sep).join("/")).filter(isHydratedList);
+  const listFiles = [...hydratedSet];
 
   for (const normalized of listFiles) {
     const filePath = path.join(MEDIA_ROOT, normalized);
@@ -1215,6 +1217,7 @@ async function main() {
 
   console.log("=== Loading data maps ===");
   const perPageDataMap = loadPerPageDataMap();
+  const hydratedSet = loadHydratedListSet();
   console.log(`[data] Loaded ${perPageDataMap.size} per-page data files.`);
 
   const wpPageMap = await loadWpPageMap();
@@ -1238,10 +1241,10 @@ async function main() {
   const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
 
   console.log("\n=== Syncing files (Media) ===");
-  const filesResult = await syncFiles(fileBirdFolderCache);
+  const filesResult = await syncFiles(fileBirdFolderCache, hydratedSet);
 
   console.log("\n=== Syncing hydrated lists ===");
-  const listsResult = await syncHydratedLists(fileBirdFolderCache, perPageDataMap);
+  const listsResult = await syncHydratedLists(fileBirdFolderCache, perPageDataMap, hydratedSet);
 
   console.log("\n=== Syncing logs ===");
   const logsResult = await syncLogs(fileBirdFolderCache);

@@ -1,0 +1,4479 @@
+[
+	{
+		"file": "elk-falls-quinsam-campground.html"
+	},
+	{
+		"file": "morton-lake-park.html"
+	},
+	{
+		"file": "sproat-lake-provincial-park.html"
+	},
+	{
+		"file": "pacific-playgrounds-resort.html"
+	},
+	{
+		"file": "salmon-point-resort.html"
+	},
+	{
+		"file": "beavertail-lake-dayuse.html"
+	},
+	{
+		"file": "echo-lake-dayuse.html"
+	},
+	{
+		"file": "mohun-lake-rec0184.html"
+	},
+	{
+		"file": "amor-lake.html"
+	},
+	{
+		"file": "beavertail-lake.html"
+	},
+	{
+		"file": "echo-lake.html"
+	},
+	{
+		"file": "gosling-lake.html"
+	},
+	{
+		"file": "keogh-lake.html"
+	},
+	{
+		"file": "mohun-lake.html"
+	},
+	{
+		"file": "morton-lake.html"
+	},
+	{
+		"file": "muchalat-lake.html"
+	},
+	{
+		"file": "roberts-lake.html"
+	},
+	{
+		"file": "sproat-lake.html"
+	},
+	{
+		"name": "French Beach Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/french-beach-park/"
+			}
+		],
+		"location": {
+			"lat": 48.3906956,
+			"lng": -123.9416582,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Between Sooke and Jordan River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 85
+				},
+				{
+					"town": "Victoria",
+					"km": 45
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"amenities": [
+				"beach access",
+				"pit toilets"
+			],
+			"links": [
+				{
+					"label": "Reservable",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Goldstream Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/goldstream-park/"
+			}
+		],
+		"location": {
+			"lat": 48.4770313,
+			"lng": -123.5430354,
+			"pin": null,
+			"zoom": 13,
+			"notes": "16 km NW of Victoria, Trans-Canada Hwy"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 210
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 15
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 155,
+			"amenities": [
+				"flush toilets",
+				"showers",
+				"drinking water",
+				"wheelchair accessible",
+				"group campsites",
+				"fire pits",
+				"winter camping"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_park_campground_map_efaee751b7.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_map_5abd6693ba.pdf"
+				},
+				{
+					"label": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Gordon Bay Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/gordon-bay-park/"
+			}
+		],
+		"location": {
+			"lat": 48.8335432,
+			"lng": -124.2022988,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cowichan Lake, north of Duncan"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 150
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 75
+				}
+			]
+		},
+		"campground": {
+			"operator": "K2 Park Services Ltd.",
+			"siteCount": 126,
+			"amenities": [
+				"flush toilets",
+				"outhouses",
+				"potable water taps",
+				"no cell service",
+				"sandy beach"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/gordon_bay_park_map_771a73ae0a.pdf"
+				},
+				{
+					"label": "123 of 126 sites reservable; limited winter FCFS at reduced rate",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Juan de Fuca Provincial Park (China Beach Campground)",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/juan-de-fuca-park/"
+			}
+		],
+		"location": {
+			"lat": 48.5086267,
+			"lng": -124.3598452,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Southwest Vancouver Island, Juan de Fuca coast"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 180
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 75
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 125,
+			"amenities": [
+				"outhouses",
+				"potable water taps",
+				"no cell service"
+			],
+			"links": [
+				{
+					"label": "Nearly all sites reservable; 1 site FCFS",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "vehicle-accessible + walk-in"
+			}
+		]
+	},
+	{
+		"name": "Little Qualicum Falls Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/little-qualicum-falls-park/"
+			}
+		],
+		"location": {
+			"lat": 49.2892711,
+			"lng": -124.6498123,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Between Parksville/Qualicum and Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 90
+				},
+				{
+					"town": "Nanaimo",
+					"km": 55
+				},
+				{
+					"town": "Victoria",
+					"km": 135
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"amenities": [
+				"hiking trails to waterfalls"
+			],
+			"links": [
+				{
+					"label": "Reservable",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Loveland Bay Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/loveland-bay-park/"
+			}
+		],
+		"location": {
+			"lat": 50.0496831,
+			"lng": -125.4512122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell Lake, near Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 15
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "Quality Recreation Ltd.",
+			"siteCount": 50,
+			"amenities": [
+				"rustic wilderness lakeside camping"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/loveland_bay_park_map_c1b9ff4f32.pdf"
+				},
+				{
+					"label": "Reservable; open April 1–Oct 12",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Lower Nimpkish Lake Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/lower-nimpkish-park/"
+			}
+		],
+		"location": {
+			"lat": 50.536722,
+			"lng": -127.0090386,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Lower Nimpkish River, Nimpkish Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 140
+				},
+				{
+					"town": "Nanaimo",
+					"km": 270
+				},
+				{
+					"town": "Victoria",
+					"km": 350
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Wilderness camping is allowed and no facilities are provided."
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Miracle Beach Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/miracle-beach-park/"
+			}
+		],
+		"location": {
+			"lat": 49.8461306,
+			"lng": -125.0972267,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Black Creek, between Campbell River and Courtenay"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 115
+				},
+				{
+					"town": "Victoria",
+					"km": 200
+				}
+			]
+		},
+		"campground": {
+			"operator": "Quality Recreation Ltd.",
+			"siteCount": 201,
+			"amenities": [
+				"hot showers",
+				"flush toilets",
+				"nature house and store",
+				"adventure playground",
+				"sheltered beach"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_map_3212db3989.pdf"
+				},
+				{
+					"label": "Trail map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_trail_map_a3af093f06.pdf"
+				},
+				{
+					"label": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Nimpkish Lake Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/nimpkish-lake-park/"
+			}
+		],
+		"location": {
+			"lat": 50.3386857,
+			"lng": -127.0217235,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nimpkish Lake, Nimpkish Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 130
+				},
+				{
+					"town": "Nanaimo",
+					"km": 255
+				},
+				{
+					"town": "Victoria",
+					"km": 340
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Wilderness camping is allowed and no facilities are provided."
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Rathtrevor Beach Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/rathtrevor-beach-park/"
+			}
+		],
+		"location": {
+			"lat": 49.3248225,
+			"lng": -124.2616978,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 251,
+			"amenities": [
+				"sandy beach",
+				"flush toilets",
+				"showers"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
+				},
+				{
+					"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
+					"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "vehicle-accessible + walk-in"
+			}
+		]
+	},
+	{
+		"name": "Schoen Lake Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/schoen-lake-park/"
+			}
+		],
+		"location": {
+			"lat": 50.17172,
+			"lng": -126.260722,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Schoen Lake, near Woss"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 200
+				},
+				{
+					"town": "Victoria",
+					"km": 285
+				}
+			]
+		},
+		"campground": {
+			"links": [
+				{
+					"label": "First-come-first-served",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Stamp River Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/stamp-river-park/"
+			}
+		],
+		"location": {
+			"lat": 49.3479789,
+			"lng": -124.9385453,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Near Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 80
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 155
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"amenities": [
+				"salmon-viewing trail",
+				"fish ladder lookout"
+			],
+			"links": [
+				{
+					"label": "Reservable",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Strathcona Provincial Park — Buttle Lake Campground",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/strathcona-park/"
+			}
+		],
+		"location": {
+			"lat": 49.7046516,
+			"lng": -125.5602583,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Highway 28, ~48 km west of Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 130
+				},
+				{
+					"town": "Victoria",
+					"km": 215
+				}
+			]
+		},
+		"campground": {
+			"operator": "BC Parks",
+			"siteCount": 79,
+			"amenities": [
+				"sandy lakefront beach",
+				"washrooms",
+				"water pump",
+				"boat launch",
+				"fire rings",
+				"no RV hookups",
+				"RV length limit 32 ft"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+				},
+				{
+					"label": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "Back-country camping allowed"
+			}
+		]
+	},
+	{
+		"name": "Strathcona Provincial Park — Ralph River Campground",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/strathcona-park/"
+			}
+		],
+		"location": {
+			"lat": 49.6537488,
+			"lng": -125.4554345,
+			"pin": null,
+			"zoom": 13,
+			"notes": "35 km south of Buttle Lake along Buttle Lake (Western Mines) Road"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 45
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		},
+		"campground": {
+			"operator": "BC Parks",
+			"siteCount": 75,
+			"amenities": [
+				"old-growth forest setting",
+				"pit toilets",
+				"water pump",
+				"no RV hookups",
+				"RV length limit 32 ft"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+				},
+				{
+					"label": "Partially reservable, remainder first-come-first-served",
+					"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Taylor Arm Provincial Park",
+		"tags": {
+			"keywords": [
+				"park"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bcparks.ca/taylor-arm-park/"
+			}
+		],
+		"location": {
+			"lat": 49.2762872,
+			"lng": -125.0435249,
+			"pin": null,
+			"zoom": 13,
+			"notes": "West of Sproat Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 155
+				}
+			]
+		},
+		"campground": {
+			"operator": "RLC Park Services",
+			"siteCount": 3,
+			"amenities": [
+				"group camping only",
+				"day-use"
+			],
+			"links": [
+				{
+					"label": "Group sites reservable",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "group sites"
+			}
+		]
+	},
+	{
+		"name": "Arden Creek Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0214"
+			}
+		],
+		"location": {
+			"lat": 49.2343668,
+			"lng": -124.8056517,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Alberni Inlet, outside Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 65
+				},
+				{
+					"town": "Victoria",
+					"km": 140
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 6,
+			"amenities": [
+				"picnic tables",
+				"pit toilets",
+				"fire pits",
+				"boat launch",
+				"not suitable for motorhomes"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "2 walk-in pads and 4 vehicle pads"
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Blackies Beach Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6407"
+			}
+		],
+		"location": {
+			"lat": 49.1573208,
+			"lng": -125.0179231,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Backroads toward Nahmint Lake, near Sproat Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 145
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 6,
+			"amenities": [
+				"tent pads",
+				"toilets",
+				"small cabin"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Leiner River Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0276"
+			}
+		],
+		"location": {
+			"lat": 49.915881,
+			"lng": -126.625535,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Leiner River, near Tahsis"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 210
+				},
+				{
+					"town": "Victoria",
+					"km": 290
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 8,
+			"links": [
+				{
+					"label": "First-come-first-served",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Lizard Lake Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0269"
+			}
+		],
+		"location": {
+			"lat": 48.5542109,
+			"lng": -124.4031008,
+			"pin": null,
+			"zoom": 13,
+			"notes": "~20 min drive from Port Renfrew"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 175
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 80
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 27,
+			"amenities": [
+				"two floating docks",
+				"swimming",
+				"paddling",
+				"lake loop trail"
+			],
+			"links": [
+				{
+					"label": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "vehicle-accessible + walk-in"
+			},
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Marble River Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0242"
+			}
+		],
+		"location": {
+			"lat": 50.5452514,
+			"lng": -127.529147,
+			"pin": null,
+			"zoom": 13,
+			"notes": "40 min drive from Port McNeill, adjacent to Marble River Provincial Park"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 170
+				},
+				{
+					"town": "Nanaimo",
+					"km": 300
+				},
+				{
+					"town": "Victoria",
+					"km": 380
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 35,
+			"amenities": [
+				"two campground loops",
+				"river access",
+				"salmon spawning viewing nearby"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free; closed September–May (gated)",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Mr. Canoehead Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3067"
+			}
+		],
+		"location": {
+			"lat": 50.1670632,
+			"lng": -125.5312914,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward Forest Canoe Route, between Amor Lake and Surprise Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 8,
+			"amenities": [
+				"picnic tables",
+				"pit toilets",
+				"boat/canoe access only"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Nahwitti Lake Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0125"
+			}
+		],
+		"location": {
+			"lat": 50.7046816,
+			"lng": -127.8407191,
+			"pin": null,
+			"zoom": 13,
+			"notes": "En route to/from Cape Scott Provincial Park, North Island"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 200
+				},
+				{
+					"town": "Nanaimo",
+					"km": 325
+				},
+				{
+					"town": "Victoria",
+					"km": 410
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 8,
+			"amenities": [
+				"vehicle accessible"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Pacific Yew Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC261703"
+			}
+		],
+		"location": {
+			"lat": 50.086223,
+			"lng": -125.505066,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Mohun Lake, Sayward Canoe Route, north of Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 30,
+			"amenities": [
+				"large sites",
+				"outhouses",
+				"paddling/boating access"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://www.vicamping.com/images/PacificYewRecreationSite.pdf"
+				},
+				{
+					"label": "First-come-first-served",
+					"url": null
+				},
+				{
+					"label": "VI Camping",
+					"url": "https://www.vicamping.com/campsites/pacificyew"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Scout Beach Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5750"
+			}
+		],
+		"location": {
+			"lat": 49.356065,
+			"lng": -125.2888531,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Great Central Lake, near Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 100
+				},
+				{
+					"town": "Victoria",
+					"km": 175
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 12,
+			"amenities": [
+				"picnic tables",
+				"pit toilets",
+				"fire pits",
+				"boat launch"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served, free",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Upper Campbell Reservoir Recreation Site",
+		"tags": {
+			"keywords": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0159"
+			}
+		],
+		"location": {
+			"lat": 49.9177133,
+			"lng": -125.6618491,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Upper Campbell Lake, near Strathcona Park"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC",
+			"siteCount": 40,
+			"amenities": [
+				"pit toilets",
+				"picnic tables",
+				"fire pits",
+				"small beach",
+				"boat launch"
+			],
+			"links": [
+				{
+					"label": "First-come-first-served; max stay 14 nights",
+					"url": null
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			}
+		]
+	},
+	{
+		"name": "Alder Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.alderbay.com/"
+			}
+		],
+		"location": {
+			"lat": 50.5893452,
+			"lng": -127.0839027,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 275
+				},
+				{
+					"town": "Victoria",
+					"km": 360
+				}
+			]
+		}
+	},
+	{
+		"name": "All Fun Recreation RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://allfun.camp.zone/"
+			}
+		],
+		"location": {
+			"lat": 48.4497693,
+			"lng": -123.504666,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Langford, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 215
+				},
+				{
+					"town": "Nanaimo",
+					"km": 85
+				},
+				{
+					"town": "Victoria",
+					"km": 10
+				}
+			]
+		}
+	},
+	{
+		"name": "Bald Eagle Campground & RV Sites",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.bc-camping.com/"
+			}
+		],
+		"location": {
+			"lat": 48.922499,
+			"lng": -123.718414,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Chemainus, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 60
+				}
+			]
+		}
+	},
+	{
+		"name": "Bella Pacifica Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://bellapacifica.com/"
+			}
+		],
+		"location": {
+			"lat": 49.1528473,
+			"lng": -125.9048279,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tofino, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 110
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		}
+	},
+	{
+		"name": "Brannen Lake Campsites",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://brannenlake.com/"
+			}
+		],
+		"location": {
+			"lat": 49.163877,
+			"lng": -123.938122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nanaimo, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 1
+				},
+				{
+					"town": "Victoria",
+					"km": 90
+				}
+			]
+		}
+	},
+	{
+		"name": "Brown's Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://brownsbayresort.com/"
+			}
+		],
+		"location": {
+			"lat": 50.1594885,
+			"lng": -125.3723823,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 15
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"siteCount": 60,
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://brownsbayresort.com/resort-map/"
+				}
+			]
+		}
+	},
+	{
+		"name": "Cameron Lake Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://cameronlakeresort.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.3479861,
+			"lng": -124.4439409,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 130
+				}
+			]
+		}
+	},
+	{
+		"name": "Cape Lazo Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://capelazo.com/"
+			}
+		],
+		"location": {
+			"lat": 49.6858493,
+			"lng": -124.8799953,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Comox, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 45
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 180
+				}
+			]
+		},
+		"campground": {
+			"siteCount": 62,
+			"amenities": [
+				"full service (water/sewer/power)",
+				"30/50 amp",
+				"WiFi",
+				"pavilion with fireplace",
+				"beach access",
+				"showers"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://capelazo.com/campground-map/"
+				},
+				{
+					"label": "Reservations required; no drop-ins; bookable up to a year ahead",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Cedar Grove RV Park & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.cedargrovervpark.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.3479861,
+			"lng": -124.4439409,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 130
+				}
+			]
+		}
+	},
+	{
+		"name": "Cedar Springs Ranch",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://cedarspringsranch.com/"
+			}
+		],
+		"location": {
+			"lat": 48.5446533,
+			"lng": -123.5680621,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Malahat, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 20
+				}
+			]
+		}
+	},
+	{
+		"name": "Chemainus Gardens RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.metrocp.ca/chemainus-gardens/"
+			}
+		],
+		"location": {
+			"lat": 48.922499,
+			"lng": -123.718414,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Chemainus, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 60
+				}
+			]
+		}
+	},
+	{
+		"name": "China Creek Marina & RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://campchinacreek.com/"
+			}
+		],
+		"location": {
+			"lat": 49.2343668,
+			"lng": -124.8056517,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 65
+				},
+				{
+					"town": "Victoria",
+					"km": 140
+				}
+			]
+		}
+	},
+	{
+		"name": "Country Maples RV Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://holidaytrailsresorts.com/country-maples-rv-resort/"
+			}
+		],
+		"location": {
+			"lat": 48.896078,
+			"lng": -123.7157026,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Chemainus, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 35
+				},
+				{
+					"town": "Victoria",
+					"km": 60
+				}
+			]
+		}
+	},
+	{
+		"name": "Crystal Cove Beach Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.crystalcove.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.1528473,
+			"lng": -125.9048279,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tofino, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 110
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		}
+	},
+	{
+		"name": "Deep Bay RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://deepbayrvpark.com/"
+			}
+		],
+		"location": {
+			"lat": 49.4402737,
+			"lng": -124.6882261,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bowser, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 150
+				}
+			]
+		}
+	},
+	{
+		"name": "Driftwood By The Sea RV Park & Cottages",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://driftwoodbythesea.com/"
+			}
+		],
+		"location": {
+			"lat": 50.004275,
+			"lng": -125.232331,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 1
+				},
+				{
+					"town": "Nanaimo",
+					"km": 130
+				},
+				{
+					"town": "Victoria",
+					"km": 220
+				}
+			]
+		}
+	},
+	{
+		"name": "Fisherboy Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.fisherboypark.com/"
+			}
+		],
+		"location": {
+			"lat": 50.3780591,
+			"lng": -125.9592773,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 65
+				},
+				{
+					"town": "Nanaimo",
+					"km": 200
+				},
+				{
+					"town": "Victoria",
+					"km": 285
+				}
+			]
+		}
+	},
+	{
+		"name": "Fort Victoria RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://fortvictoria.ca/"
+			}
+		],
+		"location": {
+			"lat": 48.4283182,
+			"lng": -123.364953,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Victoria, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 225
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 1
+				}
+			]
+		}
+	},
+	{
+		"name": "Harmony Shores Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.harmonyshorescamping.ca/"
+			}
+		],
+		"location": {
+			"lat": 50.633333,
+			"lng": -127.016667,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sointula, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 275
+				},
+				{
+					"town": "Victoria",
+					"km": 360
+				}
+			]
+		}
+	},
+	{
+		"name": "Heart Haven RV Family Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.hearthavenrvcamping.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.3179514,
+			"lng": -124.311739,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Island West Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "http://www.islandwestresort.com/"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		}
+	},
+	{
+		"name": "Jingle Pot RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.jinglepotrv.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.163877,
+			"lng": -123.938122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nanaimo, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 1
+				},
+				{
+					"town": "Victoria",
+					"km": 90
+				}
+			]
+		}
+	},
+	{
+		"name": "Living Forest Oceanside Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.livingforest.com/"
+			}
+		],
+		"location": {
+			"lat": 49.163877,
+			"lng": -123.938122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nanaimo, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 1
+				},
+				{
+					"town": "Victoria",
+					"km": 90
+				}
+			]
+		}
+	},
+	{
+		"name": "Mountainaire Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://mountainairervpark.com/"
+			}
+		],
+		"location": {
+			"lat": 49.163877,
+			"lng": -123.938122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nanaimo, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 1
+				},
+				{
+					"town": "Victoria",
+					"km": 90
+				}
+			]
+		}
+	},
+	{
+		"name": "Nanoose Creek Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://nanoosecreekcampground.com/"
+			}
+		],
+		"location": {
+			"lat": 49.271116,
+			"lng": -124.1925699,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nanoose Bay, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 115
+				},
+				{
+					"town": "Nanaimo",
+					"km": 20
+				},
+				{
+					"town": "Victoria",
+					"km": 110
+				}
+			]
+		}
+	},
+	{
+		"name": "Oceanside RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.parkbridge.com/en/resort/resort-detail/oceanside"
+			}
+		],
+		"location": {
+			"lat": 48.5937899,
+			"lng": -123.3827,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Saanichton, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 210
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 20
+				}
+			]
+		}
+	},
+	{
+		"name": "Osbourne Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.osbornebayresort.com/"
+			}
+		],
+		"location": {
+			"lat": 48.8630676,
+			"lng": -123.63917,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Crofton, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 175
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 50
+				}
+			]
+		}
+	},
+	{
+		"name": "Pacific Palms RV Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.pacificpalmsrvresort.com/"
+			}
+		],
+		"location": {
+			"lat": 49.3179514,
+			"lng": -124.311739,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Paradise Sea-Side Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.paradiservpark.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.3179514,
+			"lng": -124.311739,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Park Sands Beach Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://parksands.com/"
+			}
+		],
+		"location": {
+			"lat": 49.3179514,
+			"lng": -124.311739,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Pedder Bay RV Resort & Marina",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://pedderbay.com/"
+			}
+		],
+		"location": {
+			"lat": 48.3796009,
+			"lng": -123.535234,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Metchosin, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 220
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 15
+				}
+			]
+		}
+	},
+	{
+		"name": "Pioneer Inn",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.pioneerinn.ca/"
+			}
+		],
+		"location": {
+			"lat": 50.7244402,
+			"lng": -127.4976081,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Hardy, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 180
+				},
+				{
+					"town": "Nanaimo",
+					"km": 310
+				},
+				{
+					"town": "Victoria",
+					"km": 390
+				}
+			]
+		}
+	},
+	{
+		"name": "Port Alice RV Park & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.portaliceoceanfrontrv.com/"
+			}
+		],
+		"location": {
+			"lat": 50.426893,
+			"lng": -127.488098,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alice, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 290
+				},
+				{
+					"town": "Victoria",
+					"km": 370
+				}
+			]
+		}
+	},
+	{
+		"name": "Qualicum Bay Resort and RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://resortbc.com/"
+			}
+		],
+		"location": {
+			"lat": 49.3479861,
+			"lng": -124.4439409,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 130
+				}
+			]
+		}
+	},
+	{
+		"name": "Riverbend Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://riverbendresort.bc.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.3179514,
+			"lng": -124.311739,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Riverside Campground & RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://cowichanrivercampground.ca/"
+			}
+		],
+		"location": {
+			"lat": 48.7786872,
+			"lng": -123.7080446,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Duncan, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 180
+				},
+				{
+					"town": "Nanaimo",
+					"km": 45
+				},
+				{
+					"town": "Victoria",
+					"km": 45
+				}
+			]
+		}
+	},
+	{
+		"name": "Riverside Resort Motel & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://myriversideresort.com/"
+			}
+		],
+		"location": {
+			"lat": 49.3479861,
+			"lng": -124.4439409,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 130
+				}
+			]
+		}
+	},
+	{
+		"name": "Rondalyn Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.parkbridge.com/en/resort/resort-detail/rondalyn"
+			}
+		],
+		"location": {
+			"lat": 48.9936579,
+			"lng": -123.8157964,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ladysmith, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 155
+				},
+				{
+					"town": "Nanaimo",
+					"km": 20
+				},
+				{
+					"town": "Victoria",
+					"km": 70
+				}
+			]
+		}
+	},
+	{
+		"name": "Salish Seaside RV Haven",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.salishseasidervhaven.com/"
+			}
+		],
+		"location": {
+			"lat": 48.4283182,
+			"lng": -123.364953,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Victoria, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 225
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 1
+				}
+			]
+		}
+	},
+	{
+		"name": "Saratoga Beach Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://saratogabeach.com/"
+			}
+		],
+		"location": {
+			"lat": 49.8647774,
+			"lng": -125.1164871,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Black Creek, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 115
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		},
+		"campground": {
+			"amenities": [
+				"30 amp power, water, cable, sewer",
+				"washrooms & showers",
+				"laundry",
+				"WiFi",
+				"beachfront"
+			]
+		}
+	},
+	{
+		"name": "Seal Bay RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.sealbayrvpark.com/"
+			}
+		],
+		"location": {
+			"lat": 49.752152,
+			"lng": -124.959433,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Courtenay, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 100
+				},
+				{
+					"town": "Victoria",
+					"km": 185
+				}
+			]
+		},
+		"campground": {
+			"siteCount": 150,
+			"amenities": [
+				"full hookups (30/50 amp)",
+				"picnic tables & fire pits",
+				"WiFi",
+				"coin showers & laundry",
+				"picnic pavilion",
+				"outdoor kitchen",
+				"group camping"
+			]
+		},
+		"footnotes": [
+			{
+				"field": "siteCount",
+				"text": "fully serviced RV sites + wilderness tent sites"
+			}
+		]
+	},
+	{
+		"name": "Seaside RV Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://villageoftahsis.com"
+			}
+		],
+		"location": {
+			"lat": 49.912073,
+			"lng": -126.662932,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tahsis, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 215
+				},
+				{
+					"town": "Victoria",
+					"km": 290
+				}
+			]
+		}
+	},
+	{
+		"name": "Shalom RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "http://shalomrv.com/"
+			}
+		],
+		"location": {
+			"lat": 49.3479861,
+			"lng": -124.4439409,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 130
+				}
+			]
+		}
+	},
+	{
+		"name": "Shelter Bay Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://shelterbayresort.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.932137,
+			"lng": -125.186201,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 10
+				},
+				{
+					"town": "Nanaimo",
+					"km": 125
+				},
+				{
+					"town": "Victoria",
+					"km": 215
+				}
+			]
+		},
+		"campground": {
+			"siteCount": 50,
+			"amenities": [
+				"full hookups",
+				"heated washrooms & showers",
+				"coin laundry",
+				"private beachfront",
+				"kayaks"
+			]
+		}
+	},
+	{
+		"name": "Sooke River Campsite",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://sookecampground.com/"
+			}
+		],
+		"location": {
+			"lat": 48.3886696,
+			"lng": -123.7071955,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sooke, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 215
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 25
+				}
+			]
+		}
+	},
+	{
+		"name": "Speedway RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://speedwayrv.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.853833,
+			"lng": -125.137988,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Black Creek, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 115
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		},
+		"campground": {
+			"siteCount": 122,
+			"amenities": [
+				"serviced & unserviced RV sites",
+				"tent camping",
+				"swimming pool",
+				"hot tub",
+				"WiFi",
+				"convenience store",
+				"free hot showers"
+			],
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://speedwayrv.ca/wp-content/uploads/2025/04/Speedway-RV-Park-Map.jpg"
+				},
+				{
+					"label": "Reservable online (Campspot)",
+					"url": null
+				}
+			]
+		}
+	},
+	{
+		"name": "Sunny Sanctuary Campground / Port Hardy RV Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://porthardyrvresort.com/"
+			}
+		],
+		"location": {
+			"lat": 50.7244402,
+			"lng": -127.4976081,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Hardy, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 180
+				},
+				{
+					"town": "Nanaimo",
+					"km": 310
+				},
+				{
+					"town": "Victoria",
+					"km": 390
+				}
+			]
+		}
+	},
+	{
+		"name": "Surf Grove Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://surfgrove.com/"
+			}
+		],
+		"location": {
+			"lat": 49.1528473,
+			"lng": -125.9048279,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tofino, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 110
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		}
+	},
+	{
+		"name": "Surf Junction Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.surfjunction.com/"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		}
+	},
+	{
+		"name": "Surfside RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://surfsiderv.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.3179514,
+			"lng": -124.311739,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Parksville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 30
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Telegraph Cove Marina & RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://telegraphcove.ca/"
+			}
+		],
+		"location": {
+			"lat": 50.5474331,
+			"lng": -126.831394,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Telegraph Cove, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 125
+				},
+				{
+					"town": "Nanaimo",
+					"km": 260
+				},
+				{
+					"town": "Victoria",
+					"km": 345
+				}
+			]
+		}
+	},
+	{
+		"name": "Thunderbird Campsite",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://thunderbirdrvpark.com/"
+			}
+		],
+		"location": {
+			"lat": 50.0420496,
+			"lng": -125.2496227,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 1
+				},
+				{
+					"town": "Nanaimo",
+					"km": 135
+				},
+				{
+					"town": "Victoria",
+					"km": 225
+				}
+			]
+		},
+		"campground": {
+			"amenities": [
+				"full hookups (30/50 amp)",
+				"WiFi",
+				"laundry",
+				"washrooms & showers",
+				"waterfront & garden sites",
+				"pet-friendly"
+			]
+		}
+	},
+	{
+		"name": "Tranquility Woods Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://tranquilitywoods.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.2895736,
+			"lng": -124.3703961,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Errington, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 35
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		}
+	},
+	{
+		"name": "Ucluelet Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://uclueletcampground.com/"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		}
+	},
+	{
+		"name": "Westwood Lake RV Camping & Cabins (Westwood Lake Campground Resort)",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://westwoodlakecampgrounds.com/"
+			}
+		],
+		"location": {
+			"lat": 49.163877,
+			"lng": -123.938122,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nanaimo, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 1
+				},
+				{
+					"town": "Victoria",
+					"km": 90
+				}
+			]
+		}
+	},
+	{
+		"name": "White River Resort",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://saywardwhiteriverresort.com/"
+			}
+		],
+		"location": {
+			"lat": 50.3780591,
+			"lng": -125.9592773,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 65
+				},
+				{
+					"town": "Nanaimo",
+					"km": 200
+				},
+				{
+					"town": "Victoria",
+					"km": 285
+				}
+			]
+		}
+	},
+	{
+		"name": "Windy Waters Camping Ground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.windywaters.ca"
+			}
+		],
+		"location": {
+			"lat": 50.337,
+			"lng": -126.917111,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nimpkish Lake, Nimpkish Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 125
+				},
+				{
+					"town": "Nanaimo",
+					"km": 250
+				},
+				{
+					"town": "Victoria",
+					"km": 335
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "The campground is self serve."
+			}
+		]
+	},
+	{
+		"name": "Zuiderzee Campsites",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://zuiderzeecampsites.wixsite.com/zuiderzee-campsites"
+			}
+		],
+		"location": {
+			"lat": 49.08095,
+			"lng": -123.825712,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cedar, BC (near Nanaimo)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 15
+				},
+				{
+					"town": "Victoria",
+					"km": 80
+				}
+			]
+		}
+	},
+	{
+		"name": "Green Point Campground, Pacific Rim National Park Reserve",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://parks.canada.ca/pn-np/bc/pacificrim/activ/camping"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC (Long Beach area)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		},
+		"campground": {
+			"operator": "Parks Canada (federal, not BC provincial)"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Parks Canada (federal)"
+			}
+		]
+	},
+	{
+		"name": "Horne Lake Regional Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://rdn.bc.ca/horne-lake-regional-park"
+			}
+		],
+		"location": {
+			"lat": 49.351589,
+			"lng": -124.741552,
+			"pin": null,
+			"zoom": 13,
+			"notes": "near Qualicum Beach, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 145
+				}
+			]
+		},
+		"campground": {
+			"operator": "Regional District of Nanaimo (RDN)"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			},
+			{
+				"field": "name",
+				"text": "Home to Horne Lake Caves — guided cave tours (hornelake.com)."
+			}
+		]
+	},
+	{
+		"name": "Island View Beach Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/island-view-beach-regional-park"
+			}
+		],
+		"location": {
+			"lat": 48.5946782,
+			"lng": -123.420726,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Saanich Peninsula, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 20
+				}
+			]
+		},
+		"campground": {
+			"operator": "Capital Regional District (CRD)"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Jordan River Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/jordan-river-regional-park"
+			}
+		],
+		"location": {
+			"lat": 48.5002971,
+			"lng": -123.9681842,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Jordan River, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 195
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 45
+				}
+			]
+		},
+		"campground": {
+			"operator": "Capital Regional District (CRD)"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Kwaksistah Regional Park Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.rdmw.bc.ca/regional-services/parks/kwaksistah-winter-harbour--camping-"
+			}
+		],
+		"location": {
+			"lat": 50.516667,
+			"lng": -128.033333,
+			"pin": null,
+			"zoom": 13,
+			"notes": "near Winter Harbour, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 330
+				},
+				{
+					"town": "Victoria",
+					"km": 410
+				}
+			]
+		},
+		"campground": {
+			"operator": "Regional District of Mount Waddington",
+			"amenities": [
+				"7 rustic sites",
+				"no services",
+				"unreliable cell service"
+			]
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Link River Regional Park Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://portalice.ca/visitor-info/camping/"
+			}
+		],
+		"location": {
+			"lat": 50.426893,
+			"lng": -127.488098,
+			"pin": null,
+			"zoom": 13,
+			"notes": "near Port Alice, BC (Alice Lake)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 290
+				},
+				{
+					"town": "Victoria",
+					"km": 370
+				}
+			]
+		},
+		"campground": {
+			"operator": "Regional District of Mount Waddington",
+			"siteCount": 23,
+			"amenities": [
+				"waterfront/wooded sites",
+				"no services except accessible outhouses"
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "Regional district / municipal"
+			}
+		]
+	},
+	{
+		"name": "Nitinaht Lake Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://visitnitinaht.com/"
+			}
+		],
+		"location": {
+			"lat": 48.7524857,
+			"lng": -124.7354368,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nitinaht Lake, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 105
+				}
+			]
+		},
+		"campground": {
+			"operator": "Ditidaht First Nation (operating since 2006)"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Pacheedaht Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.visitpacheedaht.ca/"
+			}
+		],
+		"location": {
+			"lat": 48.5542109,
+			"lng": -124.4031008,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Renfrew, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 175
+				},
+				{
+					"town": "Nanaimo",
+					"km": 75
+				},
+				{
+					"town": "Victoria",
+					"km": 80
+				}
+			]
+		},
+		"campground": {
+			"operator": "Pacheedaht First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Pachena Bay Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://pachenabaycampground.ca/"
+			}
+		],
+		"location": {
+			"lat": 48.833086,
+			"lng": -125.141144,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bamfield, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 95
+				},
+				{
+					"town": "Victoria",
+					"km": 140
+				}
+			]
+		},
+		"campground": {
+			"operator": "Huu-ay-aht First Nations"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Puntledge RV Park & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.puntledgerv.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.697017,
+			"lng": -125.003351,
+			"pin": null,
+			"zoom": 13,
+			"notes": "4624 Condensory Rd, Courtenay, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 95
+				},
+				{
+					"town": "Victoria",
+					"km": 185
+				}
+			]
+		},
+		"campground": {
+			"operator": "Commercial RV campground owned and operated by the K'ómoks First Nation",
+			"siteCount": 120,
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://www.puntledgerv.ca/stay"
+				}
+			]
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Qualicum First Nation Waterfront Campground, Cabins and RV Park",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.qualicumfirstnation.com/"
+			}
+		],
+		"location": {
+			"lat": 49.4402737,
+			"lng": -124.6882261,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bowser, BC (near Qualicum Beach)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 150
+				}
+			]
+		},
+		"campground": {
+			"operator": "Qualicum First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Secret Beach Campground & Kayak Launch",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.secretbeachcampground.com/"
+			}
+		],
+		"location": {
+			"lat": 48.9426817,
+			"lng": -125.546049,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Ucluelet, BC (Toquaht Bay, 13km gravel off Hwy 4)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 120
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		},
+		"campground": {
+			"operator": "Toquaht First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "access",
+				"text": "Preliminary, to be confirmed"
+			},
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Snaw-Naw-as Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.snawnawascampground.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.2507112,
+			"lng": -124.0746545,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Lantzville, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 120
+				},
+				{
+					"town": "Nanaimo",
+					"km": 15
+				},
+				{
+					"town": "Victoria",
+					"km": 105
+				}
+			]
+		},
+		"campground": {
+			"operator": "Snaw-Naw-as First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	},
+	{
+		"name": "Sooke Potholes / Spring Salmon Place (KWL-UCHUN) Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://tsoukenation.com/sooke-potholes-regional-park-spring-salmon-place-campground/"
+			}
+		],
+		"location": {
+			"lat": 48.462091,
+			"lng": -123.738435,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sooke, BC"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 205
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 30
+				}
+			]
+		},
+		"campground": {
+			"operator": "Managed by CRD, operated by T'Sou-ke Nation",
+			"siteCount": 67,
+			"links": [
+				{
+					"label": "Campground map",
+					"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-campground.pdf"
+				},
+				{
+					"label": "Park map",
+					"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-regional-park.pdf"
+				}
+			]
+		}
+	},
+	{
+		"name": "Tsawaak RV Resort & Campground",
+		"tags": {
+			"keywords": [
+				"campground"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"url": "https://www.tsawaakrvresort.ca/"
+			}
+		],
+		"location": {
+			"lat": 49.1528473,
+			"lng": -125.9048279,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tofino, BC (near MacKenzie Beach)"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 110
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 205
+				}
+			]
+		},
+		"campground": {
+			"operator": "Tla-o-qui-aht First Nation"
+		},
+		"footnotes": [
+			{
+				"field": "name",
+				"text": "First Nations-operated"
+			}
+		]
+	}
+]
