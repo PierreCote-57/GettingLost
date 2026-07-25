@@ -10,7 +10,7 @@
 		"id": "van-howto",
 		"file": "van-howto.json",
 		"title": "How to",
-		"options": ["keywords", "search", "booklet"]
+		"options": ["view","keywords", "search", "booklet"]
 	},
 	{
 		"id": "van-checklist",
