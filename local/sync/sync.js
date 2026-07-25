@@ -77,27 +77,6 @@ const FILEBIRD_TOKEN = process.env.FILEBIRD_TOKEN || null;
 
 const FALLBACK_FEATURED_IMAGE_ID = 1751;
 
-// `exclude` drops sub-paths that `path` would otherwise sweep in.
-//
-// Lakes are excluded from the Destinations gallery on purpose: a destination
-// is somewhere you arrive at, a lake is a feature you look at. You don't drive
-// to a lake, you drive to a rec site or campground on its shore — which is why
-// lake pages carry no access/legs either. Lakes stay reachable through their
-// own Lakes gallery and through cross-references from the sites on them.
-//
-// destinations-overview is excluded for a different reason: it is not a place at
-// all, it is the table that lists them. A gallery card for it would advertise a
-// destination that cannot be visited.
-const GALLERY_RULES = [
-  { name: "Lakes", path: "destinations/lakes/" },
-  { name: "Campgrounds", path: "destinations/campgrounds/" },
-  { name: "Parks", path: "destinations/parks/" },
-  { name: "RecSites", path: "destinations/rec-sites/" },
-  { name: "Destinations", path: "destinations/", exclude: ["destinations/lakes/", "destinations/destinations-overview"] },
-  { name: "VanHowTo", path: "van/howto/" },
-  { name: "VanChecklist", path: "van/checklists/" },
-];
-
 // Leg types that may be AUTHORED in a page's access.legs. The drive list is
 // ordered easiest -> hardest and doubles as the severity rank; it mirrors
 // GL.ROAD_RANK in gl-constants.jst (browser code, can't be required here, so
@@ -115,44 +94,34 @@ const DRIVE_LEG_TYPES = ["unpaved", "dirt", "potholes", "sharp_rock", "rugged"];
 const NON_DRIVE_LEG_TYPES = ["walk", "hike", "boat"];
 const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
 
-// Badge-only value: derived from the legs, never authored.
-const BACK_COUNTRY = "back_country";
-
-// Derive the lower-left gallery badge from access.legs.
-//   legs absent  -> undefined (not filled in yet: render no badge)
-//   legs []      -> "pavement" (a deliberate statement: paved all the way)
-//   any non-drive leg -> "back_country"
-//   otherwise    -> the hardest drive leg
-// An unknown leg type is a data error: warn, name the file, and skip the leg
-// rather than silently ranking it. So is an unpaved leg with no km: unpaved
-// asserts a MEASURED non-paved tail, so without a km it claims nothing that
-// absent legs don't already say. Skipping it lands the badge back on "don't
-// know", which is what such a leg actually means.
-function deriveRoadBadge(access, filename) {
-  const legs = access && access.legs;
-  if (!Array.isArray(legs)) return undefined;
-  if (legs.length === 0) return "pavement";
-
-  let worst = -1;
-  for (const leg of legs) {
-    const type = leg && leg.type;
-    if (!LEG_TYPES.includes(type)) {
-      const msg = `[gallery] ${filename}: unknown leg type "${type}" — leg ignored.`;
-      console.warn(msg);
-      annotateWarning(msg);
-      continue;
+// Validate every page's access.legs against the authorable vocabulary. Build-time
+// DATA check only — the road badge itself is derived in the browser
+// (gettinglost.jst). A page FAILS if any leg is invalid: an unknown type, or an
+// `unpaved` leg with no positive km (unpaved asserts a MEASURED tail, so it means
+// nothing without one). Each bad leg is annotated (::error::) and the page counted
+// as failed, so the Summary reports it and main() exits non-zero. Pages with no
+// legs (e.g. lakes) are not applicable and aren't counted either way.
+function validateLegs(perPageDataMap) {
+  let successCount = 0;
+  let failCount = 0;
+  for (const [key, pd] of perPageDataMap) {
+    const legs = pd.data && pd.data.access && pd.data.access.legs;
+    if (!Array.isArray(legs) || legs.length === 0) continue;
+    let bad = false;
+    for (const leg of legs) {
+      const type = leg && leg.type;
+      if (!LEG_TYPES.includes(type)) {
+        annotateFailure(`[legs] ${key}: unknown leg type "${type}".`);
+        bad = true;
+      } else if (type === "unpaved" && !(typeof leg.km === "number" && leg.km > 0)) {
+        annotateFailure(`[legs] ${key}: unpaved leg has no km — unpaved states a measured tail, meaningless without one.`);
+        bad = true;
+      }
     }
-    if (type === "unpaved" && !(typeof leg.km === "number" && leg.km > 0)) {
-      const msg = `[gallery] ${filename}: unpaved leg has no km — unpaved states a measured tail, so it is meaningless without one. Leg ignored.`;
-      console.warn(msg);
-      annotateWarning(msg);
-      continue;
-    }
-    if (NON_DRIVE_LEG_TYPES.includes(type)) return BACK_COUNTRY;
-    worst = Math.max(worst, DRIVE_LEG_TYPES.indexOf(type));
+    if (bad) failCount++;
+    else successCount++;
   }
-
-  return worst < 0 ? undefined : DRIVE_LEG_TYPES[worst];
+  return { successCount, failCount };
 }
 
 // ---------------------------------------------------------------------
@@ -1234,6 +1203,9 @@ async function main() {
   const pageMap = generatePageMap(pageFileMap, perPageDataMap);
   console.log(`[pageMap] PageMap.json: ${Object.keys(pageMap).length} entries`);
 
+  console.log("\n=== Validating legs ===");
+  const legsResult = validateLegs(perPageDataMap);
+
   console.log("\n=== Syncing pages ===");
   const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
 
@@ -1253,14 +1225,15 @@ async function main() {
   const pageMapResult = await syncPageMap(pageMap, fileBirdFolderCache);
 
   console.log("\n=== Summary ===");
+  console.log(`Legs:      ${legsResult.successCount} ok, ${legsResult.failCount} failed`);
+  console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
+  console.log(`Posts:     ${postsResult.successCount} ok, ${postsResult.failCount} failed`);
   console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
   console.log(`Lists:     ${listsResult.successCount} ok, ${listsResult.failCount} failed`);
   console.log(`Logs:      ${logsResult.successCount} ok, ${logsResult.failCount} failed`);
   console.log(`PageMap:   ${pageMapResult.successCount} ok, ${pageMapResult.failCount} failed`);
-  console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
-  console.log(`Posts:     ${postsResult.successCount} ok, ${postsResult.failCount} failed`);
 
-  const totalFails = filesResult.failCount + listsResult.failCount + logsResult.failCount + pageMapResult.failCount + pagesResult.failCount + postsResult.failCount;
+  const totalFails = legsResult.failCount + pagesResult.failCount + postsResult.failCount + filesResult.failCount + listsResult.failCount + logsResult.failCount + pageMapResult.failCount;
   if (totalFails > 0) {
     process.exit(1);
   }
