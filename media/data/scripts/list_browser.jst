@@ -53,7 +53,7 @@
   // executes before gl-constants.jst defines window.GL, and every caller runs
   // later (after a fetch), by which time GL is there.
   function roadOrder() {
-    return GL.ROAD_COLORS;
+    return Object.keys(window.GL.ROAD_COLORS);
   }
 
   var optionsEl = document.querySelector("[data-lb-options]");
