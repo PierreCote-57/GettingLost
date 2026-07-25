@@ -522,6 +522,7 @@
     // TESTING — the alert shows the query string being committed, then the
     // navigation actually happens on dismiss. Delete the alert line before this
     // goes live; the assignment below is the real behavior and stays.
+      // Keeping the alert on purpose, it may be usefull later for other debugging.
 //    window.alert(next.toString());
     location.search = next.toString();
   }
