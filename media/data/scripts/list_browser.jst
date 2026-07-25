@@ -1,13 +1,19 @@
 /**
  * list_browser.jst
  *
- * Unified list browser (replaces gallery + destinations-overview). Driven by two
- * URL query parameters:
- *   ?dataset=<id>   one of the `id`s in datasets.json -> its file/title/filter
+ * Unified list browser (replaces gallery + destinations-overview). Driven by URL
+ * query parameters:
+ *   ?dataset=<id>   one of the `id`s in datasets.json -> its file/title/options
  *   ?view=<mode>    table | grid
+ *   ?keywords= ?badges= ?access= ?search=   the filters — written by the options
+ *                   bar and read back to pre-populate it, but NOT yet applied to
+ *                   the rendered entries (that's the next step).
+ *
+ * The URL is the whole state: every control commits by navigating to a new one
+ * (see navigate()), so the page re-renders from scratch and Back/Forward work.
  *
  * The page HTML supplies two empty divs; this script fills them:
- *   <div data-lb-options></div>  -> the controls (view + filter). Shows `view`.
+ *   <div data-lb-options></div>  -> the controls (view + filters)
  *   <div data-lb-data></div>     -> the rendered dataset (table or grid)
  *
  * Flow: resolve `dataset` to its manifest entry, load that entry's data file,
@@ -349,13 +355,38 @@
 
   // ---- options bar (controls) -----------------------------------------------
   //
-  // DISPLAY ONLY for now: renders the control surface and reflects the current
-  // URL state. No change handlers, no redirect-URL building yet — that's a later
-  // step. Keyword vocabulary is derived client-side from the selected dataset, so
-  // showOptions fetches the same file showDataset does (browser-cached), mirroring
-  // showDataset's shape.
+  // Each control reflects the current URL state and, on commit, writes its param
+  // back to the URL through navigate(). Keyword vocabulary is derived client-side
+  // from the selected dataset, so showOptions fetches the same file showDataset
+  // does (browser-cached), mirroring showDataset's shape.
+  //
+  // NOTE: only `view` is consumed so far. The filter params (keywords, badges,
+  // access, search) round-trip through the URL but nothing filters on them yet —
+  // that's the next step.
 
-  // Segmented table|grid toggle; the current view carries .is-active.
+  // The single seam every control commits through: clone the CURRENT query,
+  // apply the patch, drop empty values (so a cleared filter leaves no param),
+  // and move to the new URL. Assigning location.search keeps path and hash and
+  // is a real navigation, so Back/Forward restore prior filter states with no
+  // extra machinery — the state lives entirely in the URL. Params this control
+  // doesn't own (notably `dataset`) survive because we clone rather than rebuild.
+  // The module-level `params` is deliberately NOT mutated; the builders read it
+  // to pre-populate themselves.
+  function navigate(patch) {
+    var next = new URLSearchParams(window.location.search);
+    for (var key in patch) {
+      var value = patch[key];
+      if (value === null || value === undefined || value === "") next.delete(key);
+      else next.set(key, value);
+    }
+    // TESTING — stands in for the navigation so the controls can be exercised
+    // without leaving the page. Swap these two lines back before this goes live.
+    window.alert(next.toString());
+    // location.search = next.toString();   // TESTING — the real behavior
+  }
+
+  // Segmented table|grid toggle; the current view carries .is-active. Commits
+  // immediately on click — a single unambiguous choice, nothing to accumulate.
   function buildViewToggle() {
     var wrap = document.createElement("div");
     wrap.className = "gl-lb-view";
@@ -364,6 +395,7 @@
       b.type = "button";
       b.textContent = v;
       if (v === view) b.className = "is-active";
+      b.addEventListener("click", function () { navigate({ view: v }); });
       wrap.appendChild(b);
     });
     return wrap;
@@ -373,9 +405,15 @@
   // `values`, with the ?<paramName>= values pre-checked. Shared by the keyword,
   // badge, and road filters — they differ only in label, param, and vocabulary.
   // snake_case values (road: sharp_rock, back_country) show with spaces.
+  // Commits when the panel CLOSES, not per checkbox: navigating on every tick
+  // would reload the page and shut the panel, so only one value could ever be
+  // picked per visit. `chosen` is the canonical (values-ordered) form of what the
+  // URL currently holds, which is what the close handler compares against so a
+  // panel opened and closed untouched commits nothing.
   function buildCheckboxDropdown(label, paramName, values) {
     var selected = (params.get(paramName) || "").split(",").filter(Boolean);
     var chosen = values.filter(function (v) { return selected.indexOf(v) !== -1; });
+    var boxes = [];
 
     var details = document.createElement("details");
     details.className = "gl-lb-dropdown";
@@ -400,9 +438,28 @@
       cb.type = "checkbox";
       cb.value = v;
       if (selected.indexOf(v) !== -1) cb.checked = true;
+      boxes.push(cb);
       lab.appendChild(cb);
       lab.appendChild(document.createTextNode(v.replace(/_/g, " ")));
       panel.appendChild(lab);
+    });
+
+    // The checked set in `values` order, so it compares cleanly against `chosen`
+    // and the emitted param is order-stable no matter what order boxes were hit.
+    function checkedValues() {
+      return values.filter(function (v, i) { return boxes[i].checked; });
+    }
+
+    // `toggle` fires on open too — only the close edge commits.
+    details.addEventListener("toggle", function () {
+      if (details.open) return;
+      var now = checkedValues();
+      if (now.join(",") === chosen.join(",")) return;
+      chosen = now;
+      summary.textContent = chosen.length ? label + " (" + chosen.length + ")" : label;
+      var patch = {};
+      patch[paramName] = now.join(",");
+      navigate(patch);
     });
 
     details.appendChild(panel);
@@ -440,16 +497,35 @@
       if (r === current) opt.selected = true;
       sel.appendChild(opt);
     });
+    // Commits immediately — one choice, and "any" ("") clears the param.
+    sel.addEventListener("change", function () { navigate({ access: sel.value }); });
     return sel;
   }
 
-  // Free-text search box; prefilled with the current ?search= value.
+  // Free-text search box; prefilled with the current ?search= value. Commits on
+  // losing focus and only when the text actually changed, so tabbing through the
+  // bar navigates nothing. `committed` is updated BEFORE navigate() because
+  // anything that steals focus (the TESTING alert) can re-enter this handler —
+  // the guard has to already be closed by then.
   function buildSearchBox() {
     var input = document.createElement("input");
     input.type = "text";
     input.className = "gl-lb-search";
     input.placeholder = "Search";
     input.value = params.get("search") || "";
+
+    var committed = input.value;
+    input.addEventListener("blur", function () {
+      var value = input.value.trim();
+      if (value === committed) return;
+      committed = value;
+      navigate({ search: value });
+    });
+    // Enter routes through blur so there is ONE commit path. The input is not in
+    // a <form>, so Enter would otherwise do nothing at all.
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") input.blur();
+    });
     return input;
   }
 
