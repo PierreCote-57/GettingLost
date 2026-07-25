@@ -379,10 +379,11 @@
       if (value === null || value === undefined || value === "") next.delete(key);
       else next.set(key, value);
     }
-    // TESTING — stands in for the navigation so the controls can be exercised
-    // without leaving the page. Swap these two lines back before this goes live.
+    // TESTING — the alert shows the query string being committed, then the
+    // navigation actually happens on dismiss. Delete the alert line before this
+    // goes live; the assignment below is the real behavior and stays.
     window.alert(next.toString());
-    // location.search = next.toString();   // TESTING — the real behavior
+    location.search = next.toString();
   }
 
   // Segmented table|grid toggle; the current view carries .is-active. Commits
