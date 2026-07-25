@@ -278,10 +278,8 @@
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
-    // Sort by name (a copy — never mutate the source).
-    var places = entries.slice().sort(function (a, b) {
-      return (a.name || "").localeCompare(b.name || "");
-    });
+    // Source order is authoritative (the dataset file is pre-sorted); render as-is.
+    var places = entries;
 
     var tbody = document.createElement("tbody");
     places.forEach(function (place) {
