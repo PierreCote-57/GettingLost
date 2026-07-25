@@ -355,25 +355,63 @@ summary:focus:not(:focus-visible) {
   gap: 12px;
   margin: 0 0 1rem;
 }
+/* ONE control surface worn by all four control types. The fixed height is what
+   makes the row line up — left to itself each control sizes from its own content
+   box (and its own browser defaults), which is what made the bar look assembled
+   from parts. font-family/font-size must be stated explicitly: form elements do
+   not inherit type from the page. */
+.gl-lb-view,
+.gl-lb-dropdown summary,
 .gl-lb-select,
 .gl-lb-search {
-  padding: 6px 10px;
+  box-sizing: border-box;
+  height: 34px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  background-color: #fff;
+  color: #5e442c;
+  font-family: inherit;
   font-size: 0.95rem;
 }
-/* Segmented table|grid toggle; the active view carries .is-active. */
+/* The three data-axis filters share their inner padding. The view toggle is
+   excluded: its buttons run edge to edge inside the pill. */
+.gl-lb-dropdown summary,
+.gl-lb-select,
+.gl-lb-search {
+  padding: 0 12px;
+}
+/* The same chevron on both "pick from a list" controls — the Keywords/Badges
+   summary and the Access select — so they read as one kind of control rather
+   than as our styling next to the browser's. appearance:none is what removes
+   the select's native arrow; without it ours would be the second one. */
+.gl-lb-dropdown summary,
+.gl-lb-select {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235e442c' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+/* Open state: the chevron flips up. */
+.gl-lb-dropdown[open] summary {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 5l4-4 4 4' fill='none' stroke='%235e442c' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+/* Segmented table|grid toggle; the active view carries .is-active. Keeps the
+   family's surface but is the only control with a filled state — it picks the
+   display axis, the other three filter the data. */
 .gl-lb-view {
   display: inline-flex;
-  border: 1px solid #ccc;
-  border-radius: 6px;
   overflow: hidden;
 }
 .gl-lb-view button {
-  padding: 6px 14px;
+  height: 100%;
+  padding: 0 14px;
   border: none;
   background: #fff;
   color: #5e442c;
+  font: inherit;
   text-transform: capitalize;
   cursor: pointer;
 }
@@ -387,12 +425,14 @@ summary:focus:not(:focus-visible) {
   display: inline-block;
 }
 .gl-lb-dropdown summary {
+  display: flex;
+  align-items: center;
   list-style: none;
-  cursor: pointer;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
   user-select: none;
+}
+/* Safari draws its own disclosure triangle; list-style:none does not remove it. */
+.gl-lb-dropdown summary::-webkit-details-marker {
+  display: none;
 }
 .gl-lb-panel {
   position: absolute;
