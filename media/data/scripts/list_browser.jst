@@ -673,9 +673,28 @@
     return input;
   }
 
-  // Token -> control builder, all sharing one signature: build(p) -> DOM node.
-  // datasets.json's `options` array names which controls a dataset shows, and in
-  // what order; buildOptionsBar walks it through this map.
+  // Download link for a dataset's companion booklet PDF, e.g. ?booklet=howto ->
+  // /wp-content/uploads/howto.pdf. The parameter names the BOOKLET, not the file;
+  // the .pdf and the uploads path are this builder's business.
+  //
+  // No parameter, NO BUTTON — returning nothing is a normal outcome, the same way
+  // the filters read their parameter and apply nothing when it is absent. The
+  // dataset's `options` says a booklet is POSSIBLE here; the URL says whether
+  // this page has one. That keeps every value in one place: the query string.
+  function buildBookletLink(p) {
+    var name = p.get("booklet");
+    if (!name) return null;
+    var a = document.createElement("a");
+    a.className = "gl-lb-booklet";
+    a.href = UPLOADS + name + ".pdf";
+    a.textContent = "Download booklet (PDF)";
+    a.setAttribute("download", "");
+    return a;
+  }
+
+  // Token -> control builder, all sharing one signature: build(p) -> DOM node,
+  // or nothing. datasets.json's `options` array names which controls a dataset
+  // shows, and in what order; buildOptionsBar walks it through this map.
   var CONTROL_BUILDERS = {
     view: function (p) { return buildViewToggle(p); },
     keywords: function (p) {
@@ -685,7 +704,8 @@
       return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS), p);
     },
     access: function (p) { return buildAccessSelect(p); },
-    search: function (p) { return buildSearchBox(p); }
+    search: function (p) { return buildSearchBox(p); },
+    booklet: function (p) { return buildBookletLink(p); }
   };
 
   // Assemble the bar from the dataset's `options` recipe (order preserved).
@@ -695,13 +715,18 @@
   // designed before it is built, and a token need not be about controls at all.
   // The two switches are related but not the same vocabulary — one option can
   // emit several query parameters (a shortcut preset) or none (a display mode).
+  //
+  // A builder may also return NOTHING. `options` says which controls are possible
+  // for this dataset; the parameters say what to do about them. Values live in
+  // the query string only — a token is a plain name, never "name=value".
   function buildOptionsBar(options, p) {
     var bar = document.createElement("div");
     bar.className = "gl-lb-bar";
     (options || []).forEach(function (token) {
       var build = CONTROL_BUILDERS[token];
       if (!build) return;
-      bar.appendChild(build(p));
+      var node = build(p);
+      if (node) bar.appendChild(node);
     });
     return bar;
   }

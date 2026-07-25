@@ -76,12 +76,12 @@
   line-height: 1.4;
 }
 
-/* "Download printable booklet (PDF)" button (gallery.jst, for galleries with
- * a companion PDF). It's injected into the .wp-block-post-title element, which
- * .gl-title-with-pdf turns into a flex row so the button sits on the title's
- * line, right-justified. Brown palette matches .gl-heading so it reads as part
- * of the same family. On narrow screens the row wraps and the button drops
- * below the heading, still right-aligned. */
+/* Booklet-download button. The title-line placement (.gl-title-with-pdf, a flex
+ * row on .wp-block-post-title) came from the retired gallery.jst; the live one is
+ * .gl-lb-booklet in the list_browser options bar, which reuses .gl-pdf-button's
+ * look. Kept here because the palette rule below is shared, and the title-line
+ * variant is one class away if we ever want it back. Brown palette matches
+ * .gl-heading so it reads as part of the same family. */
 .gl-title-with-pdf {
   display: flex;
   align-items: center;
@@ -89,7 +89,8 @@
   flex-wrap: wrap;
   gap: 0.75rem 1rem;
 }
-.gl-pdf-button {
+.gl-pdf-button,
+.gl-lb-booklet {
   display: inline-block;
   text-decoration: none;
   font-size: 0.95rem;
@@ -101,7 +102,8 @@
   border: 1px solid #2a1a0e;
   transition: background 0.15s ease;
 }
-.gl-pdf-button:hover {
+.gl-pdf-button:hover,
+.gl-lb-booklet:hover {
   background: #2a1a0e;
 }
 
@@ -457,6 +459,18 @@ summary:focus:not(:focus-visible) {
 .gl-lb-panel input[type="checkbox"] {
   accent-color: #c98a3e;
   cursor: pointer;
+}
+/* The booklet link is the one control that isn't about narrowing the list, so it
+   sits apart: auto left margin pushes it to the right end of the bar, which is
+   where this button lived when it was on the title line. Height matched to the
+   shared control surface so the row still lines up; it does NOT wear that surface
+   (it is a filled button, not a field). When the bar wraps on a narrow screen the
+   margin still holds it right. */
+.gl-lb-booklet {
+  margin-left: auto;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
 }
 .gl-lb-empty {
   padding: 6px 8px;
