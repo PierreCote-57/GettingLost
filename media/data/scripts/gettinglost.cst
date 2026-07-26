@@ -358,17 +358,14 @@ summary:focus:not(:focus-visible) {
   margin: 0 0 1rem;
 }
 /* Match-count readout — not a control, so no pill. margin-left:auto floats it to
-   the right end of the bar (past any booklet button). The number carries the
-   weight in the family brown; "found" is the quiet muted label beside it. */
+   the right end of the bar (past any booklet button). One uniform string in the
+   family brown, a notch larger than the controls so it reads as the confident
+   answer to the filters rather than stray text. */
 .gl-lb-count {
   margin-left: auto;
-  color: #8a7a68;
-  font-size: 0.95rem;
-}
-.gl-lb-count-n {
   color: #5e442c;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 /* ONE control surface worn by all four control types. The fixed height is what
    makes the row line up — left to itself each control sizes from its own content
