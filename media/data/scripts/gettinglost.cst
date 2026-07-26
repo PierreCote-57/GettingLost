@@ -357,6 +357,19 @@ summary:focus:not(:focus-visible) {
   gap: 12px;
   margin: 0 0 1rem;
 }
+/* Match-count readout — not a control, so no pill. margin-left:auto floats it to
+   the right end of the bar (past any booklet button). The number carries the
+   weight in the family brown; "found" is the quiet muted label beside it. */
+.gl-lb-count {
+  margin-left: auto;
+  color: #8a7a68;
+  font-size: 0.95rem;
+}
+.gl-lb-count-n {
+  color: #5e442c;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
 /* ONE control surface worn by all four control types. The fixed height is what
    makes the row line up — left to itself each control sizes from its own content
    box (and its own browser defaults), which is what made the bar look assembled
@@ -466,10 +479,10 @@ summary:focus:not(:focus-visible) {
    shared control surface (it is a filled button, not a field), but it must match
    its 34px so the row lines up — which needs box-sizing: border-box, since
    .gl-pdf-button's vertical padding would otherwise stack on top of the height
-   and make the button tower over everything else. When the bar wraps on a narrow
-   screen the margin still holds it right. */
+   and make the button tower over everything else. No margin-left:auto: the count
+   readout is now the bar's sole right-anchored item, so the booklet stays a normal
+   control at the end of the left cluster, just before the count. */
 .gl-lb-booklet {
-  margin-left: auto;
   box-sizing: border-box;
   height: 34px;
   padding: 0 1rem;
