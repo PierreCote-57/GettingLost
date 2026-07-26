@@ -9,14 +9,6 @@ older note cites a number.
 
 ## List browser
 
-2. **Native `<details>` has no light-dismiss (2026-07-25).** Clicking elsewhere doesn't
-   close the Keywords/Badges panel — you must click its summary again, which is also what
-   commits it. Fix if it annoys in use: a document click listener that closes any open
-   panel. Trying it as-is first.
-
-3. **`.gl-lb-search` has no explicit width (2026-07-25).** It takes the browser's default
-   input size. One-line fix if it reads too narrow/wide beside the other controls.
-
 4. **On-demand keyword validation pass (2026-07-25).** Unlike badges and access, the
    keyword vocabulary is open and derived from the data, so it drifts. Loose authoring
    rules: singular/plural are the same word — pick one; synonyms are the same word —
@@ -25,14 +17,6 @@ older note cites a number.
    duplicates, plural/singular pairs, one-off values used a single time. It reports; a
    human decides. Do NOT normalize in the filter (stemming/synonym maps) — that would
    hide exactly the drift this is meant to expose.
-
-5. **Badges any/all match toggle (2026-07-25).** The shipped rule is one rule: multiple
-   values on the same control = OR, control to control = AND. The designed-but-deferred
-   refinement: a two-button any/all segmented control inside the Badges panel, committing
-   a separate `badgesMatch=all` param on the `<details>` close edge (default "any", so the
-   param is absent unless changed). Badges only — keywords are types, and "all of" there
-   just generates empty results. Naming it `<param>Match` leaves room for other controls
-   to adopt it. Deferred to keep the first filter pass simple.
 
 6. **More param validation in `processParams()` (2026-07-25).** The normalization step is
    the single place the raw query string becomes what the page acts on (it applies the
