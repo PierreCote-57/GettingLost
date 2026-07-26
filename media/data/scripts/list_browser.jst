@@ -442,12 +442,17 @@
   }
 
   // The match count, and the empty state at the same time: 0 rows reads "0 found".
+  // A readout, not a control, so no pill — it rides at the right end of the
+  // options bar (margin-left:auto in CSS). The number carries the weight, "found"
+  // is the quiet label; both wear the family's brown. See .gl-lb-count in the CSS.
   function buildCount(n) {
     var el = document.createElement("div");
-    el.textContent = n + " found";
-    el.style.fontSize = "0.85rem";
-    el.style.color = "#666";
-    el.style.margin = "0 0 0.5rem";
+    el.className = "gl-lb-count";
+    var num = document.createElement("span");
+    num.className = "gl-lb-count-n";
+    num.textContent = n;
+    el.appendChild(num);
+    el.appendChild(document.createTextNode(" found"));
     return el;
   }
 
@@ -552,17 +557,14 @@
   // needs more room than the theme's content width, so it breaks out on its own
   // inside renderTable — nothing outside has to know, and there is no width
   // state to set on one view and clear on the other.
-  // A fragment rather than a wrapper div: the count and the table/grid become
-  // direct children of the block element, adding no markup of their own.
+  // Just the table/grid now — the match count moved up into the options bar
+  // (buildOptionsBar), so this returns the single rendered node with no wrapper.
   function displayDataset(known) {
     // What I need from what is known
     var rows = known.filteredRows;
     var isGrid = known.params.get("view") === "grid";
 
-    var out = document.createDocumentFragment();
-    out.appendChild(buildCount(rows.length));
-    out.appendChild(isGrid ? renderGrid(rows) : renderTable(rows));
-    return out;
+    return isGrid ? renderGrid(rows) : renderTable(rows);
   }
 
   // ---- options bar (controls) -----------------------------------------------
@@ -823,6 +825,10 @@
       var node = build(known);
       if (node) bar.appendChild(node);
     });
+    // The match count rides at the far right (margin-left:auto), appended last so
+    // it lands after any booklet control. It is a readout, not a token, so it is
+    // not in CONTROL_BUILDERS — it belongs to the bar, on every dataset.
+    bar.appendChild(buildCount(known.filteredRows.length));
     return bar;
   }
 
