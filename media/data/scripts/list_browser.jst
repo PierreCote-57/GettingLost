@@ -10,9 +10,20 @@
  * The URL is the whole state: every control commits by navigating to a new one
  * (see navigate()), so the page re-renders from scratch and Back/Forward work.
  *
- * The page HTML supplies two empty divs; this script fills them:
- *   <div data-lb-options></div>  -> the controls (view + filters)
- *   <div data-lb-data></div>     -> the rendered dataset (table or grid)
+ * This script registers ONE block renderer and nothing else runs on load —
+ * the same shape as lakes.jst. The page HTML is a single element:
+ *
+ *   <div data-block-type="list_browser"></div>
+ *
+ * The renderer creates the two divs it fills (controls, then the rendered
+ * dataset) inside that element, so the markup carries no structure the
+ * renderer depends on finding.
+ *
+ * Registering instead of executing is also what makes the load order safe.
+ * This file is a plain <script src> in the page body, so it EXECUTES before
+ * gl-constants.jst and gettinglost.jst (both in the Footer template) — but
+ * the renderer is only CALLED from renderBlocks(), long after both have run,
+ * so window.GL is fully populated by then.
  *
  * Rendering a page is four steps:
  *   1. processParams()  — the raw query string becomes what the page acts on
@@ -38,6 +49,11 @@
 (function () {
   "use strict";
 
+  // The shared registry, created defensively: this file may execute before OR
+  // after the script that defines it (gettinglost.jst), so it never assumes.
+  window.GL = window.GL || {};
+  window.GL.blockRenderers = window.GL.blockRenderers || {};
+
   var DATASETS_URL = "/wp-content/uploads/datasets.json";
   var UPLOADS = "/wp-content/uploads/";
   var VALID_VIEWS = ["table", "grid"];
@@ -49,19 +65,24 @@
 
   // Severity ramp for the access threshold, easiest -> hardest. The access
   // <select> is built from the same array, so the control and the filter cannot
-  // drift apart. Read through a function, not a top-level constant: this script
-  // executes before gl-constants.jst defines window.GL, and every caller runs
-  // later (after a fetch), by which time GL is there.
+  // drift apart. Read through a function, not a top-level constant, because
+  // nothing in this file may touch window.GL at execute time — see the header.
   function roadOrder() {
     return Object.keys(window.GL.ROAD_COLORS);
   }
 
-  var optionsEl = document.querySelector("[data-lb-options]");
-  var dataEl = document.querySelector("[data-lb-data]");
+  // Filled by the block renderer at the bottom of this file, which is the only
+  // code here that runs. Everything below closes over these; nothing reads them
+  // before the renderer has assigned them.
+  var optionsEl = null;
+  var dataEl = null;
+  var effectiveParams = null;
+  var datasetId = "";
+  var view = "";
 
   // The ONE place the raw query string becomes what the page acts on. Today it
   // only fills in the defaults; it is also where any parameter validation would
-  // go (docs/todo.md #25), so nothing downstream has to defend itself.
+  // go, so nothing downstream has to defend itself.
   //
   // Everything reads the result — filters, controls, and navigate(). One side
   // effect, accepted deliberately: because navigate() patches this object, a
@@ -75,10 +96,6 @@
     if (!p.get("view")) p.set("view", DEFAULT_VIEW);
     return p;
   }
-
-  var effectiveParams = processParams(window.location.search);
-  var datasetId = effectiveParams.get("dataset");
-  var view = effectiveParams.get("view");
 
   // ---- table columns --------------------------------------------------------
 
@@ -735,7 +752,6 @@
   // The rows land in vocabRows UNFILTERED — that is the whole point of fetching
   // here rather than reusing showDataset's list (see the section comment).
   function showOptions(entry) {
-    if (!optionsEl) return;
     fetch(UPLOADS + entry.file)
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
@@ -752,30 +768,44 @@
       });
   }
 
-  // ---- resolve params, then dispatch ----------------------------------------
+  // ---- the block renderer: the only code in this file that runs -------------
+  //
+  //   <div data-block-type="list_browser"></div>
+  //
+  // Takes no attributes and reads no pageData — the whole state is the URL.
+  // It creates the two divs it fills, resolves the params, then dispatches.
 
-  fetch(DATASETS_URL)
-    .then(function (res) {
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      return res.json();
-    })
-    .then(function (datasets) {
-      // Resolve id -> dataset entry. processParams() guarantees an id, so the
-      // only failure left is a bad one — handled gracefully, not defended against.
-      var entry = datasets.filter(function (d) { return d.id === datasetId; })[0];
+  window.GL.blockRenderers.list_browser = function (el) {
+    optionsEl = document.createElement("div");
+    dataEl = document.createElement("div");
+    el.innerHTML = "";
+    el.appendChild(optionsEl);
+    el.appendChild(dataEl);
 
-      if (optionsEl) {
+    effectiveParams = processParams(window.location.search);
+    datasetId = effectiveParams.get("dataset");
+    view = effectiveParams.get("view");
+
+    fetch(DATASETS_URL)
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (datasets) {
+        // Resolve id -> dataset entry. processParams() guarantees an id, so the
+        // only failure left is a bad one — handled gracefully, not defended against.
+        var entry = datasets.filter(function (d) { return d.id === datasetId; })[0];
+
         if (entry) showOptions(entry);
         else optionsEl.textContent = "";
-      }
 
-      if (!dataEl) return;
-      if (!entry) dataEl.textContent = "unknown dataset: " + datasetId;
-      else showDataset(entry);
-    })
-    .catch(function (err) {
-      console.error("[list_browser] failed to load datasets.json:", err);
-      if (optionsEl) optionsEl.textContent = "";
-      if (dataEl) dataEl.textContent = "Content is temporarily unavailable.";
-    });
+        if (!entry) dataEl.textContent = "unknown dataset: " + datasetId;
+        else showDataset(entry);
+      })
+      .catch(function (err) {
+        console.error("[list_browser] failed to load datasets.json:", err);
+        optionsEl.textContent = "";
+        dataEl.textContent = "Content is temporarily unavailable.";
+      });
+  };
 })();

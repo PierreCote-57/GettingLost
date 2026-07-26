@@ -5,51 +5,42 @@
  * (via the site's Footer template) — unlike lakes.jst (lake pages
  * only) and gallery.jst (the /gallery/ page only).
  *
- * Currently handles:
- *
- *   .gl-photo — renders a clickable photo with a GPS-linked caption
- *   from a single placeholder <div>. Markup:
- *
- *     <div class="gl-photo"
- *          style="width:25%;float:left;"
- *          data-img="IMG_0512.jpg"
- *          data-lat="49.984331"
- *          data-lng="-125.413606"></div>
- *
- *   - data-img is just the filename; this script prepends
- *     "/wp-content/uploads/" automatically.
- *   - data-lat / data-lng are decimal degrees (negative = S / W).
- *   - style="width:..." is optional, defaults to 25%.
- *   - style="float:..." is optional, defaults to "right".
- *       "left"  -> floats left, text wraps on the right
- *       "right" -> floats right, text wraps on the left (default)
- *       "none"  -> centers the image as its own block
- *
- *   .gl-featured — renders a random selection of destination cards
- *   from Destinations.json. Markup:
- *
- *     <div class="gl-featured" data-count="3"></div>
- *
- *   - data-count is optional, defaults to 3.
- *   - Selection re-shuffles on every page load (no caching).
- *   - Uses the same card markup/styling as the /gallery/ page
- *     (gallery.jst), via the shared escapeHtml()/renderCard()
- *     helpers and CSS exposed on window.GL below.
+ * EVERYTHING this script puts on a page goes through ONE path:
+ * [data-block-type]. There is no second, class-driven mechanism —
+ * `.gl-photo`, `.gl-featured` and the checklists used to be enhanced by
+ * their own querySelectorAll loops in init(), and are now ordinary
+ * blocks like all the others. The only thing init() still does besides
+ * initBlocks() is inject the stylesheet, which has no element to hang off.
  *
  *   [data-block-type] — generic block-rendering system. Any element
  *   carrying a data-block-type attribute is handed off to a renderer
  *   registered on window.GL.blockRenderers[type]. This file registers
- *   the generic, page-type-agnostic renderers ("campground",
- *   "googleMap", "backToGallery", "notes", "warning");
- *   page-type-specific renderers (e.g. "fishing", "destinations" in
- *   lakes.jst) register themselves the same way from their own script
- *   files. Markup:
+ *   the generic, page-type-agnostic renderers ("photo", "featured",
+ *   "checklist", "campground", "googleMap", "backToGallery", "notes",
+ *   "warning"); page-type-specific renderers (e.g. "fishing",
+ *   "destinations" in lakes.jst, "list_browser" in list_browser.jst)
+ *   register themselves the same way from their own script files.
+ *   Markup:
  *
  *     <div data-block-type="campground"></div>
  *     <div data-block-type="googleMap"></div>
  *     <div class="gl-dest-back" data-block-type="backToGallery"></div>
  *     <div data-block-type="notes"></div>
  *     <div data-block-type="warning" data-text="Required warning text"></div>
+ *     <div data-block-type="photo" data-img="IMG_0512.jpg"
+ *          style="width:25%;float:left;"
+ *          data-lat="49.984331" data-lng="-125.413606"></div>
+ *     <div data-block-type="featured" data-count="3"></div>
+ *     <ol class="gl-numcheck" data-block-type="checklist"><li>…</li></ol>
+ *
+ *   - photo: data-img is just the filename; formatImageUrl builds the
+ *     URL. data-lat/data-lng are decimal degrees (negative = S / W) and
+ *     add a GPS caption. style width defaults to 25%, float to "right"
+ *     ("none" centers it as its own block).
+ *   - featured: data-count random destination cards (default 3),
+ *     re-shuffled every page load, using the shared renderCard().
+ *   - checklist: the gl-checklist / gl-numcheck CLASS carries the styling
+ *     and picks the variant; data-block-type only routes it here.
  *
  *   - backToGallery takes no attributes and reads no pageData: it
  *     points back at the list_browser page the visitor arrived from
@@ -318,10 +309,19 @@
   }
 
   // ---------------------------------------------------------------------
-  // .gl-photo
+  // Generic block renderer: "photo"
   // ---------------------------------------------------------------------
+  //
+  //   <div data-block-type="photo" data-img="IMG_0795.jpg"
+  //        data-lat="50.12" data-lng="-125.34"></div>
+  //
+  //   - data-img is required; a missing one renders nothing.
+  //   - data-lat/data-lng are optional; together they add a DMS caption
+  //     linking to Google Maps.
+  //   - Reads no pageData. Float/width/margin default only when the author
+  //     has not already set them inline.
 
-  function renderPhoto(el) {
+  window.GL.blockRenderers.photo = function (el) {
     var img = el.getAttribute("data-img");
     var hasLat = el.hasAttribute("data-lat");
     var hasLng = el.hasAttribute("data-lng");
@@ -384,13 +384,19 @@
         lightbox.open([{ src: fullSrc, caption: "" }], 0);
       });
     }
-  }
+  };
 
   // ---------------------------------------------------------------------
-  // .gl-featured
+  // Generic block renderer: "featured"
   // ---------------------------------------------------------------------
+  //
+  //   <div data-block-type="featured" data-count="3"></div>
+  //
+  //   - data-count is how many random destinations to show (default 3).
+  //   - Reads no pageData; fetches Destinations.json itself and renders
+  //     the shared cards.
 
-  function renderFeatured(el) {
+  window.GL.blockRenderers.featured = function (el) {
     var count = parseInt(el.getAttribute("data-count"), 10) || 3;
 
     fetch("/wp-content/uploads/Destinations.json")
@@ -412,7 +418,7 @@
           '<p style="color:#999;font-style:italic;">Content is temporarily unavailable.</p>';
         console.error(err);
       });
-  }
+  };
 
   // ---------------------------------------------------------------------
   // Generic [data-block-type] system
@@ -1268,8 +1274,8 @@
   // Checklists
   // ---------------------------------------------------------------------
 
-  // Turns a plain <ol class="gl-checklist"><li>text</li></ol> (or <ul>) into
-  // an interactive to-do list: each <li>'s content is wrapped in a
+  // Turns a plain <ol class="gl-checklist" data-block-type="checklist"><li>text</li></ol>
+  // (or <ul>) into an interactive to-do list: each <li>'s content is wrapped in a
   // <label><input type="checkbox"><span>text</span></label> so the whole row
   // toggles. Authors only write the bare <li> lines. Idempotent.
   //
@@ -1278,7 +1284,12 @@
   // The .gl-num span is left empty — its digit is drawn by a CSS counter (see
   // ol.gl-numcheck in the stylesheet), so the count stays automatic and each
   // list restarts at 1.
-  function enhanceChecklist(list) {
+  //
+  // The class is what CARRIES THE STYLING, so it stays on the element and also
+  // selects the variant; data-block-type only routes the element here. That is
+  // why this is one block type with two looks rather than two block types.
+
+  window.GL.blockRenderers.checklist = function (list) {
     var isNum = list.classList.contains("gl-numcheck");
     var items = list.children;
     for (var i = 0; i < items.length; i++) {
@@ -1302,7 +1313,7 @@
       label.appendChild(span);
       li.appendChild(label);
     }
-  }
+  };
 
   // ---------------------------------------------------------------------
   // Lightbox (shared pop-up viewer)
@@ -1446,24 +1457,11 @@
   // Init
   // ---------------------------------------------------------------------
 
+  // The CSS is the one thing that is not a block: it has no element to hang
+  // off and every page wants it. Everything else on the page renders through
+  // the ONE [data-block-type] path.
   function init() {
     injectGettingLostCss();
-
-    var photos = document.querySelectorAll(".gl-photo");
-    for (var i = 0; i < photos.length; i++) {
-      renderPhoto(photos[i]);
-    }
-
-    var featured = document.querySelectorAll(".gl-featured");
-    for (var j = 0; j < featured.length; j++) {
-      renderFeatured(featured[j]);
-    }
-
-    var checklists = document.querySelectorAll(".gl-checklist, .gl-numcheck");
-    for (var k = 0; k < checklists.length; k++) {
-      enhanceChecklist(checklists[k]);
-    }
-
     initBlocks();
   }
 

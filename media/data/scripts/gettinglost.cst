@@ -223,7 +223,7 @@ summary:focus:not(:focus-visible) {
    number between the checkbox and the text (checkbox, then "1.", then text).
    The number is a CSS counter so authors write only bare <li> lines; each
    <ol class="gl-numcheck"> restarts its own count at 1. The .gl-num span is
-   created empty by enhanceChecklist(); its ::before draws the digit. */
+   created empty by the "checklist" block renderer; its ::before draws the digit. */
 .gl-numcheck {
   list-style: none;
   padding-left: 0;
