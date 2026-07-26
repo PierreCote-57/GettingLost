@@ -443,16 +443,12 @@
 
   // The match count, and the empty state at the same time: 0 rows reads "0 found".
   // A readout, not a control, so no pill — it rides at the right end of the
-  // options bar (margin-left:auto in CSS). The number carries the weight, "found"
-  // is the quiet label; both wear the family's brown. See .gl-lb-count in the CSS.
+  // options bar (margin-left:auto in CSS). One uniform string in the family brown;
+  // see .gl-lb-count in the CSS for size/weight/color.
   function buildCount(n) {
     var el = document.createElement("div");
     el.className = "gl-lb-count";
-    var num = document.createElement("span");
-    num.className = "gl-lb-count-n";
-    num.textContent = n;
-    el.appendChild(num);
-    el.appendChild(document.createTextNode(" found"));
+    el.textContent = n + " found";
     return el;
   }
 
