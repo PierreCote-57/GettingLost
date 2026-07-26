@@ -26,14 +26,6 @@ older note cites a number.
    case whether the answer is "drop it", "fall back to the default", or "leave it and let
    it match nothing" — today everything downstream just fails gracefully.
 
-7. **Options row shouldn't need the dataset rows (2026-07-25).** Four of the five controls
-   (view/badges/access/search) need only their current value. Keywords needs the rows
-   solely because its choice list is derived client-side by scanning every record's
-   `tags.keywords` — which is also why `showOptions` fetches the dataset file a second
-   time, on top of `showDataset`'s fetch. If the distinct keyword values were materialized
-   at build time, the options row would need nothing but the params and `datasets.json`,
-   and the second fetch would go away. Works as-is short term; deferred deliberately.
-
 ## Content / pages
 
 8. **Populate the road-map photo pins (2026-07-21).** Every destination now has a

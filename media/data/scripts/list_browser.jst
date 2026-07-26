@@ -25,11 +25,34 @@
  * the renderer is only CALLED from renderBlocks(), long after both have run,
  * so window.GL is fully populated by then.
  *
- * Rendering a page is four steps:
- *   1. processParams()  — the raw query string becomes what the page acts on
- *   2. filterRows()     — narrow the rows, one filter per query parameter
- *   3. options row      — which controls, from the dataset's `options` recipe
- *   4. render           — table or grid per `view`, plus the match count
+ * Rendering a page is FOUR PHASES, in order, read top to bottom in the renderer:
+ *   1. PARAMS   — the raw query string becomes what the page acts on
+ *   2. LOAD     — datasets.json, then the selected dataset's file. Sequential
+ *                 because the first names the second, and if either fails there
+ *                 is nothing useful to do, so there is ONE error path.
+ *   3. PROCESS  — all of it, up front: filter the rows, derive the keyword
+ *                 vocabulary. Nothing is gained by sequencing work between the
+ *                 display calls.
+ *   4. DISPLAY  — displayOptionsRow() and displayDataset(), two different views
+ *                 on "all that is known".
+ *
+ * Phases 1-3 build ONE property bag, `known`, a local of the renderer passed to
+ * everything below it:
+ *   phase 1 adds  params
+ *   phase 2 adds  datasetList, dataset, rawRows
+ *   phase 3 adds  filteredRows, keywords
+ * (plus `el`, the block element the display functions render into).
+ *
+ * **Phases 1-3 WRITE the bag; phase 4 only READS it.** The display functions are
+ * meant to be independent views — if either could add a key the other might see
+ * it, and their order would start to matter. Every display function takes the
+ * same argument, `known`, and opens by naming what it needs out of it; that is
+ * what documents its dependencies, rather than an argument list.
+ *
+ * Why a bag and not explicit arguments: the controls are parallel siblings with
+ * drastically different needs (the view toggle wants one parameter, the keyword
+ * dropdown wants the derived vocabulary). Any signature serving all of them
+ * would just be the union of everyone's needs.
  *
  * Steps 2 and 3 are the same idea twice: walk a list, switch on each element,
  * do the thing you know how to do with it, silently ignore the rest. Their
@@ -71,14 +94,27 @@
     return Object.keys(window.GL.ROAD_COLORS);
   }
 
-  // Filled by the block renderer at the bottom of this file, which is the only
-  // code here that runs. Everything below closes over these; nothing reads them
-  // before the renderer has assigned them.
-  var optionsEl = null;
-  var dataEl = null;
-  var effectiveParams = null;
-  var datasetId = "";
-  var view = "";
+  // NOTHING at module scope holds page state. The renderer at the bottom builds
+  // one `known` bag and passes it down; that is the only way anything here gets
+  // at the params, the rows, or the element being rendered into.
+
+  // One fetch path for both files. The URL is in every failure message because
+  // "HTTP 404" on its own never says WHICH file was missing — and the two files
+  // fail for very different reasons (a bad dataset id vs. a missing data file).
+  function fetchJson(url) {
+    return fetch(url)
+      .catch(function () {
+        throw new Error("could not reach " + url);
+      })
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error("failed to load " + url + " (HTTP " + res.status + ")");
+        }
+        return res.json().catch(function () {
+          throw new Error("failed to parse " + url + " (not valid JSON)");
+        });
+      });
+  }
 
   // The ONE place the raw query string becomes what the page acts on. Today it
   // only fills in the defaults; it is also where any parameter validation would
@@ -482,45 +518,40 @@
     for (var prop in style) el.style[prop] = style[prop];
   }
 
-  // ---- load + fill (view-agnostic) ------------------------------------------
+  // ---- PHASE 4: display ------------------------------------------------------
+  //
+  // Two views on what is known. Both take the whole bag and READ ONLY — neither
+  // adds to it, so their order can never start to matter, and the phase comments
+  // above stay a complete map of what the bag holds.
 
-  function showDataset(entry) {
-    fetch(UPLOADS + entry.file)
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (rows) {
-        var shortList = filterRows(rows, effectiveParams);
-        var isGrid = view === "grid";
-        var node = isGrid ? renderGrid(shortList) : renderTable(shortList);
-        var style = isGrid ? getGridStyle() : getTableStyle();
-        dataEl.innerHTML = "";
-        applyStyle(dataEl, style);
-        dataEl.appendChild(buildCount(shortList.length));
-        dataEl.appendChild(node);
-      })
-      .catch(function (err) {
-        console.error("[list_browser] failed to load " + entry.file + ":", err);
-        dataEl.textContent = "Content is temporarily unavailable.";
-      });
+  // No fetching and no filtering: it is handed the rows and draws them.
+  //
+  // The per-view width override goes on the BLOCK ELEMENT, not on a div inside
+  // it. A WP block theme caps content width by styling the direct children of
+  // the content container, so the element that has to carry the override is the
+  // one the theme is constraining — which is now this block. Put it on an inner
+  // div and the table stays boxed inside the theme's ~900px cap.
+  function displayDataset(known) {
+    // What I need from what is known
+    var el = known.el;
+    var rows = known.filteredRows;
+    var isGrid = known.params.get("view") === "grid";
+
+    applyStyle(el, isGrid ? getGridStyle() : getTableStyle());
+    el.appendChild(buildCount(rows.length));
+    el.appendChild(isGrid ? renderGrid(rows) : renderTable(rows));
   }
 
   // ---- options bar (controls) -----------------------------------------------
   //
-  // Every control has the same signature — build(p) -> DOM node — reads its own
-  // current value out of `p`, and commits through navigate(). A control that
-  // needs two parameters just reads two; one that needs none ignores the object.
+  // Every control has the SAME signature — build(known) -> DOM node, or nothing —
+  // and opens by naming what it needs out of the bag. A control that needs two
+  // things names two; one that needs nothing names nothing. They are parallel
+  // siblings with genuinely different needs, which is exactly why they are handed
+  // everything rather than an argument list that is the union of all of them.
   //
-  // The rows are NOT passed in. Only Keywords needs data at all (its choice list
-  // is derived from the rows, because unlike badges/access/view its vocabulary
-  // is open), and by the time the options row is built, the list in hand is the
-  // FILTERED one — deriving choices from that would drop the very values you
-  // need to widen the search next. So it reads the full set from vocabRows,
-  // which showOptions fills from its own unfiltered fetch, and no filtered list
-  // is ever within reach. (docs/todo.md #26: materialize the vocabulary at build
-  // time and both the fetch and the variable go away.)
-  var vocabRows = [];
+  // Controls commit through navigate(known, patch), the one non-display function
+  // that also needs the bag: it clones the current params to build the next URL.
 
   // The single seam every control commits through: clone what the page is acting
   // on, apply the patch, drop empty values (so a cleared filter leaves no param),
@@ -528,9 +559,9 @@
   // is a real navigation, so Back/Forward restore prior filter states with no
   // extra machinery — the state lives entirely in the URL. Params this control
   // doesn't own (notably `dataset`) survive because we clone rather than rebuild.
-  // effectiveParams is never mutated: the patch goes onto a copy.
-  function navigate(patch) {
-    var next = new URLSearchParams(effectiveParams);
+  // known.params is never mutated: the patch goes onto a copy.
+  function navigate(known, patch) {
+    var next = new URLSearchParams(known.params);
     for (var key in patch) {
       var value = patch[key];
       if (value === null || value === undefined || value === "") next.delete(key);
@@ -546,8 +577,10 @@
 
   // Segmented table|grid toggle; the current view carries .is-active. Commits
   // immediately on click — a single unambiguous choice, nothing to accumulate.
-  function buildViewToggle(p) {
-    var current = p.get("view");
+  function buildViewToggle(known) {
+    // What I need from what is known
+    var current = known.params.get("view");
+
     var wrap = document.createElement("div");
     wrap.className = "gl-lb-view";
     VALID_VIEWS.forEach(function (v) {
@@ -555,7 +588,7 @@
       b.type = "button";
       b.textContent = v;
       if (v === current) b.className = "is-active";
-      b.addEventListener("click", function () { navigate({ view: v }); });
+      b.addEventListener("click", function () { navigate(known, { view: v }); });
       wrap.appendChild(b);
     });
     return wrap;
@@ -570,8 +603,10 @@
   // picked per visit. `chosen` is the canonical (values-ordered) form of what the
   // URL currently holds, which is what the close handler compares against so a
   // panel opened and closed untouched commits nothing.
-  function buildCheckboxDropdown(label, paramName, values, p) {
-    var selected = splitList(p.get(paramName));
+  function buildCheckboxDropdown(label, paramName, values, known) {
+    // What I need from what is known
+    var selected = splitList(known.params.get(paramName));
+
     var chosen = values.filter(function (v) { return selected.indexOf(v) !== -1; });
     var boxes = [];
 
@@ -619,7 +654,7 @@
       summary.textContent = chosen.length ? label + " (" + chosen.length + ")" : label;
       var patch = {};
       patch[paramName] = now.join(",");
-      navigate(patch);
+      navigate(known, patch);
     });
 
     details.appendChild(panel);
@@ -628,7 +663,6 @@
 
   // Distinct values across the dataset, for a control whose vocabulary is open
   // rather than fixed. Reads each row's `tags` object (tags.keywords, tags.badges).
-  // Must always be given the UNFILTERED rows — see the section comment.
   function fieldVocab(rows, field) {
     var set = {};
     rows.forEach(function (r) {
@@ -637,12 +671,24 @@
     return Object.keys(set).sort();
   }
 
+  // PHASE 3 step — the keyword vocabulary is PROCESSING, not display. Derived
+  // from the rows today; if it is ever materialized into the dataset definition
+  // at build time, ONLY this function changes and no display code notices.
+  //
+  // Must be given the UNFILTERED rows. Deriving the choices from the filtered
+  // list would delete exactly the values you need to widen the search next.
+  function deriveKeywords(rawRows) {
+    return fieldVocab(rawRows, "keywords");
+  }
+
   // Access filter — a SINGLE-choice threshold over the known, severity-ordered
   // road set (ROAD_COLORS key order: pavement -> ... -> back_country). You pick
   // the WORST road you'll accept; "any" (the default) applies no filter. A plain
   // <select>, not checkboxes — the set is fixed and only one value applies.
-  function buildAccessSelect(p) {
-    var current = p.get("access") || "";
+  function buildAccessSelect(known) {
+    // What I need from what is known
+    var current = known.params.get("access") || "";
+
     var sel = document.createElement("select");
     sel.className = "gl-lb-select";
 
@@ -659,7 +705,7 @@
       sel.appendChild(opt);
     });
     // Commits immediately — one choice, and "any" ("") clears the param.
-    sel.addEventListener("change", function () { navigate({ access: sel.value }); });
+    sel.addEventListener("change", function () { navigate(known, { access: sel.value }); });
     return sel;
   }
 
@@ -668,19 +714,22 @@
   // bar navigates nothing. `committed` is updated BEFORE navigate() because
   // anything that steals focus (the TESTING alert) can re-enter this handler —
   // the guard has to already be closed by then.
-  function buildSearchBox(p) {
+  function buildSearchBox(known) {
+    // What I need from what is known
+    var current = known.params.get("search") || "";
+
     var input = document.createElement("input");
     input.type = "text";
     input.className = "gl-lb-search";
     input.placeholder = "Search";
-    input.value = p.get("search") || "";
+    input.value = current;
 
     var committed = input.value;
     input.addEventListener("blur", function () {
       var value = input.value.trim();
       if (value === committed) return;
       committed = value;
-      navigate({ search: value });
+      navigate(known, { search: value });
     });
     // Enter routes through blur so there is ONE commit path. The input is not in
     // a <form>, so Enter would otherwise do nothing at all.
@@ -698,8 +747,10 @@
   // the filters read their parameter and apply nothing when it is absent. The
   // dataset's `options` says a booklet is POSSIBLE here; the URL says whether
   // this page has one. That keeps every value in one place: the query string.
-  function buildBookletLink(p) {
-    var name = p.get("booklet");
+  function buildBookletLink(known) {
+    // What I need from what is known
+    var name = known.params.get("booklet");
+
     if (!name) return null;
     var a = document.createElement("a");
     a.className = "gl-lb-booklet";
@@ -709,20 +760,24 @@
     return a;
   }
 
-  // Token -> control builder, all sharing one signature: build(p) -> DOM node,
+  // Token -> control builder, all sharing one signature: build(known) -> DOM node,
   // or nothing. datasets.json's `options` array names which controls a dataset
   // shows, and in what order; buildOptionsBar walks it through this map.
+  //
+  // Keywords reads the vocabulary that PHASE 3 already derived. It does not scan
+  // rows, and it does not need rawRows at all — which is the whole reason the
+  // second fetch of the data file could go away.
   var CONTROL_BUILDERS = {
-    view: function (p) { return buildViewToggle(p); },
-    keywords: function (p) {
-      return buildCheckboxDropdown("Keywords", "keywords", fieldVocab(vocabRows, "keywords"), p);
+    view: function (known) { return buildViewToggle(known); },
+    keywords: function (known) {
+      return buildCheckboxDropdown("Keywords", "keywords", known.keywords, known);
     },
-    badges: function (p) {
-      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS), p);
+    badges: function (known) {
+      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS), known);
     },
-    access: function (p) { return buildAccessSelect(p); },
-    search: function (p) { return buildSearchBox(p); },
-    booklet: function (p) { return buildBookletLink(p); }
+    access: function (known) { return buildAccessSelect(known); },
+    search: function (known) { return buildSearchBox(known); },
+    booklet: function (known) { return buildBookletLink(known); }
   };
 
   // Assemble the bar from the dataset's `options` recipe (order preserved).
@@ -736,36 +791,26 @@
   // A builder may also return NOTHING. `options` says which controls are possible
   // for this dataset; the parameters say what to do about them. Values live in
   // the query string only — a token is a plain name, never "name=value".
-  function buildOptionsBar(options, p) {
+  function buildOptionsBar(options, known) {
     var bar = document.createElement("div");
     bar.className = "gl-lb-bar";
     (options || []).forEach(function (token) {
       var build = CONTROL_BUILDERS[token];
       if (!build) return;
-      var node = build(p);
+      var node = build(known);
       if (node) bar.appendChild(node);
     });
     return bar;
   }
 
-  // Parallel to showDataset: fetch the entry's file, then fill the options div.
-  // The rows land in vocabRows UNFILTERED — that is the whole point of fetching
-  // here rather than reusing showDataset's list (see the section comment).
-  function showOptions(entry) {
-    fetch(UPLOADS + entry.file)
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (rows) {
-        vocabRows = rows;
-        optionsEl.innerHTML = "";
-        optionsEl.appendChild(buildOptionsBar(entry.options, effectiveParams));
-      })
-      .catch(function (err) {
-        console.error("[list_browser] failed to build options for " + entry.file + ":", err);
-        optionsEl.textContent = "";
-      });
+  // The other half of PHASE 4. The bar IS the options row, so it goes straight
+  // into the block element — no wrapper div that would exist only for symmetry.
+  function displayOptionsRow(known) {
+    // What I need from what is known
+    var el = known.el;
+    var options = known.dataset.options;
+
+    el.appendChild(buildOptionsBar(options, known));
   }
 
   // ---- the block renderer: the only code in this file that runs -------------
@@ -773,39 +818,56 @@
   //   <div data-block-type="list_browser"></div>
   //
   // Takes no attributes and reads no pageData — the whole state is the URL.
-  // It creates the two divs it fills, resolves the params, then dispatches.
+  // The four phases, in order, with what each one adds to `known`.
 
   window.GL.blockRenderers.list_browser = function (el) {
-    optionsEl = document.createElement("div");
-    dataEl = document.createElement("div");
     el.innerHTML = "";
-    el.appendChild(optionsEl);
-    el.appendChild(dataEl);
 
-    effectiveParams = processParams(window.location.search);
-    datasetId = effectiveParams.get("dataset");
-    view = effectiveParams.get("view");
+    // ---- PHASE 1: params. Adds: el, params ---------------------------------
+    // Needs no data, so it happens before the loads.
+    var known = {
+      el: el,
+      params: processParams(window.location.search)
+    };
 
-    fetch(DATASETS_URL)
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (datasets) {
-        // Resolve id -> dataset entry. processParams() guarantees an id, so the
-        // only failure left is a bad one — handled gracefully, not defended against.
-        var entry = datasets.filter(function (d) { return d.id === datasetId; })[0];
+    // ---- PHASE 2: load. Adds: datasetList, dataset, rawRows ----------------
+    // Two files, and only two. Sequential because datasets.json names the data
+    // file; nested rather than spread across functions so the sequence reads in
+    // one place. ONE catch for both — if either fails there is nothing to show.
+    fetchJson(DATASETS_URL)
+      .then(function (datasetList) {
+        known.datasetList = datasetList;
 
-        if (entry) showOptions(entry);
-        else optionsEl.textContent = "";
+        // processParams() guarantees an id, so the only failure left is a bad
+        // one — handled gracefully, not defended against.
+        var id = known.params.get("dataset");
+        known.dataset = datasetList.filter(function (d) { return d.id === id; })[0];
+        if (!known.dataset) {
+          el.textContent = "unknown dataset: " + id;
+          return null;
+        }
 
-        if (!entry) dataEl.textContent = "unknown dataset: " + datasetId;
-        else showDataset(entry);
+        return fetchJson(UPLOADS + known.dataset.file).then(function (rawRows) {
+          known.rawRows = rawRows;
+
+          // ---- PHASE 3: process. Adds: filteredRows, keywords --------------
+          // All of it, up front. Nothing is gained by sequencing this work
+          // between the display calls. `known` is complete after these two.
+          known.filteredRows = filterRows(known.rawRows, known.params);
+          known.keywords = deriveKeywords(known.rawRows);
+
+          // ---- PHASE 4: display. READ ONLY from here ------------------------
+          displayOptionsRow(known);
+          displayDataset(known);
+        });
       })
       .catch(function (err) {
-        console.error("[list_browser] failed to load datasets.json:", err);
-        optionsEl.textContent = "";
-        dataEl.textContent = "Content is temporarily unavailable.";
+        // fetchJson puts the failing URL in the message — "HTTP 404" alone
+        // never says which of the two files was the problem. The error object
+        // goes too: this catch also covers a throw from phase 3 or 4, where the
+        // message is a code bug rather than a URL and the stack is what helps.
+        console.error("[list_browser] " + err.message, err);
+        el.textContent = "Content is temporarily unavailable.";
       });
   };
 })();
