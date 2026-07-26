@@ -41,13 +41,17 @@
  *   phase 1 adds  params
  *   phase 2 adds  datasetList, dataset, rawRows
  *   phase 3 adds  filteredRows, keywords
- * (plus `el`, the block element the display functions render into).
  *
- * **Phases 1-3 WRITE the bag; phase 4 only READS it.** The display functions are
- * meant to be independent views — if either could add a key the other might see
- * it, and their order would start to matter. Every display function takes the
- * same argument, `known`, and opens by naming what it needs out of it; that is
- * what documents its dependencies, rather than an argument list.
+ * `known` holds KNOWLEDGE, never DOM. The block element is a plain local of the
+ * renderer, which is the only place the page gets touched.
+ *
+ * **Phases 1-3 WRITE the bag; phase 4 only READS it** — and the display functions
+ * are pure `known -> DOM node`, so they cannot affect each other or the page at
+ * all. That independence is what the rule is FOR: hand them the element instead
+ * and the options row has to run before the dataset or it lands underneath it,
+ * which is the same hidden ordering the phases exist to remove. Every display
+ * function takes the same argument and opens by naming what it needs out of it;
+ * that is what documents its dependencies, rather than an argument list.
  *
  * Why a bag and not explicit arguments: the controls are parallel siblings with
  * drastically different needs (the view toggle wants one parameter, the keyword
@@ -77,8 +81,8 @@
   window.GL = window.GL || {};
   window.GL.blockRenderers = window.GL.blockRenderers || {};
 
-  var DATASETS_URL = "/wp-content/uploads/datasets.json";
   var UPLOADS = "/wp-content/uploads/";
+  var DATASETS_URL = UPLOADS + "datasets.json";
   var VALID_VIEWS = ["table", "grid"];
 
   // Defaults for a bare URL (no params). A present-but-invalid value is NOT
@@ -114,6 +118,16 @@
           throw new Error("failed to parse " + url + " (not valid JSON)");
         });
       });
+  }
+
+  // The datasets.json entry for the requested id, or a throw. Throwing keeps the
+  // caller to one statement — the whole not-found case lives here instead of a
+  // branch interrupting the flow of the phases, and the renderer's single catch
+  // is already the place that reports a failure.
+  function pickDataset(datasetList, id) {
+    var entry = datasetList.filter(function (d) { return d.id === id; })[0];
+    if (entry) return entry;
+    throw new Error("Unknown dataset " + id);
   }
 
   // The ONE place the raw query string becomes what the page acts on. Today it
@@ -492,54 +506,63 @@
     });
     table.appendChild(tbody);
 
-    // Wrap so a wide table scrolls sideways instead of breaking the page.
+    // Wrap so a wide table scrolls sideways instead of breaking the page, and
+    // BREAK OUT of the theme's ~900px content cap so the wide table has room.
+    //
+    // The breakout has to be a real one — an explicit width plus negative side
+    // margins — not a max-width. Max-width only caps: this div fills its parent
+    // (the block element, which the theme constrains), so a larger max-width
+    // would never bind and the table would stay boxed at the content width.
+    //
+    // 1180 - 900 = 280, so -140 a side centers the extra room. `margin-inline`
+    // is the horizontal pair by definition (inline-start/end) — it cannot touch
+    // the vertical margins, so the table's spacing above and below is untouched.
+    //
+    // Only the TABLE breaks out. The options row, the count and the footnotes
+    // all keep the standard content width — the footnotes because they sit in
+    // the outer div below, as a sibling of the breakout rather than inside it.
     var wrap = document.createElement("div");
+    wrap.style.width = "1180px";
+    wrap.style.marginInline = "-140px";
     wrap.style.overflowX = "auto";
     wrap.appendChild(table);
-    if (footnotes.length) wrap.appendChild(buildFootnotesList(footnotes));
-    return wrap;
-  }
 
-  // ---- per-view data-div styling --------------------------------------------
-
-  // Grid keeps the theme's default content width; clear any table override so
-  // switching back from table resets cleanly.
-  function getGridStyle() {
-    return { maxWidth: "" };
-  }
-
-  // Table breaks out of the theme's ~900px content cap so the wide table has
-  // room (max-width does the work; width is left at the block default).
-  function getTableStyle() {
-    return { maxWidth: "1180px" };
-  }
-
-  function applyStyle(el, style) {
-    for (var prop in style) el.style[prop] = style[prop];
+    var out = document.createElement("div");
+    out.appendChild(wrap);
+    if (footnotes.length) out.appendChild(buildFootnotesList(footnotes));
+    return out;
   }
 
   // ---- PHASE 4: display ------------------------------------------------------
   //
-  // Two views on what is known. Both take the whole bag and READ ONLY — neither
-  // adds to it, so their order can never start to matter, and the phase comments
-  // above stay a complete map of what the bag holds.
+  // Two views on what is known. Both are PURE — known -> DOM node, same as the
+  // renderers below them. They read the bag, never write it, and never touch the
+  // page: the renderer does the appending, so the order the two land in is
+  // visible at the top level instead of hidden inside them.
+  //
+  // That purity is the point of the read-only rule, not a side effect of it. An
+  // earlier version passed the block element in the bag and let each function
+  // append to it — which keeps the letter of "display never writes the bag" while
+  // losing the thing it was for, since the options row then has to run before the
+  // dataset or it lands underneath it. The element is a local of the renderer.
 
   // No fetching and no filtering: it is handed the rows and draws them.
   //
-  // The per-view width override goes on the BLOCK ELEMENT, not on a div inside
-  // it. A WP block theme caps content width by styling the direct children of
-  // the content container, so the element that has to carry the override is the
-  // one the theme is constraining — which is now this block. Put it on an inner
-  // div and the table stays boxed inside the theme's ~900px cap.
+  // No per-view width handling here either. The table is the only thing that
+  // needs more room than the theme's content width, so it breaks out on its own
+  // inside renderTable — nothing outside has to know, and there is no width
+  // state to set on one view and clear on the other.
+  // A fragment rather than a wrapper div: the count and the table/grid become
+  // direct children of the block element, adding no markup of their own.
   function displayDataset(known) {
     // What I need from what is known
-    var el = known.el;
     var rows = known.filteredRows;
     var isGrid = known.params.get("view") === "grid";
 
-    applyStyle(el, isGrid ? getGridStyle() : getTableStyle());
-    el.appendChild(buildCount(rows.length));
-    el.appendChild(isGrid ? renderGrid(rows) : renderTable(rows));
+    var out = document.createDocumentFragment();
+    out.appendChild(buildCount(rows.length));
+    out.appendChild(isGrid ? renderGrid(rows) : renderTable(rows));
+    return out;
   }
 
   // ---- options bar (controls) -----------------------------------------------
@@ -803,14 +826,13 @@
     return bar;
   }
 
-  // The other half of PHASE 4. The bar IS the options row, so it goes straight
-  // into the block element — no wrapper div that would exist only for symmetry.
+  // The other half of PHASE 4. The bar IS the options row, so it is returned as
+  // it stands — no wrapper div that would exist only for symmetry.
   function displayOptionsRow(known) {
     // What I need from what is known
-    var el = known.el;
     var options = known.dataset.options;
 
-    el.appendChild(buildOptionsBar(options, known));
+    return buildOptionsBar(options, known);
   }
 
   // ---- the block renderer: the only code in this file that runs -------------
@@ -823,12 +845,12 @@
   window.GL.blockRenderers.list_browser = function (el) {
     el.innerHTML = "";
 
-    // ---- PHASE 1: params. Adds: el, params ---------------------------------
-    // Needs no data, so it happens before the loads.
-    var known = {
-      el: el,
-      params: processParams(window.location.search)
-    };
+    // `known` holds KNOWLEDGE only — no DOM. `el` is a local of this function;
+    // the display functions return nodes and the appending happens here.
+    var known = {};
+
+    // ---- PHASE 1: params. Adds: params -------------------------------------
+    known.params = processParams(window.location.search);
 
     // ---- PHASE 2: load. Adds: datasetList, dataset, rawRows ----------------
     // Two files, and only two. Sequential because datasets.json names the data
@@ -837,37 +859,34 @@
     fetchJson(DATASETS_URL)
       .then(function (datasetList) {
         known.datasetList = datasetList;
+        known.dataset = pickDataset(datasetList, known.params.get("dataset"));
 
-        // processParams() guarantees an id, so the only failure left is a bad
-        // one — handled gracefully, not defended against.
-        var id = known.params.get("dataset");
-        known.dataset = datasetList.filter(function (d) { return d.id === id; })[0];
-        if (!known.dataset) {
-          el.textContent = "unknown dataset: " + id;
-          return null;
-        }
+        return fetchJson(UPLOADS + known.dataset.file)
+          .then(function (rawRows) {
+            known.rawRows = rawRows;
 
-        return fetchJson(UPLOADS + known.dataset.file).then(function (rawRows) {
-          known.rawRows = rawRows;
+            // ---- PHASE 3: process. Adds: filteredRows, keywords ------------
+            // All of it, up front. Nothing is gained by sequencing this work
+            // between the display calls. `known` is complete after these two.
+            known.filteredRows = filterRows(known.rawRows, known.params);
+            known.keywords = deriveKeywords(known.rawRows);
 
-          // ---- PHASE 3: process. Adds: filteredRows, keywords --------------
-          // All of it, up front. Nothing is gained by sequencing this work
-          // between the display calls. `known` is complete after these two.
-          known.filteredRows = filterRows(known.rawRows, known.params);
-          known.keywords = deriveKeywords(known.rawRows);
-
-          // ---- PHASE 4: display. READ ONLY from here ------------------------
-          displayOptionsRow(known);
-          displayDataset(known);
-        });
+            // ---- PHASE 4: display. READ ONLY from here ---------------------
+            // Both are pure known -> node. The page is touched only on these
+            // two lines, which is also where the top-to-bottom order lives.
+            el.appendChild(displayOptionsRow(known));
+            el.appendChild(displayDataset(known));
+          });
       })
       .catch(function (err) {
-        // fetchJson puts the failing URL in the message — "HTTP 404" alone
-        // never says which of the two files was the problem. The error object
-        // goes too: this catch also covers a throw from phase 3 or 4, where the
-        // message is a code bug rather than a URL and the stack is what helps.
+        // The message IS the report, on screen and in the console. Every throw
+        // that reaches here already says what happened and to which file — a
+        // generic "temporarily unavailable" would be wrong (a missing uploads
+        // file never loads on a retry) and useless to the one person who can
+        // act on it. The error object goes to the console too: this catch also
+        // covers a throw from phase 3 or 4, where the stack is what helps.
         console.error("[list_browser] " + err.message, err);
-        el.textContent = "Content is temporarily unavailable.";
+        el.textContent = err.message;
       });
   };
 })();
