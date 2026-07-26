@@ -9,10 +9,6 @@ older note cites a number.
 
 ## List browser
 
-1. **Is "Gallery" the right display word for the back-link label?** The `backToGallery`
-   block shows a fixed "← Back to gallery" (grid of cards = a gallery, to a visitor).
-   Revisit the wording later; low stakes, deferred deliberately.
-
 2. **Native `<details>` has no light-dismiss (2026-07-25).** Clicking elsewhere doesn't
    close the Keywords/Badges panel — you must click its summary again, which is also what
    commits it. Fix if it annoys in use: a document click listener that closes any open

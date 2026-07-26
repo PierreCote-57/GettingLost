@@ -47,15 +47,14 @@
  *
  *     <div data-block-type="campground"></div>
  *     <div data-block-type="googleMap"></div>
- *     <div class="gl-dest-back" data-block-type="backToGallery"
- *          data-title="Optional title" data-file="Optional file"></div>
+ *     <div class="gl-dest-back" data-block-type="backToGallery"></div>
  *     <div data-block-type="notes"></div>
  *     <div data-block-type="warning" data-text="Required warning text"></div>
  *
- *   - backToGallery is driven by its own data-title/data-file
- *     attributes (not pageData), so a page can include more than one,
- *     each pointing at a different gallery filter (e.g. "Back to
- *     Parks" and "Back to Destinations" on the same page).
+ *   - backToGallery takes no attributes and reads no pageData: it
+ *     points back at the list_browser page the visitor arrived from
+ *     (referrer, filters and all), or at the destinations grid when
+ *     they arrived some other way.
  *
  *   - The page's own slug (from window.location.pathname) is used to
  *     fetch /wp-content/uploads/<slug>.json once; every block on the
@@ -841,36 +840,78 @@
   // Generic block renderer: "backToGallery"
   // ---------------------------------------------------------------------
   //
-  // Renders a "← Back to gallery" link back to the list_browser page,
-  // scoped to one dataset and shown in grid view. Fully driven by the
-  // element's own attribute (not pageData):
+  // Renders a "← Back to …" link to the list_browser page.
+  // Takes no attributes and reads no pageData — the link is derived entirely
+  // from where the visitor came from:
   //
-  //   <div data-block-type="backToGallery" data-dataset="destinations"></div>
+  //   <div data-block-type="backToGallery"></div>
   //
-  //   - data-dataset is the list_browser dataset id (e.g. "destinations",
-  //     "van-howto", "van-checklist"), passed through as ?dataset=. When
-  //     omitted, the link goes to list_browser unscoped.
-  //   - The label is a fixed, generic "Back to gallery"; the target dataset
-  //     is carried by data-dataset, so there is no per-dataset title lookup
-  //     (and no extra fetch). Centralizing this here means the link
-  //     style/wording can change sitewide from one place.
+  //   - Arrived from list_browser: the referrer IS the link, verbatim. That
+  //     carries the visitor's whole context back — dataset, view, and every
+  //     filter (badges/access/keywords/search) — with no parsing or
+  //     rebuilding. The referrer's `view` picks the label, so the word
+  //     matches the face of the page being returned to (VIEW_LABELS).
+  //   - Arrived any other way (direct visit, bookmark, search engine, or a
+  //     link from another GL page): there is no context to return to, so the
+  //     link is the site's front door — the destinations grid — and says so.
+  //   - The label is always one of a fixed set of literals picked by a
+  //     whitelist lookup; referrer text is never rendered. The referrer's URL
+  //     reaches the href (escaped), and only after passing the origin and
+  //     path checks in referrerListBrowserUrl().
+
+  // grid = cards, table = rows. Keyed by the list_browser `view` values.
+  var VIEW_LABELS = {
+    grid: "Back to gallery",
+    table: "Back to list view",
+  };
+
+  var FALLBACK_LABEL = "Back to destination gallery";
+
+  // The referrer, but only when it really is this site's list_browser page —
+  // same origin AND same path. Anything else (off-site, another GL page, an
+  // unparseable or absent referrer) returns null, which is what sends the
+  // caller to the fallback. Returns the URL object so the caller can read
+  // both the full href and the `view` param off it.
+  function referrerListBrowserUrl(listSlug) {
+    if (!document.referrer) return null;
+
+    var url;
+    try {
+      url = new URL(document.referrer);
+    } catch (err) {
+      return null;
+    }
+
+    if (url.origin !== window.location.origin) return null;
+    // Trailing slash is optional on the referrer WP hands us.
+    if (url.pathname.replace(/\/+$/, "") !== "/" + listSlug) return null;
+
+    return url;
+  }
 
   window.GL.blockRenderers.backToGallery = function (el) {
-    var dataset = el.getAttribute("data-dataset") || "";
-
     if (!el.className) {
       el.className = "gl-dest-back";
     }
 
     // The listing page is list_browser.html — derive its URL slug so we
     // never hardcode the slug form.
-    var href = "/" + fileToSlug("list_browser.html") + "/";
-    if (dataset) {
-      href += "?dataset=" + encodeURIComponent(dataset) + "&view=grid";
+    var listSlug = fileToSlug("list_browser.html");
+    var from = referrerListBrowserUrl(listSlug);
+
+    var href;
+    var label;
+    if (from) {
+      href = from.href;
+      // An absent or unknown view means list_browser's own default, grid.
+      label = VIEW_LABELS[from.searchParams.get("view")] || VIEW_LABELS.grid;
+    } else {
+      href = "/" + listSlug + "/?dataset=destinations&view=grid";
+      label = FALLBACK_LABEL;
     }
 
     el.innerHTML =
-      '<a href="' + escapeAttr(href) + '">\u2190 Back to gallery</a>';
+      '<a href="' + escapeAttr(href) + '">\u2190 ' + label + "</a>";
   };
 
   // ---------------------------------------------------------------------
