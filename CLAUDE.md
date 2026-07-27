@@ -111,6 +111,15 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
   2–3 lines. Do not pre-empt the follow-up question with sections, caveats, or a
   "who it's for" coda; Pierre asks when he wants more. Same rule in code comments
   (§ the `filterView` pass): detail he didn't ask for goes stale and costs a read.
+- **Code conventions (2026-07-27).** Name the return: `var shortList = f(x); return
+  shortList;`, never `return f(x)` — a bare return has no breakpoint and no place to
+  override a value. (IntelliJ flags it "redundant"; that inspection dates from
+  compilers where the temp cost something. It doesn't.) Parameters are named for what
+  the function RECEIVES, not what the caller does with the result — a filter takes
+  `longList`. A comment says what the function does; it must not know what its callers
+  or its neighbours do.
+- **Don't re-list settled items.** Abandoned/decided records (e.g. the DRA section in
+  `docs/todo.md`) are not work — don't repeat them in every recap.
 - **No redundant sign-off / manufactured approval.** Once something is decided, don't
   re-wrap it as "are you good with X?" Don't offer to do trivial one-liners he can do
   faster in IntelliJ. Reserve offering for real leverage (bulk/multi-file/lookups).

@@ -3,6 +3,8 @@
 Work parked for later: small issues found while working on something bigger, plus
 planned passes. Noted, not fixed. Delete a line when it's done.
 
+Code and data-integrity work only. **Content authoring does not belong here** (2026-07-27).
+
 Numbers are sequential and unique. Renumbered 2026-07-27 (completed entries deleted
 per the rule above); old numbers are gone, so refer to items by their text if an
 older note cites a number.
@@ -18,24 +20,11 @@ older note cites a number.
    human decides. Do NOT normalize in the filter (stemming/synonym maps) — that would
    hide exactly the drift this is meant to expose.
 
-## Content / pages
-
-2. **Home template shows "Block contains unexpected or invalid content" (2026-07-25).**
-   Seen in the Site Editor preview of the Home template, over the hero image, with an
-   "Attempt recovery" button. Not investigated, not clicked.
-
 ## Data integrity
 
-3. **Cross-reference validation pass.** Walk the cross-referenced pages against each
-   other and confirm they agree. Item 4 is an instance of the same class and should
-   fold into this pass.
-
-4. **98 of the 116 destination rows have no `file` link.** Only the 18 rows that point
-   at a GL page can be drift-checked or cross-referenced; the rest are catalog-only.
-
-5. **Unpublished-page handling in the destinations TABLE.** The grid excludes unpublished
-   pages (`filterView`), but the table still renders a row whose "View" link points at a
-   page that isn't live. Needs a defined behavior: skip, grey out, or drop just the link.
+2. **Cross-reference validation pass.** Walk the cross-referenced pages against each
+   other and confirm they agree. Only the rows carrying a `file` link are in scope —
+   a catalog-only row has nothing to check against.
 
 ## DRA pavement-distance — ABANDONED 2026-07-25
 
