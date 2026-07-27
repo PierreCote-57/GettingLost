@@ -191,6 +191,10 @@
     return COLUMNS.reduce(function (sum, col) { return sum + (col.width || 0); }, 0);
   }
 
+  function isPublished(place) {
+    return !!(place.wpSettings && place.wpSettings.published === true);
+  }
+
   function campbellRiverKm(place) {
     var access = place.access || {};
     var list = access.haversine || [];
@@ -266,7 +270,7 @@
         cell.textContent = cellText(place.name);
       }
     } else if (field === "on_lost") {
-      if (place.file) {
+      if (place.file && isPublished(place)) {
         cell.appendChild(internalLink(place.file, "View", "Open the page on this web site"));
       }
     } else if (field === "location") {
@@ -349,9 +353,7 @@
   // `view=grid` narrows to published rows: a card advertises a live page.
   function filterView(value, longList) {
     if (value !== "grid") return longList;
-    var shortList = longList.filter(function (row) {
-      return !!(row.wpSettings && row.wpSettings.published === true);
-    });
+    var shortList = longList.filter(isPublished);
     return shortList;
   }
 
