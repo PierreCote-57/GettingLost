@@ -358,12 +358,12 @@ summary:focus:not(:focus-visible) {
   margin: 0 0 1rem;
 }
 /* Match-count readout — not a control, so no pill. margin-left:auto floats it to
-   the right end of the bar (past any booklet button). One uniform string in the
-   family brown, a notch larger than the controls so it reads as the confident
-   answer to the filters rather than stray text. */
+   the right end of the bar (past any booklet button). No color of its own: it
+   inherits the theme's text brown (#4a3828), the same color the grid card titles
+   get, so it sits with the page rather than shouting. A notch larger than the
+   controls and semibold so it still reads as the answer to the filters. */
 .gl-lb-count {
   margin-left: auto;
-  color: #5e442c;
   font-weight: 600;
   font-size: 1.15rem;
 }
