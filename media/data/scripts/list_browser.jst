@@ -346,14 +346,13 @@
     return (value || "").split(",").filter(Boolean);
   }
 
-  // `view` both displays AND filters: a card advertises a live page, so the grid
-  // shows published rows only. Living here rather than inside renderGrid is what
-  // keeps the match count honest — it counts what you actually see.
-  function filterView(value, shortList) {
-    if (value !== "grid") return shortList;
-    return shortList.filter(function (row) {
+  // `view=grid` narrows to published rows: a card advertises a live page.
+  function filterView(value, longList) {
+    if (value !== "grid") return longList;
+    var shortList = longList.filter(function (row) {
       return !!(row.wpSettings && row.wpSettings.published === true);
     });
+    return shortList;
   }
 
   // Tag membership, OR within the field: keep a row carrying at least one of the
@@ -441,14 +440,17 @@
     return grid;
   }
 
-  // The match count, and the empty state at the same time: 0 rows reads "0 found".
+  // The match count, and the empty state at the same time: 0 rows reads
+  // "0 of 38 found". Always both numbers, even when nothing is filtered out
+  // ("38 of 38 found") — one format at all times, so the readout never changes
+  // shape under you as you filter.
   // A readout, not a control, so no pill — it rides at the right end of the
   // options bar (margin-left:auto in CSS). One uniform string in the family brown;
   // see .gl-lb-count in the CSS for size/weight/color.
-  function buildCount(n) {
+  function buildCount(n, total) {
     var el = document.createElement("div");
     el.className = "gl-lb-count";
-    el.textContent = n + " found";
+    el.textContent = n + " of " + total + " found";
     return el;
   }
 
@@ -824,7 +826,7 @@
     // The match count rides at the far right (margin-left:auto), appended last so
     // it lands after any booklet control. It is a readout, not a token, so it is
     // not in CONTROL_BUILDERS — it belongs to the bar, on every dataset.
-    bar.appendChild(buildCount(known.filteredRows.length));
+    bar.appendChild(buildCount(known.filteredRows.length, known.rawRows.length));
     return bar;
   }
 
