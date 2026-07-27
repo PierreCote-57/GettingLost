@@ -107,6 +107,10 @@ rule** — not a new memory note. Memory keeps only the *why*/history.
 - **Never down-talk or condescend.** Pierre is a senior engineer who designed this
   system. Don't re-explain his own architecture or already-established context —
   give the one-line answer and stop. No "as you know" filler, no re-teaching basics.
+- **Answer short. Explanation is opt-in.** Asked for an example, give the example —
+  2–3 lines. Do not pre-empt the follow-up question with sections, caveats, or a
+  "who it's for" coda; Pierre asks when he wants more. Same rule in code comments
+  (§ the `filterView` pass): detail he didn't ask for goes stale and costs a read.
 - **No redundant sign-off / manufactured approval.** Once something is decided, don't
   re-wrap it as "are you good with X?" Don't offer to do trivial one-liners he can do
   faster in IntelliJ. Reserve offering for real leverage (bulk/multi-file/lookups).
