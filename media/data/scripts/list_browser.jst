@@ -124,7 +124,11 @@
   // caller to one statement — the whole not-found case lives here instead of a
   // branch interrupting the flow of the phases, and the renderer's single catch
   // is already the place that reports a failure.
-  function pickDataset(datasetList, id) {
+  function pickDataset(known) {
+    // What I need from what is known
+    var datasetList = known.datasetList;
+    var id = known.params.get("dataset");
+
     var entry = datasetList.filter(function (d) { return d.id === id; })[0];
     if (entry) return entry;
     throw new Error("Unknown dataset " + id);
@@ -411,8 +415,11 @@
   // a control this dataset doesn't show still filters, which is what makes a
   // hand-typed or shared URL work. A key with no case is not an error: it is
   // `dataset`, or a control that doesn't filter, or a filter not built yet.
-  function filterRows(rows, p) {
-    var shortList = rows;
+  function filterRows(known) {
+    // What I need from what is known
+    var p = known.params;
+
+    var shortList = known.rawRows;
     p.forEach(function (value, key) {
       switch (key) {
         case "view":     shortList = filterView(value, shortList); break;
@@ -702,8 +709,12 @@
   //
   // Must be given the UNFILTERED rows. Deriving the choices from the filtered
   // list would delete exactly the values you need to widen the search next.
-  function deriveKeywords(rawRows) {
-    return fieldVocab(rawRows, "keywords");
+  function extractKeywords(known) {
+    // What I need from what is known
+    var rawRows = known.rawRows;
+
+    var keywords = fieldVocab(rawRows, "keywords");
+    return keywords;
   }
 
   // Access filter — a SINGLE-choice threshold over the known, severity-ordered
@@ -846,51 +857,36 @@
   //   <div data-block-type="list_browser"></div>
   //
   // Takes no attributes and reads no pageData — the whole state is the URL.
-  // The four phases, in order, with what each one adds to `known`.
 
   window.GL.blockRenderers.list_browser = function (el) {
     el.innerHTML = "";
 
-    // `known` holds KNOWLEDGE only — no DOM. `el` is a local of this function;
-    // the display functions return nodes and the appending happens here.
+    // `known` holds KNOWLEDGE only — no DOM. The appending happens here.
     var known = {};
 
-    // ---- PHASE 1: params. Adds: params -------------------------------------
+    // ---- PHASE 1: params ---------------------------------------------------
     known.params = processParams(window.location.search);
 
-    // ---- PHASE 2: load. Adds: datasetList, dataset, rawRows ----------------
-    // Two files, and only two. Sequential because datasets.json names the data
-    // file; nested rather than spread across functions so the sequence reads in
-    // one place. ONE catch for both — if either fails there is nothing to show.
+    // ---- PHASE 2: load. Sequential — the first file names the second --------
     fetchJson(DATASETS_URL)
       .then(function (datasetList) {
         known.datasetList = datasetList;
-        known.dataset = pickDataset(datasetList, known.params.get("dataset"));
+        known.dataset = pickDataset(known);
 
         return fetchJson(UPLOADS + known.dataset.file)
           .then(function (rawRows) {
             known.rawRows = rawRows;
 
-            // ---- PHASE 3: process. Adds: filteredRows, keywords ------------
-            // All of it, up front. Nothing is gained by sequencing this work
-            // between the display calls. `known` is complete after these two.
-            known.filteredRows = filterRows(known.rawRows, known.params);
-            known.keywords = deriveKeywords(known.rawRows);
+            // ---- PHASE 3: process. All of it, up front ---------------------
+            known.filteredRows = filterRows(known);
+            known.keywords = extractKeywords(known);
 
             // ---- PHASE 4: display. READ ONLY from here ---------------------
-            // Both are pure known -> node. The page is touched only on these
-            // two lines, which is also where the top-to-bottom order lives.
             el.appendChild(displayOptionsRow(known));
             el.appendChild(displayDataset(known));
           });
       })
       .catch(function (err) {
-        // The message IS the report, on screen and in the console. Every throw
-        // that reaches here already says what happened and to which file — a
-        // generic "temporarily unavailable" would be wrong (a missing uploads
-        // file never loads on a retry) and useless to the one person who can
-        // act on it. The error object goes to the console too: this catch also
-        // covers a throw from phase 3 or 4, where the stack is what helps.
         console.error("[list_browser] " + err.message, err);
         el.textContent = err.message;
       });

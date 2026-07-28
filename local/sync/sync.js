@@ -1013,7 +1013,7 @@ function hydrateList(entries, relPath, perPageDataMap) {
   return { hydrated, failCount };
 }
 
-async function syncFiles(fileBirdFolderCache, hydratedSet) {
+async function syncFiles(fileBirdFolderCache, excludedSet) {
   let successCount = 0;
   let failCount = 0;
 
@@ -1031,7 +1031,7 @@ async function syncFiles(fileBirdFolderCache, hydratedSet) {
   for (const relSubPath of filenames) {
     const normalized = relSubPath.split(path.sep).join("/");
 
-    if (hydratedSet.has(normalized)) {
+    if (excludedSet.has(normalized)) {
       continue;
     }
 

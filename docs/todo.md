@@ -20,9 +20,13 @@ older note cites a number.
    human decides. Do NOT normalize in the filter (stemming/synonym maps) — that would
    hide exactly the drift this is meant to expose.
 
+2. **Generate the keyword list at sync time (2026-07-27).** `deriveKeywords(rawRows)`
+   builds it at render time in phase 3. Move it to sync so the dataset carries the list.
+   Phase 4 already reads the finished list, so only the phase-3 step changes.
+
 ## Data integrity
 
-2. **Cross-reference validation pass.** Walk the cross-referenced pages against each
+3. **Cross-reference validation pass.** Walk the cross-referenced pages against each
    other and confirm they agree. Only the rows carrying a `file` link are in scope —
    a catalog-only row has nothing to check against.
 
