@@ -102,6 +102,7 @@ const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
 // as failed, so the Summary reports it and main() exits non-zero. Pages with no
 // legs (e.g. lakes) are not applicable and aren't counted either way.
 function validateLegs(perPageDataMap) {
+  console.log("\n=== Validating legs ===");
   let successCount = 0;
   let failCount = 0;
   for (const [key, pd] of perPageDataMap) {
@@ -318,14 +319,13 @@ async function loadWpPageMap() {
     if (page >= totalPages) break;
     page++;
   }
+  console.log(`[wp] Loaded ${map.size} existing WP pages.`);
   return map;
 }
 
 function loadPerPageDataMap() {
   const map = new Map();
-  if (!fs.existsSync(DATA_ROOT)) return map;
-
-  const entries = fs.readdirSync(DATA_ROOT, { recursive: true });
+  const entries = fs.existsSync(DATA_ROOT) ? fs.readdirSync(DATA_ROOT, { recursive: true }) : [];
   for (const entry of entries) {
     if (!entry.endsWith(".json")) continue;
     const normalized = entry.split(path.sep).join("/");
@@ -338,6 +338,7 @@ function loadPerPageDataMap() {
     const repoPath = path.dirname(normalized);
     map.set(filename, { data, repoPath });
   }
+  console.log(`[data] Loaded ${map.size} per-page data files.`);
   return map;
 }
 
@@ -378,6 +379,7 @@ async function loadWpMediaMap() {
     if (page >= totalPages) break;
     page++;
   }
+  console.log(`[wp] Loaded ${map.size} media attachments.\n`);
   return map;
 }
 
@@ -397,10 +399,12 @@ function generatePageMap(pageFileMap, perPageDataMap) {
     if (!pd || wpStatusFromData(pd.data) !== "publish") continue;
     map[filename] = { name: pd.data.name || base };
   }
+  console.log(`[pageMap] PageMap.json: ${Object.keys(map).length} entries`);
   return map;
 }
 
 async function syncPageMap(pageMap, fileBirdFolderCache) {
+  console.log("\n=== Syncing PageMap ===");
   let successCount = 0;
   let failCount = 0;
 
@@ -466,10 +470,12 @@ async function loadWpPostMap() {
     if (page >= totalPages) break;
     page++;
   }
+  console.log(`[wp] Loaded ${map.size} existing WP posts.`);
   return map;
 }
 
 async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap) {
+  console.log("\n=== Syncing pages ===");
   const pageFileMap = buildPageFileMap();
 
   let successCount = 0;
@@ -583,6 +589,7 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
 // ---------------------------------------------------------------------
 
 async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap) {
+  console.log("\n=== Syncing posts ===");
   const postFileMap = buildPostFileMap();
 
   let successCount = 0;
@@ -1038,6 +1045,7 @@ function hydrateList(entries, relPath, perPageDataMap) {
 }
 
 async function syncFiles(fileBirdFolderCache, excludedSet) {
+  console.log("\n=== Syncing files (Media) ===");
   let successCount = 0;
   let failCount = 0;
 
@@ -1090,6 +1098,7 @@ async function syncFiles(fileBirdFolderCache, excludedSet) {
 // file itself didn't change. An unresolvable pointer is a hard failure
 // (annotated + counted in hydrateList); the partial list is not published.
 async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) {
+  console.log("\n=== Syncing hydrated lists ===");
   let successCount = 0;
   let failCount = 0;
 
@@ -1160,6 +1169,7 @@ async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) 
 // reads to resolve location.location_id. Walked generically so future log files
 // (travel-log maps, etc.) sync without touching this code.
 async function syncLogs(fileBirdFolderCache) {
+  console.log("\n=== Syncing logs ===");
   let successCount = 0;
   let failCount = 0;
 
@@ -1233,53 +1243,31 @@ async function main() {
   const perPageDataMap = loadPerPageDataMap();
   const datasets = loadDatasetManifest();
   const excludedSet = buildExcludedSet(datasets);
-  console.log(`[data] Loaded ${perPageDataMap.size} per-page data files.`);
-
   const wpPageMap = await loadWpPageMap();
-  console.log(`[wp] Loaded ${wpPageMap.size} existing WP pages.`);
-
   const wpPostMap = await loadWpPostMap();
-  console.log(`[wp] Loaded ${wpPostMap.size} existing WP posts.`);
-
   const wpMediaMap = await loadWpMediaMap();
-  console.log(`[wp] Loaded ${wpMediaMap.size} media attachments.\n`);
-
   const pageFileMap = buildPageFileMap();
-
   const pageMap = generatePageMap(pageFileMap, perPageDataMap);
-  console.log(`[pageMap] PageMap.json: ${Object.keys(pageMap).length} entries`);
 
-  console.log("\n=== Validating legs ===");
-  const legsResult = validateLegs(perPageDataMap);
-
-  console.log("\n=== Syncing pages ===");
-  const pagesResult = await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap);
-
-  console.log("\n=== Syncing posts ===");
-  const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
-
-  console.log("\n=== Syncing files (Media) ===");
-  const filesResult = await syncFiles(fileBirdFolderCache, excludedSet);
-
-  console.log("\n=== Syncing hydrated lists ===");
-  const listsResult = await syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets);
-
-  console.log("\n=== Syncing logs ===");
-  const logsResult = await syncLogs(fileBirdFolderCache);
-
-  console.log("\n=== Syncing PageMap ===");
-  const pageMapResult = await syncPageMap(pageMap, fileBirdFolderCache);
+  // The run, in order. Each step announces its own section header and returns
+  // { successCount, failCount }; the name is attached here because it is a label
+  // in this report, not something a sync step should know about itself. Adding a
+  // step means adding ONE line — the summary and the exit code follow from it.
+  const results = [];
+  results.push({ name: "Legs", ...validateLegs(perPageDataMap) });
+  results.push({ name: "Pages", ...await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap) });
+  results.push({ name: "Posts", ...await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap) });
+  results.push({ name: "Files", ...await syncFiles(fileBirdFolderCache, excludedSet) });
+  results.push({ name: "Lists", ...await syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) });
+  results.push({ name: "Logs", ...await syncLogs(fileBirdFolderCache) });
+  results.push({ name: "PageMap", ...await syncPageMap(pageMap, fileBirdFolderCache) });
 
   console.log("\n=== Summary ===");
-  console.log(`Legs:      ${legsResult.successCount} ok, ${legsResult.failCount} failed`);
-  console.log(`Pages:     ${pagesResult.successCount} ok, ${pagesResult.failCount} failed`);
-  console.log(`Posts:     ${postsResult.successCount} ok, ${postsResult.failCount} failed`);
-  console.log(`Files:     ${filesResult.successCount} ok, ${filesResult.failCount} failed`);
-  console.log(`Lists:     ${listsResult.successCount} ok, ${listsResult.failCount} failed`);
-  console.log(`Logs:      ${logsResult.successCount} ok, ${logsResult.failCount} failed`);
-  console.log(`PageMap:   ${pageMapResult.successCount} ok, ${pageMapResult.failCount} failed`);
+  for (const result of results) {
+    console.log(`${(result.name + ":").padEnd(10)}${String(result.successCount).padStart(3)} ok, ${String(result.failCount).padStart(3)} failed`);
+  }
 
-  const totalFails = legsResult.failCount + pagesResult.failCount + postsResult.failCount + filesResult.failCount + listsResult.failCount + logsResult.failCount + pageMapResult.failCount;
+  const totalFails = results.reduce((sum, result) => sum + result.failCount, 0);
   if (totalFails > 0) {
     process.exit(1);
   }

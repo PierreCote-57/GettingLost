@@ -30,7 +30,7 @@
  *   2. LOAD     — datasets.json, then the selected dataset's file. Sequential
  *                 because the first names the second, and if either fails there
  *                 is nothing useful to do, so there is ONE error path.
- *   3. PROCESS  — all of it, up front: filter the rows, derive the keyword
+ *   3. PROCESS  — all of it, up front: filter the rows, pick up the keyword
  *                 vocabulary. Nothing is gained by sequencing work between the
  *                 display calls.
  *   4. DISPLAY  — displayOptionsRow() and displayDataset(), two different views
@@ -627,9 +627,9 @@
   }
 
   // One multi-select checkbox dropdown (<details>/<summary> disclosure) over
-  // `values`, with the ?<paramName>= values pre-checked. Shared by the keyword,
-  // badge, and road filters — they differ only in label, param, and vocabulary.
-  // snake_case values (road: sharp_rock, back_country) show with spaces.
+  // `values`, with the ?<paramName>= values pre-checked. Shared by the keyword and
+  // badge filters — they differ only in label, param, and vocabulary. snake_case
+  // values show with spaces. An empty vocabulary builds nothing (see below).
   // Commits when the panel CLOSES, not per checkbox: navigating on every tick
   // would reload the page and shut the panel, so only one value could ever be
   // picked per visit. `chosen` is the canonical (values-ordered) form of what the
@@ -695,16 +695,6 @@
 
     details.appendChild(panel);
     return details;
-  }
-
-  // Distinct values across the dataset, for a control whose vocabulary is open
-  // rather than fixed. Reads each row's `tags` object (tags.keywords, tags.badges).
-  function fieldVocab(rows, field) {
-    var set = {};
-    rows.forEach(function (r) {
-      ((r.tags || {})[field] || []).forEach(function (v) { set[v] = true; });
-    });
-    return Object.keys(set).sort();
   }
 
   // PHASE 3 step — the keyword vocabulary is PROCESSING, not display. sync.js
@@ -799,10 +789,6 @@
   // Token -> control builder, all sharing one signature: build(known) -> DOM node,
   // or nothing. datasets.json's `options` array names which controls a dataset
   // shows, and in what order; buildOptionsBar walks it through this map.
-  //
-  // Keywords reads the vocabulary that PHASE 3 already derived. It does not scan
-  // rows, and it does not need rawRows at all — which is the whole reason the
-  // second fetch of the data file could go away.
   var CONTROL_BUILDERS = {
     view: function (known) { return buildViewToggle(known); },
     keywords: function (known) {
