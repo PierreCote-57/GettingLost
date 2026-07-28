@@ -636,6 +636,10 @@
   // URL currently holds, which is what the close handler compares against so a
   // panel opened and closed untouched commits nothing.
   function buildCheckboxDropdown(label, paramName, values, known) {
+    // Nothing to pick is not a control. An absent vocabulary and an empty one are
+    // the same thing to a reader, so both build nothing.
+    if (!values || !values.length) return null;
+
     // What I need from what is known
     var selected = splitList(known.params.get(paramName));
 
@@ -703,17 +707,13 @@
     return Object.keys(set).sort();
   }
 
-  // PHASE 3 step — the keyword vocabulary is PROCESSING, not display. Derived
-  // from the rows today; if it is ever materialized into the dataset definition
-  // at build time, ONLY this function changes and no display code notices.
-  //
-  // Must be given the UNFILTERED rows. Deriving the choices from the filtered
-  // list would delete exactly the values you need to widen the search next.
+  // PHASE 3 step — the keyword vocabulary is PROCESSING, not display. sync.js
+  // collects it from the hydrated rows and writes it into the dataset entry, so
+  // this is a pick rather than a derivation.
   function extractKeywords(known) {
     // What I need from what is known
-    var rawRows = known.rawRows;
+    var keywords = known.dataset.keywords;
 
-    var keywords = fieldVocab(rawRows, "keywords");
     return keywords;
   }
 

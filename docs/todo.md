@@ -33,10 +33,10 @@ older note cites a number.
 4. **`tags` is `[]` on van pages, an object on destinations (found 2026-07-28).** The
    howto/checklist pages carry `"tags": []` where the schema says an object holding
    `keywords`/`badges`. Nothing breaks — both the browser and sync read
-   `(row.tags || {}).keywords || []` — but the `van-howto` and `van-checklist`
-   datasets declare `keywords` in their `options` and offer an EMPTY dropdown,
-   because no van page carries a keyword. Either the pages get keywords or those
-   datasets drop the option.
+   `(row.tags || {}).keywords || []`, and `buildCheckboxDropdown` now builds nothing
+   on an empty vocabulary, so no empty dropdown shows. What's left is authoring:
+   `van-howto` and `van-checklist` declare `keywords` in their `options` and no van
+   page carries one. Either the pages get keywords or those datasets drop the option.
 
 ## DRA pavement-distance — ABANDONED 2026-07-25
 
