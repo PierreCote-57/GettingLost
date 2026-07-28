@@ -977,15 +977,39 @@ async function syncOnePageToFileBird(pageFolderCache, pageId, relPath) {
 // The manifest (list_browser/datasets.json) is the single source of truth for
 // which files get HYDRATED at sync time: each entry's `file` is a pointer/inline
 // list whose `{file}` pointers are replaced with the referenced page's JSON.
-// datasets.json itself and list_browser.json aren't listed there, so they copy
+// The manifest itself is published by syncHydratedLists() too, carrying the
+// keyword vocabulary collected from the hydrated rows, so the repo copy and the
+// published copy differ. list_browser.json isn't listed there and copies
 // verbatim like any other file.
 const LIST_BROWSER_DIR = "data/shared/list_browser";
+const MANIFEST_REL = `${LIST_BROWSER_DIR}/datasets.json`;
 
-// Set of normalized (MEDIA_ROOT-relative) paths to hydrate, read from the manifest.
-function loadHydratedListSet() {
-  const manifest = path.join(MEDIA_ROOT, LIST_BROWSER_DIR, "datasets.json");
-  const datasets = JSON.parse(fs.readFileSync(manifest, "utf8"));
-  return new Set(datasets.map((d) => `${LIST_BROWSER_DIR}/${d.file}`));
+// The parsed manifest entries: { id, file, title, options }.
+function loadDatasetManifest() {
+  const datasets = JSON.parse(fs.readFileSync(path.join(MEDIA_ROOT, MANIFEST_REL), "utf8"));
+  return datasets;
+}
+
+// Everything syncFiles() must NOT copy verbatim — the hydrated dataset files
+// plus the manifest, all published by syncHydratedLists() instead.
+function buildExcludedSet(datasets) {
+  const excluded = new Set(datasets.map((d) => `${LIST_BROWSER_DIR}/${d.file}`));
+  excluded.add(MANIFEST_REL);
+  return excluded;
+}
+
+// The distinct `tags.keywords` values across a hydrated dataset, sorted. This is
+// the open vocabulary the list browser's keyword filter offers as choices; it is
+// collected here so the browser reads a finished list instead of deriving one.
+function collectKeywords(hydratedRows) {
+  const seen = new Set();
+  for (const row of hydratedRows) {
+    for (const keyword of (row.tags || {}).keywords || []) {
+      seen.add(keyword);
+    }
+  }
+  const keywords = [...seen].sort();
+  return keywords;
 }
 
 // Replace each `{file}` pointer entry with the referenced page's JSON, matching
@@ -1059,12 +1083,13 @@ async function syncFiles(fileBirdFolderCache, excludedSet) {
   return { successCount, failCount };
 }
 
-// Hydrate the manifest-listed dataset files (see loadHydratedListSet) and publish
-// the merged result. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
+// Hydrate the manifest-listed dataset files (see loadDatasetManifest) and publish
+// the merged result, then publish the manifest itself with each entry's keyword
+// vocabulary attached. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
 // changed page is always reflected in the hydrated output even when the list
 // file itself didn't change. An unresolvable pointer is a hard failure
 // (annotated + counted in hydrateList); the partial list is not published.
-async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, hydratedSet) {
+async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) {
   let successCount = 0;
   let failCount = 0;
 
@@ -1073,9 +1098,12 @@ async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, hydratedSe
     return { successCount, failCount };
   }
 
-  const listFiles = [...hydratedSet];
+  // The manifest as it will be published: one entry per dataset that made it,
+  // the authored fields plus the collected keywords.
+  const publishedDatasets = [];
 
-  for (const normalized of listFiles) {
+  for (const dataset of datasets) {
+    const normalized = `${LIST_BROWSER_DIR}/${dataset.file}`;
     const filePath = path.join(MEDIA_ROOT, normalized);
     const filename = path.basename(filePath);
 
@@ -1100,6 +1128,23 @@ async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, hydratedSe
     if (mediaId) {
       successCount++;
       await syncOneFileToFileBird(fileBirdFolderCache, mediaId, normalized);
+      publishedDatasets.push({ ...dataset, keywords: collectKeywords(hydrated) });
+    } else {
+      failCount++;
+    }
+  }
+
+  // The manifest describes what was just published, so it goes out only when
+  // every dataset made it. Leaving the previous copy on WP beats advertising a
+  // vocabulary for data that didn't publish.
+  if (failCount === 0) {
+    const manifestName = path.basename(MANIFEST_REL);
+    const fileBuffer = Buffer.from(JSON.stringify(publishedDatasets, null, 2));
+    const mediaId = await syncOneFileToWordPress(MANIFEST_REL, manifestName, fileBuffer, guessMimeFromExt(manifestName));
+
+    if (mediaId) {
+      successCount++;
+      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, MANIFEST_REL);
     } else {
       failCount++;
     }
@@ -1186,7 +1231,8 @@ async function main() {
 
   console.log("=== Loading data maps ===");
   const perPageDataMap = loadPerPageDataMap();
-  const hydratedSet = loadHydratedListSet();
+  const datasets = loadDatasetManifest();
+  const excludedSet = buildExcludedSet(datasets);
   console.log(`[data] Loaded ${perPageDataMap.size} per-page data files.`);
 
   const wpPageMap = await loadWpPageMap();
@@ -1213,10 +1259,10 @@ async function main() {
   const postsResult = await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap);
 
   console.log("\n=== Syncing files (Media) ===");
-  const filesResult = await syncFiles(fileBirdFolderCache, hydratedSet);
+  const filesResult = await syncFiles(fileBirdFolderCache, excludedSet);
 
   console.log("\n=== Syncing hydrated lists ===");
-  const listsResult = await syncHydratedLists(fileBirdFolderCache, perPageDataMap, hydratedSet);
+  const listsResult = await syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets);
 
   console.log("\n=== Syncing logs ===");
   const logsResult = await syncLogs(fileBirdFolderCache);

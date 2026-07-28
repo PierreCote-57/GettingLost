@@ -30,6 +30,14 @@ older note cites a number.
    other and confirm they agree. Only the rows carrying a `file` link are in scope —
    a catalog-only row has nothing to check against.
 
+4. **`tags` is `[]` on van pages, an object on destinations (found 2026-07-28).** The
+   howto/checklist pages carry `"tags": []` where the schema says an object holding
+   `keywords`/`badges`. Nothing breaks — both the browser and sync read
+   `(row.tags || {}).keywords || []` — but the `van-howto` and `van-checklist`
+   datasets declare `keywords` in their `options` and offer an EMPTY dropdown,
+   because no van page carries a keyword. Either the pages get keywords or those
+   datasets drop the option.
+
 ## DRA pavement-distance — ABANDONED 2026-07-25
 
 Dropped by Pierre. The DRA can't describe a road the way the site needs it: its
