@@ -391,9 +391,9 @@ async function loadWpMediaMap() {
 // its "<base>.json" — constructed from the page filename, never looked up by
 // base. The emitted `file` is the master; the consumer (gettinglost.jst) derives
 // the URL slug from it via fileToSlug.
-function generatePageMap(pageFileMap, perPageDataMap) {
+function generatePageMap(ghPageMap, perPageDataMap) {
   const map = {};
-  for (const [filename] of pageFileMap) {
+  for (const [filename] of ghPageMap) {
     const base = path.basename(filename, path.extname(filename));
     const pd = perPageDataMap.get(`${base}.json`);
     if (!pd || wpStatusFromData(pd.data) !== "publish") continue;
@@ -403,13 +403,13 @@ function generatePageMap(pageFileMap, perPageDataMap) {
   return map;
 }
 
-async function syncPageMap(pageMap, fileBirdFolderCache) {
+async function syncPageMap(glPageMap, fileBirdFolderCache) {
   console.log("\n=== Syncing PageMap ===");
   let successCount = 0;
   let failCount = 0;
 
   // PageMap.json — slug-to-metadata lookup for cross-page references
-  const pmBuffer = Buffer.from(JSON.stringify(pageMap, null, 2));
+  const pmBuffer = Buffer.from(JSON.stringify(glPageMap, null, 2));
   const pmRelPath = "data/shared/gallery/PageMap.json";
   const pmId = await syncOneFileToWordPress(pmRelPath, "PageMap.json", pmBuffer, "application/json");
   if (pmId) {
@@ -448,12 +448,14 @@ function buildFileMap(root, repoPrefix) {
   return map;
 }
 
-function buildPageFileMap() {
-  return buildFileMap(PAGES_ROOT, "pages");
+function buildGhPageMap() {
+  const ghPageMap = buildFileMap(PAGES_ROOT, "pages");
+  return ghPageMap;
 }
 
-function buildPostFileMap() {
-  return buildFileMap(POSTS_ROOT, "posts");
+function buildGhPostMap() {
+  const ghPostMap = buildFileMap(POSTS_ROOT, "posts");
+  return ghPostMap;
 }
 
 async function loadWpPostMap() {
@@ -474,14 +476,12 @@ async function loadWpPostMap() {
   return map;
 }
 
-async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap) {
+async function syncPages(pageFolderCache, ghPageMap, wpPageMap, perPageDataMap, wpMediaMap) {
   console.log("\n=== Syncing pages ===");
-  const pageFileMap = buildPageFileMap();
-
   let successCount = 0;
   let failCount = 0;
 
-  for (const [filename, entry] of pageFileMap) {
+  for (const [filename, entry] of ghPageMap) {
     const base = path.basename(filename, path.extname(filename));
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
       const pd = perPageDataMap.get(`${base}.json`);
@@ -588,14 +588,12 @@ async function syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap)
 // POSTS sync
 // ---------------------------------------------------------------------
 
-async function syncPosts(postFolderCache, wpPostMap, perPageDataMap, wpMediaMap) {
+async function syncPosts(postFolderCache, ghPostMap, wpPostMap, perPageDataMap, wpMediaMap) {
   console.log("\n=== Syncing posts ===");
-  const postFileMap = buildPostFileMap();
-
   let successCount = 0;
   let failCount = 0;
 
-  for (const [filename, entry] of postFileMap) {
+  for (const [filename, entry] of ghPostMap) {
     const base = path.basename(filename, path.extname(filename));
     if (CHANGED && !CHANGED.files.has(entry.relPath)) {
       const pd = perPageDataMap.get(`${base}.json`);
@@ -1246,8 +1244,9 @@ async function main() {
   const wpPageMap = await loadWpPageMap();
   const wpPostMap = await loadWpPostMap();
   const wpMediaMap = await loadWpMediaMap();
-  const pageFileMap = buildPageFileMap();
-  const pageMap = generatePageMap(pageFileMap, perPageDataMap);
+  const ghPageMap = buildGhPageMap();
+  const ghPostMap = buildGhPostMap();
+  const glPageMap = generatePageMap(ghPageMap, perPageDataMap);
 
   // The run, in order. Each step announces its own section header and returns
   // { successCount, failCount }; the name is attached here because it is a label
@@ -1255,12 +1254,12 @@ async function main() {
   // step means adding ONE line — the summary and the exit code follow from it.
   const results = [];
   results.push({ name: "Legs", ...validateLegs(perPageDataMap) });
-  results.push({ name: "Pages", ...await syncPages(pageFolderCache, wpPageMap, perPageDataMap, wpMediaMap) });
-  results.push({ name: "Posts", ...await syncPosts(pageFolderCache, wpPostMap, perPageDataMap, wpMediaMap) });
+  results.push({ name: "Pages", ...await syncPages(pageFolderCache, ghPageMap, wpPageMap, perPageDataMap, wpMediaMap) });
+  results.push({ name: "Posts", ...await syncPosts(pageFolderCache, ghPostMap, wpPostMap, perPageDataMap, wpMediaMap) });
   results.push({ name: "Files", ...await syncFiles(fileBirdFolderCache, excludedSet) });
   results.push({ name: "Lists", ...await syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) });
   results.push({ name: "Logs", ...await syncLogs(fileBirdFolderCache) });
-  results.push({ name: "PageMap", ...await syncPageMap(pageMap, fileBirdFolderCache) });
+  results.push({ name: "PageMap", ...await syncPageMap(glPageMap, fileBirdFolderCache) });
 
   console.log("\n=== Summary ===");
   for (const result of results) {
