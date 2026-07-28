@@ -5,7 +5,7 @@ planned passes. Noted, not fixed. Delete a line when it's done.
 
 Code and data-integrity work only. **Content authoring does not belong here** (2026-07-27).
 
-Numbers are sequential and unique. Renumbered 2026-07-27 (completed entries deleted
+Numbers are sequential and unique. Renumbered 2026-07-28 (completed entries deleted
 per the rule above); old numbers are gone, so refer to items by their text if an
 older note cites a number.
 
@@ -20,23 +20,11 @@ older note cites a number.
    human decides. Do NOT normalize in the filter (stemming/synonym maps) — that would
    hide exactly the drift this is meant to expose.
 
-2. **Generate the keyword list at sync time (2026-07-27).** `deriveKeywords(rawRows)`
-   builds it at render time in phase 3. Move it to sync so the dataset carries the list.
-   Phase 4 already reads the finished list, so only the phase-3 step changes.
-
 ## Data integrity
 
-3. **Cross-reference validation pass.** Walk the cross-referenced pages against each
+2. **Cross-reference validation pass.** Walk the cross-referenced pages against each
    other and confirm they agree. Only the rows carrying a `file` link are in scope —
    a catalog-only row has nothing to check against.
-
-4. **`tags` is `[]` on van pages, an object on destinations (found 2026-07-28).** The
-   howto/checklist pages carry `"tags": []` where the schema says an object holding
-   `keywords`/`badges`. Nothing breaks — both the browser and sync read
-   `(row.tags || {}).keywords || []`, and `buildCheckboxDropdown` now builds nothing
-   on an empty vocabulary, so no empty dropdown shows. What's left is authoring:
-   `van-howto` and `van-checklist` declare `keywords` in their `options` and no van
-   page carries one. Either the pages get keywords or those datasets drop the option.
 
 ## DRA pavement-distance — ABANDONED 2026-07-25
 

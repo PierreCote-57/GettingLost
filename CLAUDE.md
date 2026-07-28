@@ -1,5 +1,17 @@
 # GettingLost — working agreement
 
+## READ THIS AT THE START OF EVERY SESSION
+
+**ALWAYS DO THIS: follow the rules in this file. All of them, every time.**
+
+They are not preferences to weigh against my own judgment in the moment — they are the
+agreement. Every rule here exists because breaking it already cost Pierre something.
+Breaking one again costs his time, costs limited resources, and irritates him — and it
+makes writing rules pointless, which is the worst outcome of the three.
+
+So: before acting, and before writing a recap, a status list, or an opinion, check what
+this file says about that. "I didn't think of it" is the same failure as not reading it.
+
 ## 1. FIND ≠ FIX. Never change anything I didn't ask you to change. (CARDINAL RULE)
 
 **The default is STOP.** Acting requires an explicit instruction to act. A question,
