@@ -1,9 +1,61 @@
-# Destination schema unification — spec + migration plan
+# Schema unification
+
+COMPLETE 2026-07-20. Two records, not yet consolidated — a summary of what is in
+force, followed by the full implementation record.
+
+## Summary
+
+What the unification put in force, plus the non-obvious implementation notes.
+
+**DONE and pushed, 2026-07-20.** All phases (1, 2, 3a–3e, 4, 5) shipped. The full
+record lives in `docs/schema-unification.md` ("Migration status" header). This memory
+keeps only what's non-obvious from the repo.
+
+**The unified schema now in force** (this is CURRENT, not aspirational — other memories
+that still describe the old shapes are stale):
+- `title` → **`name`** sitewide (pages + posts); sync sets WP `body.title` from `name`.
+- gallery JSON = the page JSON **verbatim** + sync-injected `file` (no projection; the
+  old `teaser`/`image` rename is gone — renderers read `excerpt`/`featuredImage`).
+- `badges` is a **flat array** of tag strings; the road badge is DERIVED at render from
+  `access.legs` by one shared `GL.deriveRoadBadge` (gettinglost.jst).
+- top-level **`links: [{label,url}]`** — `HomePage` (shown "Website") and `OnLost`
+  (a scheme-less `*.html` url resolved to an internal `/slug/` via `onLostHref`, shown
+  "On Getting Lost"). Rendered by the new `links` block via shared `linkRow`.
+- **`campground: {operator?, siteCount?, amenities?, links:[…]}`** — `links` holds the
+  maps ("Campground map"/"Park map"/"Trail map") + reservation (a booking `{label,url}`
+  or status prose with `url:null`). The old `website`/`siteMap`/`reservation` scalars
+  are gone.
+- lake `destinations[]` folded into a `notes` **"Destinations"** section; the
+  `destinations` renderer + block are retired from lakes.jst and the lake HTMLs.
+
+**Non-obvious impl facts (worth remembering):**
+- **Hydration is SYNC-TIME** (it was render-time when first built; moved in the list
+  browser refactor). `sync.js` replaces each `{file}` pointer with the page's own JSON
+  before upload, so the browser fetches an already-flat array and the page stays the
+  single source (kills access/location drift). A row is therefore either a unified
+  partial entry inline, or a hydrated `{file}` pointer. Columns: Name, On-lost,
+  Location, Distance, Access, **Sites=plain `siteCount`**, **Maps**, Amenities,
+  Reservation (Maps vs Reservation split from `campground.links` by a `/map/i` label test).
+- Morton identity fix: the old `morton-lake-rec3104` page was really **Morton Lake Park**
+  — renamed + moved rec-sites→parks as `morton-lake-park`. Goose Lake Trail (REC3104) is
+  a rec site *inside* the park with no GL page.
+- Data transforms ran via Python + `local/tools/jsonio.py`; the sites-label decisions
+  were made one-at-a-time with Pierre.
+
+Stale memories to reconcile next (describe pre-unification shapes): [docs/schema/badges-road.md](../schema/badges-road.md),
+[docs/projects/destinations-overview.md](destinations-overview.md), [docs/rendering/blocks.md](../rendering/blocks.md). See also [docs/schema/access.md](../schema/access.md)
+(access unchanged), [docs/conventions/github-workflow.md](../conventions/github-workflow.md).
+
+## Full record
+
+The original working document.
+
+## Destination schema unification — spec + migration plan
 
 Consolidates the 2026-07-20 design conversation. **Design is settled; this is the
 build reference.** Each phase is its own go.
 
-## Migration status (2026-07-20 — COMPLETE)
+### Migration status (2026-07-20 — COMPLETE)
 
 All phases done and pushed (verify the newest tweak with `git status`). What remains is
 optional: the **review-flags** noted per phase below (design calls worth an eyeball, not
@@ -70,7 +122,7 @@ bugs) and the **future follow-ons** in §8. The migration itself is finished.
   it; the overview hydrates its 5 (now with day-use, `{file}`-linked) known entries from
   their pages, so there's no inline duplication left to drift.
 
-## 1. Goal
+### 1. Goal
 
 Today three things carry a destination's data in three shapes:
 
@@ -90,7 +142,7 @@ transform. The gallery and overview entries become the page JSON *verbatim* plus
 sync-injected `file`. All defaulting/derivation moves to render time. This also sets
 up the future `data-gallery-list` / `data-gallery-table` pair reading one dataset.
 
-## 2. Principles
+### 2. Principles
 
 1. **sync.js does not mutate content.** Its jobs are: select (publish filter, path
    rules), pack (gallery), hydrate (overview `{file}`→page JSON), inject `file`, and
@@ -106,12 +158,12 @@ up the future `data-gallery-list` / `data-gallery-table` pair reading one datase
 5. **Size is a non-issue.** Verbatim copy is fine; page JSONs are 0.9–5.5 KB and the
    overview already ships at 79 KB.
 
-## 3. The unified destination JSON
+### 3. The unified destination JSON
 
 Comments are annotations; real JSON has none. `file` is **not** in the file — sync
 injects it.
 
-### Common core (every destination)
+#### Common core (every destination)
 
 ```jsonc
 {
@@ -156,7 +208,7 @@ injects it.
 }
 ```
 
-### Type block — campgrounds / parks / rec-sites
+#### Type block — campgrounds / parks / rec-sites
 
 ```jsonc
 "campground": {
@@ -171,7 +223,7 @@ injects it.
 }
 ```
 
-### Type block — lakes
+#### Type block — lakes
 
 ```jsonc
 "fishingReferences": { "bcIdentifier": "00517SALM", "areaKm2": 0.211, "lakeChartList": [], "stockingName": "" }
@@ -180,7 +232,7 @@ injects it.
 A lake drops `access` and `campground`; the old top-level `destinations` block is
 gone (now a `notes` section).
 
-## 4. Field changes (old → new)
+### 4. Field changes (old → new)
 
 | Old | New | Notes |
 |---|---|---|
@@ -195,7 +247,7 @@ gone (now a `notes` section).
 | `destinations[]` (block) | `notes[]` `"Destinations"` section | see §5 |
 | injected by sync | `file` | never authored in the page JSON |
 
-### §5 — `destinations[]` → `notes` "Destinations" section
+#### §5 — `destinations[]` → `notes` "Destinations" section
 
 Each entry reduces to `{name, url, description}` (the Further-readings shape). One
 entry **per link** — same `name` repeats, `description` says where ("BC Sites &
@@ -205,7 +257,7 @@ link; original observations are lost, to be re-added during the per-page content
 pass). `url` follows the OnLost rule (local page if one exists, else the reference's
 own url).
 
-## 5. Code changes
+### 5. Code changes
 
 - **sync.js** — `generateGalleryJsons` emits the page JSON verbatim + injected
   `file` (drop the 5-field projection); keep publish filter + path rules; keep leg
@@ -225,7 +277,7 @@ own url).
 - **Delete** `rec-sites/beavertail-lake-dayuse/Destinations.json` (stray generated
   file, never read).
 
-## 6. `destinations-overview.json` (hydration model)
+### 6. `destinations-overview.json` (hydration model)
 
 `places: [ {group, list:[…]} ]` stays. A **known** entry collapses to just its
 hydration pointer:
@@ -241,7 +293,7 @@ no-`file`-link todos). An **unknown** entry (no page yet) stays inline but must 
 the unified schema as a partial (name/location/access/campground/links/footnotes as
 applicable).
 
-## 7. Migration plan
+### 7. Migration plan
 
 Constraints: **no local node** — sync.js runs only in GitHub Actions; data transforms
 run via Python through `local/tools/jsonio.py` (tab-indented house format). Data and
@@ -288,7 +340,7 @@ schema).
    fold into the cross-reference pass below.
 3. Update docs/memory that reference `title` / `teaser` / the old projection.
 
-## 8. Enabled follow-ons (not part of this migration)
+### 8. Enabled follow-ons (not part of this migration)
 
 1. **Cross-reference validation pass** — hydration removes the duplication outright,
    so the remaining check is a *dangling* `{file}` (points at a missing/unpublished
@@ -300,7 +352,7 @@ schema).
 4. **Per-page content pass** — Pierre's one-page-at-a-time sweep to re-enrich the
    prose dropped in §5.
 
-## 9. Risks
+### 9. Risks
 
 1. **Coordinated cutovers** — a rename that lands in data but not the renderer (or
    vice-versa) breaks rendering until the next deploy. Mitigate by keeping each 3x

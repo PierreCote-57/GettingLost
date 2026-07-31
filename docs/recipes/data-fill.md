@@ -1,0 +1,19 @@
+# Data-fill technique
+
+Techniques proven in the 2026-07 destinations data passes (URLs, coordinates, distanceKM). The dataset now lives at `media/data/shared/list_browser/destinations.json` (one flat array, sorted by name). Reuse for the pending precise-coords, road-distance, and list-completion passes.
+
+**Geocoding (lat/lng):** WebFetch OpenStreetMap Nominatim, one place per call:
+`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=<name>%2C+<town>%2C+BC%2C+Canada`
+with prompt "Return the lat and lon of the first JSON result as decimal numbers."
+- Provincial parks, rec sites, and LAKES resolve well by name (rec sites → geocode their lake, e.g. Pacific Yew → Mohun Lake).
+- PRIVATE RV parks: try a **business-name POI query first** (`q=<Resort Name>%2C+<town>%2C+BC%2C+Canada`) — many DO exist in OSM and return a building-level hit (proven 2026-07-17: Cape Lazo RV Park, Thunderbird RV Park, Saratoga Beach Resort all nailed to the exact building this way). A house-number *address* query often returns only a ROAD-level centroid (or conflates Ave/Dr), so prefer the POI-name query for precision; fall back to address, then TOWN centroid. Some still miss entirely (`[]`) → town-level, flag it.
+- Batch ~12 WebFetch calls per turn. Empty results → retry with a broader query or use town.
+- **Pin-precision tolerance (Pierre's rule):** only move an existing pin when the new point is meaningfully different — "a 100 m difference is nothing." Compare old vs new (haversine) and skip trivial moves. Pierre supplies exact coords himself when he has them (e.g. Speedway 49.853833, -125.137988); don't commit a road-level guess over a value he's confirmed.
+
+**Filling site data from a park's own website:** WebFetch each `url` with a prompt asking for site count, site-map/campground-map URL, reservation policy, amenities, and street address — "only state facts on the page; say 'not stated' otherwise" (keeps the fast model from inventing). Feed the count into `campground.siteCount` (a plain number) and the site-map URL into `campground.links` as a `{label,url}` whose label contains "map" — that is what routes it to the Maps column rather than Reservation (per [docs/projects/destinations-overview.md](../projects/destinations-overview.md) schema). Watch for cottage-inn pages that list room perks but nothing about the RV sites (e.g. Driftwood By The Sea) → leave blank, don't fill.
+
+**Distances:** compute client-side/offline with haversine from a reference point (Campbell River = 50.0230710, -125.2441530), round to nearest 5 km. This is STRAIGHT-LINE, not road distance — label it. `distanceKM` is a list so more origin cities can be added.
+
+**Editing the JSON (SUPERSEDED 2026-07-19 — the old one-line-per-record rule is dead):** the house format is now TAB-indented pretty-printed JSON, one field per line. Do the obvious thing: `json.load` → mutate → dump via the shared helper `local/tools/jsonio.py` (`load`/`save`), which pins tabs + `ensure_ascii=False` + trailing newline. Verified byte-identical to IntelliJ's reformat, so scripts and Pierre's editor never fight over the file. **Route even single-field edits through python** rather than string-matching `Edit` — a load/dump round-trip can't produce invalid JSON or a half-applied change. One-off pass scripts live in the session scratchpad; the shared writer lives in the repo. See [docs/conventions/site.md](../conventions/site.md).
+
+Note: computer workflow — Claude edits `media/data/**` and STOPS; Pierre pushes (only `logs/` auto-pushes). See [docs/projects/destinations-overview.md](../projects/destinations-overview.md), `~/Claude/working-with-pierre.md`.

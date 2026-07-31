@@ -1,106 +1,83 @@
-# Getting Lost in Canada — GitHub Master (Pages)
+# Getting Lost in Canada — GitHub master
 
-This repo is the **source of truth for site Pages** (lakes, parks, campgrounds,
-templates, and core site pages) for the "Getting Lost in Canada" WordPress.com
-site (gettinglostonvi.wpcomstaging.com).
+This repo is the **source of truth for the site's pages, posts and data** for the
+"Getting Lost in Canada" WordPress.com site
+([gettinglostonvi.wpcomstaging.com](https://gettinglostonvi.wpcomstaging.com)).
 
-**Blog posts stay native to WordPress** and are not represented here.
+Edit here, push, and a GitHub Action syncs to WordPress. WordPress renders; it does not
+master content. Site **navigation** is the one exception — that stays WP-mastered.
 
-## To push to Wordpress:
-https://github.com/PierreCote-57/GettingLost/actions/workflows/sync.yml
-
-## Structure
+## Layout
 
 ```
-pages/
-  lakes/<slug>.html         — raw page body markup for each lake page
-  parks/<slug>.html
-  campgrounds/<slug>.html
-  templates/<slug>.html     — Lake/Park/Campground Templates (drafts in WP)
-  site/<slug>.html          — Home, Gallery, About, Useful Links
+pages/            page body markup, one .html per page
+  destinations/     lakes/ · campgrounds/ · parks/ · rec-sites/
+  van/              howto/ · checklists/
+  about/  shared/  templates/
 
-data/
-  lakes/<slug>.json         — per-lake data consumed by lakes.jst
-  parks/<slug>.json         (in progress)
-  campgrounds/<slug>.json   (in progress)
+posts/            blog posts, one .html each — pulled from WP, then mastered here
 
-scripts/
-  gettinglost.jst           — sitewide block-renderer registry
-  lakes.jst                 — lake-page-specific block renderers
-  gallery.jst               — /gallery/ page renderer
+media/data/       the JSON each page reads at runtime, mirroring the pages/ tree
+                  plus shared/  scripts/  templates/
 
-gallery-data/               — Destinations.json, Lakes.json, Parks.json,
-                               Campgrounds.json (in progress)
+logs/             travel, locations and fuel logs
 
-config/
-  page-map.json             — slug → WordPress page ID, used by the future
-                               sync script to know which WP page to update
+local/            never synced — tooling and reference material
+  sync/             sync.js · pull-posts.js
+  tools/            jsonio.py · build_booklet_pdf.py · keyword_validation.py
+  charting/         gen-chart.py + captured CSVs
+  data/             FROZEN reference data (LakeData, rest stops, campground lists)
+  refactor/         one-shot migration scripts
+  config/  plugins/
+
+docs/             how the site works — see docs/README.md for the index
+.claude/          Claude Code configuration and notes
 ```
 
-## Status (this migration pass)
-
-- ✅ All 20 lake pages + 3 templates + Elk Falls Park + 2 campgrounds + Home/
-  Gallery/About/Useful Links pulled from WordPress (read-only) and saved here.
-- ✅ Shared scripts (gettinglost.jst, lakes.jst, gallery.jst) pulled.
-- 🔄 Lake JSON data files: 11 of 20 done (echo, amor, sproat, keogh, mohun,
-  drum, crest, blackwater, chain, muchalat saved; remaining lakes + park JSON
-  + campground JSON + the 4 gallery-data files still to pull).
-- ✅ Sync script + GitHub Action built (see "Syncing to WordPress" below).
+**Filename is master.** A WordPress slug is always derived, never authored:
+`amor-lake.html` → slug `amor-lake_html`. The transform lives byte-identically in
+`sync.js` and `gettinglost.jst`. See [docs/conventions/site.md](docs/conventions/site.md).
 
 ## Syncing to WordPress
 
-**This is a one-way, full-overwrite sync — GitHub is master.** Running it
-replaces the live WordPress content with whatever is currently in this repo.
-There is no diff, no confirmation step, and no merge: if something was
-changed directly in WordPress since the last sync, that change is lost.
-Editing WordPress directly is no longer supported once you start using this —
-always edit in the repo and sync.
+**One-way, full overwrite — GitHub is master.** A sync replaces live WordPress content with
+whatever is in the repo. No diff, no confirmation, no merge: anything edited directly in
+WordPress since the last sync is lost. Always edit in the repo.
 
-### One-time setup (you do this, not Claude)
+| Workflow | Trigger | Does |
+| --- | --- | --- |
+| `sync-on-push.yml` | automatic, on push to `main` | incremental sync of what changed; falls back to a full sync when the push includes deletions or touches `local/` |
+| `sync.yml` | [manual](https://github.com/PierreCote-57/GettingLost/actions/workflows/sync.yml) | full overwrite, no diffing |
+| `pull-posts.yml` | manual | fetches WP posts not yet in the repo, writes the files, commits and pushes |
 
-1. In WordPress, create an **Application Password** for the account that
-   will authenticate (WordPress admin → Users → your profile → Application
-   Passwords).
-2. In this GitHub repo, go to **Settings → Secrets and variables → Actions**
-   and add three repository secrets:
-   - `WP_SITE_URL` — e.g. `https://gettinglostonvi.wpcomstaging.com`
-   - `WP_USER` — the WordPress username for that Application Password
-   - `WP_APP_PASSWORD` — the Application Password itself
-3. Confirm the site's REST API is reachable at
-   `<WP_SITE_URL>/wp-json/wp/v2/pages` (should return JSON, not a 404/403).
+Pages are created automatically — a new `pages/foo.html` plus `media/data/…/foo.json` is
+enough; there is no page-ID map to maintain. JSON and `.jst`/`.cst` files are pushed to the
+media library at the same `/wp-content/uploads/<filename>` path they already use; because
+WordPress won't overwrite a same-named file, the sync deletes the existing item first and
+re-uploads, so the file 404s for well under a second mid-sync. Files sync before pages, so a
+page is never updated ahead of the data it depends on.
 
-### Running a sync
+### One-time setup
 
-1. Go to the **Actions** tab on GitHub.
-2. Select **"Sync to WordPress"** from the workflow list.
-3. Click **Run workflow** → confirm branch `main` → **Run workflow**.
-4. Watch the run's logs to confirm success (it logs each page/file as it
-   goes, then a pass/fail summary at the end).
+1. In WordPress, create an **Application Password** (admin → Users → your profile).
+2. In this repo, **Settings → Secrets and variables → Actions**, add: `WP_SITE_URL`,
+   `WP_USER`, `WP_APP_PASSWORD`, `FILEBIRD_TOKEN`.
+3. Confirm `<WP_SITE_URL>/wp-json/wp/v2/pages` returns JSON.
 
-### How it works
+Secrets are write-only, so the sync scripts only ever run for real in Actions — locally they
+are good for syntax and logic checks. See
+[docs/conventions/github-workflow.md](docs/conventions/github-workflow.md).
 
-- **Pages** (`pages/**/*.html`) are pushed via a full `content` overwrite to
-  the WordPress page ID listed in `config/page-map.json` for that slug.
-- **JSON data files and `.jst` scripts** are pushed to the media library at
-  the same `/wp-content/uploads/<filename>` path they already use. Because
-  WordPress doesn't overwrite a same-named file by default (it appends
-  `-1`, `-2`, etc. instead), the script deletes the existing media item for
-  that filename first, then re-uploads — so the file briefly 404s for
-  visitors mid-sync (normally under a second).
-- Files sync before pages, so by the time a page is updated, any new data
-  it depends on is already in place.
-- Blog posts are never touched — the sync script only calls the WordPress
-  `pages` and `media` REST endpoints, never `posts`.
+## Documentation
 
-## Notes / things to revisit
+[docs/README.md](docs/README.md) indexes everything: the data schemas, site conventions,
+how a page becomes HTML, recipes for building a page, the external data sources, and the
+records of past work.
 
-- A handful of legacy, ID-named JSON files (e.g. `00324SALM.json`) still exist
-  in the WordPress uploads folder from before the slug-rename migration.
-  These are stale and are **not** included here — only the current slug-named
-  files are considered live/canonical.
-- `fishingReferences.lakeChartList` is always an array of `{name, url}`
-  objects — one entry per bathymetric map. Most lakes have a single chart;
-  `sproat-lake.json` has 3. An empty array `[]` means no chart (renders "NA").
-  `lakes.jst`'s `buildLakeChartRow()` renders one link per entry, stacked.
-- Images remain hosted in the WordPress media library (not migrated here).
-  Page/data files reference them by path only.
+## Notes
+
+- Images live in the WordPress media library, not in this repo. Pages and data reference
+  them by filename.
+- A handful of legacy ID-named JSON files (e.g. `00324SALM.json`) still sit in the WP
+  uploads folder from before the slug migration. They are stale; only slug-named files are
+  canonical.
