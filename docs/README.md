@@ -31,6 +31,8 @@ per-page JSON as source of truth, auto-generated galleries.
 | File | Covers |
 | --- | --- |
 | [site.md](conventions/site.md) | standing conventions, filename-master, destination types, FileBird folders |
+| [json-format.md](conventions/json-format.md) | the JSON house format — tabs, one field per line, written through `jsonio.py` |
+| [keywords.md](conventions/keywords.md) | `tags.keywords` as an OPEN vocabulary: authoring, and never normalizing in the filter |
 | [folders.md](conventions/folders.md) | folder structure across the 4 locations, FileBird IDs |
 | [github-workflow.md](conventions/github-workflow.md) | repo SOP, sync workflows, token policy |
 | [fishing-links.md](conventions/fishing-links.md) | Go Fish BC stocking reports, further-readings placement |
@@ -44,6 +46,15 @@ per-page JSON as source of truth, auto-generated galleries.
 | [blocks.md](rendering/blocks.md) | THE INVARIANT, every renderer, load order |
 | [list-browser.md](rendering/list-browser.md) | the four phases, the `known` bag, adding a control or filter |
 | [wp-templates.md](rendering/wp-templates.md) | editing Twenty Twenty-Five templates via the wpcom MCP |
+
+## skills/ — procedures to follow, not background to read
+
+A file here is followed step by step when Pierre asks for what it covers, exactly as an
+installed skill would be. `CLAUDE.md` points at them so they are known every session.
+
+| File | Covers |
+| --- | --- |
+| [keyword-validation.md](skills/keyword-validation.md) | the keyword validation pass: the script, the report format, the standing rulings |
 
 ## recipes/ — how to do a thing
 

@@ -86,8 +86,9 @@ written before that date may not resolve.
   and 18 page JSONs; `collectCounts` and the vocabulary check in `sync.js`; `filterTypes` +
   one switch line + one `CONTROL_BUILDERS` entry in `list_browser.jst`; `"types"` into the
   destinations `options` array. Data and code must land in one push. Then the docs and the
-  keyword tooling: [rules/keywords.md](../.claude/rules/keywords.md) loses "type keywords are
-  load-bearing", the `keyword-validation` skill loses its exemption for them,
+  keyword tooling: [conventions/keywords.md](conventions/keywords.md) loses "type keywords are
+  load-bearing", [skills/keyword-validation.md](skills/keyword-validation.md) loses its
+  exemption for them,
   `local/tools/keyword_validation.py` stops seeing them, and
   [conventions/site.md](conventions/site.md) + [rendering/list-browser.md](rendering/list-browser.md)
   get the new facet.

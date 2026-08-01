@@ -1,9 +1,9 @@
----
-name: keyword-validation
-description: Run a keyword validation pass over the site data — surface keyword vocabulary drift (same word in two forms, spellings, collisions with badges, synonyms) for Pierre to rule on. Use when Pierre says "run a keyword validation pass", or asks about keyword drift, duplicate or near-duplicate keywords, or the keyword vocabulary generally.
----
-
 # Keyword validation pass
+
+**Follow this when Pierre says "run a keyword validation pass"**, or asks about keyword
+drift, duplicate or near-duplicate keywords, or the keyword vocabulary generally. It
+surfaces vocabulary drift — the same word in two forms, odd spellings, collisions with the
+badge vocabulary, synonyms — for him to rule on.
 
 `tags.keywords` is an **open** vocabulary — unlike badges and access, nothing
 constrains it, so it drifts as pages are authored. This pass surfaces the drift.

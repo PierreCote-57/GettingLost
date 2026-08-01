@@ -20,4 +20,4 @@ records in the current shape. Size is irrelevant — gzip eliminates indentation
 suited it when captured. Never write there without a specific request from Pierre, and never
 reformat it to match the current schema.
 
-Related: [docs/conventions/site.md](../../docs/conventions/site.md).
+Related: [site.md](site.md).

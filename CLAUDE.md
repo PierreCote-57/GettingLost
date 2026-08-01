@@ -28,6 +28,20 @@ here in full and are not repeated below.
   live site, browser-pane gotchas.
 - **[docs/todo.md](docs/todo.md)** — parked work. Side issues found mid-task go here.
 
+**`docs/skills/` holds procedures to FOLLOW, not background to read.** Treat a file there
+exactly as if it were an installed skill: when Pierre asks for the thing it covers, open it
+and follow it step by step. Today that is
+[docs/skills/keyword-validation.md](docs/skills/keyword-validation.md) — run it when he asks
+for a keyword validation pass, or asks about keyword drift or the vocabulary generally.
+
+**Two conventions govern actions rather than describing the site, so check them before
+acting, not after:** [docs/conventions/json-format.md](docs/conventions/json-format.md)
+before writing any JSON under `media/data/**` or `logs/`, and
+[docs/conventions/keywords.md](docs/conventions/keywords.md) before touching `tags` in one.
+
+Nothing but genuine configuration lives in `.claude/` — content that gets edited belongs in
+`docs/`, where editing it doesn't need a permission dialog (2026-08-01).
+
 ## 3. Log entries: phone auto-commits, computer defers to Pierre.
 
 *(scoped exception to FIND ≠ FIX and plan-before-implementing)*

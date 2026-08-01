@@ -1,9 +1,6 @@
----
-paths:
-  - "media/data/**/*.json"
----
-
 # Keywords
+
+**Read this before touching `tags` in any `media/data/**/*.json`.**
 
 `tags.keywords` is an **open** vocabulary, derived from the data rather than declared —
 unlike badges and access, which are closed. Open means it drifts.
@@ -21,9 +18,10 @@ would silently behave as one, and nothing would ever surface them.
 
 ## After keyword work, remind Pierre to run the pass
 
-The `keyword-validation` skill walks every `tags.keywords` value across the datasets and
-surfaces suspects: near-duplicates, plural/singular pairs, values used only once. **It
-reports; a human decides.** It is run on demand — never in the build, never in the filter.
+The pass in [docs/skills/keyword-validation.md](../skills/keyword-validation.md) walks every
+`tags.keywords` value across the datasets and surfaces suspects: near-duplicates,
+plural/singular pairs, values used only once. **It reports; a human decides.** It is run on
+demand — never in the build, never in the filter.
 
 Claude does not run it unprompted, but after any session that adds or edits keywords, say
 that it's worth running. Pierre owns the vocabulary decisions.
