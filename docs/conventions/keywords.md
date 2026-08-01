@@ -26,9 +26,10 @@ demand — never in the build, never in the filter.
 Claude does not run it unprompted, but after any session that adds or edits keywords, say
 that it's worth running. Pierre owns the vocabulary decisions.
 
-## Type keywords are load-bearing
+## Type is NOT a keyword any more
 
-`lake` / `park` / `rec-site` / `campground` look redundant to the pass and are not. Nothing
-else on a row states the destination type — for per-page rows it's implied by the folder,
-for inline dataset rows by nothing at all. Drop them and lakes become unselectable. Whether
-type deserves a structured facet of its own is an open question — `docs/todo.md` item 5.
+`lake` / `park` / `rec-site` / `campground` used to be keywords, and load-bearing ones —
+nothing else on a row said what kind of place it was. They became their own closed facet,
+`tags.types`, on 2026-08-01; see [docs/schema/types.md](../schema/types.md). Do not
+reintroduce them here: a word that says what a place IS belongs to that vocabulary, where it
+can be validated and counted.

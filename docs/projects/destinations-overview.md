@@ -17,7 +17,8 @@ a count from here.
   `local/data/vi-non-government-campgrounds.json`, both FROZEN — see
   [docs/conventions/site.md](../conventions/site.md).
 
-There are no groups. The type axis is `tags.keywords`.
+There are no groups. The type axis is `tags.types` — its own closed facet since 2026-08-01,
+see [docs/schema/types.md](../schema/types.md).
 
 ## Two kinds of row, and the difference matters
 

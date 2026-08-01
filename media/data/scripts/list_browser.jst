@@ -384,6 +384,14 @@
     return filterByWord("badges", splitList(value), shortList);
   }
 
+  // What KIND of place it is. Membership like badges, and absence FAILS for the
+  // same reason — which is the point of the facet: an untyped row (a city park,
+  // say) answers no type filter at all, so "park" returns provincial parks rather
+  // than everything with the word in its name.
+  function filterTypes(value, shortList) {
+    return filterByWord("types", splitList(value), shortList);
+  }
+
   // Ordinal threshold, not membership: you pick the worst road you will accept,
   // and a row is kept when its derived badge is no worse. UNKNOWN PASSES — only
   // rows with authored legs derive a badge at all, and an unmeasured road is not
@@ -424,6 +432,7 @@
       switch (key) {
         case "view":     shortList = filterView(value, shortList); break;
         case "keywords": shortList = filterKeywords(value, shortList); break;
+        case "types":    shortList = filterTypes(value, shortList); break;
         case "badges":   shortList = filterBadges(value, shortList); break;
         case "access":   shortList = filterAccess(value, shortList); break;
         case "search":   shortList = filterSearch(value, shortList); break;
@@ -807,6 +816,9 @@
   // shows, and in what order; buildOptionsBar walks it through this map.
   var CONTROL_BUILDERS = {
     view: function (known) { return buildViewToggle(known); },
+    types: function (known) {
+      return buildCheckboxDropdown("Types", "types", window.GL.DESTINATION_TYPES, known.dataset.counts.types, known);
+    },
     keywords: function (known) {
       return buildCheckboxDropdown("Keywords", "keywords", known.keywords, known.dataset.counts.keywords, known);
     },

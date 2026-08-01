@@ -38,7 +38,9 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 - **Destinations** (top-level, no dropdown) → `/list_browser_html/?dataset=destinations&view=grid`
 - **The Van** (dropdown) → Overview `/van-overview/`, Checklists `?dataset=van-checklist&view=grid`, How to `?dataset=van-howto&view=grid`
 - The old per-type items (Lakes/Campgrounds/Parks/Rec Sites) are GONE — that axis is the
-  list browser's keyword filter now. See [docs/rendering/list-browser.md](rendering/list-browser.md).
+  list browser's **types** filter now (`tags.types`, a closed vocabulary — see
+  [docs/schema/types.md](schema/types.md)). Those four words were keywords until 2026-08-01.
+  See [docs/rendering/list-browser.md](rendering/list-browser.md).
 - **Blog** → `/blog/`
 - **About** (dropdown) → About `/about/`, Useful Links `/useful-links/`, Useful Contacts `/useful-contacts/`
 - Maintenance menu item not yet added (planned)
@@ -46,16 +48,18 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 
 ## Sync Pipeline — GitHub Masters Everything (except navigation)
 - **GitHub is master** for both pages and posts — push triggers the sync action automatically
-- `sync.js` does four things:
+- `sync.js` does five things:
   1. **Pages** — dynamic WP lookup (no page-map.json), auto-creates missing pages, pushes title/excerpt/featured_image/status from per-page JSON
   2. **Posts** — same pattern as pages, using `/posts` WP endpoint. Pushes title/excerpt/featured_image/date/status. New posts get `comment_status: "open"`
   3. **Files** — uploads JSON/JST to WP media library (delete-then-recreate)
   4. **List hydration** — manifest-driven (`loadHydratedListSet` reads `datasets.json`);
      each `{file}` pointer is replaced by the page's own JSON before upload. Replaced the
      old GALLERY_RULES auto-generation, which is deleted. The published manifest also carries
-     a `counts` map per dataset (`collectCounts`) — how many rows each keyword, badge and
-     road value would match, so the browser's dropdowns can show a number without walking
+     a `counts` map per dataset (`collectCounts`) — how many rows each keyword, type, badge
+     and road value would match, so the browser's dropdowns can show a number without walking
      the rows themselves.
+  5. **Validation** — `main()` runs load → validate → push. Legs, types and list hydration
+     are checked before anything is uploaded, and a failure means nothing is pushed.
 - Sync is incremental on push, full on manual trigger. Incremental mode triggers on both HTML and JSON changes (fixed 2026-07-02)
 - FileBird integration: media and pages filed into matching folder paths (best-effort)
 - `FALLBACK_FEATURED_IMAGE_ID = 1751` (under-construction.png)

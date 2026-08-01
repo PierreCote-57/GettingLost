@@ -99,8 +99,10 @@ does both — it displays *and* filters.
 - `filterAccess` — ordinal threshold over `Object.keys(GL.ROAD_COLORS)`: the worst road you
   will accept. **Unknown PASSES.** Only the GL pages have authored legs, so a strict rule
   would drop every catalog row; an unmeasured road is not evidence of a bad one.
-- `filterKeywords` / `filterBadges` — tag membership; **absence FAILS**. Consequence: no
-  catalog row carries badges, so any badge filter narrows to the GL pages.
+- `filterKeywords` / `filterTypes` / `filterBadges` — tag membership; **absence FAILS**. Two
+  consequences worth knowing: no catalog row carries badges, so any badge filter narrows to
+  the GL pages; and an untyped destination answers no type filter, which is exactly what
+  keeps `park` meaning provincial park (see [schema/types.md](../schema/types.md)).
 - `filterSearch` — `JSON.stringify(row)` substring. Broad on purpose: it sees keys and URLs
   too, so "map" matches every row with a map link.
 
@@ -112,15 +114,19 @@ need in order to widen the search next.
 
 Every filter value shows how many rows it would match. The numbers come from the manifest:
 `collectCounts` in sync.js walks each hydrated dataset once and writes
-`counts: { keywords, badges, access }` onto the dataset entry. The browser never counts.
+`counts: { keywords, types, badges, access }` onto the dataset entry. The browser never counts.
 
 - **`keywords` is the OPEN vocabulary, so its keys ARE the choice list** — sorted by sync.js,
   and `extractKeywords` just takes `Object.keys`. There is one list, so the choices and the
   numbers cannot disagree.
-- **`badges` is CLOSED** (`GL.TAG_COLORS`), and the browser still owns that vocabulary; only
-  the numbers come from the manifest. A value nobody used has no key and reads as `(0)`.
-  **The zero is deliberate and the option is not hidden** — a closed vocabulary showing a zero
-  is advertising room the data has not used yet, not a dead choice.
+- **`types` and `badges` are CLOSED** (`GL.DESTINATION_TYPES`, `GL.TAG_COLORS`), and the
+  browser still owns those vocabularies; only the numbers come from the manifest. A value
+  nobody used has no key and reads as `(0)`. **The zero is deliberate and the option is not
+  hidden** — a closed vocabulary showing a zero is advertising room the data has not used yet,
+  not a dead choice.
+- **`types` gets no bucket for untyped rows**, so those counts sum to less than the row
+  count. A row with no type matches no type filter, so there is nothing for it to be counted
+  in — the opposite of `access` below, and deliberately so.
 - **`access` counts the DERIVED road badge**, with unmeasured rows under the key `"unknown"`
   (never a road value, so it cannot collide). Deriving it costs sync.js a small mirror of
   `GL.deriveRoadBadge` — the browser keeps the render-time derivation, `deriveRoad` in sync.js

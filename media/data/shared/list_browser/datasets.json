@@ -1,21 +1,36 @@
 [
-
 	{
 		"id": "destinations",
 		"file": "destinations.json",
 		"title": "All destinations",
-		"options": ["view", "keywords", "badges", "access", "search"]
+		"options": [
+			"view",
+			"types",
+			"keywords",
+			"badges",
+			"access",
+			"search"
+		]
 	},
 	{
 		"id": "van-howto",
 		"file": "van-howto.json",
 		"title": "How to",
-		"options": ["view","keywords", "search", "booklet"]
+		"options": [
+			"view",
+			"keywords",
+			"search",
+			"booklet"
+		]
 	},
 	{
 		"id": "van-checklist",
 		"file": "van-checklist.json",
 		"title": "Checklists",
-		"options": ["keywords", "search", "booklet"]
+		"options": [
+			"keywords",
+			"search",
+			"booklet"
+		]
 	}
 ]

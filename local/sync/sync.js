@@ -94,6 +94,16 @@ const DRIVE_LEG_TYPES = ["unpaved", "dirt", "potholes", "sharp_rock", "rugged"];
 const NON_DRIVE_LEG_TYPES = ["walk", "hike", "boat"];
 const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
 
+// What KIND of place a destination is, carried as `tags.types`. Mirrors
+// GL.DESTINATION_TYPES in gl-constants.jst (browser code, can't be required here,
+// so keep the two in sync). Alphabetical: unlike the leg types above, the order
+// carries no meaning.
+//
+// A type is never mandatory — validateTypes checks the VALUE, never the presence.
+// An untyped destination is a legitimate state, and the one that keeps `park`
+// meaningful: a city park carries no type rather than the wrong one.
+const DESTINATION_TYPES = ["campground", "lake", "park", "rec-site"];
+
 // Validate every page's access.legs against the authorable vocabulary. Build-time
 // DATA check only — the road badge itself is derived in the browser
 // (gettinglost.jst). A page FAILS if any leg is invalid: an unknown type, or an
@@ -1040,10 +1050,15 @@ function countRowValues(map, values) {
 // walking the rows itself.
 //
 // `keywords` is the OPEN vocabulary: its keys ARE the choice list the keyword
-// filter offers, which is why they are sorted. `badges` and `access` are CLOSED
-// vocabularies the browser already holds (GL.TAG_COLORS, GL.ROAD_COLORS); only
-// the numbers come from here, so a value nobody used simply has no key and the
-// browser reads it as 0 — a closed vocabulary advertising room not yet used.
+// filter offers, which is why they are sorted. `types`, `badges` and `access` are
+// CLOSED vocabularies the browser already holds (GL.DESTINATION_TYPES,
+// GL.TAG_COLORS, GL.ROAD_COLORS); only the numbers come from here, so a value
+// nobody used simply has no key and the browser reads it as 0 — a closed
+// vocabulary advertising room not yet used.
+//
+// `types` gets no bucket for untyped rows: a row with no type matches no type
+// filter, so it is simply absent and these counts sum to less than the row count.
+// (`access` is the opposite — see below.)
 //
 // `access` counts the DERIVED road badge, with unmeasured rows under "unknown"
 // (never a road value, so it cannot collide). The access control is a threshold
@@ -1051,12 +1066,14 @@ function countRowValues(map, values) {
 // rows into every option's running total.
 function collectCounts(hydratedRows) {
   const keywords = {};
+  const types = {};
   const badges = {};
   const access = {};
 
   for (const row of hydratedRows) {
     const tags = row.tags || {};
     countRowValues(keywords, tags.keywords || []);
+    countRowValues(types, tags.types || []);
     countRowValues(badges, tags.badges || []);
     countRowValues(access, [deriveRoad(row.access) || "unknown"]);
   }
@@ -1066,7 +1083,7 @@ function collectCounts(hydratedRows) {
     sortedKeywords[keyword] = keywords[keyword];
   }
 
-  const counts = { keywords: sortedKeywords, badges, access };
+  const counts = { keywords: sortedKeywords, types, badges, access };
   return counts;
 }
 
@@ -1126,6 +1143,38 @@ function loadHydratedListSet(datasets, perPageDataMap) {
   }
 
   return hydratedSets;
+}
+
+// Every `tags.types` value across the hydrated rows is in the vocabulary. One of
+// the checks in main()'s validate block.
+//
+// VOCABULARY ONLY, never presence: a row with no types is correct, not missing
+// something. A row typed outside the list is the error — it would sit in the data
+// answering no filter, invisible, with nothing on screen to say why.
+//
+// It runs over the HYDRATED rows because that is the only place both kinds are
+// visible: per-page rows resolved from `{file}` pointers, and the inline rows that
+// exist nowhere but the dataset file. perPageDataMap would miss 98 of 116.
+function validateTypes(hydratedSets) {
+  let checked = 0;
+  let invalid = 0;
+
+  for (const set of hydratedSets) {
+    for (const row of set.hydrated) {
+      const types = (row.tags || {}).types;
+      if (!Array.isArray(types) || types.length === 0) continue;
+      checked++;
+      for (const type of types) {
+        if (!DESTINATION_TYPES.includes(type)) {
+          annotateFailure(`  ${row.file || row.name || set.relPath}: invalid type "${type}".`);
+          invalid++;
+        }
+      }
+    }
+  }
+
+  console.log(`Types: ${checked} checked, ${invalid} invalid`);
+  return invalid;
 }
 
 // Every manifest-listed dataset resolved into publishable rows. One of the checks
@@ -1344,6 +1393,7 @@ async function main() {
   console.log("\n=== Validating ===");
   let invalidCount = 0;
   invalidCount += validateLegs(perPageDataMap);
+  invalidCount += validateTypes(hydratedListSet);
   invalidCount += validateLists(hydratedListSet);
 
   if (invalidCount > 0) {

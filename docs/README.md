@@ -21,6 +21,7 @@ per-page JSON as source of truth, auto-generated galleries.
 | [image.md](schema/image.md) | `featuredImage`, null rules, `formatImageUrl`, filename reuse |
 | [access.md](schema/access.md) | `access{haversine,driving,legs}`, leg vocabulary, km rounding |
 | [badges-road.md](schema/badges-road.md) | authored `badges.tags`, derived `badges.road`, `ROAD_COLORS` |
+| [types.md](schema/types.md) | `tags.types` — the closed destination-type facet, why it is optional |
 | [map-pins-location.md](schema/map-pins-location.md) | `location{lat,lng,pin,zoom}`, pin vocabulary, `googleMap` block |
 | [wpsettings-comments.md](schema/wpsettings-comments.md) | `wpSettings{published,comments}` |
 | [wp-title-date.md](schema/wp-title-date.md) | tab title, post date/modified, backdating |

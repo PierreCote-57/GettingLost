@@ -42,7 +42,7 @@ Merge your semantic findings into the script's output as **one flat list**.
 Pierre sees one report, not two to reconcile.
 
 ```
-11 keywords over 116 rows
+7 keywords over 6 rows
 
 1. hike (1), hiking (1) --- hiking is also a badge
 2. picnic (1) --- is also a badge
@@ -110,11 +110,12 @@ them, and do not re-surface a finding they cover.
   redundant.** `trout` next to the `fishing` badge is deliberate: in fishing the
   target species changes everything, so the species is not a finer label for the
   same signal. Do not flag species-vs-activity overlap (2026-07-30).
-- **Global — a keyword that is the row's only marker of its type is
-  load-bearing, not redundant.** `lake` / `park` / `rec-site` / `campground`
-  restate the folder for per-page rows and nothing at all for inline dataset
-  rows. Removing them makes those destinations unselectable — there is no type
-  facet to fall back on. Do not flag them (2026-07-30).
+- **Global — type words are no longer keywords at all** (2026-08-01). `lake` /
+  `park` / `rec-site` / `campground` moved to their own closed facet,
+  `tags.types` ([docs/schema/types.md](../schema/types.md)), so the walk no
+  longer sees them and the old "load-bearing, do not flag" ruling they needed
+  (2026-07-30) is retired. If one turns up in `tags.keywords` again, that IS a
+  finding: it belongs in `types`.
 
 ## Scope of the walk
 
@@ -122,6 +123,6 @@ Files under `media/` where `tags.keywords` is applicable to the site. Not
 `local/data/` — those are unauthored source datasets.
 
 The walk finds any object carrying `tags.keywords` at any depth, which is what
-picks up the inline rows inside dataset files. A per-page glob misses those: at
-the time of writing they were 98 of 116 tagged rows, and `whales` existed only
-there.
+picks up the inline rows inside dataset files. A per-page glob misses those, and
+they are where most of the tagging lives — at the type migration they were 98 of
+116 tagged rows, and `whales` existed only there.
