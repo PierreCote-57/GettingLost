@@ -153,14 +153,16 @@
 
   // ---- table columns --------------------------------------------------------
 
+  // `align` is optional and means text-align on the whole column, heading
+  // included; buildCell applies it. Left is the default and is not written out.
   var COLUMNS = [
     { label: "Name", field: "name", width: 170 },
-    { label: "On lost", field: "on_lost", width: 60 },
+    { label: "On lost", field: "on_lost", width: 60, align: "center" },
     { label: "Location", field: "location", width: 155 },
-    { label: "Distance", field: "haversine", width: 85 },
-    { label: "Access", field: "roadBadge", width: 75 },
-    { label: "Sites", field: "siteCount", width: 55 },
-    { label: "Maps", field: "maps", width: 100 },
+    { label: "Distance", field: "haversine", width: 85, align: "center" },
+    { label: "Access", field: "roadBadge", width: 75, align: "center" },
+    { label: "Sites", field: "siteCount", width: 55, align: "center" },
+    { label: "Maps", field: "maps", width: 100, align: "center" },
     { label: "Amenities", field: "amenities", width: 175 },
     { label: "Reservation", field: "reservation" }
   ];
@@ -215,7 +217,12 @@
     return String(value);
   }
 
-  function buildCell(tag) {
+  // The one place a cell's presentation is decided, for both <th> and <td>. A
+  // column's `align` lands here rather than in buildColGroup because a <col>
+  // honours only width, border, background and visibility — text-align set there
+  // does nothing. Applied last so it beats the header default, which keeps a
+  // centered column's heading centered over it.
+  function buildCell(tag, col) {
     var cell = document.createElement(tag);
     cell.style.border = "1px solid #ddd";
     cell.style.padding = "0.3rem 0.6rem";
@@ -227,6 +234,7 @@
       cell.style.textAlign = "left";
       cell.style.fontWeight = "700";
     }
+    if (col && col.align) cell.style.textAlign = col.align;
     return cell;
   }
 
@@ -493,7 +501,7 @@
     var thead = document.createElement("thead");
     var headerRow = document.createElement("tr");
     COLUMNS.forEach(function (col) {
-      var th = buildCell("th");
+      var th = buildCell("th", col);
       th.textContent = col.label;
       if (col.field === "haversine") {
         var caveat = "Straight-line distance from Campbell River, approximate — not road distance.";
@@ -513,7 +521,7 @@
     places.forEach(function (place) {
       var row = document.createElement("tr");
       COLUMNS.forEach(function (col) {
-        var cell = buildCell("td");
+        var cell = buildCell("td", col);
         fillDataCell(cell, place, col.field);
         (place.footnotes || []).forEach(function (fn) {
           if (fn.field !== col.field) return;
