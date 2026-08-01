@@ -54,7 +54,18 @@
 	"links": [
 		{
 			"label": "HomePage",
+			"type": "homepage",
 			"url": "https://salmonpoint.com"
+		},
+		{
+			"label": "Campground",
+			"type": "map",
+			"url": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf"
+		},
+		{
+			"label": "Reservation",
+			"type": "reservation",
+			"url": "https://www.campspot.com/book/salmon-point"
 		}
 	],
 	"campground": {
@@ -66,16 +77,6 @@
 			"washrooms & laundry",
 			"beach access",
 			"restaurant"
-		],
-		"links": [
-			{
-				"label": "Campground map",
-				"url": "https://salmonpoint.com/wp-content/uploads/2021/03/Salmon-Point-Map-4x8-web-1.pdf"
-			},
-			{
-				"label": "Reservation",
-				"url": "https://www.campspot.com/book/salmon-point"
-			}
 		]
 	},
 	"notes": [

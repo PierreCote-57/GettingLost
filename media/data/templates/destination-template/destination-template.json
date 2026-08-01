@@ -7,8 +7,6 @@
 	"lat": 0,
 	"lng": 0,
 	"links": [],
-	"campground": {
-		"links": []
-	},
+	"campground": {},
 	"notes": []
 }

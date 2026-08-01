@@ -58,8 +58,9 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
      a `counts` map per dataset (`collectCounts`) — how many rows each keyword, type, badge
      and road value would match, so the browser's dropdowns can show a number without walking
      the rows themselves.
-  5. **Validation** — `main()` runs load → validate → push. Legs, types and list hydration
-     are checked before anything is uploaded, and a failure means nothing is pushed.
+  5. **Validation** — `main()` runs load → validate → push. Legs, destination types, link
+     types and list hydration are checked before anything is uploaded, and a failure means
+     nothing is pushed.
 - Sync is incremental on push, full on manual trigger. Incremental mode triggers on both HTML and JSON changes (fixed 2026-07-02)
 - FileBird integration: media and pages filed into matching folder paths (best-effort)
 - `FALLBACK_FEATURED_IMAGE_ID = 1751` (under-construction.png)

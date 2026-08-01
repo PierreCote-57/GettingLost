@@ -10,6 +10,7 @@
  *   GL.TAG_COLORS  — tag-chip colors (used by renderTags).
  *   GL.TAG_FALLBACK
  *   GL.DESTINATION_TYPES — the closed tags.types vocabulary.
+ *   GL.LINK_TYPES  — the closed links[].type vocabulary.
  *   GL.ROAD_COLORS — road-condition badge colors (used by renderRoad).
  *   GL.MAP_CONFIG  — Google Maps API key + default zoom / type / styles.
  *
@@ -44,6 +45,19 @@
   // park, so it carries no type at all rather than a wrong one. Someone filtering
   // for park gets Elk Falls, not The Spit. Add a value here when a kind earns one.
   GL.DESTINATION_TYPES = ["campground", "lake", "park", "rec-site"];
+
+  // What a link IS, carried as `type` on a `links[]` entry. CLOSED, and the KEY
+  // every renderer selects by — the label went back to being display text only.
+  // It had been doing both jobs, which is why renaming "Campground map" to
+  // "Campground" silently moved 18 links into the wrong column (2026-08-01).
+  //
+  // Optional, like tags.types: a link that is none of these keeps its label and
+  // carries no type. "VI Camping" is the case in the data — a real external site
+  // that is not the destination's own homepage, a map, or a booking page.
+  //
+  // An entry with NO url is not a link at all: reservation status prose lives in
+  // a "Reservation notes" notes section instead.
+  GL.LINK_TYPES = ["homepage", "map", "reservation"];
 
   // Road-condition badge colors (used by renderRoad). Severity ramp,
   // easy -> hard: blue -> green -> orange -> rust -> red. Two values sit OFF

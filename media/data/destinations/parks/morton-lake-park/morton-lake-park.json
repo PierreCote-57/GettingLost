@@ -53,7 +53,18 @@
 	"links": [
 		{
 			"label": "HomePage",
+			"type": "homepage",
 			"url": "https://bcparks.ca/morton-lake-park/"
+		},
+		{
+			"label": "Campground",
+			"type": "map",
+			"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/morton_lake_park_map_78a837ca57.pdf"
+		},
+		{
+			"label": "Reservation",
+			"type": "reservation",
+			"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483570&mapId=-2147483481&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32765&partySize=2"
 		}
 	],
 	"campground": {
@@ -61,16 +72,6 @@
 		"amenities": [
 			"rustic wilderness lakeside camping",
 			"winter camping year-round"
-		],
-		"links": [
-			{
-				"label": "Campground map",
-				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/morton_lake_park_map_78a837ca57.pdf"
-			},
-			{
-				"label": "Reservation",
-				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483570&mapId=-2147483481&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32765&partySize=2"
-			}
 		]
 	},
 	"googleMap": {

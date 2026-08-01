@@ -104,6 +104,12 @@ const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
 // meaningful: a city park carries no type rather than the wrong one.
 const DESTINATION_TYPES = ["campground", "lake", "park", "rec-site"];
 
+// What a link IS, carried as `type` on a `links[]` entry. Mirrors GL.LINK_TYPES
+// in gl-constants.jst — keep the two in sync. Optional in the same way and for
+// the same reason as DESTINATION_TYPES: a link that is none of these keeps its
+// label and carries no type, so validateLinks checks the VALUE, never presence.
+const LINK_TYPES = ["homepage", "map", "reservation"];
+
 // Validate every page's access.legs against the authorable vocabulary. Build-time
 // DATA check only — the road badge itself is derived in the browser
 // (gettinglost.jst). A page FAILS if any leg is invalid: an unknown type, or an
@@ -1177,6 +1183,33 @@ function validateTypes(hydratedSets) {
   return invalid;
 }
 
+// Every `links[].type` across the hydrated rows is in the vocabulary. One of the
+// checks in main()'s validate block, and the one that would have caught the
+// label-rename breakage: since `type` is now the key every renderer selects by, a
+// typo there silently drops the link out of its column instead of failing.
+//
+// VOCABULARY ONLY, never presence — an untyped link is a legitimate link.
+function validateLinks(hydratedSets) {
+  let checked = 0;
+  let invalid = 0;
+
+  for (const set of hydratedSets) {
+    for (const row of set.hydrated) {
+      for (const link of row.links || []) {
+        if (!link || link.type === undefined) continue;
+        checked++;
+        if (!LINK_TYPES.includes(link.type)) {
+          annotateFailure(`  ${row.file || row.name || set.relPath}: invalid link type "${link.type}" on "${link.label}".`);
+          invalid++;
+        }
+      }
+    }
+  }
+
+  console.log(`Links: ${checked} checked, ${invalid} invalid`);
+  return invalid;
+}
+
 // Every manifest-listed dataset resolved into publishable rows. One of the checks
 // in main()'s validate block; reports what loadHydratedListSet collected — a file
 // that would not parse, or a `{file}` pointer with no page data behind it.
@@ -1394,6 +1427,7 @@ async function main() {
   let invalidCount = 0;
   invalidCount += validateLegs(perPageDataMap);
   invalidCount += validateTypes(hydratedListSet);
+  invalidCount += validateLinks(hydratedListSet);
   invalidCount += validateLists(hydratedListSet);
 
   if (invalidCount > 0) {

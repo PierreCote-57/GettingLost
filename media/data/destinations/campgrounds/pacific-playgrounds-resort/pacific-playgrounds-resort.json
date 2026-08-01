@@ -58,7 +58,18 @@
 	"links": [
 		{
 			"label": "HomePage",
+			"type": "homepage",
 			"url": "https://pacificplaygrounds.ca"
+		},
+		{
+			"label": "Campground",
+			"type": "map",
+			"url": "https://pacificplaygrounds.ca/wp-content/uploads/2025/03/0372501-Pacific-Playground-site-map.pdf"
+		},
+		{
+			"label": "Reservation",
+			"type": "reservation",
+			"url": "https://pacificplaygrounds.ca/about-us/pacific-playgrounds-key-policies/"
 		}
 	],
 	"campground": {
@@ -69,16 +80,6 @@
 			"beach access",
 			"campfire areas",
 			"kayak & paddleboard rentals"
-		],
-		"links": [
-			{
-				"label": "Campground map",
-				"url": "https://pacificplaygrounds.ca/wp-content/uploads/2025/03/0372501-Pacific-Playground-site-map.pdf"
-			},
-			{
-				"label": "Reservation",
-				"url": "https://pacificplaygrounds.ca/about-us/pacific-playgrounds-key-policies/"
-			}
 		]
 	},
 	"notes": [

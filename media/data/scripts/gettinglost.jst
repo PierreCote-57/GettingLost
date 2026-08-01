@@ -560,21 +560,22 @@
   // Generic block renderer: "campground"
   // ---------------------------------------------------------------------
   //
-  // The logistics row shown immediately under the title: one line of exactly
-  //   Website · Campground map · Reservation
-  // Each is a specific, by-label lookup — nothing else in the data appears here:
-  //   - "Website"        = the "HomePage" entry of top-level links[]
-  //   - "Campground map"  = the "Campground map" entry of campground.links
-  //   - "Reservation"     = the "Reservation" entry of campground.links
-  // Other campground.links entries (e.g. the "Reservable; open …" status prose
-  // with url:null) are NOT part of this row. Same "· "-separated row as links.
+  // The logistics row shown immediately under the title: one "· "-separated line
+  //   Website · <every map> · <every reservation>
+  // selected from pageData.links by `type` (GL.LINK_TYPES). The homepage shows as
+  // "Website"; maps and reservations show their own label, which is the only
+  // thing that distinguishes a "Campground" map from a "Park" one.
+  //
+  // Selecting by type instead of by exact label is what fixed two bugs at once:
+  // a "Park map" or "Trail map" used to be looked up by a name nobody searched
+  // for, so it appeared in the list browser's table and never on the page.
+  //
+  // An untyped link is not in this row — it is a general link for the `links`
+  // block, not part of the logistics line. Reservation status with no booking url
+  // is not a link at all; it lives in a "Reservation notes" notes section.
 
-  function findByLabel(list, label) {
-    list = list || [];
-    for (var i = 0; i < list.length; i++) {
-      if (list[i] && list[i].label === label) return list[i];
-    }
-    return null;
+  function linksByType(list, type) {
+    return (list || []).filter(function (l) { return l && l.type === type; });
   }
 
   window.GL.blockRenderers.campground = function (el, pageData) {
@@ -584,12 +585,10 @@
     }
     if (!el.style.marginTop) el.style.marginTop = "0";
     var row = [];
-    var home = findByLabel(pageData.links, "HomePage");
-    if (home) row.push({ label: "Website", url: home.url });
-    var map = findByLabel(data.links, "Campground map");
-    if (map) row.push(map);
-    var reservation = findByLabel(data.links, "Reservation");
-    if (reservation) row.push(reservation);
+    linksByType(pageData.links, "homepage").forEach(function (home) {
+      row.push({ label: "Website", url: home.url });
+    });
+    row = row.concat(linksByType(pageData.links, "map"), linksByType(pageData.links, "reservation"));
     el.innerHTML = linkRow(row, null);
   };
 
@@ -597,20 +596,23 @@
   // Generic block renderer: "links"
   // ---------------------------------------------------------------------
   //
-  // Reads pageData.links = [ { label, url }, ... ] \u2014 the destination's own
-  // links: its official HomePage, plus any OnLost cross-links to other pages
-  // on this site. Two label conventions get a friendly display word:
-  // "HomePage" -> "Website", "OnLost" -> "On Getting Lost" (its url is a
-  // scheme-less *.html, resolved to an internal link by linkRow). Any other
-  // label is shown verbatim. Absent key -> renders nothing.
+  // Reads pageData.links = [ { label, url, type? }, ... ] \u2014 every link the
+  // destination carries, shown in one row. The homepage is the one entry whose
+  // display word is not its label: type "homepage" shows as "Website". Every
+  // other link shows its label verbatim, typed or not.
+  //
+  // A scheme-less *.html url still resolves to an internal link, in linkRow \u2014
+  // that is a URL convention and has nothing to do with `type`.
 
   window.GL.blockRenderers.links = function (el, pageData) {
     if (!pageData.links) return;
     if (!el.style.marginTop) el.style.marginTop = "0";
+    var byLabel = {};
+    (pageData.links || []).forEach(function (l) {
+      if (l && l.type === "homepage") byLabel[l.label] = "Website";
+    });
     el.innerHTML = linkRow(pageData.links, function (label) {
-      if (label === "HomePage") return "Website";
-      if (label === "OnLost") return "On Getting Lost";
-      return label;
+      return byLabel[label] || label;
     });
   };
 

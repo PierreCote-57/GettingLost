@@ -57,7 +57,18 @@
 	"links": [
 		{
 			"label": "HomePage",
+			"type": "homepage",
 			"url": "https://bcparks.ca/sproat-lake-park/"
+		},
+		{
+			"label": "Campground",
+			"type": "map",
+			"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/sproat_lake_map_ec757653ce.pdf"
+		},
+		{
+			"label": "Reservation",
+			"type": "reservation",
+			"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&mapId=-2147483402&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32765&partySize=1"
 		}
 	],
 	"campground": {
@@ -67,16 +78,6 @@
 			"two separate campgrounds",
 			"day-use area",
 			"lake access"
-		],
-		"links": [
-			{
-				"label": "Campground map",
-				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/sproat_lake_map_ec757653ce.pdf"
-			},
-			{
-				"label": "Reservation",
-				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483531&mapId=-2147483402&searchTabGroupId=0&bookingCategoryId=0&nights=1&isReserving=true&equipmentId=-32768&subEquipmentId=-32765&partySize=1"
-			}
 		]
 	},
 	"notes": [

@@ -46,7 +46,7 @@ injects it.
     "legs": []                                 // [] = paved all the way
   },
 
-  "links": [
+  "links": [                                   // SUPERSEDED 2026-08-01 — see docs/schema/links.md
     { "label": "HomePage", "url": "https://bcparks.ca/elk-falls-park/" },
     { "label": "OnLost",   "url": "morton-lake-park.html" }   // scheme-less *.html → local page
   ],
@@ -64,8 +64,14 @@ injects it.
 }
 ```
 
-`links` renders through the `links` block: `HomePage` shows as "Website", `OnLost` as "On
-Getting Lost", both via the shared `linkRow`.
+`links` renders through the `links` block via the shared `linkRow`.
+
+> **Superseded 2026-08-01.** `links[]` gained a closed, optional `type`
+> (`homepage` / `map` / `reservation`) which is now the key every renderer selects by, the
+> label having gone back to being display text. `campground.links` was merged up into this
+> same array, and the `OnLost` label was dropped — a page on this site is signalled by the
+> presence of `file`. The scheme-less `*.html` url convention is unchanged.
+> **[docs/schema/links.md](../schema/links.md) is current for everything about links.**
 
 ### Type block — campgrounds, parks, rec-sites
 
@@ -73,11 +79,8 @@ Getting Lost", both via the shared `linkRow`.
 "campground": {
   "operator": "Quality Recreation Ltd.",
   "siteCount": 6,                              // a number; composition ("2 + 4") goes to a footnote
-  "amenities": ["suspension bridge", "waterfall"],
-  "links": [                                   // url is null when the entry is informational
-    { "label": "Campground map", "url": "https://.../map.pdf" },
-    { "label": "Reservation",    "url": "https://camping.bcparks.ca/..." }
-  ]
+  "amenities": ["suspension bridge", "waterfall"]
+  // `links` was REMOVED 2026-08-01 — merged up into the row's own links[], typed.
 }
 ```
 
@@ -103,8 +106,8 @@ inline, or a hydrated `{file}` pointer. See
 [docs/projects/destinations-overview.md](destinations-overview.md).
 
 Table columns: Name, On-lost, Location, Distance, Access, Sites (plain `siteCount`), Maps,
-Amenities, Reservation. Maps and Reservation are split out of `campground.links` by a
-`/map/i` test on the label.
+Amenities, Reservation. Maps and Reservation select from `links[]` by `type` (2026-08-01);
+they used to be split out of `campground.links` by a `/map/i` test on the label.
 
 ## Enabled follow-ons
 

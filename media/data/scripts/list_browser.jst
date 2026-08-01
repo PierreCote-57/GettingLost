@@ -169,24 +169,17 @@
 
   // ---- table cell helpers (ported from destinations-overview.jst) -----------
 
-  function homepageUrl(place) {
-    var links = place.links || [];
-    for (var i = 0; i < links.length; i++) {
-      if (links[i] && links[i].label === "HomePage") return links[i].url;
-    }
-    return null;
+  // Every link a row carries lives in one flat `links[]`, and `type` says what
+  // each one IS (GL.LINK_TYPES). The label is display text and nothing else — it
+  // used to be the classifier too, which made renaming a label move the link to
+  // another column. Selecting by type is why these are one-liners.
+  function linksOfType(place, type) {
+    return (place.links || []).filter(function (l) { return l && l.type === type; });
   }
 
-  // Split campground.links into map links vs reservation entries. Maps are
-  // labelled "…map"; everything else is a reservation entry.
-  function campgroundLinks(place) {
-    var links = (place.campground || {}).links || [];
-    var maps = [], reservation = [];
-    for (var i = 0; i < links.length; i++) {
-      var l = links[i] || {};
-      (/map/i.test(l.label || "") ? maps : reservation).push(l);
-    }
-    return { maps: maps, reservation: reservation };
+  function homepageUrl(place) {
+    var homepages = linksOfType(place, "homepage");
+    return homepages.length ? homepages[0].url : null;
   }
 
   // Sum of the columns that HAVE a fixed width (the flexible last column has
@@ -307,11 +300,13 @@
       var n = (place.campground || {}).siteCount;
       if (n !== null && n !== undefined) cell.textContent = String(n);
     } else if (field === "maps") {
-      fillLinkList(cell, campgroundLinks(place).maps, "Open the map", "Map");
+      // Every map, one per line — the label ("Campground", "Park", "Trail") is
+      // what tells them apart.
+      fillLinkList(cell, linksOfType(place, "map"), "Open the map", "Map");
     } else if (field === "amenities") {
       cell.textContent = cellText((place.campground || {}).amenities);
     } else if (field === "reservation") {
-      fillLinkList(cell, campgroundLinks(place).reservation, "Open the reservation web site", null);
+      fillLinkList(cell, linksOfType(place, "reservation"), "Open the reservation web site", null);
     } else {
       cell.textContent = cellText(place[field]);
     }

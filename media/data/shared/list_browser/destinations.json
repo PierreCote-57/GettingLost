@@ -12,6 +12,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.alderbay.com/"
 			}
 		],
@@ -49,6 +50,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://allfun.camp.zone/"
 			}
 		],
@@ -92,6 +94,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC0214"
 			}
 		],
@@ -127,12 +130,6 @@
 				"fire pits",
 				"boat launch",
 				"not suitable for motorhomes"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served, free",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
@@ -143,6 +140,16 @@
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served, free"
+					}
+				]
 			}
 		]
 	},
@@ -156,6 +163,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.bc-camping.com/"
 			}
 		],
@@ -199,6 +207,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bellapacifica.com/"
 			}
 		],
@@ -236,6 +245,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC6407"
 			}
 		],
@@ -269,18 +279,22 @@
 				"tent pads",
 				"toilets",
 				"small cabin"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served, free",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served, free"
+					}
+				]
 			}
 		]
 	},
@@ -294,6 +308,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://brannenlake.com/"
 			}
 		],
@@ -331,7 +346,13 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://brownsbayresort.com/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://brownsbayresort.com/resort-map/"
 			}
 		],
 		"location": {
@@ -358,13 +379,7 @@
 			]
 		},
 		"campground": {
-			"siteCount": 60,
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://brownsbayresort.com/resort-map/"
-				}
-			]
+			"siteCount": 60
 		}
 	},
 	{
@@ -377,6 +392,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://cameronlakeresort.ca/"
 			}
 		],
@@ -414,7 +430,13 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://capelazo.com/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://capelazo.com/campground-map/"
 			}
 		],
 		"location": {
@@ -449,18 +471,18 @@
 				"pavilion with fireplace",
 				"beach access",
 				"showers"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://capelazo.com/campground-map/"
-				},
-				{
-					"label": "Reservations required; no drop-ins; bookable up to a year ahead",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservations required; no drop-ins; bookable up to a year ahead"
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Cedar Grove RV Park & Campground",
@@ -472,6 +494,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.cedargrovervpark.ca/"
 			}
 		],
@@ -509,6 +532,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://cedarspringsranch.com/"
 			}
 		],
@@ -546,6 +570,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.metrocp.ca/chemainus-gardens/"
 			}
 		],
@@ -583,6 +608,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://campchinacreek.com/"
 			}
 		],
@@ -620,6 +646,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://holidaytrailsresorts.com/country-maples-rv-resort/"
 			}
 		],
@@ -657,6 +684,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.crystalcove.ca/"
 			}
 		],
@@ -694,6 +722,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://deepbayrvpark.com/"
 			}
 		],
@@ -731,6 +760,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://driftwoodbythesea.com/"
 			}
 		],
@@ -777,6 +807,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.fisherboypark.com/"
 			}
 		],
@@ -814,6 +845,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://fortvictoria.ca/"
 			}
 		],
@@ -851,6 +883,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/french-beach-park/"
 			}
 		],
@@ -882,14 +915,18 @@
 			"amenities": [
 				"beach access",
 				"pit toilets"
-			],
-			"links": [
-				{
-					"label": "Reservable",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable"
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Goldstream Provincial Park",
@@ -901,7 +938,18 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/goldstream-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_park_campground_map_efaee751b7.pdf"
+			},
+			{
+				"label": "Park",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_map_5abd6693ba.pdf"
 			}
 		],
 		"location": {
@@ -938,22 +986,18 @@
 				"group campsites",
 				"fire pits",
 				"winter camping"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_park_campground_map_efaee751b7.pdf"
-				},
-				{
-					"label": "Park map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/goldstream_map_5abd6693ba.pdf"
-				},
-				{
-					"label": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable in peak season with some first-come-first-served sites; winter camping FCFS with limited services"
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Gordon Bay Provincial Park",
@@ -965,7 +1009,13 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/gordon-bay-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/gordon_bay_park_map_771a73ae0a.pdf"
 			}
 		],
 		"location": {
@@ -1000,18 +1050,18 @@
 				"potable water taps",
 				"no cell service",
 				"sandy beach"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/gordon_bay_park_map_771a73ae0a.pdf"
-				},
-				{
-					"label": "123 of 126 sites reservable; limited winter FCFS at reduced rate",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "123 of 126 sites reservable; limited winter FCFS at reduced rate"
+					}
+				]
+			}
+		]
 	},
 	{
 		"file": "gosling-lake.html"
@@ -1026,6 +1076,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://parks.canada.ca/pn-np/bc/pacificrim/activ/camping"
 			}
 		],
@@ -1072,6 +1123,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.harmonyshorescamping.ca/"
 			}
 		],
@@ -1109,6 +1161,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.hearthavenrvcamping.ca/"
 			}
 		],
@@ -1146,6 +1199,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://rdn.bc.ca/horne-lake-regional-park"
 			}
 		],
@@ -1200,6 +1254,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/island-view-beach-regional-park"
 			}
 		],
@@ -1246,6 +1301,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "http://www.islandwestresort.com/"
 			}
 		],
@@ -1283,6 +1339,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.jinglepotrv.ca/"
 			}
 		],
@@ -1320,6 +1377,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.crd.ca/parks-recreation/find-park-or-trail/jordan-river-regional-park"
 			}
 		],
@@ -1366,6 +1424,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/juan-de-fuca-park/"
 			}
 		],
@@ -1399,18 +1458,22 @@
 				"outhouses",
 				"potable water taps",
 				"no cell service"
-			],
-			"links": [
-				{
-					"label": "Nearly all sites reservable; 1 site FCFS",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "siteCount",
 				"text": "vehicle-accessible + walk-in"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Nearly all sites reservable; 1 site FCFS"
+					}
+				]
 			}
 		]
 	},
@@ -1427,6 +1490,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.rdmw.bc.ca/regional-services/parks/kwaksistah-winter-harbour--camping-"
 			}
 		],
@@ -1482,6 +1546,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC0276"
 			}
 		],
@@ -1510,18 +1575,22 @@
 		},
 		"campground": {
 			"operator": "RSTBC",
-			"siteCount": 8,
-			"links": [
-				{
-					"label": "First-come-first-served",
-					"url": null
-				}
-			]
+			"siteCount": 8
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served"
+					}
+				]
 			}
 		]
 	},
@@ -1535,6 +1604,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://portalice.ca/visitor-info/camping/"
 			}
 		],
@@ -1586,6 +1656,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/little-qualicum-falls-park/"
 			}
 		],
@@ -1616,14 +1687,18 @@
 			"operator": "RLC Park Services",
 			"amenities": [
 				"hiking trails to waterfalls"
-			],
-			"links": [
-				{
-					"label": "Reservable",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable"
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Living Forest Oceanside Campground",
@@ -1635,6 +1710,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.livingforest.com/"
 			}
 		],
@@ -1672,6 +1748,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC0269"
 			}
 		],
@@ -1706,12 +1783,6 @@
 				"swimming",
 				"paddling",
 				"lake loop trail"
-			],
-			"links": [
-				{
-					"label": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
@@ -1722,6 +1793,16 @@
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Just over half reservable (60-day rolling window), remainder first-come-first-served; $20/night"
+					}
+				]
 			}
 		]
 	},
@@ -1735,7 +1816,13 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/loveland-bay-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/loveland_bay_park_map_c1b9ff4f32.pdf"
 			}
 		],
 		"location": {
@@ -1766,22 +1853,22 @@
 			"siteCount": 50,
 			"amenities": [
 				"rustic wilderness lakeside camping"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/loveland_bay_park_map_c1b9ff4f32.pdf"
-				},
-				{
-					"label": "Reservable; open April 1–Oct 12",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable; open April 1–Oct 12"
+					}
+				]
 			}
 		]
 	},
@@ -1795,6 +1882,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/lower-nimpkish-park/"
 			}
 		],
@@ -1842,6 +1930,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC0242"
 			}
 		],
@@ -1875,18 +1964,22 @@
 				"two campground loops",
 				"river access",
 				"salmon spawning viewing nearby"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served, free; closed September–May (gated)",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served, free; closed September–May (gated)"
+					}
+				]
 			}
 		]
 	},
@@ -1900,7 +1993,18 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/miracle-beach-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_map_3212db3989.pdf"
+			},
+			{
+				"label": "Trail",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_trail_map_a3af093f06.pdf"
 			}
 		],
 		"location": {
@@ -1935,22 +2039,18 @@
 				"nature house and store",
 				"adventure playground",
 				"sheltered beach"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_map_3212db3989.pdf"
-				},
-				{
-					"label": "Trail map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/miracle_beach_trail_map_a3af093f06.pdf"
-				},
-				{
-					"label": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable; open March 20–Oct 31, winter camping March 1–19 & Nov 1–30"
+					}
+				]
+			}
+		]
 	},
 	{
 		"file": "mohun-lake-rec0184.html"
@@ -1974,6 +2074,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://mountainairervpark.com/"
 			}
 		],
@@ -2011,6 +2112,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC3067"
 			}
 		],
@@ -2044,14 +2146,18 @@
 				"picnic tables",
 				"pit toilets",
 				"boat/canoe access only"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served, free",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served, free"
+					}
+				]
+			}
+		]
 	},
 	{
 		"file": "muchalat-lake.html"
@@ -2066,6 +2172,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC0125"
 			}
 		],
@@ -2097,18 +2204,22 @@
 			"siteCount": 8,
 			"amenities": [
 				"vehicle accessible"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served, free",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served, free"
+					}
+				]
 			}
 		]
 	},
@@ -2122,6 +2233,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://nanoosecreekcampground.com/"
 			}
 		],
@@ -2159,6 +2271,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/nimpkish-lake-park/"
 			}
 		],
@@ -2206,6 +2319,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://visitnitinaht.com/"
 			}
 		],
@@ -2256,6 +2370,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.parkbridge.com/en/resort/resort-detail/oceanside"
 			}
 		],
@@ -2293,6 +2408,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.osbornebayresort.com/"
 			}
 		],
@@ -2330,6 +2446,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.visitpacheedaht.ca/"
 			}
 		],
@@ -2376,6 +2493,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://pachenabaycampground.ca/"
 			}
 		],
@@ -2426,6 +2544,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.pacificpalmsrvresort.com/"
 			}
 		],
@@ -2466,7 +2585,17 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC261703"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://www.vicamping.com/images/PacificYewRecreationSite.pdf"
+			},
+			{
+				"label": "VI Camping",
+				"url": "https://www.vicamping.com/campsites/pacificyew"
 			}
 		],
 		"location": {
@@ -2499,26 +2628,22 @@
 				"large sites",
 				"outhouses",
 				"paddling/boating access"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://www.vicamping.com/images/PacificYewRecreationSite.pdf"
-				},
-				{
-					"label": "First-come-first-served",
-					"url": null
-				},
-				{
-					"label": "VI Camping",
-					"url": "https://www.vicamping.com/campsites/pacificyew"
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served"
+					}
+				]
 			}
 		]
 	},
@@ -2532,6 +2657,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.paradiservpark.ca/"
 			}
 		],
@@ -2569,6 +2695,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://parksands.com/"
 			}
 		],
@@ -2606,6 +2733,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://pedderbay.com/"
 			}
 		],
@@ -2643,6 +2771,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.pioneerinn.ca/"
 			}
 		],
@@ -2680,6 +2809,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.portaliceoceanfrontrv.com/"
 			}
 		],
@@ -2717,7 +2847,13 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.puntledgerv.ca/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://www.puntledgerv.ca/stay"
 			}
 		],
 		"location": {
@@ -2745,13 +2881,7 @@
 		},
 		"campground": {
 			"operator": "Commercial RV campground owned and operated by the K'ómoks First Nation",
-			"siteCount": 120,
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://www.puntledgerv.ca/stay"
-				}
-			]
+			"siteCount": 120
 		},
 		"footnotes": [
 			{
@@ -2770,6 +2900,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://resortbc.com/"
 			}
 		],
@@ -2807,6 +2938,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.qualicumfirstnation.com/"
 			}
 		],
@@ -2853,7 +2985,18 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/rathtrevor-beach-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
+			},
+			{
+				"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
+				"type": "reservation",
+				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
 			}
 		],
 		"location": {
@@ -2886,16 +3029,6 @@
 				"sandy beach",
 				"flush toilets",
 				"showers"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
-				},
-				{
-					"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
-					"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
-				}
 			]
 		},
 		"footnotes": [
@@ -2915,6 +3048,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://riverbendresort.bc.ca/"
 			}
 		],
@@ -2952,6 +3086,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://cowichanrivercampground.ca/"
 			}
 		],
@@ -2989,6 +3124,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://myriversideresort.com/"
 			}
 		],
@@ -3029,6 +3165,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.parkbridge.com/en/resort/resort-detail/rondalyn"
 			}
 		],
@@ -3066,6 +3203,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.salishseasidervhaven.com/"
 			}
 		],
@@ -3106,6 +3244,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://saratogabeach.com/"
 			}
 		],
@@ -3152,6 +3291,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/schoen-lake-park/"
 			}
 		],
@@ -3178,14 +3318,17 @@
 				}
 			]
 		},
-		"campground": {
-			"links": [
-				{
-					"label": "First-come-first-served",
-					"url": null
-				}
-			]
-		}
+		"campground": {},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served"
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Scout Beach Recreation Site",
@@ -3197,6 +3340,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC5750"
 			}
 		],
@@ -3231,18 +3375,22 @@
 				"pit toilets",
 				"fire pits",
 				"boat launch"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served, free",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served, free"
+					}
+				]
 			}
 		]
 	},
@@ -3256,6 +3404,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sealbayrvpark.com/"
 			}
 		],
@@ -3311,6 +3460,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://villageoftahsis.com"
 			}
 		],
@@ -3348,6 +3498,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.secretbeachcampground.com/"
 			}
 		],
@@ -3398,6 +3549,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "http://shalomrv.com/"
 			}
 		],
@@ -3435,6 +3587,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://shelterbayresort.ca/"
 			}
 		],
@@ -3482,6 +3635,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.snawnawascampground.ca/"
 			}
 		],
@@ -3528,7 +3682,18 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://tsoukenation.com/sooke-potholes-regional-park-spring-salmon-place-campground/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-campground.pdf"
+			},
+			{
+				"label": "Park",
+				"type": "map",
+				"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-regional-park.pdf"
 			}
 		],
 		"location": {
@@ -3556,17 +3721,7 @@
 		},
 		"campground": {
 			"operator": "Managed by CRD, operated by T'Sou-ke Nation",
-			"siteCount": 67,
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-campground.pdf"
-				},
-				{
-					"label": "Park map",
-					"url": "https://tsoukenation.wpenginepowered.com/wp-content/uploads/2024/05/MAP-sooke-potholes-regional-park.pdf"
-				}
-			]
+			"siteCount": 67
 		}
 	},
 	{
@@ -3579,6 +3734,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://sookecampground.com/"
 			}
 		],
@@ -3616,7 +3772,13 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://speedwayrv.ca/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://speedwayrv.ca/wp-content/uploads/2025/04/Speedway-RV-Park-Map.jpg"
 			}
 		],
 		"location": {
@@ -3652,18 +3814,18 @@
 				"WiFi",
 				"convenience store",
 				"free hot showers"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://speedwayrv.ca/wp-content/uploads/2025/04/Speedway-RV-Park-Map.jpg"
-				},
-				{
-					"label": "Reservable online (Campspot)",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable online (Campspot)"
+					}
+				]
+			}
+		]
 	},
 	{
 		"file": "sproat-lake.html"
@@ -3681,6 +3843,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/stamp-river-park/"
 			}
 		],
@@ -3712,14 +3875,18 @@
 			"amenities": [
 				"salmon-viewing trail",
 				"fish ladder lookout"
-			],
-			"links": [
-				{
-					"label": "Reservable",
-					"url": null
-				}
 			]
-		}
+		},
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservable"
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Strathcona Provincial Park — Buttle Lake Campground",
@@ -3731,7 +3898,18 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/strathcona-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+			},
+			{
+				"label": "Park",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
 			}
 		],
 		"location": {
@@ -3768,26 +3946,22 @@
 				"fire rings",
 				"no RV hookups",
 				"RV length limit 32 ft"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
-				},
-				{
-					"label": "Park map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
-				},
-				{
-					"label": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "siteCount",
 				"text": "Back-country camping allowed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Reservation-only in recent seasons; unreserved sites revert to first-come-first-served nightly"
+					}
+				]
 			}
 		]
 	},
@@ -3801,7 +3975,23 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/strathcona-park/"
+			},
+			{
+				"label": "Campground",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
+			},
+			{
+				"label": "Park",
+				"type": "map",
+				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
+			},
+			{
+				"label": "Partially reservable, remainder first-come-first-served",
+				"type": "reservation",
+				"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
 			}
 		],
 		"location": {
@@ -3836,20 +4026,6 @@
 				"water pump",
 				"no RV hookups",
 				"RV length limit 32 ft"
-			],
-			"links": [
-				{
-					"label": "Campground map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_buttle_ralph_map_882f4ac08f.pdf"
-				},
-				{
-					"label": "Park map",
-					"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/strathcona_park_d4aabbe560.pdf"
-				},
-				{
-					"label": "Partially reservable, remainder first-come-first-served",
-					"url": "https://camping.bcparks.ca/create-booking/results?transactionLocationId=-2147483483&resourceLocationId=-2147483527&mapId=-2147483397&equipmentId=-32768&subEquipmentId=-32765"
-				}
 			]
 		},
 		"footnotes": [
@@ -3869,6 +4045,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://porthardyrvresort.com/"
 			}
 		],
@@ -3906,6 +4083,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://surfgrove.com/"
 			}
 		],
@@ -3943,6 +4121,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.surfjunction.com/"
 			}
 		],
@@ -3980,6 +4159,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://surfsiderv.ca/"
 			}
 		],
@@ -4017,6 +4197,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://bcparks.ca/taylor-arm-park/"
 			}
 		],
@@ -4049,18 +4230,22 @@
 			"amenities": [
 				"group camping only",
 				"day-use"
-			],
-			"links": [
-				{
-					"label": "Group sites reservable",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "siteCount",
 				"text": "group sites"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "Group sites reservable"
+					}
+				]
 			}
 		]
 	},
@@ -4074,6 +4259,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://telegraphcove.ca/"
 			}
 		],
@@ -4111,6 +4297,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://thunderbirdrvpark.com/"
 			}
 		],
@@ -4158,6 +4345,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://tranquilitywoods.ca/"
 			}
 		],
@@ -4195,6 +4383,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.tsawaakrvresort.ca/"
 			}
 		],
@@ -4241,6 +4430,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://uclueletcampground.com/"
 			}
 		],
@@ -4278,6 +4468,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.sitesandtrailsbc.ca/resource/REC0159"
 			}
 		],
@@ -4313,18 +4504,22 @@
 				"fire pits",
 				"small beach",
 				"boat launch"
-			],
-			"links": [
-				{
-					"label": "First-come-first-served; max stay 14 nights",
-					"url": null
-				}
 			]
 		},
 		"footnotes": [
 			{
 				"field": "access",
 				"text": "Preliminary, to be confirmed"
+			}
+		],
+		"notes": [
+			{
+				"sectionName": "Reservation notes",
+				"list": [
+					{
+						"name": "First-come-first-served; max stay 14 nights"
+					}
+				]
 			}
 		]
 	},
@@ -4338,6 +4533,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://westwoodlakecampgrounds.com/"
 			}
 		],
@@ -4375,6 +4571,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://saywardwhiteriverresort.com/"
 			}
 		],
@@ -4412,6 +4609,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://www.windywaters.ca"
 			}
 		],
@@ -4455,6 +4653,7 @@
 		"links": [
 			{
 				"label": "HomePage",
+				"type": "homepage",
 				"url": "https://zuiderzeecampsites.wixsite.com/zuiderzee-campsites"
 			}
 		],

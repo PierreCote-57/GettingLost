@@ -162,6 +162,20 @@ URLs the browser already fetches on every page load, and the only non-project in
 dataset id, goes in via `textContent`, so it is inert. **Before adding a mechanism, ask what
 this code actually has to distinguish**, rather than importing a habit from bigger apps.
 
+## The table's columns
+
+`COLUMNS` is the whole definition: `{ label, field, width?, align? }`, in display order.
+
+- **`width`** is applied through `buildColGroup`. The last column deliberately has none, so
+  it takes the slack.
+- **`align`** is applied in `buildCell`, NOT in the colgroup — a `<col>` honours only width,
+  border, background and visibility, so `text-align` set there does nothing. `buildCell`
+  applies it after the `th` default, which keeps a centered column's heading centered over
+  it. Left is the default and is not written out.
+- Link columns select from `links[]` **by type**, never by label — `linksOfType(place, …)`.
+  Name links to the `homepage`; Maps lists every `map`, one per line, told apart by its
+  label; Reservation lists every `reservation`. See [schema/links.md](../schema/links.md).
+
 ## The table breakout
 
 `max-width` **cannot** break an element out of a constrained parent — it only caps. The table
