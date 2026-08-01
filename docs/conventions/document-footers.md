@@ -4,9 +4,13 @@
 
 Every document Pierre produces uses the footer format **"Page n of N"** on all pages.
 
-**Why:** It's his standing convention across his documents; a ToC page number is only usable if the physical pages carry matching numbers.
+The footer is centered and appears on every page. Counting includes the cover and any front
+matter, so the cover reads "Page 1 of N". Where a document has a Table of Contents, its page
+numbers must match the printed footers — a ToC number is only usable if the physical page
+carries the same one.
 
-**How to apply:** Any generated PDF/doc gets a centered "Page n of N" footer on every page. Counting includes the cover and any front matter (cover = "Page 1 of N"). If a doc has a Table of Contents, the ToC page numbers must match these printed footers. See the `NumberedCanvas` pattern in [local/tools/build_checklists_pdf.py](local/tools/build_checklists_pdf.py) for the two-pass reportlab implementation.
+The two-pass reportlab implementation is the `NumberedCanvas` class in
+[local/tools/build_booklet_pdf.py](../../local/tools/build_booklet_pdf.py).
 
 ## Marking numbers that aren't measured
 

@@ -15,16 +15,18 @@
 
 ## Parameter quirks
 
-**Validate every FileBird API call against the docs before writing code** — parameter names are inconsistent across endpoints (e.g. `parent_id` for create folder, `folder` for set-attachment, `folderId` for set-posts). Never assume a parameter name carries over from one endpoint to another.
+**Parameter names are inconsistent across endpoints and do not carry over.** The folder id is
+`parent_id` when creating a folder, `folder` for `set-attachment`, and `folderId` for
+`set-posts`. Check the name against the endpoint list in
+[docs/conventions/site.md](../conventions/site.md) before writing the call — a wrong name
+returns a "Validation failed" that says nothing about which parameter it disliked. `sync.js`
+sent `folder_id` and `attachment_ids` to `set-attachment` for exactly that reason until
+2026-06-30.
 
-**Why:** The original sync.js used wrong param names (`folder_id` and `attachment_ids` instead of `folder` and `ids`) for `set-attachment`, causing silent "Validation failed" errors. Fixed 2026-06-30.
+## Folder lookups are case-insensitive
 
-**How to apply:** When writing or reviewing any FileBird API call, cross-check param names against the docs at [docs/conventions/site.md](../conventions/site.md). Don't copy param names from one endpoint to another.
-
----
-
-**FileBird folder lookups must be case-insensitive** — FileBird stores folder names in Title Case (e.g. "Data") but repo paths are lowercase (e.g. "data"). Without `.toLowerCase()` on cache keys, the sync creates duplicate folders like "data (1)".
-
-**Why:** sync.js had case-insensitive lookups for page folders but not media folders, causing duplicates on every sync run. Fixed 2026-06-30.
-
-**How to apply:** Both `loadFileBirdFolderTree` and `ensureFileBirdFolderPath` in sync.js now use `.toLowerCase()` cache keys, matching the page folder pattern. Maintain this if touching either function.
+FileBird stores folder names in Title Case ("Data"); repo paths are lowercase ("data"). Both
+`loadFileBirdFolderTree` and `ensureFileBirdFolderPath` in `sync.js` key their caches on
+`.toLowerCase()`, so a repo path matches the folder that already exists. Without it the sync
+creates a duplicate — "data (1)" — on every run, which is what media folders did until
+2026-06-30; page folders had the lowercasing from the start.

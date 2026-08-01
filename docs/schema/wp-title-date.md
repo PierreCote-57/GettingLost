@@ -29,7 +29,7 @@ Learned 2026-07-11 debugging howto-power on the live site (gettinglostonvi.wpcom
   date for pages). Confirmed via REST that sync DOES bump it; a stale footer was a
   render/caching artifact, not a sync bug.
 - `post_date` (published): for POSTS, sync sets it from the JSON **`"date"`** field
-  ([sync.js](local/sync/sync.js) ~L565) so Pierre can backdate posts and typo-fixes
+  ([sync.js](../../local/sync/sync.js) ~L565) so Pierre can backdate posts and typo-fixes
   don't move it. PAGES send no date. There is no per-post timezone in WP (only
   site-wide); post_date/post_date_gmt store local+UTC but not the zone name.
 

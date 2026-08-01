@@ -6,6 +6,7 @@
 - External links: `target="_blank" rel="noopener noreferrer"`
 - WPautop disabled via "Disable WPautop" plugin (Nick Momrik) — no stray `<br/>` in multi-line inline elements
 - **JSON house format** — tab-indented, one field per line, written through `local/tools/jsonio.py`. The rule lives in [.claude/rules/json-format.md](../../.claude/rules/json-format.md), which loads every session, because it governs an action rather than describing the site. `local/data/**` is exempt and frozen.
+- **After adding or editing `tags.keywords`, run the keyword validation pass.** Keywords are an OPEN vocabulary — unlike badges and access, nothing declares the valid values, so the list drifts: plurals, synonyms and one-off spellings accumulate silently. The `keyword-validation` skill walks every value across the datasets and surfaces the suspects; it reports, and the author decides. Run it on demand, never in the build and never in the filter. The rule lives in [.claude/rules/keywords.md](../../.claude/rules/keywords.md), which loads whenever a `media/data` JSON file is in play.
 - **A new HTML page always gets its matching JSON at the same time** — pages fetch their JSON at runtime, so a missing file is a console error. Use the proper structure for the page type, never a bare `{}`.
 - **List JSON files are sorted BY HAND**, in the file itself — the reverse of the old rule. `gallery.jst` used to sort alphabetically at render time; it is retired, and the list browser treats source order as authoritative. `destinations.json` is kept sorted by name.
 
