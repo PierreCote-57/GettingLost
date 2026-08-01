@@ -6,8 +6,11 @@
 		"badges": [
 			"fishing"
 		],
+		"types": [
+			"park"
+		],
 		"keywords": [
-			"park", "hike"
+			"hike"
 		]
 	},
 	"wpSettings": {

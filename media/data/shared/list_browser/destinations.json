@@ -2,8 +2,11 @@
 	{
 		"name": "Alder Bay Resort",
 		"tags": {
+			"types": [
+				"campground"
+			],
 			"keywords": [
-				"campground","whales"
+				"whales"
 			]
 		},
 		"links": [
@@ -39,7 +42,7 @@
 	{
 		"name": "All Fun Recreation RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -79,8 +82,11 @@
 	{
 		"name": "Arden Creek Recreation Site",
 		"tags": {
+			"types": [
+				"rec-site"
+			],
 			"keywords": [
-				"rec-site", "whaling"
+				"whaling"
 			]
 		},
 		"links": [
@@ -143,7 +149,7 @@
 	{
 		"name": "Bald Eagle Campground & RV Sites",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -186,7 +192,7 @@
 	{
 		"name": "Bella Pacifica Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -223,7 +229,7 @@
 	{
 		"name": "Blackies Beach Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -281,7 +287,7 @@
 	{
 		"name": "Brannen Lake Campsites",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -318,7 +324,7 @@
 	{
 		"name": "Brown's Bay Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -364,7 +370,7 @@
 	{
 		"name": "Cameron Lake Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -401,7 +407,7 @@
 	{
 		"name": "Cape Lazo Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -459,7 +465,7 @@
 	{
 		"name": "Cedar Grove RV Park & Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -496,7 +502,7 @@
 	{
 		"name": "Cedar Springs Ranch",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -533,7 +539,7 @@
 	{
 		"name": "Chemainus Gardens RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -570,7 +576,7 @@
 	{
 		"name": "China Creek Marina & RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -607,7 +613,7 @@
 	{
 		"name": "Country Maples RV Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -644,7 +650,7 @@
 	{
 		"name": "Crystal Cove Beach Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -681,7 +687,7 @@
 	{
 		"name": "Deep Bay RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -718,7 +724,7 @@
 	{
 		"name": "Driftwood By The Sea RV Park & Cottages",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -764,7 +770,7 @@
 	{
 		"name": "Fisherboy Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -801,7 +807,7 @@
 	{
 		"name": "Fort Victoria RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -838,7 +844,7 @@
 	{
 		"name": "French Beach Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -888,7 +894,7 @@
 	{
 		"name": "Goldstream Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -952,7 +958,7 @@
 	{
 		"name": "Gordon Bay Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -1013,7 +1019,7 @@
 	{
 		"name": "Green Point Campground, Pacific Rim National Park Reserve",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1059,7 +1065,7 @@
 	{
 		"name": "Harmony Shores Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1096,7 +1102,7 @@
 	{
 		"name": "Heart Haven RV Family Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1133,7 +1139,7 @@
 	{
 		"name": "Horne Lake Regional Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1187,7 +1193,7 @@
 	{
 		"name": "Island View Beach Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1233,7 +1239,7 @@
 	{
 		"name": "Island West Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1270,7 +1276,7 @@
 	{
 		"name": "Jingle Pot RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1307,7 +1313,7 @@
 	{
 		"name": "Jordan River Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1353,7 +1359,7 @@
 	{
 		"name": "Juan de Fuca Provincial Park (China Beach Campground)",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -1414,7 +1420,7 @@
 	{
 		"name": "Kwaksistah Regional Park Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1469,7 +1475,7 @@
 	{
 		"name": "Leiner River Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -1522,7 +1528,7 @@
 	{
 		"name": "Link River Regional Park Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1573,7 +1579,7 @@
 	{
 		"name": "Little Qualicum Falls Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -1622,7 +1628,7 @@
 	{
 		"name": "Living Forest Oceanside Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1659,7 +1665,7 @@
 	{
 		"name": "Lizard Lake Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -1722,7 +1728,7 @@
 	{
 		"name": "Loveland Bay Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -1782,7 +1788,7 @@
 	{
 		"name": "Lower Nimpkish Lake Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -1829,7 +1835,7 @@
 	{
 		"name": "Marble River Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -1887,7 +1893,7 @@
 	{
 		"name": "Miracle Beach Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -1961,7 +1967,7 @@
 	{
 		"name": "Mountainaire Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -1998,7 +2004,7 @@
 	{
 		"name": "Mr. Canoehead Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -2053,7 +2059,7 @@
 	{
 		"name": "Nahwitti Lake Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -2109,7 +2115,7 @@
 	{
 		"name": "Nanoose Creek Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2146,7 +2152,7 @@
 	{
 		"name": "Nimpkish Lake Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -2193,7 +2199,7 @@
 	{
 		"name": "Nitinaht Lake Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2243,7 +2249,7 @@
 	{
 		"name": "Oceanside RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2280,7 +2286,7 @@
 	{
 		"name": "Osbourne Bay Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2317,7 +2323,7 @@
 	{
 		"name": "Pacheedaht Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2363,7 +2369,7 @@
 	{
 		"name": "Pachena Bay Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2413,7 +2419,7 @@
 	{
 		"name": "Pacific Palms RV Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2453,7 +2459,7 @@
 	{
 		"name": "Pacific Yew Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -2519,7 +2525,7 @@
 	{
 		"name": "Paradise Sea-Side Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2556,7 +2562,7 @@
 	{
 		"name": "Park Sands Beach Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2593,7 +2599,7 @@
 	{
 		"name": "Pedder Bay RV Resort & Marina",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2630,7 +2636,7 @@
 	{
 		"name": "Pioneer Inn",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2667,7 +2673,7 @@
 	{
 		"name": "Port Alice RV Park & Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2704,7 +2710,7 @@
 	{
 		"name": "Puntledge RV Park & Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2757,7 +2763,7 @@
 	{
 		"name": "Qualicum Bay Resort and RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2794,7 +2800,7 @@
 	{
 		"name": "Qualicum First Nation Waterfront Campground, Cabins and RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2840,7 +2846,7 @@
 	{
 		"name": "Rathtrevor Beach Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -2902,7 +2908,7 @@
 	{
 		"name": "Riverbend Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2939,7 +2945,7 @@
 	{
 		"name": "Riverside Campground & RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -2976,7 +2982,7 @@
 	{
 		"name": "Riverside Resort Motel & Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3016,7 +3022,7 @@
 	{
 		"name": "Rondalyn Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3053,7 +3059,7 @@
 	{
 		"name": "Salish Seaside RV Haven",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3093,7 +3099,7 @@
 	{
 		"name": "Saratoga Beach Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3139,7 +3145,7 @@
 	{
 		"name": "Schoen Lake Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -3184,7 +3190,7 @@
 	{
 		"name": "Scout Beach Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -3243,7 +3249,7 @@
 	{
 		"name": "Seal Bay RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3298,7 +3304,7 @@
 	{
 		"name": "Seaside RV Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3335,7 +3341,7 @@
 	{
 		"name": "Secret Beach Campground & Kayak Launch",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3385,7 +3391,7 @@
 	{
 		"name": "Shalom RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3422,7 +3428,7 @@
 	{
 		"name": "Shelter Bay Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3469,7 +3475,7 @@
 	{
 		"name": "Snaw-Naw-as Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3515,7 +3521,7 @@
 	{
 		"name": "Sooke Potholes / Spring Salmon Place (KWL-UCHUN) Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3566,7 +3572,7 @@
 	{
 		"name": "Sooke River Campsite",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3603,7 +3609,7 @@
 	{
 		"name": "Speedway RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3668,7 +3674,7 @@
 	{
 		"name": "Stamp River Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -3718,7 +3724,7 @@
 	{
 		"name": "Strathcona Provincial Park — Buttle Lake Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -3788,7 +3794,7 @@
 	{
 		"name": "Strathcona Provincial Park — Ralph River Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -3856,7 +3862,7 @@
 	{
 		"name": "Sunny Sanctuary Campground / Port Hardy RV Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3893,7 +3899,7 @@
 	{
 		"name": "Surf Grove Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3930,7 +3936,7 @@
 	{
 		"name": "Surf Junction Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -3967,7 +3973,7 @@
 	{
 		"name": "Surfside RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4004,7 +4010,7 @@
 	{
 		"name": "Taylor Arm Provincial Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"park"
 			]
 		},
@@ -4061,7 +4067,7 @@
 	{
 		"name": "Telegraph Cove Marina & RV Park",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4098,7 +4104,7 @@
 	{
 		"name": "Thunderbird Campsite",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4145,7 +4151,7 @@
 	{
 		"name": "Tranquility Woods Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4182,7 +4188,7 @@
 	{
 		"name": "Tsawaak RV Resort & Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4228,7 +4234,7 @@
 	{
 		"name": "Ucluelet Campground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4265,7 +4271,7 @@
 	{
 		"name": "Upper Campbell Reservoir Recreation Site",
 		"tags": {
-			"keywords": [
+			"types": [
 				"rec-site"
 			]
 		},
@@ -4325,7 +4331,7 @@
 	{
 		"name": "Westwood Lake RV Camping & Cabins (Westwood Lake Campground Resort)",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4362,7 +4368,7 @@
 	{
 		"name": "White River Resort",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4399,7 +4405,7 @@
 	{
 		"name": "Windy Waters Camping Ground",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},
@@ -4442,7 +4448,7 @@
 	{
 		"name": "Zuiderzee Campsites",
 		"tags": {
-			"keywords": [
+			"types": [
 				"campground"
 			]
 		},

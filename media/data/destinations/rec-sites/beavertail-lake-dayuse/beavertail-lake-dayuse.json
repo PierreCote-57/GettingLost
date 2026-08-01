@@ -7,9 +7,11 @@
 			"fishing",
 			"picnic"
 		],
+		"types": [
+			"rec-site"
+		],
 		"keywords": [
 			"picnic",
-			"rec-site",
 			"trout"
 		]
 	},

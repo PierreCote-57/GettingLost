@@ -6,8 +6,11 @@
 		"badges": [
 			"camping"
 		],
+		"types": [
+			"campground"
+		],
 		"keywords": [
-			"campground", "whale"
+			"whale"
 		]
 	},
 	"wpSettings": {

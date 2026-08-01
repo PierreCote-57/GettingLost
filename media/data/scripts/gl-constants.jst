@@ -9,6 +9,7 @@
  *   GL.PIN_ICONS   — map-marker SVGs keyed by a page's location.pin.
  *   GL.TAG_COLORS  — tag-chip colors (used by renderTags).
  *   GL.TAG_FALLBACK
+ *   GL.DESTINATION_TYPES — the closed tags.types vocabulary.
  *   GL.ROAD_COLORS — road-condition badge colors (used by renderRoad).
  *   GL.MAP_CONFIG  — Google Maps API key + default zoom / type / styles.
  *
@@ -28,6 +29,21 @@
     picnic:   { bg: "rgba(186, 117, 23, 0.88)", text: "#FAEEDA" }
   };
   GL.TAG_FALLBACK = { bg: "rgba(95, 94, 90, 0.88)", text: "#F1EFE8" };
+
+  // What KIND of place a destination is, carried as `tags.types`. A CLOSED
+  // vocabulary, unlike `tags.keywords`: sync.js fails the build on a value that
+  // isn't here, so the list browser can offer these as choices and show a count of
+  // zero against one nothing uses yet.
+  //
+  // Alphabetical. Unlike ROAD_RANK, the order carries no meaning — it is only the
+  // order the dropdown lists them in, and alphabetical is the order that doesn't
+  // shift as data lands.
+  //
+  // A type is NEVER mandatory, and that is what keeps `park` meaningful: a city
+  // park (The Spit, in Campbell River) is a very different thing from a provincial
+  // park, so it carries no type at all rather than a wrong one. Someone filtering
+  // for park gets Elk Falls, not The Spit. Add a value here when a kind earns one.
+  GL.DESTINATION_TYPES = ["campground", "lake", "park", "rec-site"];
 
   // Road-condition badge colors (used by renderRoad). Severity ramp,
   // easy -> hard: blue -> green -> orange -> rust -> red. Two values sit OFF

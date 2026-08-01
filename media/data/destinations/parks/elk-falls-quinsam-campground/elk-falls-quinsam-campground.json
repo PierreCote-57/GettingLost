@@ -8,8 +8,11 @@
 			"fishing",
 			"hiking"
 		],
+		"types": [
+			"park"
+		],
 		"keywords": [
-			"park", "hiking"
+			"hiking"
 		]
 	},
 	"wpSettings": {

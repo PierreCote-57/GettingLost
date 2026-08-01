@@ -98,31 +98,34 @@ const LEG_TYPES = [...DRIVE_LEG_TYPES, ...NON_DRIVE_LEG_TYPES];
 // DATA check only — the road badge itself is derived in the browser
 // (gettinglost.jst). A page FAILS if any leg is invalid: an unknown type, or an
 // `unpaved` leg with no positive km (unpaved asserts a MEASURED tail, so it means
-// nothing without one). Each bad leg is annotated (::error::) and the page counted
-// as failed, so the Summary reports it and main() exits non-zero. Pages with no
-// legs (e.g. lakes) are not applicable and aren't counted either way.
+// nothing without one). Pages with no legs (e.g. lakes) are not applicable and
+// aren't counted either way.
+//
+// One of the checks in main()'s validate block: each bad leg is annotated
+// (::error::) as it is found, the tally line closes the check, and the returned
+// invalid count is what stops the run before anything is pushed.
 function validateLegs(perPageDataMap) {
-  console.log("\n=== Validating legs ===");
-  let successCount = 0;
-  let failCount = 0;
+  let checked = 0;
+  let invalid = 0;
   for (const [key, pd] of perPageDataMap) {
     const legs = pd.data && pd.data.access && pd.data.access.legs;
     if (!Array.isArray(legs) || legs.length === 0) continue;
+    checked++;
     let bad = false;
     for (const leg of legs) {
       const type = leg && leg.type;
       if (!LEG_TYPES.includes(type)) {
-        annotateFailure(`[legs] ${key}: unknown leg type "${type}".`);
+        annotateFailure(`  ${key}: unknown leg type "${type}".`);
         bad = true;
       } else if (type === "unpaved" && !(typeof leg.km === "number" && leg.km > 0)) {
-        annotateFailure(`[legs] ${key}: unpaved leg has no km — unpaved states a measured tail, meaningless without one.`);
+        annotateFailure(`  ${key}: unpaved leg has no km — unpaved states a measured tail, meaningless without one.`);
         bad = true;
       }
     }
-    if (bad) failCount++;
-    else successCount++;
+    if (bad) invalid++;
   }
-  return { successCount, failCount };
+  console.log(`Legs:  ${checked} checked, ${invalid} invalid`);
+  return invalid;
 }
 
 // ---------------------------------------------------------------------
@@ -982,10 +985,10 @@ async function syncOnePageToFileBird(pageFolderCache, pageId, relPath) {
 // The manifest (list_browser/datasets.json) is the single source of truth for
 // which files get HYDRATED at sync time: each entry's `file` is a pointer/inline
 // list whose `{file}` pointers are replaced with the referenced page's JSON.
-// The manifest itself is published by syncHydratedLists() too, carrying the
-// keyword vocabulary collected from the hydrated rows, so the repo copy and the
-// published copy differ. list_browser.json isn't listed there and copies
-// verbatim like any other file.
+// The manifest itself is published by syncHydratedLists() too, carrying the counts
+// collected from the hydrated rows, so the repo copy and the published copy
+// differ. list_browser.json isn't listed there and copies verbatim like any other
+// file.
 const LIST_BROWSER_DIR = "data/shared/list_browser";
 const MANIFEST_REL = `${LIST_BROWSER_DIR}/datasets.json`;
 
@@ -1069,19 +1072,21 @@ function collectCounts(hydratedRows) {
 
 // Replace each `{file}` pointer entry with the referenced page's JSON, matching
 // the gallery merge ({ ...pageData, file }). Inline entries (no `file`) pass
-// through untouched. An unresolvable pointer is a hard failure: annotate + count
-// it so main() exits non-zero, and skip the entry so no partial list is
-// published. `perPageDataMap` is keyed by `<base>.json` (see loadPerPageDataMap).
+// through untouched. An unresolvable pointer is a hard failure, and the entry is
+// skipped so no partial list can be published. `perPageDataMap` is keyed by
+// `<base>.json` (see loadPerPageDataMap).
+//
+// Problems are RETURNED, not printed: validateLists() owns the reporting, so every
+// failure line lands under the validate block's header instead of during the load.
 function hydrateList(entries, relPath, perPageDataMap) {
-  let failCount = 0;
+  const problems = [];
   const hydrated = [];
   for (const entry of entries) {
     if (entry && entry.file) {
       const base = path.basename(entry.file, path.extname(entry.file));
       const pd = perPageDataMap.get(`${base}.json`);
       if (!pd) {
-        annotateFailure(`[lists] ${relPath}: unresolvable file pointer "${entry.file}" — no page data found.`);
-        failCount++;
+        problems.push(`${relPath}: unresolvable file pointer "${entry.file}" — no page data found.`);
         continue;
       }
       hydrated.push({ ...pd.data, file: entry.file });
@@ -1089,7 +1094,54 @@ function hydrateList(entries, relPath, perPageDataMap) {
       hydrated.push(entry);
     }
   }
-  return { hydrated, failCount };
+  return { hydrated, problems };
+}
+
+// Read every manifest-listed dataset file and hydrate it. This is DERIVING what
+// gets published — the file's content decides the output — so it belongs in the
+// load phase, where the validate block can inspect the result before anything is
+// pushed. The counts ride along for the same reason: by the time the push phase
+// runs, every byte it will upload is already decided.
+//
+// Contrast with a plain file copy, which reads at upload time and stays there: the
+// bytes are the payload of a decision already made, and hoisting them would mean
+// holding every image in memory for the whole run.
+function loadHydratedListSet(datasets, perPageDataMap) {
+  const hydratedSets = [];
+
+  for (const dataset of datasets) {
+    const relPath = `${LIST_BROWSER_DIR}/${dataset.file}`;
+    const filePath = path.join(MEDIA_ROOT, relPath);
+
+    let entries;
+    try {
+      entries = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    } catch (err) {
+      hydratedSets.push({ dataset, relPath, hydrated: [], counts: null, problems: [`${relPath}: could not parse JSON — ${err.message}`] });
+      continue;
+    }
+
+    const { hydrated, problems } = hydrateList(entries, relPath, perPageDataMap);
+    hydratedSets.push({ dataset, relPath, hydrated, counts: collectCounts(hydrated), problems });
+  }
+
+  return hydratedSets;
+}
+
+// Every manifest-listed dataset resolved into publishable rows. One of the checks
+// in main()'s validate block; reports what loadHydratedListSet collected — a file
+// that would not parse, or a `{file}` pointer with no page data behind it.
+function validateLists(hydratedSets) {
+  let invalid = 0;
+  for (const set of hydratedSets) {
+    if (!set.problems.length) continue;
+    invalid++;
+    for (const problem of set.problems) {
+      annotateFailure(`  ${problem}`);
+    }
+  }
+  console.log(`Lists: ${hydratedSets.length} checked, ${invalid} invalid`);
+  return invalid;
 }
 
 async function syncFiles(fileBirdFolderCache, excludedSet) {
@@ -1139,53 +1191,32 @@ async function syncFiles(fileBirdFolderCache, excludedSet) {
   return { successCount, failCount };
 }
 
-// Hydrate the manifest-listed dataset files (see loadDatasetManifest) and publish
-// the merged result, then publish the manifest itself with each entry's keyword
-// vocabulary attached. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
-// changed page is always reflected in the hydrated output even when the list
-// file itself didn't change. An unresolvable pointer is a hard failure
-// (annotated + counted in hydrateList); the partial list is not published.
-async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) {
+// Publish the hydrated dataset files, then the manifest itself with each entry's
+// counts attached. UNCONDITIONAL every run (bypasses the CHANGED gate), so a
+// changed page is always reflected in the hydrated output even when the list file
+// itself didn't change.
+//
+// PUSH ONLY — it is handed what loadHydratedListSet built and the validate block
+// already cleared, so there is nothing here to read, merge or decide. Serialize
+// and upload.
+async function syncHydratedLists(fileBirdFolderCache, hydratedSets) {
   console.log("\n=== Syncing hydrated lists ===");
   let successCount = 0;
   let failCount = 0;
 
-  if (!fs.existsSync(MEDIA_ROOT)) {
-    console.warn(`[lists] media root not found at ${MEDIA_ROOT} — nothing to hydrate.`);
-    return { successCount, failCount };
-  }
-
   // The manifest as it will be published: one entry per dataset that made it,
-  // the authored fields plus the collected keywords.
+  // the authored fields plus the collected counts.
   const publishedDatasets = [];
 
-  for (const dataset of datasets) {
-    const normalized = `${LIST_BROWSER_DIR}/${dataset.file}`;
-    const filePath = path.join(MEDIA_ROOT, normalized);
-    const filename = path.basename(filePath);
-
-    let entries;
-    try {
-      entries = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    } catch (err) {
-      annotateFailure(`[lists] ${normalized}: could not parse JSON — ${err.message}`);
-      failCount++;
-      continue;
-    }
-
-    const { hydrated, failCount: hfails } = hydrateList(entries, normalized, perPageDataMap);
-    if (hfails > 0) {
-      failCount += hfails;
-      continue;
-    }
-
-    const fileBuffer = Buffer.from(JSON.stringify(hydrated, null, 2));
-    const mediaId = await syncOneFileToWordPress(normalized, filename, fileBuffer, guessMimeFromExt(filename));
+  for (const set of hydratedSets) {
+    const filename = path.basename(set.relPath);
+    const fileBuffer = Buffer.from(JSON.stringify(set.hydrated, null, 2));
+    const mediaId = await syncOneFileToWordPress(set.relPath, filename, fileBuffer, guessMimeFromExt(filename));
 
     if (mediaId) {
       successCount++;
-      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, normalized);
-      publishedDatasets.push({ ...dataset, counts: collectCounts(hydrated) });
+      await syncOneFileToFileBird(fileBirdFolderCache, mediaId, set.relPath);
+      publishedDatasets.push({ ...set.dataset, counts: set.counts });
     } else {
       failCount++;
     }
@@ -1287,10 +1318,12 @@ async function main() {
     }
   }
 
+  // ---- LOAD: read everything, derive everything that will be published -------
   console.log("=== Loading data maps ===");
   const perPageDataMap = loadPerPageDataMap();
   const datasets = loadDatasetManifest();
   const excludedSet = buildExcludedSet(datasets);
+  const hydratedListSet = loadHydratedListSet(datasets, perPageDataMap);
   const wpPageMap = await loadWpPageMap();
   const wpPostMap = await loadWpPostMap();
   const wpMediaMap = await loadWpMediaMap();
@@ -1298,16 +1331,39 @@ async function main() {
   const ghPostMap = buildGhPostMap();
   const glPageMap = generatePageMap(ghPageMap, perPageDataMap);
 
-  // The run, in order. Each step announces its own section header and returns
-  // { successCount, failCount }; the name is attached here because it is a label
-  // in this report, not something a sync step should know about itself. Adding a
-  // step means adding ONE line — the summary and the exit code follow from it.
+  // ---- VALIDATE: every check runs, THEN the block decides --------------------
+  //
+  // Running them all means one run reports everything that is wrong, instead of
+  // making Pierre fix one thing to discover the next. Each check streams its own
+  // failures as it finds them and closes with a tally line, so nothing has to be
+  // accumulated here.
+  //
+  // A failure stops the run before ANY push. Failing halfway through, with the
+  // site half updated, was the old behavior and it was a bug: an invalid leg was
+  // reported and then the whole site went out anyway.
+  console.log("\n=== Validating ===");
+  let invalidCount = 0;
+  invalidCount += validateLegs(perPageDataMap);
+  invalidCount += validateLists(hydratedListSet);
+
+  if (invalidCount > 0) {
+    console.log("FAILED — nothing pushed.");
+    process.exit(1);
+  }
+
+  // ---- PUSH: tell WordPress about what is already decided --------------------
+  //
+  // Each step announces its own section header and returns { successCount,
+  // failCount }; the name is attached here because it is a label in this report,
+  // not something a sync step should know about itself. Adding a step means adding
+  // ONE line — the summary and the exit code follow from it. Validation is not in
+  // this list: a run that gets here has already passed, and the summary is about
+  // what was pushed.
   const results = [];
-  results.push({ name: "Legs", ...validateLegs(perPageDataMap) });
   results.push({ name: "Pages", ...await syncPages(pageFolderCache, ghPageMap, wpPageMap, perPageDataMap, wpMediaMap) });
   results.push({ name: "Posts", ...await syncPosts(pageFolderCache, ghPostMap, wpPostMap, perPageDataMap, wpMediaMap) });
   results.push({ name: "Files", ...await syncFiles(fileBirdFolderCache, excludedSet) });
-  results.push({ name: "Lists", ...await syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) });
+  results.push({ name: "Lists", ...await syncHydratedLists(fileBirdFolderCache, hydratedListSet) });
   results.push({ name: "Logs", ...await syncLogs(fileBirdFolderCache) });
   results.push({ name: "PageMap", ...await syncPageMap(glPageMap, fileBirdFolderCache) });
 

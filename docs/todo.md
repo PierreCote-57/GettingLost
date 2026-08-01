@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 17**
+**next id: 21**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -34,11 +34,109 @@ written before that date may not resolve.
 
 ## List browser
 
-- **#5 — Should destination type be its own facet rather than a keyword?** *(2026-07-30)*
-  `lake`/`park`/`rec-site`/`campground` are carried as keywords because nothing else on a
-  row states the type — for per-page rows it is implied by the folder, for inline dataset
-  rows by nothing at all. So the keyword is load-bearing: drop it and lakes become
-  unselectable. The question is whether type deserves a structured facet of its own.
+- **#19 — Should a destination's type be VISIBLE, not just filterable?** *(2026-08-01)*
+  Cards render `tags.badges` as chips and nothing else, so type shows nowhere today. Whether
+  it earns a chip (a color entry, and chip crowding beside the badges) or a table column is a
+  separate question from the facet itself — deferred out of #5 deliberately.
+
+- **#18 — The non-type keywords in the data are TEST VALUES** *(2026-08-01)*
+  `hike`, `hiking`, `picnic`, `trout`, `whale`, `whales`, `whaling` were put in to exercise
+  the filter, not to describe the destinations. Pierre authors the real vocabulary later.
+  **Until he does, the keyword data proves nothing** — do not read the thin vocabulary, the
+  singletons or the near-duplicates as evidence in a design argument (it was read that way in
+  #5 on 2026-08-01), and do not "fix" the drift. The `keyword-validation` pass is worth
+  running only after the real values land.
+
+- **#5 — Give destination type its own facet** *(2026-07-30, designed 2026-08-01)*
+  `lake`/`park`/`rec-site`/`campground` are carried as keywords because nothing else on a row
+  states the type — for per-page rows it is implied by the folder, for inline dataset rows by
+  nothing at all. Type moves to a facet of its own. **Facets are the filter axes; keywords,
+  badges and access are all facets** — this adds a fourth, it does not promote type out of
+  being a tag.
+
+  Settled 2026-08-01:
+
+  - **`tags.types`, a LIST**, beside `keywords` and `badges` — same kind of thing, same
+    shape. The data is single-valued today (116 of 116 rows carry exactly one), but that is
+    a fact about the data, not a constraint to encode: a rec site on a lake should be able
+    to say so without a schema change.
+  - **Closed vocabulary**, declared as a bare ordered array `GL.DESTINATION_TYPES` in
+    `gl-constants.jst`. Precedent is `GL.ROAD_RANK`, which is exactly this: a closed
+    vocabulary with no colors, held separately from the color map.
+  - **Never mandatory. The build check is VOCABULARY ONLY** — a value outside the list fails,
+    an absent `types` is fine. This is what protects the meaning of `park`: a city park (The
+    Spit in Campbell River) carries no type rather than a wrong one, and someone filtering
+    for "park" gets Elk Falls, not The Spit. `filterByWord` already fails a row that lacks
+    the tag, so an untyped row surfaces under no type filter — no new code.
+  - **No `unknown` bucket in the counts**, unlike access: an untyped row matches nothing, so
+    it is simply absent and the type counts sum to less than the row count. (Access is the
+    opposite because an unmeasured road passes every threshold.)
+  - **Multi-select checkbox dropdown**, like badges — the filter wants OR ("lakes and parks")
+    even though a row carries one value. Access is single-choice only because a threshold has
+    one answer.
+  - Ids stay as authored: `rec-site` keeps its hyphen and renders as it does in the Keywords
+    dropdown today.
+
+  Current data is clean: all 15 inline `park` rows are bcparks.ca provincial parks (three are
+  named without the word "Provincial" — Lower Nimpkish Lake, Nimpkish Lake, Schoen Lake). A
+  `city-park` value can be added when the first one arrives; it renders `(0)` until used.
+
+  Touches: the vocabulary in `gl-constants.jst`; a python migration through `jsonio.py` moving
+  the word out of `tags.keywords` into `tags.types` on 98 inline rows of `destinations.json`
+  and 18 page JSONs; `collectCounts` and the vocabulary check in `sync.js`; `filterTypes` +
+  one switch line + one `CONTROL_BUILDERS` entry in `list_browser.jst`; `"types"` into the
+  destinations `options` array. Data and code must land in one push. Then the docs and the
+  keyword tooling: [rules/keywords.md](../.claude/rules/keywords.md) loses "type keywords are
+  load-bearing", the `keyword-validation` skill loses its exemption for them,
+  `local/tools/keyword_validation.py` stops seeing them, and
+  [conventions/site.md](conventions/site.md) + [rendering/list-browser.md](rendering/list-browser.md)
+  get the new facet.
+
+## Tooling — sync.js
+
+- **#20 — Three phases in `main()`: load, validate, push** *(2026-08-01)*
+  `syncHydratedLists` reads its dataset files, hydrates them and uploads them, all in one
+  step. That read in the push phase is what leaves a validation with nowhere to stand:
+  `validateLegs` sits at [sync.js:1306](../local/sync/sync.js:1306) as the lone outlier
+  between the load block and the push block, and it can only see `perPageDataMap` — never the
+  98 inline dataset rows, which is where most destination data lives.
+
+  Fix: hoist the read + hydrate into the load block as `loadHydratedListSet(datasets,
+  perPageDataMap)` — **a name `overview.md` already uses for a function that does not exist**,
+  so this restores the documented shape. `syncHydratedLists` then only uploads what it is
+  handed. A validate block goes between the two, seeing both per-page and inline rows.
+
+  **Decided: validation runs before ANY push, and a failure means nothing was pushed** —
+  better than failing after half the site is up. Every check runs before the block decides, so
+  one run reports everything that is wrong. Validations LEAVE the summary, which becomes
+  purely about what was pushed; a failed run prints no summary at all, just the validation
+  report and exit 1.
+
+  This is a BUG FIX, not a new policy: today an invalid leg is counted, reported, and the site
+  is pushed anyway.
+
+  Output — each failure prints as it is found, before its check's tally line, so nothing has
+  to be accumulated (`annotateFailure` already streams). The tally carries the count, not a
+  bare "Success", because the number is what says the check actually looked at something:
+
+  ```
+  === Validating ===
+  Legs:  19 checked, 0 invalid
+    QuinsamRiver.json: invalid type "river"
+  Types: 116 checked, 1 invalid
+  FAILED — nothing pushed.
+  ```
+
+  A COPY IS NOT A READ. `copy(X, Y)` reading X internally is an implementation detail the
+  caller doesn't know about; the test is whether the content changes *what gets published*.
+  By that test the file has exactly one offender: [sync.js:1169](../local/sync/sync.js:1169).
+  Page content, post content, media bytes and log bytes are payload — read, handed to WP
+  unexamined, never consulted for a decision — and stay where they are. Hoisting those would
+  mean holding every image in memory for the whole run.
+
+  Do this FIRST and on its own, verified by a full sync producing byte-identical uploads.
+  #5's type check goes in on top of it, so the refactor and the new check stay separate
+  diffs.
 
 ## Housekeeping
 
@@ -46,6 +144,16 @@ written before that date may not resolve.
   `local/charting/cabin-indoor-storage.svg` and `local/charting/cabin-outdoors.svg` are
   working files from a charting session — per the charting lifecycle only the CSV persists.
   Now committed, so it's a `git rm`. Pierre's cleanup.
+
+## Documentation
+
+- **#17 — `site.md` still describes the retired `destinations` table on lake pages** *(2026-08-01)*
+  [conventions/site.md](conventions/site.md) says a lake page's nearby places are the
+  `destinations` block with a **Type** column labelling each entry. `lakes.jst`'s header says
+  that renderer was retired in the schema-unification pass (2026-07-20) and those places are
+  now a "Destinations" section inside the shared `notes` block. Check which is true on a live
+  lake page, then fix the doc. Found while checking whether a second machine-readable type
+  vocabulary existed for todo #5 — it does not, if lakes.jst is right.
 
 ## Site configuration
 
