@@ -15,7 +15,7 @@ its file, leaving only what is true about the thing that now exists.
 | [destinations-overview.md](destinations-overview.md) | **Live dataset** | The Vancouver Island campground dataset: place schema, the two row kinds, column-to-field mapping, editing rules, standing data caveats. The page that once rendered it is retired; the data is current. |
 | [checklists-booklet.md](checklists-booklet.md) | **Live tool** | The booklet PDF builder — both booklets from one script — plus how the PDFs deploy and how the download button works. |
 | [logs-travel.md](logs-travel.md) | **Live data, no renderer** | The `logs/` schemas: stops, locations, fuel. The `<referent>_id` naming rule and the shared `location` block. |
-| [images.md](images.md) | **Partly built** | Schema and Photon sizing are in force; `glmedia.py`, the ingest script, is designed but not written. |
+| [images.md](images.md) | **Live** | Where image masters live locally, and Photon sizing on the site. Images are placed and uploaded by hand. |
 
 "Live" means the thing is in use and the file describes current behaviour — there is no
 completion date because it is not a finished project, it is a running part of the site.

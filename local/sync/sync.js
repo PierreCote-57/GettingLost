@@ -1003,18 +1003,68 @@ function buildExcludedSet(datasets) {
   return excluded;
 }
 
-// The distinct `tags.keywords` values across a hydrated dataset, sorted. This is
-// the open vocabulary the list browser's keyword filter offers as choices; it is
-// collected here so the browser reads a finished list instead of deriving one.
-function collectKeywords(hydratedRows) {
-  const seen = new Set();
-  for (const row of hydratedRows) {
-    for (const keyword of (row.tags || {}).keywords || []) {
-      seen.add(keyword);
-    }
+// The road badge a row's access derives. Mirrors GL.deriveRoadBadge in
+// gettinglost.jst, which owns the render-time derivation; this copy exists only
+// to COUNT rows per badge. It trusts what it reads because validateLegs already
+// failed the build on an unknown leg type or an unmeasured `unpaved`.
+// null means no badge at all — the row's road is unmeasured.
+function deriveRoad(access) {
+  const legs = access && access.legs;
+  if (!Array.isArray(legs)) return null;
+  if (legs.length === 0) return "pavement";
+
+  let worst = -1;
+  for (const leg of legs) {
+    const type = leg && leg.type;
+    if (NON_DRIVE_LEG_TYPES.includes(type)) return "back_country";
+    const rank = DRIVE_LEG_TYPES.indexOf(type);
+    if (rank > worst) worst = rank;
   }
-  const keywords = [...seen].sort();
-  return keywords;
+  return worst < 0 ? null : DRIVE_LEG_TYPES[worst];
+}
+
+// Add one row's values to a facet's count map. The Set is what makes this one
+// count per ROW: a row listing a value twice would still be kept once by the
+// filter, so it must count once here.
+function countRowValues(map, values) {
+  for (const value of new Set(values)) {
+    map[value] = (map[value] || 0) + 1;
+  }
+}
+
+// How many rows each filter value would match, per facet, across one hydrated
+// dataset — collected here so the browser reads finished numbers instead of
+// walking the rows itself.
+//
+// `keywords` is the OPEN vocabulary: its keys ARE the choice list the keyword
+// filter offers, which is why they are sorted. `badges` and `access` are CLOSED
+// vocabularies the browser already holds (GL.TAG_COLORS, GL.ROAD_COLORS); only
+// the numbers come from here, so a value nobody used simply has no key and the
+// browser reads it as 0 — a closed vocabulary advertising room not yet used.
+//
+// `access` counts the DERIVED road badge, with unmeasured rows under "unknown"
+// (never a road value, so it cannot collide). The access control is a threshold
+// and an unmeasured road passes every one of them, so the browser adds those
+// rows into every option's running total.
+function collectCounts(hydratedRows) {
+  const keywords = {};
+  const badges = {};
+  const access = {};
+
+  for (const row of hydratedRows) {
+    const tags = row.tags || {};
+    countRowValues(keywords, tags.keywords || []);
+    countRowValues(badges, tags.badges || []);
+    countRowValues(access, [deriveRoad(row.access) || "unknown"]);
+  }
+
+  const sortedKeywords = {};
+  for (const keyword of Object.keys(keywords).sort()) {
+    sortedKeywords[keyword] = keywords[keyword];
+  }
+
+  const counts = { keywords: sortedKeywords, badges, access };
+  return counts;
 }
 
 // Replace each `{file}` pointer entry with the referenced page's JSON, matching
@@ -1135,7 +1185,7 @@ async function syncHydratedLists(fileBirdFolderCache, perPageDataMap, datasets) 
     if (mediaId) {
       successCount++;
       await syncOneFileToFileBird(fileBirdFolderCache, mediaId, normalized);
-      publishedDatasets.push({ ...dataset, keywords: collectKeywords(hydrated) });
+      publishedDatasets.push({ ...dataset, counts: collectCounts(hydrated) });
     } else {
       failCount++;
     }

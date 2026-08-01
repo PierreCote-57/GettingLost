@@ -630,12 +630,16 @@
   // `values`, with the ?<paramName>= values pre-checked. Shared by the keyword and
   // badge filters — they differ only in label, param, and vocabulary. snake_case
   // values show with spaces. An empty vocabulary builds nothing (see below).
+  // Each value carries how many rows it would match, from `counts` (sync.js
+  // collected them per dataset). A value with no key counts 0 — which happens
+  // only in the CLOSED badge vocabulary, where a zero is worth showing: the
+  // dropdown is advertising room the data has not used yet.
   // Commits when the panel CLOSES, not per checkbox: navigating on every tick
   // would reload the page and shut the panel, so only one value could ever be
   // picked per visit. `chosen` is the canonical (values-ordered) form of what the
   // URL currently holds, which is what the close handler compares against so a
   // panel opened and closed untouched commits nothing.
-  function buildCheckboxDropdown(label, paramName, values, known) {
+  function buildCheckboxDropdown(label, paramName, values, counts, known) {
     // Nothing to pick is not a control. An absent vocabulary and an empty one are
     // the same thing to a reader, so both build nothing.
     if (!values || !values.length) return null;
@@ -671,7 +675,7 @@
       if (selected.indexOf(v) !== -1) cb.checked = true;
       boxes.push(cb);
       lab.appendChild(cb);
-      lab.appendChild(document.createTextNode(v.replace(/_/g, " ")));
+      lab.appendChild(document.createTextNode(v.replace(/_/g, " ") + " (" + (counts[v] || 0) + ")"));
       panel.appendChild(lab);
     });
 
@@ -698,12 +702,14 @@
   }
 
   // PHASE 3 step — the keyword vocabulary is PROCESSING, not display. sync.js
-  // collects it from the hydrated rows and writes it into the dataset entry, so
-  // this is a pick rather than a derivation.
+  // walks the hydrated rows and writes the per-value counts into the dataset
+  // entry; for keywords, which are OPEN, those keys are the vocabulary itself,
+  // already sorted. So this reads a finished list rather than deriving one.
   function extractKeywords(known) {
     // What I need from what is known
-    var keywords = known.dataset.keywords;
+    var counted = known.dataset.counts.keywords;
 
+    var keywords = Object.keys(counted);
     return keywords;
   }
 
@@ -711,9 +717,17 @@
   // road set (ROAD_COLORS key order: pavement -> ... -> back_country). You pick
   // the WORST road you'll accept; "any" (the default) applies no filter. A plain
   // <select>, not checkboxes — the set is fixed and only one value applies.
+  //
+  // The count on an option is CUMULATIVE, because that is what the option means:
+  // picking "dirt" keeps pavement and unpaved rows too, so the number has to be
+  // the running total down the ramp. Unmeasured rows (sync.js counts them under
+  // "unknown") pass every threshold, so they seed the total rather than sitting
+  // in one option. Accumulating here, not in sync.js, is deliberate: the running
+  // total is threshold semantics, and the threshold lives in this file.
   function buildAccessSelect(known) {
     // What I need from what is known
     var current = known.params.get("access") || "";
+    var counts = known.dataset.counts.access;
 
     var sel = document.createElement("select");
     sel.className = "gl-lb-select";
@@ -723,10 +737,12 @@
     any.textContent = "Access: any";
     sel.appendChild(any);
 
+    var running = counts.unknown || 0;
     roadOrder().forEach(function (r) {
+      running += counts[r] || 0;
       var opt = document.createElement("option");
       opt.value = r;
-      opt.textContent = r.replace(/_/g, " ");
+      opt.textContent = r.replace(/_/g, " ") + " (" + running + ")";
       if (r === current) opt.selected = true;
       sel.appendChild(opt);
     });
@@ -792,10 +808,10 @@
   var CONTROL_BUILDERS = {
     view: function (known) { return buildViewToggle(known); },
     keywords: function (known) {
-      return buildCheckboxDropdown("Keywords", "keywords", known.keywords, known);
+      return buildCheckboxDropdown("Keywords", "keywords", known.keywords, known.dataset.counts.keywords, known);
     },
     badges: function (known) {
-      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS), known);
+      return buildCheckboxDropdown("Badges", "badges", Object.keys(window.GL.TAG_COLORS), known.dataset.counts.badges, known);
     },
     access: function (known) { return buildAccessSelect(known); },
     search: function (known) { return buildSearchBox(known); },

@@ -101,7 +101,6 @@ Two roots only: `Images/` and `Data/`
 
 ### NOT DONE / PENDING
 - keogh-lake and sproat-lake — no source images in ~/Working/Fishing/Images/
-- `glmedia.py` image pipeline (planned, not built)
 - Posts strategy (deferred)
 
 ## Lake ID Mapping

@@ -20,8 +20,8 @@ The renderer reads top to bottom, in order:
    first names the second; if either fails nothing useful can happen, so error handling
    collapses to one place. Nested `fetch/.then`, not async/await — the file keeps its ES5-ish
    idiom. **Two files, two requests.**
-3. **Process** — all of it, up front: filtering, and deriving the keyword list. Nothing is
-   gained by sequencing work between display calls.
+3. **Process** — all of it, up front: filtering, and picking up the keyword vocabulary.
+   Nothing is gained by sequencing work between display calls.
 4. **Display** — `displayOptionsRow` and `displayDataset`, two different views on "all that
    is known".
 
@@ -60,10 +60,11 @@ what you need, here is what I know, use what you want."
   order".**
 - **Filtering is not a display concern.** Renderers are pure `rows -> DOM node`; the count is
   a plain value at top level.
-- **The keyword list is a processing step.** Derived from `rawRows` today, possibly read from
-  the dataset definition later — either way it is one function in phase 3.
-  `displayKeywordOptions` reads the finished list, never `rawRows`, so that later migration
-  touches one processing step and no view.
+- **The keyword list is a processing step.** It is read from the dataset definition —
+  `extractKeywords` takes the keys of `dataset.counts.keywords`, which sync.js wrote sorted.
+  The migration this convention was written to allow (derive from `rawRows` → read from the
+  manifest) has happened, and it touched that one processing step and no view, because the
+  keyword control reads the finished list and never `rawRows`.
 - `navigate(known, patch)` is the one non-display function that also takes the bag: it clones
   `known.params` to build the next URL, and controls call it from their handlers.
 
@@ -103,8 +104,33 @@ does both — it displays *and* filters.
 - `filterSearch` — `JSON.stringify(row)` substring. Broad on purpose: it sees keys and URLs
   too, so "map" matches every row with a map link.
 
-**The keyword vocabulary is derived from the UNFILTERED rows.** Never pass the filtered list
-to `fieldVocab` — it would delete the choices you need in order to widen the search next.
+**The keyword vocabulary is derived from the UNFILTERED rows** — sync.js walks the whole
+hydrated dataset. A vocabulary derived from the filtered list would delete the choices you
+need in order to widen the search next.
+
+## Counts in the controls
+
+Every filter value shows how many rows it would match. The numbers come from the manifest:
+`collectCounts` in sync.js walks each hydrated dataset once and writes
+`counts: { keywords, badges, access }` onto the dataset entry. The browser never counts.
+
+- **`keywords` is the OPEN vocabulary, so its keys ARE the choice list** — sorted by sync.js,
+  and `extractKeywords` just takes `Object.keys`. There is one list, so the choices and the
+  numbers cannot disagree.
+- **`badges` is CLOSED** (`GL.TAG_COLORS`), and the browser still owns that vocabulary; only
+  the numbers come from the manifest. A value nobody used has no key and reads as `(0)`.
+  **The zero is deliberate and the option is not hidden** — a closed vocabulary showing a zero
+  is advertising room the data has not used yet, not a dead choice.
+- **`access` counts the DERIVED road badge**, with unmeasured rows under the key `"unknown"`
+  (never a road value, so it cannot collide). Deriving it costs sync.js a small mirror of
+  `GL.deriveRoadBadge` — the browser keeps the render-time derivation, `deriveRoad` in sync.js
+  exists only to count. It can be the simpler of the two because `validateLegs` has already
+  failed the build on any leg it would have had to reject.
+- **The access numbers are CUMULATIVE, and the accumulation happens in the browser.** The
+  control is a threshold — picking "dirt" keeps pavement and unpaved rows too — so each option
+  shows the running total down `roadOrder()`, seeded with the `unknown` rows because an
+  unmeasured road passes every threshold. Sync ships per-value counts and nothing else: the
+  running total is threshold semantics, and the threshold lives in `buildAccessSelect`.
 
 ## Errors: say what happened, do not comfort
 

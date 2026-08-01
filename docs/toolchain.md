@@ -88,6 +88,13 @@ Findings from a long "why does it keep asking?" session (2026-07-10):
   the project directory — no per-path Bash wildcards needed to edit outside the repo.
 - `Bash(* ~/path/*)` with a **leading** wildcard does not work. The matcher needs a concrete
   command prefix, e.g. `Bash(ls ~/path/*)`.
+- **Writing into `.claude/` prompts anyway** (2026-07-31) — bare `Write` in the allow list
+  does not cover it, since a rule letting Claude write its own config and rules would be
+  self-granting. This file moved to `docs/` for that reason. Never put a new doc under
+  `.claude/` because it wants to be always-loaded: **durable knowledge goes in `docs/`, and
+  anything that must load every session goes in `CLAUDE.md`** — an ordinary repo file that
+  writes without a prompt. Touch `.claude/` only when Pierre asked for that file by name,
+  where the prompt is expected rather than an interruption.
 
 ## Image work
 

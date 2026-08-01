@@ -30,5 +30,5 @@ tokens are registered on `:root`, but the site only really uses these two.)
 
 Practical recipe to make something "belong to the page": inherit color (→ #4a3828),
 don't set font-family (→ Source Sans 3), use a heading element if you want Lora.
-Verifying live CSS after a sync has a cache trap — see `.claude/toolchain.md`.
+Verifying live CSS after a sync has a cache trap — see [docs/toolchain.md](../toolchain.md).
 Related: [docs/rendering/blocks.md](../rendering/blocks.md) (list_browser renderer), [docs/rendering/wp-templates.md](../rendering/wp-templates.md).

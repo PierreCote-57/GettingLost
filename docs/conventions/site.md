@@ -7,6 +7,7 @@
 - WPautop disabled via "Disable WPautop" plugin (Nick Momrik) — no stray `<br/>` in multi-line inline elements
 - **JSON house format** — tab-indented, one field per line, written through `local/tools/jsonio.py`. The rule lives in [.claude/rules/json-format.md](../../.claude/rules/json-format.md), which loads every session, because it governs an action rather than describing the site. `local/data/**` is exempt and frozen.
 - **After adding or editing `tags.keywords`, run the keyword validation pass.** Keywords are an OPEN vocabulary — unlike badges and access, nothing declares the valid values, so the list drifts: plurals, synonyms and one-off spellings accumulate silently. The `keyword-validation` skill walks every value across the datasets and surfaces the suspects; it reports, and the author decides. Run it on demand, never in the build and never in the filter. The rule lives in [.claude/rules/keywords.md](../../.claude/rules/keywords.md), which loads whenever a `media/data` JSON file is in play.
+- **After changing destination content, check the cross-references both ways.** Pages point at each other by `file` — a lake's `destinations` block names nearby rec-sites and parks, and those pages point back. Editing one side without the other leaves them disagreeing, and nothing at build time catches it. Only rows carrying a `file` link are in scope; a catalog-only row has nothing to check against. Turning this into a repeatable skill is `docs/todo.md` #16.
 - **A new HTML page always gets its matching JSON at the same time** — pages fetch their JSON at runtime, so a missing file is a console error. Use the proper structure for the page type, never a bare `{}`.
 - **List JSON files are sorted BY HAND**, in the file itself — the reverse of the old rule. `gallery.jst` used to sort alphabetically at render time; it is retired, and the list browser treats source order as authoritative. `destinations.json` is kept sorted by name.
 
@@ -32,7 +33,6 @@ Two root media folders: **Images** (id:52) and **Data** (id:56) — peers.
 
 Full folder trees with IDs are in [docs/conventions/folders.md](folders.md) — always check there for current state.
 
-**Images/** tree still needs reorganization (add Destinations parent, remove Special, etc.)
 **Data/** tree was reorganized 2026-06-30 and matches GitHub `media/data/` exactly.
 
 FileBird REST API: Bearer token auth at `/wp-json/filebird/public/v1/`
@@ -60,11 +60,8 @@ FileBird REST API: Bearer token auth at `/wp-json/filebird/public/v1/`
 ## Known Bugs
 - **Sproat Lake**: fully built 2026-07-18 (lake page + Sproat Lake Provincial Park park page). It uses `fishingReferences.lakeChartList` = array of `{name,url}` (3 bathymetric sheets), the current schema every lake uses (mohun is live) — the old `lakeChartUrl`-single-string bug note is obsolete; the array renders fine.
 
-## Backup Reminder
-Pierre uses free UpdraftPlus — remind him after major structural sessions.
-
 ## Site Icon
 RVIcon.png is live.
 
 ## Google Maps API Key
-In `gettinglost.jst` — once site leaves wpcomstaging.com, lock HTTP referrer restrictions to the production domain.
+Loaded in `gettinglost.jst` as `MAP_CONFIG.mapApiKey`. Whether it carries an HTTP-referrer restriction is not recorded anywhere in the repo and has not been checked — `docs/todo.md` #15. What to do at the domain move is in [docs/site-move.md](../site-move.md).

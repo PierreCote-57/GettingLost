@@ -23,7 +23,7 @@ here in full and are not repeated below.
   schemas, conventions, renderer behavior, recipes, external APIs, project records. **Read
   the index at the start of any real work, then the specific doc it points to.** Do not
   reconstruct from memory what is written down there.
-- **[.claude/toolchain.md](.claude/toolchain.md)** — Claude's setup for this repo:
+- **[docs/toolchain.md](docs/toolchain.md)** — Claude's setup for this repo:
   session-start validation, permission tiering, one-command-per-Bash-call, inspecting the
   live site, browser-pane gotchas.
 - **[docs/todo.md](docs/todo.md)** — parked work. Side issues found mid-task go here.
@@ -43,7 +43,21 @@ Applies **only** to changes under `logs/`. Everything outside `logs/` follows th
 rules — find ≠ fix, plan before acting, confirm before pushing. Detect device from the
 runtime environment (computer = local shell + filesystem present).
 
-## 4. Site rules
+## 4. After a structural session, tell Pierre to run a backup
+
+He runs the **free** UpdraftPlus, which has no scheduling — a backup only happens when he
+starts one by hand, and nothing in the pipeline takes one. So end any session that changed
+the site structurally with a one-line reminder. Not a question, not an offer to do it.
+
+Structural means a schema migration, a bulk rewrite of data files, a slug or filename change
+across many objects, template or theme edits, or anything that moved or deleted pages.
+Adding a page, editing content, or fixing one record is not structural.
+
+It lives here, in the always-loaded file, because it is a thing to be *said at the right
+moment* — buried in a conventions doc it was missed through both the schema unification and
+the slug rebuild.
+
+## 5. Site rules
 
 - **URLs are always `https://`.** When copying a URL from any source into the site data,
   rewrite `http://` → `https://`. Never curl/fetch/test a plain `http://` URL — upgrade the

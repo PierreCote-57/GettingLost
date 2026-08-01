@@ -52,7 +52,10 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
   3. **Files** — uploads JSON/JST to WP media library (delete-then-recreate)
   4. **List hydration** — manifest-driven (`loadHydratedListSet` reads `datasets.json`);
      each `{file}` pointer is replaced by the page's own JSON before upload. Replaced the
-     old GALLERY_RULES auto-generation, which is deleted.
+     old GALLERY_RULES auto-generation, which is deleted. The published manifest also carries
+     a `counts` map per dataset (`collectCounts`) — how many rows each keyword, badge and
+     road value would match, so the browser's dropdowns can show a number without walking
+     the rows themselves.
 - Sync is incremental on push, full on manual trigger. Incremental mode triggers on both HTML and JSON changes (fixed 2026-07-02)
 - FileBird integration: media and pages filed into matching folder paths (best-effort)
 - `FALLBACK_FEATURED_IMAGE_ID = 1751` (under-construction.png)
@@ -104,7 +107,6 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 - ~~Tag filtering~~ — DONE 2026-07-25 in the list browser, not the gallery: an options bar
   writing URL params, OR within a control and AND across controls
 - ~~Blog post editing~~ — DONE (2026-07-02): sync.js pushes posts, pull-posts.js pulls from WP
-- `glmedia.py` image pipeline (planned, not built)
 - Add Maintenance menu item to The Van dropdown once maintenance pages are created
 - A van-maintenance dataset is not yet created (add it to `datasets.json` once van/maintenance/ pages exist)
 - Delete `Van.json` from WP Admin → Media Library if still there (orphaned)

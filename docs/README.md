@@ -3,7 +3,7 @@
 Durable project knowledge lives here — schemas, conventions, renderer behavior, recipes,
 external APIs, project records. Versioned with the code, readable in IntelliJ.
 
-`CLAUDE.md` holds the working agreement (rules). `.claude/toolchain.md` holds Claude's setup
+`CLAUDE.md` holds the working agreement (rules). [toolchain.md](toolchain.md) holds Claude's setup
 — permissions, session-start checks, browser gotchas. Claude's memory holds only what cannot
 be published: who Pierre is, the *why* behind the rules, and the FileBird token. None of
 them duplicate what is documented here: **when this file and a memory disagree, this file
@@ -72,3 +72,6 @@ project's status is recorded. Each project file describes the work as it stands,
 status or history in it.
 
 [todo.md](todo.md) — parked work.
+
+[site-move.md](site-move.md) — what has to be dealt with when the site leaves
+`wpcomstaging.com` for the production domain.
