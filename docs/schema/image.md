@@ -31,6 +31,13 @@ Galleries and `featuredImage` reference images by **bare filename**, so the same
 - All ~19 source JSONs migrated from full `/wp-content/uploads/...` paths to **bare filenames** under `featuredImage` (2026-07-03).
 - Hard dependency: WP media must be FLAT under `/wp-content/uploads/` (no year/month folders) — see Image Path Warning in [docs/conventions/site.md](../conventions/site.md).
 
-## Corner-chip fields moved under `badges` (2026-07-13)
-Card corner data no longer sits at top level: `tags` migrated to **`badges.tags`**, and a new **`badges.road`** drives the road-condition badge. `renderCard` and `sync.js` read the nested shape. Full spec in [docs/schema/badges-road.md](badges-road.md).
-- **pull-posts.js** writes `featuredImage` as a bare filename (`path.basename` of source_url), **`null` not `""`**, and `console.warn`s when `featured_media` isn't found in the media map (the silent-miss that lost post featured images during the wpcomstaging migration). See [[project-posts-featured-backfill]].
+## Corner chips
+
+Card corner data is the flat `badges` array; the road chip is derived at render from
+`access.legs` and never stored. Full spec in [docs/schema/badges-road.md](badges-road.md).
+
+## pull-posts.js
+
+It writes `featuredImage` as a bare filename (`path.basename` of `source_url`), **`null`,
+never `""`**, and `console.warn`s when `featured_media` isn't found in the media map — that
+silent miss is what lost post featured images during the wpcomstaging migration.

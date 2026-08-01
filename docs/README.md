@@ -67,13 +67,8 @@ per-page JSON as source of truth, auto-generated galleries.
 
 ## projects/ — records of work
 
-| File | Covers |
-| --- | --- |
-| [schema-unification.md](projects/schema-unification.md) | COMPLETE 2026-07-20 |
-| [destinations-overview.md](projects/destinations-overview.md) | campground master table, place JSON schema |
-| [logs-travel.md](projects/logs-travel.md) | `logs/` travel, locations, fuel |
-| [checklists-booklet.md](projects/checklists-booklet.md) | van checklist + how-to PDF builder |
-| [images.md](projects/images.md) | image management pipeline — planned, not built |
-| [slug-rebuild.md](projects/slug-rebuild.md) | COMPLETE 2026-07-08 — pending deletion, see todo 6 |
+[projects/README.md](projects/README.md) indexes all six and is the **only** place a
+project's status is recorded. Each project file describes the work as it stands, with no
+status or history in it.
 
 [todo.md](todo.md) — parked work.

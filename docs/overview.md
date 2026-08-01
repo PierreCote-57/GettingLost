@@ -87,8 +87,9 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 - Details, and the pattern for adding a control or filter: [docs/rendering/list-browser.md](rendering/list-browser.md)
 
 ## Back-to-Gallery Links
-- One `<div data-block-type="backToGallery" data-dataset="<id>">` per page — the label is a
-  static "← Back to gallery"; `data-title`/`data-file` are GONE
+- One bare `<div data-block-type="backToGallery">` per page — **no attributes at all**.
+  The href and label are derived from `document.referrer`; see
+  [docs/rendering/blocks.md](rendering/blocks.md).
 
 ## Templates
 - `destination-template.html` — shared by campgrounds, parks, and rec sites (campground links + map + notes + backToGallery)

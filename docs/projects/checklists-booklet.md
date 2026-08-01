@@ -1,46 +1,58 @@
-# Checklists booklet
+# Booklet builder
 
-One builder now makes **both** booklets — checklists and howto — from
-[local/tools/build_booklet_pdf.py](local/tools/build_booklet_pdf.py) (renamed
-2026-07-16 from `build_checklists_pdf.py`). A `BOOKLETS` config dict holds the
-only per-booklet differences: `source_dir`, `data_dir`, `cover_title`,
-`cover_subtitle`, `step_style` ("checkbox" for checklists, "number" for howto).
-CLI: `python3 local/tools/build_booklet_pdf.py <checklists|howto> [output.pdf]`;
-defaults write to `media/data/van/<kind>/<kind>.pdf`. Pages developed
-**structure/format first**; wording is placeholder.
+One builder makes **both** booklets — checklists and howto — from
+[local/tools/build_booklet_pdf.py](../../local/tools/build_booklet_pdf.py). A `BOOKLETS`
+config dict holds the only per-booklet differences: `source_dir`, `data_dir`,
+`cover_title`, `cover_subtitle`, `step_style` (`checkbox` for checklists, `number` for
+howto).
 
-**How to apply:** Don't polish/debate content or structure — that's the **author's
-job**, not the builder's (see `docs/rendering/blocks.md`). The renderer
-renders exactly what's in the `<section data-howto-section="howto">`, whatever it
-is; no section → title-only page; empty/malformed block → author's problem.
+```bash
+python3 local/tools/build_booklet_pdf.py <checklists|howto> [output.pdf]
+```
 
-Builder facts: half-letter (5.5x8.5). Page **title comes from the sibling JSON
-`title`** (`<data_dir>/<slug>/<slug>.json`), NOT the section h2 (howto h2s are the
-generic "How to"); the section's own heading h2 is skipped. Generic renderer walks
-the section's children in order, dispatched by tag: h2/h3→heading, p→paragraph,
-ol→numbered (or checkbox), ul→bullets (nested recursively), table→gridded table,
-`<details>`→summary-as-heading + contents expanded, warning block→callout,
-photoRef→its caption text inline, photoGallery→ignored (images out of scope).
-Globs `*.html` so new pages auto-join, sorted alpha by title, cover + ToC +
-one-or-more pages each, "Page n of N" footers (also on the cover). See
+Defaults write to `media/data/van/<kind>/<kind>.pdf`.
+
+## What the builder does
+
+Half-letter pages (5.5 × 8.5). It globs `*.html` so new pages join automatically, sorts
+alphabetically by title, and emits a cover, a table of contents, and one or more pages per
+source page, with "Page n of N" footers including on the cover — see
 [docs/conventions/document-footers.md](../conventions/document-footers.md).
 
-**Deploy (added 2026-07-16):** the built PDFs (`media/data/van/checklists/checklists.pdf`,
-`media/data/van/howto/howto.pdf`) now sync to WP via sync.js's FILES pass — `.pdf`
-was added to three spots (the `syncFiles` extension filter, `guessMimeFromExt`
-→ `application/pdf`, and the `findExistingMediaIdByFilename` strip regex). They land
-flat at `/wp-content/uploads/<name>.pdf` (same convention as the JSON files) and file
-into their FileBird `data/van/...` folders. The `media/**` push trigger already covers
-them; no yml change.
+A page's **title comes from the sibling JSON `title`** (`<data_dir>/<slug>/<slug>.json`),
+not the section `h2` — howto `h2`s are all the generic "How to". The section's own heading
+is skipped.
 
-**The "Download booklet (PDF)" button** — lost in the 2026-07-25 cutover (it lived in the
-retired `gallery.jst` as a `PDF_BY_FILE` map and nothing carried it over), RESTORED the
-same day as the `booklet` options token: `datasets.json` lists a bare `"booklet"` on the
-two van datasets (a booklet is POSSIBLE here), and the URL decides — `?booklet=howto`
-renders the button, no parameter renders nothing. The builder makes the URL
-(`/wp-content/uploads/<value>.pdf`), so the parameter names the BOOKLET, not the file.
-**The nav-menu links must carry `&booklet=…`** or no button appears. Right-justified at the end of the options bar
-via `margin-left:auto` on `.gl-lb-booklet`, reusing `.gl-pdf-button`'s brown filled look.
-The old title-line placement (`.gl-title-with-pdf`, a flex row on `.wp-block-post-title`)
-is still in gettinglost.cst, unused, one class away if it's ever wanted back. The word
-"printable" was dropped from the label. See [docs/rendering/list-browser.md](../rendering/list-browser.md), [docs/rendering/blocks.md](../rendering/blocks.md).
+The renderer walks the section's children in order and dispatches by tag: `h2`/`h3` →
+heading, `p` → paragraph, `ol` → numbered or checkbox, `ul` → bullets (recursive),
+`table` → gridded table, `<details>` → summary-as-heading plus expanded contents, warning
+block → callout, `photoRef` → its caption text inline, `photoGallery` → ignored, images
+being out of scope.
+
+**Render what's there.** Content and structure are the author's job, not the builder's — no
+section means a title-only page, an empty or malformed block is the author's problem. See
+[docs/rendering/blocks.md](../rendering/blocks.md).
+
+## Deployment
+
+The built PDFs sync to WP through `sync.js`'s files pass: `.pdf` appears in the `syncFiles`
+extension filter, in `guessMimeFromExt` → `application/pdf`, and in the
+`findExistingMediaIdByFilename` strip regex. They land flat at
+`/wp-content/uploads/<name>.pdf`, the same convention as the JSON files, and file into their
+FileBird `data/van/…` folders. The existing `media/**` push trigger covers them.
+
+## The "Download booklet (PDF)" button
+
+A `booklet` options token. `datasets.json` lists a bare `"booklet"` on the two van datasets,
+meaning a booklet is *possible* here; the URL decides — `?booklet=howto` renders the button,
+no parameter renders nothing. The builder makes the URL
+(`/wp-content/uploads/<value>.pdf`), so **the parameter names the booklet, not the file**.
+
+**Nav-menu links must carry `&booklet=…`** or no button appears.
+
+Right-justified at the end of the options bar via `margin-left:auto` on `.gl-lb-booklet`,
+reusing `.gl-pdf-button`'s brown filled look. An alternative title-line placement
+(`.gl-title-with-pdf`, a flex row on `.wp-block-post-title`) still exists in
+`gettinglost.cst`, unused, one class away if it is ever wanted.
+
+See [docs/rendering/list-browser.md](../rendering/list-browser.md).

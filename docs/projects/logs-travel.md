@@ -1,10 +1,10 @@
 # Logs and travel system
 
-`logs/` holds Pierre's van/travel logs. **Redesigned 2026-07-10** — this replaced the flat
-`event`/`location_id` model. `logs/` is the auto-commit exception (CLAUDE.md rule 3) and is
-**NOT synced to WP** (sync only walks `pages/`/`posts/`/`media/`). Still **data-only — no
-renderer yet**; the browser will eventually need to load `locations.json` to resolve
-`location_id` refs (a later problem, Pierre's call).
+`logs/` holds Pierre's van and travel logs. It is the auto-commit exception (CLAUDE.md rule
+3) and is **not synced to WP** — sync only walks `pages/`, `posts/` and `media/`.
+
+**Data-only; there is no renderer.** A browser-side renderer would need to load
+`locations.json` to resolve `location_id` references.
 
 ## Naming rule (`<referent>_id`)
 A field pointing at another object is named `<target>_id`; bare `id` = an object's OWN
@@ -36,18 +36,18 @@ One type, a **stop**: `{ name, arrival, departure, location, note?, post_id?, id
 
 ## Insertion & sort (both travel-log and fuel-log)
 **Always APPEND the newest entry LAST, by creation time — NOT by arrival/datetime.** This is
-deliberate (set 2026-07-10): appending is trivial, no hunting for a chronological slot. Array
-order = creation order. **Sort by `arrival`/`datetime` only on demand** (e.g. at render), never
-eagerly on write.
+deliberate: appending is trivial, with no hunting for a chronological slot. Array order is
+creation order. **Sort by `arrival`/`datetime` only on demand**, at render, never eagerly on
+write.
 
 ## `logs/locations.json` — place registry
 Record: `{ name (first), id, address?, url?, destination_id?, location:{lat,lng,pin?} }`.
-`id` kebab-case = own identity; `destination_id` (renamed from `destination` 2026-07-10) =
-destination page's github filename; `location` inline. Pin vocab: tent/campground/picnic/
+`id` kebab-case = own identity; `destination_id` = the destination page's github filename;
+`location` inline. Pin vocab: tent/campground/picnic/
 lake/park/home. Rest-stop `url` uses the DriveBC map link w/ the API id ([docs/reference/bc-rest-stops.md](../reference/bc-rest-stops.md)).
 
 ## `logs/fuel-log.json` — fuel entries
-`{ name (first — was `note`), datetime, odometer_km, liters, price_per_liter_cad,
+`{ name (first), datetime, odometer_km, liters, price_per_liter_cad,
 total_cost_cad, location, fullTank, id }`. Time field is `datetime` (NOT `arrival`).
 `fuel-0001` = full-tank baseline (odo 641, 2026-07-05, Shell station inline location).
 **Tank state is odometer-driven and lives entirely here**, decoupled from travel-log
@@ -59,4 +59,5 @@ ref) so fills are mappable and "near home vs on the road" is computed from coord
 - **Computer:** Claude makes/edits entries then STOPS; Pierre pushes.
 - **Phone:** Claude does full edit → commit → push to `main` (rule 3 auto-commit).
 
-`van-log.json` was deleted long ago (superseded). See [docs/conventions/github-workflow.md](../conventions/github-workflow.md), [docs/conventions/site.md](../conventions/site.md).
+See [docs/conventions/github-workflow.md](../conventions/github-workflow.md) and
+[docs/conventions/site.md](../conventions/site.md).
