@@ -23,15 +23,18 @@
 				},
 				{
 					"name": "Mosaic Forest Management / TimberWest",
-					"url": "https://www.mosaicforests.com"
+					"url": "https://www.mosaicforests.com",
+					"description": ["Home web pate"]
 				},
 				{
 					"name": "Western Forest Products (WFP)",
-					"url": "https://www.westernforest.com"
+					"url": "https://www.westernforest.com",
+					"description": ["Home web pate"]
 				},
 				{
 					"name": "A&A Trading Ltd",
-					"url": "https://aatrading.com"
+					"url": "https://aatrading.com",
+					"description": ["Home web pate"]
 				}
 			]
 		},
