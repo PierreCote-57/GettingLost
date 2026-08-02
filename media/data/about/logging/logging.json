@@ -10,11 +10,28 @@
 			"sectionName": "Logging information",
 			"list": [
 				{
-					"name": "Example entry",
-					"url": "https://example.com",
+					"name": "Forestry Operations Management",
+					"url": "https://fom.nrs.gov.bc.ca/public/projects",
 					"description": [
-						"Placeholder row — replace with the real logging entries."
+						"Map of planned operations, open for comments"
 					]
+				},
+				{
+					"name": "BC Forest Map",
+					"url": "http://www.bcforestmap.com/#6.624296777875932/49.83329876803029/-126.05270127475359",
+					"description": ["Map of planned logging"]
+				},
+				{
+					"name": "Mosaic Forest Management / TimberWest",
+					"url": "https://www.mosaicforests.com"
+				},
+				{
+					"name": "Western Forest Products (WFP)",
+					"url": "https://www.westernforest.com"
+				},
+				{
+					"name": "A&A Trading Ltd",
+					"url": "https://aatrading.com"
 				}
 			]
 		},
