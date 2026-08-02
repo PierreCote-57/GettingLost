@@ -1,6 +1,6 @@
 {
 	"name": "Logging",
-	"featuredImage": "IMG_0682.JPG",
+	"featuredImage": "IMG_0682.jpg",
 	"wpSettings": {
 		"published": true,
 		"comments": "open"
@@ -37,27 +37,27 @@
 			"items": [
 				{
 					"id": "img-0404",
-					"img": "IMG_0404.JPG",
+					"img": "IMG_0404.jpg",
 					"label": "Label to be tuned"
 				},
 				{
 					"id": "img-0921",
-					"img": "IMG_0921.JPG",
+					"img": "IMG_0921.jpg",
 					"label": "Label to be tuned"
 				},
 				{
 					"id": "img-0682",
-					"img": "IMG_0682.JPG",
+					"img": "IMG_0682.jpg",
 					"label": "Label to be tuned"
 				},
 				{
 					"id": "img-0724",
-					"img": "IMG_0724.JPG",
+					"img": "IMG_0724.jpg",
 					"label": "Label to be tuned"
 				},
 				{
 					"id": "img-0727",
-					"img": "IMG_0727.JPG",
+					"img": "IMG_0727.jpg",
 					"label": "Label to be tuned"
 				}
 			]
