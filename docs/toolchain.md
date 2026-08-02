@@ -95,6 +95,12 @@ Findings from a long "why does it keep asking?" session (2026-07-10):
   anything that must load every session goes in `CLAUDE.md`** — an ordinary repo file that
   writes without a prompt. Touch `.claude/` only when Pierre asked for that file by name,
   where the prompt is expected rather than an interruption.
+- **`.claude/` now holds nothing but `settings.json` and `settings.local.json`**
+  (2026-08-01). The rules and the skill moved to `docs/conventions/` and `docs/skills/`,
+  pointed at from `CLAUDE.md`. What was lost is only the `/keyword-validation` slash command
+  and its description-based auto-trigger — Pierre has never used a slash command, and the
+  keyword rule forbids running that pass unprompted anyway. What was gained is that the
+  content edits without a permission dialog, which is where all the churn actually is.
 
 ## Image work
 
