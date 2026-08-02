@@ -845,15 +845,32 @@
       }
     }
 
+    // The block element is the WRAPPER; the map is a child of it, and so is the
+    // caption. That containment is what keeps the caption under the map instead
+    // of spanning the content column: the two used to be siblings, and the
+    // caption imitated the map's box by copying its inline float and width —
+    // which only worked while those two properties happened to describe the
+    // layout. A map inside a wrapper, or one sized by CSS, or a `float:none`
+    // pixel-width map (the 800×500 ones in a <details>) put the caption back on
+    // the main column at full width.
+    //
+    // The authored inline styles stay on the wrapper, where they belong — the
+    // height moves to the map, and the wrapper's height goes auto so it grows to
+    // fit the caption.
     function drawMap(center, zoom, pins) {
       el.textContent = "";
       if (!el.style.width) el.style.width = "45%";
-      if (!el.style.height) el.style.height = "400px";
       if (!el.style.float) el.style.float = "right";
       if (!el.style.margin) el.style.margin = "0 0 1rem 1.5rem";
 
+      var mapEl = document.createElement("div");
+      mapEl.style.width = "100%";
+      mapEl.style.height = el.style.height || "400px";
+      el.style.height = "auto";
+      el.appendChild(mapEl);
+
       loadGoogleMapsApi(function () {
-        var map = new google.maps.Map(el, {
+        var map = new google.maps.Map(mapEl, {
           zoom: (typeof zoom === "number") ? zoom : MAP_CONFIG.mapZoom,
           center: { lat: center.lat, lng: center.lng },
           mapTypeId: MAP_CONFIG.mapTypeId,
@@ -866,13 +883,14 @@
         // map's "idle" event so the current values can be read straight off the
         // map. (Public for now — hiding it from real visitors is a later
         // revisit.)
+        //
+        // Appended INSIDE the wrapper, after the map: it is as wide as the map
+        // because it is in the map's box, not because it was told a width.
         var caption = document.createElement("div");
         caption.style.textAlign = "center";
-        caption.style.margin = "0.4rem 0 1rem";
+        caption.style.margin = "0.4rem 0 0";
         caption.style.fontSize = "0.9rem";
-        if (el.style.float) caption.style.float = el.style.float;
-        if (el.style.width) caption.style.width = el.style.width;
-        el.insertAdjacentElement("afterend", caption);
+        el.appendChild(caption);
         var updateCaption = function () {
           var c = map.getCenter();
           caption.textContent = "Center = (" + c.lat().toFixed(6) + ", " +
