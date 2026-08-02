@@ -1,7 +1,7 @@
 {
 	"name": "Roberts Lake",
 	"featuredImage": "IMG_0627.jpg",
-	"excerpt": "A wheelchair-accessible day-use site with sandy beach, popular with anglers and picnickers.",
+	"excerpt": "A 1.7 km² lake beside Highway 19, about 30 km north of Campbell River.",
 	"tags": {
 		"badges": [
 			"fishing"
@@ -48,10 +48,10 @@
 			"sectionName": "Destinations",
 			"list": [
 				{
-					"name": "Roberts Lake",
-					"url": "https://www.sitesandtrailsbc.ca/resource/REC0191",
+					"name": "Roberts Lake (rec site)",
+					"url": "roberts-lake-rec0191.html",
 					"description": [
-						"Sites & Trails BC"
+						"On Getting Lost"
 					]
 				}
 			]
@@ -60,5 +60,22 @@
 			"sectionName": "Further readings",
 			"list": []
 		}
-	]
+	],
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "img_0492",
+					"img": "IMG_0492.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0627",
+					"img": "IMG_0627.jpg",
+					"label": ""
+				}
+			]
+		}
+	}
 }

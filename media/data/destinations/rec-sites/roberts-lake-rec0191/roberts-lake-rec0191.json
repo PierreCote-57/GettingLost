@@ -1,0 +1,102 @@
+{
+	"name": "Roberts Lake (rec site)",
+	"featuredImage": "IMG_0627.jpg",
+	"excerpt": "A wheelchair-accessible day-use site with sandy beach, popular with anglers and picnickers.",
+	"tags": {
+		"badges": [
+			"fishing",
+			"picnic"
+		],
+		"types": [
+			"rec-site"
+		]
+	},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"location": {
+		"lat": 50.211914,
+		"lng": -125.535749,
+		"pin": "picnic",
+		"zoom": 16
+	},
+	"googleMap": {
+		"road": {
+			"lat": 50.211914,
+			"lng": -125.535749,
+			"zoom": 16,
+			"pins": [
+				{
+					"pin": "picnic",
+					"lat": 50.211914,
+					"lng": -125.535749
+				}
+			]
+		}
+	},
+	"access": {
+		"haversine": [
+			{
+				"town": "Campbell River",
+				"km": 30
+			},
+			{
+				"town": "Nanaimo",
+				"km": 165
+			},
+			{
+				"town": "Victoria",
+				"km": 255
+			}
+		],
+		"legs": [
+			{
+				"type": "dirt",
+				"km": 0.5
+			},
+			{
+				"type": "hike",
+				"km": 0.2
+			}
+		]
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Roberts Lake",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC0191",
+					"description": [
+						"Sites & Trails BC"
+					]
+				},
+				{
+					"name": "Roberts Lake",
+					"url": "roberts-lake.html",
+					"description": [
+						"On Getting Lost"
+					]
+				}
+			]
+		}
+	],
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "img_0492",
+					"img": "IMG_0492.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_0627",
+					"img": "IMG_0627.jpg",
+					"label": ""
+				}
+			]
+		}
+	}
+}

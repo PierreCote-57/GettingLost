@@ -114,6 +114,7 @@ You don't drive to a lake, you drive to a rec site or campground on its shore �
 so lake pages have no `access`. (The old `GALLERY_RULES` `exclude` that kept them
 out of the Destinations gallery is gone with that system — lakes now sit in the one
 `destinations.json` and are distinguished by `tags.keywords: ["lake"]`, i.e. by
-filtering rather than by exclusion.) Roberts Lake is
-the known exception to sort out: it's a lake page describing a day-use site, and
-needs its own day-use destination created.
+filtering rather than by exclusion.) Roberts Lake was the known exception — a lake
+page describing a day-use site — and was split 2026-08-02: the lake page keeps the
+lake and carries no `access`, and the day-use site became its own destination,
+`roberts-lake-rec0191`, which carries it.

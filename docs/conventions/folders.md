@@ -28,20 +28,31 @@ about/
   about/
   useful-contacts/
   useful-links/
-destinations/
+destinations/                       ← refreshed from the repo 2026-08-02
   campgrounds/
     pacific-playgrounds-resort/
     salmon-point-resort/
   lakes/
     amor-lake/
+    beavertail-lake/
+    brewster-lake/
     echo-lake/
     gosling-lake/
     keogh-lake/
+    mohun-lake/
+    morton-lake/
     muchalat-lake/
     roberts-lake/
     sproat-lake/
   parks/
     elk-falls-quinsam-campground/
+    morton-lake-park/
+    sproat-lake-provincial-park/
+  rec-sites/
+    beavertail-lake-dayuse/
+    echo-lake-dayuse/
+    mohun-lake-rec0184/
+    roberts-lake-rec0191/
 shared/
   gallery/
   home/
