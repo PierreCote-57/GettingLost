@@ -4,13 +4,11 @@
 	"excerpt": "Under some construction",
 	"tags": {
 		"badges": [
-			"fishing"
+			"fishing",
+			"hiking"
 		],
 		"types": [
 			"park"
-		],
-		"keywords": [
-			"hike"
 		]
 	},
 	"wpSettings": {
