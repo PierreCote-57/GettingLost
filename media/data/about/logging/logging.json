@@ -100,6 +100,16 @@
 					"id": "img-0727",
 					"img": "IMG_0727.jpg",
 					"label": "Huh! This could be an active logging road"
+				},
+				{
+					"id": "img-0455",
+					"img": "IMG_0455.jpg",
+					"label": "Potholes ahead! Slow down"
+				},
+				{
+					"id": "img-0563",
+					"img": "IMG_0563.jpg",
+					"label": "Large gravel, loves to tear your tires sidewalls"
 				}
 			]
 		}
