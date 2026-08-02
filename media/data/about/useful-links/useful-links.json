@@ -87,7 +87,7 @@
 				{
 					"name": "Mosaic Forest Campsites",
 					"url": "https://www.mosaiccampsites.com",
-					"description": "Reservations for compsites on their properties"
+					"description": ["Reservations for compsites on their properties"]
 				}
 			]
 		},
