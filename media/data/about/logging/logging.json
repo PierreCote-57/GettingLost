@@ -82,26 +82,24 @@
 					"label": "The is probably a sign at the FSR entrance"
 				},
 				{
-					"id": "img-0921",
-					"img": "IMG_0921.jpg",
-					"label": "Oops, should likely not be here",
-					"x": "https://gettinglostonvi.wpcomstaging.com/wp-content/uploads/IMG_0445.jpg",
-					"y": "https://gettinglostonvi.wpcomstaging.com/wp-content/uploads/IMG_0455.jpg"
-				},
-				{
 					"id": "img-0682",
 					"img": "IMG_0682.jpg",
 					"label": "Lucky I heard on the radio he was coming"
 				},
 				{
-					"id": "img-0724",
-					"img": "IMG_0724.jpg",
-					"label": "Lots of trucks"
-				},
-				{
 					"id": "img-0727",
 					"img": "IMG_0727.jpg",
 					"label": "Huh! This could be an active logging road"
+				},
+				{
+					"id": "img-0921",
+					"img": "IMG_0921.jpg",
+					"label": "Oops, should likely not be here"
+				},
+				{
+					"id": "img-0724",
+					"img": "IMG_0724.jpg",
+					"label": "Lots of trucks"
 				},
 				{
 					"id": "img-0445",
