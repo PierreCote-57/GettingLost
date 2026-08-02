@@ -51,6 +51,14 @@ Block-rendering implications:
 
 ## Generic Renderers
 
+**tags** (2026-08-01) — the destination's own vocabularies, **first on the page**, above the campground row: identity, then actions. Block `<div data-block-type="tags"></div>`, on all 18 destination pages and both templates.
+- **badges LEFT, road badge RIGHT** on one line (`justify-content: space-between`), **keywords BELOW** on their own line. Left and right are different KINDS of fact — what you would do there vs what it costs you to get there — so they read as two things rather than one row. Keywords sit under because they are the OPEN vocabulary: most numerous, least authoritative, and the only one that grows without warning.
+- **The road badge carries a distance**: every leg OF THE BADGE'S TYPE, summed (`roadBadgeKm`). Legs `[potholes 3, dirt 5, potholes 2, dirt 1]` → **potholes 5 km** — worst type wins the badge, and all of that type counts even though the last leg is dirt. `pavement` has no legs so it gets no distance; `back_country` sums the non-drive legs, i.e. how far you are not in the van. The km is plain grey text, not a pill — it is a measurement, not a vocabulary word.
+- **`tags.types` is deliberately absent.** It filters; the page already says what kind of place it is (Pierre, 2026-08-01).
+- Keywords render black-on-white (`.gl-tag.gl-plain`) — a vocabulary with no colour of its own, where `TAG_FALLBACK`'s grey would read as "unknown value" rather than "no colour".
+- **Same pill as the gallery cards.** `renderTags`/`renderRoad` gained an optional wrapper/class argument, so the cards keep their absolutely-positioned corner stack and the page gets a plain inline group — one pill definition, two layouts, no drift.
+- Renders **nothing at all** when there is nothing to say, rather than an empty band.
+
 **campground** (CURRENT, 2026-08-01) — the logistics row rendered right **under the page title** (standardized top-of-page slot), one `· `-separated line selected **by `links[].type`**, never by label: **Website · every map · every reservation**. See [docs/schema/links.md](../schema/links.md); `campground.links` no longer exists, everything lives in one flat `links[]`.
 - **Website** = the `type: "homepage"` entry (displayed "Website"); the place's official page (BC Parks etc.). Do NOT also duplicate in Further readings.
 - **maps** = every `type: "map"` entry, each shown under its own label (an external gov PDF URL is fine here — this is where a map belongs, not Further readings). A park map and a campground map differ: park map = whole-park view (boundary, trails, day-use); campground map = campsite loops/numbered sites for booking. The label follows what the PDF depicts — `Campground`, `Park`, `Trail`. **All of them render**; the old exact-label lookup showed only the campground one, so five destinations had a second map that appeared in the list browser and never on their own page.

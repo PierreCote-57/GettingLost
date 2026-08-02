@@ -117,16 +117,28 @@
     return "https://i0.wp.com/" + location.host + "/wp-content/uploads/" + img + "?fit=" + w + "," + h + "&quality=80";
   }
 
-  function renderTags(tags) {
+  // `wrapperClass` picks the container, not the pill: the cards want the absolutely
+  // positioned corner stack (the default), the destination page's tag row wants a
+  // plain inline group. The pill itself is one class either way, so the two places
+  // cannot drift apart.
+  //
+  // `colors` false renders the plain black-on-white pill — for a vocabulary with no
+  // colour of its own (keywords), where TAG_FALLBACK's grey would read as "unknown
+  // value" rather than "no colour".
+  function renderTags(tags, wrapperClass, colors) {
     if (!tags || !tags.length) return "";
     var sorted = tags.slice().sort();
-    var html = '<div class="gl-tag-stack">';
+    var html = '<div class="' + (wrapperClass || "gl-tag-stack") + '">';
     for (var i = 0; i < sorted.length; i++) {
-      var c = TAG_COLORS[sorted[i]] || TAG_FALLBACK;
-      html +=
-        '<span class="gl-tag" style="background:' + c.bg + ";color:" + c.text + ';">' +
-        escapeHtml(sorted[i]) +
-        "</span>";
+      var style = "";
+      var cls = "gl-tag";
+      if (colors === false) {
+        cls += " gl-plain";
+      } else {
+        var c = TAG_COLORS[sorted[i]] || TAG_FALLBACK;
+        style = ' style="background:' + c.bg + ";color:" + c.text + ';"';
+      }
+      html += '<span class="' + cls + '"' + style + ">" + escapeHtml(sorted[i]) + "</span>";
     }
     html += "</div>";
     return html;
@@ -181,7 +193,7 @@
   //
   // Values are snake_case identifiers; the underscore is an id convention, not
   // something to show a reader, so it becomes a space on the way to the badge.
-  function renderRoad(road) {
+  function renderRoad(road, className) {
     if (!road) return "";
     var c = ROAD_COLORS[road];
     if (!c) {
@@ -189,10 +201,35 @@
       return "";
     }
     return (
-      '<span class="gl-road" style="background:' + c.bg + ";color:" + c.text + ';">' +
+      '<span class="' + (className || "gl-road") + '" style="background:' + c.bg + ";color:" + c.text + ';">' +
       escapeHtml(road.replace(/_/g, " ")) +
       "</span>"
     );
+  }
+
+  // How much road there is OF THE BADGE'S TYPE — every leg of it, summed. The
+  // badge names the worst road you will meet; this says how long you are on it,
+  // wherever those legs fall in the drive. Pierre's worked example:
+  //
+  //   legs [potholes 3, dirt 5, potholes 2, dirt 1]  ->  "potholes 5 km"
+  //
+  // Worst type wins the badge, and every leg of that type counts, even though the
+  // last leg is dirt.
+  //
+  // pavement is derived from legs: [] — there is nothing to measure, so it gets no
+  // distance. back_country is derived from the non-drive legs, so its distance is
+  // those summed: how far you are NOT in the van.
+  function roadBadgeKm(access, road) {
+    var legs = (access || {}).legs;
+    if (!road || road === "pavement" || !Array.isArray(legs)) return null;
+
+    var wanted = road === "back_country" ? GL.NON_DRIVE_LEG_TYPES : [road];
+    var total = 0;
+    for (var i = 0; i < legs.length; i++) {
+      var leg = legs[i] || {};
+      if (wanted.indexOf(leg.type) !== -1 && typeof leg.km === "number") total += leg.km;
+    }
+    return total || null;
   }
 
   // Slug transforms — mirror sync.js. The github filename is the master; a
@@ -555,6 +592,55 @@
       "</p>"
     );
   }
+
+  // ---------------------------------------------------------------------
+  // Generic block renderer: "tags"
+  // ---------------------------------------------------------------------
+  //
+  // The destination's own vocabularies, surfaced on its page — the list browser
+  // filters on these, and until now nothing on a page said what they were.
+  //
+  //   badges  LEFT   what you would do there            (closed, coloured)
+  //   road    RIGHT  what it costs you to get there     (closed, coloured, + km)
+  //   keywords BELOW  everything else                   (open, black on white)
+  //
+  // Left and right are two different KINDS of fact, so they read as two things
+  // rather than one long row. Keywords go underneath because they are the open
+  // vocabulary: the most numerous, the least authoritative, and the only one that
+  // will grow without warning.
+  //
+  // `tags.types` is deliberately NOT here. It filters, and the page itself already
+  // says what kind of place it is.
+  //
+  // Renders nothing at all when there is nothing to say — no empty band.
+  window.GL.blockRenderers.tags = function (el, pageData) {
+    var tags = pageData.tags || {};
+    var road = deriveRoadBadge(pageData.access);
+    var km = roadBadgeKm(pageData.access, road);
+
+    var badges = renderTags(tags.badges, "gl-tagrow-group");
+    var keywords = renderTags(tags.keywords, "gl-tagrow-group", false);
+    var roadHtml = renderRoad(road, "gl-tag");
+    if (roadHtml && km !== null) {
+      roadHtml += '<span class="gl-tagrow-km">' + km + " km</span>";
+    }
+
+    if (!badges && !roadHtml && !keywords) return;
+    if (!el.style.marginTop) el.style.marginTop = "0";
+
+    var html = "";
+    if (badges || roadHtml) {
+      html +=
+        '<div class="gl-tagrow">' +
+        (badges || '<div class="gl-tagrow-group"></div>') +
+        '<div class="gl-tagrow-group">' + roadHtml + "</div>" +
+        "</div>";
+    }
+    if (keywords) {
+      html += '<div class="gl-tagrow-keywords">' + keywords + "</div>";
+    }
+    el.innerHTML = html;
+  };
 
   // ---------------------------------------------------------------------
   // Generic block renderer: "campground"

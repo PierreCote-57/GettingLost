@@ -34,11 +34,6 @@ written before that date may not resolve.
 
 ## List browser
 
-- **#19 — Should a destination's type be VISIBLE, not just filterable?** *(2026-08-01)*
-  Cards render `tags.badges` as chips and nothing else, so type shows nowhere today. Whether
-  it earns a chip (a color entry, and chip crowding beside the badges) or a table column is a
-  separate question from the facet itself — deferred out of #5 deliberately.
-
 - **#18 — The non-type keywords in the data are TEST VALUES** *(2026-08-01)*
   `hike`, `hiking`, `picnic`, `trout`, `whale`, `whales`, `whaling` were put in to exercise
   the filter, not to describe the destinations. Pierre authors the real vocabulary later.

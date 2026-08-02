@@ -65,6 +65,39 @@
   border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
+/* ---- destination page tag row -------------------------------------------
+   The same pills as the cards, laid out along the page instead of pinned to
+   the corners of an image: badges LEFT, road badge RIGHT, keywords BELOW.
+   Only the containers are new — .gl-tag is the pill in both places, which is
+   what keeps a card and a page from drifting apart. */
+.gl-tagrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.gl-tagrow-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+.gl-tagrow-keywords {
+  margin-top: 0.4rem;
+}
+/* A vocabulary with no colour of its own. The border does the work the fill
+   does on a coloured pill, so it still reads as a pill. */
+.gl-tag.gl-plain {
+  background: #fff;
+  color: #000;
+  border: 1px solid #bbb;
+}
+/* A measurement, not a vocabulary word — no pill. */
+.gl-tagrow-km {
+  font-size: 11px;
+  color: #555;
+}
+
 .gl-gallery-card-title {
   margin: 0.6rem 0 0.3rem;
   font-size: 1.15rem;
