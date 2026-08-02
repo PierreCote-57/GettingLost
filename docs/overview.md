@@ -42,7 +42,7 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
   [docs/schema/types.md](schema/types.md)). Those four words were keywords until 2026-08-01.
   See [docs/rendering/list-browser.md](rendering/list-browser.md).
 - **Blog** → `/blog/`
-- **About** (dropdown) → About `/about/`, Useful Links `/useful-links/`, Useful Contacts `/useful-contacts/`
+- **Info** (dropdown) → About `/about/`, Useful Links `/useful-links/`, Useful Contacts `/useful-contacts/`
 - Maintenance menu item not yet added (planned)
 - CRITICAL: Always update navigation using Gutenberg block markup (`<!-- wp:navigation-link ... /-->`), NOT raw HTML `<li>` tags — raw HTML corrupts the nav and makes it disappear
 

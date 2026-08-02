@@ -1,0 +1,66 @@
+{
+	"name": "Logging",
+	"featuredImage": "IMG_0682.JPG",
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"notes": [
+		{
+			"sectionName": "Logging information",
+			"list": [
+				{
+					"name": "Example entry",
+					"url": "https://example.com",
+					"description": [
+						"Placeholder row — replace with the real logging entries."
+					]
+				}
+			]
+		},
+		{
+			"sectionName": "Radio information",
+			"list": [
+				{
+					"name": "Example entry",
+					"url": "https://example.com",
+					"description": [
+						"Placeholder row — replace with the real radio entries."
+					]
+				}
+			]
+		}
+	],
+	"photoGalleries": {
+		"logging": {
+			"name": "Logging pictures",
+			"items": [
+				{
+					"id": "img-0404",
+					"img": "IMG_0404.JPG",
+					"label": "Label to be tuned"
+				},
+				{
+					"id": "img-0921",
+					"img": "IMG_0921.JPG",
+					"label": "Label to be tuned"
+				},
+				{
+					"id": "img-0682",
+					"img": "IMG_0682.JPG",
+					"label": "Label to be tuned"
+				},
+				{
+					"id": "img-0724",
+					"img": "IMG_0724.JPG",
+					"label": "Label to be tuned"
+				},
+				{
+					"id": "img-0727",
+					"img": "IMG_0727.JPG",
+					"label": "Label to be tuned"
+				}
+			]
+		}
+	}
+}
