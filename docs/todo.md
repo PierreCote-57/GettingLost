@@ -54,26 +54,6 @@ written before that date may not resolve.
   working files from a charting session — per the charting lifecycle only the CSV persists.
   Now committed, so it's a `git rm`. Pierre's cleanup.
 
-## Documentation
-
-- **#17 — `site.md` still describes the retired `destinations` table on lake pages** *(2026-08-01)*
-  [conventions/site.md](conventions/site.md) says a lake page's nearby places are the
-  `destinations` block with a **Type** column labelling each entry. `lakes.jst`'s header says
-  that renderer was retired in the schema-unification pass (2026-07-20) and those places are
-  now a "Destinations" section inside the shared `notes` block. Check which is true on a live
-  lake page, then fix the doc. Found while checking whether a second machine-readable type
-  vocabulary existed for todo #5 — it does not, if lakes.jst is right.
-
-## Site configuration
-
-- **#15 — Find out whether the Google Maps API key is referrer-restricted** *(2026-07-31)*
-  Nothing in the repo records it and `site.md` only ever said what to do at the domain move,
-  not what is set today. Test it: load the Maps JS API with `MAP_CONFIG.mapApiKey` from a
-  page on some other origin — `http://localhost` rather than `file://`, so the request
-  carries a real referrer. Map renders → no effective restriction. `RefererNotAllowedMapError`
-  → an allow-list exists. `InvalidKeyMapError` / `ApiNotActivatedMapError` mean the test is
-  wrong, not the key. What to do at the move is in [site-move.md](site-move.md).
-
 ## Data integrity
 
 - **#14 — Reconcile the FileBird `Images/` tree with its local master** *(2026-07-31, rescoped

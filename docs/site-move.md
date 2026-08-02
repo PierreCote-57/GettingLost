@@ -9,10 +9,14 @@ and no date; it is triggered by the move. Parked work is `docs/todo.md`.
 
 ## Lock the Google Maps API key to the production domain
 
-The key is loaded in `media/data/scripts/gettinglost.jst` as `MAP_CONFIG.mapApiKey`. Its
-HTTP-referrer restriction lives in the Google Cloud console, on the credentials page for the
-key — nothing in the repo records it. Set the allow-list to the new domain as part of the
-move, and remove the staging host once nothing serves from it.
+The key is declared in `media/data/scripts/gl-constants.jst` as `MAP_CONFIG.mapApiKey` and
+used by the `googleMap` renderer in `gettinglost.jst`. Its HTTP-referrer restriction lives in
+the Google Cloud console, on the credentials page for the key.
+
+**It IS restricted, to the staging site** (confirmed by Pierre against the console,
+2026-08-01). So this is not a tidy-up at the move — **every map on the site breaks the moment
+the domain changes**, until the allow-list has the new domain on it. Add the production
+domain before or with the cutover, and remove the staging host once nothing serves from it.
 
 ## Update the hardcoded hostname
 
