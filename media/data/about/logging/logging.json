@@ -1,5 +1,5 @@
 {
-	"name": "Logging",
+	"name": "FSR = Logging roads",
 	"featuredImage": "IMG_0682.jpg",
 	"wpSettings": {
 		"published": true,
@@ -84,7 +84,9 @@
 				{
 					"id": "img-0921",
 					"img": "IMG_0921.jpg",
-					"label": "Oops, should likely not be here"
+					"label": "Oops, should likely not be here",
+					"x": "https://gettinglostonvi.wpcomstaging.com/wp-content/uploads/IMG_0445.jpg",
+					"y": "https://gettinglostonvi.wpcomstaging.com/wp-content/uploads/IMG_0455.jpg"
 				},
 				{
 					"id": "img-0682",
@@ -102,8 +104,8 @@
 					"label": "Huh! This could be an active logging road"
 				},
 				{
-					"id": "img-0455",
-					"img": "IMG_0455.jpg",
+					"id": "img-0445",
+					"img": "IMG_0445.jpg",
 					"label": "Potholes ahead! Slow down"
 				},
 				{
