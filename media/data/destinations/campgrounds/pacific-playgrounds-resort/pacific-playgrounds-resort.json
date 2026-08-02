@@ -82,6 +82,63 @@
 			"kayak & paddleboard rentals"
 		]
 	},
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "img_2822",
+					"img": "IMG_2822.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2823",
+					"img": "IMG_2823.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2824",
+					"img": "IMG_2824.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2826",
+					"img": "IMG_2826.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2827",
+					"img": "IMG_2827.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2828",
+					"img": "IMG_2828.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2829",
+					"img": "IMG_2829.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2830",
+					"img": "IMG_2830.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2831",
+					"img": "IMG_2831.jpg",
+					"label": ""
+				},
+				{
+					"id": "img_2832",
+					"img": "IMG_2832.jpg",
+					"label": ""
+				}
+			]
+		}
+	},
 	"notes": [
 		{
 			"sectionName": "Further readings",
