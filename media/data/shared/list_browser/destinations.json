@@ -82,6 +82,9 @@
 		"file": "amor-lake.html"
 	},
 	{
+		"file": "amor-lake-rec0174.html"
+	},
+	{
 		"name": "Arden Creek Recreation Site",
 		"tags": {
 			"types": [
@@ -635,6 +638,9 @@
 				}
 			]
 		}
+	},
+	{
+		"file": "keogh-lake-rec16077.html"
 	},
 	{
 		"name": "Country Maples RV Resort",
@@ -2053,10 +2059,10 @@
 		]
 	},
 	{
-		"file": "mohun-lake-rec0184.html"
+		"file": "mohun-lake.html"
 	},
 	{
-		"file": "mohun-lake.html"
+		"file": "mohun-lake-rec0184.html"
 	},
 	{
 		"file": "morton-lake.html"
@@ -2161,6 +2167,9 @@
 	},
 	{
 		"file": "muchalat-lake.html"
+	},
+	{
+		"file": "muchalat-lake-rec0258.html"
 	},
 	{
 		"name": "Nahwitti Lake Recreation Site",

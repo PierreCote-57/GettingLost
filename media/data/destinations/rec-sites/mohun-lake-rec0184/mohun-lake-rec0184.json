@@ -1,5 +1,5 @@
 {
-	"name": "Mohun Lake",
+	"name": "Mohun Lake (REC0184)",
 	"featuredImage": "IMG_0429.jpg",
 	"excerpt": "Under construction",
 	"tags": {
@@ -17,7 +17,7 @@
 	"location": {
 		"lat": 50.085584,
 		"lng": -125.515456,
-		"pin": "campground",
+		"pin": "tent",
 		"zoom": 15
 	},
 	"access": {

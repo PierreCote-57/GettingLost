@@ -49,9 +49,12 @@ destinations/                       ← refreshed from the repo 2026-08-02
     morton-lake-park/
     sproat-lake-provincial-park/
   rec-sites/
+    amor-lake-rec0174/
     beavertail-lake-dayuse/
     echo-lake-dayuse/
+    keogh-lake-rec16077/
     mohun-lake-rec0184/
+    muchalat-lake-rec0258/
     roberts-lake-rec0191/
 shared/
   gallery/

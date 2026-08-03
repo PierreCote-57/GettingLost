@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 21**
+**next id: 22**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -50,6 +50,13 @@ written before that date may not resolve.
   Now committed, so it's a `git rm`. Pierre's cleanup.
 
 ## Data integrity
+
+- **#21 — `mohun-lake-rec0184` uses pin `campground`** *(2026-08-02)*
+  The vocabulary reserves `campground` for a COMMERCIAL campground or RV resort; a rec site
+  you can camp at is `tent` ([schema/map-pins-location.md](schema/map-pins-location.md)).
+  REC0184 is a BC rec site, so its pin should be `tent` — the three rec-site pages stood up
+  2026-08-02 (amor, muchalat, keogh) use `tent`. Spotted while applying the naming pattern;
+  one field, but it changes a marker icon on a live page.
 
 - **#14 — Reconcile the FileBird `Images/` tree with its local master** *(2026-07-31, rescoped
   2026-08-01)*
