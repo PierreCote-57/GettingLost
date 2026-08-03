@@ -1,0 +1,84 @@
+{
+	"name": "Clint Beek (REC16077)",
+	"featuredImage": "under-construction.png",
+	"excerpt": "Under construction",
+	"tags": {
+		"badges": [],
+		"types": [
+			"rec-site"
+		]
+	},
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"location": {
+		"lat": 50.49391,
+		"lng": -127.172186,
+		"pin": "tent",
+		"zoom": 15
+	},
+	"googleMap": {
+		"road": {
+			"lat": 50.49391,
+			"lng": -127.172186,
+			"zoom": 15,
+			"pins": [
+				{
+					"pin": "tent",
+					"lat": 50.49391,
+					"lng": -127.172186
+				}
+			]
+		}
+	},
+	"access": {
+		"haversine": [
+			{
+				"town": "Campbell River",
+				"km": 145
+			},
+			{
+				"town": "Nanaimo",
+				"km": 275
+			},
+			{
+				"town": "Victoria",
+				"km": 360
+			}
+		]
+	},
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Clint Beek (REC16077)",
+					"url": "https://www.sitesandtrailsbc.ca/resource/REC16077",
+					"description": [
+						"Sites & Trails BC"
+					]
+				},
+				{
+					"name": "Keogh Lake",
+					"url": "keogh-lake.html",
+					"description": [
+						"On Getting Lost"
+					]
+				}
+			]
+		}
+	],
+	"photoGalleries": {
+		"photos": {
+			"name": "Photos",
+			"items": [
+				{
+					"id": "under-construction",
+					"img": "under-construction.png",
+					"label": "Under construction"
+				}
+			]
+		}
+	}
+}
