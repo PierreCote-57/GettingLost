@@ -19,7 +19,8 @@ Proven end-to-end 2026-07-17 (Mohun Lake `00385SALM`). The lake id is the BC wat
 - Rec site: `pages/destinations/rec-sites/<lake-name>-<recid>.html` + matching JSON under `media/data/destinations/rec-sites/`.
 
 ## Conventions locked this session
-- **Page slug for a rec site = `<lake-name>-<recid>`, all lowercase** (e.g. `mohun-lake-rec0184`) — scales when a lake has many rec sites. Rec-site page **title = the rec-site's name**.
+- **Page slug for a rec site = `<lake-name>-<recid>`, all lowercase** (e.g. `mohun-lake-rec0184`) — scales when a lake has many rec sites. A site with no BC rec id uses a descriptive tail instead (`echo-lake-dayuse`).
+- **Rec-site page NAME = `<site name> (RECnnnn)`** (2026-08-02), e.g. "Mohun Lake (REC0184)". The bare site name collides with the lake's — mohun's rec-site page was literally called "Mohun Lake" — and the suffix makes the display name and the slug read as one identity. A site with no rec id puts the descriptive tail in the same parentheses: "Echo Lake (day-use)". Where the registry name is itself parenthesized ("Clint Beek (Keogh Lake)"), drop its parenthetical — the lake is already in the slug: "Clint Beek (REC16077)".
 - **Trip notes = STATIC HTML** in the rec-site `.html` body (no renderer): `<p><strong>April 12, 2021 @ 09:17 PM</strong></p>` then the `m_text`. Format via `TZ=America/Vancouver date -r <epoch_seconds> "+%B %d, %Y @ %I:%M %p"` (m_timeMS/1000).
 - **Two galleries** in the rec-site JSON `photoGalleries`: `atSite` + `onTheWay`, ALL photos, every `label:"TBD"`, `img:"IMG_XXXX.jpg"`, `id:"img_xxxx"`.
 - Don't fabricate: unknown areaKm2/stockingName/etc. left null/""/[] (render "NA"). `featuredImage` = a placeholder photo Pierre swaps.
