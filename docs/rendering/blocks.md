@@ -119,6 +119,7 @@ An **untyped** link is a general link for the `links` block, not part of this ro
 - `id` is a stable slug, only needs to be unique within its own mini-gallery (not page-wide)
 - Same photo filename can appear in multiple mini-galleries under different ids/labels — intended duplication, not a workaround
 - No backward-compat fallback — every photoGallery block requires `data-gallery`, every photoRef requires a valid "gallery/id" `data-id`
+- **`photo` takes a filename, `photoRef` takes a gallery ref — BY DESIGN** (Pierre, 2026-08-03). `photo` deliberately does not resolve `"gallery/id"`: it is the standalone inline image, independent of any mini-gallery. Referencing a gallery entry is what `photoRef` is for. Not an open question — don't propose unifying them.
 
 ## STANDING PRACTICE
 Before delivering any page using photoRef/photoGallery, validate every gallery key + id against the JSON and report results. Pierre's framing: "equivalent of a dead link."

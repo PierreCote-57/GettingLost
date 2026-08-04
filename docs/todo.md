@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 22**
+**next id: 25**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -80,6 +80,18 @@ written before that date may not resolve.
   than as a habit. Model it on `keyword-validation`: it reports disagreements, a human
   decides. Only rows carrying a `file` link are in scope; a catalog-only row has nothing to
   check against. Replaced todo #2, which wrongly parked a recurring pass as a task.
+
+- **#22 — A block inside a notes `description` is written but never exercised** *(2026-08-03)*
+  Multi-pass dispatch landed and the `<b>` half is confirmed live. The nested-block half —
+  `<span data-block-type="photoRef" data-id="key/id"></span>` in a description — has not been
+  run once. Pierre said he would try it later. First page to use it is the test.
+
+- **#24 — `lake-page.md` still tells you to author a `googleRoadMap` block** *(2026-08-03)*
+  [recipes/lake-page.md](recipes/lake-page.md) line 31 documents `<div
+  data-block-type="googleRoadMap">` as the road-map recipe. That renderer was deleted in the
+  2026-07-21 merge into `googleMap` (`data-map="road"`) — see
+  [rendering/blocks.md](rendering/blocks.md). Following the recipe as written produces a block
+  with no renderer.
 
 - **#21 — `bcforestmap.com` link on the logging page is `http://`** *(2026-08-03)*
   `media/data/about/logging/logging.json`, Logging information section, "BC Forest Map".
