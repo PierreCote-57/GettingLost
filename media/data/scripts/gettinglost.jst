@@ -58,6 +58,13 @@
  *   - A renderer that throws (bad/missing data) is caught per-block,
  *     logs a console error with the original error, and that block is
  *     skipped; other blocks on the page still render normally.
+ *   - Blocks may CONTAIN blocks. A renderer is free to emit markup that
+ *     itself carries data-block-type (a photoRef span written into a
+ *     notes description, say); dispatch repeats until nothing is left,
+ *     so those render on a later pass, exactly as they would anywhere
+ *     else on the page. The dispatcher removes data-block-type from each
+ *     element as it processes it — that attribute is dispatcher-private,
+ *     read by nothing else on the site. See renderBlocks.
  *
  * Shared card rendering (window.GL) — escapeHtml() and renderCard(),
  * plus the .gl-gallery-* CSS, live here (not in gallery.jst) so any
@@ -481,26 +488,71 @@
     });
   }
 
-  function renderBlocks(pageData) {
-    var blocks = document.querySelectorAll("[data-block-type]");
-    blocks.forEach(function (el) {
-      var type = el.getAttribute("data-block-type");
-      var renderer = window.GL.blockRenderers[type];
+  // Renders every block on the page, repeatedly, until none are left.
+  //
+  // A renderer may itself emit markup containing blocks — a photoRef span
+  // inside a notes description, say. Those elements do not exist when the
+  // first querySelectorAll runs (it returns a static NodeList, a snapshot),
+  // so the block list is re-fetched each pass and the new arrivals render
+  // on the next one.
+  //
+  // The dispatcher REMOVES data-block-type before handing the element to
+  // its renderer. That is what makes the re-query return only unprocessed
+  // blocks: the wrapper element stays in the DOM (renderers fill it, they
+  // do not replace it, and its style/class/data-* inputs stay with it), it
+  // just no longer matches the selector. Removing it BEFORE the call also
+  // means a renderer that throws is not retried on every subsequent pass.
+  // Nothing else on the site reads the attribute — no CSS selector, no
+  // other script — so dropping it costs only the DevTools record of which
+  // renderer produced a given div.
+  var MAX_RENDER_PASSES = 3;
 
-      if (!renderer) {
-        console.error(
-          '[gettinglost] No renderer registered for block type "' + type +
-          '" — is the matching .jst file included on this page?'
-        );
+  function renderBlocks(pageData) {
+    for (var pass = 0; pass < MAX_RENDER_PASSES; pass++) {
+      var blocks = document.querySelectorAll("[data-block-type]");
+      if (!blocks.length) {
         return;
       }
 
-      try {
-        renderer(el, pageData);
-      } catch (err) {
-        console.error('[gettinglost] Error rendering block type "' + type + '":', err);
-      }
-    });
+      blocks.forEach(function (el) {
+        var type = el.getAttribute("data-block-type");
+        el.removeAttribute("data-block-type");
+
+        var renderer = window.GL.blockRenderers[type];
+        if (!renderer) {
+          console.error(
+            '[gettinglost] No renderer registered for block type "' + type +
+            '" — is the matching .jst file included on this page?'
+          );
+          return;
+        }
+
+        try {
+          renderer(el, pageData);
+        } catch (err) {
+          console.error('[gettinglost] Error rendering block type "' + type + '":', err);
+        }
+      });
+    }
+
+    // Still blocks left after the last allowed pass: a renderer is emitting
+    // blocks that emit blocks, without end. Name the types so the culprit
+    // is obvious.
+    var leftover = document.querySelectorAll("[data-block-type]");
+    if (leftover.length) {
+      var types = [];
+      leftover.forEach(function (el) {
+        var t = el.getAttribute("data-block-type");
+        if (types.indexOf(t) === -1) {
+          types.push(t);
+        }
+      });
+      console.error(
+        "[gettinglost] Block rendering did not settle after " + MAX_RENDER_PASSES +
+        " passes; " + leftover.length + " block(s) left unrendered, of type(s): " +
+        types.join(", ") + ". A renderer is emitting blocks on every pass."
+      );
+    }
   }
 
   function initBlocks() {
@@ -1082,6 +1134,14 @@
   //                                   displayed as continuous flowing
   //                                   text (the "\n" is just a soft word
   //                                   separator, not a line break).
+  //                                   It is HTML, not plain text: the
+  //                                   author writes <b>, <a>, or a block
+  //                                   span (e.g. photoRef) directly in
+  //                                   the JSON string, and it is the
+  //                                   author's job for it to be valid.
+  //                                   Blocks emitted here render on the
+  //                                   dispatcher's next pass — see
+  //                                   renderBlocks.
   //   - A section with no items still renders its heading with an empty
   //     table, rather than throwing.
   //   - If pageData.notes is absent entirely (no "notes" key in the page's
@@ -1146,7 +1206,7 @@
         var descCell = document.createElement("td");
         descCell.style.padding = "0.3rem 0";
         descCell.style.verticalAlign = "top";
-        descCell.textContent = (item.description || []).join("\n");
+        descCell.innerHTML = (item.description || []).join("\n");
 
         row.appendChild(nameCell);
         row.appendChild(descCell);

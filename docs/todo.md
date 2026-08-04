@@ -80,3 +80,8 @@ written before that date may not resolve.
   than as a habit. Model it on `keyword-validation`: it reports disagreements, a human
   decides. Only rows carrying a `file` link are in scope; a catalog-only row has nothing to
   check against. Replaced todo #2, which wrongly parked a recurring pass as a task.
+
+- **#21 — `bcforestmap.com` link on the logging page is `http://`** *(2026-08-03)*
+  `media/data/about/logging/logging.json`, Logging information section, "BC Forest Map".
+  Site rule is that URLs are always `https://`. Check the host actually serves TLS before
+  rewriting it — if it does not, the entry needs a different fix than a scheme swap.

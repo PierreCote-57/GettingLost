@@ -85,6 +85,8 @@ An **untyped** link is a general link for the `links` block, not part of this ro
 (`h2 display:inline` sits it on the summary row.) CAVEAT confirmed 2026-07-21: a map initialized inside a *closed* `<details>` inits **0×0**, so it never fires `idle` → the live caption stays frozen and tiles may not draw until a resize. The block renderer runs at page load regardless of details state. If it bites, recenter + `google.maps.event.trigger(map,"resize")` on the details `toggle` event. (Not yet worked around — accepted for now.)
 
 **notes** — `pageData.notes = [{sectionName, list: [{name, url|file, description:[...]}]}]` → heading + 2-col table per section. Each item is an **internal** link when it has `file` (a page filename → same-tab, href via `fileToSlug`), an **external** link when it has `url` (new tab), else plain text. "Further reading" is just a `notes` section (`sectionName:"Further readings"`). `furtherReading` renderer is fully retired and replaced by this.
+- **`description` is HTML, not text** (2026-08-03): the joined strings go in via `innerHTML`. Write `<b>`, `<a>`, or a block span straight into the JSON — author is author, no escaping and no markup vocabulary. `name` is still plain text (it's the link label). An invalid tag renders as the browser sees fit; that's the author's problem, not the renderer's.
+- Because it's HTML, a `description` can carry a **block** — `<span data-block-type="photoRef" data-id="key/id"></span>` is the intended case. It renders on the dispatcher's next pass, identically to one written in the page HTML. Nothing about nesting is special-cased.
 
 **pageLink** — inline cross-page link: `<span data-block-type="pageLink" data-file="foo.html">fallback</span>`. `data-file` = target page's FILENAME (was `data-slug="foo"` pre-2026-07-08). Title from `PageMap[data-file]`; `href = "/" + fileToSlug(data-file) + "/"`; falls back to element text if not in PageMap.
 
@@ -104,7 +106,13 @@ An **untyped** link is a general link for the `links` block, not part of this ro
 
 **Lightbox (shared pop-up viewer)** — clicking a gallery thumbnail OR an inline `photo` block now opens a shared in-page overlay (built once, lazily; `var lightbox` IIFE in gettinglost.jst) instead of a new tab. Backdrop/✕/Esc close; ←/→ + prev/next buttons + "n / total" counter page through the whole mini-gallery (single image for a `photo` block). Anchors keep their `href` + `target=_blank` as a no-JS fallback; click handlers `preventDefault()` only when it opens. Right-click still gives native open/save. Sizing gotcha (fixed 2026-07): the overlay image is a flex item in a `flex-direction:column` figure, so it needs **`min-height: 0`** (on both figure and img) or `max-height:75vh` won't bind and tall/portrait images balloon + clip at top. Z-index gotcha (fixed 2026-07): overlay must be **`z-index: 100000`** (> WP admin bar's 99999) or, for logged-in users, the admin bar covers the top ✕/counter. Any future full-screen overlay on this site has the same constraint. `src` still flows through `formatImageUrl` — the resize seam.
 
-**photoRef** — inline: `<span data-block-type="photoRef" data-id="key/id"></span>` → `<a href="#gl-photo-key-id">{label}</a>`. Label always pulled live from JSON — renaming a caption never requires touching inline text.
+**photoRef** — inline: `<span data-block-type="photoRef" data-id="key/id"></span>` → `<a href="#gl-photo-key-id">{label}</a>`. Label always pulled live from JSON — renaming a caption never requires touching inline text. Valid in a `notes` `description` as well as in page HTML.
+
+## Dispatch: blocks can contain blocks (2026-08-03)
+`renderBlocks` **repeats** until no `[data-block-type]` elements are left, max 3 passes then a console.error naming the leftover types. Why it has to: `querySelectorAll` returns a *static* NodeList — a snapshot — so elements a renderer creates (a photoRef span written into a notes description) were never in the list the loop is walking. Re-query, don't reorder: a type-priority order over one snapshot cannot see elements that do not exist yet.
+- The dispatcher **removes `data-block-type`** from each element as it processes it, *before* calling the renderer. That is what makes the re-query return only unprocessed blocks. Renderers FILL their element (`el.textContent = ""` + append, or `el.innerHTML =`), they never replace it, so the wrapper and its author-supplied `style`/`class`/`data-*` inputs survive — only the routing attribute goes. Removing before the call also stops a throwing renderer being retried every pass.
+- The attribute is dispatcher-private: no CSS selector and no other script reads it (verified 2026-08-03). Cost of removing it is only that DevTools no longer shows which renderer produced a given div.
+- Nesting needs nothing from the renderer that emits the block, and nothing from the one that consumes it. Don't add per-type ordering.
 
 ## photoGalleries Design Decisions
 - `galleryKey` is for lookup only; `name` is the freely-editable display heading
@@ -114,6 +122,7 @@ An **untyped** link is a general link for the `links` block, not part of this ro
 
 ## STANDING PRACTICE
 Before delivering any page using photoRef/photoGallery, validate every gallery key + id against the JSON and report results. Pierre's framing: "equivalent of a dead link."
+**Scan the JSON too, not just the page HTML** (2026-08-03): a photoRef can now live inside a `notes` `description`, so grep the page's `.json` for `data-block-type` alongside the `.html`.
 
 ## How-To naming split (renamed from "instructions" 2026-07-04)
 The van how-to section lives at `pages/van/howto/` + `media/data/van/howto/` (was `van/instructions/`). Two distinct casings, don't conflate:
