@@ -4,6 +4,148 @@
 		"published": true,
 		"comments": "open"
 	},
+	"photoGalleries": {
+		"listing-pictures": {
+			"name": "Listing Pictures",
+			"items": [
+				{
+					"id": "1",
+					"img": "Ford-Bronco_Sport-2026-1.jpg",
+					"label": ""
+				},
+				{
+					"id": "2",
+					"img": "Ford-Bronco_Sport-2026-2.jpg",
+					"label": ""
+				},
+				{
+					"id": "3",
+					"img": "Ford-Bronco_Sport-2026-3.jpg",
+					"label": ""
+				},
+				{
+					"id": "4",
+					"img": "Ford-Bronco_Sport-2026-4.jpg",
+					"label": ""
+				},
+				{
+					"id": "5",
+					"img": "Ford-Bronco_Sport-2026-5.jpg",
+					"label": ""
+				},
+				{
+					"id": "6",
+					"img": "Ford-Bronco_Sport-2026-6.jpg",
+					"label": ""
+				},
+				{
+					"id": "7",
+					"img": "Ford-Bronco_Sport-2026-7.jpg",
+					"label": ""
+				},
+				{
+					"id": "8",
+					"img": "Ford-Bronco_Sport-2026-8.jpg",
+					"label": ""
+				},
+				{
+					"id": "9",
+					"img": "Ford-Bronco_Sport-2026-9.jpg",
+					"label": ""
+				},
+				{
+					"id": "10",
+					"img": "Ford-Bronco_Sport-2026-10.jpg",
+					"label": ""
+				},
+				{
+					"id": "11",
+					"img": "Ford-Bronco_Sport-2026-11.jpg",
+					"label": ""
+				},
+				{
+					"id": "12",
+					"img": "Ford-Bronco_Sport-2026-12.jpg",
+					"label": ""
+				},
+				{
+					"id": "13",
+					"img": "Ford-Bronco_Sport-2026-13.jpg",
+					"label": ""
+				},
+				{
+					"id": "14",
+					"img": "Ford-Bronco_Sport-2026-14.jpg",
+					"label": ""
+				},
+				{
+					"id": "15",
+					"img": "Ford-Bronco_Sport-2026-15.jpg",
+					"label": ""
+				},
+				{
+					"id": "16",
+					"img": "Ford-Bronco_Sport-2026-16.jpg",
+					"label": ""
+				},
+				{
+					"id": "17",
+					"img": "Ford-Bronco_Sport-2026-17.jpg",
+					"label": ""
+				},
+				{
+					"id": "18",
+					"img": "Ford-Bronco_Sport-2026-18.jpg",
+					"label": ""
+				},
+				{
+					"id": "19",
+					"img": "Ford-Bronco_Sport-2026-19.png",
+					"label": ""
+				},
+				{
+					"id": "20",
+					"img": "Ford-Bronco_Sport-2026-20.jpg",
+					"label": ""
+				},
+				{
+					"id": "21",
+					"img": "Ford-Bronco_Sport-2026-21.jpg",
+					"label": ""
+				},
+				{
+					"id": "22",
+					"img": "Ford-Bronco_Sport-2026-22.jpg",
+					"label": ""
+				},
+				{
+					"id": "23",
+					"img": "Ford-Bronco_Sport-2026-23.jpg",
+					"label": ""
+				},
+				{
+					"id": "24",
+					"img": "Ford-Bronco_Sport-2026-24.png",
+					"label": ""
+				},
+				{
+					"id": "25",
+					"img": "Ford-Bronco_Sport-2026-25.jpg",
+					"label": ""
+				},
+				{
+					"id": "26",
+					"img": "Ford-Bronco_Sport-2026-26.jpg",
+					"label": ""
+				},
+				{
+					"id": "27",
+					"img": "Ford-Bronco_Sport-2026-27.jpg",
+					"label": ""
+				}
+			]
+		}
+	},
 	"notes": [
 		{
 			"sectionName": "Shopping list",
