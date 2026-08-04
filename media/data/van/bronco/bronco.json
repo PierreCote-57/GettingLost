@@ -1,0 +1,142 @@
+{
+	"name": "Bronco",
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"notes": [
+		{
+			"sectionName": "Shopping list",
+			"list": [
+				{
+					"name": "Slime tire sealant, 24 oz",
+					"description": [
+						"Truck/SUV size for the 235/65R17 tires. One bottle per tire to be treated. Check the chart on the bottle."
+					]
+				},
+				{
+					"name": "Tire plug kit",
+					"description": [
+						"For tread punctures. A plug does nothing for a sidewall cut, which is what FSR gravel actually does."
+					]
+				},
+				{
+					"name": "12V compressor",
+					"description": [
+						"To reinflate after a plug, and to air back up after dropping pressure for washboard."
+					]
+				},
+				{
+					"name": "Tire gauge"
+				},
+				{
+					"name": "MotoMaster Overland Traction Aid, 2-pc",
+					"url": "https://www.canadiantire.ca/en/pdp/motomaster-overland-traction-aid-2-pc-0304238p.html",
+					"description": [
+						"$69.99. 22.75 x 12.5 in each; the two couple together into a single run of about 45 in, with the joint acting as a flex point. Crush tested to 10 tons."
+					]
+				},
+				{
+					"name": "Recovery strap, 2 in x 30 ft",
+					"url": "https://www.canadiantire.ca/en/pdp/motomaster-15-000-lb-recovery-strap-with-loop-ends-commercial-grade-2-in-x-30-ft-0402757p.html",
+					"description": [
+						"15,000 lb is the right size for a 2,182 kg GVWR. Needs a rated recovery point at both ends — this vehicle has no front hooks, so the attachment point is unresolved."
+					]
+				},
+				{
+					"name": "Soft shackle",
+					"description": [
+						"Not carried by Canadian Tire. A steel bow shackle becomes a projectile if something lets go, which is the reason to buy this elsewhere."
+					]
+				},
+				{
+					"name": "Fire extinguisher",
+					"description": [
+						"Check the current BC fire season rules before each trip; requirements change by year and by fire centre."
+					]
+				},
+				{
+					"name": "Folding shovel"
+				},
+				{
+					"name": "Plywood offcut, 12 x 12 in",
+					"description": [
+						"Jack base. The factory scissor jack sinks in gravel. Canadian Tire sells nothing purpose-made for this; 3/4 in plywood beats everything they do sell."
+					]
+				},
+				{
+					"name": "Work gloves"
+				},
+				{
+					"name": "Headlamp"
+				}
+			]
+		},
+		{
+			"sectionName": "What goes in the Bronco",
+			"list": [
+				{
+					"name": "VHF resource road radio",
+					"file": "logging.html",
+					"description": [
+						"Already owned. Programmed for the Coast and North Island channels — see the logging page for the channel maps."
+					]
+				},
+				{
+					"name": "inReach",
+					"description": [
+						"Already owned. Cell coverage ends quickly outside the Campbell River corridor."
+					]
+				},
+				{
+					"name": "First aid kit",
+					"description": [
+						"Already owned."
+					]
+				},
+				{
+					"name": "Gaia, maps downloaded",
+					"description": [
+						"Already owned. Downloaded before leaving, since the data goes away."
+					]
+				},
+				{
+					"name": "Factory spare and jack",
+					"description": [
+						"Stock. The spare is 225/65R17, narrower and lower rated than the 235/65R17 on the ground — good to limp out on, not to drive an FSR on."
+					]
+				},
+				{
+					"name": "Slime, plug kit, compressor, gauge"
+				},
+				{
+					"name": "Plywood jack base"
+				},
+				{
+					"name": "Traction boards",
+					"description": [
+						"With the shovel, this is the self-recovery kit. Dig ahead of the tires, seat the boards, ease on."
+					]
+				},
+				{
+					"name": "Recovery strap and soft shackle",
+					"description": [
+						"Only useful with a second vehicle. On an active FSR a logging truck or another traveller stopping is likely."
+					]
+				},
+				{
+					"name": "Fire extinguisher"
+				},
+				{
+					"name": "Folding shovel"
+				},
+				{
+					"name": "Gloves, headlamp"
+				},
+				{
+					"name": "Water for a night, warm layers"
+				}
+			]
+		}
+	]
+}
