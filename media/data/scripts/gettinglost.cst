@@ -169,6 +169,13 @@ summary:focus:not(:focus-visible) {
   outline: none;
 }
 
+/* Menu separator. WP has no separator item, so it is a navigation link
+ * labelled "—" carrying this class; the rule makes it inert and dims it. */
+.gl-menu-sep a {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 .gl-photogallery-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
