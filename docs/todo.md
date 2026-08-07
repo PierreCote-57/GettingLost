@@ -32,16 +32,6 @@ counts separately.
 Note: the list was renumbered once, on 2026-07-28, before this rule. Ids cited in anything
 written before that date may not resolve.
 
-## List browser
-
-- **#18 — The non-type keywords in the data are TEST VALUES** *(2026-08-01)*
-  `hike`, `hiking`, `picnic`, `trout`, `whale`, `whales`, `whaling` were put in to exercise
-  the filter, not to describe the destinations. Pierre authors the real vocabulary later.
-  **Until he does, the keyword data proves nothing** — do not read the thin vocabulary, the
-  singletons or the near-duplicates as evidence in a design argument (it was read that way in
-  #5 on 2026-08-01), and do not "fix" the drift. The `keyword-validation` pass is worth
-  running only after the real values land.
-
 ## Housekeeping
 
 - **#12 — Delete the two charting SVGs** *(2026-07-31)*
@@ -80,20 +70,3 @@ written before that date may not resolve.
   than as a habit. Model it on `keyword-validation`: it reports disagreements, a human
   decides. Only rows carrying a `file` link are in scope; a catalog-only row has nothing to
   check against. Replaced todo #2, which wrongly parked a recurring pass as a task.
-
-- **#22 — A block inside a notes `description` is written but never exercised** *(2026-08-03)*
-  Multi-pass dispatch landed and the `<b>` half is confirmed live. The nested-block half —
-  `<span data-block-type="photoRef" data-id="key/id"></span>` in a description — has not been
-  run once. Pierre said he would try it later. First page to use it is the test.
-
-- **#24 — `lake-page.md` still tells you to author a `googleRoadMap` block** *(2026-08-03)*
-  [recipes/lake-page.md](recipes/lake-page.md) line 31 documents `<div
-  data-block-type="googleRoadMap">` as the road-map recipe. That renderer was deleted in the
-  2026-07-21 merge into `googleMap` (`data-map="road"`) — see
-  [rendering/blocks.md](rendering/blocks.md). Following the recipe as written produces a block
-  with no renderer.
-
-- **#21 — `bcforestmap.com` link on the logging page is `http://`** *(2026-08-03)*
-  `media/data/about/logging/logging.json`, Logging information section, "BC Forest Map".
-  Site rule is that URLs are always `https://`. Check the host actually serves TLS before
-  rewriting it — if it does not, the entry needs a different fix than a scheme swap.
