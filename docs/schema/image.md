@@ -2,6 +2,14 @@
 
 Established 2026-07-03. How image fields in `media/data/**/<slug>.json` flow to the WP featured image and to gallery cards. **This is the foundation for the future image-resize work** — see [docs/projects/images.md](../projects/images.md).
 
+**The only image check that exists: a referenced image is available in WP.** Nothing else is
+checked, ever. `~/Pictures/GettingLost/Images/` is not a master and not a mirror — it is
+practical intermediary storage for *some* images, and images reach WP from several other
+places, so it can never be an authority for what should be there. Do not check a reference
+against it, do not diff the trees in either direction, do not report an unreferenced or
+missing local file as a finding. Full ruling: *Images are Pierre's* in
+[conventions/folders.md](../conventions/folders.md).
+
 ## MODEL CHANGE 2026-07-04 — featuredImage is now GRID/LIST-ONLY; galleryImage RETIRED
 Pierre redesigned the image model so pages/posts have **no image at the top by default**:
 - **`featuredImage` = the lists/galleries image, full stop.** It feeds `featured_media` (which the theme's query-loop listings use — Posts page, home "recent posts") AND the generated gallery JSONs. It is **no longer displayed at the top of a page or single post**, because the `wp:post-featured-image` block was removed from the Twenty Twenty-Five **Pages** (`twentytwentyfive//page`) and **Single Posts** (`twentytwentyfive//single`) templates. See [docs/rendering/wp-templates.md](../rendering/wp-templates.md).
