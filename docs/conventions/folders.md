@@ -4,7 +4,7 @@
 |---|---|
 | Page HTML | GitHub (`pages/`) |
 | Media data (JSON/JST) | GitHub (`media/data/`) |
-| Media images | Local (`~/Pictures/GettingLost/Images/`) |
+| Media images | **Pierre** — the image half of the WP media library is his, no external master |
 | Page metadata (featured image, WP template, slug, status) | WordPress |
 | Navigation/menus | WordPress |
 
@@ -14,13 +14,14 @@
 
 ## Folder Structure (IMPLEMENTED 2026-06-30)
 
-All four locations mirror the same hierarchy:
+These locations follow the same hierarchy:
 
 ```
 pages/                              ← GitHub, page HTML
 media/data/                         ← GitHub, page JSON data
-~/Pictures/GettingLost/Images/      ← local, source images
-FileBird Images/ and Data/          ← WordPress media library
+FileBird Data/                      ← WordPress media library, synced from media/data/
+FileBird Images/                    ← WordPress media library, PIERRE'S (see below)
+~/Pictures/GettingLost/Images/      ← Pierre's utility folder, not a master and not a mirror
 ```
 
 ```
@@ -95,6 +96,19 @@ Two roots only: `Images/` and `Data/`
 - Claude handles FileBird page folder assignment via post-type API; Pierre validates visually in WP Admin
 - FileBird media folder (`set-attachment`) API broken — media folder assignment is manual in WP Admin
 
+### Images are Pierre's (2026-08-07)
+**The image portion of WP media belongs to Pierre.** It has no external master, it is not
+reconciled against anything, and its folder layout is his to decide. `~/Pictures/GettingLost/`
+is a utility folder he keeps for his own convenience — practical for storing some images,
+never intended as the GitHub-side master.
+
+Claude's whole job with images is **on demand**: verify a file the site references is present
+and findable, and handle ad-hoc requests (crop, retouch, locate, rename on request — see
+[recipes/image-editing.md](../recipes/image-editing.md)). Do not audit the image tree, do not
+diff it against anything, do not propose renames or a reorganization, and do not report drift
+as a finding. This cancelled todo #14, a FileBird↔local reconciliation built on the wrong
+premise.
+
 ## Implementation Status (updated 2026-07-01)
 
 ### DONE
@@ -115,7 +129,6 @@ Two roots only: `Images/` and `Data/`
 - Van images and howto images assigned in WP admin (2026-07-01)
 
 ### NOT DONE / PENDING
-- keogh-lake and sproat-lake — no source images in ~/Working/Fishing/Images/
 - Posts strategy (deferred)
 
 ## Lake ID Mapping
@@ -182,28 +195,9 @@ Data (id:56)
     van-overview (id:89)
 ```
 
-## Current FileBird Images Folder Structure (confirmed 2026-07-01)
-```
-Images/ (id:52)
-  About/ (id:160)
-  Destinations/ (id:159)
-    Campgrounds/ (id:29)
-      pacific-playgrounds-resort/ (id:31)
-      salmon-point-resort/ (id:32)
-    Lakes/ (id:1)
-      amor-lake/ (id:9)
-      ... (20 lake subfolders)
-      sproat-lake/ (id:28)
-    Parks/ (id:3)
-      elk-falls-quinsam-campground/ (id:51)
-  Shared/ (id:37)
-  Posts/ (id:63)
-    every-journey-has-a-first-step/ (id:45)
-  Van/ (id:65)
-    checklists/ (id:162)
-    howto/ (id:163)  (renamed from instructions/ 2026-07-04)
-      howto-temperature-control/ (id:66)
-      howto-awning/ (id:69)
-    maintenance/ (id:166)
-    van-overview/ (id:164)
-```
+## FileBird Images folder structure
+
+Not recorded here. It is Pierre's tree (see *Images are Pierre's* above) and nothing on the
+site depends on a snapshot of it. Look it up live if a specific answer is needed. The
+2026-07-01 snapshot that used to sit here was deleted 2026-08-07 — it was maintained only to
+support the reconciliation that is no longer a task.

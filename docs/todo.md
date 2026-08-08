@@ -39,29 +39,6 @@ written before that date may not resolve.
   working files from a charting session — per the charting lifecycle only the CSV persists.
   Now committed, so it's a `git rm`. Pierre's cleanup.
 
-## Data integrity
-
-- **#14 — Reconcile the FileBird `Images/` tree with its local master** *(2026-07-31, rescoped
-  2026-08-01)*
-  The original premise is done: live FileBird `Images/` already has the `Destinations` parent
-  and no `Special`. What is left is drift against the master,
-  `~/Pictures/GettingLost/Images/` — checked live 2026-08-01:
-
-  Only in FileBird: `Destinations/RecSites/` and its four site folders; eleven extra lake
-  folders under `Lakes/` (blackwater, brewster, campbell, chain, crest, drum, gray,
-  mccreight, merrill, mohun, morton, snakehead); `Posts/` subfolders; `Van/van-overview/Listing`.
-
-  Only locally: `about/*`, `templates/*` (FileBird `Images/` has no templates at all),
-  `shared/{gallery,home}`, `van/checklists/*`, `van/howto/howto-shower`,
-  `van/van-overview/{Original,cropped}` (working folders — probably should not be mirrored).
-
-  Naming: FileBird `RecSites` vs GitHub/local `rec-sites`. Convention allows mixed case in
-  FileBird, but this also drops the hyphen — decide which way it goes before renaming.
-
-  The `Images/` snapshot in [conventions/folders.md](conventions/folders.md) is dated
-  2026-07-01 and is stale; refresh it as part of this. Sync never deletes, so a rename has to
-  be done by hand in both the media and post-type trees or it orphans the old folder.
-
 ## Tooling
 
 - **#16 — Make the cross-reference check repeatable** *(2026-07-31)*
