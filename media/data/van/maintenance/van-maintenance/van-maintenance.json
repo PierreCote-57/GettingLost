@@ -7,7 +7,7 @@
 	"actual": [
 		{
 			"date": "2026-08-17",
-			"odometer_km": 14200,
+			"odometer_km": 141200,
 			"shop": {
 				"name": "Marshall Ford",
 				"url": null
@@ -16,9 +16,9 @@
 				"name": "Oil and filter",
 				"url": "van-2026-08-17-oil.pdf"
 			},
-			"cost_cad": 129.45,
+			"cost_cad": 5129.45,
 			"nextDue": {
-				"km": 22200,
+				"km": 123200,
 				"date": null
 			}
 		}
