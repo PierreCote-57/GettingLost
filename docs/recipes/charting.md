@@ -78,10 +78,6 @@ Title/subtitle rules (in gen-chart.py):
     (`11:00 11:00 11:00`) — **fixed 2026-07-19** to render real minutes; whole-hour
     ticks are byte-identical, so existing cabin charts are unaffected.
 
-## TODO (next session)
-- Confirm the temp chart is in the gallery, then delete the `cabin-temperature.*` set.
-- Possible: humidity bands for Fridge/Freezer (currently 30–70 like the others).
-
 ## Showing a chart to Pierre
 
 The folder he opens for charting work is **`local/charting/`** (it was `logs/` very early on

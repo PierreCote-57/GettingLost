@@ -5,7 +5,9 @@ external APIs, project records. Versioned with the code, readable in IntelliJ.
 
 `CLAUDE.md` holds the working agreement (rules). [toolchain.md](toolchain.md) holds Claude's setup
 — permissions, session-start checks, browser gotchas. Claude's memory holds only what cannot
-be published: who Pierre is, the *why* behind the rules, and the FileBird token. None of
+be published: the FileBird token, and the *why* behind rules that live elsewhere. Who Pierre
+is and how to work with him are in `~/Claude/` (`pierre.md`, `working-with-pierre.md`),
+imported into every project by `~/.claude/CLAUDE.md`. None of
 them duplicate what is documented here: **when this file and a memory disagree, this file
 wins.**
 

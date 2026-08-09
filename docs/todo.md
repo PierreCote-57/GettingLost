@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 25**
+**next id: 28**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -34,10 +34,20 @@ written before that date may not resolve.
 
 ## Housekeeping
 
-- **#12 — Delete the two charting SVGs** *(2026-07-31)*
+- **#12 — Delete the charting working files** *(2026-07-31, extended 2026-08-09)*
   `local/charting/cabin-indoor-storage.svg` and `local/charting/cabin-outdoors.svg` are
   working files from a charting session — per the charting lifecycle only the CSV persists.
   Now committed, so it's a `git rm`. Pierre's cleanup.
+  Same pass: the `cabin-temperature.*` set goes too, once the temp chart is confirmed present
+  in the gallery. Moved here from a "TODO (next session)" section in `recipes/charting.md`.
+
+## Site
+
+- **#25 — Two follow-ons gated on the van/maintenance pages existing** *(2026-08-09)*
+  `media/data/van/maintenance/` holds only `placeholder.txt`. Once real pages are there:
+  add the Maintenance item to The Van dropdown, and add a `van-maintenance` dataset to
+  `media/data/shared/list_browser/datasets.json`. Neither is doable before then. Moved here
+  from `overview.md`.
 
 ## Tooling
 
@@ -47,3 +57,10 @@ written before that date may not resolve.
   than as a habit. Model it on `keyword-validation`: it reports disagreements, a human
   decides. Only rows carrying a `file` link are in scope; a catalog-only row has nothing to
   check against. Replaced todo #2, which wrongly parked a recurring pass as a task.
+
+- **#27 — Drop humidity from the Fridge/Freezer charts** *(2026-08-09)*
+  **Decided by Pierre 2026-08-09: no humidity for Fridge/Freezer.** Not open — only the edit
+  is pending, to be made the next time the chart is worked on. `BANDS` in `gen-chart.py`
+  currently gives both a 30–70 humidity band; the series, its band and the right axis all go.
+  Update the bands table in `recipes/charting.md` in the same pass — it documents today's
+  behaviour and stays correct until the change lands.

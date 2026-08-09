@@ -18,11 +18,10 @@ so it should not prompt. If it does, the settings are wrong.
 **2. WordPress MCP** — site `255518505` (gettinglostonvi.wpcomstaging.com). Load
 `wpcom-user-sites` via ToolSearch and call it to confirm the connection.
 
-**3. FileBird REST API** — endpoint, curl format and param quirks are in
-[docs/reference/filebird-api.md](../docs/reference/filebird-api.md). **The bearer token is
-deliberately not in this repo** — it is in Claude's `feedback-session-start` memory. A
-healthy response is `{"success":true,"data":{"folders":[…]}}` with the Images (id 52) and
-Data (id 56) roots.
+**3. FileBird REST API** — endpoint, curl format, param quirks and what a healthy response
+looks like are all in [docs/reference/filebird-api.md](../docs/reference/filebird-api.md);
+that file is the only copy. **The bearer token is deliberately not in this repo** — it is in
+Claude's `feedback-session-start` memory.
 
 **Why:** Claude repeatedly forgot how to reach FileBird — tried the WP MCP tools, searched
 transcripts, guessed endpoints. Use the documented commands; don't rediscover them.

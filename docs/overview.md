@@ -106,13 +106,5 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 - `van-template.html` — van overview pages
 - Old `campground-template.html` and `park-template.html` removed (2026-07-02)
 
-## Pending / To Do
-- keogh-lake and sproat-lake — no source images found
-- ~~Tag badges on gallery cards~~ — DONE
-- ~~Tag filtering~~ — DONE 2026-07-25 in the list browser, not the gallery: an options bar
-  writing URL params, OR within a control and AND across controls
-- ~~Blog post editing~~ — DONE (2026-07-02): sync.js pushes posts, pull-posts.js pulls from WP
-- Add Maintenance menu item to The Van dropdown once maintenance pages are created
-- A van-maintenance dataset is not yet created (add it to `datasets.json` once van/maintenance/ pages exist)
-- Delete `Van.json` from WP Admin → Media Library if still there (orphaned)
-- Clean up orphaned WP pages: `park-template`, `campground-template` (sync doesn't delete orphans)
+Outstanding work is in [todo.md](todo.md) — never here. This file describes what the project
+is, not what is left to do.
