@@ -10,10 +10,10 @@
 			"odometer_km": 4321,
 			"shop": {
 				"name": "Marshall Ford",
-				"url": null
+				"url": "https://www.stevemarshallfordcampbellriver.com"
 			},
 			"work": {
-				"name": "New car disgnostic",
+				"name": "New car diagnostic",
 				"url": "bronco-2026-09-19.pdf"
 			},
 			"cost_cad": 0.0,

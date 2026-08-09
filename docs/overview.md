@@ -16,15 +16,16 @@ pages/
   templates/      — destination-template, howto-template, lake-template, van-template
   van/
     van-overview.html
+    bronco.html
     howto/          — howto-*.html
     checklists/     — checklist-*.html
-    maintenance/    — (empty, future)
+    maintenance/    — van-maintenance.html, bronco-maintenance.html
 posts/              — blog post HTML files (one per post)
 media/
   data/             — mirrors pages/ exactly, one JSON per page (+ posts/)
     about/, destinations/, shared/, templates/, van/
     posts/          — per-post JSON metadata
-    scripts/        — gl-constants.jst, gettinglost.jst, list_browser.jst, lakes.jst
+    scripts/        — gl-constants.jst, gettinglost.jst, list_browser.jst, lakes.jst, maintenance.jst
 local/
   sync/
     sync.js          — GitHub Actions sync script (pages + posts)
@@ -36,14 +37,18 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 
 ## Current Navigation Structure (WP navigation post id: 5)
 - **Destinations** (top-level, no dropdown) → `/list_browser_html/?dataset=destinations&view=grid`
-- **The Van** (dropdown) → Overview `/van-overview/`, Checklists `?dataset=van-checklist&view=grid`, How to `?dataset=van-howto&view=grid`
+- **Vehicles** (dropdown) → Van `/van-overview/`, "-> Maintenance" `/van-maintenance/`, Bronco
+  `/bronco/`, "-> Maintenance" `/bronco-maintenance/`, an "—" separator (href `#`), then
+  Checklists `?dataset=van-checklist&view=grid&booklet=checklists`, How to
+  `?dataset=van-howto&view=grid&booklet=howto`. Renamed from "The Van" when the Bronco joined.
+  The maintenance hrefs are the BARE page names, so they 301 to the real `_html` slugs — the
+  same hop the Van and Bronco items take.
 - The old per-type items (Lakes/Campgrounds/Parks/Rec Sites) are GONE — that axis is the
   list browser's **types** filter now (`tags.types`, a closed vocabulary — see
   [docs/schema/types.md](schema/types.md)). Those four words were keywords until 2026-08-01.
   See [docs/rendering/list-browser.md](rendering/list-browser.md).
 - **Blog** → `/blog/`
-- **Info** (dropdown) → About `/about/`, Useful Links `/useful-links/`, Useful Contacts `/useful-contacts/`
-- Maintenance menu item not yet added (planned)
+- **Info** (dropdown) → About `/about/`, Useful Links `/useful-links/`, Useful Contacts `/useful-contacts/`, FSR/Logging roads `/logging/`
 - CRITICAL: Always update navigation using Gutenberg block markup (`<!-- wp:navigation-link ... /-->`), NOT raw HTML `<li>` tags — raw HTML corrupts the nav and makes it disappear
 
 ## Sync Pipeline — GitHub Masters Everything (except navigation)

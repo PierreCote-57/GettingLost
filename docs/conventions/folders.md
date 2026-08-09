@@ -69,6 +69,7 @@ templates/
   van-template/
 van/
   van-overview/
+  bronco/
   checklists/
     checklist-arriving-campsite/
     checklist-leaving-campsite/
@@ -78,6 +79,8 @@ van/
     howto-temperature-control/
     howto-water/
   maintenance/
+    van-maintenance/
+    bronco-maintenance/
 ```
 
 Additional folders not mirrored everywhere:

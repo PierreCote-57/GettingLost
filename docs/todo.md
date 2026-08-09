@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 28**
+**next id: 29**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -31,6 +31,14 @@ counts separately.
 
 Note: the list was renumbered once, on 2026-07-28, before this rule. Ids cited in anything
 written before that date may not resolve.
+
+## Site
+
+- **#28 — folders.md's howto/ subtree names two pages that do not exist** *(2026-08-09)*
+  It lists `howto-shower/` and `howto-temperature-control/`; on disk the five are
+  `howto-awning`, `howto-climate`, `howto-dump`, `howto-power`, `howto-water`. Predates the
+  maintenance work — found while adding the maintenance folders to the same tree. Check the
+  rest of that tree against disk in the same pass rather than fixing only these two.
 
 ## Tooling
 

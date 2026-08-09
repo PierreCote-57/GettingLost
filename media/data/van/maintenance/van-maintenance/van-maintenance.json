@@ -10,7 +10,7 @@
 			"odometer_km": 1234,
 			"shop": {
 				"name": "Marshall Ford",
-				"url": null
+				"url": "https://www.stevemarshallfordcampbellriver.com"
 			},
 			"work": {
 				"name": "Recall & beep",
