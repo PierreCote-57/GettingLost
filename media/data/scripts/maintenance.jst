@@ -41,7 +41,17 @@
 
   var UPLOADS = "/wp-content/uploads/";
 
-  var COLUMNS = ["Date", "Odometer", "Shop", "Work", "Cost", "Next due"];
+  // The whole table definition, one row per column: heading, fixed width,
+  // alignment, and the cell to build from an entry. Column order, tuning and
+  // rendering all come from here — there is no second list to keep in step.
+  var COLUMNS = [
+    { label: "Date", width: "12%", align: "center", buildCell: buildDateCell },
+    { label: "Odometer", width: "12%", align: "center", buildCell: buildOdometerCell },
+    { label: "Shop", width: "16%", align: "center", buildCell: buildShopCell },
+    { label: "Work", width: "34%", align: "left", buildCell: buildWorkCell },
+    { label: "Cost", width: "12%", align: "center", buildCell: buildCostCell },
+    { label: "Next due", width: "14%", align: "center", buildCell: buildNextDueCell }
+  ];
 
   // ---------------------------------------------------------------------
   // Small DOM helpers (same table/cell styling convention used by the
@@ -53,14 +63,27 @@
     table.style.borderCollapse = "collapse";
     table.style.marginTop = "0.25rem";
     table.style.width = "100%";
+    // Fixed layout is what makes the COLUMNS widths bind: content no longer
+    // votes on how wide a column is.
+    table.style.tableLayout = "fixed";
     return table;
   }
 
-  function buildHeaderCell(label) {
+  function buildColGroup() {
+    var group = document.createElement("colgroup");
+    COLUMNS.forEach(function (column) {
+      var col = document.createElement("col");
+      col.style.width = column.width;
+      group.appendChild(col);
+    });
+    return group;
+  }
+
+  function buildHeaderCell(column) {
     var cell = document.createElement("th");
-    cell.textContent = label;
-    cell.style.padding = "0.2rem 1rem 0.2rem 0";
-    cell.style.textAlign = "left";
+    cell.textContent = column.label;
+    cell.style.padding = "0.2rem 0.5rem";
+    cell.style.textAlign = column.align;
     cell.style.verticalAlign = "bottom";
     cell.style.borderBottom = "1px solid #ccc";
     cell.style.color = "#666";
@@ -71,7 +94,7 @@
 
   function buildBodyCell() {
     var cell = document.createElement("td");
-    cell.style.padding = "0.2rem 1rem 0.2rem 0";
+    cell.style.padding = "0.2rem 0.5rem";
     cell.style.verticalAlign = "top";
     cell.style.fontSize = "0.9rem";
     return cell;
@@ -102,21 +125,24 @@
     if (typeof km !== "number") {
       return "";
     }
-    return km.toLocaleString("en-CA") + " km";
+    return km.toLocaleString("en-CA") + " km";
   }
 
-  function buildCostCell(costCad) {
-    var cell = buildBodyCell();
-    cell.style.textAlign = "right";
-    if (typeof costCad === "number") {
-      cell.textContent = costCad.toLocaleString("en-CA", { style: "currency", currency: "CAD" });
-    }
+  function buildDateCell(entry) {
+    var cell = buildTextCell(entry.date);
     return cell;
   }
 
-  function buildOdometerCell(km) {
-    var cell = buildTextCell(formatKm(km));
-    cell.style.textAlign = "right";
+  function buildOdometerCell(entry) {
+    var cell = buildTextCell(formatKm(entry.odometer_km));
+    return cell;
+  }
+
+  function buildCostCell(entry) {
+    var cell = buildBodyCell();
+    if (typeof entry.cost_cad === "number") {
+      cell.textContent = entry.cost_cad.toLocaleString("en-CA", { style: "currency", currency: "CAD" });
+    }
     return cell;
   }
 
@@ -125,34 +151,40 @@
    * it is not. buildHref turns the entry's url into the address to link to,
    * which is what differs between an outside shop and an uploaded invoice.
    */
-  function buildNamedLinkCell(entry, buildHref) {
+  function buildNamedLinkCell(named, buildHref) {
     var cell = buildBodyCell();
-    var named = entry || {};
-    if (!named.name) {
+    var pair = named || {};
+    if (!pair.name) {
       return cell;
     }
-    if (named.url) {
-      cell.appendChild(buildLink(buildHref(named.url), named.name));
+    if (pair.url) {
+      cell.appendChild(buildLink(buildHref(pair.url), pair.name));
     } else {
-      cell.textContent = named.name;
+      cell.textContent = pair.name;
     }
     return cell;
   }
 
-  function shopHref(url) {
-    return url;
+  function buildShopCell(entry) {
+    var cell = buildNamedLinkCell(entry.shop, function (url) {
+      return url;
+    });
+    return cell;
   }
 
-  function invoiceHref(url) {
-    return UPLOADS + url;
+  function buildWorkCell(entry) {
+    var cell = buildNamedLinkCell(entry.work, function (url) {
+      return UPLOADS + url;
+    });
+    return cell;
   }
 
   /**
    * Whichever of km and date is known. Both known puts them on two lines.
    */
-  function buildNextDueCell(nextDue) {
+  function buildNextDueCell(entry) {
     var cell = buildBodyCell();
-    var due = nextDue || {};
+    var due = entry.nextDue || {};
     var lines = [];
     var km = formatKm(due.km);
     if (km) {
@@ -172,12 +204,11 @@
 
   function buildEntryRow(entry) {
     var row = document.createElement("tr");
-    row.appendChild(buildTextCell(entry.date));
-    row.appendChild(buildOdometerCell(entry.odometer_km));
-    row.appendChild(buildNamedLinkCell(entry.shop, shopHref));
-    row.appendChild(buildNamedLinkCell(entry.work, invoiceHref));
-    row.appendChild(buildCostCell(entry.cost_cad));
-    row.appendChild(buildNextDueCell(entry.nextDue));
+    COLUMNS.forEach(function (column) {
+      var cell = column.buildCell(entry);
+      cell.style.textAlign = column.align;
+      row.appendChild(cell);
+    });
     return row;
   }
 
@@ -204,11 +235,12 @@
     el.appendChild(window.GL.buildGlHeading("Actual maintenance"));
 
     var table = createStyledTable();
+    table.appendChild(buildColGroup());
 
     var thead = document.createElement("thead");
     var headerRow = document.createElement("tr");
-    COLUMNS.forEach(function (label) {
-      headerRow.appendChild(buildHeaderCell(label));
+    COLUMNS.forEach(function (column) {
+      headerRow.appendChild(buildHeaderCell(column));
     });
     thead.appendChild(headerRow);
     table.appendChild(thead);

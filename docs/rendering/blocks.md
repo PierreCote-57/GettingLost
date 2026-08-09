@@ -177,6 +177,8 @@ Lake-specific, loaded via inline `<script src>` (not footer), so it runs before 
 ## maintenance.jst (2026-08-09)
 The **second** page-type-specific jst, same pattern as lakes.jst: inline `<script src>` in the page CONTENT (not the footer), registers instead of executing, so load order doesn't matter. Adds ONE renderer, **`maintenanceActual`**, on `van-maintenance.html` and `bronco-maintenance.html`.
 
+**`COLUMNS` is the whole table definition** — one entry per column carrying label, fixed width, alignment and the cell builder, so column order, tuning and rendering come from one list with nothing to keep in step. Widths bind because the table is `table-layout: fixed` with a `<colgroup>`; they are starting values summing to 100% and meant to be tuned. Everything is centered except Work, which is left (Pierre, 2026-08-09).
+
 Its `createStyledTable` / `buildBodyCell` / link helpers are a deliberate COPY of lakes.jst's, not a shared set — two table renderers with different cell rules (blank vs `NA`, columns vs label/value) didn't justify touching a working lake page. A third table is the moment to hoist them into gettinglost.jst.
 
 ## CSS delivery — external gettinglost.cst (2026-07-04)

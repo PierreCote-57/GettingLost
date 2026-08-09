@@ -39,6 +39,12 @@
 					"description": [
 						"Should oil change soon?"
 					]
+				},
+				{
+					"name": "June 2027 ???",
+					"description": [
+						"Make FSR compatible"
+					]
 				}
 			]
 		}
