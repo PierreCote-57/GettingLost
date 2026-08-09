@@ -32,23 +32,6 @@ counts separately.
 Note: the list was renumbered once, on 2026-07-28, before this rule. Ids cited in anything
 written before that date may not resolve.
 
-## Housekeeping
-
-- **#12 — Delete the charting working files** *(2026-07-31, extended 2026-08-09)*
-  `local/charting/cabin-indoor-storage.svg` and `local/charting/cabin-outdoors.svg` are
-  working files from a charting session — per the charting lifecycle only the CSV persists.
-  Now committed, so it's a `git rm`. Pierre's cleanup.
-  Same pass: the `cabin-temperature.*` set goes too, once the temp chart is confirmed present
-  in the gallery. Moved here from a "TODO (next session)" section in `recipes/charting.md`.
-
-## Site
-
-- **#25 — Two follow-ons gated on the van/maintenance pages existing** *(2026-08-09)*
-  `media/data/van/maintenance/` holds only `placeholder.txt`. Once real pages are there:
-  add the Maintenance item to The Van dropdown, and add a `van-maintenance` dataset to
-  `media/data/shared/list_browser/datasets.json`. Neither is doable before then. Moved here
-  from `overview.md`.
-
 ## Tooling
 
 - **#16 — Make the cross-reference check repeatable** *(2026-07-31)*

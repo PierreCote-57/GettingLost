@@ -1,0 +1,20 @@
+{
+	"name": "Bronco maintenance",
+	"wpSettings": {
+		"published": true,
+		"comments": "open"
+	},
+	"notes": [
+		{
+			"sectionName": "Placeholder",
+			"list": [
+				{
+					"name": "Nothing recorded yet",
+					"description": [
+						"Placeholder so the notes block has something to render."
+					]
+				}
+			]
+		}
+	]
+}
