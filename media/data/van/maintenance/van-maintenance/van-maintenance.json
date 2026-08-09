@@ -13,10 +13,10 @@
 				"url": null
 			},
 			"work": {
-				"name": "Oil and filter",
-				"url": "van-2026-08-17-oil.pdf"
+				"name": "Recall & beep",
+				"url": "van-2026-08-17.pdf"
 			},
-			"cost_cad": 5129.45,
+			"cost_cad": 0.0,
 			"nextDue": {
 				"km": 123200,
 				"date": null
