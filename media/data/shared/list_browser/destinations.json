@@ -41,6 +41,47 @@
 		}
 	},
 	{
+		"name": "Alder Grove (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0180"
+			}
+		],
+		"location": {
+			"lat": 50.281405,
+			"lng": -125.64853099999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 175
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "All Fun Recreation RV Park",
 		"tags": {
 			"types": [
@@ -85,7 +126,130 @@
 		"file": "amor-lake-rec0174.html"
 	},
 	{
-		"name": "Arden Creek Recreation Site",
+		"name": "Amor Lake North (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6322"
+			}
+		],
+		"location": {
+			"lat": 50.182179,
+			"lng": -125.55408,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Amor West (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6622"
+			}
+		],
+		"location": {
+			"lat": 50.175148,
+			"lng": -125.564098,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Apple Point (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0172"
+			}
+		],
+		"location": {
+			"lat": 50.079792,
+			"lng": -125.587005,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Arden Creek (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -157,6 +321,47 @@
 		]
 	},
 	{
+		"name": "Avatar Grove Hiking Trails (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC202159"
+			}
+		],
+		"location": {
+			"lat": 48.616794999999996,
+			"lng": -124.437198,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Renfrew"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 165
+				},
+				{
+					"town": "Nanaimo",
+					"km": 70
+				},
+				{
+					"town": "Victoria",
+					"km": 80
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Bald Eagle Campground & RV Sites",
 		"tags": {
 			"types": [
@@ -195,10 +400,133 @@
 		}
 	},
 	{
+		"name": "Bald Mountain (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0208"
+			}
+		],
+		"location": {
+			"lat": 48.835221999999995,
+			"lng": -124.172277,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cowichan Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 155
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 75
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Beaver Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC16081"
+			}
+		],
+		"location": {
+			"lat": 50.600646,
+			"lng": -127.309977,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 160
+				},
+				{
+					"town": "Nanaimo",
+					"km": 290
+				},
+				{
+					"town": "Victoria",
+					"km": 375
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "beavertail-lake.html"
 	},
 	{
 		"file": "beavertail-lake-dayuse.html"
+	},
+	{
+		"name": "Bedrock City (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6788"
+			}
+		],
+		"location": {
+			"lat": 50.143823,
+			"lng": -125.500356,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Bella Pacifica Campground",
@@ -239,7 +567,89 @@
 		}
 	},
 	{
-		"name": "Blackies Beach Recreation Site",
+		"name": "Big Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0156"
+			}
+		],
+		"location": {
+			"lat": 50.026951999999994,
+			"lng": -125.425454,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 15
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 230
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Big Cedar Tree (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5896"
+			}
+		],
+		"location": {
+			"lat": 52.189941,
+			"lng": -126.871429,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bella Coola Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 265
+				},
+				{
+					"town": "Nanaimo",
+					"km": 395
+				},
+				{
+					"town": "Victoria",
+					"km": 485
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Blackies Beach (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -302,6 +712,170 @@
 		]
 	},
 	{
+		"name": "Blackies Beach (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3295"
+			}
+		],
+		"location": {
+			"lat": 49.18358,
+			"lng": -125.070781,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 150
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Blackwater Point (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC204456"
+			}
+		],
+		"location": {
+			"lat": 50.168378,
+			"lng": -125.58947599999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Blinkhorn Peninsula (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3189"
+			}
+		],
+		"location": {
+			"lat": 50.541779,
+			"lng": -126.785382,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 125
+				},
+				{
+					"town": "Nanaimo",
+					"km": 255
+				},
+				{
+					"town": "Victoria",
+					"km": 340
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Bonanza Bluffs (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6851"
+			}
+		],
+		"location": {
+			"lat": 48.672087,
+			"lng": -123.660882,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Shawnigan Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 190
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 35
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Brannen Lake Campsites",
 		"tags": {
 			"types": [
@@ -337,6 +911,129 @@
 					"km": 90
 				}
 			]
+		}
+	},
+	{
+		"name": "Brewster Camp (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3054"
+			}
+		],
+		"location": {
+			"lat": 50.076336999999995,
+			"lng": -125.589041,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Brewster Point (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC16198"
+			}
+		],
+		"location": {
+			"lat": 50.111461999999996,
+			"lng": -125.573003,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Brittany Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6433"
+			}
+		],
+		"location": {
+			"lat": 50.056168,
+			"lng": -125.59432699999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -386,6 +1083,47 @@
 		}
 	},
 	{
+		"name": "Burnt Beach (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6344"
+			}
+		],
+		"location": {
+			"lat": 50.035714,
+			"lng": -125.46810099999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 15
+				},
+				{
+					"town": "Nanaimo",
+					"km": 145
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Cameron Lake Resort",
 		"tags": {
 			"types": [
@@ -421,6 +1159,88 @@
 					"km": 130
 				}
 			]
+		}
+	},
+	{
+		"name": "Camp 5 (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0171"
+			}
+		],
+		"location": {
+			"lat": 50.080265999999995,
+			"lng": -125.59156,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Canoe Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5940"
+			}
+		],
+		"location": {
+			"lat": 49.173305,
+			"lng": -125.398877,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Tofino"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 95
+				},
+				{
+					"town": "Nanaimo",
+					"km": 105
+				},
+				{
+					"town": "Victoria",
+					"km": 170
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -523,6 +1343,47 @@
 					"km": 130
 				}
 			]
+		}
+	},
+	{
+		"name": "Cedar Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0190"
+			}
+		],
+		"location": {
+			"lat": 50.201588,
+			"lng": -125.56765899999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 255
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -643,6 +1504,47 @@
 		"file": "keogh-lake-rec16077.html"
 	},
 	{
+		"name": "Cobble Hill (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0202"
+			}
+		],
+		"location": {
+			"lat": 48.679431,
+			"lng": -123.611352,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Duncan"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 190
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 35
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Country Maples RV Resort",
 		"tags": {
 			"types": [
@@ -719,6 +1621,47 @@
 		}
 	},
 	{
+		"name": "Cypress Harbour (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3030"
+			}
+		],
+		"location": {
+			"lat": 50.828993999999994,
+			"lng": -126.66502,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 270
+				},
+				{
+					"town": "Victoria",
+					"km": 355
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Deep Bay RV Park",
 		"tags": {
 			"types": [
@@ -754,6 +1697,47 @@
 					"km": 150
 				}
 			]
+		}
+	},
+	{
+		"name": "Dogwood Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0182"
+			}
+		],
+		"location": {
+			"lat": 50.018589,
+			"lng": -125.540058,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -801,7 +1785,171 @@
 		"file": "echo-lake-dayuse.html"
 	},
 	{
+		"name": "Elk Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5810"
+			}
+		],
+		"location": {
+			"lat": 50.274533,
+			"lng": -125.426971,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 255
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Elk Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0144"
+			}
+		],
+		"location": {
+			"lat": 50.312374999999996,
+			"lng": -125.927821,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 60
+				},
+				{
+					"town": "Nanaimo",
+					"km": 190
+				},
+				{
+					"town": "Victoria",
+					"km": 280
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "elk-falls-quinsam-campground.html"
+	},
+	{
+		"name": "Father & Son Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0467"
+			}
+		],
+		"location": {
+			"lat": 49.113468,
+			"lng": -124.63069899999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 110
+				},
+				{
+					"town": "Nanaimo",
+					"km": 50
+				},
+				{
+					"town": "Victoria",
+					"km": 120
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Fir Grove (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0158"
+			}
+		],
+		"location": {
+			"lat": 50.030649999999994,
+			"lng": -125.503339,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Fisherboy Park",
@@ -839,6 +1987,47 @@
 					"km": 285
 				}
 			]
+		}
+	},
+	{
+		"name": "Flora Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3130"
+			}
+		],
+		"location": {
+			"lat": 48.862123,
+			"lng": -124.719925,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 135
+				},
+				{
+					"town": "Nanaimo",
+					"km": 65
+				},
+				{
+					"town": "Victoria",
+					"km": 110
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -933,6 +2122,170 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Fry Narrows (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6166"
+			}
+		],
+		"location": {
+			"lat": 50.022006,
+			"lng": -125.57642799999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Fry Peninsula (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6325"
+			}
+		],
+		"location": {
+			"lat": 50.028942,
+			"lng": -125.570334,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Fry Trestle (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0196"
+			}
+		],
+		"location": {
+			"lat": 50.030049999999996,
+			"lng": -125.577124,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Georgie Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0150"
+			}
+		],
+		"location": {
+			"lat": 50.744671999999994,
+			"lng": -127.61397099999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Hardy"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 185
+				},
+				{
+					"town": "Nanaimo",
+					"km": 315
+				},
+				{
+					"town": "Victoria",
+					"km": 400
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Goldstream Provincial Park",
@@ -1070,7 +2423,130 @@
 		]
 	},
 	{
+		"name": "Gosling Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0167"
+			}
+		],
+		"location": {
+			"lat": 50.036904,
+			"lng": -125.498246,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "gosling-lake.html"
+	},
+	{
+		"name": "Gosling Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0163"
+			}
+		],
+		"location": {
+			"lat": 50.045021999999996,
+			"lng": -125.500567,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Gray Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0162"
+			}
+		],
+		"location": {
+			"lat": 50.049800000000005,
+			"lng": -125.593885,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Green Point Campground, Pacific Rim National Park Reserve",
@@ -1120,6 +2596,47 @@
 		]
 	},
 	{
+		"name": "Greenway Sound (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0296"
+			}
+		],
+		"location": {
+			"lat": 50.835716999999995,
+			"lng": -126.772374,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 140
+				},
+				{
+					"town": "Nanaimo",
+					"km": 275
+				},
+				{
+					"town": "Victoria",
+					"km": 365
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Harmony Shores Campground",
 		"tags": {
 			"types": [
@@ -1155,6 +2672,47 @@
 					"km": 360
 				}
 			]
+		}
+	},
+	{
+		"name": "Harris Creek Spruce (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC163931"
+			}
+		],
+		"location": {
+			"lat": 48.660250999999995,
+			"lng": -124.225278,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Renfrew"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 170
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 70
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -1484,7 +3042,171 @@
 		]
 	},
 	{
+		"name": "Junction Pool (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3237"
+			}
+		],
+		"location": {
+			"lat": 50.43895,
+			"lng": -126.24810000000001,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 220
+				},
+				{
+					"town": "Victoria",
+					"km": 305
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Kaikash Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5978"
+			}
+		],
+		"location": {
+			"lat": 50.516838,
+			"lng": -126.69369499999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 115
+				},
+				{
+					"town": "Nanaimo",
+					"km": 250
+				},
+				{
+					"town": "Victoria",
+					"km": 335
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "keogh-lake.html"
+	},
+	{
+		"name": "Kinsol Trestle Trail (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0282"
+			}
+		],
+		"location": {
+			"lat": 48.669301999999995,
+			"lng": -123.69086300000001,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Shawnigan Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 190
+				},
+				{
+					"town": "Nanaimo",
+					"km": 60
+				},
+				{
+					"town": "Victoria",
+					"km": 35
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Knob Point (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0271"
+			}
+		],
+		"location": {
+			"lat": 48.801846,
+			"lng": -124.701819,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nitinaht"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 140
+				},
+				{
+					"town": "Nanaimo",
+					"km": 70
+				},
+				{
+					"town": "Victoria",
+					"km": 105
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Kwaksistah Regional Park Campground",
@@ -1543,7 +3265,89 @@
 		]
 	},
 	{
-		"name": "Leiner River Recreation Site",
+		"name": "Labour Day Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0468"
+			}
+		],
+		"location": {
+			"lat": 49.121691999999996,
+			"lng": -124.45279,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 115
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 110
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Lak La More (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3046"
+			}
+		],
+		"location": {
+			"lat": 50.172073999999995,
+			"lng": -125.53943699999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Leiner River (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -1653,6 +3457,47 @@
 		]
 	},
 	{
+		"name": "Little Bear Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0187"
+			}
+		],
+		"location": {
+			"lat": 50.337381,
+			"lng": -125.517915,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 175
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Little Qualicum Falls Provincial Park",
 		"tags": {
 			"types": [
@@ -1745,7 +3590,7 @@
 		}
 	},
 	{
-		"name": "Lizard Lake Recreation Site",
+		"name": "Lizard Lake (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -1811,6 +3656,129 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Long Point (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0175"
+			}
+		],
+		"location": {
+			"lat": 50.013456999999995,
+			"lng": -125.555422,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Loon Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0160"
+			}
+		],
+		"location": {
+			"lat": 50.026723,
+			"lng": -125.551058,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Lost Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC16067"
+			}
+		],
+		"location": {
+			"lat": 52.418617,
+			"lng": -126.457319,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bella Coola Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 280
+				},
+				{
+					"town": "Nanaimo",
+					"km": 405
+				},
+				{
+					"town": "Victoria",
+					"km": 495
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Loveland Bay Provincial Park",
@@ -1927,7 +3895,48 @@
 		]
 	},
 	{
-		"name": "Marble River Recreation Site",
+		"name": "Lowry Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3129"
+			}
+		],
+		"location": {
+			"lat": 49.387755,
+			"lng": -125.132106,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 70
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 165
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Marble River (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -1988,6 +3997,211 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Maynard Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3198"
+			}
+		],
+		"location": {
+			"lat": 50.393555,
+			"lng": -127.209338,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 270
+				},
+				{
+					"town": "Victoria",
+					"km": 355
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "McCall Flats (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0475"
+			}
+		],
+		"location": {
+			"lat": 52.424408,
+			"lng": -126.182186,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bella Coola Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 275
+				},
+				{
+					"town": "Nanaimo",
+					"km": 395
+				},
+				{
+					"town": "Victoria",
+					"km": 485
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "McCreight Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0165"
+			}
+		],
+		"location": {
+			"lat": 50.284455,
+			"lng": -125.64773199999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 175
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "McNair Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0303"
+			}
+		],
+		"location": {
+			"lat": 50.228128999999996,
+			"lng": -125.575577,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 255
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Memekay Horse Camp (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC169767"
+			}
+		],
+		"location": {
+			"lat": 50.218140999999996,
+			"lng": -125.778591,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 45
+				},
+				{
+					"town": "Nanaimo",
+					"km": 175
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Miracle Beach Provincial Park",
@@ -2059,10 +4273,174 @@
 		]
 	},
 	{
+		"name": "Mohun Beach (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6787"
+			}
+		],
+		"location": {
+			"lat": 50.111061,
+			"lng": -125.493264,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Mohun Island (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0429"
+			}
+		],
+		"location": {
+			"lat": 50.092048999999996,
+			"lng": -125.50477699999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "mohun-lake.html"
 	},
 	{
 		"file": "mohun-lake-rec0184.html"
+	},
+	{
+		"name": "Montague Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5735"
+			}
+		],
+		"location": {
+			"lat": 50.341426999999996,
+			"lng": -126.199767,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 75
+				},
+				{
+					"town": "Nanaimo",
+					"km": 210
+				},
+				{
+					"town": "Victoria",
+					"km": 295
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Moore Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0146"
+			}
+		],
+		"location": {
+			"lat": 50.881237,
+			"lng": -126.53790599999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 130
+				},
+				{
+					"town": "Nanaimo",
+					"km": 265
+				},
+				{
+					"town": "Victoria",
+					"km": 355
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"file": "morton-lake.html"
@@ -2109,7 +4487,7 @@
 		}
 	},
 	{
-		"name": "Mr. Canoehead Recreation Site",
+		"name": "Mr. Canoehead (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -2172,7 +4550,48 @@
 		"file": "muchalat-lake-rec0258.html"
 	},
 	{
-		"name": "Nahwitti Lake Recreation Site",
+		"name": "Musgrave Point (in Sansum Narrows) (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC107043"
+			}
+		],
+		"location": {
+			"lat": 48.743773,
+			"lng": -123.542746,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Saltspring Island"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 190
+				},
+				{
+					"town": "Nanaimo",
+					"km": 55
+				},
+				{
+					"town": "Victoria",
+					"km": 35
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Nahwitti Lake (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -2231,6 +4650,88 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Nahwitti River Trail (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0149"
+			}
+		],
+		"location": {
+			"lat": 50.700612,
+			"lng": -127.81620000000001,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Hardy"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 195
+				},
+				{
+					"town": "Nanaimo",
+					"km": 325
+				},
+				{
+					"town": "Victoria",
+					"km": 410
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Naka Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6356"
+			}
+		],
+		"location": {
+			"lat": 50.477546,
+			"lng": -126.427589,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 230
+				},
+				{
+					"town": "Victoria",
+					"km": 320
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Nanoose Creek Campground",
@@ -2370,6 +4871,129 @@
 		]
 	},
 	{
+		"name": "Nitinat Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0272"
+			}
+		],
+		"location": {
+			"lat": 48.805093,
+			"lng": -124.678585,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Nitinaht"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 140
+				},
+				{
+					"town": "Nanaimo",
+					"km": 65
+				},
+				{
+					"town": "Victoria",
+					"km": 105
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Nixon Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0211"
+			}
+		],
+		"location": {
+			"lat": 48.901353,
+			"lng": -124.38702,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cowichan Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 140
+				},
+				{
+					"town": "Nanaimo",
+					"km": 45
+				},
+				{
+					"town": "Victoria",
+					"km": 90
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Nusatsum River (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5894"
+			}
+		],
+		"location": {
+			"lat": 52.245416,
+			"lng": -126.30649199999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Bella Coola Valley"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 260
+				},
+				{
+					"town": "Nanaimo",
+					"km": 380
+				},
+				{
+					"town": "Victoria",
+					"km": 475
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Oceanside RV Park",
 		"tags": {
 			"types": [
@@ -2405,6 +5029,47 @@
 					"km": 20
 				}
 			]
+		}
+	},
+	{
+		"name": "Orchard Meadow (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0195"
+			}
+		],
+		"location": {
+			"lat": 50.029965,
+			"lng": -125.579368,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 240
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -2585,7 +5250,7 @@
 		"file": "pacific-playgrounds-resort.html"
 	},
 	{
-		"name": "Pacific Yew Recreation Site",
+		"name": "Pacific Yew (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -2771,6 +5436,129 @@
 		}
 	},
 	{
+		"name": "Petite Gosling (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC16068"
+			}
+		],
+		"location": {
+			"lat": 50.031957,
+			"lng": -125.499022,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 20
+				},
+				{
+					"town": "Nanaimo",
+					"km": 150
+				},
+				{
+					"town": "Victoria",
+					"km": 235
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Pine Marten (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC204459"
+			}
+		],
+		"location": {
+			"lat": 50.185638999999995,
+			"lng": -125.704354,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 170
+				},
+				{
+					"town": "Victoria",
+					"km": 260
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Pine Point Site (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0205"
+			}
+		],
+		"location": {
+			"lat": 48.887989999999995,
+			"lng": -124.26122699999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cowichan Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 145
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 85
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Pioneer Inn",
 		"tags": {
 			"types": [
@@ -2898,6 +5686,211 @@
 				"text": "First Nations-operated"
 			}
 		]
+	},
+	{
+		"name": "Pye Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0181"
+			}
+		],
+		"location": {
+			"lat": 50.298190999999996,
+			"lng": -125.584585,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 175
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Pye Beach (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0297"
+			}
+		],
+		"location": {
+			"lat": 50.288956,
+			"lng": -125.570268,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 170
+				},
+				{
+					"town": "Victoria",
+					"km": 260
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Pye Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0179"
+			}
+		],
+		"location": {
+			"lat": 50.289367,
+			"lng": -125.602303,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 175
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Pye Mountain (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC206138"
+			}
+		],
+		"location": {
+			"lat": 50.24496,
+			"lng": -125.520179,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 30
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 255
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Pye Point (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC16069"
+			}
+		],
+		"location": {
+			"lat": 50.297954999999995,
+			"lng": -125.57983899999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 170
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Qualicum Bay Resort and RV Park",
@@ -3343,7 +6336,7 @@
 		]
 	},
 	{
-		"name": "Scout Beach Recreation Site",
+		"name": "Scout Beach (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -3405,6 +6398,47 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Seagull Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0300"
+			}
+		],
+		"location": {
+			"lat": 50.164431,
+			"lng": -125.486966,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 155
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Seal Bay RV Park",
@@ -3638,6 +6672,47 @@
 		}
 	},
 	{
+		"name": "Smokey's Pond (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3057"
+			}
+		],
+		"location": {
+			"lat": 48.790473,
+			"lng": -123.896915,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Duncan"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 170
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 55
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Snaw-Naw-as Campground",
 		"tags": {
 			"types": [
@@ -3683,6 +6758,47 @@
 				"text": "First Nations-operated"
 			}
 		]
+	},
+	{
+		"name": "Snow Creek (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3128"
+			}
+		],
+		"location": {
+			"lat": 49.272714,
+			"lng": -125.18169499999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 90
+				},
+				{
+					"town": "Victoria",
+					"km": 165
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Sooke Potholes / Spring Salmon Place (KWL-UCHUN) Campground",
@@ -3840,10 +6956,92 @@
 		]
 	},
 	{
+		"name": "Spring Beach (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0209"
+			}
+		],
+		"location": {
+			"lat": 48.844755,
+			"lng": -124.11454499999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Cowichan Lake"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 155
+				},
+				{
+					"town": "Nanaimo",
+					"km": 40
+				},
+				{
+					"town": "Victoria",
+					"km": 70
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "sproat-lake.html"
 	},
 	{
 		"file": "sproat-lake-provincial-park.html"
+	},
+	{
+		"name": "Spruce Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3204"
+			}
+		],
+		"location": {
+			"lat": 50.348248,
+			"lng": -127.363512,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alice"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 155
+				},
+				{
+					"town": "Nanaimo",
+					"km": 280
+				},
+				{
+					"town": "Victoria",
+					"km": 360
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Stamp River Provincial Park",
@@ -3899,6 +7097,293 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Stamp River Trail (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6400"
+			}
+		],
+		"location": {
+			"lat": 49.317282,
+			"lng": -124.901663,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port Alberni"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 80
+				},
+				{
+					"town": "Nanaimo",
+					"km": 70
+				},
+				{
+					"town": "Victoria",
+					"km": 150
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Star Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5671"
+			}
+		],
+		"location": {
+			"lat": 49.742751999999996,
+			"lng": -126.036415,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Gold River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 65
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 245
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Stella Bay (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0186"
+			}
+		],
+		"location": {
+			"lat": 50.284994999999995,
+			"lng": -125.486902,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 255
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Stella Beach (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0166"
+			}
+		],
+		"location": {
+			"lat": 50.287959,
+			"lng": -125.494666,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 165
+				},
+				{
+					"town": "Victoria",
+					"km": 260
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Stella Lake North (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0177"
+			}
+		],
+		"location": {
+			"lat": 50.303211,
+			"lng": -125.524817,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 35
+				},
+				{
+					"town": "Nanaimo",
+					"km": 170
+				},
+				{
+					"town": "Victoria",
+					"km": 260
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Sterling Island (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6423"
+			}
+		],
+		"location": {
+			"lat": 50.163149999999995,
+			"lng": -125.55670599999999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Campbell River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 25
+				},
+				{
+					"town": "Nanaimo",
+					"km": 160
+				},
+				{
+					"town": "Victoria",
+					"km": 250
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Stewart Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6450"
+			}
+		],
+		"location": {
+			"lat": 50.053492,
+			"lng": -125.99995200000001,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 55
+				},
+				{
+					"town": "Nanaimo",
+					"km": 180
+				},
+				{
+					"town": "Victoria",
+					"km": 265
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Strathcona Provincial Park — Buttle Lake Campground",
@@ -4200,6 +7685,47 @@
 		}
 	},
 	{
+		"name": "Tansky (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC160879"
+			}
+		],
+		"location": {
+			"lat": 48.438285,
+			"lng": -124.076135,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Jordan River"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 195
+				},
+				{
+					"town": "Nanaimo",
+					"km": 80
+				},
+				{
+					"town": "Victoria",
+					"km": 50
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Taylor Arm Provincial Park",
 		"tags": {
 			"types": [
@@ -4300,6 +7826,47 @@
 		}
 	},
 	{
+		"name": "Three Isle Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC3199"
+			}
+		],
+		"location": {
+			"lat": 50.44922,
+			"lng": -127.213999,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 150
+				},
+				{
+					"town": "Nanaimo",
+					"km": 275
+				},
+				{
+					"town": "Victoria",
+					"km": 360
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Thunderbird Campsite",
 		"tags": {
 			"types": [
@@ -4345,6 +7912,47 @@
 				"waterfront & garden sites",
 				"pet-friendly"
 			]
+		}
+	},
+	{
+		"name": "Tlowils Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6444"
+			}
+		],
+		"location": {
+			"lat": 50.260808999999995,
+			"lng": -125.99562,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 60
+				},
+				{
+					"town": "Nanaimo",
+					"km": 190
+				},
+				{
+					"town": "Victoria",
+					"km": 280
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
 		}
 	},
 	{
@@ -4433,6 +8041,88 @@
 		]
 	},
 	{
+		"name": "Tsitika Crossing (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC6551"
+			}
+		],
+		"location": {
+			"lat": 50.402952,
+			"lng": -126.563856,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Sayward"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 105
+				},
+				{
+					"town": "Nanaimo",
+					"km": 235
+				},
+				{
+					"town": "Victoria",
+					"km": 320
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
+		"name": "Turnbull Cove (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC0306"
+			}
+		],
+		"location": {
+			"lat": 50.964529999999996,
+			"lng": -126.836005,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Port McNeill"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 155
+				},
+				{
+					"town": "Nanaimo",
+					"km": 290
+				},
+				{
+					"town": "Victoria",
+					"km": 375
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"file": "twin-lake-rec0185.html"
 	},
 	{
@@ -4474,7 +8164,7 @@
 		}
 	},
 	{
-		"name": "Upper Campbell Reservoir Recreation Site",
+		"name": "Upper Campbell Reservoir (rec-site)",
 		"tags": {
 			"types": [
 				"rec-site"
@@ -4537,6 +8227,47 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Vernon Lake (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC160442"
+			}
+		],
+		"location": {
+			"lat": 50.054978999999996,
+			"lng": -126.44409,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Woss"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 85
+				},
+				{
+					"town": "Nanaimo",
+					"km": 205
+				},
+				{
+					"town": "Victoria",
+					"km": 285
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Westwood Lake RV Camping & Cabins (Westwood Lake Campground Resort)",
@@ -4615,6 +8346,47 @@
 		}
 	},
 	{
+		"name": "Wildwood Forest (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC5825"
+			}
+		],
+		"location": {
+			"lat": 49.695952999999996,
+			"lng": -125.058836,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Courtenay"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 40
+				},
+				{
+					"town": "Nanaimo",
+					"km": 100
+				},
+				{
+					"town": "Victoria",
+					"km": 185
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
+	},
+	{
 		"name": "Windy Waters Camping Ground",
 		"tags": {
 			"types": [
@@ -4657,6 +8429,47 @@
 				"text": "The campground is self serve."
 			}
 		]
+	},
+	{
+		"name": "Woss Fire Lookout (rec-site)",
+		"tags": {
+			"types": [
+				"rec-site"
+			]
+		},
+		"links": [
+			{
+				"label": "HomePage",
+				"type": "homepage",
+				"url": "https://www.sitesandtrailsbc.ca/resource/REC135981"
+			}
+		],
+		"location": {
+			"lat": 50.229510999999995,
+			"lng": -126.616402,
+			"pin": null,
+			"zoom": 13,
+			"notes": "Woss"
+		},
+		"access": {
+			"haversine": [
+				{
+					"town": "Campbell River",
+					"km": 100
+				},
+				{
+					"town": "Nanaimo",
+					"km": 225
+				},
+				{
+					"town": "Victoria",
+					"km": 310
+				}
+			]
+		},
+		"campground": {
+			"operator": "RSTBC"
+		}
 	},
 	{
 		"name": "Zuiderzee Campsites",

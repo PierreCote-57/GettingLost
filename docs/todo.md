@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 31**
+**next id: 32**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -40,6 +40,16 @@ written before that date may not resolve.
   wins every time and both booklets print filenames — "howto-water" instead of "How To: Use
   water". One-word fix, but the PDFs have to be rebuilt and re-pushed after it, which is why
   it is parked rather than done inline. Found reading the docs against the code, 2026-08-09.
+
+- **#31 — Recreation trails and interpretive forests are not in `destinations.json`** *(2026-08-09)*
+  The rec-site pass covered only `PRJCT_TYPE = SIT - Recreation Site`. From
+  `local/data/RecSites-VancouverIsland.csv`, cross-referenced against
+  `local/data/RecSites-Fixed.csv` by REC #, that leaves **39 `RTR - Recreation Trail`** and
+  **5 `IF - Interpretative Forest`** absent from the list. Same data source and same fill
+  method as the rec sites, but the shape is an open question: a trail is not somewhere you
+  arrive, so `access`, `campground` and the `rec-site` type may all be wrong for it — see
+  the lakes-carry-no-access reasoning in `docs/schema/access.md`. Decide the type and the
+  schema before filling.
 
 ## Tooling
 
