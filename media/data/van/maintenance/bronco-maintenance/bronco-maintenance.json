@@ -6,12 +6,18 @@
 	},
 	"notes": [
 		{
-			"sectionName": "Placeholder",
+			"sectionName": "Scheduled maintenance",
 			"list": [
 				{
-					"name": "Nothing recorded yet",
+					"name": "Saturday, September 19, 2026 @ 8;00 AM",
 					"description": [
-						"Placeholder so the notes block has something to render."
+						"Just run diagnostic, make sure all is well."
+					]
+				},
+				{
+					"name": "Feb 1, 2027",
+					"description": [
+						"First oil change, pre-paid, every 6 month."
 					]
 				}
 			]
