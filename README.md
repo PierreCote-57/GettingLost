@@ -50,8 +50,8 @@ WordPress since the last sync is lost. Always edit in the repo.
 | `sync.yml` | [manual](https://github.com/PierreCote-57/GettingLost/actions/workflows/sync.yml) | full overwrite, no diffing |
 | `pull-posts.yml` | manual | fetches WP posts not yet in the repo, writes the files, commits and pushes |
 
-Pages are created automatically — a new `pages/foo.html` plus `media/data/…/foo.json` is
-enough; there is no page-ID map to maintain. JSON, `.jst`/`.cst` and `.pdf` files are pushed
+Pages are created automatically — a new `pages/<name>.html` plus `media/data/…/<name>.json`
+is enough; there is no page-ID map to maintain. JSON, `.jst`/`.cst` and `.pdf` files are pushed
 to the media library at the same `/wp-content/uploads/<filename>` path they already use; because
 WordPress won't overwrite a same-named file, the sync deletes the existing item first and
 re-uploads, so the file 404s for well under a second mid-sync. Files sync before pages, so a

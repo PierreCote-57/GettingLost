@@ -44,10 +44,10 @@ written before that date may not resolve.
 ## Tooling
 
 - **#30 — sync-on-push.yml's header comment describes a page-map gate that does not exist** *(2026-08-09)*
-  Its comment block says new page files with no entry in `local/config/page-map.json` are
-  warned about and never auto-created, and that a change under `local/config/` forces a full
-  sync of all pages. `sync.js` discovers pages dynamically and says so in its own header;
-  `local/config/` is empty. The `local/config/**` path trigger is harmless but describes a
+  Its comment block gates new pages on `local/config/page-map.json`, which does not exist —
+  they are warned about rather than created, it says, and a change under `local/config/`
+  forces a full sync of all pages. `sync.js` discovers pages dynamically and says so in its
+  own header; `local/config/` is empty. The `local/config/**` path trigger is harmless but describes a
   mechanism that is gone. Decide whether the trigger and the comment both go.
 
 - **#16 — Make the cross-reference check repeatable** *(2026-07-31)*

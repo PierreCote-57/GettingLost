@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Documentation validation pass — the mechanical half.
 
-Checks what a script can check about `docs/`: that every pointer resolves and
-every name it uses still exists. It REPORTS; it never edits, and it never drops
-a finding for being uninteresting.
+Checks what a script can check about the markdown Claude maintains: that every
+pointer resolves and every name it uses still exists. It REPORTS; it never
+edits, and it never drops a finding for being uninteresting.
 
 Prose is out of scope on purpose. Whether a paragraph still describes how the
 site works is a reading job, and no script can do it. What lives here is the
@@ -16,10 +16,22 @@ tree that drifted from disk, a function the code no longer has.
 Five checks:
 
     links     every relative markdown link resolves
-    paths     every backticked repo path exists
+    paths     every backticked repo or home path exists
     index     docs/README.md lists every doc; projects/README.md every project
     tree      the folders.md hierarchy matches media/data and pages on disk
-    names     every code symbol and filename the docs name still exists
+    names     every code symbol a doc attributes to a source file still exists
+
+Three sets of files, because they are not the same kind of document:
+
+    docs/           this project's knowledge — every check applies
+    the repo root   CLAUDE.md, README.md — every check but the index
+    ~/Claude/       Pierre's cross-project files — links and home paths only
+
+`~/Claude/` gets the narrow treatment deliberately. Those files are loaded in
+EVERY project, so a bare `docs/todo.md` in one of them means "the current
+project's", not this repo's, and checking it here would be asserting something
+the file never claimed. For the same reason their code names are not checked
+against this repo's source.
 
 A folder line in the folders.md tree annotated "WP only" is skipped by the tree
 check — it describes a folder that lives in WordPress with no repo counterpart.
@@ -31,6 +43,7 @@ import sys
 
 REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 DOCS_ROOT = os.path.join(REPO_ROOT, "docs")
+CLAUDE_ROOT = os.path.expanduser("~/Claude")
 
 # Where a name the docs mention could legitimately live.
 SOURCE_GLOBS = ["local", "media/data/scripts", ".github/workflows"]
@@ -65,6 +78,7 @@ NAME_BINDING_WINDOW = 40
 RETIREMENT_WORDS = (
 	"retired", "removed", "deleted", "obsolete", "dead", "gone", "dropped", "died",
 	"no longer", "was ", "old ", "used to", "replaced", "renamed from", "not moved",
+	"does not exist", "no page-map", "never existed",
 )
 
 LINK_PATTERN = re.compile(r"\[([^\]]*)\]\(([^)]+)\)")
@@ -73,7 +87,7 @@ FOLDER_LINE_PATTERN = re.compile(r"^(\s*)([A-Za-z0-9._-]+)/\s*(←.*)?$")
 REPO_PREFIXES = ("media/", "pages/", "local/", "docs/", "logs/", "posts/", ".claude/", ".github/")
 
 
-# Every markdown file under docs/, sorted so a run is reproducible.
+# Every markdown file under a root, sorted so a run is reproducible.
 def findDocFiles(docsRoot):
 	docPaths = []
 	for dirPath, dirNames, fileNames in os.walk(docsRoot):
@@ -84,22 +98,38 @@ def findDocFiles(docsRoot):
 	return docPaths
 
 
+# The markdown sitting directly in the repo root — CLAUDE.md and README.md. Not
+# a walk: everything deeper belongs to one of the other roots.
+def findRootFiles(repoRoot):
+	rootPaths = []
+	for fileName in sorted(os.listdir(repoRoot)):
+		if fileName.endswith(".md"):
+			rootPaths.append(os.path.join(repoRoot, fileName))
+	return rootPaths
+
+
 def readText(path):
 	with open(path, encoding="utf-8") as handle:
 		text = handle.read()
 	return text
 
 
-# Repo-relative, so a finding can be pasted straight into a message.
+# Repo-relative, so a finding can be pasted straight into a message. A file
+# outside the repo keeps its ~-abbreviated absolute path — "../../Claude/x.md"
+# would be unreadable and unpasteable.
 def relative(path):
-	relPath = os.path.relpath(path, REPO_ROOT)
+	if path.startswith(REPO_ROOT + os.sep):
+		relPath = os.path.relpath(path, REPO_ROOT)
+		return relPath
+	home = os.path.expanduser("~")
+	relPath = path.replace(home, "~", 1) if path.startswith(home) else path
 	return relPath
 
 
-# A placeholder stands for a name the reader supplies; there is nothing on disk
-# to check it against.
+# A placeholder stands for a name the reader supplies, or an elision standing in
+# for the rest of a path; there is nothing on disk to check either against.
 def isPlaceholder(token):
-	placeholder = any(character in token for character in "<>{}*")
+	placeholder = any(character in token for character in "<>{}*…") or "..." in token
 	return placeholder
 
 
@@ -117,30 +147,56 @@ def checkLinks(docPaths):
 	return findings
 
 
-# Every backticked token in the docs, with the file it came from.
+# Every backticked token, with the file and the line it came from. The line
+# travels with the token because a sentence saying a thing is GONE is not
+# claiming it is there — same rule the names check uses.
 def collectBacktickedTokens(docPaths):
 	tokens = []
 	for docPath in docPaths:
-		for match in BACKTICK_PATTERN.finditer(readText(docPath)):
-			tokens.append({"token": match.group(1).strip(), "doc": docPath})
+		for line in readText(docPath).splitlines():
+			for match in BACKTICK_PATTERN.finditer(line):
+				tokens.append({"token": match.group(1).strip(), "doc": docPath, "line": line})
 	return tokens
 
 
-# CHECK: every backticked path that looks like a repo path exists on disk.
-def checkPaths(tokens):
+def saysItIsGone(line):
+	lowered = line.lower()
+	gone = any(word in lowered for word in RETIREMENT_WORDS)
+	return gone
+
+
+# Where a backticked path is rooted, or nothing when it is not a path at all.
+# A repo path is only meaningful for files that belong to this project — see the
+# module docstring on why ~/Claude/ is excluded from that half.
+def resolvePathToken(token, allowRepoPaths):
+	if " " in token or isPlaceholder(token):
+		return None
+	target = token.rstrip("/")
+	if target.startswith("~/"):
+		resolved = os.path.expanduser(target)
+		return resolved
+	if allowRepoPaths and target.startswith(REPO_PREFIXES):
+		resolved = os.path.join(REPO_ROOT, target)
+		return resolved
+	return None
+
+
+# CHECK: every backticked repo or home path exists on disk.
+def checkPaths(tokens, allowRepoPaths=True):
 	findings = []
 	seen = set()
 	for entry in tokens:
-		token = entry["token"]
-		if " " in token or isPlaceholder(token) or not token.startswith(REPO_PREFIXES):
+		if saysItIsGone(entry["line"]):
 			continue
-		target = token.rstrip("/")
-		key = (target, entry["doc"])
+		resolved = resolvePathToken(entry["token"], allowRepoPaths)
+		if resolved is None:
+			continue
+		key = (resolved, entry["doc"])
 		if key in seen:
 			continue
 		seen.add(key)
-		if not os.path.exists(os.path.join(REPO_ROOT, target)):
-			findings.append(f"{relative(entry['doc'])}: `{token}` does not exist")
+		if not os.path.exists(resolved):
+			findings.append(f"{relative(entry['doc'])}: `{entry['token']}` does not exist")
 	return findings
 
 
@@ -306,18 +362,26 @@ def printReport(sections):
 def main(argv):
 	verbose = "--verbose" in argv
 	docPaths = findDocFiles(DOCS_ROOT)
-	tokens = collectBacktickedTokens(docPaths)
+	rootPaths = findRootFiles(REPO_ROOT)
+	claudePaths = findDocFiles(CLAUDE_ROOT) if os.path.isdir(CLAUDE_ROOT) else []
+
+	# docs/ and the repo root are this project's own files and are checked the
+	# same way; ~/Claude/ is checked narrowly (docstring).
+	projectPaths = docPaths + rootPaths
 	sourceFiles = collectSourceFiles()
+	projectTokens = collectBacktickedTokens(projectPaths)
+	claudeTokens = collectBacktickedTokens(claudePaths)
 
 	if verbose:
-		print(f"{len(docPaths)} docs, {len(tokens)} backticked tokens, {len(sourceFiles)} source files\n")
+		print(f"{len(docPaths)} docs, {len(rootPaths)} root, {len(claudePaths)} in ~/Claude, "
+			f"{len(projectTokens) + len(claudeTokens)} backticked tokens, {len(sourceFiles)} source files\n")
 
 	sections = [
-		("links", checkLinks(docPaths)),
-		("paths", checkPaths(tokens)),
+		("links", checkLinks(projectPaths + claudePaths)),
+		("paths", checkPaths(projectTokens) + checkPaths(claudeTokens, allowRepoPaths=False)),
 		("index", checkIndex(docPaths)),
 		("tree", checkTree()),
-		("names", checkNames(docPaths, sourceFiles)),
+		("names", checkNames(projectPaths, sourceFiles)),
 	]
 	total = printReport(sections)
 	return 1 if total else 0

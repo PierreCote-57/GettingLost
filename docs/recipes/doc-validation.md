@@ -5,9 +5,9 @@ python3 local/tools/check_docs.py
 python3 local/tools/check_docs.py --verbose
 ```
 
-`local/tools/check_docs.py` checks what a script can check about `docs/`: that every
-pointer resolves and every name still exists. It reports and never edits. Exit code is 1
-when anything is found, 0 when clean.
+`local/tools/check_docs.py` checks what a script can check about the markdown Claude
+maintains: that every pointer resolves and every name still exists. It reports and never
+edits. Exit code is 1 when anything is found, 0 when clean.
 
 Run it after any session that moved files, renamed something in the code, or changed a
 folder tree — and as the last step of a docs cleanup, so the mechanical half is settled
@@ -18,10 +18,28 @@ before anyone reads prose.
 | Check | What it proves |
 | --- | --- |
 | `links` | every relative markdown link resolves to a file that exists |
-| `paths` | every backticked `media/…`, `pages/…`, `local/…` path exists on disk |
+| `paths` | every backticked `media/…`, `pages/…`, `local/…` or `~/…` path exists on disk |
 | `index` | `docs/README.md` lists every doc; `docs/projects/README.md` every project |
 | `tree` | the folder tree in `conventions/folders.md` matches `media/data` and `pages` |
 | `names` | a symbol a doc attributes to one of our source files still exists |
+
+## Three sets of files
+
+| Set | Checked |
+| --- | --- |
+| `docs/` | everything |
+| the repo root — `CLAUDE.md`, `README.md` | everything but the index |
+| `~/Claude/` | links and `~/…` paths only |
+
+**`~/Claude/` is narrow on purpose.** Those files load in EVERY project, so a bare
+`docs/todo.md` in one of them means "the current project's", not this repo's — checking it
+here would assert something the file never claimed. Their code names are not checked against
+this repo's source for the same reason.
+
+The repo root was outside the walk until 2026-08-09, and that is exactly where the drift
+hid: the root `README.md` had a stale `pages/van/` tree, a `local/tools/` listing missing a
+file, `.claude/` described as holding notes it no longer holds, and a sync paragraph that
+omitted `.pdf`. Nothing else was checking it.
 
 ## What it does NOT check
 
@@ -36,9 +54,17 @@ counterpart is annotated that way and the tree check skips it. `shared/gallery/`
 case: sync writes the generated `PageMap.json` there, and nothing in the repo mirrors it.
 Without the annotation it reads as drift on every run.
 
-**A retirement word keeps a line out of the `names` check** — retired, removed, deleted,
-obsolete, gone, dropped, no longer, was, replaced. A doc naming `GALLERY_RULES` to say it
-is deleted is the docs doing their job, not rot, and flagging those buries the real ones.
+**A retirement word keeps a line out of the `names` AND `paths` checks** — retired, removed,
+deleted, obsolete, gone, dropped, no longer, was, replaced, does not exist. A doc naming
+`GALLERY_RULES` to say it is deleted is the docs doing their job, not rot, and flagging
+those buries the real ones. The same holds for a todo entry whose whole point is that a file
+is missing.
+
+**A placeholder is never checked** — anything carrying `<`, `>`, `{`, `}`, `*` or an
+ellipsis. That is why the site's naming convention matters in prose too: write
+`pages/<name>.html`, since a made-up `foo.html` under a real folder sends the checker
+looking for a file nobody meant to exist. It also keeps the docs saying `<name>` where the
+filename is master, rather than `<slug>`, which is derived.
 
 ## Why `names` is scoped the way it is
 
