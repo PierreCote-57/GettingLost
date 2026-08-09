@@ -6,12 +6,13 @@
 	},
 	"notes": [
 		{
-			"sectionName": "Placeholder",
+			"sectionName": "Scheduled maintenance",
 			"list": [
 				{
-					"name": "Nothing recorded yet",
+					"name": "Monday, August 17, 2026 @ 8:00 AM",
 					"description": [
-						"Placeholder so the notes block has something to render."
+						"Camera recall. <br />",
+						"Low occasional beep, visible on diagnostics"
 					]
 				}
 			]
