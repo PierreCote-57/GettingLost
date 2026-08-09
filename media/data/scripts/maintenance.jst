@@ -1,0 +1,224 @@
+/**
+ * maintenance.jst (javascript)
+ *
+ * Page-type-specific block renderer for the vehicle maintenance pages
+ * (van-maintenance.html, bronco-maintenance.html). Registers on
+ * window.GL.blockRenderers, the shared registry defined in gettinglost.jst
+ * (loaded on every page), which already handles:
+ *
+ *   - fetching the page's own JSON (/wp-content/uploads/<slug>.json) once
+ *   - dispatching each [data-block-type] element to its renderer
+ *   - per-block error handling (a renderer that throws just skips that
+ *     one block; other blocks on the page still render normally)
+ *   - the generic, page-type-agnostic renderers ("notes", "backToGallery", ...)
+ *
+ * This file adds one renderer:
+ *
+ *   <div data-block-type="maintenanceActual"></div>
+ *
+ * A maintenance page carries two things. `notes` is the PLAN — what is
+ * scheduled, what is being watched. `actual` is the RECORD — one entry per
+ * visit, written on return. This renderer draws the record; the plan is the
+ * generic notes renderer, and the page puts the record above it.
+ *
+ * pageData.actual is a list of entries whose top-level keys ARE the columns,
+ * in order:
+ *
+ *   { date, odometer_km, shop{name,url}, work{name,url}, cost_cad,
+ *     nextDue{km,date} }
+ *
+ * shop.url links out to the shop; work.url is the invoice or work sheet, a
+ * bare filename living beside the page JSON and uploaded flat to
+ * /wp-content/uploads/. Either link is optional — no url means plain text.
+ * A missing value renders as an empty cell, never a placeholder.
+ */
+
+(function () {
+  "use strict";
+
+  window.GL = window.GL || {};
+  window.GL.blockRenderers = window.GL.blockRenderers || {};
+
+  var UPLOADS = "/wp-content/uploads/";
+
+  var COLUMNS = ["Date", "Odometer", "Shop", "Work", "Cost", "Next due"];
+
+  // ---------------------------------------------------------------------
+  // Small DOM helpers (same table/cell styling convention used by the
+  // generic renderers in gettinglost.jst and by lakes.jst)
+  // ---------------------------------------------------------------------
+
+  function createStyledTable() {
+    var table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.marginTop = "0.25rem";
+    table.style.width = "100%";
+    return table;
+  }
+
+  function buildHeaderCell(label) {
+    var cell = document.createElement("th");
+    cell.textContent = label;
+    cell.style.padding = "0.2rem 1rem 0.2rem 0";
+    cell.style.textAlign = "left";
+    cell.style.verticalAlign = "bottom";
+    cell.style.borderBottom = "1px solid #ccc";
+    cell.style.color = "#666";
+    cell.style.fontSize = "0.88rem";
+    cell.style.fontWeight = "600";
+    return cell;
+  }
+
+  function buildBodyCell() {
+    var cell = document.createElement("td");
+    cell.style.padding = "0.2rem 1rem 0.2rem 0";
+    cell.style.verticalAlign = "top";
+    cell.style.fontSize = "0.9rem";
+    return cell;
+  }
+
+  function buildLink(url, label) {
+    var link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = label;
+    return link;
+  }
+
+  // ---------------------------------------------------------------------
+  // Cell builders — one per column, in column order
+  // ---------------------------------------------------------------------
+
+  function buildTextCell(text) {
+    var cell = buildBodyCell();
+    if (text !== undefined && text !== null && text !== "") {
+      cell.textContent = text;
+    }
+    return cell;
+  }
+
+  function formatKm(km) {
+    if (typeof km !== "number") {
+      return "";
+    }
+    return km.toLocaleString("en-CA") + " km";
+  }
+
+  function buildCostCell(costCad) {
+    var cell = buildBodyCell();
+    cell.style.textAlign = "right";
+    if (typeof costCad === "number") {
+      cell.textContent = costCad.toLocaleString("en-CA", { style: "currency", currency: "CAD" });
+    }
+    return cell;
+  }
+
+  function buildOdometerCell(km) {
+    var cell = buildTextCell(formatKm(km));
+    cell.style.textAlign = "right";
+    return cell;
+  }
+
+  /**
+   * A {name, url} pair: the name, linked when a url is there, plain text when
+   * it is not. buildHref turns the entry's url into the address to link to,
+   * which is what differs between an outside shop and an uploaded invoice.
+   */
+  function buildNamedLinkCell(entry, buildHref) {
+    var cell = buildBodyCell();
+    var named = entry || {};
+    if (!named.name) {
+      return cell;
+    }
+    if (named.url) {
+      cell.appendChild(buildLink(buildHref(named.url), named.name));
+    } else {
+      cell.textContent = named.name;
+    }
+    return cell;
+  }
+
+  function shopHref(url) {
+    return url;
+  }
+
+  function invoiceHref(url) {
+    return UPLOADS + url;
+  }
+
+  /**
+   * Whichever of km and date is known. Both known puts them on two lines.
+   */
+  function buildNextDueCell(nextDue) {
+    var cell = buildBodyCell();
+    var due = nextDue || {};
+    var lines = [];
+    var km = formatKm(due.km);
+    if (km) {
+      lines.push(km);
+    }
+    if (due.date) {
+      lines.push(due.date);
+    }
+    lines.forEach(function (line, i) {
+      if (i > 0) {
+        cell.appendChild(document.createElement("br"));
+      }
+      cell.appendChild(document.createTextNode(line));
+    });
+    return cell;
+  }
+
+  function buildEntryRow(entry) {
+    var row = document.createElement("tr");
+    row.appendChild(buildTextCell(entry.date));
+    row.appendChild(buildOdometerCell(entry.odometer_km));
+    row.appendChild(buildNamedLinkCell(entry.shop, shopHref));
+    row.appendChild(buildNamedLinkCell(entry.work, invoiceHref));
+    row.appendChild(buildCostCell(entry.cost_cad));
+    row.appendChild(buildNextDueCell(entry.nextDue));
+    return row;
+  }
+
+  // ---------------------------------------------------------------------
+  // Block renderer: "maintenanceActual"
+  // ---------------------------------------------------------------------
+
+  window.GL.blockRenderers.maintenanceActual = function (el, pageData) {
+    var actual = pageData.actual;
+
+    el.textContent = "";
+
+    if (actual === undefined || actual === null) {
+      return;
+    }
+    if (!Array.isArray(actual)) {
+      console.warn("[maintenance] `actual` is not a list — nothing rendered.");
+      return;
+    }
+    if (!actual.length) {
+      return;
+    }
+
+    el.appendChild(window.GL.buildGlHeading("Actual maintenance"));
+
+    var table = createStyledTable();
+
+    var thead = document.createElement("thead");
+    var headerRow = document.createElement("tr");
+    COLUMNS.forEach(function (label) {
+      headerRow.appendChild(buildHeaderCell(label));
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement("tbody");
+    actual.forEach(function (entry) {
+      tbody.appendChild(buildEntryRow(entry));
+    });
+    table.appendChild(tbody);
+
+    el.appendChild(table);
+  };
+})();

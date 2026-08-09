@@ -4,6 +4,25 @@
 		"published": true,
 		"comments": "open"
 	},
+	"actual": [
+		{
+			"date": "2026-09-19",
+			"odometer_km": 4800,
+			"shop": {
+				"name": "Marshall Ford",
+				"url": null
+			},
+			"work": {
+				"name": "First service, oil and inspection",
+				"url": "bronco-2026-09-19-first-service.pdf"
+			},
+			"cost_cad": 0.0,
+			"nextDue": {
+				"km": 12800,
+				"date": null
+			}
+		}
+	],
 	"notes": [
 		{
 			"sectionName": "Scheduled maintenance notes",
