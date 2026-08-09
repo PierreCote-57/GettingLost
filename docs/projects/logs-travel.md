@@ -55,7 +55,7 @@ granularity; the two join only via odometer for per-trip economy (later — need
 `fullTank` fill with `liters` to get L/100km). `location` uses the shared block (coords or
 ref) so fills are mappable and "near home vs on the road" is computed from coords.
 
-## Commit workflow — device split (see `~/Claude/working-with-pierre.md`)
+## Commit workflow — device split (CLAUDE.md rule 3)
 - **Computer:** Claude makes/edits entries then STOPS; Pierre pushes.
 - **Phone:** Claude does full edit → commit → push to `main` (rule 3 auto-commit).
 

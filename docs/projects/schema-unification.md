@@ -105,7 +105,7 @@ A row in the destinations dataset is therefore one of two things: a unified part
 inline, or a hydrated `{file}` pointer. See
 [docs/projects/destinations-overview.md](destinations-overview.md).
 
-Table columns: Name, On-lost, Location, Distance, Access, Sites (plain `siteCount`), Maps,
+Table columns: Name, On lost, Location, Distance, Access, Sites (plain `siteCount`), Maps,
 Amenities, Reservation. Maps and Reservation select from `links[]` by `type` (2026-08-01);
 they used to be split out of `campground.links` by a `/map/i` test on the label.
 
@@ -115,7 +115,7 @@ Not part of the migration; recorded because the unification is what made them po
 
 1. **Cross-reference validation** — hydration removed the duplication, so the remaining check
    is a *dangling* `{file}` pointing at a missing or unpublished page. Sync could fail the
-   build on it, the way it does for slug drift. `docs/todo.md` #2.
+   build on it, the way it does for slug drift. `docs/todo.md` #16.
 2. **Unpublished-page display** in the hydrated table — skip or grey out. The renderer
    currently ignores `wpSettings`.
 3. **Per-page content pass** — re-enriching prose that the migration dropped. Authoring, not

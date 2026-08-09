@@ -2,7 +2,7 @@
 
 How Claude's tooling is set up for this project: permissions, session-start checks,
 and the browser gotchas that have caused false diagnoses. Site knowledge is not here —
-see [docs/README.md](../docs/README.md).
+see [docs/README.md](README.md).
 
 The rules Claude must follow live in [CLAUDE.md](../CLAUDE.md). This file is the
 supporting detail behind a few of them.
@@ -19,7 +19,7 @@ so it should not prompt. If it does, the settings are wrong.
 `wpcom-user-sites` via ToolSearch and call it to confirm the connection.
 
 **3. FileBird REST API** — endpoint, curl format, param quirks and what a healthy response
-looks like are all in [docs/reference/filebird-api.md](../docs/reference/filebird-api.md);
+looks like are all in [docs/reference/filebird-api.md](reference/filebird-api.md);
 that file is the only copy. **The bearer token is deliberately not in this repo** — it is in
 Claude's `feedback-session-start` memory.
 
@@ -133,7 +133,7 @@ the overlay. Measurement beat theorizing.
 read as "missing images / broken links" from a screenshot when a `curl` already run showed
 all three images HTTP 200 (raw + Photon). The cards were fine. Recall existing model facts
 before diagnosing, too — `featuredImage` is intentionally grid/list-only and never shown
-atop a page ([docs/schema/image.md](../docs/schema/image.md)), so a bare page hero is
+atop a page ([docs/schema/image.md](schema/image.md)), so a bare page hero is
 by design, not a bug.
 
 ## Browser pane gotchas
@@ -157,5 +157,5 @@ Theme-level `:root` tokens (`--wp--preset--*`) and unedited files are safe to re
 pane; it's the just-changed uploads asset that goes stale.
 
 The map-in-`<details>` zero-size quirk is a different, genuine thing — see
-[docs/rendering/blocks.md](../docs/rendering/blocks.md). Theme tokens:
-[docs/conventions/theme-tokens.md](../docs/conventions/theme-tokens.md).
+[docs/rendering/blocks.md](rendering/blocks.md). Theme tokens:
+[docs/conventions/theme-tokens.md](conventions/theme-tokens.md).

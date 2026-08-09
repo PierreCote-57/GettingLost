@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 29**
+**next id: 31**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -34,13 +34,21 @@ written before that date may not resolve.
 
 ## Site
 
-- **#28 — folders.md's howto/ subtree names two pages that do not exist** *(2026-08-09)*
-  It lists `howto-shower/` and `howto-temperature-control/`; on disk the five are
-  `howto-awning`, `howto-climate`, `howto-dump`, `howto-power`, `howto-water`. Predates the
-  maintenance work — found while adding the maintenance folders to the same tree. Check the
-  rest of that tree against disk in the same pass rather than fixing only these two.
+- **#29 — The booklet builder reads a `title` key the page JSONs no longer have** *(2026-08-09)*
+  `build_booklet_pdf.py` line ~320 is `data.get("title") or <filename base>`. Page JSONs were
+  renamed `title` → `name` in schema-unification Phase 3a (2026-07-20), so the `or` branch
+  wins every time and both booklets print filenames — "howto-water" instead of "How To: Use
+  water". One-word fix, but the PDFs have to be rebuilt and re-pushed after it, which is why
+  it is parked rather than done inline. Found reading the docs against the code, 2026-08-09.
 
 ## Tooling
+
+- **#30 — sync-on-push.yml's header comment describes a page-map gate that does not exist** *(2026-08-09)*
+  Its comment block says new page files with no entry in `local/config/page-map.json` are
+  warned about and never auto-created, and that a change under `local/config/` forces a full
+  sync of all pages. `sync.js` discovers pages dynamically and says so in its own header;
+  `local/config/` is empty. The `local/config/**` path trigger is harmless but describes a
+  mechanism that is gone. Decide whether the trigger and the comment both go.
 
 - **#16 — Make the cross-reference check repeatable** *(2026-07-31)*
   Walking cross-referenced pages against each other is something to do whenever destination

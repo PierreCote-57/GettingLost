@@ -14,7 +14,7 @@ wins.**
 Migrated out of Claude's memory directory 2026-07-30.
 
 [overview.md](overview.md) — what the project is: the GitHub-mastered sync pipeline,
-per-page JSON as source of truth, auto-generated galleries.
+per-page JSON as source of truth, the one param-driven list browser.
 
 ## schema/ — the shape of the data
 
@@ -37,7 +37,7 @@ per-page JSON as source of truth, auto-generated galleries.
 | [site.md](conventions/site.md) | standing conventions, filename-master, destination types, FileBird folders |
 | [json-format.md](conventions/json-format.md) | the JSON house format — tabs, one field per line, written through `jsonio.py` |
 | [keywords.md](conventions/keywords.md) | `tags.keywords` as an OPEN vocabulary: authoring, and never normalizing in the filter |
-| [folders.md](conventions/folders.md) | folder structure across the 4 locations, FileBird IDs |
+| [folders.md](conventions/folders.md) | folder structure across the 4 locations; why FileBird ids are never stored here |
 | [github-workflow.md](conventions/github-workflow.md) | repo SOP, sync workflows, token policy |
 | [fishing-links.md](conventions/fishing-links.md) | Go Fish BC stocking reports, further-readings placement |
 | [theme-tokens.md](conventions/theme-tokens.md) | palette, fonts, why `gettinglost.cst` uses no theme `var()`s |
@@ -68,6 +68,7 @@ installed skill would be. `CLAUDE.md` points at them so they are known every ses
 | [data-fill.md](recipes/data-fill.md) | geocoding, haversine, per-park scraping, `jsonio.py` |
 | [image-editing.md](recipes/image-editing.md) | crop, EXIF orientation, donor-clone removal |
 | [charting.md](recipes/charting.md) | `gen-chart.py`, the locked cabin-climate chart |
+| [doc-validation.md](recipes/doc-validation.md) | `check_docs.py` — the five checks, and what the pass deliberately does not check |
 
 ## reference/ — external sources
 

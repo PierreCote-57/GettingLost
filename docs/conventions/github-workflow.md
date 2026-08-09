@@ -30,8 +30,10 @@ silently following the web config; the right move is to run that work in the loc
 
 ## Sync Workflows
 - `sync.yml` — manual, full overwrite, no diffing
-- `sync-on-push.yml` — automatic incremental on push to main; falls back to full sync when push includes file deletions or when `local/` changes (sync.js doesn't trust its own incremental logic after a self-edit); triggers on `pages/**`, `posts/**`, `media/**`, `local/config/**`, `local/sync/**`
+- `sync-on-push.yml` — automatic incremental on push to main; falls back to full sync when push includes file deletions or when `local/` changes (sync.js doesn't trust its own incremental logic after a self-edit); triggers on `pages/**`, `posts/**`, `logs/**`, `media/**`, `local/config/**`, `local/sync/**`
 - `pull-posts.yml` — manual trigger, runs pull-posts.js to fetch new WP posts into repo, auto-commits and pushes (has `permissions: contents: write`)
+- `slug-refactor.yml` — manual, dry-run by default; the one-shot slug migration, see [../projects/slug-rebuild.md](../projects/slug-rebuild.md)
+- `slug-test.yml` — manual probe, 2026-07-06. Uploads ONE file asking for an explicit slug and reads back what WP stored, to answer whether a binary upload honours `?slug=` in one call. Touches nothing else and leaves the test attachment behind on purpose
 
 ## Running the JS Locally
 - Node is installed locally (v26.5.0, npm 11.17.0, on PATH since 2026-07-20) — `node --check`,

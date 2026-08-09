@@ -29,11 +29,12 @@ WordPress's default year/month folder behavior means a bare-filename block refer
 ## FileBird Folder Structure
 FileBird keeps **two independent folder trees**: media folders (Images/Data, for library attachments) and **post-type folders** (for pages/posts). Sync mirrors a repo path into BOTH: `[filebird:media]` files uploaded media into media folders, `[filebird:pages]` files the WP page/post into a page folder. So a repo folder rename (e.g. `van/instructions`→`van/howto`) creates the new folder in whichever tree the next full sync touches and **leaves the old one orphaned — sync never deletes**; rename it manually in both trees to avoid orphans (case-insensitive match lets sync reuse it).
 
-Two root media folders: **Images** (id:52) and **Data** (id:56) — peers.
+Two root media folders: **Images** and **Data** — peers.
 
-Full folder trees with IDs are in [docs/conventions/folders.md](folders.md) — always check there for current state.
-
-**Data/** tree was reorganized 2026-06-30 and matches GitHub `media/data/` exactly.
+**Folder ids are never written down in this repo — read them from WP when needed.** They
+change when a folder is recreated, and a committed number cannot tell you it went stale.
+The ruling and what folders.md does record are in
+[docs/conventions/folders.md](folders.md).
 
 FileBird REST API: Bearer token auth at `/wp-json/filebird/public/v1/`
 - The token is **not in this repo** — it is in Claude's `feedback-session-start` memory. See
@@ -56,9 +57,6 @@ FileBird REST API: Bearer token auth at `/wp-json/filebird/public/v1/`
 - `POST /post-type-folder/update` — rename/move folder (`post_type`, `id`, `title`, `parent`)
 - `POST /post-type-folder/delete` — delete folder (`post_type`, `ids[]`)
 - `POST /post-type-folder/set-posts` — assign pages to folder (`post_type`, `folderId`, `ids[]`)
-
-## Known Bugs
-- **Sproat Lake**: fully built 2026-07-18 (lake page + Sproat Lake Provincial Park park page). It uses `fishingReferences.lakeChartList` = array of `{name,url}` (3 bathymetric sheets), the current schema every lake uses (mohun is live) — the old `lakeChartUrl`-single-string bug note is obsolete; the array renders fine.
 
 ## Site Icon
 RVIcon.png is live.

@@ -19,9 +19,10 @@ alphabetically by title, and emits a cover, a table of contents, and one or more
 source page, with "Page n of N" footers including on the cover — see
 [docs/conventions/document-footers.md](../conventions/document-footers.md).
 
-A page's **title comes from the sibling JSON `title`** (`<data_dir>/<slug>/<slug>.json`),
-not the section `h2` — howto `h2`s are all the generic "How to". The section's own heading
-is skipped.
+A page's **title comes from the sibling JSON** (`<data_dir>/<name>/<name>.json`), not the
+section `h2` — howto `h2`s are all the generic "How to". The section's own heading is
+skipped. **The builder reads a `title` key, which page JSONs have not carried since the
+2026-07-20 rename to `name`, so every page currently falls back to its filename — todo #29.**
 
 The renderer walks the section's children in order and dispatches by tag: `h2`/`h3` →
 heading, `p` → paragraph, `ol` → numbered or checkbox, `ul` → bullets (recursive),

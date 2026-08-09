@@ -51,7 +51,7 @@ Block-rendering implications:
 
 ## Generic Renderers
 
-**tags** (2026-08-01) — the destination's own vocabularies, **first on the page**, above the campground row: identity, then actions. Block `<div data-block-type="tags"></div>`, on all 18 destination pages and both templates.
+**tags** (2026-08-01) — the destination's own vocabularies, **first on the page**, above the campground row: identity, then actions. Block `<div data-block-type="tags"></div>`, on every destination page and both templates.
 - **badges LEFT, road badge RIGHT** on one line (`justify-content: space-between`), **keywords BELOW** on their own line. Left and right are different KINDS of fact — what you would do there vs what it costs you to get there — so they read as two things rather than one row. Keywords sit under because they are the OPEN vocabulary: most numerous, least authoritative, and the only one that grows without warning.
 - **The road badge carries a distance**: every leg OF THE BADGE'S TYPE, summed (`roadBadgeKm`). Legs `[potholes 3, dirt 5, potholes 2, dirt 1]` → **potholes 5 km** — worst type wins the badge, and all of that type counts even though the last leg is dirt. `pavement` has no legs so it gets no distance; `back_country` sums the non-drive legs, i.e. how far you are not in the van. The km is plain grey text, not a pill — it is a measurement, not a vocabulary word.
 - **`tags.types` is deliberately absent.** It filters; the page already says what kind of place it is (Pierre, 2026-08-01).
@@ -130,7 +130,7 @@ Before delivering any page using photoRef/photoGallery, validate every gallery k
 ## How-To naming split (renamed from "instructions" 2026-07-04)
 The van how-to section lives at `pages/van/howto/` + `media/data/van/howto/` (was `van/instructions/`). Two distinct casings, don't conflate:
 - **`howto` (lowercase) = the machine token** — folder names, `data-howto-section="howto"`, `data-gallery="howto"`, the `photoGalleries` key, and the `data-id="howto/…"` half of photoRefs. HTML `data-gallery`/`data-id` must match the JSON `photoGalleries` key per page or the block throws.
-- **"How to" (display) = the human label** — the WP nav item under *The Van*, and the `title` of the `van-howto` dataset in `datasets.json`. (The old `backToGallery data-title="How to"` is gone; the label is static now. Historical trap worth remembering: a find/replace once lowercased that label and shipped "Back to howto".)
+- **"How to" (display) = the human label** — the WP nav item under *Vehicles*, and the `title` of the `van-howto` dataset in `datasets.json`. (The old `backToGallery data-title="How to"` is gone; the label is static now. Historical trap worth remembering: a find/replace once lowercased that label and shipped "Back to howto".)
 
 ## How-To Page Structure Convention
 1. Always-visible "How to" section (`data-howto-section="howto"`)
@@ -157,7 +157,7 @@ The `checklist` block renderer (gettinglost.jst; was the standalone `enhanceChec
 - `renderCard` is exposed as `window.GL.renderCard`, shared by list_browser.jst's grid view and `featured` blocks (home page etc.)
 - Current tags in use: camping, fishing, hiking, picnic
 
-## Image resizing via Jetpack Photon (implemented 2026-07-03, in working tree pending push)
+## Image resizing via Jetpack Photon (2026-07-03)
 `formatImageUrl(img, w, h)` in gettinglost.jst returns `https://i0.wp.com/{location.host}/wp-content/uploads/{img}?fit={w},{h}&quality=80`. `fit`=contain (no crop), w/h default 1920. sync.js copy NOT changed (lookup key). Full rationale: [docs/schema/image.md](../schema/image.md).
 - **Callers & sizes:** gallery card (renderCard) `600,400`; custom `photo` block inline `480,480`; mini-gallery thumb `360,220`; anything feeding the lightbox `1920,1920`.
 - **Two DUAL-WINDOW callers** feed an on-page image AND the lightbox from what was one URL, so each was split into two `formatImageUrl` calls: (1) the `photo` renderer → `displaySrc` (480) for `<img>`, `fullSrc` (1920) for `<a href>`+lightbox; (2) photoGallery renderer → `thumbSrc` (360×220) for the grid `<img>`, full-size `entries[].src` (1920) for lightbox + href fallback. The no-JS `<a href>` fallback always points at the full-size image.

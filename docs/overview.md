@@ -30,6 +30,13 @@ local/
   sync/
     sync.js          — GitHub Actions sync script (pages + posts)
     pull-posts.js    — GitHub Actions script to pull new WP posts into repo
+  tools/             — local Python, run by hand, never in Actions
+    jsonio.py            — the JSON house format, load/save
+    check_docs.py        — the documentation validation pass
+    keyword_validation.py — the keyword validation pass
+    build_booklet_pdf.py — the checklists/howto booklet builder
+  refactor/
+    slug-refactor.js — one-shot slug migration, outside sync/ on purpose
   plugins/
     filebird_new/    — FileBird Pro plugin zip
 ```

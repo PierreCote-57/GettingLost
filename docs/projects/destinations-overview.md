@@ -32,10 +32,11 @@ Lake Provincial Park" is the page now named `morton-lake-park.html`.
 
 ## Editing
 
-**Do not `json.load`/`dump` this file** — a round-trip reformats every place. Use raw-text
-insertion anchored on the `"name"` or `"file"` line, then re-parse to validate. Its `access`
-blocks are fully expanded while the destination pages use compact one-line entries; that
-cosmetic mismatch is known and deliberate.
+Through `local/tools/jsonio.py` like every other file under `media/data/**`, including
+single-field edits — [../conventions/json-format.md](../conventions/json-format.md). The old
+"never `json.load`/`dump` this one, it reformats every place" rule died with the house format
+on 2026-07-19: the file is now tab-indented one-field-per-line like its neighbours, so a
+round-trip is byte-identical and there is no expanded-vs-compact mismatch left to preserve.
 
 ## Place schema
 
@@ -80,11 +81,14 @@ the JSON, never to paper over in code.
 
 ## Renderer behaviors
 
-Each group is a collapsible `<details>`, collapsed by default, with the count in the summary.
-Fixed-px columns via `table-layout:fixed` plus an identical colgroup, so columns align across
-the separate per-group tables. `MAX_CONTENT_WIDTH=1180` overrides the theme's 900 cap.
-Client-side sort by name operates on a copy and never mutates source order. Footnotes are
-deduped within a group.
+**One flat table** — colgroup, thead, tbody, numbered footnotes. The collapsible per-group
+`<details>` sections, and the footnote deduping that went with them, belonged to the retired
+overview page; `list_browser.jst` flattened them away and the only `<details>` left on the
+page is a filter dropdown. Fixed-px columns via `table-layout:fixed` plus a colgroup. The
+table breaks out of the theme's 900 cap on its own wrapper, not through a shared constant —
+the mechanism and why `max-width` cannot do it are in
+[../rendering/list-browser.md](../rendering/list-browser.md). Client-side sort by name
+operates on a copy and never mutates source order.
 
 ## Standing data caveats
 

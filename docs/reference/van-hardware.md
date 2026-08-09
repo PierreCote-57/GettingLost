@@ -15,17 +15,19 @@ The hardware itself — Truma units, electrical, awning — is documented in `~/
 outside this repo, so it is available in any project.
 
 ## Current Notes Content
-**howto-temperature-control.json** — 3 sections:
+**howto-climate.json** — 3 sections:
 - "Truma CP plus" (product page + Aventa/Combi-specific operating instructions)
 - "Truma Aventa eco + soft start" (product page, product guide, operating instructions, quick start guide)
 - "Truma Combi G comfort" (product page, one sheet, operating instructions, quick start guide)
 
-**howto-power.json** (built 2026-07-11) — notes sections in order: Generator (Cummins, 2 real links), Inverter (2,000 W Victron — placeholder), Solar panels (placeholder), House battery (Group 8D, 330 Ah AGM — placeholder), then the 3 Truma sections **copied verbatim** from howto-temperature-control.json.
-- ⚠ Truma docs now DUPLICATED across howto-power.json AND howto-temperature-control.json — if a Truma URL changes, update BOTH.
+**howto-power.json** (built 2026-07-11) — notes sections in order: Generator (Cummins, 2 real links), Inverter (2,000 W Victron — placeholder), Solar panels (placeholder), House battery (Group 8D, 330 Ah AGM — placeholder), then the 3 Truma sections **copied verbatim** from howto-climate.json.
+- ⚠ Truma docs now DUPLICATED across howto-power.json AND howto-climate.json — if a Truma URL changes, update BOTH.
 - 3 "To be researched" placeholders await real doc URLs: inverter, solar, house battery.
 
-## Hosting supplier PDFs (caveat)
-Can't just drop a PDF in `media/` and have it sync. `syncFiles` in local/sync/sync.js only uploads `.json`/`.jst`/`.cst` under `media/` to the WP media library — it is NOT a general binary uploader. Repo stores no binaries (images live locally in ~/Pictures/GettingLost; image pipeline planned, not built). Self-hosting a manual PDF would need a sync-code change or a manual WP-admin upload. (Was mid-investigation when session ended.)
+## Hosting supplier PDFs
+A PDF under `media/data/**` syncs like any other file: sync.js uploads `.json`/`.jst`/`.cst`/`.pdf` to the WP media library, flat, so it is fetchable at `/wp-content/uploads/<basename>` — which is how the booklet PDFs and the maintenance invoices are served. **Flat means a PDF filename must be unique sitewide, not just within its folder.**
+
+Images are the exception and stay out of the repo — they are Pierre's, uploaded by hand ([../conventions/folders.md](../conventions/folders.md)).
 
 **howto-awning.json** — 2 sections:
 - "Carefree Eclipse" (product page, owner's manual r10, installation manual)

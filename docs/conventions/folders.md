@@ -27,6 +27,7 @@ FileBird Images/                    ← WordPress media library, PIERRE'S (see b
 ```
 about/
   about/
+  logging/
   useful-contacts/
   useful-links/
 destinations/                       ← refreshed from the repo 2026-08-02
@@ -59,13 +60,13 @@ destinations/                       ← refreshed from the repo 2026-08-02
     roberts-lake-rec0191/
     twin-lake-rec0185/
 shared/
-  gallery/
+  gallery/                          ← WP only: where sync puts the generated PageMap.json
   home/
+  list_browser/
 templates/
-  campground-template/
+  destination-template/
   howto-template/
   lake-template/
-  park-template/
   van-template/
 van/
   van-overview/
@@ -75,8 +76,9 @@ van/
     checklist-leaving-campsite/
   howto/
     howto-awning/
-    howto-shower/
-    howto-temperature-control/
+    howto-climate/
+    howto-dump/
+    howto-power/
     howto-water/
   maintenance/
     van-maintenance/
@@ -112,31 +114,9 @@ diff it against anything, do not propose renames or a reorganization, and do not
 as a finding. This cancelled todo #14, a FileBird↔local reconciliation built on the wrong
 premise.
 
-## Implementation Status (updated 2026-07-01)
-
-### DONE
-- GitHub `pages/` reorganized to match structure (pushed, synced to WP)
-- GitHub `media/data/` reorganized to match structure (pushed, synced to WP)
-- `~/Pictures/GettingLost/Images/` full folder tree created
-- FileBird Data tree reorganized and validated — matches GitHub exactly
-- FileBird Images tree reorganized and validated (2026-07-01) — matches target structure
-- FileBird Page folder tree validated (2026-07-01) — matches GitHub
-- Template JSON files created (lake-template, campground-template, park-template, van-template)
-- Lake images copied from `~/Working/Fishing/Images/` to Pictures folder:
-  - amor-lake (28 images, from 00324SALM)
-  - echo-lake (24 images, from 00126CAMB)
-  - gosling-lake (3 images, from 00040CAMB)
-  - muchalat-lake (12 images, from 00197GOLD)
-  - roberts-lake (22 images, from 00155SALM)
-- Total: 89 lake images copied
-- Van images and howto images assigned in WP admin (2026-07-01)
-
-### NOT DONE / PENDING
-- Posts strategy (deferred)
-
 ## Lake ID Mapping
-| lakeId | Slug | Fishing Images Folder |
-|--------|------|-----------------------|
+| lakeId | Page name | Fishing Images Folder |
+|--------|-----------|-----------------------|
 | 00040CAMB | gosling-lake | ~/Working/Fishing/Images/00040CAMB |
 | 00126CAMB | echo-lake | ~/Working/Fishing/Images/00126CAMB |
 | 00155SALM | roberts-lake | ~/Working/Fishing/Images/00155SALM |
@@ -145,62 +125,29 @@ premise.
 | 00324SALM | amor-lake | ~/Working/Fishing/Images/00324SALM |
 | 01128ALBN | sproat-lake | NOT FOUND |
 
-## FileBird Post-Type API (pages — working)
-- `GET /wp-json/filebird/public/v1/post-type-folders/?post_type=page`
-- `POST /wp-json/filebird/public/v1/post-type-folders` — create (`post_type`, `title`, `parent`)
-- `POST /wp-json/filebird/public/v1/post-type-folder/update` — rename/move
-- `POST /wp-json/filebird/public/v1/post-type-folder/delete`
-- `POST /wp-json/filebird/public/v1/post-type-folder/set-posts` — assign pages
-- No "read folder contents" endpoint — validation must be done visually in WP Admin
+## FileBird folder ids are NEVER stored here (Pierre, 2026-08-09)
 
-## FileBird Media API (broken)
-- `set-attachment` returns "Validation failed" regardless of param format or auth — all media folder assignments are manual
+**A FileBird folder id is read from WordPress at the moment it is needed, never written
+down in this repo.** WordPress is the master of that tree: ids change when a folder is
+recreated, and a number committed to GitHub cannot announce that it went stale — it just
+sits there being wrong until something is filed into the wrong folder. Assume any id you
+remember has changed underneath you.
 
-## Current FileBird Data Folder Structure (confirmed 2026-06-30 evening)
-```
-Data (id:56)
-  about (id:80)
-    about (id:81)
-    useful-contacts (id:82)
-    useful-links (id:83)
-  destinations (id:90)
-    campgrounds (id:91)
-      pacific-playgrounds-resort (id:92)
-      salmon-point-resort (id:93)
-    lakes (id:94)
-      amor-lake (id:95)
-      echo-lake (id:96)
-      gosling-lake (id:97)
-      keogh-lake (id:98)
-      muchalat-lake (id:99)
-      roberts-lake (id:100)
-      sproat-lake (id:101)
-    parks (id:102)
-      elk-falls-quinsam-campground (id:103)
-  scripts (id:60)
-  shared (id:84)
-    gallery (id:85)
-  templates (id:113)
-    campground-template (id:114)
-    howto-template (id:87)
-    lake-template (id:115)
-    park-template (id:116)
-    van-template (id:117)
-  van (id:88)
-    checklists (id:104)
-      checklist-arriving-campsite (id:105)
-      checklist-leaving-campsite (id:106)
-    instructions (id:107)
-      howto-awning (id:108)
-      howto-shower (id:109)
-      howto-temperature-control (id:110)
-      howto-water (id:111)
-    van-overview (id:89)
-```
+The same goes for the shape of either tree, Data or Images. Neither is recorded here; walk
+`GET /folders` or `GET /post-type-folders/?post_type=page` and read what is actually there.
+Endpoints, curl format and param quirks: [../reference/filebird-api.md](../reference/filebird-api.md),
+which is the only copy.
 
-## FileBird Images folder structure
+Two facts about the trees that are not ids, and so do belong here:
 
-Not recorded here. It is Pierre's tree (see *Images are Pierre's* above) and nothing on the
-site depends on a snapshot of it. Look it up live if a specific answer is needed. The
-2026-07-01 snapshot that used to sit here was deleted 2026-08-07 — it was maintained only to
-support the reconciliation that is no longer a task.
+- **Two media roots only** — `Images/` and `Data/`, peers. `Data/` mirrors `media/data/`;
+  `Images/` is Pierre's (above).
+- **There is no "read folder contents" endpoint for post-type folders**, so page-folder
+  filing is validated visually in WP Admin.
+- **The media `set-attachment` endpoint is broken** — returns "Validation failed" whatever
+  the params or auth — so media folder assignment is manual in WP Admin.
+
+The 2026-06-30 Data snapshot that used to sit here was deleted 2026-08-09, along with the
+root ids in `site.md`. It had already rotted: it still showed `instructions/`,
+`howto-shower/` and `park-template/`, none of which have existed for weeks. The Images
+snapshot went the same way on 2026-08-07 when the reconciliation it supported was cancelled.

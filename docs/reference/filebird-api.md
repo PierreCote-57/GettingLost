@@ -9,8 +9,9 @@
 - **URL first, flags after** — `curl "<url>" -s -H "Authorization: Bearer <token>"`.
   Putting `-s` before the URL breaks the permission allow-rule glob and forces a prompt.
   Piping to anything (`| python3 …`) is a different command string and needs its own rule.
-- A healthy response is `{"success":true,"data":{"folders":[…]}}` with the Images (id 52)
-  and Data (id 56) roots.
+- A healthy response is `{"success":true,"data":{"folders":[…]}}` with the Images and Data
+  roots. **Read the ids off that response; never carry one in the repo** — see
+  [docs/conventions/folders.md](../conventions/folders.md).
 - Vendor docs: https://ninjateam.gitbook.io/filebird/integrations/developer-zone/post-type-folders-api
 
 ## Parameter quirks
@@ -18,7 +19,8 @@
 **Parameter names are inconsistent across endpoints and do not carry over.** The folder id is
 `parent_id` when creating a folder, `folder` for `set-attachment`, and `folderId` for
 `set-posts`. Check the name against the endpoint list in
-[docs/conventions/site.md](../conventions/site.md) before writing the call — a wrong name
+[docs/conventions/site.md](../conventions/site.md) — the only place they are written down —
+before writing the call — a wrong name
 returns a "Validation failed" that says nothing about which parameter it disliked. `sync.js`
 sent `folder_id` and `attachment_ids` to `set-attachment` for exactly that reason until
 2026-06-30.
