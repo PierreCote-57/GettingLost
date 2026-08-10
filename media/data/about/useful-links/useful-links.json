@@ -92,6 +92,49 @@
 			]
 		},
 		{
+			"sectionName": "Where to stay search sites",
+			"list": [
+				{
+					"name": "HipCamp",
+					"url": "https://www.hipcamp.com/en-CA",
+					"description": [
+						"Find an interesting location where you can stay"
+					]
+				},
+				{
+					"name": "Compendium",
+					"url": "https://campendium.com",
+					"description": [
+						"Standard campground search"
+					]
+				},
+				{
+					"name": "Outdoorsy",
+					"url": "https://ca.outdoorsy.com/",
+					"description": [
+						"Seems to know availability! Also appears to be USA only."
+					]
+				},
+				{
+					"name": "iOverlander",
+					"url": "https://ioverlander.com/",
+					"description": [
+						"Allows filtering on map, shows dump stations (20,575 in Canada)"
+					]
+				},
+				{
+					"name": "Park4Night",
+					"url": "https://park4night.com/en",
+					"description": "Interesting, has 'The responsible traveller's charter'"
+				},
+				{
+					"name": "Harvest hosts",
+					"url": "https://www.harvesthosts.com/",
+					"description": "Free stay at interesting locations (Winery, farms, ...)"
+				}
+			]
+		},
+		{
 			"sectionName": "Canada",
 			"list": [
 				{
