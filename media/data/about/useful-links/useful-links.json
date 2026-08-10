@@ -125,12 +125,16 @@
 				{
 					"name": "Park4Night",
 					"url": "https://park4night.com/en",
-					"description": "Interesting, has 'The responsible traveller's charter'"
+					"description": [
+						"Interesting, has 'The responsible traveller's charter'"
+					]
 				},
 				{
 					"name": "Harvest hosts",
 					"url": "https://www.harvesthosts.com/",
-					"description": "Free stay at interesting locations (Winery, farms, ...)"
+					"description": [
+						"Free stay at interesting locations (Winery, farms, ...)"
+						]
 				}
 			]
 		},
