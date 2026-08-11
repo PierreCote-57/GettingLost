@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 32**
+**next id: 35**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -32,44 +32,3 @@ counts separately.
 Note: the list was renumbered once, on 2026-07-28, before this rule. Ids cited in anything
 written before that date may not resolve.
 
-## Site
-
-- **#29 — The booklet builder reads a `title` key the page JSONs no longer have** *(2026-08-09)*
-  `build_booklet_pdf.py` line ~320 is `data.get("title") or <filename base>`. Page JSONs were
-  renamed `title` → `name` in schema-unification Phase 3a (2026-07-20), so the `or` branch
-  wins every time and both booklets print filenames — "howto-water" instead of "How To: Use
-  water". One-word fix, but the PDFs have to be rebuilt and re-pushed after it, which is why
-  it is parked rather than done inline. Found reading the docs against the code, 2026-08-09.
-
-- **#31 — Recreation trails and interpretive forests are not in `destinations.json`** *(2026-08-09)*
-  The rec-site pass covered only `PRJCT_TYPE = SIT - Recreation Site`. From
-  `local/data/RecSites-VancouverIsland.csv`, cross-referenced against
-  `local/data/RecSites-Fixed.csv` by REC #, that leaves **39 `RTR - Recreation Trail`** and
-  **5 `IF - Interpretative Forest`** absent from the list. Same data source and same fill
-  method as the rec sites, but the shape is an open question: a trail is not somewhere you
-  arrive, so `access`, `campground` and the `rec-site` type may all be wrong for it — see
-  the lakes-carry-no-access reasoning in `docs/schema/access.md`. Decide the type and the
-  schema before filling.
-
-## Tooling
-
-- **#30 — sync-on-push.yml's header comment describes a page-map gate that does not exist** *(2026-08-09)*
-  Its comment block gates new pages on `local/config/page-map.json`, which does not exist —
-  they are warned about rather than created, it says, and a change under `local/config/`
-  forces a full sync of all pages. `sync.js` discovers pages dynamically and says so in its
-  own header; `local/config/` is empty. The `local/config/**` path trigger is harmless but describes a
-  mechanism that is gone. Decide whether the trigger and the comment both go.
-
-- **#16 — Make the cross-reference check repeatable** *(2026-07-31)*
-  Walking cross-referenced pages against each other is something to do whenever destination
-  content changes, not a one-time pass — so it needs to exist as a skill or a recipe rather
-  than as a habit. Model it on `keyword-validation`: it reports disagreements, a human
-  decides. Only rows carrying a `file` link are in scope; a catalog-only row has nothing to
-  check against. Replaced todo #2, which wrongly parked a recurring pass as a task.
-
-- **#27 — Drop humidity from the Fridge/Freezer charts** *(2026-08-09)*
-  **Decided by Pierre 2026-08-09: no humidity for Fridge/Freezer.** Not open — only the edit
-  is pending, to be made the next time the chart is worked on. `BANDS` in `gen-chart.py`
-  currently gives both a 30–70 humidity band; the series, its band and the right axis all go.
-  Update the bands table in `recipes/charting.md` in the same pass — it documents today's
-  behaviour and stays correct until the change lands.

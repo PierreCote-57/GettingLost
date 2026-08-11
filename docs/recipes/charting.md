@@ -49,19 +49,24 @@ Title/subtitle rules (in gen-chart.py):
 ## LOCKED dual-axis cabin-climate format (finalized 2026-07-18)
 - **900 × 520**, white bg, black left+right+bottom borders, `#e1e0d9` gridlines.
 - **Left axis** Temp °C red **`#d62728`**; **right axis** Humidity %RH blue **`#2166c4`**.
-  **Per-location bands** (`BANDS` in gen-chart.py) — both always **4 intervals** so
-  gridlines coincide; all values **clamp** to band (no interpolation at 10-min cadence):
+  **Per-location bands** (`BANDS` in gen-chart.py) — where a location has both, each is
+  **4 intervals** so gridlines coincide; all values **clamp** to band (no interpolation
+  at 10-min cadence):
 
   | Location | Temp | Humidity | Thermostat |
   |---|---|---|---|
-  | Indoor Storage | 0–20 by 5 | 20–60 by 10 | 6 °C |
+  | Indoor Storage | 0–40 by 10 | 20–60 by 10 | 6 °C |
   | Outdoors | 10–30 by 5 | 30–70 by 10 | 20 °C |
-  | Fridge | 0–20 by 5 | 30–70 by 10 | — |
-  | Freezer | −20–0 by 5 | 30–70 by 10 | — |
+  | Fridge | 0–20 by 5 | none | — |
+  | Freezer | −20–0 by 5 | none | — |
+
+  **Fridge and Freezer carry no humidity** (decided 2026-08-09): no `hum` key in `BANDS`,
+  so the series, the right axis, its title and its legend entry are all absent and the
+  chart draws temperature alone. `--measure hum` or `both` exits on those two locations.
 
 - **Thermostat** (Indoor/Outdoors): solid **bold green** `#1a9850` line on temp axis +
   right-aligned "Thermostat N °C" label.
-- Two lines width 3, no markers; **axis titles 18 pt, colored to match their line**;
+- Lines width 3, no markers; **axis titles 18 pt, colored to match their line**;
   **legend** top-right. Title 24 bold, subtitle 18 grey (`#6b6b6b`), tick labels 14.
 - **X axis — NOT locked; min/max/step vary per chart** (clarified 2026-07-19). It has
   all three knobs and they're plain CLI flags, no `.py` edit:

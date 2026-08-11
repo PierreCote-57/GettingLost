@@ -5,6 +5,8 @@ Pierre converts the SVG -> PNG in IntelliJ (~1 s) for the howto-climate gallery.
 
 Two modes:
   single   Temperature (left, red) + Humidity (right, blue), dual axis, 900x520.
+           A scale with no humidity band (Fridge, Freezer) draws temperature only,
+           on a single axis.
   overlay  One measure, N nights of the same clock window superimposed, one colour
            per night (NIGHT_COLORS) with a matching legend. Right axis dropped.
            --overlay switches this on.
@@ -41,14 +43,16 @@ Usage:
                 draw one line per period from NIGHT_COLORS. both restores the dual axis
                 and keeps red=temperature / blue=humidity, telling the periods apart by
                 dash pattern (DASHES) instead — readable to about three periods.
+                hum and both need a scale with a humidity band; Fridge/Freezer exit.
   --xstep       hours between X-axis ticks (e.g. 1 or 2). Omit -> auto by span (12/2/1h).
   --title       override the chart title, e.g. 'Freezer (Level 3)'.
 
-Per-scale axis bands + setpoint live in BANDS below, in Celsius. Temp & humidity both
-span 4 intervals so their gridlines coincide; the Fahrenheit band is DERIVED to keep
-that invariant (convert, snap lo down to a multiple of 5, smallest step from 5/10/20
-whose 4 intervals cover the span). All values clamp to their band; the 10-min cadence
-is dense enough that no band-edge interpolation is needed.
+Per-scale axis bands + setpoint live in BANDS below, in Celsius. A scale with a
+humidity band spans 4 intervals on both so their gridlines coincide; the Fahrenheit
+band is DERIVED to keep that invariant (convert, snap lo down to a multiple of 5,
+smallest step from 5/10/20 whose 4 intervals cover the span). All values clamp to
+their band; the 10-min cadence is dense enough that no band-edge interpolation is
+needed.
 
 X axis default = data range snapped out to the enclosing 12h ticks. Focus one chart
 by setting WIN_START/WIN_END; weekday ticks come from the real dates (single mode only
@@ -114,12 +118,13 @@ def date_range(d0, d1):
 # ---------- per-scale bands (Celsius) ----------
 # temp (lo, hi, step) | hum (lo, hi, step) | setpoint °C (None = no line).
 # Temp span 20 (step 5) and hum span 40 (step 10) both give 4 intervals -> gridlines coincide.
+# No hum key = that scale carries no humidity: no series, no band, no right axis.
 BANDS = {
     "Indoor Storage": dict(temp=(0, 40, 10),  hum=(20, 60, 10), thermostat=6,
                            temp_f=(20, 100, 20)),
     "Outdoors":       dict(temp=(10, 30, 5),  hum=(30, 70, 10), thermostat=None, thermostat_f=70),
-    "Fridge":         dict(temp=(0, 20, 5),   hum=(30, 70, 10), thermostat=None),
-    "Freezer":        dict(temp=(-20, 0, 5),  hum=(30, 70, 10), thermostat=None),
+    "Fridge":         dict(temp=(0, 20, 5),   thermostat=None),
+    "Freezer":        dict(temp=(-20, 0, 5),  thermostat=None),
 }
 
 def to_f(c): return c * 9.0 / 5.0 + 32.0
@@ -272,13 +277,15 @@ def build_svg(lines, cfg, anchor):
         rx = W - 18
         p.append('<text x="%d" y="%.1f" transform="rotate(90 %d %.1f)" text-anchor="middle" font-size="18" fill="%s">%s</text>' % (rx, cy, rx, cy, R["color"], esc(R["title"])))
 
-    # legend (top-right, inside the plot's empty upper corner): the two measures in
+    # legend (top-right, inside the plot's empty upper corner): the measures drawn in
     # single mode, one entry per night — colour-matched to its line — in overlay.
     if cfg.get("overlay"):
         entries = [(ln["label"], ln.get("color", L["color"]), ln.get("dash")) for ln in lines]
         lx = PR - 185
     else:
-        entries = [("Temperature", L["color"], None), ("Humidity", R["color"], None)]
+        entries = [("Temperature", L["color"], None)]
+        if dual:
+            entries.append(("Humidity", R["color"], None))
         lx = PR - 150
     ly = PT + 18
     for label, color, dash in entries:
@@ -306,7 +313,8 @@ ap.add_argument("--overlay", metavar="DATES", help="period start dates (7/18,7/1
 ap.add_argument("--days", type=int, default=1, metavar="N",
                 help="days the window spans, for periods longer than one day (default: 1)")
 ap.add_argument("--measure", choices=["temp", "hum", "both"], default="temp",
-                help="overlay series: temp (default), hum, or both on a dual axis")
+                help="overlay series: temp (default), hum, or both on a dual axis; "
+                     "hum/both need a scale with a humidity band")
 ap.add_argument("--xstep", type=float, metavar="HOURS", help="hours between X-axis ticks (default: auto by span)")
 ap.add_argument("--title", metavar="TEXT", help="override the chart title, e.g. 'Freezer (Level 3)'")
 args = ap.parse_args()
@@ -363,8 +371,14 @@ if args.overlay and not args.win:
     sys.exit("gen-chart.py: --overlay needs --win to say which window each night covers")
 
 TEMP = dict(title=t_title, lo=t_lo, hi=t_hi, step=t_step, suffix=t_suffix, color="#d62728", src="temp")
-HUM  = dict(title="Humidity (%RH)", lo=b["hum"][0], hi=b["hum"][1], step=b["hum"][2],
-            suffix="%", color="#2166c4", src="hum")
+if "hum" in b:
+    HUM = dict(title="Humidity (%RH)", lo=b["hum"][0], hi=b["hum"][1], step=b["hum"][2],
+               suffix="%", color="#2166c4", src="hum")
+else:
+    HUM = None                                  # this scale carries no humidity
+
+if HUM is None and args.measure != "temp":
+    sys.exit("gen-chart.py: %s carries no humidity — --measure must be temp" % CFG["scale"])
 
 if args.overlay:
     # ---- overlay: N nights of one measure, re-anchored onto a shared window ----
@@ -431,7 +445,8 @@ if args.overlay:
     CFG["subtitle"] = "%d %s, %s" % (len(used), "nights" if args.days == 1 else "weeks",
                                      date_range(d0, d1))                  # the legend names them
 else:
-    # ---- single: one window, temperature + humidity on a dual axis ----
+    # ---- single: one window, temperature + humidity on a dual axis (temperature
+    # alone on a single axis when the scale carries no humidity) ----
     if args.win:
         peek = load(SRCS[0])                            # unfiltered peek to place the window
         fd = peek[3]                                    # first data date
@@ -449,8 +464,9 @@ else:
     if CFG["unit"] == "F":
         temps = [to_f(v) for v in temps]
     CFG["left"], CFG["right"] = TEMP, HUM
-    lines = [dict(times=times, values=temps, axis="L"),
-             dict(times=times, values=hums,  axis="R")]
+    lines = [dict(times=times, values=temps, axis="L")]
+    if HUM is not None:
+        lines.append(dict(times=times, values=hums, axis="R"))
     used = None
     if CFG["scale"] == "Indoor Storage":
         CFG["subtitle"] = "%s, %s" % (CFG["dehumidifier"], date_range(d0, d1))

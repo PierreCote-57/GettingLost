@@ -313,11 +313,11 @@ def render_element(el):
 def build_page(path, data_dir):
     """Return a list of (title, subtitle, [flowables]) — one booklet page per
     <section data-howto-section="howto"> on the page. The title is the page's
-    actual title (JSON), shared by every section; the subtitle is that section's
+    `name` (JSON), shared by every section; the subtitle is that section's
     own heading (via aria-labelledby). A page with no section still yields one
     title-only entry (producing the block is the author's job)."""
     data = _load_data(path, data_dir)
-    title = xml_escape(data.get("title") or os.path.splitext(os.path.basename(path))[0])
+    title = xml_escape(data.get("name") or os.path.splitext(os.path.basename(path))[0])
     galleries = data.get("photoGalleries", {})
 
     with open(path, encoding="utf-8") as f:

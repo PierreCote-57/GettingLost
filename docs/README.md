@@ -69,6 +69,7 @@ installed skill would be. `CLAUDE.md` points at them so they are known every ses
 | [image-editing.md](recipes/image-editing.md) | crop, EXIF orientation, donor-clone removal |
 | [charting.md](recipes/charting.md) | `gen-chart.py`, the locked cabin-climate chart |
 | [doc-validation.md](recipes/doc-validation.md) | `check_docs.py` — the five checks, and what the pass deliberately does not check |
+| [crossref-check.md](recipes/crossref-check.md) | `crossref_check.py` — the `file` link graph: targets resolve, data files exist, names agree |
 
 ## reference/ — external sources
 

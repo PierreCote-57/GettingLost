@@ -69,7 +69,7 @@ def findTaggedRows(node):
 # What to call a row in a report. A dataset file holds many rows, so the file
 # name alone cannot answer "where does this show up".
 def rowLabel(row):
-	label = row.get("name") or row.get("title") or row.get("file") or "(unnamed)"
+	label = row.get("name") or row.get("file") or "(unnamed)"
 	return label
 
 
