@@ -44,6 +44,13 @@ itself a finding — the slug model requires it to be unique.
 - **Prose.** Whether the two sides' `description` still tell the same story is a reading job,
   not a rule, and the script does not pretend to it.
 
+## Standing rulings
+
+- **bronco.json "VHF resource road radio" → logging.json "FSR = Logging roads"** — accepted
+  2026-08-11. The link names the specific thing the reader is being sent for; the target is a
+  broader page that covers it. A link whose `name` describes the section it points into is
+  correct, not a mismatch.
+
 Related: [doc-validation.md](doc-validation.md) — the same shape for the markdown,
 [../conventions/site.md](../conventions/site.md) for the convention this enforces,
 [../schema/links.md](../schema/links.md) for `file` vs `url`.
