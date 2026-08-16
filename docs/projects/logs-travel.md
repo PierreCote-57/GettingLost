@@ -9,16 +9,20 @@
 ## Naming rule (`<referent>_id`)
 A field pointing at another object is named `<target>_id`; bare `id` = an object's OWN
 identity. "id" = the target's canonical identifier: a `locations.json` record's `id`, or a
-page's **github filename**. So `location_id` → locations.json; `destination_id` → destination
-page (filename); `post_id` → blog post (filename).
+page's **github filename**. So `location_id` → locations.json; `post_id` → blog post
+(filename). A place that HAS a destination page is referenced by that page's filename in a
+`file` field — the same key, and the same meaning, as `file` everywhere else in the repo.
 
 ## The `location` block (shared by every log file)
-One block, two forms — never two competing top-level fields:
-- Reference: `"location": { "location_id": "oyster-bay-rest-area" }` → resolve in locations.json.
-- Inline (ad-hoc/roadside, phone-GPS): `"location": { "lat":…, "lng":…, "name"?:…, "pin"?:… }`.
-`location_id` present ⇒ resolve; absent ⇒ use inline coords. In `locations.json` records the
-block is ALWAYS inline (the definition). Superset of the site's `{lat,lng,pin,zoom}` schema
-([docs/schema/map-pins-location.md](../schema/map-pins-location.md)).
+A `location` is the place itself: `{ lat, lng, icon?, zoom?, pinList?, displayName?, img? }`,
+always concrete — **a location never points**
+([docs/schema/map-pins-location.md](../schema/map-pins-location.md)). References live in the
+referring field, not inside the location: a log entry names a place with `location_id`
+(a `locations.json` id) or `file` (a destination page filename).
+
+`logs/travel-log.json` still carries `location_id` references to two records that the
+2026-08-16 map-model migration deleted, because those places now have destination pages —
+see `docs/todo.md` #36.
 
 ## `logs/travel-log.json` — unified "stop" entries
 One type, a **stop**: `{ name, arrival, departure, location, note?, post_id?, id }`.
@@ -41,10 +45,17 @@ creation order. **Sort by `arrival`/`datetime` only on demand**, at render, neve
 write.
 
 ## `logs/locations.json` — place registry
-Record: `{ name (first), id, address?, url?, destination_id?, location:{lat,lng,pin?} }`.
-`id` kebab-case = own identity; `destination_id` = the destination page's github filename;
-`location` inline. Pin vocab: tent/campground/picnic/
-lake/park/home. Rest-stop `url` uses the DriveBC map link w/ the API id ([docs/reference/bc-rest-stops.md](../reference/bc-rest-stops.md)).
+Record: `{ name (first), id, address?, url?, location:{lat,lng,icon?,zoom?} }`.
+`id` kebab-case = own identity; `location` always inline and concrete. Icon vocab:
+tent/campground/picnic/lake/park/home. Rest-stop `url` uses the DriveBC map link w/ the API
+id ([docs/reference/bc-rest-stops.md](../reference/bc-rest-stops.md)).
+
+**The registry holds only places with no destination page.** A place that gets a page leaves
+the registry, and references to it become `file` pointers — the page is the authority. Two
+kinds of tenant live here: scaffolding (a real destination whose page doesn't exist yet, e.g.
+`rathtrevor-beach-park`) and permanent oddballs that will never be destinations (the storage
+unit, the dealers, a rest area). `destination_id` was deleted with the 2026-08-16 migration —
+it had no consumer and only existed to mark records that have now left.
 
 ## `logs/fuel-log.json` — fuel entries
 `{ name (first), datetime, odometer_km, liters, price_per_liter_cad,

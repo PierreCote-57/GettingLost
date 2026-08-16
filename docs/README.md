@@ -25,7 +25,7 @@ per-page JSON as source of truth, the one param-driven list browser.
 | [badges-road.md](schema/badges-road.md) | authored `badges.tags`, derived `badges.road`, `ROAD_COLORS` |
 | [types.md](schema/types.md) | `tags.types` — the closed destination-type facet, why it is optional |
 | [links.md](schema/links.md) | `links[]` — one flat list, `type` is the key, the label is display text |
-| [map-pins-location.md](schema/map-pins-location.md) | `location{lat,lng,pin,zoom}`, pin vocabulary, `googleMap` block |
+| [map-pins-location.md](schema/map-pins-location.md) | the one shape shared by `location`, a named `googleMap` and a `pin`; resolution, icon vocabulary |
 | [wpsettings-comments.md](schema/wpsettings-comments.md) | `wpSettings{published,comments}` |
 | [wp-title-date.md](schema/wp-title-date.md) | tab title, post date/modified, backdating |
 | [slug-vs-title.md](schema/slug-vs-title.md) | slug = id, title = display name |

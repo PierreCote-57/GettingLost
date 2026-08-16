@@ -12,11 +12,21 @@ uninteresting. Exit code is 1 when anything is found, 0 when clean.
     crossref_check.py                 the report
     crossref_check.py --verbose       also list every link it walked
 
-Three checks:
+Five checks:
 
     target    the linked file exists, and the name resolves to exactly one file
     data      an .html target has its matching .json beside it
     name      the link's own `name` matches the `name` in the target's JSON
+    location  a `location` is concrete lat/lng and never holds a pointer
+    registry  every `location_id` resolves to a record in logs/locations.json
+
+The last two guard the map model ([docs/schema/map-pins-location.md]): a named
+`googleMap` entry may point at a page (`file`) or a registry record
+(`location_id`), and what it lands on is a `location`. A `location` that pointed
+somewhere itself would make resolution a chain instead of one hop, so the rule
+is that it never does — which is what makes a pointer always terminate. A `file`
+pointer needs no rule of its own here: it is an object carrying a string `file`,
+so the target and data checks above already walk it.
 
 Out of scope on purpose:
 
@@ -26,10 +36,13 @@ Out of scope on purpose:
   - PROSE. Whether the two sides' `description` still tell the same story is a
     reading job, not a rule (ruled 2026-08-10).
 
-Scope of the walk: JSON under media/. Any object carrying a string `file` at
-any depth is a link, which is what picks up the rows inline in dataset files —
-a per-page glob would miss them, and that is where most of the links live.
-`local/data/` is out of scope; those are unauthored source datasets.
+Scope of the walk: JSON under media/, plus logs/locations.json for the two map
+checks — the registry defines the records `location_id` names, so it has to be
+read to say whether one lands, and its own records carry a `location`.
+Any object carrying a string `file` at any depth is a link, which is what picks
+up the rows inline in dataset files — a per-page glob would miss them, and that
+is where most of the links live. `local/data/` is out of scope; those are
+unauthored source datasets.
 
 The `name` check is skipped for a link that carries no `name`, and for one whose
 target JSON has none. The list-browser catalog rows are the case: they label a
@@ -192,6 +205,68 @@ def checkNames(links, pageIndex, dataIndex):
 	return findings
 
 
+# Every `location` block in one JSON document, with the path that reached it, so
+# a finding can name the row it came from. Registry files are a list of records,
+# page files a single object; both are walked the same way.
+def collectLocations(document, source, where="", found=None):
+	locations = [] if found is None else found
+	if isinstance(document, dict):
+		for key, value in document.items():
+			path = where + "." + key
+			if key == "location" and isinstance(value, dict):
+				locations.append({"source": source, "where": path, "location": value})
+			else:
+				collectLocations(value, source, path, locations)
+	elif isinstance(document, list):
+		for index, value in enumerate(document):
+			collectLocations(value, source, "%s[%d]" % (where, index), locations)
+	return locations
+
+
+# Every `location_id` in one JSON document, with the path that reached it.
+def collectLocationIds(document, source, where="", found=None):
+	references = [] if found is None else found
+	if isinstance(document, dict):
+		for key, value in document.items():
+			path = where + "." + key
+			if key == "location_id" and isinstance(value, str):
+				references.append({"source": source, "where": path, "id": value})
+			else:
+				collectLocationIds(value, source, path, references)
+	elif isinstance(document, list):
+		for index, value in enumerate(document):
+			collectLocationIds(value, source, "%s[%d]" % (where, index), references)
+	return references
+
+
+# CHECK: a `location` is the place itself — concrete coordinates, never a
+# pointer. A location that pointed somewhere would turn one-hop resolution into
+# a chain, so both halves of that are findings here.
+def checkLocations(locations):
+	findings = []
+	for entry in locations:
+		block = entry["location"]
+		label = "%s %s" % (relative(entry["source"]), entry["where"])
+		for pointer in ("file", "location_id"):
+			if pointer in block:
+				findings.append("%s holds a %r — a location never points" % (label, pointer))
+		for axis in ("lat", "lng"):
+			if not isinstance(block.get(axis), (int, float)):
+				findings.append("%s has no concrete %r" % (label, axis))
+	return findings
+
+
+# CHECK: every `location_id` names a record that exists. A dangling one is a
+# console error and an empty map at runtime.
+def checkRegistry(references, registryIds):
+	findings = []
+	for reference in references:
+		if reference["id"] not in registryIds:
+			findings.append("%s %s -> %r is not a record in logs/locations.json" %
+				(relative(reference["source"]), reference["where"], reference["id"]))
+	return findings
+
+
 # The report: one section per check, numbered as plain text so the numbers
 # survive being pasted into a reply.
 def printReport(sections):
@@ -213,6 +288,17 @@ def main(argv):
 	dataPaths = findDataFiles(os.path.join(REPO_ROOT, "media"))
 	links = collectAllLinks(dataPaths)
 
+	registryPath = os.path.join(REPO_ROOT, "logs", "locations.json")
+	registry = json.load(open(registryPath, encoding="utf-8"))
+	registryIds = {record["id"] for record in registry if "id" in record}
+
+	locations = collectLocations(registry, registryPath)
+	references = collectLocationIds(registry, registryPath)
+	for dataPath in dataPaths:
+		document = json.load(open(dataPath, encoding="utf-8"))
+		collectLocations(document, dataPath, "", locations)
+		collectLocationIds(document, dataPath, "", references)
+
 	if verbose:
 		print("%d links in %d data files, against %d pages and %d data files\n" %
 			(len(links), len(dataPaths), len(pageIndex), len(dataIndex)))
@@ -224,6 +310,8 @@ def main(argv):
 		("target", checkTargets(links, pageIndex, dataIndex)),
 		("data", checkData(links, pageIndex, dataIndex)),
 		("name", checkNames(links, pageIndex, dataIndex)),
+		("location", checkLocations(locations)),
+		("registry", checkRegistry(references, registryIds)),
 	]
 	total = printReport(sections)
 	return 1 if total else 0
