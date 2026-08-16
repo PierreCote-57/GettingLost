@@ -18,9 +18,9 @@
 	"location": {
 		"lat": 50.12631,
 		"lng": -125.47977,
-		"pin": "campground",
+		"icon": "campground",
 		"zoom": 15,
-		"notes": "Near Campbell River"
+		"displayName": "Near Campbell River"
 	},
 	"access": {
 		"haversine": [
@@ -77,7 +77,7 @@
 			"lat": 50.089026,
 			"lng": -125.3845,
 			"zoom": 12,
-			"pins": [
+			"pinList": [
 				{
 					"img": "onTheWay/img_0499",
 					"lat": 50.120322,
@@ -124,7 +124,7 @@
 			"lat": 50.125713,
 			"lng": -125.481117,
 			"zoom": 16,
-			"pins": [
+			"pinList": [
 				{
 					"img": "atSite/img_0577",
 					"lat": 50.126398,

@@ -6,7 +6,7 @@
  * is on window.GL before the core script (and its renderers) run.
  *
  * Home for cross-cutting ALL-CAPS constants:
- *   GL.PIN_ICONS   — map-marker SVGs keyed by a page's location.pin.
+ *   GL.PIN_ICONS   — map-marker SVGs keyed by a pin's "icon" value.
  *   GL.TAG_COLORS  — tag-chip colors (used by renderTags).
  *   GL.TAG_FALLBACK
  *   GL.DESTINATION_TYPES — the closed tags.types vocabulary.
@@ -116,7 +116,7 @@
     ]
   };
 
-  // Map-marker figures, keyed by the page JSON's location.pin value.
+  // Map-marker figures, keyed by a pin's "icon" value.
   // Each is a standalone 48x48 SVG (xmlns is required for data-URI use),
   // with the figure centered via translate(24,24) so gettinglost.jst can
   // anchor every pin at (24,24). Unknown/absent pin -> the core script

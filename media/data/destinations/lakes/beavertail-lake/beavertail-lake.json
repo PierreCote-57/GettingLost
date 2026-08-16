@@ -18,19 +18,11 @@
 	"location": {
 		"lat": 49.9812,
 		"lng": -125.5033,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 49.9812,
-			"lng": -125.5033,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 49.9812,
-					"lng": -125.5033
-				}
-			]
+			"file": "beavertail-lake.html"
 		}
 	},
 	"fishingReferences": {

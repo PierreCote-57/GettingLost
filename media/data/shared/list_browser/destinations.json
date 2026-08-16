@@ -19,9 +19,9 @@
 		"location": {
 			"lat": 50.5893452,
 			"lng": -127.0839027,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill, BC"
+			"displayName": "Port McNeill, BC"
 		},
 		"access": {
 			"haversine": [
@@ -57,9 +57,9 @@
 		"location": {
 			"lat": 50.281405,
 			"lng": -125.64853099999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -98,9 +98,9 @@
 		"location": {
 			"lat": 48.4497693,
 			"lng": -123.504666,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Langford, BC"
+			"displayName": "Langford, BC"
 		},
 		"access": {
 			"haversine": [
@@ -142,9 +142,9 @@
 		"location": {
 			"lat": 50.182179,
 			"lng": -125.55408,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -183,9 +183,9 @@
 		"location": {
 			"lat": 50.175148,
 			"lng": -125.564098,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -224,9 +224,9 @@
 		"location": {
 			"lat": 50.079792,
 			"lng": -125.587005,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -268,9 +268,9 @@
 		"location": {
 			"lat": 49.2343668,
 			"lng": -124.8056517,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Alberni Inlet, outside Port Alberni"
+			"displayName": "Alberni Inlet, outside Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -337,9 +337,9 @@
 		"location": {
 			"lat": 48.616794999999996,
 			"lng": -124.437198,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Renfrew"
+			"displayName": "Port Renfrew"
 		},
 		"access": {
 			"haversine": [
@@ -378,9 +378,9 @@
 		"location": {
 			"lat": 48.922499,
 			"lng": -123.718414,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Chemainus, BC"
+			"displayName": "Chemainus, BC"
 		},
 		"access": {
 			"haversine": [
@@ -416,9 +416,9 @@
 		"location": {
 			"lat": 48.835221999999995,
 			"lng": -124.172277,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Cowichan Lake"
+			"displayName": "Cowichan Lake"
 		},
 		"access": {
 			"haversine": [
@@ -457,9 +457,9 @@
 		"location": {
 			"lat": 50.600646,
 			"lng": -127.309977,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -504,9 +504,9 @@
 		"location": {
 			"lat": 50.143823,
 			"lng": -125.500356,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -545,9 +545,9 @@
 		"location": {
 			"lat": 49.1528473,
 			"lng": -125.9048279,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Tofino, BC"
+			"displayName": "Tofino, BC"
 		},
 		"access": {
 			"haversine": [
@@ -583,9 +583,9 @@
 		"location": {
 			"lat": 50.026951999999994,
 			"lng": -125.425454,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -624,9 +624,9 @@
 		"location": {
 			"lat": 52.189941,
 			"lng": -126.871429,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bella Coola Valley"
+			"displayName": "Bella Coola Valley"
 		},
 		"access": {
 			"haversine": [
@@ -665,9 +665,9 @@
 		"location": {
 			"lat": 49.1573208,
 			"lng": -125.0179231,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Backroads toward Nahmint Lake, near Sproat Lake"
+			"displayName": "Backroads toward Nahmint Lake, near Sproat Lake"
 		},
 		"access": {
 			"haversine": [
@@ -728,9 +728,9 @@
 		"location": {
 			"lat": 49.18358,
 			"lng": -125.070781,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -769,9 +769,9 @@
 		"location": {
 			"lat": 50.168378,
 			"lng": -125.58947599999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -810,9 +810,9 @@
 		"location": {
 			"lat": 50.541779,
 			"lng": -126.785382,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -851,9 +851,9 @@
 		"location": {
 			"lat": 48.672087,
 			"lng": -123.660882,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Shawnigan Lake"
+			"displayName": "Shawnigan Lake"
 		},
 		"access": {
 			"haversine": [
@@ -892,9 +892,9 @@
 		"location": {
 			"lat": 49.163877,
 			"lng": -123.938122,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nanaimo, BC"
+			"displayName": "Nanaimo, BC"
 		},
 		"access": {
 			"haversine": [
@@ -930,9 +930,9 @@
 		"location": {
 			"lat": 50.076336999999995,
 			"lng": -125.589041,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -971,9 +971,9 @@
 		"location": {
 			"lat": 50.111461999999996,
 			"lng": -125.573003,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1012,9 +1012,9 @@
 		"location": {
 			"lat": 50.056168,
 			"lng": -125.59432699999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1058,9 +1058,9 @@
 		"location": {
 			"lat": 50.1594885,
 			"lng": -125.3723823,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River, BC"
+			"displayName": "Campbell River, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1099,9 +1099,9 @@
 		"location": {
 			"lat": 50.035714,
 			"lng": -125.46810099999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1140,9 +1140,9 @@
 		"location": {
 			"lat": 49.3479861,
 			"lng": -124.4439409,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Qualicum Beach, BC"
+			"displayName": "Qualicum Beach, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1178,9 +1178,9 @@
 		"location": {
 			"lat": 50.080265999999995,
 			"lng": -125.59156,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1219,9 +1219,9 @@
 		"location": {
 			"lat": 49.173305,
 			"lng": -125.398877,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Tofino"
+			"displayName": "Tofino"
 		},
 		"access": {
 			"haversine": [
@@ -1265,9 +1265,9 @@
 		"location": {
 			"lat": 49.6858493,
 			"lng": -124.8799953,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Comox, BC"
+			"displayName": "Comox, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1324,9 +1324,9 @@
 		"location": {
 			"lat": 49.3479861,
 			"lng": -124.4439409,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Qualicum Beach, BC"
+			"displayName": "Qualicum Beach, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1362,9 +1362,9 @@
 		"location": {
 			"lat": 50.201588,
 			"lng": -125.56765899999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1403,9 +1403,9 @@
 		"location": {
 			"lat": 48.5446533,
 			"lng": -123.5680621,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Malahat, BC"
+			"displayName": "Malahat, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1441,9 +1441,9 @@
 		"location": {
 			"lat": 48.922499,
 			"lng": -123.718414,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Chemainus, BC"
+			"displayName": "Chemainus, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1479,9 +1479,9 @@
 		"location": {
 			"lat": 49.2343668,
 			"lng": -124.8056517,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni, BC"
+			"displayName": "Port Alberni, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1520,9 +1520,9 @@
 		"location": {
 			"lat": 48.679431,
 			"lng": -123.611352,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Duncan"
+			"displayName": "Duncan"
 		},
 		"access": {
 			"haversine": [
@@ -1561,9 +1561,9 @@
 		"location": {
 			"lat": 48.896078,
 			"lng": -123.7157026,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Chemainus, BC"
+			"displayName": "Chemainus, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1599,9 +1599,9 @@
 		"location": {
 			"lat": 49.1528473,
 			"lng": -125.9048279,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Tofino, BC"
+			"displayName": "Tofino, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1637,9 +1637,9 @@
 		"location": {
 			"lat": 50.828993999999994,
 			"lng": -126.66502,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -1678,9 +1678,9 @@
 		"location": {
 			"lat": 49.4402737,
 			"lng": -124.6882261,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bowser, BC"
+			"displayName": "Bowser, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1716,9 +1716,9 @@
 		"location": {
 			"lat": 50.018589,
 			"lng": -125.540058,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1757,9 +1757,9 @@
 		"location": {
 			"lat": 50.004275,
 			"lng": -125.232331,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River, BC"
+			"displayName": "Campbell River, BC"
 		},
 		"access": {
 			"haversine": [
@@ -1801,9 +1801,9 @@
 		"location": {
 			"lat": 50.274533,
 			"lng": -125.426971,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1842,9 +1842,9 @@
 		"location": {
 			"lat": 50.312374999999996,
 			"lng": -125.927821,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -1886,9 +1886,9 @@
 		"location": {
 			"lat": 49.113468,
 			"lng": -124.63069899999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -1927,9 +1927,9 @@
 		"location": {
 			"lat": 50.030649999999994,
 			"lng": -125.503339,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -1968,9 +1968,9 @@
 		"location": {
 			"lat": 50.3780591,
 			"lng": -125.9592773,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward, BC"
+			"displayName": "Sayward, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2006,9 +2006,9 @@
 		"location": {
 			"lat": 48.862123,
 			"lng": -124.719925,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -2047,9 +2047,9 @@
 		"location": {
 			"lat": 48.4283182,
 			"lng": -123.364953,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Victoria, BC"
+			"displayName": "Victoria, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2085,9 +2085,9 @@
 		"location": {
 			"lat": 48.3906956,
 			"lng": -123.9416582,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Between Sooke and Jordan River"
+			"displayName": "Between Sooke and Jordan River"
 		},
 		"access": {
 			"haversine": [
@@ -2140,9 +2140,9 @@
 		"location": {
 			"lat": 50.022006,
 			"lng": -125.57642799999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -2181,9 +2181,9 @@
 		"location": {
 			"lat": 50.028942,
 			"lng": -125.570334,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -2222,9 +2222,9 @@
 		"location": {
 			"lat": 50.030049999999996,
 			"lng": -125.577124,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -2263,9 +2263,9 @@
 		"location": {
 			"lat": 50.744671999999994,
 			"lng": -127.61397099999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Hardy"
+			"displayName": "Port Hardy"
 		},
 		"access": {
 			"haversine": [
@@ -2314,9 +2314,9 @@
 		"location": {
 			"lat": 48.4770313,
 			"lng": -123.5430354,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "16 km NW of Victoria, Trans-Canada Hwy"
+			"displayName": "16 km NW of Victoria, Trans-Canada Hwy"
 		},
 		"access": {
 			"haversine": [
@@ -2380,9 +2380,9 @@
 		"location": {
 			"lat": 48.8335432,
 			"lng": -124.2022988,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Cowichan Lake, north of Duncan"
+			"displayName": "Cowichan Lake, north of Duncan"
 		},
 		"access": {
 			"haversine": [
@@ -2439,9 +2439,9 @@
 		"location": {
 			"lat": 50.036904,
 			"lng": -125.498246,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -2483,9 +2483,9 @@
 		"location": {
 			"lat": 50.045021999999996,
 			"lng": -125.500567,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -2524,9 +2524,9 @@
 		"location": {
 			"lat": 50.049800000000005,
 			"lng": -125.593885,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -2565,9 +2565,9 @@
 		"location": {
 			"lat": 48.9426817,
 			"lng": -125.546049,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Ucluelet, BC (Long Beach area)"
+			"displayName": "Ucluelet, BC (Long Beach area)"
 		},
 		"access": {
 			"haversine": [
@@ -2612,9 +2612,9 @@
 		"location": {
 			"lat": 50.835716999999995,
 			"lng": -126.772374,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -2653,9 +2653,9 @@
 		"location": {
 			"lat": 50.633333,
 			"lng": -127.016667,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sointula, BC"
+			"displayName": "Sointula, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2691,9 +2691,9 @@
 		"location": {
 			"lat": 48.660250999999995,
 			"lng": -124.225278,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Renfrew"
+			"displayName": "Port Renfrew"
 		},
 		"access": {
 			"haversine": [
@@ -2732,9 +2732,9 @@
 		"location": {
 			"lat": 49.3179514,
 			"lng": -124.311739,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville, BC"
+			"displayName": "Parksville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2770,9 +2770,9 @@
 		"location": {
 			"lat": 49.351589,
 			"lng": -124.741552,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "near Qualicum Beach, BC"
+			"displayName": "near Qualicum Beach, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2825,9 +2825,9 @@
 		"location": {
 			"lat": 48.5946782,
 			"lng": -123.420726,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Saanich Peninsula, BC"
+			"displayName": "Saanich Peninsula, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2872,9 +2872,9 @@
 		"location": {
 			"lat": 48.9426817,
 			"lng": -125.546049,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Ucluelet, BC"
+			"displayName": "Ucluelet, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2910,9 +2910,9 @@
 		"location": {
 			"lat": 49.163877,
 			"lng": -123.938122,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nanaimo, BC"
+			"displayName": "Nanaimo, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2948,9 +2948,9 @@
 		"location": {
 			"lat": 48.5002971,
 			"lng": -123.9681842,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Jordan River, BC"
+			"displayName": "Jordan River, BC"
 		},
 		"access": {
 			"haversine": [
@@ -2995,9 +2995,9 @@
 		"location": {
 			"lat": 48.5086267,
 			"lng": -124.3598452,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Southwest Vancouver Island, Juan de Fuca coast"
+			"displayName": "Southwest Vancouver Island, Juan de Fuca coast"
 		},
 		"access": {
 			"haversine": [
@@ -3058,9 +3058,9 @@
 		"location": {
 			"lat": 50.43895,
 			"lng": -126.24810000000001,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -3099,9 +3099,9 @@
 		"location": {
 			"lat": 50.516838,
 			"lng": -126.69369499999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -3143,9 +3143,9 @@
 		"location": {
 			"lat": 48.669301999999995,
 			"lng": -123.69086300000001,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Shawnigan Lake"
+			"displayName": "Shawnigan Lake"
 		},
 		"access": {
 			"haversine": [
@@ -3184,9 +3184,9 @@
 		"location": {
 			"lat": 48.801846,
 			"lng": -124.701819,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nitinaht"
+			"displayName": "Nitinaht"
 		},
 		"access": {
 			"haversine": [
@@ -3225,9 +3225,9 @@
 		"location": {
 			"lat": 50.516667,
 			"lng": -128.033333,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "near Winter Harbour, BC"
+			"displayName": "near Winter Harbour, BC"
 		},
 		"access": {
 			"haversine": [
@@ -3281,9 +3281,9 @@
 		"location": {
 			"lat": 49.121691999999996,
 			"lng": -124.45279,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -3322,9 +3322,9 @@
 		"location": {
 			"lat": 50.172073999999995,
 			"lng": -125.53943699999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -3363,9 +3363,9 @@
 		"location": {
 			"lat": 49.915881,
 			"lng": -126.625535,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Leiner River, near Tahsis"
+			"displayName": "Leiner River, near Tahsis"
 		},
 		"access": {
 			"haversine": [
@@ -3421,9 +3421,9 @@
 		"location": {
 			"lat": 50.426893,
 			"lng": -127.488098,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "near Port Alice, BC (Alice Lake)"
+			"displayName": "near Port Alice, BC (Alice Lake)"
 		},
 		"access": {
 			"haversine": [
@@ -3473,9 +3473,9 @@
 		"location": {
 			"lat": 50.337381,
 			"lng": -125.517915,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -3514,9 +3514,9 @@
 		"location": {
 			"lat": 49.2892711,
 			"lng": -124.6498123,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Between Parksville/Qualicum and Port Alberni"
+			"displayName": "Between Parksville/Qualicum and Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -3568,9 +3568,9 @@
 		"location": {
 			"lat": 49.163877,
 			"lng": -123.938122,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nanaimo, BC"
+			"displayName": "Nanaimo, BC"
 		},
 		"access": {
 			"haversine": [
@@ -3606,9 +3606,9 @@
 		"location": {
 			"lat": 48.5542109,
 			"lng": -124.4031008,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "~20 min drive from Port Renfrew"
+			"displayName": "~20 min drive from Port Renfrew"
 		},
 		"access": {
 			"haversine": [
@@ -3674,9 +3674,9 @@
 		"location": {
 			"lat": 50.013456999999995,
 			"lng": -125.555422,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -3715,9 +3715,9 @@
 		"location": {
 			"lat": 50.026723,
 			"lng": -125.551058,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -3756,9 +3756,9 @@
 		"location": {
 			"lat": 52.418617,
 			"lng": -126.457319,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bella Coola Valley"
+			"displayName": "Bella Coola Valley"
 		},
 		"access": {
 			"haversine": [
@@ -3802,9 +3802,9 @@
 		"location": {
 			"lat": 50.0496831,
 			"lng": -125.4512122,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell Lake, near Campbell River"
+			"displayName": "Campbell Lake, near Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -3863,9 +3863,9 @@
 		"location": {
 			"lat": 50.536722,
 			"lng": -127.0090386,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Lower Nimpkish River, Nimpkish Valley"
+			"displayName": "Lower Nimpkish River, Nimpkish Valley"
 		},
 		"access": {
 			"haversine": [
@@ -3911,9 +3911,9 @@
 		"location": {
 			"lat": 49.387755,
 			"lng": -125.132106,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -3952,9 +3952,9 @@
 		"location": {
 			"lat": 50.5452514,
 			"lng": -127.529147,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "40 min drive from Port McNeill, adjacent to Marble River Provincial Park"
+			"displayName": "40 min drive from Port McNeill, adjacent to Marble River Provincial Park"
 		},
 		"access": {
 			"haversine": [
@@ -4015,9 +4015,9 @@
 		"location": {
 			"lat": 50.393555,
 			"lng": -127.209338,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -4056,9 +4056,9 @@
 		"location": {
 			"lat": 52.424408,
 			"lng": -126.182186,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bella Coola Valley"
+			"displayName": "Bella Coola Valley"
 		},
 		"access": {
 			"haversine": [
@@ -4097,9 +4097,9 @@
 		"location": {
 			"lat": 50.284455,
 			"lng": -125.64773199999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -4138,9 +4138,9 @@
 		"location": {
 			"lat": 50.228128999999996,
 			"lng": -125.575577,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -4179,9 +4179,9 @@
 		"location": {
 			"lat": 50.218140999999996,
 			"lng": -125.778591,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -4230,9 +4230,9 @@
 		"location": {
 			"lat": 49.8461306,
 			"lng": -125.0972267,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Black Creek, between Campbell River and Courtenay"
+			"displayName": "Black Creek, between Campbell River and Courtenay"
 		},
 		"access": {
 			"haversine": [
@@ -4289,9 +4289,9 @@
 		"location": {
 			"lat": 50.111061,
 			"lng": -125.493264,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -4330,9 +4330,9 @@
 		"location": {
 			"lat": 50.092048999999996,
 			"lng": -125.50477699999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -4377,9 +4377,9 @@
 		"location": {
 			"lat": 50.341426999999996,
 			"lng": -126.199767,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -4418,9 +4418,9 @@
 		"location": {
 			"lat": 50.881237,
 			"lng": -126.53790599999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -4465,9 +4465,9 @@
 		"location": {
 			"lat": 49.163877,
 			"lng": -123.938122,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nanaimo, BC"
+			"displayName": "Nanaimo, BC"
 		},
 		"access": {
 			"haversine": [
@@ -4503,9 +4503,9 @@
 		"location": {
 			"lat": 50.1670632,
 			"lng": -125.5312914,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward Forest Canoe Route, between Amor Lake and Surprise Lake"
+			"displayName": "Sayward Forest Canoe Route, between Amor Lake and Surprise Lake"
 		},
 		"access": {
 			"haversine": [
@@ -4566,9 +4566,9 @@
 		"location": {
 			"lat": 48.743773,
 			"lng": -123.542746,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Saltspring Island"
+			"displayName": "Saltspring Island"
 		},
 		"access": {
 			"haversine": [
@@ -4607,9 +4607,9 @@
 		"location": {
 			"lat": 50.7046816,
 			"lng": -127.8407191,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "En route to/from Cape Scott Provincial Park, North Island"
+			"displayName": "En route to/from Cape Scott Provincial Park, North Island"
 		},
 		"access": {
 			"haversine": [
@@ -4668,9 +4668,9 @@
 		"location": {
 			"lat": 50.700612,
 			"lng": -127.81620000000001,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Hardy"
+			"displayName": "Port Hardy"
 		},
 		"access": {
 			"haversine": [
@@ -4709,9 +4709,9 @@
 		"location": {
 			"lat": 50.477546,
 			"lng": -126.427589,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -4750,9 +4750,9 @@
 		"location": {
 			"lat": 49.271116,
 			"lng": -124.1925699,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nanoose Bay, BC"
+			"displayName": "Nanoose Bay, BC"
 		},
 		"access": {
 			"haversine": [
@@ -4788,9 +4788,9 @@
 		"location": {
 			"lat": 50.3386857,
 			"lng": -127.0217235,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nimpkish Lake, Nimpkish Valley"
+			"displayName": "Nimpkish Lake, Nimpkish Valley"
 		},
 		"access": {
 			"haversine": [
@@ -4836,9 +4836,9 @@
 		"location": {
 			"lat": 48.7524857,
 			"lng": -124.7354368,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nitinaht Lake, BC"
+			"displayName": "Nitinaht Lake, BC"
 		},
 		"access": {
 			"haversine": [
@@ -4887,9 +4887,9 @@
 		"location": {
 			"lat": 48.805093,
 			"lng": -124.678585,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nitinaht"
+			"displayName": "Nitinaht"
 		},
 		"access": {
 			"haversine": [
@@ -4928,9 +4928,9 @@
 		"location": {
 			"lat": 48.901353,
 			"lng": -124.38702,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Cowichan Lake"
+			"displayName": "Cowichan Lake"
 		},
 		"access": {
 			"haversine": [
@@ -4969,9 +4969,9 @@
 		"location": {
 			"lat": 52.245416,
 			"lng": -126.30649199999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bella Coola Valley"
+			"displayName": "Bella Coola Valley"
 		},
 		"access": {
 			"haversine": [
@@ -5010,9 +5010,9 @@
 		"location": {
 			"lat": 48.5937899,
 			"lng": -123.3827,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Saanichton, BC"
+			"displayName": "Saanichton, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5048,9 +5048,9 @@
 		"location": {
 			"lat": 50.029965,
 			"lng": -125.579368,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5089,9 +5089,9 @@
 		"location": {
 			"lat": 48.8630676,
 			"lng": -123.63917,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Crofton, BC"
+			"displayName": "Crofton, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5127,9 +5127,9 @@
 		"location": {
 			"lat": 48.5542109,
 			"lng": -124.4031008,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Renfrew, BC"
+			"displayName": "Port Renfrew, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5174,9 +5174,9 @@
 		"location": {
 			"lat": 48.833086,
 			"lng": -125.141144,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bamfield, BC"
+			"displayName": "Bamfield, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5225,9 +5225,9 @@
 		"location": {
 			"lat": 49.3179514,
 			"lng": -124.311739,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville, BC"
+			"displayName": "Parksville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5275,9 +5275,9 @@
 		"location": {
 			"lat": 50.086223,
 			"lng": -125.505066,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Mohun Lake, Sayward Canoe Route, north of Campbell River"
+			"displayName": "Mohun Lake, Sayward Canoe Route, north of Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5338,9 +5338,9 @@
 		"location": {
 			"lat": 49.3179514,
 			"lng": -124.311739,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville, BC"
+			"displayName": "Parksville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5376,9 +5376,9 @@
 		"location": {
 			"lat": 49.3179514,
 			"lng": -124.311739,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville, BC"
+			"displayName": "Parksville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5414,9 +5414,9 @@
 		"location": {
 			"lat": 48.3796009,
 			"lng": -123.535234,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Metchosin, BC"
+			"displayName": "Metchosin, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5452,9 +5452,9 @@
 		"location": {
 			"lat": 50.031957,
 			"lng": -125.499022,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5493,9 +5493,9 @@
 		"location": {
 			"lat": 50.185638999999995,
 			"lng": -125.704354,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -5534,9 +5534,9 @@
 		"location": {
 			"lat": 48.887989999999995,
 			"lng": -124.26122699999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Cowichan Lake"
+			"displayName": "Cowichan Lake"
 		},
 		"access": {
 			"haversine": [
@@ -5575,9 +5575,9 @@
 		"location": {
 			"lat": 50.7244402,
 			"lng": -127.4976081,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Hardy, BC"
+			"displayName": "Port Hardy, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5613,9 +5613,9 @@
 		"location": {
 			"lat": 50.426893,
 			"lng": -127.488098,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alice, BC"
+			"displayName": "Port Alice, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5656,9 +5656,9 @@
 		"location": {
 			"lat": 49.697017,
 			"lng": -125.003351,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "4624 Condensory Rd, Courtenay, BC"
+			"displayName": "4624 Condensory Rd, Courtenay, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5704,9 +5704,9 @@
 		"location": {
 			"lat": 50.298190999999996,
 			"lng": -125.584585,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5745,9 +5745,9 @@
 		"location": {
 			"lat": 50.288956,
 			"lng": -125.570268,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5786,9 +5786,9 @@
 		"location": {
 			"lat": 50.289367,
 			"lng": -125.602303,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5827,9 +5827,9 @@
 		"location": {
 			"lat": 50.24496,
 			"lng": -125.520179,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5868,9 +5868,9 @@
 		"location": {
 			"lat": 50.297954999999995,
 			"lng": -125.57983899999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -5909,9 +5909,9 @@
 		"location": {
 			"lat": 49.3479861,
 			"lng": -124.4439409,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Qualicum Beach, BC"
+			"displayName": "Qualicum Beach, BC"
 		},
 		"access": {
 			"haversine": [
@@ -5947,9 +5947,9 @@
 		"location": {
 			"lat": 49.4402737,
 			"lng": -124.6882261,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Bowser, BC (near Qualicum Beach)"
+			"displayName": "Bowser, BC (near Qualicum Beach)"
 		},
 		"access": {
 			"haversine": [
@@ -6004,9 +6004,9 @@
 		"location": {
 			"lat": 49.3248225,
 			"lng": -124.2616978,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville"
+			"displayName": "Parksville"
 		},
 		"access": {
 			"haversine": [
@@ -6057,9 +6057,9 @@
 		"location": {
 			"lat": 49.3179514,
 			"lng": -124.311739,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville, BC"
+			"displayName": "Parksville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6095,9 +6095,9 @@
 		"location": {
 			"lat": 48.7786872,
 			"lng": -123.7080446,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Duncan, BC"
+			"displayName": "Duncan, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6133,9 +6133,9 @@
 		"location": {
 			"lat": 49.3479861,
 			"lng": -124.4439409,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Qualicum Beach, BC"
+			"displayName": "Qualicum Beach, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6177,9 +6177,9 @@
 		"location": {
 			"lat": 48.9936579,
 			"lng": -123.8157964,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Ladysmith, BC"
+			"displayName": "Ladysmith, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6215,9 +6215,9 @@
 		"location": {
 			"lat": 48.4283182,
 			"lng": -123.364953,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Victoria, BC"
+			"displayName": "Victoria, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6256,9 +6256,9 @@
 		"location": {
 			"lat": 49.8647774,
 			"lng": -125.1164871,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Black Creek, BC"
+			"displayName": "Black Creek, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6303,9 +6303,9 @@
 		"location": {
 			"lat": 50.17172,
 			"lng": -126.260722,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Schoen Lake, near Woss"
+			"displayName": "Schoen Lake, near Woss"
 		},
 		"access": {
 			"haversine": [
@@ -6352,9 +6352,9 @@
 		"location": {
 			"lat": 49.356065,
 			"lng": -125.2888531,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Great Central Lake, near Port Alberni"
+			"displayName": "Great Central Lake, near Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -6416,9 +6416,9 @@
 		"location": {
 			"lat": 50.164431,
 			"lng": -125.486966,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -6457,9 +6457,9 @@
 		"location": {
 			"lat": 49.752152,
 			"lng": -124.959433,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Courtenay, BC"
+			"displayName": "Courtenay, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6513,9 +6513,9 @@
 		"location": {
 			"lat": 49.912073,
 			"lng": -126.662932,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Tahsis, BC"
+			"displayName": "Tahsis, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6551,9 +6551,9 @@
 		"location": {
 			"lat": 48.9426817,
 			"lng": -125.546049,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Ucluelet, BC (Toquaht Bay, 13km gravel off Hwy 4)"
+			"displayName": "Ucluelet, BC (Toquaht Bay, 13km gravel off Hwy 4)"
 		},
 		"access": {
 			"haversine": [
@@ -6602,9 +6602,9 @@
 		"location": {
 			"lat": 49.3479861,
 			"lng": -124.4439409,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Qualicum Beach, BC"
+			"displayName": "Qualicum Beach, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6640,9 +6640,9 @@
 		"location": {
 			"lat": 49.932137,
 			"lng": -125.186201,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River, BC"
+			"displayName": "Campbell River, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6688,9 +6688,9 @@
 		"location": {
 			"lat": 48.790473,
 			"lng": -123.896915,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Duncan"
+			"displayName": "Duncan"
 		},
 		"access": {
 			"haversine": [
@@ -6729,9 +6729,9 @@
 		"location": {
 			"lat": 49.2507112,
 			"lng": -124.0746545,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Lantzville, BC"
+			"displayName": "Lantzville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6776,9 +6776,9 @@
 		"location": {
 			"lat": 49.272714,
 			"lng": -125.18169499999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -6827,9 +6827,9 @@
 		"location": {
 			"lat": 48.462091,
 			"lng": -123.738435,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sooke, BC"
+			"displayName": "Sooke, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6869,9 +6869,9 @@
 		"location": {
 			"lat": 48.3886696,
 			"lng": -123.7071955,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sooke, BC"
+			"displayName": "Sooke, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6912,9 +6912,9 @@
 		"location": {
 			"lat": 49.853833,
 			"lng": -125.137988,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Black Creek, BC"
+			"displayName": "Black Creek, BC"
 		},
 		"access": {
 			"haversine": [
@@ -6972,9 +6972,9 @@
 		"location": {
 			"lat": 48.844755,
 			"lng": -124.11454499999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Cowichan Lake"
+			"displayName": "Cowichan Lake"
 		},
 		"access": {
 			"haversine": [
@@ -7019,9 +7019,9 @@
 		"location": {
 			"lat": 50.348248,
 			"lng": -127.363512,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alice"
+			"displayName": "Port Alice"
 		},
 		"access": {
 			"haversine": [
@@ -7060,9 +7060,9 @@
 		"location": {
 			"lat": 49.3479789,
 			"lng": -124.9385453,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Near Port Alberni"
+			"displayName": "Near Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -7115,9 +7115,9 @@
 		"location": {
 			"lat": 49.317282,
 			"lng": -124.901663,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Alberni"
+			"displayName": "Port Alberni"
 		},
 		"access": {
 			"haversine": [
@@ -7156,9 +7156,9 @@
 		"location": {
 			"lat": 49.742751999999996,
 			"lng": -126.036415,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Gold River"
+			"displayName": "Gold River"
 		},
 		"access": {
 			"haversine": [
@@ -7197,9 +7197,9 @@
 		"location": {
 			"lat": 50.284994999999995,
 			"lng": -125.486902,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -7238,9 +7238,9 @@
 		"location": {
 			"lat": 50.287959,
 			"lng": -125.494666,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -7279,9 +7279,9 @@
 		"location": {
 			"lat": 50.303211,
 			"lng": -125.524817,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -7320,9 +7320,9 @@
 		"location": {
 			"lat": 50.163149999999995,
 			"lng": -125.55670599999999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River"
+			"displayName": "Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -7361,9 +7361,9 @@
 		"location": {
 			"lat": 50.053492,
 			"lng": -125.99995200000001,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -7412,9 +7412,9 @@
 		"location": {
 			"lat": 49.7046516,
 			"lng": -125.5602583,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Highway 28, ~48 km west of Campbell River"
+			"displayName": "Highway 28, ~48 km west of Campbell River"
 		},
 		"access": {
 			"haversine": [
@@ -7494,9 +7494,9 @@
 		"location": {
 			"lat": 49.6537488,
 			"lng": -125.4554345,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "35 km south of Buttle Lake along Buttle Lake (Western Mines) Road"
+			"displayName": "35 km south of Buttle Lake along Buttle Lake (Western Mines) Road"
 		},
 		"access": {
 			"haversine": [
@@ -7549,9 +7549,9 @@
 		"location": {
 			"lat": 50.7244402,
 			"lng": -127.4976081,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port Hardy, BC"
+			"displayName": "Port Hardy, BC"
 		},
 		"access": {
 			"haversine": [
@@ -7587,9 +7587,9 @@
 		"location": {
 			"lat": 49.1528473,
 			"lng": -125.9048279,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Tofino, BC"
+			"displayName": "Tofino, BC"
 		},
 		"access": {
 			"haversine": [
@@ -7625,9 +7625,9 @@
 		"location": {
 			"lat": 48.9426817,
 			"lng": -125.546049,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Ucluelet, BC"
+			"displayName": "Ucluelet, BC"
 		},
 		"access": {
 			"haversine": [
@@ -7663,9 +7663,9 @@
 		"location": {
 			"lat": 49.3179514,
 			"lng": -124.311739,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Parksville, BC"
+			"displayName": "Parksville, BC"
 		},
 		"access": {
 			"haversine": [
@@ -7701,9 +7701,9 @@
 		"location": {
 			"lat": 48.438285,
 			"lng": -124.076135,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Jordan River"
+			"displayName": "Jordan River"
 		},
 		"access": {
 			"haversine": [
@@ -7742,9 +7742,9 @@
 		"location": {
 			"lat": 49.2762872,
 			"lng": -125.0435249,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "West of Sproat Lake"
+			"displayName": "West of Sproat Lake"
 		},
 		"access": {
 			"haversine": [
@@ -7804,9 +7804,9 @@
 		"location": {
 			"lat": 50.5474331,
 			"lng": -126.831394,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Telegraph Cove, BC"
+			"displayName": "Telegraph Cove, BC"
 		},
 		"access": {
 			"haversine": [
@@ -7842,9 +7842,9 @@
 		"location": {
 			"lat": 50.44922,
 			"lng": -127.213999,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -7883,9 +7883,9 @@
 		"location": {
 			"lat": 50.0420496,
 			"lng": -125.2496227,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Campbell River, BC"
+			"displayName": "Campbell River, BC"
 		},
 		"access": {
 			"haversine": [
@@ -7931,9 +7931,9 @@
 		"location": {
 			"lat": 50.260808999999995,
 			"lng": -125.99562,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -7972,9 +7972,9 @@
 		"location": {
 			"lat": 49.2895736,
 			"lng": -124.3703961,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Errington, BC"
+			"displayName": "Errington, BC"
 		},
 		"access": {
 			"haversine": [
@@ -8010,9 +8010,9 @@
 		"location": {
 			"lat": 49.1528473,
 			"lng": -125.9048279,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Tofino, BC (near MacKenzie Beach)"
+			"displayName": "Tofino, BC (near MacKenzie Beach)"
 		},
 		"access": {
 			"haversine": [
@@ -8057,9 +8057,9 @@
 		"location": {
 			"lat": 50.402952,
 			"lng": -126.563856,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward"
+			"displayName": "Sayward"
 		},
 		"access": {
 			"haversine": [
@@ -8098,9 +8098,9 @@
 		"location": {
 			"lat": 50.964529999999996,
 			"lng": -126.836005,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Port McNeill"
+			"displayName": "Port McNeill"
 		},
 		"access": {
 			"haversine": [
@@ -8142,9 +8142,9 @@
 		"location": {
 			"lat": 48.9426817,
 			"lng": -125.546049,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Ucluelet, BC"
+			"displayName": "Ucluelet, BC"
 		},
 		"access": {
 			"haversine": [
@@ -8180,9 +8180,9 @@
 		"location": {
 			"lat": 49.9177133,
 			"lng": -125.6618491,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Upper Campbell Lake, near Strathcona Park"
+			"displayName": "Upper Campbell Lake, near Strathcona Park"
 		},
 		"access": {
 			"haversine": [
@@ -8245,9 +8245,9 @@
 		"location": {
 			"lat": 50.054978999999996,
 			"lng": -126.44409,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Woss"
+			"displayName": "Woss"
 		},
 		"access": {
 			"haversine": [
@@ -8286,9 +8286,9 @@
 		"location": {
 			"lat": 49.163877,
 			"lng": -123.938122,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nanaimo, BC"
+			"displayName": "Nanaimo, BC"
 		},
 		"access": {
 			"haversine": [
@@ -8324,9 +8324,9 @@
 		"location": {
 			"lat": 50.3780591,
 			"lng": -125.9592773,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Sayward, BC"
+			"displayName": "Sayward, BC"
 		},
 		"access": {
 			"haversine": [
@@ -8362,9 +8362,9 @@
 		"location": {
 			"lat": 49.695952999999996,
 			"lng": -125.058836,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Courtenay"
+			"displayName": "Courtenay"
 		},
 		"access": {
 			"haversine": [
@@ -8403,9 +8403,9 @@
 		"location": {
 			"lat": 50.337,
 			"lng": -126.917111,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Nimpkish Lake, Nimpkish Valley"
+			"displayName": "Nimpkish Lake, Nimpkish Valley"
 		},
 		"access": {
 			"haversine": [
@@ -8447,9 +8447,9 @@
 		"location": {
 			"lat": 50.229510999999995,
 			"lng": -126.616402,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Woss"
+			"displayName": "Woss"
 		},
 		"access": {
 			"haversine": [
@@ -8488,9 +8488,9 @@
 		"location": {
 			"lat": 49.08095,
 			"lng": -123.825712,
-			"pin": null,
+			"icon": null,
 			"zoom": 13,
-			"notes": "Cedar, BC (near Nanaimo)"
+			"displayName": "Cedar, BC (near Nanaimo)"
 		},
 		"access": {
 			"haversine": [

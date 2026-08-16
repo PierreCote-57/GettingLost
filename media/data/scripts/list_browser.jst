@@ -280,7 +280,7 @@
       }
     } else if (field === "location") {
       var loc = place.location || {};
-      var notes = cellText(loc.notes);
+      var notes = cellText(loc.displayName);
       if (loc.lat != null && loc.lng != null && notes) {
         cell.appendChild(externalLink(
           "https://www.google.com/maps/search/?api=1&query=" + loc.lat + "," + loc.lng,

@@ -17,19 +17,11 @@
 	"location": {
 		"lat": 50.0603,
 		"lng": -125.5031,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.0603,
-			"lng": -125.5031,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 50.0603,
-					"lng": -125.5031
-				}
-			]
+			"file": "gosling-lake.html"
 		}
 	},
 	"fishingReferences": {

@@ -18,19 +18,11 @@
 	"location": {
 		"lat": 50.1602,
 		"lng": -125.56,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.1602,
-			"lng": -125.56,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 50.1602,
-					"lng": -125.56
-				}
-			]
+			"file": "amor-lake.html"
 		}
 	},
 	"fishingReferences": {

@@ -11,9 +11,6 @@
 	"badges": [
 		"picnic"
 	],
-	"location": {
-		"location_id": "beavertail-lake-dayuse"
-	},
 	"photoGalleries": {
 		"photos": {
 			"name": "Photos",
@@ -49,5 +46,10 @@
 				}
 			]
 		}
-	]
+	],
+	"googleMap": {
+		"where": {
+			"file": "beavertail-lake-dayuse.html"
+		}
+	}
 }

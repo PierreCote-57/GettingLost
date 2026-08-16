@@ -18,19 +18,11 @@
 	"location": {
 		"lat": 49.873,
 		"lng": -126.1828,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 49.873,
-			"lng": -126.1828,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 49.873,
-					"lng": -126.1828
-				}
-			]
+			"file": "muchalat-lake.html"
 		}
 	},
 	"fishingReferences": {

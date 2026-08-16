@@ -18,16 +18,16 @@
 	"location": {
 		"lat": 49.9864,
 		"lng": -125.4084,
-		"pin": "lake",
-		"Zoom": 14
+		"icon": "lake",
+		"zoom": 14
 	},
 	"googleMap": {
 		"road": {
 			"lat": 49.9864,
 			"lng": -125.4084,
-			"pins": [
+			"pinList": [
 				{
-					"pin": "lake",
+					"icon": "lake",
 					"lat": 49.9864,
 					"lng": -125.4084
 				}

@@ -15,21 +15,12 @@
 	"location": {
 		"lat": 50.49391,
 		"lng": -127.172186,
-		"pin": "tent",
+		"icon": "tent",
 		"zoom": 15
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.49391,
-			"lng": -127.172186,
-			"zoom": 15,
-			"pins": [
-				{
-					"pin": "tent",
-					"lat": 50.49391,
-					"lng": -127.172186
-				}
-			]
+			"file": "keogh-lake-rec16077.html"
 		}
 	},
 	"access": {

@@ -19,22 +19,13 @@
 	"location": {
 		"lat": 49.2986,
 		"lng": -124.9294,
-		"pin": "campground",
+		"icon": "campground",
 		"zoom": 14,
-		"notes": "Near Port Alberni"
+		"displayName": "Near Port Alberni"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 49.2986,
-			"lng": -124.9294,
-			"zoom": 14,
-			"pins": [
-				{
-					"pin": "campground",
-					"lat": 49.2986,
-					"lng": -124.9294
-				}
-			]
+			"file": "sproat-lake-provincial-park.html"
 		}
 	},
 	"access": {

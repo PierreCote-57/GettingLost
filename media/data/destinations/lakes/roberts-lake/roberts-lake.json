@@ -17,19 +17,11 @@
 	"location": {
 		"lat": 50.2172,
 		"lng": -125.5387,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.2172,
-			"lng": -125.5387,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 50.2172,
-					"lng": -125.5387
-				}
-			]
+			"file": "roberts-lake.html"
 		}
 	},
 	"fishingReferences": {

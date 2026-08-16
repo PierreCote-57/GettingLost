@@ -17,7 +17,7 @@
 	"location": {
 		"lat": 50.085584,
 		"lng": -125.515456,
-		"pin": "tent",
+		"icon": "tent",
 		"zoom": 15
 	},
 	"access": {
@@ -39,7 +39,7 @@
 	"googleMap": {
 		"road": {
 			"zoom": 11,
-			"pins": [
+			"pinList": [
 				{
 					"img": "atSite/img_0421",
 					"lat": 50.084797,
@@ -70,7 +70,9 @@
 					"lat": 50.126522,
 					"lng": -125.486175
 				}
-			]
+			],
+			"lat": 50.085584,
+			"lng": -125.515456
 		}
 	},
 	"photoGalleries": {

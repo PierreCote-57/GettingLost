@@ -18,19 +18,11 @@
 	"location": {
 		"lat": 50.4962,
 		"lng": -127.1664,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.4962,
-			"lng": -127.1664,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 50.4962,
-					"lng": -127.1664
-				}
-			]
+			"file": "keogh-lake.html"
 		}
 	},
 	"fishingReferences": {

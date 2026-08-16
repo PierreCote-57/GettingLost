@@ -19,20 +19,12 @@
 	"location": {
 		"lat": 50.037009,
 		"lng": -125.295734,
-		"pin": "tent",
-		"notes": "Near Campbell River"
+		"icon": "tent",
+		"displayName": "Near Campbell River"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.037009,
-			"lng": -125.295734,
-			"pins": [
-				{
-					"pin": "tent",
-					"lat": 50.037009,
-					"lng": -125.295734
-				}
-			]
+			"file": "elk-falls-quinsam-campground.html"
 		}
 	},
 	"access": {

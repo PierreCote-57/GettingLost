@@ -18,19 +18,11 @@
 	"location": {
 		"lat": 49.2901,
 		"lng": -124.9153,
-		"pin": "lake"
+		"icon": "lake"
 	},
 	"googleMap": {
 		"road": {
-			"lat": 49.2901,
-			"lng": -124.9153,
-			"pins": [
-				{
-					"pin": "lake",
-					"lat": 49.2901,
-					"lng": -124.9153
-				}
-			]
+			"file": "sproat-lake.html"
 		}
 	},
 	"fishingReferences": {

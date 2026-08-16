@@ -7,7 +7,7 @@
 		"location": {
 			"lat": 50.028517,
 			"lng": -125.255148,
-			"pin": "home"
+			"icon": "home"
 		}
 	},
 	{
@@ -16,7 +16,7 @@
 		"address": "10049 Galaran Road, Sidney, BC V8L 5X3",
 		"url": "https://www.pedenrv.com",
 		"location": {
-			"lat": 48.654480,
+			"lat": 48.65448,
 			"lng": -123.412022
 		}
 	},
@@ -36,21 +36,8 @@
 		"address": "1632 Coulter Road, Campbell River, BC V9W 7M1",
 		"url": "https://www.campbellriverrv.com",
 		"location": {
-			"lat": 50.045360,
+			"lat": 50.04536,
 			"lng": -125.265786
-		}
-	},
-	{
-		"name": "Salmon Point Resort",
-		"id": "salmon-point-resort",
-		"address": "2176 Salmon Point Road, Campbell River, BC V9H 1E5",
-		"url": "https://salmonpoint.com",
-		"destination_id": "salmon-point-resort.html",
-		"location": {
-			"lat": 49.889183,
-			"lng": -125.1282272,
-			"pin": "campground",
-			"zoom": 11
 		}
 	},
 	{
@@ -61,7 +48,7 @@
 		"location": {
 			"lat": 49.895435,
 			"lng": -125.147474,
-			"pin": "outhouse"
+			"icon": "outhouse"
 		}
 	},
 	{
@@ -72,19 +59,8 @@
 		"location": {
 			"lat": 50.046944,
 			"lng": -125.253889,
-			"pin": "park",
+			"icon": "park",
 			"zoom": 12
-		}
-	},
-	{
-		"name": "Beavertail Lake Day Use",
-		"id": "beavertail-lake-dayuse",
-		"destination_id": "beavertail-lake-dayuse.html",
-		"location": {
-			"lat": 49.97964,
-			"lng": -125.50546,
-			"pin": "picnic",
-			"zoom": 15
 		}
 	},
 	{
@@ -104,7 +80,7 @@
 		"address": "The Point, Tuktoyaktuk, NT X0E 1C0",
 		"location": {
 			"lat": 69.456013,
-			"lng": -133.036440,
+			"lng": -133.03644,
 			"zoom": 15
 		}
 	},
@@ -116,7 +92,7 @@
 		"location": {
 			"lat": 49.324823,
 			"lng": -124.261698,
-			"pin": "tent"
+			"icon": "tent"
 		}
 	}
 ]

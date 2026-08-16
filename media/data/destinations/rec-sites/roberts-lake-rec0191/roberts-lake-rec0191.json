@@ -18,21 +18,12 @@
 	"location": {
 		"lat": 50.211914,
 		"lng": -125.535749,
-		"pin": "picnic",
+		"icon": "picnic",
 		"zoom": 16
 	},
 	"googleMap": {
 		"road": {
-			"lat": 50.211914,
-			"lng": -125.535749,
-			"zoom": 16,
-			"pins": [
-				{
-					"pin": "picnic",
-					"lat": 50.211914,
-					"lng": -125.535749
-				}
-			]
+			"file": "roberts-lake-rec0191.html"
 		}
 	},
 	"access": {
