@@ -90,6 +90,12 @@
   var DEFAULT_DATASET = "destinations";
   var DEFAULT_VIEW = "grid";
 
+  // Where the map view opens: northern Vancouver Island, wide enough to hold the
+  // whole catalog area. Fixed for now — the map is not driven by the rows yet.
+  var MAP_CENTER = { lat: 50.159395, lng: -126.431037 };
+  var MAP_ZOOM = 7;
+  var MAP_HEIGHT = "600px";
+
   // Severity ramp for the access threshold, easiest -> hardest. The access
   // <select> is built from the same array, so the control and the filter cannot
   // drift apart. Read through a function, not a top-level constant, because
@@ -461,12 +467,31 @@
     return grid;
   }
 
-  // Placeholder: the map view is wired end to end (toggle -> ?view=map ->
-  // displayDataset) but draws nothing yet.
+  // Map view: the map itself, full width of the block, and NOTHING on it — the
+  // rows are not drawn yet.
+  //
+  // Pure like its siblings, and synchronous like them too: it returns the
+  // container, then fills it once the Maps API answers. The fill is deferred one
+  // tick because loadGoogleMapsApi calls back SYNCHRONOUSLY when the API is
+  // already loaded, and Google sizes a map from the element's box — which does
+  // not exist until displayDataset's caller has appended it.
   function renderMap(rows) {
-    var map = document.createElement("div");
-    map.textContent = "Map goes here";
-    return map;
+    var mapEl = document.createElement("div");
+    mapEl.style.width = "100%";
+    mapEl.style.height = MAP_HEIGHT;
+
+    setTimeout(function () {
+      window.GL.loadGoogleMapsApi(function () {
+        var map = new google.maps.Map(mapEl, {
+          zoom: MAP_ZOOM,
+          center: MAP_CENTER,
+          mapTypeId: window.GL.MAP_CONFIG.mapTypeId,
+          styles: window.GL.MAP_CONFIG.mapStyles
+        });
+      });
+    }, 0);
+
+    return mapEl;
   }
 
   // The match count, and the empty state at the same time: 0 rows reads

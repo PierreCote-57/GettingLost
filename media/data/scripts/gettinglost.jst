@@ -617,6 +617,10 @@
     document.head.appendChild(script);
   }
 
+  // Shared so list_browser.jst's map view loads the API through the same
+  // one-script-tag path instead of injecting a second one.
+  window.GL.loadGoogleMapsApi = loadGoogleMapsApi;
+
   // ---------------------------------------------------------------------
   // Shared: the "· "-separated link row (campground + links blocks)
   // ---------------------------------------------------------------------
