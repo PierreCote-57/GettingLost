@@ -14,6 +14,7 @@ its file, leaving only what is true about the thing that now exists.
 | [slug-rebuild.md](slug-rebuild.md) | **Complete** — 2026-07-08 | The universal `<base>_<ext>` slug and the shift to github-filename-as-master. Rules live in [../conventions/site.md](../conventions/site.md); this holds the problem it solved and the artifacts left behind. |
 | [destinations-overview.md](destinations-overview.md) | **Live dataset** | The Vancouver Island campground dataset: place schema, the two row kinds, column-to-field mapping, editing rules, standing data caveats. The page that once rendered it is retired; the data is current. |
 | [checklists-booklet.md](checklists-booklet.md) | **Live tool** | The booklet PDF builder — both booklets from one script — plus how the PDFs deploy and how the download button works. |
+| [map-model.md](map-model.md) | **Complete** — 2026-08-16 | One shape for `location`, a named `googleMap` entry and a `pin`. Schema in [../schema/map-pins-location.md](../schema/map-pins-location.md); this holds the problem it solved and the alternatives rejected. |
 | [logs-travel.md](logs-travel.md) | **Live data, no renderer** | The `logs/` schemas: stops, locations, fuel. The `<referent>_id` naming rule and the shared `location` block. |
 | [images.md](images.md) | **Live** | Photon sizing on the site. Images are Pierre's — placed and uploaded by hand, no external master, Claude's role is on-demand only. |
 

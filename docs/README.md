@@ -84,7 +84,7 @@ installed skill would be. `CLAUDE.md` points at them so they are known every ses
 
 ## projects/ — records of work
 
-[projects/README.md](projects/README.md) indexes all six and is the **only** place a
+[projects/README.md](projects/README.md) indexes all seven and is the **only** place a
 project's status is recorded. Each project file describes the work as it stands, with no
 status or history in it.
 

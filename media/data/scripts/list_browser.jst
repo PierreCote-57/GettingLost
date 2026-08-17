@@ -4,7 +4,7 @@
  * Unified list browser (replaces gallery + destinations-overview). Driven by URL
  * query parameters:
  *   ?dataset=<id>   one of the `id`s in datasets.json -> its file/title/options
- *   ?view=<mode>    table | grid
+ *   ?view=<mode>    table | grid | map
  *   ?keywords= ?badges= ?access= ?search=   the filters
  *
  * The URL is the whole state: every control commits by navigating to a new one
@@ -65,7 +65,7 @@
  * A token with no builder, or a parameter with no filter, is a legitimate
  * state (staged rollout, testing, retired-but-kept), never an error.
  *
- * Both renderers are pure (rows -> DOM node): the publish rule that used to
+ * The renderers are pure (rows -> DOM node): the publish rule that used to
  * live inside renderGrid is now filterView, so what the count says and what
  * you see cannot disagree.
  *
@@ -83,7 +83,7 @@
 
   var UPLOADS = "/wp-content/uploads/";
   var DATASETS_URL = UPLOADS + "datasets.json";
-  var VALID_VIEWS = ["table", "grid"];
+  var VALID_VIEWS = ["table", "grid", "map"];
 
   // Defaults for a bare URL (no params). A present-but-invalid value is NOT
   // defaulted over — it falls through to the graceful "unknown …" handling.
@@ -461,6 +461,14 @@
     return grid;
   }
 
+  // Placeholder: the map view is wired end to end (toggle -> ?view=map ->
+  // displayDataset) but draws nothing yet.
+  function renderMap(rows) {
+    var map = document.createElement("div");
+    map.textContent = "Map goes here";
+    return map;
+  }
+
   // The match count, and the empty state at the same time: 0 rows reads
   // "0 of 38 found". Always both numbers, even when nothing is filtered out
   // ("38 of 38 found") — one format at all times, so the readout never changes
@@ -581,9 +589,20 @@
   function displayDataset(known) {
     // What I need from what is known
     var rows = known.filteredRows;
-    var isGrid = known.params.get("view") === "grid";
+    var view = known.params.get("view");
 
-    return isGrid ? renderGrid(rows) : renderTable(rows);
+    var node;
+    if (view === "grid") {
+      node = renderGrid(rows);
+    } else if (view === "table") {
+      node = renderTable(rows);
+    } else if (view === "map") {
+      node = renderMap(rows);
+    } else {
+      console.error("[list_browser] Unknown view " + view + " — showing the table");
+      node = renderTable(rows);
+    }
+    return node;
   }
 
   // ---- options bar (controls) -----------------------------------------------
