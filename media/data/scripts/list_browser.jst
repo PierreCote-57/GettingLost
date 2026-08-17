@@ -468,8 +468,27 @@
     return grid;
   }
 
-  // Map view: the map itself, full width of the block, and NOTHING on it — the
-  // rows are not drawn yet.
+  // One row -> one marker at its own location. A row is a marker or it is
+  // nothing: no lat/lng means no pin, silently, the same way renderPin drops a
+  // pin it cannot place. The hover title is the row's NAME — location.displayName
+  // is the Location column's text and holds a town ("Black Creek, BC"), which is
+  // not what you want to read off a marker.
+  // The icon comes from the row's own location.icon through GL.pinIcon, so the
+  // figures here and on the destination pages are one vocabulary.
+  function dropPin(map, row) {
+    var loc = row.location || {};
+    if (typeof loc.lat !== "number" || typeof loc.lng !== "number") return;
+
+    var markerOptions = { position: { lat: loc.lat, lng: loc.lng }, map: map };
+    if (row.name) markerOptions.title = row.name;
+    var icon = window.GL.pinIcon(loc.icon);
+    if (icon) markerOptions.icon = icon;
+    new google.maps.Marker(markerOptions);
+  }
+
+  // Map view: the map, full width of the block, with one pin per row. The centre
+  // and zoom are FIXED (MAP_CENTER / MAP_ZOOM) — the map does not reframe itself
+  // around whatever is currently filtered in.
   //
   // Pure like its siblings, and synchronous like them too: it returns the
   // container, then fills it once the Maps API answers. The fill is deferred one
@@ -489,6 +508,7 @@
           mapTypeId: window.GL.MAP_CONFIG.mapTypeId,
           styles: window.GL.MAP_CONFIG.mapStyles
         });
+        rows.forEach(function (row) { dropPin(map, row); });
       });
     }, 0);
 

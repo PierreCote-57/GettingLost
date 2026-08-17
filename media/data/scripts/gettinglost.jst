@@ -810,6 +810,10 @@
     };
   }
 
+  // Shared so list_browser.jst's map view draws the same figures from the same
+  // icon vocabulary. Callable only after the Maps API is loaded (google.maps.Size).
+  window.GL.pinIcon = pinIcon;
+
   // Cached loader for the published locations registry (logs/locations.json ->
   // /wp-content/uploads/locations.json). Resolves once per page load to an
   // { id: entry } map, shared by every googleMap block that references a

@@ -80,9 +80,20 @@ read Table / Grid / Map, so a new view needs no label of its own.
 dropped, below): the page has to render *something*, and the table is the honest choice
 because it is the one view that shows everything.
 
-**The map is a placeholder.** `renderMap` draws a Google map at a fixed centre and zoom
-(`MAP_CENTER`, `MAP_ZOOM`, `MAP_HEIGHT` at the top of the file) with **nothing on it** — it
-receives `filteredRows` like its siblings and ignores them.
+`renderMap` draws a Google map at a **fixed** centre and zoom (`MAP_CENTER`, `MAP_ZOOM`,
+`MAP_HEIGHT` at the top of the file) and drops one marker per row through `dropPin`. Fixed on
+purpose: the map does not reframe itself around whatever is currently filtered in.
+
+- A row with no `location.lat`/`lng` is silently no pin, the same way `renderPin` drops a pin
+  it cannot place.
+- The hover title is the row's **`name`**, not `location.displayName` — that field is the
+  Location column's text and holds a town ("Black Creek, BC").
+- The icon is the row's own `location.icon`, resolved through `GL.pinIcon` (exported from
+  `gettinglost.jst` alongside `GL.loadGoogleMapsApi`), so the figures here and on the
+  destination pages are one vocabulary. `renderPin` itself is NOT reused: it closes over the
+  page's `photoGalleries` for the `img` InfoWindow, which this page has no equivalent of — and
+  no `location` in the data carries `img` anyway.
+- **Clicking a pin does nothing**, deliberately, for now.
 
 It differs from the `googleMap` block renderer in one way that matters: that renderer is
 *handed* an element already in the document, while a list_browser display function *returns*
