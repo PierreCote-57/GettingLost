@@ -1,8 +1,8 @@
 # List browser
 
 One param-driven page, `pages/shared/list_browser.html`, with two independent axes —
-display (table/grid) × data — driven by URL query parameters. It replaced both the gallery
-and the destinations-overview pages.
+display (table/grid/map) × data — driven by URL query parameters. It replaced both the
+gallery and the destinations-overview pages.
 
 `list_browser.jst` registers `blockRenderers.list_browser` and runs nothing on load; see
 [docs/rendering/blocks.md](blocks.md), "THE INVARIANT". Everything below happens inside the
@@ -68,6 +68,32 @@ what you need, here is what I know, use what you want."
 - `navigate(known, patch)` is the one non-display function that also takes the bag: it clones
   `known.params` to build the next URL, and controls call it from their handlers.
 
+## The three views
+
+`VALID_VIEWS = ["table", "grid", "map"]` is the whole vocabulary, and it drives both the
+toggle and the display switch. The toggle builds one button per entry and shows the value
+itself as the label — `.gl-lb-view button { text-transform: capitalize }` is what makes it
+read Table / Grid / Map, so a new view needs no label of its own.
+
+`displayDataset` is an if / else-if over the three, with a final `else` that logs
+`console.error` and renders the table. That fallback is not param validation (which stays
+dropped, below): the page has to render *something*, and the table is the honest choice
+because it is the one view that shows everything.
+
+**The map is a placeholder.** `renderMap` draws a Google map at a fixed centre and zoom
+(`MAP_CENTER`, `MAP_ZOOM`, `MAP_HEIGHT` at the top of the file) with **nothing on it** — it
+receives `filteredRows` like its siblings and ignores them.
+
+It differs from the `googleMap` block renderer in one way that matters: that renderer is
+*handed* an element already in the document, while a list_browser display function *returns*
+a detached node the caller appends. `loadGoogleMapsApi` fires its callback synchronously when
+the API is already loaded, and Google sizes a map from the element's box — which a detached
+div does not have. Hence the `setTimeout(…, 0)` around the fill. Today nothing else on that
+page loads Maps, so the short-circuit never happens; the guard is for when something does.
+
+`loadGoogleMapsApi` is exported as `window.GL.loadGoogleMapsApi` from `gettinglost.jst` so
+both pages load the API through the same one-script-tag dedupe.
+
 ## The two switches
 
 **Related, but NOT the same vocabulary.** One option can emit several query params (a
@@ -94,8 +120,11 @@ does both — it displays *and* filters.
 **OR within a control, AND across controls.** Each filter is
 `filterX(value, longList) -> shortList`, and chaining is what produces the AND.
 
-- `filterView` — `view=grid` keeps `wpSettings.published === true`. It lives outside
-  `renderGrid` so the count cannot disagree with what you see.
+- `filterView` — **the table is the only view that shows unpublished rows**; `grid` and `map`
+  both keep `wpSettings.published === true`. The test is `value === "table"`, so the rule is
+  stated once and a fourth view would inherit it. A card or a pin advertises a live page; the
+  table is where an inline-in-`destinations.json` row with no page of its own is visible. It
+  lives outside `renderGrid` so the count cannot disagree with what you see.
 - `filterAccess` — ordinal threshold over `Object.keys(GL.ROAD_COLORS)`: the worst road you
   will accept. **Unknown PASSES.** Only the GL pages have authored legs, so a strict rule
   would drop every catalog row; an unmeasured road is not evidence of a bad one.

@@ -363,9 +363,10 @@
     return (value || "").split(",").filter(Boolean);
   }
 
-  // `view=grid` narrows to published rows: a card advertises a live page.
+  // The table shows everything; every other view narrows to published rows,
+  // because a card or a pin advertises a live page.
   function filterView(value, longList) {
-    if (value !== "grid") return longList;
+    if (value === "table") return longList;
     var shortList = longList.filter(isPublished);
     return shortList;
   }
