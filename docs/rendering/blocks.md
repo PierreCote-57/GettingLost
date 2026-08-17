@@ -157,6 +157,8 @@ The `checklist` block renderer (gettinglost.jst; was the standalone `enhanceChec
 - `renderCard` is exposed as `window.GL.renderCard`, shared by list_browser.jst's grid view and `featured` blocks (home page etc.)
 - Current tags in use: camping, fishing, hiking, picnic
 
+**Map machinery shared the same way (2026-08-17):** `window.GL.loadGoogleMapsApi` (one API script tag per page) and `window.GL.pinIcon` (the `GL.PIN_ICONS` figures) are exposed from gettinglost.jst for list_browser.jst's map view. `pinIcon` builds a `google.maps.Size`, so it is callable only from inside a loader callback. See [docs/schema/map-pins-location.md](../schema/map-pins-location.md).
+
 ## Image resizing via Jetpack Photon (2026-07-03)
 `formatImageUrl(img, w, h)` in gettinglost.jst returns `https://i0.wp.com/{location.host}/wp-content/uploads/{img}?fit={w},{h}&quality=80`. `fit`=contain (no crop), w/h default 1920. sync.js copy NOT changed (lookup key). Full rationale: [docs/schema/image.md](../schema/image.md).
 - **Callers & sizes:** gallery card (renderCard) `600,400`; custom `photo` block inline `480,480`; mini-gallery thumb `360,220`; anything feeding the lightbox `1920,1920`.

@@ -48,7 +48,7 @@ per-page JSON as source of truth, the one param-driven list browser.
 | File | Covers |
 | --- | --- |
 | [blocks.md](rendering/blocks.md) | THE INVARIANT, every renderer, load order |
-| [list-browser.md](rendering/list-browser.md) | the four phases, the `known` bag, adding a control or filter |
+| [list-browser.md](rendering/list-browser.md) | the four phases, the `known` bag, the three views (table/grid/map), adding a control or filter |
 | [wp-templates.md](rendering/wp-templates.md) | editing Twenty Twenty-Five templates via the wpcom MCP |
 
 ## skills/ — procedures to follow, not background to read

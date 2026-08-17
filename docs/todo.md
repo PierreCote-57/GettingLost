@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 37**
+**next id: 39**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -33,6 +33,17 @@ Note: the list was renumbered once, on 2026-07-28, before this rule. Ids cited i
 written before that date may not resolve.
 
 ## Entries
+
+**#38** `list_browser.jst`'s Location column still calls its local `notes` —
+`fillDataCell`'s `location` branch reads `loc.displayName` into `var notes` and uses it three
+times. The field was renamed; the variable kept the old name and reads as a different field.
+
+**#37** No center/zoom caption under the list browser's map. Every `googleMap` block has one
+(`Center = (lat, lng) · Zoom = n`, wired to the map's `idle` event) and it is what the
+centre/zoom for a map gets dialled in with. Costed 2026-08-17: lift the 12 lines out of
+`drawMap` in `gettinglost.jst`, export them as `GL.mapCaption(map, parentEl)` so one format
+serves both, and have `renderMap` return a wrapper holding map + caption instead of the map
+div — the same wrapper/mapEl split the block renderer already uses.
 
 **#36** `logs/travel-log.json` place references — it holds `location_id` refs to
 `salmon-point-resort` and `beavertail-lake-dayuse`, the two locations.json records deleted by

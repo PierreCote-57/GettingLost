@@ -366,8 +366,8 @@
   // The table shows everything; every other view narrows to published rows,
   // because a card or a pin advertises a live page.
   function filterView(value, longList) {
-    if (value === "table") return longList;
-    var shortList = longList.filter(isPublished);
+    var shortList = longList;
+    if (value === "grid") shortList = shortList.filter(isPublished);
     return shortList;
   }
 

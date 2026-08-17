@@ -77,6 +77,14 @@ General rule Pierre stated: rec site with camping = tent; commercial campground 
 - Maps inside collapsed `<details>` init zero-size → never fire `idle` (caption frozen, tiles may not draw) — known quirk, not a bug to chase.
 - `pinIcon(icon)`: unknown/absent → `null` → default Google pin. `google.maps.Marker` now emits a **deprecation console warning** (AdvancedMarkerElement); parked (needs a Map ID + kills inline `mapStyles`). Migration recipe + prereqs in [docs/rendering/blocks.md](../rendering/blocks.md)/todo.
 
+## Second consumer: the list browser's map view (2026-08-17)
+`gettinglost.jst` **exports two functions on `window.GL`** so the list browser draws from the same machinery: `GL.loadGoogleMapsApi` (one script tag per page, shared dedupe) and `GL.pinIcon` (same `GL.PIN_ICONS` figures, callable only after the API has loaded).
+- `list_browser.jst`'s `dropPin(map, row)` treats a row's **`location` as the pin**, which the unified shape is what makes possible: `lat`/`lng` place it, `icon` picks the figure. No `lat`/`lng` → no pin, silently.
+- **Its hover title is the row's `name`.** That is not a contradiction of the no-automatic-page-name-label ruling (#35): that ruling is about a `googleMap` block synthesizing a marker for the page it sits on. Here the row IS the record, and `location.displayName` holds a town ("Black Creek, BC"), which is Location-column text, not a marker label.
+- `renderPin` is NOT shared: it closes over the page's `photoGalleries` to resolve `img`, and the list browser has no page data. No `location` in the destinations data carries `img` today.
+- The list map has **no center/zoom caption** — see `docs/todo.md` #37.
+Behavior and the rest of the view live in [../rendering/list-browser.md](../rendering/list-browser.md).
+
 ## Pin delivery — GL.PIN_ICONS as inline SVG data-URI
 The 6 marker figures are inline SVG STRINGS in `gl-constants.jst` (`GL.PIN_ICONS`), keyed by a pin's `icon`. `pinIcon()` returns `{ url: "data:image/svg+xml," + encodeURIComponent(svg), scaledSize: 48×48, anchor: (24,24) }`.
 - Each SVG is a standalone `48×48` viewBox, figure centered via `transform="translate(24,24)"`; `xmlns` is REQUIRED (data-URI images need it). Anchor is CENTER (Pierre rejected the teardrop shape → not bottom-anchored).
