@@ -10,6 +10,10 @@ unlike badges and access, which are closed. Open means it drifts.
 Singular and plural are the same word — pick one. Synonyms are the same word — pick one.
 These are loose rules applied by a human, not enforced anywhere.
 
+**Keywords are written capitalised** — `Visited`, not `visited`. They are display text: the
+value is what the site shows. `Visited` (2026-08-18) is the first real keyword; the lowercase
+values already in the data are test content and carry no ruling.
+
 ## Never normalize in the filter
 
 No stemming, no synonym maps, no case folding beyond what already exists. Normalizing in
