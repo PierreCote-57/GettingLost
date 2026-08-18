@@ -475,6 +475,9 @@
   // not what you want to read off a marker.
   // The icon comes from the row's own location.icon through GL.pinIcon, so the
   // figures here and on the destination pages are one vocabulary.
+  // A row with a `file` has a page: clicking its pin goes there, through the
+  // same GL.fileToSlug the cards use, so a pin and a card never disagree.
+  // No `file` -> no listener, and the pin is hover title only.
   function dropPin(map, row) {
     var loc = row.location || {};
     if (typeof loc.lat !== "number" || typeof loc.lng !== "number") return;
@@ -483,7 +486,13 @@
     if (row.name) markerOptions.title = row.name;
     var icon = window.GL.pinIcon(loc.icon);
     if (icon) markerOptions.icon = icon;
-    new google.maps.Marker(markerOptions);
+    var marker = new google.maps.Marker(markerOptions);
+    if (row.file) {
+      var pageUrl = "/" + window.GL.fileToSlug(row.file) + "/";
+      marker.addListener("click", function () {
+        window.location.href = pageUrl;
+      });
+    }
   }
 
   // Map view: the map, full width of the block, with one pin per row. The centre

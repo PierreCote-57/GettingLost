@@ -93,7 +93,10 @@ purpose: the map does not reframe itself around whatever is currently filtered i
   destination pages are one vocabulary. `renderPin` itself is NOT reused: it closes over the
   page's `photoGalleries` for the `img` InfoWindow, which this page has no equivalent of — and
   no `location` in the data carries `img` anyway.
-- **Clicking a pin does nothing**, deliberately, for now.
+- **Clicking a pin opens that destination's page**, in the same tab, when the row has a
+  `file` (23 of the 191 destination rows today; the rest are registry entries with no
+  page). The URL comes from `GL.fileToSlug(row.file)` — the same call the cards use, so a
+  pin and a card can never disagree. No `file` → no click listener, hover title only.
 
 It differs from the `googleMap` block renderer in one way that matters: that renderer is
 *handed* an element already in the document, while a list_browser display function *returns*

@@ -78,9 +78,12 @@ General rule Pierre stated: rec site with camping = tent; commercial campground 
 - `pinIcon(icon)`: unknown/absent → `null` → default Google pin. `google.maps.Marker` now emits a **deprecation console warning** (AdvancedMarkerElement); parked (needs a Map ID + kills inline `mapStyles`). Migration recipe + prereqs in [docs/rendering/blocks.md](../rendering/blocks.md)/todo.
 
 ## Second consumer: the list browser's map view (2026-08-17)
-`gettinglost.jst` **exports two functions on `window.GL`** so the list browser draws from the same machinery: `GL.loadGoogleMapsApi` (one script tag per page, shared dedupe) and `GL.pinIcon` (same `GL.PIN_ICONS` figures, callable only after the API has loaded).
+`gettinglost.jst` **exports three functions on `window.GL`** so the list browser draws from the same machinery: `GL.loadGoogleMapsApi` (one script tag per page, shared dedupe), `GL.pinIcon` (same `GL.PIN_ICONS` figures, callable only after the API has loaded) and `GL.fileToSlug` (a row's page URL).
 - `list_browser.jst`'s `dropPin(map, row)` treats a row's **`location` as the pin**, which the unified shape is what makes possible: `lat`/`lng` place it, `icon` picks the figure. No `lat`/`lng` → no pin, silently.
 - **Its hover title is the row's `name`.** That is not a contradiction of the no-automatic-page-name-label ruling (#35): that ruling is about a `googleMap` block synthesizing a marker for the page it sits on. Here the row IS the record, and `location.displayName` holds a town ("Black Creek, BC"), which is Location-column text, not a marker label.
+- **A pin whose row has a `file` is a link to that page** (same tab), built with the third
+  export, `GL.fileToSlug` — the same call `renderCard` uses for a card's `href`. Rows with
+  no `file` are registry entries with no page: no listener, hover title only.
 - `renderPin` is NOT shared: it closes over the page's `photoGalleries` to resolve `img`, and the list browser has no page data. No `location` in the destinations data carries `img` today.
 - The list map has **no center/zoom caption** — see `docs/todo.md` #37.
 Behavior and the rest of the view live in [../rendering/list-browser.md](../rendering/list-browser.md).
