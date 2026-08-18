@@ -8,6 +8,9 @@
 		],
 		"types": [
 			"park"
+		],
+		"keywords": [
+			"Visited"
 		]
 	},
 	"wpSettings": {

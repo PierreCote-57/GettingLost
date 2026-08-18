@@ -9,6 +9,9 @@
 		],
 		"types": [
 			"campground"
+		],
+		"keywords": [
+			"Visited"
 		]
 	},
 	"wpSettings": {
