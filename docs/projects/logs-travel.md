@@ -53,7 +53,7 @@ id ([docs/reference/bc-rest-stops.md](../reference/bc-rest-stops.md)).
 **The registry holds only places with no destination page.** A place that gets a page leaves
 the registry, and references to it become `file` pointers — the page is the authority. Two
 kinds of tenant live here: scaffolding (a real destination whose page doesn't exist yet, e.g.
-`rathtrevor-beach-park`) and permanent oddballs that will never be destinations (the storage
+`tyee-spit`) and permanent oddballs that will never be destinations (the storage
 unit, the dealers, a rest area). `destination_id` was deleted with the 2026-08-16 migration —
 it had no consumer and only existed to mark records that have now left.
 

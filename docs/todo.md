@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 39**
+**next id: 40**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -33,6 +33,11 @@ Note: the list was renumbered once, on 2026-07-28, before this rule. Ids cited i
 written before that date may not resolve.
 
 ## Entries
+
+**#39** The destination template is pre-unification. `media/data/templates/destination-template/destination-template.json` still carries top-level `lat`/`lng` instead of a `location`
+block, and `pages/templates/destination-template.html` has a `googleMap` div with no
+`data-map` — which the resolver treats as an error. Anyone starting a page from the template
+gets both.
 
 **#38** `list_browser.jst`'s Location column still calls its local `notes` —
 `fillDataCell`'s `location` branch reads `loc.displayName` into `var notes` and uses it three

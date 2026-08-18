@@ -83,16 +83,5 @@
 			"lng": -133.03644,
 			"zoom": 15
 		}
-	},
-	{
-		"name": "Rathtrevor Beach Provincial Park",
-		"id": "rathtrevor-beach-park",
-		"address": "Highway 19A, just south of Parksville, BC",
-		"url": "https://bcparks.ca/rathtrevor-beach-park/",
-		"location": {
-			"lat": 49.324823,
-			"lng": -124.261698,
-			"icon": "tent"
-		}
 	}
 ]

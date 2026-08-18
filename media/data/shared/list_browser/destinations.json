@@ -5978,67 +5978,7 @@
 		]
 	},
 	{
-		"name": "Rathtrevor Beach Provincial Park",
-		"tags": {
-			"types": [
-				"park"
-			]
-		},
-		"links": [
-			{
-				"label": "HomePage",
-				"type": "homepage",
-				"url": "https://bcparks.ca/rathtrevor-beach-park/"
-			},
-			{
-				"label": "Campground",
-				"type": "map",
-				"url": "https://nrs.objectstore.gov.bc.ca/kuwyyf/rathtrevor_beach_park_map_95625a028d.pdf"
-			},
-			{
-				"label": "Reservable May–October; limited winter FCFS sites (mid-Oct to mid-March, reduced services)",
-				"type": "reservation",
-				"url": "https://camping.bcparks.ca/create-booking/results?resourceLocationId=-2147483545&mapId=-2147483437&equipmentId=-32768&subEquipmentId=-32765"
-			}
-		],
-		"location": {
-			"lat": 49.3248225,
-			"lng": -124.2616978,
-			"icon": null,
-			"zoom": 13,
-			"displayName": "Parksville"
-		},
-		"access": {
-			"haversine": [
-				{
-					"town": "Campbell River",
-					"km": 105
-				},
-				{
-					"town": "Nanaimo",
-					"km": 30
-				},
-				{
-					"town": "Victoria",
-					"km": 120
-				}
-			]
-		},
-		"campground": {
-			"operator": "RLC Park Services",
-			"siteCount": 251,
-			"amenities": [
-				"sandy beach",
-				"flush toilets",
-				"showers"
-			]
-		},
-		"footnotes": [
-			{
-				"field": "siteCount",
-				"text": "vehicle-accessible + walk-in"
-			}
-		]
+		"file": "rathtrevor-beach-park.html"
 	},
 	{
 		"name": "Riverbend Resort",
