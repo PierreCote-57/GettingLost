@@ -18,9 +18,9 @@
 		"comments": "open"
 	},
 	"location": {
-		"lat": 49.3248225,
-		"lng": -124.2616978,
-		"icon": "tent",
+		"lat": 49.321578, ,,
+		"lng": -124.269079,
+		"icon": "park",
 		"zoom": 13,
 		"displayName": "Parksville"
 	},
