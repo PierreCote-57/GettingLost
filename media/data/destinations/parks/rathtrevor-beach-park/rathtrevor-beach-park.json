@@ -72,7 +72,48 @@
 			"showers"
 		]
 	},
-	"notes": [],
+	"notes": [
+		{
+			"sectionName": "Further readings",
+			"list": [
+				{
+					"name": "Go Hiking",
+					"url": "https://gohiking.ca/rathtrevor-park/",
+					"description": [
+						"Write-up of the park: the campground, the forest trails and the day-use area."
+					]
+				},
+				{
+					"name": "Go Hiking — Rathtrevor Beach",
+					"url": "https://gohiking.ca/beaches/rathtrevor-beach/",
+					"description": [
+						"The beach itself, and how far the tide goes out."
+					]
+				},
+				{
+					"name": "Camping & RV BC",
+					"url": "https://www.campingrvbc.com/sites/bc/rathtrevor-beach-provincial-park-parksville/",
+					"description": [
+						"Site breakdown and amenities for the campground."
+					]
+				},
+				{
+					"name": "Camping on Vancouver Island (Off Track Travel)",
+					"url": "https://offtracktravel.ca/camping-vancouver-island/#rathtrevor",
+					"description": [
+						"Rathtrevor's entry in the Island campground guide."
+					]
+				},
+				{
+					"name": "Best beaches in BC (Off Track Travel)",
+					"url": "https://offtracktravel.ca/best-beaches-bc-canada/#rathtrevor",
+					"description": [
+						"Rathtrevor Beach as one of the province's best."
+					]
+				}
+			]
+		}
+	],
 	"photoGalleries": {
 		"photos": {
 			"name": "Photos",

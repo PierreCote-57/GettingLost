@@ -56,6 +56,36 @@
 					"description": [
 						"Vancouver Island Camping provides first-hand campground information, camping guides and campground walk-through videos for campers exploring Vancouver Island, British Columbia."
 					]
+				},
+				{
+					"name": "Camping & RV BC",
+					"url": "https://www.campingrvbc.com/",
+					"description": [
+						"Per-site listings for BC campgrounds, RV parks and provincial park campgrounds,",
+						"with amenities, site counts and photos."
+					]
+				},
+				{
+					"name": "Explore BC Parks",
+					"url": "https://explorebcparks.ca/",
+					"description": [
+						"Quality Recreation, the company contracted to operate a number of BC provincial parks.",
+						"Per-park pages with campground and facility details."
+					]
+				},
+				{
+					"name": "GoRVing Canada",
+					"url": "https://gorving.ca/",
+					"description": [
+						"Campground directory aimed at RVers, with a page per campground."
+					]
+				},
+				{
+					"name": "Travel British Columbia",
+					"url": "https://www.travel-british-columbia.com/",
+					"description": [
+						"Accommodation directory covering campgrounds, RV parks, resorts and lodges across BC."
+					]
 				}
 			]
 		},
@@ -87,7 +117,23 @@
 				{
 					"name": "Mosaic Forest Campsites",
 					"url": "https://www.mosaiccampsites.com",
-					"description": ["Reservations for compsites on their properties"]
+					"description": [
+						"Reservations for compsites on their properties"
+					]
+				},
+				{
+					"name": "VI Camping",
+					"url": "https://www.vicamping.com/",
+					"description": [
+						"Per-campsite pages and online booking for a set of Vancouver Island campsites."
+					]
+				},
+				{
+					"name": "Let's Camp",
+					"url": "https://letscamp.ca/",
+					"description": [
+						"Booking platform for BC recreation sites and small campgrounds."
+					]
 				}
 			]
 		},
@@ -134,7 +180,7 @@
 					"url": "https://www.harvesthosts.com/",
 					"description": [
 						"Free stay at interesting locations (Winery, farms, ...)"
-						]
+					]
 				}
 			]
 		},
