@@ -88,19 +88,19 @@
 					"label": ""
 				},
 				{
-					"id": "img_2849-rotated",
-					"img": "IMG_2849-rotated.jpg",
-					"label": ""
-				},
-				{
 					"id": "img_2850",
 					"img": "IMG_2850.jpg",
 					"label": ""
 				},
 				{
+					"id": "img_2849-rotated",
+					"img": "IMG_2849-rotated.jpg",
+					"label": ""
+				},
+				{
 					"id": "img_2854",
 					"img": "IMG_2854.jpg",
-					"label": ""
+					"label": "Beautiful beach"
 				}
 			]
 		}
