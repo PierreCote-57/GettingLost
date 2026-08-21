@@ -50,13 +50,6 @@ gets both.
 `fillDataCell`'s `location` branch reads `loc.displayName` into `var notes` and uses it three
 times. The field was renamed; the variable kept the old name and reads as a different field.
 
-**#37** No center/zoom caption under the list browser's map. Every `googleMap` block has one
-(`Center = (lat, lng) · Zoom = n`, wired to the map's `idle` event) and it is what the
-centre/zoom for a map gets dialled in with. Costed 2026-08-17: lift the 12 lines out of
-`drawMap` in `gettinglost.jst`, export them as `GL.mapCaption(map, parentEl)` so one format
-serves both, and have `renderMap` return a wrapper holding map + caption instead of the map
-div — the same wrapper/mapEl split the block renderer already uses.
-
 **#35** Map marker labels — revisit AFTER the `pin` → `pins` migration. The migration writes
 no `label`, and the ruling is *missing label = no label*: the old auto-fill that injected the
 page's own `name` into the synthesized marker is gone. Open afterwards: which markers should

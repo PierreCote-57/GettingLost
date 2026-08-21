@@ -530,3 +530,39 @@ summary:focus:not(:focus-visible) {
   padding: 6px 8px;
   color: #999;
 }
+
+/* Maps. GL.drawMap gives every map the same two children — the map and the live
+   centre/zoom caption under it — and touches no box property at all: the box is
+   CSS, and the caller states only the OUTSIDE size. .gl-mapbox is the flex column
+   that splits that height, so the caption takes its own line out of the block
+   rather than being added on underneath it.
+   The caption reserves its line before it has any text, so Google sizes the map
+   once against a box that already allows for it and never has to redraw into a
+   box that shrank underneath it. */
+.gl-mapbox {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+.gl-map {
+  flex: 1;
+  min-height: 0;
+}
+.gl-map-caption {
+  flex: none;
+  min-height: 1.4em;
+  text-align: center;
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+}
+
+/* House style for a map ON A PAGE: the article text wraps around it. It lives on
+   the block selector and nowhere else, so a map drawn somewhere that is not a
+   page block — the list browser's map view — inherits none of it and sizes
+   itself. Every property here is overridable by an inline style on the div, the
+   ordinary way: the <details> road maps set width/height/float and win. */
+[data-block-type="googleMap"] {
+  width: 45%;
+  float: right;
+  margin: 0 0 1rem 1.5rem;
+}

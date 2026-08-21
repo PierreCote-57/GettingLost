@@ -80,33 +80,40 @@ read Table / Grid / Map, so a new view needs no label of its own.
 dropped, below): the page has to render *something*, and the table is the honest choice
 because it is the one view that shows everything.
 
-`renderMap` draws a Google map at a **fixed** centre and zoom (`MAP_CENTER`, `MAP_ZOOM`,
-`MAP_HEIGHT` at the top of the file) and drops one marker per row through `dropPin`. Fixed on
-purpose: the map does not reframe itself around whatever is currently filtered in.
+**This map is the site's map (2026-08-21).** `mapObjectFor(rows)` turns the rows into the
+same `mapObject` a page's `googleMap` entry resolves to, and `renderMap` hands it to
+`window.GL.drawMap` — the one function that draws every map on the site. There is no second
+Google map here any more: the shared pin rendering, the icon vocabulary and the live
+centre/zoom caption all arrive with it. Centre and zoom are **fixed** (`MAP_CENTER`,
+`MAP_ZOOM` at the top of the file), on purpose: the map does not reframe itself around
+whatever is currently filtered in.
 
-- A row with no `location.lat`/`lng` is silently no pin, the same way `renderPin` drops a pin
-  it cannot place.
-- The hover title is the row's **`name`**, not `location.displayName` — that field is the
-  Location column's text and holds a town ("Black Creek, BC").
-- The icon is the row's own `location.icon`, resolved through `GL.pinIcon` (exported from
-  `gettinglost.jst` alongside `GL.loadGoogleMapsApi`), so the figures here and on the
-  destination pages are one vocabulary. `renderPin` itself is NOT reused: it closes over the
-  page's `photoGalleries` for the `img` InfoWindow, which this page has no equivalent of — and
+- A row with no `location.lat`/`lng` is dropped by `mapObjectFor`. That filter belongs here
+  and not in `renderPin`, which deliberately places a coordinate-less pin at the map's centre
+  for authored single-pin maps — rows that got through would stack in the middle of the map.
+- The pin's `displayName` is the row's **`name`**, overwriting `location.displayName` — that
+  field is the Location column's text and holds a town ("Black Creek, BC").
+- The icon is the row's own `location.icon`, so the figures here and on the destination pages
+  are one vocabulary. `galleries` is a `drawMap` parameter rather than a closure capture, so
+  the `img` InfoWindow resolves on a page and no-ops here, where there is no page data — and
   no `location` in the data carries `img` anyway.
 - **Clicking a pin opens that destination's page**, in the same tab, when the row has a
   `file` (23 of the 191 destination rows today; the rest are registry entries with no
-  page). The URL comes from `GL.fileToSlug(row.file)` — the same call the cards use, so a
-  pin and a card can never disagree. No `file` → no click listener, hover title only.
+  page). `mapObjectFor` resolves it to the pin's `url` with `GL.fileToSlug(row.file)` — the
+  same call the cards use, so a pin and a card can never disagree. No `file` → no `url`,
+  hover title only.
+
+`MAP_HEIGHT` is set inline on the container here, because `drawMap` never touches its
+container's box and the `[data-block-type="googleMap"]` house style is a page-block rule that
+does not reach this element.
 
 It differs from the `googleMap` block renderer in one way that matters: that renderer is
 *handed* an element already in the document, while a list_browser display function *returns*
-a detached node the caller appends. `loadGoogleMapsApi` fires its callback synchronously when
+a detached node the caller appends. `drawMap`'s loader fires its callback synchronously when
 the API is already loaded, and Google sizes a map from the element's box — which a detached
-div does not have. Hence the `setTimeout(…, 0)` around the fill. Today nothing else on that
-page loads Maps, so the short-circuit never happens; the guard is for when something does.
-
-`loadGoogleMapsApi` is exported as `window.GL.loadGoogleMapsApi` from `gettinglost.jst` so
-both pages load the API through the same one-script-tag dedupe.
+div does not have. Hence the `setTimeout(…, 0)` around the `drawMap` call. Today nothing else
+on that page loads Maps, so the short-circuit never happens; the guard is for when something
+does.
 
 ## The two switches
 

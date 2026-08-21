@@ -468,31 +468,41 @@
     return grid;
   }
 
-  // One row -> one marker at its own location. A row is a marker or it is
-  // nothing: no lat/lng means no pin, silently, the same way renderPin drops a
-  // pin it cannot place. The hover title is the row's NAME — location.displayName
+  // The rows, as a mapObject for GL.drawMap — the same shape a page's googleMap
+  // entry resolves to, so the browser's map and a destination page's map are one
+  // renderer with one pin vocabulary and one caption.
+  //
+  // A row is a pin or it is nothing: no lat/lng means no pin, silently. That
+  // filter has to happen HERE — renderPin puts a coordinate-less pin at the map's
+  // centre (which is what an authored single-pin map wants), so rows that slipped
+  // through would stack on top of each other in the middle of the map.
+  //
+  // displayName is overwritten with the row's NAME on purpose: location.displayName
   // is the Location column's text and holds a town ("Black Creek, BC"), which is
   // not what you want to read off a marker.
-  // The icon comes from the row's own location.icon through GL.pinIcon, so the
-  // figures here and on the destination pages are one vocabulary.
-  // A row with a `file` has a page: clicking its pin goes there, through the
-  // same GL.fileToSlug the cards use, so a pin and a card never disagree.
-  // No `file` -> no listener, and the pin is hover title only.
-  function dropPin(map, row) {
-    var loc = row.location || {};
-    if (typeof loc.lat !== "number" || typeof loc.lng !== "number") return;
-
-    var markerOptions = { position: { lat: loc.lat, lng: loc.lng }, map: map };
-    if (row.name) markerOptions.title = row.name;
-    var icon = window.GL.pinIcon(loc.icon);
-    if (icon) markerOptions.icon = icon;
-    var marker = new google.maps.Marker(markerOptions);
-    if (row.file) {
-      var pageUrl = "/" + window.GL.fileToSlug(row.file) + "/";
-      marker.addListener("click", function () {
-        window.location.href = pageUrl;
-      });
-    }
+  // The icon comes from the row's own location.icon, so the figures here and on
+  // the destination pages are one vocabulary. A row with a `file` has a page, so
+  // its pin gets that page's url through the same GL.fileToSlug the cards use —
+  // a pin and a card never disagree. No `file` -> no url, and the pin is hover
+  // title only.
+  function mapObjectFor(rows) {
+    var pinList = [];
+    rows.forEach(function (row) {
+      var loc = row.location || {};
+      if (typeof loc.lat !== "number" || typeof loc.lng !== "number") return;
+      var pin = { lat: loc.lat, lng: loc.lng };
+      if (loc.icon) pin.icon = loc.icon;
+      if (row.name) pin.displayName = row.name;
+      if (row.file) pin.url = "/" + window.GL.fileToSlug(row.file) + "/";
+      pinList.push(pin);
+    });
+    var mapObject = {
+      lat: MAP_CENTER.lat,
+      lng: MAP_CENTER.lng,
+      zoom: MAP_ZOOM,
+      pinList: pinList
+    };
+    return mapObject;
   }
 
   // Map view: the map, full width of the block, with one pin per row. The centre
@@ -500,28 +510,22 @@
   // around whatever is currently filtered in.
   //
   // Pure like its siblings, and synchronous like them too: it returns the
-  // container, then fills it once the Maps API answers. The fill is deferred one
-  // tick because loadGoogleMapsApi calls back SYNCHRONOUSLY when the API is
-  // already loaded, and Google sizes a map from the element's box — which does
-  // not exist until displayDataset's caller has appended it.
+  // container, then GL.drawMap fills it. The fill is deferred one tick because
+  // Google sizes a map from the element's box — which does not exist until
+  // displayDataset's caller has appended it.
+  //
+  // The height is set here, inline: drawMap never touches its container's box,
+  // and the [data-block-type="googleMap"] house style is a page-block rule that
+  // does not reach this element.
   function renderMap(rows) {
-    var mapEl = document.createElement("div");
-    mapEl.style.width = "100%";
-    mapEl.style.height = MAP_HEIGHT;
+    var box = document.createElement("div");
+    box.style.height = MAP_HEIGHT;
 
     setTimeout(function () {
-      window.GL.loadGoogleMapsApi(function () {
-        var map = new google.maps.Map(mapEl, {
-          zoom: MAP_ZOOM,
-          center: MAP_CENTER,
-          mapTypeId: window.GL.MAP_CONFIG.mapTypeId,
-          styles: window.GL.MAP_CONFIG.mapStyles
-        });
-        rows.forEach(function (row) { dropPin(map, row); });
-      });
+      window.GL.drawMap(box, mapObjectFor(rows));
     }, 0);
 
-    return mapEl;
+    return box;
   }
 
   // The match count, and the empty state at the same time: 0 rows reads

@@ -8,8 +8,8 @@ place can be a map, a marker, or the target of a pointer without being restated.
 ```
 Point               lat, lng
 googleMap : Point   zoom?, pinList?   (or file? / location_id? in place of lat/lng)
-pin       : Point   icon?, displayName?, img?
-location  : both    zoom?, pinList?, icon?, displayName?, img?
+pin       : Point   icon?, displayName?, img?, url?
+location  : both    zoom?, pinList?, icon?, displayName?, img?, url?
 ```
 
 | Element | location | googleMap | pin |
@@ -22,6 +22,7 @@ location  : both    zoom?, pinList?, icon?, displayName?, img?
 | `pinList` | optional | optional | — |
 | `displayName` | optional | — | optional |
 | `img` | optional | — | optional |
+| `url` | optional | — | optional |
 
 *one of* — exactly one required, precedence `file` → `location_id` → `lat`/`lng`.
 
@@ -36,6 +37,10 @@ one exception: it may carry `file`/`location_id` itself, same precedence — see
 - `displayName` on a `location` is the list browser's Location-column text
   ([list_browser.jst](../../media/data/scripts/list_browser.jst)); on a `pin` it is the
   marker's hover title / InfoWindow header.
+- `url` on a `pin` makes the marker a link — a READY href, not a reference: whoever
+  builds the pin resolves it (the list browser runs a row's `file` through
+  `GL.fileToSlug`), so a pin can point off-site just as easily. It rides along onto
+  `location` because `location` is the union; nothing sets it there today.
 - `location` stays top-level and does not move into `googleMap`: a road map's centre is a
   *viewport* (Morton's frames the highway, not the lake), and the Location column needs a
   place record, not a map.
@@ -74,20 +79,24 @@ Values (lowercase, controlled): `lake`, `campground`, `park`, `tent`, `picnic`, 
 General rule Pierre stated: rec site with camping = tent; commercial campground = campground.
 
 ## Marker rendering (gettinglost.jst googleMap renderer)
-- **A pin** is `{ icon?, displayName?, img?, lat?, lng? }`: `img` with `/` = `"galleryKey/itemId"` ref into `photoGalleries` (pulls img + its label); without `/` = direct file. Render: `icon`→custom marker else default; resolved `img`→click InfoWindow; label-only→hover `title`; neither→plain marker. Label chain: `pin.displayName`→gallery item's label→the `img` string→none. There is **no** automatic page-name label (see `docs/todo.md` #35).
+- **A pin** is `{ icon?, displayName?, img?, url?, lat?, lng? }`: `img` with `/` = `"galleryKey/itemId"` ref into `photoGalleries` (pulls img + its label); without `/` = direct file. Render: `icon`→custom marker else default; resolved `img`→click InfoWindow; label-only→hover `title`; neither→plain marker. Label chain: `pin.displayName`→gallery item's label→the `img` string→none. There is **no** automatic page-name label (see `docs/todo.md` #35).
+- **`url` and `img` do not cancel each other** (2026-08-21). No `img`: clicking the marker navigates. With an `img`: the InfoWindow still opens, and its photo and header are wrapped in the link. One click, both fields honored.
 - **Live center/zoom caption** under EVERY map (no width gate — Pierre removed it): a centered `<div>` after the map, wired to the map's `idle` event, `Center = (lat, lng) · Zoom = n`, 6-decimal. Deliberate authoring aid to dial in center/zoom; "public for now, hide from real users later."
+- **`drawMap` touches no box property** (2026-08-21). Width/height/float/margin are CSS: `.gl-mapbox` (added by `drawMap`) is a flex column, `.gl-map` takes `flex:1`, `.gl-map-caption` its own line, and the caller states only the outside size. The page-block house style — `width:45%; float:right; margin:0 0 1rem 1.5rem` — is the `[data-block-type="googleMap"]` rule in `gettinglost.cst`, so it reaches page blocks and nothing else; an inline `style` on the div overrides it the ordinary way. `min-height:400px` on `.gl-mapbox` is the default for a block that states nothing.
 - Maps inside collapsed `<details>` init zero-size → never fire `idle` (caption frozen, tiles may not draw) — known quirk, not a bug to chase.
 - `pinIcon(icon)`: unknown/absent → `null` → default Google pin. `google.maps.Marker` now emits a **deprecation console warning** (AdvancedMarkerElement); parked (needs a Map ID + kills inline `mapStyles`). Migration recipe + prereqs in [docs/rendering/blocks.md](../rendering/blocks.md)/todo.
 
-## Second consumer: the list browser's map view (2026-08-17)
-`gettinglost.jst` **exports three functions on `window.GL`** so the list browser draws from the same machinery: `GL.loadGoogleMapsApi` (one script tag per page, shared dedupe), `GL.pinIcon` (same `GL.PIN_ICONS` figures, callable only after the API has loaded) and `GL.fileToSlug` (a row's page URL).
-- `list_browser.jst`'s `dropPin(map, row)` treats a row's **`location` as the pin**, which the unified shape is what makes possible: `lat`/`lng` place it, `icon` picks the figure. No `lat`/`lng` → no pin, silently.
-- **Its hover title is the row's `name`.** That is not a contradiction of the no-automatic-page-name-label ruling (#35): that ruling is about a `googleMap` block synthesizing a marker for the page it sits on. Here the row IS the record, and `location.displayName` holds a town ("Black Creek, BC"), which is Location-column text, not a marker label.
-- **A pin whose row has a `file` is a link to that page** (same tab), built with the third
-  export, `GL.fileToSlug` — the same call `renderCard` uses for a card's `href`. Rows with
-  no `file` are registry entries with no page: no listener, hover title only.
-- `renderPin` is NOT shared: it closes over the page's `photoGalleries` to resolve `img`, and the list browser has no page data. No `location` in the destinations data carries `img` today.
-- The list map has **no center/zoom caption** — see `docs/todo.md` #37.
+## Second consumer: the list browser's map view
+**One code path (2026-08-21).** Every map on the site is drawn by `GL.drawMap(el, mapObject, galleries?)`, exported from `gettinglost.jst`. A page block resolves its named entry and calls it; `list_browser.jst` builds a mapObject out of its rows (`mapObjectFor`) and calls the same function. The list map therefore gets the shared pin rendering, the icon vocabulary and the centre/zoom caption for free — there is no second Google map, no `dropPin`, and no separate caption to keep in step.
+
+Before this the list browser stood up its own map and borrowed pieces: `GL.loadGoogleMapsApi` and `GL.pinIcon` were exported for it and are now internal again. `GL.fileToSlug` is still exported and still used — the list browser resolves a row's `file` to the pin's `url` with it, the same call `renderCard` uses for a card's `href`.
+
+- A row's **`location` IS the pin** — the unified shape is what makes that possible: `lat`/`lng` place it, `icon` picks the figure.
+- `mapObjectFor` **drops a row with no `lat`/`lng`**. That filter cannot move into `renderPin`, which deliberately puts a coordinate-less pin at the map's centre for authored single-pin maps; rows that slipped through would stack in the middle of the map.
+- **The pin's `displayName` is the row's `name`, overwriting `location.displayName`**, which holds a town ("Black Creek, BC") — Location-column text, not a marker label. Not a contradiction of the no-automatic-page-name-label ruling (#35): that ruling is about a `googleMap` block synthesizing a marker for the page it sits on, and here the row IS the record.
+- **A row with a `file` gets a `url`** and its marker is a link to that page. Rows with no `file` are registry entries with no page: no `url`, hover title only.
+- `galleries` is a `drawMap` parameter, not a closure capture, so `renderPin` resolves `img` for a page block and no-ops for the list browser, which has no page data. No `location` in the destinations data carries `img` today.
+
 Behavior and the rest of the view live in [../rendering/list-browser.md](../rendering/list-browser.md).
 
 ## Pin delivery — GL.PIN_ICONS as inline SVG data-URI

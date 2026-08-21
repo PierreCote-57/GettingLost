@@ -617,10 +617,6 @@
     document.head.appendChild(script);
   }
 
-  // Shared so list_browser.jst's map view loads the API through the same
-  // one-script-tag path instead of injecting a second one.
-  window.GL.loadGoogleMapsApi = loadGoogleMapsApi;
-
   // ---------------------------------------------------------------------
   // Shared: the "· "-separated link row (campground + links blocks)
   // ---------------------------------------------------------------------
@@ -788,15 +784,17 @@
   // The three shapes are one shape:
   //   Point               lat, lng
   //   googleMap : Point   zoom?, pinList?  (or file? / location_id?)
-  //   pin       : Point   icon?, displayName?, img?
-  //   location  : both    zoom?, pinList?, icon?, displayName?, img?
+  //   pin       : Point   icon?, displayName?, img?, url?
+  //   location  : both    zoom?, pinList?, icon?, displayName?, img?, url?
   //
   // After resolution a top-level "icon" becomes a pinList entry at the
   // centre, so a place that is just "here, with this marker" needs no
   // pinList of its own.
   //
-  // Size/float live on the div's inline style; the renderer only fills in
-  // defaults for properties the div hasn't already set.
+  // The div's box is CSS and CSS only — the renderer never reads or writes
+  // width/height/float/margin. The house style (45% floated right) is the
+  // [data-block-type="googleMap"] rule in gettinglost.cst; an inline style on
+  // the div overrides it the ordinary way.
 
   // Build a marker icon from a pin type via GL.PIN_ICONS (SVG data-URI).
   // Unknown/absent type -> null, so the marker uses the default pin.
@@ -809,10 +807,6 @@
       anchor: new google.maps.Point(24, 24)
     };
   }
-
-  // Shared so list_browser.jst's map view draws the same figures from the same
-  // icon vocabulary. Callable only after the Maps API is loaded (google.maps.Size).
-  window.GL.pinIcon = pinIcon;
 
   // Cached loader for the published locations registry (logs/locations.json ->
   // /wp-content/uploads/locations.json). Resolves once per page load to an
@@ -890,128 +884,143 @@
     return resolved;
   }
 
-  window.GL.blockRenderers.googleMap = function (el, pageData) {
-    var mapName = el.getAttribute("data-map");
-    var galleries = pageData.photoGalleries || {};
-
-    // Resolve a pin's { img, label } from its optional "img" field:
-    //   "galleryKey/itemId" -> that photoGalleries item (img + its label)
-    //   "file.jpg"          -> a direct image file
-    // label precedence: pin.displayName -> gallery item's label -> the img
-    // string itself -> none.
-    function resolvePinMedia(pin) {
-      var label = pin.displayName || null;
-      var img = null;
-      if (pin.img) {
-        var slash = pin.img.indexOf("/");
-        if (slash >= 0) {
-          var gKey = pin.img.slice(0, slash);
-          var itemId = pin.img.slice(slash + 1);
-          var items = (galleries[gKey] && galleries[gKey].items) || [];
-          var item = null;
-          items.forEach(function (it) {
-            if (it && it.id === itemId && !item) item = it;
-          });
-          if (item) {
-            img = item.img;
-            if (!label) label = item.label || null;
-          }
-        } else {
-          img = pin.img;
+  // Resolve a pin's { img, label } from its optional "img" field:
+  //   "galleryKey/itemId" -> that photoGalleries item (img + its label)
+  //   "file.jpg"          -> a direct image file
+  // label precedence: pin.displayName -> gallery item's label -> the img
+  // string itself -> none.
+  function resolvePinMedia(pin, galleries) {
+    var label = pin.displayName || null;
+    var img = null;
+    if (pin.img) {
+      var slash = pin.img.indexOf("/");
+      if (slash >= 0) {
+        var gKey = pin.img.slice(0, slash);
+        var itemId = pin.img.slice(slash + 1);
+        var items = (galleries[gKey] && galleries[gKey].items) || [];
+        var item = null;
+        items.forEach(function (it) {
+          if (it && it.id === itemId && !item) item = it;
+        });
+        if (item) {
+          img = item.img;
+          if (!label) label = item.label || null;
         }
-        if (!label) label = pin.img;
+      } else {
+        img = pin.img;
       }
-      return { img: img, label: label };
+      if (!label) label = pin.img;
     }
+    return { img: img, label: label };
+  }
 
-    // Drop one pin onto the map. pin = { icon?, displayName?, img?, lat?, lng? }.
-    //   lat/lng absent -> the pin sits at the map's centre
-    //   pin.icon       -> custom icon (GL.PIN_ICONS), else the default marker
-    //   img            -> click opens an InfoWindow with the photo
-    //   label-only     -> native hover title; neither -> plain marker.
-    function renderPin(map, infoWindow, pin, centre) {
-      var lat = (typeof pin.lat === "number") ? pin.lat : centre.lat;
-      var lng = (typeof pin.lng === "number") ? pin.lng : centre.lng;
-      if (typeof lat !== "number" || typeof lng !== "number") return;
-      var media = resolvePinMedia(pin);
-      var markerOptions = { position: { lat: lat, lng: lng }, map: map };
-      var icon = pinIcon(pin.icon);
-      if (icon) markerOptions.icon = icon;
-      if (media.img == null && media.label) markerOptions.title = media.label;
-      var marker = new google.maps.Marker(markerOptions);
-      if (media.img != null) {
-        marker.addListener("click", function () {
-          var img = document.createElement("img");
-          img.src = formatImageUrl(media.img, 320, 240);
-          img.alt = media.label || "";
-          img.style.display = "block";
-          img.style.maxWidth = "320px";
-          img.style.maxHeight = "240px";
-          infoWindow.setHeaderContent(media.label || "");
-          infoWindow.setContent(img);
-          infoWindow.open(map, marker);
-        });
-      }
-    }
+  // An <a> wrapped around whatever the InfoWindow is showing, so a pin that has
+  // BOTH a photo and a url keeps both: the photo still opens, and it is the link.
+  function pinLink(url, child) {
+    var a = document.createElement("a");
+    a.href = url;
+    a.appendChild(child);
+    return a;
+  }
 
-    // The block element is the WRAPPER; the map is a child of it, and so is the
-    // caption. That containment is what keeps the caption under the map instead
-    // of spanning the content column: the two used to be siblings, and the
-    // caption imitated the map's box by copying its inline float and width —
-    // which only worked while those two properties happened to describe the
-    // layout. A map inside a wrapper, or one sized by CSS, or a `float:none`
-    // pixel-width map (the 800×500 ones in a <details>) put the caption back on
-    // the main column at full width.
-    //
-    // The authored inline styles stay on the wrapper, where they belong — the
-    // height moves to the map, and the wrapper's height goes auto so it grows to
-    // fit the caption.
-    function drawMap(mapObject) {
-      el.textContent = "";
-      if (!el.style.width) el.style.width = "45%";
-      if (!el.style.float) el.style.float = "right";
-      if (!el.style.margin) el.style.margin = "0 0 1rem 1.5rem";
-
-      var mapEl = document.createElement("div");
-      mapEl.style.width = "100%";
-      mapEl.style.height = el.style.height || "400px";
-      el.style.height = "auto";
-      el.appendChild(mapEl);
-
-      loadGoogleMapsApi(function () {
-        var map = new google.maps.Map(mapEl, {
-          zoom: (typeof mapObject.zoom === "number") ? mapObject.zoom : MAP_CONFIG.mapZoom,
-          center: { lat: mapObject.lat, lng: mapObject.lng },
-          mapTypeId: MAP_CONFIG.mapTypeId,
-          styles: MAP_CONFIG.mapStyles
-        });
-        var infoWindow = new google.maps.InfoWindow();
-        (mapObject.pinList || []).forEach(function (pin) {
-          renderPin(map, infoWindow, pin, mapObject);
-        });
-
-        // Live center/zoom readout under every map. Follows pan/zoom via the
-        // map's "idle" event so the current values can be read straight off the
-        // map. (Public for now — hiding it from real visitors is a later
-        // revisit.)
-        //
-        // Appended INSIDE the wrapper, after the map: it is as wide as the map
-        // because it is in the map's box, not because it was told a width.
-        var caption = document.createElement("div");
-        caption.style.textAlign = "center";
-        caption.style.margin = "0.4rem 0 0";
-        caption.style.fontSize = "0.9rem";
-        el.appendChild(caption);
-        var updateCaption = function () {
-          var c = map.getCenter();
-          caption.textContent = "Center = (" + c.lat().toFixed(6) + ", " +
-            c.lng().toFixed(6) + ")   ·   Zoom = " + map.getZoom();
-        };
-        map.addListener("idle", updateCaption);
-        updateCaption();
+  // Drop one pin onto the map. pin = { icon?, displayName?, img?, url?, lat?, lng? }.
+  //   lat/lng absent -> the pin sits at the map's centre
+  //   pin.icon       -> custom icon (GL.PIN_ICONS), else the default marker
+  //   img            -> click opens an InfoWindow with the photo
+  //   url            -> the pin is a link. No img: the click navigates. With an
+  //                     img: the InfoWindow's photo and header carry the link,
+  //                     so neither field cancels the other out.
+  //   label-only     -> native hover title; none of it -> plain marker.
+  // url is a READY href, not a reference: whoever builds the pin resolves it
+  // (list_browser runs a row's file through GL.fileToSlug), so a pin can point
+  // just as easily off-site.
+  function renderPin(map, infoWindow, pin, centre, galleries) {
+    var lat = (typeof pin.lat === "number") ? pin.lat : centre.lat;
+    var lng = (typeof pin.lng === "number") ? pin.lng : centre.lng;
+    if (typeof lat !== "number" || typeof lng !== "number") return;
+    var media = resolvePinMedia(pin, galleries);
+    var markerOptions = { position: { lat: lat, lng: lng }, map: map };
+    var icon = pinIcon(pin.icon);
+    if (icon) markerOptions.icon = icon;
+    if (media.img == null && media.label) markerOptions.title = media.label;
+    var marker = new google.maps.Marker(markerOptions);
+    if (media.img != null) {
+      marker.addListener("click", function () {
+        var img = document.createElement("img");
+        img.src = formatImageUrl(media.img, 320, 240);
+        img.alt = media.label || "";
+        img.style.display = "block";
+        img.style.maxWidth = "320px";
+        img.style.maxHeight = "240px";
+        var label = media.label || "";
+        var header = pin.url ? pinLink(pin.url, document.createTextNode(label)) : label;
+        var body = pin.url ? pinLink(pin.url, img) : img;
+        infoWindow.setHeaderContent(header);
+        infoWindow.setContent(body);
+        infoWindow.open(map, marker);
+      });
+    } else if (pin.url) {
+      marker.addListener("click", function () {
+        window.location.href = pin.url;
       });
     }
+  }
 
+  // Draw a resolved mapObject into el. THE CALLER OWNS el's BOX — width, height,
+  // float and margin are CSS and are never read or written here. A page block
+  // gets the house style from the [data-block-type="googleMap"] rule; the list
+  // browser sizes its own container. All this adds is the class the shared
+  // layout rule keys on.
+  //
+  // el is the WRAPPER; the map and the caption are both children of it. That
+  // containment is what makes the caption the width of the map instead of the
+  // main column, and the flex column in gettinglost.cst is what splits el's
+  // height between the two. Both children are in place BEFORE the Maps API
+  // answers, so Google sizes the map once, against a box that already allows
+  // for the caption.
+  function drawMap(el, mapObject, galleries) {
+    el.textContent = "";
+    el.classList.add("gl-mapbox");
+
+    var mapEl = document.createElement("div");
+    mapEl.className = "gl-map";
+    el.appendChild(mapEl);
+
+    // Live center/zoom readout under every map, following pan and zoom through
+    // the map's "idle" event so the current values can be read straight off it.
+    // (Public for now — hiding it from real visitors is a later revisit.)
+    var caption = document.createElement("div");
+    caption.className = "gl-map-caption";
+    el.appendChild(caption);
+
+    loadGoogleMapsApi(function () {
+      var map = new google.maps.Map(mapEl, {
+        zoom: (typeof mapObject.zoom === "number") ? mapObject.zoom : MAP_CONFIG.mapZoom,
+        center: { lat: mapObject.lat, lng: mapObject.lng },
+        mapTypeId: MAP_CONFIG.mapTypeId,
+        styles: MAP_CONFIG.mapStyles
+      });
+      var infoWindow = new google.maps.InfoWindow();
+      (mapObject.pinList || []).forEach(function (pin) {
+        renderPin(map, infoWindow, pin, mapObject, galleries || {});
+      });
+      var updateCaption = function () {
+        var c = map.getCenter();
+        caption.textContent = "Center = (" + c.lat().toFixed(6) + ", " +
+          c.lng().toFixed(6) + ")   ·   Zoom = " + map.getZoom();
+      };
+      map.addListener("idle", updateCaption);
+      updateCaption();
+    });
+  }
+
+  // Shared so list_browser.jst's map view IS this map: it builds a mapObject out
+  // of its rows and calls this, rather than standing up a second Google map with
+  // its own pins and no caption.
+  window.GL.drawMap = drawMap;
+
+  window.GL.blockRenderers.googleMap = function (el, pageData) {
+    var mapName = el.getAttribute("data-map");
     if (!mapName) {
       console.error('[gettinglost] Error rendering block type "googleMap": ' +
         'the div has no data-map attribute — every map block is named.');
@@ -1019,7 +1028,7 @@
     }
     var mapObject = pageData.googleMap && pageData.googleMap[mapName];
     resolveMapObject(mapObject, pageData).then(function (resolvedMap) {
-      drawMap(resolvedMap);
+      drawMap(el, resolvedMap, pageData.photoGalleries || {});
     }).catch(function (err) {
       console.error('[gettinglost] Error rendering block type "googleMap" (map "' +
         mapName + '"):', err);
