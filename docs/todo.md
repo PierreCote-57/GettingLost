@@ -14,6 +14,14 @@ IT (2026-07-30).
 
 Code and data-integrity work only. **Content authoring does not belong here** (2026-07-27).
 
+**Cosmetic is not an entry** (2026-08-21). Whitespace, indentation, a file that doesn't match
+a formatting convention — none of that is a todo, however true it is. An entry has to name
+something that will bite: wrong behavior, wrong data, a trap someone falls into.
+
+**"We're ignoring X for now" means DELETE the entry, not park it** (2026-08-21). Parked means
+it is still coming. Ignored means it is not, and carrying it forward makes every later "what
+is left?" longer than the truth.
+
 **This file is the complete answer to "where are we?"** — if something is outstanding it is
 an entry here, and if it is not an entry here it does not get named in a status list. No
 "nothing outstanding except…" (2026-07-31).
@@ -34,26 +42,4 @@ written before that date may not resolve.
 
 ## Entries
 
-**#40** `logs/travel-log.json` is 2-space indented, not the tab house format
-([docs/conventions/json-format.md](conventions/json-format.md)) that `logs/locations.json`
-and everything under `media/data/` use. Consequence: the first `jsonio.save()` on it rewrites
-the whole file — tabs, one field per line — losing the inline `location` objects and the
-aligned `"arrival":   ` columns. Decide whether to reformat it deliberately or keep it out of
-jsonio's path.
-
-**#39** The destination template is pre-unification. `media/data/templates/destination-template/destination-template.json` still carries top-level `lat`/`lng` instead of a `location`
-block, and `pages/templates/destination-template.html` has a `googleMap` div with no
-`data-map` — which the resolver treats as an error. Anyone starting a page from the template
-gets both.
-
-**#38** `list_browser.jst`'s Location column still calls its local `notes` —
-`fillDataCell`'s `location` branch reads `loc.displayName` into `var notes` and uses it three
-times. The field was renamed; the variable kept the old name and reads as a different field.
-
-**#35** Map marker labels — revisit AFTER the `pin` → `pins` migration. The migration writes
-no `label`, and the ruling is *missing label = no label*: the old auto-fill that injected the
-page's own `name` into the synthesized marker is gone. Open afterwards: which markers should
-carry a label at all, and — for a map that points at another page or a registry entry —
-whether the label should come from the pointed-at record's `name` rather than the page
-holding the block.
-
+Nothing parked.

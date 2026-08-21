@@ -50,7 +50,9 @@ means exactly one thing — an element of a `pinList`.
 - **Keeping a top-level `pin` on a map object.** Dropped in favour of `pinList` everywhere,
   with a `location`'s `icon` normalized into a centre pin after resolution.
 - **Automatic marker labels.** The old unnamed branch injected the page's `name` into the
-  synthesized marker. Ruled *missing label = no label*; revisiting labels is `../todo.md` #35.
+  synthesized marker. Ruled *missing label = no label*, and closed 2026-08-21: a page's own
+  marker is right without one, and a marker that should carry a label gets `displayName` from
+  whoever builds the pin — an author per `pinList` entry, the list browser from the row's name.
 - **De-duplicating registry coordinates by resolving `destination_id` at runtime.** Solved
   instead by deleting the records: a place with a destination page is referenced by page, so
   it leaves `logs/locations.json` entirely and `destination_id` went with it.

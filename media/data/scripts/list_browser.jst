@@ -286,15 +286,15 @@
       }
     } else if (field === "location") {
       var loc = place.location || {};
-      var notes = cellText(loc.displayName);
-      if (loc.lat != null && loc.lng != null && notes) {
+      var displayName = cellText(loc.displayName);
+      if (loc.lat != null && loc.lng != null && displayName) {
         cell.appendChild(externalLink(
           "https://www.google.com/maps/search/?api=1&query=" + loc.lat + "," + loc.lng,
-          notes,
+          displayName,
           "Open in Google Maps"
         ));
       } else {
-        cell.textContent = notes;
+        cell.textContent = displayName;
       }
     } else if (field === "haversine") {
       var km = campbellRiverKm(place);
