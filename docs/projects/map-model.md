@@ -61,4 +61,3 @@ means exactly one thing — an element of a `pinList`.
   with no `data-map` is now an error.
 - `logs/locations.json` holds only places with **no** destination page.
 - The one-shot migration script was deleted after it ran; it was never idempotent.
-- `logs/travel-log.json` still references two deleted registry records — `../todo.md` #36.

@@ -1,6 +1,6 @@
 # TODO — GettingLost
 
-**next id: 40**
+**next id: 41**
 
 Work parked for later: small issues found while working on something bigger, plus planned
 passes. Noted, not fixed. Delete an entry when it's done.
@@ -34,6 +34,13 @@ written before that date may not resolve.
 
 ## Entries
 
+**#40** `logs/travel-log.json` is 2-space indented, not the tab house format
+([docs/conventions/json-format.md](conventions/json-format.md)) that `logs/locations.json`
+and everything under `media/data/` use. Consequence: the first `jsonio.save()` on it rewrites
+the whole file — tabs, one field per line — losing the inline `location` objects and the
+aligned `"arrival":   ` columns. Decide whether to reformat it deliberately or keep it out of
+jsonio's path.
+
 **#39** The destination template is pre-unification. `media/data/templates/destination-template/destination-template.json` still carries top-level `lat`/`lng` instead of a `location`
 block, and `pages/templates/destination-template.html` has a `googleMap` div with no
 `data-map` — which the resolver treats as an error. Anyone starting a page from the template
@@ -49,13 +56,6 @@ centre/zoom for a map gets dialled in with. Costed 2026-08-17: lift the 12 lines
 `drawMap` in `gettinglost.jst`, export them as `GL.mapCaption(map, parentEl)` so one format
 serves both, and have `renderMap` return a wrapper holding map + caption instead of the map
 div — the same wrapper/mapEl split the block renderer already uses.
-
-**#36** `logs/travel-log.json` place references — it holds `location_id` refs to
-`salmon-point-resort` and `beavertail-lake-dayuse`, the two locations.json records deleted by
-the googleMap model migration (both now have destination pages). Travel-log is not part of
-the map model and nothing renders it yet, so it needs its own answer: either those refs
-become `file` pointers to the pages, or travel-log adopts the same `file`/`location_id`
-resolution the maps use.
 
 **#35** Map marker labels — revisit AFTER the `pin` → `pins` migration. The migration writes
 no `label`, and the ruling is *missing label = no label*: the old auto-fill that injected the

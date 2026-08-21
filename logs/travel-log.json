@@ -17,7 +17,7 @@
     "name": "Stay at Salmon Point Resort",
     "arrival": "2026-06-26T18:00:00-08:00",
     "departure": "2026-06-29T10:00:00-08:00",
-    "location": { "location_id": "salmon-point-resort" },
+    "location": { "file": "salmon-point-resort.html" },
     "post_id": "first-try.html",
     "id": "stop-0003"
   },
@@ -40,7 +40,7 @@
     "name": "Picnic at Beavertail Lake",
     "arrival":   "2026-07-12T11:00:00-08:00",
     "departure": "2026-07-12T15:00:00-08:00",
-    "location": { "location_id": "beavertail-lake-dayuse" },
+    "location": { "file": "beavertail-lake-dayuse.html" },
     "post_id": "picnic-2026-07-12.html",
     "id": "stop-0009"
   }

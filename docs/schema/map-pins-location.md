@@ -25,8 +25,10 @@ location  : both    zoom?, pinList?, icon?, displayName?, img?
 
 *one of* — exactly one required, precedence `file` → `location_id` → `lat`/`lng`.
 
-`location` is the **union** of the other two, and the only one with no pointer fields — it is
-what `file` and `location_id` resolve to. That is the whole model: a `location` is a valid
+`location` is the **union** of the other two, and on a page the only one with no pointer
+fields — it is what `file` and `location_id` resolve to. (A `location` inside `logs/` is the
+one exception: it may carry `file`/`location_id` itself, same precedence — see
+[docs/projects/logs-travel.md](../projects/logs-travel.md).) That is the whole model: a `location` is a valid
 `googleMap` AND a valid `pin`.
 
 - `zoom` overrides `MAP_CONFIG.mapZoom` (default 13).
@@ -51,8 +53,8 @@ Every block is named. `data-map` picks one entry out of `pageData.googleMap`; a 
 
 **A pointer replaces the entry outright** — `zoom` and `pinList` come from the target too,
 never a mix. Extra keys are legal and ignored, so a `file` can be renamed to `fileSAV` to fall
-back to an older source while testing. A `location` never points, so resolution is always one
-hop and always terminates.
+back to an older source while testing. A `location` never points (outside `logs/`), so resolution
+is always one hop and always terminates.
 
 After resolution a top-level `icon` becomes a `pinList` entry at the centre (copied, not
 appended — the self-pointer path hands back `pageData.location` by reference).

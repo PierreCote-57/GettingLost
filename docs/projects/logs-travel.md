@@ -14,15 +14,12 @@ page's **github filename**. So `location_id` → locations.json; `post_id` → b
 `file` field — the same key, and the same meaning, as `file` everywhere else in the repo.
 
 ## The `location` block (shared by every log file)
-A `location` is the place itself: `{ lat, lng, icon?, zoom?, pinList?, displayName?, img? }`,
-always concrete — **a location never points**
-([docs/schema/map-pins-location.md](../schema/map-pins-location.md)). References live in the
-referring field, not inside the location: a log entry names a place with `location_id`
-(a `locations.json` id) or `file` (a destination page filename).
-
-`logs/travel-log.json` still carries `location_id` references to two records that the
-2026-08-16 map-model migration deleted, because those places now have destination pages —
-see `docs/todo.md` #36.
+A `location` is the place: `{ lat, lng, icon?, zoom?, pinList?, displayName?, img? }`
+([docs/schema/map-pins-location.md](../schema/map-pins-location.md)). **In `logs/` — and
+only there — a `location` may point instead**: `file` (a destination page filename) or
+`location_id` (a `locations.json` id) stands in place of `lat`/`lng`, exactly as a
+`googleMap` entry does, same `file` → `location_id` → `lat`/`lng` precedence. On a page a
+`location` is always concrete.
 
 ## `logs/travel-log.json` — unified "stop" entries
 One type, a **stop**: `{ name, arrival, departure, location, note?, post_id?, id }`.
