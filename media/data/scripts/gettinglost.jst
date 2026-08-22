@@ -179,11 +179,17 @@
       var driveRank = DRIVE.indexOf(type);
       var isNonDrive = NON_DRIVE.indexOf(type) !== -1;
       if (driveRank === -1 && !isNonDrive) {
-        console.error('Unknown leg type "' + type + '" — leg ignored.');
+        console.error(
+          "[gettinglost] deriveRoadBadge: unknown leg type — leg ignored. type='" +
+          type + "' leg='" + JSON.stringify(leg) + "' url='" + window.location.pathname + "'"
+        );
         continue;
       }
       if (type === "unpaved" && !(typeof leg.km === "number" && leg.km > 0)) {
-        console.error("unpaved leg has no km — leg ignored.");
+        console.error(
+          "[gettinglost] deriveRoadBadge: unpaved leg has no km — leg ignored. leg='" +
+          JSON.stringify(leg) + "' url='" + window.location.pathname + "'"
+        );
         continue;
       }
       if (isNonDrive) return "back_country";
@@ -482,10 +488,15 @@
   // Generic [data-block-type] system
   // ---------------------------------------------------------------------
 
+  // Which page are we on? The last path segment IS the WP slug (<base>_<ext>).
+  // The site root has no segment and is the home page, so it answers with home's
+  // slug rather than nothing — otherwise initBlocks cannot load page data and no
+  // block on the home page renders at all.
   function getSlugFromUrl() {
     var path = window.location.pathname;
     var parts = path.split("/").filter(Boolean);
-    return parts.length ? parts[parts.length - 1] : "";
+    var slug = parts.length ? parts[parts.length - 1] : fileToSlug("home.html");
+    return slug;
   }
 
   // Fetch the data file belonging to a page filename: <base>.json in the
@@ -583,7 +594,10 @@
 
     var slug = getSlugFromUrl();
     if (!slug) {
-      console.error("[gettinglost] Could not determine page slug from URL; cannot load page data.");
+      console.error(
+        "[gettinglost] Could not determine page slug; cannot load page data. url='" +
+        window.location.pathname + "'"
+      );
       return;
     }
 
@@ -1487,7 +1501,10 @@
   window.GL.blockRenderers.pageLink = function (el) {
     var file = el.getAttribute("data-file") || "";
     if (!file) {
-      console.error("pageLink: missing data-file attribute.");
+      console.error(
+        "[gettinglost] pageLink: missing data-file attribute. text='" +
+        el.textContent + "' url='" + window.location.pathname + "'"
+      );
       return;
     }
 

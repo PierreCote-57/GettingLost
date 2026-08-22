@@ -227,7 +227,11 @@
       return;
     }
     if (!Array.isArray(actual)) {
-      console.warn("[maintenance] `actual` is not a list — nothing rendered.");
+      console.warn(
+        "[maintenance] `actual` is not a list — nothing rendered. type='" +
+        typeof actual + "' value='" + JSON.stringify(actual) + "' url='" +
+        window.location.pathname + "'"
+      );
       return;
     }
     if (!actual.length) {

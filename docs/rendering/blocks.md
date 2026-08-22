@@ -43,6 +43,12 @@ Applies to the booklet PDF builder as much as the page renderers — see
 - Fully silent = top-level JSON key simply absent — valid deliberate state
 Apply this same test when adding any new validation logic.
 
+**A message NAMES THE VALUE THAT FAILED, in quotes, plus the page** (Pierre, 2026-08-22):
+`… type='unpaved' leg='{"type":"unpaved"}' url='/amor-lake_html/'`. The quotes are not
+decoration — the case that set this was `getSlugFromUrl` returning `""` on the site root,
+and an unquoted empty string prints as nothing at all, so the message named no cause. A
+diagnostic that does not carry the offending value only tells you that something failed.
+
 ## Filename is master (2026-07-08) — full model in [docs/conventions/site.md](../conventions/site.md)
 The github filename is the master; a slug is ALWAYS derived, never authored or stored as truth. Two inverse transforms exist in BOTH `sync.js` and `gettinglost.jst` — different source (Node vs browser ES5), **identical output required**:
 - `fileToSlug(filename)` = replace last `.`→`_`, then WP-sanitise. `amor-lake.html` → `amor-lake_html`.
