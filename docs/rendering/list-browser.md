@@ -155,14 +155,15 @@ display toggle for the second. Neither exists today; they are what the separatio
 **OR within a control, AND across controls.** Each filter is
 `filterX(value, longList) -> shortList`, and chaining is what produces the AND.
 
-- `filterView` — narrows to `window.GL.isPublished` rows, the one shared definition of
-  "this row is a live page" (`gettinglost.jst`, also used by the `featured` block). A card
-  advertises a live page; the table is where an inline-in-`destinations.json` row with no
-  page of its own is visible. It lives outside `renderGrid` so the count cannot disagree
-  with what you see.
-  **Today the test is `value === "grid"`, so the MAP is not filtered** and unpublished rows
-  appear as pins. The function's own comment says "every other view narrows to published
-  rows", so the code and its comment disagree — flagged 2026-08-22, not yet ruled on.
+- `filterView` — **only the grid narrows**, to `window.GL.isPublished` rows: the one shared
+  definition of "this row is a live page", in `gettinglost.jst`, also used by the `featured`
+  block. A card is a link, so a card must have a page behind it. The table and the map both
+  show everything, including the inline `destinations.json` rows with no page — on the map
+  those get a pin with a hover title and no link. It lives outside `renderGrid` so the count
+  cannot disagree with what you see.
+  **The test is `value === "grid"` — only the grid narrows.** The table and the map both
+  show everything. An earlier version tested `value === "table"`, and this doc and the
+  function's own comment described that version for a while after the code changed.
 - `filterAccess` — ordinal threshold over `Object.keys(GL.ROAD_COLORS)`: the worst road you
   will accept. **Unknown PASSES.** Only the GL pages have authored legs, so a strict rule
   would drop every catalog row; an unmeasured road is not evidence of a bad one.

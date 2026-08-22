@@ -359,8 +359,9 @@
     return (value || "").split(",").filter(Boolean);
   }
 
-  // The table shows everything; every other view narrows to published rows,
-  // because a card or a pin advertises a live page.
+  // Only the GRID narrows to published rows — a card advertises a live page.
+  // The table and the map both show everything, including the inline
+  // destinations.json rows that have no page of their own.
   function filterView(value, longList) {
     var shortList = longList;
     if (value === "grid") shortList = shortList.filter(window.GL.isPublished);
