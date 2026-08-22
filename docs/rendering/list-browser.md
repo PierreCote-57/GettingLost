@@ -155,11 +155,14 @@ display toggle for the second. Neither exists today; they are what the separatio
 **OR within a control, AND across controls.** Each filter is
 `filterX(value, longList) -> shortList`, and chaining is what produces the AND.
 
-- `filterView` — **the table is the only view that shows unpublished rows**; `grid` and `map`
-  both keep `wpSettings.published === true`. The test is `value === "table"`, so the rule is
-  stated once and a fourth view would inherit it. A card or a pin advertises a live page; the
-  table is where an inline-in-`destinations.json` row with no page of its own is visible. It
-  lives outside `renderGrid` so the count cannot disagree with what you see.
+- `filterView` — narrows to `window.GL.isPublished` rows, the one shared definition of
+  "this row is a live page" (`gettinglost.jst`, also used by the `featured` block). A card
+  advertises a live page; the table is where an inline-in-`destinations.json` row with no
+  page of its own is visible. It lives outside `renderGrid` so the count cannot disagree
+  with what you see.
+  **Today the test is `value === "grid"`, so the MAP is not filtered** and unpublished rows
+  appear as pins. The function's own comment says "every other view narrows to published
+  rows", so the code and its comment disagree — flagged 2026-08-22, not yet ruled on.
 - `filterAccess` — ordinal threshold over `Object.keys(GL.ROAD_COLORS)`: the worst road you
   will accept. **Unknown PASSES.** Only the GL pages have authored legs, so a strict rule
   would drop every catalog row; an unmeasured road is not evidence of a bad one.

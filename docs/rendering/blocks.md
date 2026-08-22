@@ -109,7 +109,7 @@ Any per-page override is still just inline `style` on the block div, which beats
 
 **photo / featured / checklist** — converted from class hooks to block renderers 2026-07-26 (see THE INVARIANT above). All three take only the element and read no pageData.
 - `photo` (was `.gl-photo`): `<div data-block-type="photo" data-img="…" style="width:25%;float:left;" data-lat data-lng>`. The class is GONE — it carried no CSS, it was only a JS hook.
-- `featured` (was `.gl-featured`): `<div data-block-type="featured" data-count="3">`. Class gone, same reason.
+- `featured` (was `.gl-featured`): `<div data-block-type="featured" data-count="3">`. Class gone, same reason. **It is the one renderer that fetches a file of its own** — the hydrated `destinations.json`, not `pageData` — and it FILTERS before picking: a row needs a `file` and `wpSettings.published === true`, because most of that catalog has no page and `renderCard` would build a dead href. Same rule `filterView` applies to the grid. It fetched the retired `Destinations.json` until 2026-08-22, so the home page's featured row had been 404ing.
 - `checklist` (was `.gl-checklist` / `.gl-numcheck`): `<ol class="gl-numcheck" data-block-type="checklist">`. **The class STAYS** — unlike the other two it carries real CSS (checkbox rows, the numbering counter) and it also selects the variant (`classList.contains("gl-numcheck")`). One block type with two looks, not two block types.
 - Timing change accepted: these now render after the page-data fetch instead of at DOMContentLoaded, same as every other block.
 

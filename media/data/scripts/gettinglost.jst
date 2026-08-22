@@ -276,6 +276,15 @@
     return "/" + fileToSlug(url) + "/";
   }
 
+  // Is this row a live page on this site? The one definition — a card or a pin
+  // advertises a page a visitor can open, so anything that renders cards filters
+  // on it. list_browser.jst's filterView wraps it with the table's exception;
+  // the featured block calls it straight.
+  function isPublished(entry) {
+    var live = !!(entry.wpSettings && entry.wpSettings.published === true);
+    return live;
+  }
+
   function renderCard(entry) {
     var title = escapeHtml(entry.name || "");
     var image = escapeHtml(formatImageUrl(entry.featuredImage || "under-construction.png", 600, 400));
@@ -299,6 +308,7 @@
   window.GL.escapeHtml = escapeHtml;
   window.GL.renderCard = renderCard;
   window.GL.deriveRoadBadge = deriveRoadBadge; // shared render-time road badge (overview table)
+  window.GL.isPublished = isPublished;
   window.GL.fileToSlug = fileToSlug; // shared so lakes.jst can derive slugs
   window.GL.blockRenderers = window.GL.blockRenderers || {};
 
@@ -437,19 +447,23 @@
   //   <div data-block-type="featured" data-count="3"></div>
   //
   //   - data-count is how many random destinations to show (default 3).
-  //   - Reads no pageData; fetches Destinations.json itself and renders
-  //     the shared cards.
+  //   - Reads no pageData; fetches the hydrated destinations.json itself and
+  //     renders the shared cards.
+  //   - That file is the WHOLE catalog, most of which has no page of its own, so
+  //     it is filtered through the shared isPublished before picking: a card
+  //     advertises a live page. Same predicate filterView uses for the grid.
 
   window.GL.blockRenderers.featured = function (el) {
     var count = parseInt(el.getAttribute("data-count"), 10) || 3;
 
-    fetch("/wp-content/uploads/Destinations.json")
+    fetch("/wp-content/uploads/destinations.json")
       .then(function (res) {
-        if (!res.ok) throw new Error("Failed to load Destinations.json: " + res.status);
+        if (!res.ok) throw new Error("Failed to load destinations.json: " + res.status);
         return res.json();
       })
-      .then(function (entries) {
-        var picks = pickRandom(entries, count);
+      .then(function (longList) {
+        var shortList = longList.filter(isPublished);
+        var picks = pickRandom(shortList, count);
         var html = '<div class="gl-gallery-grid">';
         for (var i = 0; i < picks.length; i++) {
           html += renderCard(picks[i]);

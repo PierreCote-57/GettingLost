@@ -196,10 +196,6 @@
     return COLUMNS.reduce(function (sum, col) { return sum + (col.width || 0); }, 0);
   }
 
-  function isPublished(place) {
-    return !!(place.wpSettings && place.wpSettings.published === true);
-  }
-
   function campbellRiverKm(place) {
     var access = place.access || {};
     var list = access.haversine || [];
@@ -281,7 +277,7 @@
         cell.textContent = cellText(place.name);
       }
     } else if (field === "on_lost") {
-      if (place.file && isPublished(place)) {
+      if (place.file && window.GL.isPublished(place)) {
         cell.appendChild(internalLink(place.file, "View", "Open the page on this web site"));
       }
     } else if (field === "location") {
@@ -367,7 +363,7 @@
   // because a card or a pin advertises a live page.
   function filterView(value, longList) {
     var shortList = longList;
-    if (value === "grid") shortList = shortList.filter(isPublished);
+    if (value === "grid") shortList = shortList.filter(window.GL.isPublished);
     return shortList;
   }
 
