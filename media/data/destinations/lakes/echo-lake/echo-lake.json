@@ -37,14 +37,6 @@
 			]
 		}
 	},
-	"access": {
-		"legs": [
-			{
-				"type": "potholes",
-				"km": 1
-			}
-		]
-	},
 	"fishingReferences": {
 		"bcIdentifier": "00126CAMB",
 		"areaKm2": 0.23,

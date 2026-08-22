@@ -13,6 +13,31 @@ wins.**
 
 Migrated out of Claude's memory directory 2026-07-30.
 
+## These files are not a cache of the repo (2026-08-21)
+
+**Anything derivable from the true source is READ FROM THE SOURCE, never copied here.**
+Folder trees, file lists, which objects exist, counts — the repo, the JSON and the API
+already hold them, and a copy in markdown is a cache with no invalidation: nothing detects
+that it went stale, and the reader cannot tell a hit from a stale hit. The two questions
+that justify any cache both fail here — the master is free to read (`ls`, `grep`, one
+query), and the obsolescence is unbounded.
+
+What belongs here is what has no master: decisions, rationale, conventions, the why. Those
+are not cached in `docs/` — they are *sourced* here, which is why the staleness question
+does not apply to them.
+
+The commonest instance:
+
+**A count of what the data holds right now is MEASURED when it is needed, never written
+down here.** "24 of 214 rows", "116 of 116", "five destinations" — every one of those is
+true for a day and then quietly wrong, and a doc cannot announce that it went stale. Say
+the relationship instead ("the minority of rows", "most of the tagging"), and query the
+JSON for the number. Same reasoning as FileBird folder ids in
+[conventions/folders.md](conventions/folders.md).
+
+A count *inside a dated record of a migration* is different — that is history, and it
+stays true. `docs/projects/` may say what a pass moved on the day it ran.
+
 [overview.md](overview.md) — what the project is: the GitHub-mastered sync pipeline,
 per-page JSON as source of truth, the one param-driven list browser.
 
@@ -22,7 +47,7 @@ per-page JSON as source of truth, the one param-driven list browser.
 | --- | --- |
 | [image.md](schema/image.md) | `featuredImage`, null rules, `formatImageUrl`, filename reuse |
 | [access.md](schema/access.md) | `access{haversine,driving,legs}`, leg vocabulary, km rounding |
-| [badges-road.md](schema/badges-road.md) | authored `badges.tags`, derived `badges.road`, `ROAD_COLORS` |
+| [badges-road.md](schema/badges-road.md) | authored `tags.badges`, the derived road chip, `ROAD_COLORS` |
 | [types.md](schema/types.md) | `tags.types` — the closed destination-type facet, why it is optional |
 | [links.md](schema/links.md) | `links[]` — one flat list, `type` is the key, the label is display text |
 | [map-pins-location.md](schema/map-pins-location.md) | the one shape shared by `location`, a named `googleMap` and a `pin`; resolution, icon vocabulary |
@@ -37,7 +62,7 @@ per-page JSON as source of truth, the one param-driven list browser.
 | [site.md](conventions/site.md) | standing conventions, filename-master, destination types, FileBird folders |
 | [json-format.md](conventions/json-format.md) | the JSON house format — tabs, one field per line, written through `jsonio.py` |
 | [keywords.md](conventions/keywords.md) | `tags.keywords` as an OPEN vocabulary: authoring, and never normalizing in the filter |
-| [folders.md](conventions/folders.md) | folder structure across the 4 locations; why FileBird ids are never stored here |
+| [folders.md](conventions/folders.md) | what mirrors what across the repo, WP and FileBird; why the tree and the folder ids are never written down |
 | [github-workflow.md](conventions/github-workflow.md) | repo SOP, sync workflows, token policy |
 | [fishing-links.md](conventions/fishing-links.md) | Go Fish BC stocking reports, further-readings placement |
 | [theme-tokens.md](conventions/theme-tokens.md) | palette, fonts, why `gettinglost.cst` uses no theme `var()`s |
@@ -67,9 +92,10 @@ installed skill would be. `CLAUDE.md` points at them so they are known every ses
 | [lake-page.md](recipes/lake-page.md) | fishing folder → lake page + rec-site page, end to end |
 | [data-fill.md](recipes/data-fill.md) | geocoding, haversine, per-park scraping, `jsonio.py` |
 | [image-editing.md](recipes/image-editing.md) | crop, EXIF orientation, donor-clone removal |
-| [charting.md](recipes/charting.md) | `gen-chart.py`, the locked cabin-climate chart |
-| [doc-validation.md](recipes/doc-validation.md) | `check_docs.py` — the five checks, and what the pass deliberately does not check |
-| [crossref-check.md](recipes/crossref-check.md) | `crossref_check.py` — the `file` link graph: targets resolve, data files exist, names agree |
+| [charting.md](recipes/charting.md) | `gen-chart.py` — the flags, and the invariants the bands hold to |
+| [doc-reading-pass.md](recipes/doc-reading-pass.md) | the reading half: the per-file checklist, and why a finding never ends a pass |
+| [doc-validation.md](recipes/doc-validation.md) | `check_docs.py` — the six checks, and what the pass deliberately does not check |
+| [crossref-check.md](recipes/crossref-check.md) | `crossref_check.py` — the five checks over the `file` link graph, `location` blocks and the registry |
 
 ## reference/ — external sources
 
@@ -84,7 +110,7 @@ installed skill would be. `CLAUDE.md` points at them so they are known every ses
 
 ## projects/ — records of work
 
-[projects/README.md](projects/README.md) indexes all seven and is the **only** place a
+[projects/README.md](projects/README.md) indexes every project and is the **only** place a
 project's status is recorded. Each project file describes the work as it stands, with no
 status or history in it.
 

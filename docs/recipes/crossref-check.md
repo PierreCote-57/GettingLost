@@ -14,13 +14,15 @@ neighbours, a dataset row gaining or losing a `file`. Nothing at build time catc
 that stopped landing; the page fetches its JSON at runtime, so the failure shows up as a
 console error on a visitor's screen.
 
-## The three checks
+## The five checks
 
 | Check | What it proves |
 | --- | --- |
 | `target` | every `file` link resolves to exactly one file — a page under `pages/`, a dataset under `media/data/` |
 | `data` | an `.html` target has its matching `.json`, the one the page fetches at runtime |
 | `name` | the link's own `name` matches the `name` in the target's JSON |
+| `location` | every `location` block is concrete — real numeric `lat`/`lng`, and no `file` or `location_id`, because **a location never points** ([../schema/map-pins-location.md](../schema/map-pins-location.md)) |
+| `registry` | every `location_id` names a record that exists in `logs/locations.json` — a dangling one is a console error and an empty map at runtime |
 
 The `name` check needs both sides to have one. It is skipped for a link with no `name`, and
 for a target whose JSON has none — the list-browser catalog rows are the case, labelling a
@@ -29,7 +31,11 @@ inside the target.
 
 ## Scope of the walk
 
-JSON under `media/`. Any object carrying a string `file` at any depth is a link, which is
+JSON under `media/`, plus `logs/locations.json` for the `registry` check's id list. The
+`location` check therefore never sees a `logs/` location, which is the one place a
+`location` is allowed to point ([../projects/logs-travel.md](../projects/logs-travel.md)).
+
+Any object carrying a string `file` at any depth is a link, which is
 what picks up the rows inline in dataset files — a per-page glob would miss those, and they
 are where most of the links live. `local/data/` is out of scope: unauthored source datasets.
 

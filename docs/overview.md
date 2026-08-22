@@ -4,43 +4,22 @@
 - Custom domain `GettingLostInCanada.ca` is available and planned for future
 
 ## Repo Structure
-```
-pages/
-  about/          — about.html, useful-contacts.html, useful-links.html
-  destinations/
-    campgrounds/  — campground pages
-    lakes/        — lake destination pages
-    parks/        — park pages
-    rec-sites/    — rec site pages (BC rec sites, regional rec areas)
-  shared/         — list_browser.html, home.html
-  templates/      — destination-template, howto-template, lake-template, van-template
-  van/
-    van-overview.html
-    bronco.html
-    howto/          — howto-*.html
-    checklists/     — checklist-*.html
-    maintenance/    — van-maintenance.html, bronco-maintenance.html
-posts/              — blog post HTML files (one per post)
-media/
-  data/             — mirrors pages/ exactly, one JSON per page (+ posts/)
-    about/, destinations/, shared/, templates/, van/
-    posts/          — per-post JSON metadata
-    scripts/        — gl-constants.jst, gettinglost.jst, list_browser.jst, lakes.jst, maintenance.jst
-local/
-  sync/
-    sync.js          — GitHub Actions sync script (pages + posts)
-    pull-posts.js    — GitHub Actions script to pull new WP posts into repo
-  tools/             — local Python, run by hand, never in Actions
-    jsonio.py            — the JSON house format, load/save
-    check_docs.py        — the documentation validation pass
-    keyword_validation.py — the keyword validation pass
-    build_booklet_pdf.py — the checklists/howto booklet builder
-  refactor/
-    slug-refactor.js — one-shot slug migration, outside sync/ on purpose
-  plugins/
-    filebird_new/    — FileBird Pro plugin zip
-```
-See [docs/conventions/folders.md](conventions/folders.md) for the complete tree with all leaf folders.
+
+`ls` it — the tree is not copied here (see [docs/README.md](README.md), "These files are not
+a cache of the repo"). What the layout means:
+
+- `pages/` — page HTML, one file per page, foldered by section (`about/`, `destinations/`
+  with its four typed subfolders, `shared/`, `templates/`, `van/`).
+- `posts/` — blog post HTML, one per post, peer of `pages/`.
+- `media/data/` — mirrors `pages/` exactly, one JSON per page, plus `posts/` and `scripts/`.
+- `local/` — never synced. `sync/` holds the two GitHub Actions scripts; `tools/` the local
+  Python run by hand; `refactor/` one-shot migrations, outside `sync/` so committing one
+  does not trigger a sync; `data/` FROZEN reference data; `charting/`; `plugins/`.
+- `logs/` — travel, locations and fuel logs. **Synced**: `syncLogs` publishes the tree
+  flat to `/wp-content/uploads/`, which is how the browser reaches `locations.json`.
+
+Conventions that govern the tree are in
+[docs/conventions/folders.md](conventions/folders.md).
 
 ## Current Navigation Structure (WP navigation post id: 5)
 - **Destinations** (top-level, no dropdown) → `/list_browser_html/?dataset=destinations&view=grid`
@@ -60,22 +39,28 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 
 ## Sync Pipeline — GitHub Masters Everything (except navigation)
 - **GitHub is master** for both pages and posts — push triggers the sync action automatically
-- `sync.js` does five things:
+- `sync.js` validates first, then pushes in six phases:
   1. **Pages** — dynamic WP lookup (no page-map.json), auto-creates missing pages, pushes title/excerpt/featured_image/status from per-page JSON
   2. **Posts** — same pattern as pages, using `/posts` WP endpoint. Pushes title/excerpt/featured_image/date/status. New posts get `comment_status: "open"`
-  3. **Files** — uploads JSON/JST to WP media library (delete-then-recreate)
+  3. **Files** — uploads `.json`/`.jst`/`.cst`/`.pdf` to the WP media library (delete-then-recreate), flat under `/wp-content/uploads/`
   4. **List hydration** — manifest-driven (`loadHydratedListSet` reads `datasets.json`);
      each `{file}` pointer is replaced by the page's own JSON before upload. Replaced the
      old GALLERY_RULES auto-generation, which is deleted. The published manifest also carries
      a `counts` map per dataset (`collectCounts`) — how many rows each keyword, type, badge
      and road value would match, so the browser's dropdowns can show a number without walking
      the rows themselves.
-  5. **Validation** — `main()` runs load → validate → push. Legs, destination types, link
-     types and list hydration are checked before anything is uploaded, and a failure means
-     nothing is pushed.
+  5. **Logs** — `syncLogs` publishes the whole `logs/` tree flat to
+     `/wp-content/uploads/`, filed in FileBird under a top-level `logs` folder. This is how
+     `locations.json` becomes fetchable, which is what resolves a `googleMap`
+     `location_id` — see [docs/projects/logs-travel.md](projects/logs-travel.md)
+  6. **PageMap** — `generatePageMap` writes `PageMap.json`, keyed by page filename with
+     `{name}`, holding **published pages only**; `pageLink` reads it for its label
+- **Validation runs first.** `main()` is load → validate → push: legs, destination types,
+  link types and list hydration are all checked before anything uploads, and a failure means
+  nothing is pushed.
 - Sync is incremental on push, full on manual trigger. Incremental mode triggers on both HTML and JSON changes (fixed 2026-07-02)
 - FileBird integration: media and pages filed into matching folder paths (best-effort)
-- `FALLBACK_FEATURED_IMAGE_ID = 1751` (under-construction.png)
+- `FALLBACK_FEATURED_IMAGE_ID` in `sync.js` stands in when a page names a featured image WP does not have yet — it points at under-construction.png. The id itself lives in the code, not here; a WP id copied into a doc cannot announce that it went stale.
 - Sync script does NOT delete orphaned WP content (pages, posts, or media) — must delete manually
 
 ## Pull Posts — WP → GitHub
@@ -88,19 +73,22 @@ See [docs/conventions/folders.md](conventions/folders.md) for the complete tree 
 - Pull never overwrites existing local files
 
 ## Per-Page JSON — Single Source of Truth
-- Every HTML page has a matching JSON under `media/data/<path>/<slug>/<slug>.json`
-- Standard fields for pages that appear in a list: `title`, `featuredImage`, `excerpt`, `tags`, `wpSettings`
-- Pages that don't (about, templates, home): `title`, `wpSettings` (plus any page-specific data)
-- Post JSON fields: `title`, `excerpt`, `image`, `date`, `published`, `categories`, `tags`
+- Every HTML page has a matching JSON under `media/data/<path>/<name>/<name>.json`
+- **The display-name field is `name`**, not `title` — renamed in schema-unification Phase 3a
+  (2026-07-20); `sync.js` sets `body.title = pageData.name`. See
+  [docs/schema/wp-title-date.md](schema/wp-title-date.md)
+- Standard fields for pages that appear in a list: `name`, `featuredImage`, `excerpt`, `tags`, `wpSettings`
+- Pages that don't (about, templates, home): `name`, `wpSettings` (plus any page-specific data)
+- Post JSON fields: `name`, `excerpt`, `featuredImage`, `date`, `tags`, `wpSettings`, `categories` — `badges` sits under `tags` exactly as on a page (moved 2026-08-22; it was top-level on posts only)
 - `wpSettings.published: true` → WP status "publish"; `false` → "draft" (see [docs/schema/wpsettings-comments.md](schema/wpsettings-comments.md))
 - Only published pages show in the GRID view — that rule is `filterView`, not the data
 - Howto/checklist pages also have `photoGalleries` and optionally `notes`
 - Lake pages have `fishingReferences.bcIdentifier` (e.g. "00324SALM")
 
 ## List Browser (replaced the Gallery system, 2026-07-25)
-- ONE page, `/list_browser_html/`, driven by URL params: `?dataset=&view=&keywords=&badges=&access=&search=`
-- `datasets.json` = the 3 datasets (`destinations`, `van-howto`, `van-checklist`); each names
-  its data file, title, and the ordered `options` recipe for its controls
+- ONE page, `/list_browser_html/`, driven by URL params — `dataset`, `view`, `types`, `keywords`, `badges`, `access`, `search`, `booklet`
+- `datasets.json` is the manifest — read it for the dataset list; each entry names its data
+  file, title, and the ordered `options` recipe for its controls
 - Sources live on disk in `media/data/shared/list_browser/`; sync hydrates the `{file}` pointers
 - The old `gallery.*` and `destinations-overview.*` files are retired, and the frozen
   Lakes/Parks/Campgrounds/RecSites/Destinations/VanHowTo/VanChecklist JSONs are deleted from WP

@@ -3,14 +3,16 @@
 	"excerpt": "Great picnic, too many potholes for the van",
 	"featuredImage": "IMG_0873.jpg",
 	"date": "2026-07-12T06:00:00",
+	"tags": {
+		"badges": [
+			"picnic"
+		]
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"
 	},
 	"categories": [],
-	"badges": [
-		"picnic"
-	],
 	"photoGalleries": {
 		"photos": {
 			"name": "Photos",

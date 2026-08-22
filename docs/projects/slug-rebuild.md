@@ -16,8 +16,8 @@ master**, not the slug.
 The finalized rules live in [docs/conventions/site.md](../conventions/site.md) under
 "Slug / filename model". In short:
 
-- `fileToSlug(filename)` and its inverse `slugToFilename` are byte-identical in `sync.js`
-  and `gettinglost.jst`.
+- `fileToSlug(filename)` and its inverse `slugToFilename` exist in both `sync.js` and
+  `gettinglost.jst` and must agree on every input — same output, not the same source text.
 - Every map is keyed by the FILENAME. Base is never a key — only a transient used to build
   `<base>.json`.
 - Authors link by filename (`data-file`, `file`); the jst derives slugs. See

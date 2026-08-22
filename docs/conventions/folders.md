@@ -4,6 +4,7 @@
 |---|---|
 | Page HTML | GitHub (`pages/`) |
 | Media data (JSON/JST) | GitHub (`media/data/`) |
+| Logs (travel, locations, fuel) | GitHub (`logs/`) — synced to WP, see [../projects/logs-travel.md](../projects/logs-travel.md) |
 | Media images | **Pierre** — the image half of the WP media library is his, no external master |
 | Page metadata (featured image, WP template, slug, status) | WordPress |
 | Navigation/menus | WordPress |
@@ -14,7 +15,7 @@
 
 ## Folder Structure (IMPLEMENTED 2026-06-30)
 
-These locations follow the same hierarchy:
+The locations that mirror each other:
 
 ```
 pages/                              ← GitHub, page HTML
@@ -24,77 +25,23 @@ FileBird Images/                    ← WordPress media library, PIERRE'S (see b
 ~/Pictures/GettingLost/Images/      ← Pierre's utility folder, not a master and not a mirror
 ```
 
-```
-about/
-  about/
-  logging/
-  useful-contacts/
-  useful-links/
-destinations/                       ← refreshed from the repo 2026-08-02
-  campgrounds/
-    pacific-playgrounds-resort/
-    salmon-point-resort/
-  lakes/
-    amor-lake/
-    beavertail-lake/
-    brewster-lake/
-    echo-lake/
-    gosling-lake/
-    keogh-lake/
-    mohun-lake/
-    morton-lake/
-    muchalat-lake/
-    roberts-lake/
-    sproat-lake/
-  parks/
-    elk-falls-quinsam-campground/
-    morton-lake-park/
-    sproat-lake-provincial-park/
-  rec-sites/
-    amor-lake-rec0174/
-    beavertail-lake-dayuse/
-    echo-lake-dayuse/
-    keogh-lake-rec16077/
-    mohun-lake-rec0184/
-    muchalat-lake-rec0258/
-    roberts-lake-rec0191/
-    twin-lake-rec0185/
-shared/
-  gallery/                          ← WP only: where sync puts the generated PageMap.json
-  home/
-  list_browser/
-templates/
-  destination-template/
-  howto-template/
-  lake-template/
-  van-template/
-van/
-  van-overview/
-  bronco/
-  checklists/
-    checklist-arriving-campsite/
-    checklist-leaving-campsite/
-  howto/
-    howto-awning/
-    howto-climate/
-    howto-dump/
-    howto-power/
-    howto-water/
-  maintenance/
-    van-maintenance/
-    bronco-maintenance/
-```
+**The tree itself is not written out here** — `ls` it. A copy in markdown is a cache of the
+disk with nothing to invalidate it, and it went stale on every page added
+([../README.md](../README.md), "These files are not a cache of the repo"). The rules that
+are *not* on the disk:
 
-Additional folders not mirrored everywhere:
-- `media/data/scripts/` — data-only, no pages or images
-- `posts/` — future, peer of `pages/`
-
-- Folder names are practical identifiers, not display labels
-- Structure mirrors the menu hierarchy at every level
-- Folder names are case-insensitive; lowercase in GitHub/local, mixed case in FileBird per Pierre's taste
+- `media/data/` mirrors `pages/` one folder per page, plus `scripts/` (data-only, no pages
+  or images) and `posts/`, peer of `pages/`.
+- `shared/gallery/` exists in WordPress only — sync writes the generated `PageMap.json`
+  there and nothing in the repo mirrors it.
+- Structure mirrors the menu hierarchy at every level.
+- Folder names are practical identifiers, not display labels.
+- Folder names are case-insensitive; lowercase in GitHub/local, mixed case in FileBird per
+  Pierre's taste.
+- An empty folder is legitimate — it is scaffolding for something not built yet.
 
 ## WP Media Top Level
-Two roots only: `Images/` and `Data/`
+Three roots: `Images/`, `Data/` and `logs/` — peers.
 
 ## Working Model
 - Claude makes file changes locally; Pierre reviews and pushes to GitHub
@@ -115,15 +62,13 @@ as a finding. This cancelled todo #14, a FileBird↔local reconciliation built o
 premise.
 
 ## Lake ID Mapping
-| lakeId | Page name | Fishing Images Folder |
-|--------|-----------|-----------------------|
-| 00040CAMB | gosling-lake | ~/Working/Fishing/Images/00040CAMB |
-| 00126CAMB | echo-lake | ~/Working/Fishing/Images/00126CAMB |
-| 00155SALM | roberts-lake | ~/Working/Fishing/Images/00155SALM |
-| 00197GOLD | muchalat-lake | ~/Working/Fishing/Images/00197GOLD |
-| 00216NIMP | keogh-lake | NOT FOUND |
-| 00324SALM | amor-lake | ~/Working/Fishing/Images/00324SALM |
-| 01128ALBN | sproat-lake | NOT FOUND |
+
+Not tabulated here — it is derivable, and a copy goes stale as lakes are added.
+
+- **id → page:** each lake's own JSON carries it, at
+  `media/data/destinations/lakes/<name>/<name>.json` → `fishingReferences.bcIdentifier`.
+- **id → source images:** `~/Working/Fishing/Images/<id>/`, when the folder exists — many
+  lakes have none. `ls` it rather than assuming either way.
 
 ## FileBird folder ids are NEVER stored here (Pierre, 2026-08-09)
 
@@ -135,13 +80,14 @@ remember has changed underneath you.
 
 The same goes for the shape of either tree, Data or Images. Neither is recorded here; walk
 `GET /folders` or `GET /post-type-folders/?post_type=page` and read what is actually there.
-Endpoints, curl format and param quirks: [../reference/filebird-api.md](../reference/filebird-api.md),
-which is the only copy.
+The **endpoint list** is in [site.md](site.md); how to reach the API — auth, curl form, the
+param quirks — is in [../reference/filebird-api.md](../reference/filebird-api.md).
 
-Two facts about the trees that are not ids, and so do belong here:
+What is not an id, and so does belong here:
 
-- **Two media roots only** — `Images/` and `Data/`, peers. `Data/` mirrors `media/data/`;
-  `Images/` is Pierre's (above).
+- **Three media roots** — `Images/`, `Data/` and `logs/`, peers. `Data/` mirrors
+  `media/data/`; `logs/` is written by `syncLogs` from the repo's `logs/` tree
+  ([../projects/logs-travel.md](../projects/logs-travel.md)); `Images/` is Pierre's (above).
 - **There is no "read folder contents" endpoint for post-type folders**, so page-folder
   filing is validated visually in WP Admin.
 - **The media `set-attachment` endpoint is broken** — returns "Validation failed" whatever

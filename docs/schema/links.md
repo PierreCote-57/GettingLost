@@ -24,11 +24,11 @@ It was, in three incompatible ways, and that is the whole reason this shape exis
 | `gettinglost.jst` campground block | label is exactly `"Campground map"` |
 | both, for the website link | label is exactly `"HomePage"` |
 
-Two bugs came out of that. A `"Park map"` or `"Trail map"` appeared in the table but never
-on the destination's own page, because nothing looked that name up — five destinations carry
-a second map that was invisible. And renaming `"Campground map"` to `"Campground"` moved 18
-links out of the Maps column into Reservation, silently, because the classifier was the
-thing being renamed.
+Two separate bugs came out of that. **Maps nobody looked up were invisible:** a `"Park map"`
+or `"Trail map"` appeared in the table but never on the destination's own page, because the
+page's lookup was for the exact label `"Campground map"`. **And renaming the classifier
+silently reclassified:** changing `"Campground map"` to `"Campground"` moved those links out
+of the Maps column into Reservation, because the thing being renamed *was* the test.
 
 With `type` as the key both readers select the same way, the label is free to say whatever
 reads best, and `validateLinks` fails the build on a value outside the vocabulary.

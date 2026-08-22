@@ -3,12 +3,14 @@
 	"excerpt": "Need more electricity.",
 	"featuredImage": "open-book-icon.png",
 	"date": "2026-08-15T07:00:00",
+	"tags": {
+		"badges": []
+	},
 	"wpSettings": {
 		"published": true,
 		"comments": "open"
 	},
 	"categories": [],
-	"badges": [],
 	"googleMap": {
 		"where": {
 			"file": "rathtrevor-beach-park.html"

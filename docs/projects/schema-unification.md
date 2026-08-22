@@ -16,8 +16,9 @@ These still govern anything that touches the pipeline.
 2. **One derivation, at render.** The road badge word comes from `access.legs` via a single
    shared `GL.deriveRoadBadge` in `gettinglost.jst`. Never stored.
 3. **Filename is the master.** A page JSON never carries its own `file`; sync injects it. A
-   link to a local page is a scheme-less `*.html` url, resolved via `fileToSlug` and
-   drift-checked at build — the "OnLost" convention.
+   link to a local page is a scheme-less `*.html` url, resolved at render by `onLostHref()`
+   via `fileToSlug`. Sync does not check those urls — that is `crossref_check.py`'s job,
+   run by hand ([../recipes/crossref-check.md](../recipes/crossref-check.md)).
 4. **Clean data, not legacy-tolerant code.** Every rename was a coordinated cutover — data,
    sync and renderer in one deploy. No dual-read shims.
 5. **Size is a non-issue.** Verbatim copy is fine; page JSONs are 0.9–5.5 KB.
@@ -32,13 +33,17 @@ injects it.
   "name": "Elk Falls Park",                    // drives the table, the gallery, and WP post_title
   "featuredImage": "under-construction.png",   // stored; the default is applied at render
   "excerpt": "A thundering waterfall ...",     // teaser text, not renamed anywhere
-  "badges": ["camping", "fishing", "hiking"],  // flat array; road is DERIVED at render
+  "tags": {                                    // `badges` moved in here 2026-07-24 — was top-level
+    "badges": ["camping", "fishing", "hiking"],// flat array; road is DERIVED at render
+    "types": ["park"],                         // closed facet, added 2026-08-01
+    "keywords": ["Visited"]                    // open vocabulary
+  },
   "wpSettings": { "published": true, "comments": "open" },
 
-  "location": {
+  "location": {                                // RENAMED 2026-08-16 — see docs/schema/map-pins-location.md
     "lat": 50.037009, "lng": -125.295734,
-    "pin": "tent", "zoom": 13,
-    "notes": "Near Campbell River"             // optional
+    "icon": "tent", "zoom": 13,                // was `pin`
+    "displayName": "Near Campbell River"       // optional; was `notes`
   },
 
   "access": {                                  // omitted on lakes
@@ -46,10 +51,16 @@ injects it.
     "legs": []                                 // [] = paved all the way
   },
 
-  "links": [                                   // SUPERSEDED 2026-08-01 — see docs/schema/links.md
-    { "label": "HomePage", "url": "https://bcparks.ca/elk-falls-park/" },
-    { "label": "OnLost",   "url": "morton-lake-park.html" }   // scheme-less *.html → local page
+  "links": [                                   // TYPED 2026-08-01 — see docs/schema/links.md
+    { "label": "Website",    "url": "https://bcparks.ca/elk-falls-park/", "type": "homepage" },
+    { "label": "Campground", "url": "https://bcparks.ca/…/map.pdf",       "type": "map" },
+    { "label": "Quinsam River Trail", "url": "elk-falls-quinsam-campground.html" }
+    //                                  ^ untyped, and a scheme-less *.html → local page
   ],
+
+  "googleMap": {                               // every destination page has at least one NAMED map
+    "road": { "file": "elk-falls-quinsam-campground.html" }   // this page's own location
+  },
 
   "footnotes": [ { "field": "siteCount", "text": "2 vehicle pads + 4 walk-in tent pads" } ],
 
@@ -66,10 +77,10 @@ injects it.
 
 `links` renders through the `links` block via the shared `linkRow`.
 
-> **Superseded 2026-08-01.** `links[]` gained a closed, optional `type`
-> (`homepage` / `map` / `reservation`) which is now the key every renderer selects by, the
-> label having gone back to being display text. `campground.links` was merged up into this
-> same array, and the `OnLost` label was dropped — a page on this site is signalled by the
+> **What 2026-08-01 changed.** The migration shipped `links[]` keyed by its **label**.
+> That was replaced by a closed, optional `type` (`homepage` / `map` / `reservation`), the
+> label going back to being display text; `campground.links` was merged up into the same
+> array; and the `OnLost` label was dropped — a page on this site is signalled by the
 > presence of `file`. The scheme-less `*.html` url convention is unchanged.
 > **[docs/schema/links.md](../schema/links.md) is current for everything about links.**
 
@@ -85,6 +96,13 @@ injects it.
 ```
 
 A day-use site with nothing to say drops the `campground` block entirely.
+
+Two keys above have their own docs and are the authority there, not this file:
+`googleMap` ([../schema/map-pins-location.md](../schema/map-pins-location.md)) and `links`
+([../schema/links.md](../schema/links.md)). `photoGalleries` is a further page key, omitted
+above because it is a rendering concern ([../rendering/blocks.md](../rendering/blocks.md)).
+`footnotes` is legal anywhere the shape is, but in practice only the inline dataset rows
+carry it.
 
 ### Type block — lakes
 
@@ -113,11 +131,17 @@ they used to be split out of `campground.links` by a `/map/i` test on the label.
 
 Not part of the migration; recorded because the unification is what made them possible.
 
-1. **Cross-reference validation** — hydration removed the duplication, so the remaining check
-   is a *dangling* `{file}` pointing at a missing or unpublished page. Sync could fail the
-   build on it, the way it does for slug drift. `docs/todo.md` #16.
-2. **Unpublished-page display** in the hydrated table — skip or grey out. The renderer
-   currently ignores `wpSettings`.
+1. **Cross-reference validation** — both halves landed. A dangling `{file}` pointer in a
+   dataset is a hard build failure: `hydrateList` skips the entry so no partial list can
+   publish, and `validateLists` annotates the run red. Everything else — a `file` link
+   anywhere in `media/**`, and whether the two sides agree on the target's name — is
+   `crossref_check.py`, run by hand
+   ([../recipes/crossref-check.md](../recipes/crossref-check.md)). An *unpublished* target
+   still resolves at build; `loadPerPageDataMap` reads every page JSON regardless of status.
+2. **Unpublished-page display** — done, at render rather than at build. `filterView` keeps
+   `wpSettings.published === true` for `grid` and `map`, so the table is the one view that
+   shows unpublished rows, and the "On lost" column withholds its View link for them.
+   See [../rendering/list-browser.md](../rendering/list-browser.md).
 3. **Per-page content pass** — re-enriching prose that the migration dropped. Authoring, not
    code.
 

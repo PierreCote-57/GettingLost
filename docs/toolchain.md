@@ -18,10 +18,10 @@ so it should not prompt. If it does, the settings are wrong.
 **2. WordPress MCP** — site `255518505` (gettinglostonvi.wpcomstaging.com). Load
 `wpcom-user-sites` via ToolSearch and call it to confirm the connection.
 
-**3. FileBird REST API** — endpoint, curl format, param quirks and what a healthy response
-looks like are all in [docs/reference/filebird-api.md](reference/filebird-api.md);
-that file is the only copy. **The bearer token is deliberately not in this repo** — it is in
-Claude's `feedback-session-start` memory.
+**3. FileBird REST API** — the folders endpoint, curl format, param quirks and what a healthy
+response looks like are in [docs/reference/filebird-api.md](reference/filebird-api.md); the
+full endpoint list is in [docs/conventions/site.md](conventions/site.md). **The bearer token
+is deliberately not in this repo** — it is in Claude's `feedback-session-start` memory.
 
 **Why:** Claude repeatedly forgot how to reach FileBird — tried the WP MCP tools, searched
 transcripts, guessed endpoints. Use the documented commands; don't rediscover them.
@@ -52,7 +52,7 @@ Consolidated 2026-07-19 into a deliberate tiering. Keep it this way; don't let
 
 | File | Holds |
 | --- | --- |
-| `~/.claude/settings.json` (global) | project-agnostic only: theme + general-tool Bash allows (`cd`, `curl`, `env`, `find`, `git`, `grep`, `ls`, `mkdir`, `python3`, `touch`), all `:*` except `env` |
+| `~/.claude/settings.json` (global) | project-agnostic only: theme, notification channel, the `~/.claude` + `~/Claude` `additionalDirectories` grant, and read-only general-tool Bash allows in `:*` form. Read the file for the current list — it is not copied here |
 | `.claude/settings.json` (project, committed) | GettingLost-specific: `Read`/`Edit`/`Write`, the `~/Pictures/GettingLost` `additionalDirectories` grant, and destructive verbs (`cp`/`mv`/`rm`) **path-scoped** to that folder |
 | `.claude/settings.local.json` (project, private) | MCP servers + `WebFetch(domain:*)`/`WebSearch` + a few Bash extras. Sorted, grouped (MCP / Web / Bash), blank-line separated |
 

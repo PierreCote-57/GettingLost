@@ -1,10 +1,18 @@
 # Logs and travel system
 
 `logs/` holds Pierre's van and travel logs. It is the auto-commit exception (CLAUDE.md rule
-3) and is **not synced to WP** — sync only walks `pages/`, `posts/` and `media/`.
+3).
 
-**Data-only; there is no renderer.** A browser-side renderer would need to load
-`locations.json` to resolve `location_id` references.
+**`logs/` IS synced to WP.** `syncLogs` in `sync.js` publishes the whole tree **flat** to
+`/wp-content/uploads/<basename>`, and files it in FileBird under a top-level **`logs`**
+folder, peer of `Images` and `Data`. It is walked generically, so a new log file syncs
+without touching that code.
+
+**That flat publish is load-bearing, not incidental.** `logs/locations.json` is fetchable at
+`/wp-content/uploads/locations.json`, and that is how the `googleMap` renderer resolves a
+`location_id` ([docs/schema/map-pins-location.md](../schema/map-pins-location.md)). So a log
+file is not rendered as a page of its own — there is no travel-log or fuel-log renderer —
+but `locations.json` is read by the browser on any page whose map points at the registry.
 
 ## Naming rule (`<referent>_id`)
 A field pointing at another object is named `<target>_id`; bare `id` = an object's OWN
@@ -43,8 +51,9 @@ write.
 
 ## `logs/locations.json` — place registry
 Record: `{ name (first), id, address?, url?, location:{lat,lng,icon?,zoom?} }`.
-`id` kebab-case = own identity; `location` always inline and concrete. Icon vocab:
-tent/campground/picnic/lake/park/home. Rest-stop `url` uses the DriveBC map link w/ the API
+`id` kebab-case = own identity; `location` always inline and concrete. Icon vocab is the one
+shared list in `GL.PIN_ICONS` — tent/campground/picnic/lake/park/home/outhouse, see
+[docs/schema/map-pins-location.md](../schema/map-pins-location.md). Rest-stop `url` uses the DriveBC map link w/ the API
 id ([docs/reference/bc-rest-stops.md](../reference/bc-rest-stops.md)).
 
 **The registry holds only places with no destination page.** A place that gets a page leaves

@@ -1,8 +1,13 @@
 # Block rendering
 
-> **PARTLY STALE (2026-07-20 schema unification) — see [docs/projects/schema-unification.md](../projects/schema-unification.md) for current shapes.** Changed since: new shared `linkRow` + `onLostHref` and a new `links` block renderer; the `notes` renderer resolves scheme-less `*.html` urls to internal pages; the lake `destinations` renderer + block are RETIRED (folded into a `notes` "Destinations" section). The dispatch/registry/filename-master mechanics below are still accurate.
+> **This file is current.** It describes every renderer as it stands today. The per-field
+> shapes live in the schema docs, which are the authority when one is involved:
+> [links.md](../schema/links.md) for `links[]`, [map-pins-location.md](../schema/map-pins-location.md)
+> for `location` / `googleMap` / `pin`, [image.md](../schema/image.md) for images.
 >
-> **Links changed again on 2026-08-01:** `campground.links` was merged up into one flat `links[]`, and a closed `type` (`homepage` / `map` / `reservation`, optional) replaced the label as the key every renderer selects by. The `OnLost` *label* is gone — a page on this site is signalled by the presence of `file`. [docs/schema/links.md](../schema/links.md) is current; the `campground` entry below is rewritten, the `links` sections in schema-unification.md are not.
+> [docs/projects/schema-unification.md](../projects/schema-unification.md) is a **project record**, not a
+> live schema — it holds the 2026-07-20 migration, its principles, and what changed after.
+> When it and a schema doc disagree, the schema doc wins.
 
 ## THE INVARIANT (established 2026-07-26 — Pierre's rule)
 **Everything a script puts on a page goes through ONE path: `[data-block-type]`.** There is no second, class-driven mechanism. `init()` is now exactly `injectGettingLostCss()` + `initBlocks()` — the CSS is the only non-block, because it has no element to hang off.
@@ -12,7 +17,7 @@ Pierre's diagnosis, worth keeping: **load-order problems are a SYMPTOM of patter
 **A script that registers instead of executing is order-independent.** `list_browser.jst` and `lakes.jst` are plain `<script src>` in the page BODY, so they execute BEFORE `gl-constants.jst` and `gettinglost.jst` (Footer template). They survive by (a) creating the registry defensively — `window.GL = window.GL || {}; window.GL.blockRenderers = window.GL.blockRenderers || {};` — and (b) only ever touching `window.GL` from inside a renderer, which `renderBlocks()` calls long after both footer scripts have run. Never move a `GL.*` read to execute time in those files.
 
 ## Overview
-`gettinglost.jst` is loaded sitewide via the Footer template (with `gl-constants.jst` loaded on the line ABOVE it — sitewide ALL-CAPS constants: `GL.PIN_ICONS`/`TAG_COLORS`/`TAG_FALLBACK`/`MAP_CONFIG`; see [docs/schema/map-pins-location.md](../schema/map-pins-location.md)). Registry: `window.GL.blockRenderers`. Any `<div data-block-type="X">` is rendered once the page's data JSON loads (the page derives its `<base>.json` from its URL slug — see "Filename is master" below). Zero blocks on a page = no fetch at all. Unregistered type or thrown error = that block skipped + console-logged, others unaffected.
+`gettinglost.jst` is loaded sitewide via the Footer template (with `gl-constants.jst` loaded on the line ABOVE it — the sitewide ALL-CAPS constants; read that file for the list, and see [docs/schema/map-pins-location.md](../schema/map-pins-location.md)). Registry: `window.GL.blockRenderers`. Any `<div data-block-type="X">` is rendered once the page's data JSON loads (the page derives its `<base>.json` from its URL slug — see "Filename is master" below). Zero blocks on a page = no fetch at all. Unregistered type or thrown error = that block skipped + console-logged, others unaffected.
 
 ## Render what's there — don't second-guess the author
 
@@ -39,14 +44,14 @@ Applies to the booklet PDF builder as much as the page renderers — see
 Apply this same test when adding any new validation logic.
 
 ## Filename is master (2026-07-08) — full model in [docs/conventions/site.md](../conventions/site.md)
-The github filename is the master; a slug is ALWAYS derived, never authored or stored as truth. Two inverse transforms exist byte-identically in BOTH `sync.js` and `gettinglost.jst`:
+The github filename is the master; a slug is ALWAYS derived, never authored or stored as truth. Two inverse transforms exist in BOTH `sync.js` and `gettinglost.jst` — different source (Node vs browser ES5), **identical output required**:
 - `fileToSlug(filename)` = replace last `.`→`_`, then WP-sanitise. `amor-lake.html` → `amor-lake_html`.
 - `slugToFilename(slug)` = replace last `_`→`.`. `amor-lake_html` → `amor-lake.html`.
 
 Block-rendering implications:
 - A page loads its own data by reversing its URL slug: `slugToFilename(urlSlug)` → base → fetch `<base>.json` (`fetchPageData`).
 - Gallery / `featured`-block entries carry **`file`** (the page filename), NOT `slug`; `renderCard` builds `href = "/" + fileToSlug(entry.file) + "/"`.
-- `PageMap.json` is keyed by page **filename** (`amor-lake.html`), value `{title}`.
+- `PageMap.json` is keyed by page **filename** (`amor-lake.html`), value `{name}` — and it holds **published pages only** (`generatePageMap` skips the rest), which is why a `pageLink` to an unpublished page falls back to its element text.
 - Authors reference other pages/files by FILENAME (`data-file`, references `file`) — never a slug. `window.GL.fileToSlug` is exposed so lakes.jst (and any consumer) derives slugs identically.
 
 ## Generic Renderers
@@ -61,9 +66,17 @@ Block-rendering implications:
 
 **campground** (CURRENT, 2026-08-01) — the logistics row rendered right **under the page title** (standardized top-of-page slot), one `· `-separated line selected **by `links[].type`**, never by label: **Website · every map · every reservation**. See [docs/schema/links.md](../schema/links.md); `campground.links` no longer exists, everything lives in one flat `links[]`.
 - **Website** = the `type: "homepage"` entry (displayed "Website"); the place's official page (BC Parks etc.). Do NOT also duplicate in Further readings.
-- **maps** = every `type: "map"` entry, each shown under its own label (an external gov PDF URL is fine here — this is where a map belongs, not Further readings). A park map and a campground map differ: park map = whole-park view (boundary, trails, day-use); campground map = campsite loops/numbered sites for booking. The label follows what the PDF depicts — `Campground`, `Park`, `Trail`. **All of them render**; the old exact-label lookup showed only the campground one, so five destinations had a second map that appeared in the list browser and never on their own page.
+- **maps** = every `type: "map"` entry, each shown under its own label (an external gov PDF URL is fine here — this is where a map belongs, not Further readings). A park map and a campground map differ: park map = whole-park view (boundary, trails, day-use); campground map = campsite loops/numbered sites for booking. The label follows what the PDF depicts — `Campground`, `Park`, `Trail`. **All of them render**; the old exact-label lookup showed only the campground one, so a destination's second map appeared in the list browser and never on its own page.
 - **reservations** = every `type: "reservation"` entry — a pre-populated booking URL (camping.bcparks.ca `create-booking/results?resourceLocationId=…`). Trim ephemeral params (transactionLocationId/startDate/endDate/searchTime/flexibleSearch); keep the stable ones. `subEquipmentId=-32765` = Van/Camper.
 An **untyped** link is a general link for the `links` block, not part of this row. Reservation status with no booking url is not a link at all — it lives in a `Reservation notes` notes section.
+
+**links** — `<div data-block-type="links"></div>` → every link the page carries, on one
+`· `-separated row via the shared `linkRow`. Renders nothing when `pageData.links` is absent.
+Unlike the `campground` row it does **not** select by type: every entry shows, typed or not,
+and `type: "homepage"` is the one whose **display word** is swapped — its label renders as
+"Website". A scheme-less `*.html` url still resolves to an internal link inside `linkRow`
+(`onLostHref`), which is a URL convention and unrelated to `type`. See
+[docs/schema/links.md](../schema/links.md).
 
 **googleMap** — **every block is named** (2026-08-16). `data-map` picks one entry out of `pageData.googleMap`; a div with no `data-map` is an error. A page can carry MULTIPLE maps. Full model in [docs/schema/map-pins-location.md](../schema/map-pins-location.md).
 - **A named entry** either HOLDS the map or POINTS at the `location` that does — one source, precedence `file` (a page filename; its `location` becomes the map, self-reference answered from `pageData` with no fetch) → `location_id` (a `logs/locations.json` id) → `lat`+`lng` inline. **A pointer replaces the entry outright**: `zoom` and `pinList` come from the target too, never a mix. Extra keys are legal, so `file`→`fileSAV` falls back to an older source while testing.
@@ -163,14 +176,14 @@ The `checklist` block renderer (gettinglost.jst; was the standalone `enhanceChec
 
 ## Image resizing via Jetpack Photon (2026-07-03)
 `formatImageUrl(img, w, h)` in gettinglost.jst returns `https://i0.wp.com/{location.host}/wp-content/uploads/{img}?fit={w},{h}&quality=80`. `fit`=contain (no crop), w/h default 1920. sync.js copy NOT changed (lookup key). Full rationale: [docs/schema/image.md](../schema/image.md).
-- **Callers & sizes:** gallery card (renderCard) `600,400`; custom `photo` block inline `480,480`; mini-gallery thumb `360,220`; anything feeding the lightbox `1920,1920`.
+- **Callers & sizes:** not listed here — `grep -n 'formatImageUrl(' media/data/scripts/gettinglost.jst` gives every call site with its numbers. The rule the numbers follow: each caller asks for the size it will DISPLAY at, and anything feeding the lightbox asks for the 1920 cap.
 - **Two DUAL-WINDOW callers** feed an on-page image AND the lightbox from what was one URL, so each was split into two `formatImageUrl` calls: (1) the `photo` renderer → `displaySrc` (480) for `<img>`, `fullSrc` (1920) for `<a href>`+lightbox; (2) photoGallery renderer → `thumbSrc` (360×220) for the grid `<img>`, full-size `entries[].src` (1920) for lightbox + href fallback. The no-JS `<a href>` fallback always points at the full-size image.
 - quality=80 cuts the 1920 lightbox ~876KB→651KB; 72→542KB, 60→440KB if smaller wanted (change the constant in formatImageUrl).
 - WP featured image is theme-rendered + already Photon'd by Jetpack srcset — separate, not our code.
 
 ## Gallery Card Image Fit (decided 2026-07-03)
-- `.gl-gallery-card-img` (main gallery cards, ~line 190) uses **`object-fit: contain`**, NOT `cover` — deliberate. Cards are `width:100% × height:200px`; `contain` shows the WHOLE image uncropped, letterboxing off-ratio images (e.g. Gosling's portrait `ActiveWorksite.jpg`) with transparent gutters that reveal the page background. Chosen over `cover` because Pierre would rather see full images than crop portraits. Do NOT "fix" back to `cover`.
-- The 110px small-card variant (~line 250) stays `cover`; lightbox (~line 338) is `contain`.
+- `.gl-gallery-card-img` (main gallery cards) uses **`object-fit: contain`**, NOT `cover` — deliberate. Cards are `width:100% × height:200px`; `contain` shows the WHOLE image uncropped, letterboxing off-ratio images (e.g. Gosling's portrait `ActiveWorksite.jpg`) with transparent gutters that reveal the page background. Chosen over `cover` because Pierre would rather see full images than crop portraits. Do NOT "fix" back to `cover`.
+- **All three `object-fit` rules in `gettinglost.cst` are `contain`** — the card, the 110px-tall mini-gallery thumbnail (`.gl-photogallery-item img`) and the lightbox (`.gl-lightbox-img`). `cover` appears nowhere in the file. Same reason each time: show the whole image.
 - `object-position` is the lever if a specific card ever needs its crop/placement nudged.
 
 ## lakes.jst

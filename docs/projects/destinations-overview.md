@@ -1,8 +1,9 @@
 # Destinations dataset
 
-The master table of Vancouver Island campgrounds — one line per place. The page that once
-rendered it is retired; the **dataset** is live and is what this file documents. It is
-rendered by the table view of `list_browser.jst`. See
+The master table of Vancouver Island destinations — campgrounds, lakes, parks and rec sites,
+one line per place. It began as a campground list; the type axis arrived with `tags.types` on
+2026-08-01. The page that once rendered it is retired; the **dataset** is live, is what this
+file documents, and is rendered by the table view of `list_browser.jst`. See
 [docs/rendering/list-browser.md](../rendering/list-browser.md).
 
 **NO STATUS IN THIS FILE — BY RULE.** Counts, coverage, "pending", "N remain" are
@@ -40,19 +41,36 @@ round-trip is byte-identical and there is no expanded-vs-compact mismatch left t
 
 ## Place schema
 
-`name`, `url` (external home page — the Name column links to it), `file` (internal GL page →
-the "On lost" column's View link), `operator` (carried but not displayed — the JSON
-deliberately holds more than the table shows), `location:{lat,lng,pin,zoom,notes}` (the
-Location column shows `notes`, linked to Google Maps when lat/lng exist),
-`access:{haversine:[{town,km}]}` (see [docs/schema/access.md](../schema/access.md)),
-`sites:[{label,url}]`, `amenities:[]`, `reservation:[{label,url}]`,
-`footnotes:[{field,text}]` — a LIST, so one row can carry several, including multiple on one
-field; numbered superscripts on the matching cell, deduped per group. Page publish and
-comment settings live in top-level `wpSettings`, see
-[docs/schema/wpsettings-comments.md](../schema/wpsettings-comments.md).
+A row is the unified destination shape — the same one a page carries, which is what hydration
+is for, so [schema-unification.md](schema-unification.md) is where that shape is written down.
+What each key does *for the table*:
 
-`reservation` uses the same `{label,url}` list shape as `sites`, rendered one entry per line,
-so a row shows its status text plus a link to the booking site.
+- `name` — the Name column's text; links to the `homepage` entry in `links[]`.
+- `file` — the internal GL page, the "On lost" column's View link. Absent on a catalog row.
+- `links:[{label,url,type?}]` — **one flat list**; `type` (`homepage`/`map`/`reservation`) is
+  what every column selects by, never the label. `campground.links` and the old top-level
+  `url` were merged into it on 2026-08-01. See [docs/schema/links.md](../schema/links.md).
+
+  Two older fields split in half rather than moving:
+  **`sites:[{label,url}]`** carried a count in its `label` (`12`, `"5 + 5"`) and an optional
+  site-map url — the count became `campground.siteCount` with any composition going to a
+  footnote, the url became a `type:"map"` link.
+  **`reservation_status`** was prose ("First-come-first-served, free") — a real booking URL
+  became a `type:"reservation"` link, and status with no URL is not a link at all and lives
+  in a `Reservation notes` notes section.
+- `location:{lat,lng,icon?,zoom?,displayName?}` — the Location column shows `displayName`,
+  linked to Google Maps when lat/lng exist. Renamed 2026-08-16 (`pin`→`icon`,
+  `notes`→`displayName`); see [docs/schema/map-pins-location.md](../schema/map-pins-location.md).
+- `access:{haversine:[{town,km}]}` — see [docs/schema/access.md](../schema/access.md).
+- `campground:{operator?,siteCount?,amenities?}` — `siteCount` feeds the Sites column and
+  `amenities` the Amenities column; `operator` is carried but not displayed, the JSON
+  deliberately holding more than the table shows.
+- `tags:{types?,badges?,keywords?}` — the filter facets, not columns.
+- `footnotes:[{field,text}]` — a LIST, so one row can carry several, including multiple on one
+  field; numbered superscripts on the matching cell, deduped per group.
+
+Page publish and comment settings live in top-level `wpSettings`, see
+[docs/schema/wpsettings-comments.md](../schema/wpsettings-comments.md).
 
 ## Columns → fields
 
@@ -69,13 +87,13 @@ together.
 ## Links and tooltips
 
 Every link carries a `title` naming where it goes — Name "Open the destination's web site",
-On lost "Open the page on this web site", Sites "Open the site map", Reservation "Open the
+On lost "Open the page on this web site", Maps "Open the map", Reservation "Open the
 reservation web site", Location "Open in Google Maps". Tooltips sit on the `<a>`, **never**
-the cell, so an unlinked cell has no tooltip. A shared `fillLinkList()` renders both Sites
+the cell, so an unlinked cell has no tooltip. A shared `fillLinkList()` renders both Maps
 and Reservation.
 
-**Never render a link with no display element.** `sites` satisfies this with its "Map"
-fallback for a url with an empty label — legitimate and in use. `reservation` has no
+**Never render a link with no display element.** The Maps column satisfies this with its
+"Map" fallback for a url with an empty label — legitimate and in use. Reservation has no
 fallback: a url with no label renders nothing, and that is a DATA BUG to report and fix in
 the JSON, never to paper over in code.
 

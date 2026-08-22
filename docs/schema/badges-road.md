@@ -1,24 +1,29 @@
 # Badges and the road chip
 
 Road-condition badge feature. Originally merged to `main` 2026-07-13 via PR #4
-(commit `64c2e0b`). A single badge in the **lower-left** of gallery cards showing
-the **worst** stretch of the drive in, color-coded by severity. **Gallery cards
-only** — never on destination pages (mirrors how activity `tags` behave). See
+(commit `64c2e0b`). A single badge showing the **worst** stretch of the drive in, color-coded by
+severity. On a **gallery card** it sits in the lower-left corner. Since
+2026-08-01 it also renders **on the destination page itself**, right-hand end of
+the `tags` block's first line and carrying a distance — the same
+`deriveRoadBadge` value, painted by the same `renderRoad`. See
 [docs/rendering/blocks.md](../rendering/blocks.md), [docs/schema/image.md](image.md), [docs/conventions/site.md](../conventions/site.md).
 
 **Reworked 2026-07-20: the value is now DERIVED, not authored.** The vocabulary,
 the leg model it derives from, and the van-anchored severity rank all live in
 [docs/schema/access.md](access.md) — read that first. This file covers rendering.
 
-## Data model — flat `badges` array (schema unification, 2026-07-20)
+## Data model — `tags.badges`, a flat array
 ```json
-"badges": ["fishing", "picnic"]
+"tags": { "badges": ["fishing", "picnic"] }
 ```
-- `badges` is a bare array of activity tags. Authored. (Was `{ "tags": [...] }`
-  before Phase 3b — the wrapper is gone.)
+- `badges` is a bare array of activity tags. Authored. Two moves got it here: the
+  `{ "tags": [...] }` wrapper *inside* badges went in the 2026-07-20 unification, and the
+  whole field moved **under a top-level `tags`** on 2026-07-24, where `keywords` already
+  sat and `types` joined it on 2026-08-01 — the three facets in one place. See
+  [types.md](types.md) for the tree.
 - The **road badge is never stored.** It is DERIVED at RENDER time from
   `access.legs` by the single shared `GL.deriveRoadBadge` in gettinglost.jst
-  (used by both gallery cards and the overview Access column). `sync.js` runs the
+  (used by both the grid cards and the list browser's Access column). `sync.js` runs the
   same logic only to VALIDATE the legs (warn on bad data), not to emit anything.
 
 ## Colors — `GL.ROAD_COLORS` in gl-constants.jst
@@ -52,9 +57,9 @@ types that derive to `back_country`, never badges themselves.
   reader should see.
 - `.gl-road` in `gettinglost.cst` — same pill as `.gl-tag`,
   `position:absolute; bottom:8px; left:8px`.
-- The overview table's Access column shows the same derived word as **text**
-  (see [docs/projects/destinations-overview.md](../projects/destinations-overview.md)); whether it becomes a real badge there
-  is undecided.
+- The list browser's table Access column shows the same derived word as **text**
+  (see [docs/rendering/list-browser.md](../rendering/list-browser.md)); whether it becomes a
+  real badge there is undecided.
 
 ## Behavior on bad value
 - Falsy road → no badge, silently (means "legs not filled in yet").

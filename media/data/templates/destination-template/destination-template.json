@@ -1,11 +1,30 @@
 {
 	"name": "Destination Template",
+	"featuredImage": "under-construction.png",
+	"excerpt": "",
+	"tags": {
+		"badges": [],
+		"types": [],
+		"keywords": []
+	},
 	"wpSettings": {
 		"published": false,
 		"comments": "open"
 	},
-	"lat": 0,
-	"lng": 0,
+	"location": {
+		"lat": 0,
+		"lng": 0,
+		"icon": "",
+		"zoom": 13
+	},
+	"googleMap": {
+		"road": {
+			"file": "destination-template.html"
+		}
+	},
+	"access": {
+		"haversine": []
+	},
 	"links": [],
 	"campground": {},
 	"notes": []

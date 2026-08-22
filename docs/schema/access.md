@@ -3,7 +3,7 @@
 The `access` object on destination content JSON — "how do I get there" — designed
 2026-07-20, replacing the flat `badges.road` string and the old top-level
 `distanceKM`. See [docs/schema/badges-road.md](badges-road.md) for how the badge renders,
-[docs/projects/destinations-overview.md](../projects/destinations-overview.md) for the overview table.
+[docs/rendering/list-browser.md](../rendering/list-browser.md) for the table's Access column.
 
 ## The tree
 
@@ -21,7 +21,7 @@ access
 - Origin coordinates used: Campbell River 50.0244/−125.2475, Nanaimo
   49.1659/−123.9401, Victoria 48.4284/−123.3656 (town centres).
 
-## The three states of `legs` (settled 2026-07-20)
+## The states of `legs` (settled 2026-07-20)
 
 ```
 legs absent / null            don't know — nobody has looked. No badge.
@@ -113,8 +113,9 @@ A destination is somewhere you **arrive**; a lake is a feature you **look at**.
 You don't drive to a lake, you drive to a rec site or campground on its shore —
 so lake pages have no `access`. (The old `GALLERY_RULES` `exclude` that kept them
 out of the Destinations gallery is gone with that system — lakes now sit in the one
-`destinations.json` and are distinguished by `tags.keywords: ["lake"]`, i.e. by
-filtering rather than by exclusion.) Roberts Lake was the known exception — a lake
+`destinations.json` and are distinguished by `tags.types: ["lake"]`, i.e. by
+filtering rather than by exclusion. That was a `keywords` value until the type facet
+took it on 2026-08-01 — see [types.md](types.md).) Roberts Lake was the known exception — a lake
 page describing a day-use site — and was split 2026-08-02: the lake page keeps the
 lake and carries no `access`, and the day-use site became its own destination,
 `roberts-lake-rec0191`, which carries it.

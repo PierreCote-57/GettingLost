@@ -22,10 +22,14 @@ domain before or with the cutover, and remove the staging host once nothing serv
 
 `gettinglostonvi.wpcomstaging.com` is written into these, and each has to be revisited:
 
+- [../README.md](../README.md) — the site link in the opening paragraph
 - [toolchain.md](toolchain.md) — the session-start WordPress MCP check and the live-site
   inspection notes
 - [overview.md](overview.md) — the site identity line
 - [rendering/wp-templates.md](rendering/wp-templates.md) — site host and blog_id
 - [reference/filebird-api.md](reference/filebird-api.md) — the folders endpoint URL
+
+`schema/image.md` and `schema/wp-title-date.md` also name the host, but only in dated prose
+about how something was learned — nothing to change there.
 
 The blog_id (`255518505`) does not change with the domain.

@@ -1,7 +1,12 @@
 ## Standing Conventions
+- **THE LIVE SITE IS ALWAYS VALID** (Pierre, 2026-08-21) — except while a change is actually
+  in flight. A page that renders nothing, a block that no longer dispatches, a link that
+  404s: none of those is a "known issue" to be parked in `todo.md`. It is broken on a site
+  people can load, so it is fixed now. This is why a retired hook is a real defect and not
+  cosmetic — `class="gl-photo"` sat on a published post silently rendering no image.
 - ALL placeholder body text is "Under construction" — never lorem ipsum
 - Every new page gets an "Under construction" featured image set AT CREATION TIME (mandatory `featuredImage`)
-- **As of 2026-07-04, `featuredImage` is grid/list-ONLY — it is NOT shown at the top of pages/posts** (the `wp:post-featured-image` block was removed from the Pages & Single Post templates). Top/body images are hand-placed `gl-photo`s. `galleryImage` is retired. See [docs/schema/image.md](../schema/image.md) and [docs/rendering/wp-templates.md](../rendering/wp-templates.md).
+- **As of 2026-07-04, `featuredImage` is grid/list-ONLY — it is NOT shown at the top of pages/posts** (the `wp:post-featured-image` block was removed from the Pages & Single Post templates). Top/body images are hand-placed `photo` blocks (`data-block-type="photo"`). `galleryImage` is retired. See [docs/schema/image.md](../schema/image.md) and [docs/rendering/wp-templates.md](../rendering/wp-templates.md).
 - Root-relative URLs site-wide
 - External links: `target="_blank" rel="noopener noreferrer"`
 - WPautop disabled via "Disable WPautop" plugin (Nick Momrik) — no stray `<br/>` in multi-line inline elements
@@ -14,7 +19,7 @@
 
 ## Slug / filename model — github filename is MASTER (finalized 2026-07-08)
 - The github **filename is the single source of truth**. A WP slug is always DERIVED, never authored or stored as truth. Any prior "slug is the key/master" rule is DEAD — do not reintroduce it.
-- WP slug for every object (page/post/attachment) = `<base>_<ext>` = `fileToSlug(filename)` (replace the last `.`→`_`, then WP-sanitise: lowercase etc.). Inverse: `slugToFilename(slug)` = last `_`→`.`. Both transforms live **byte-identically in sync.js AND gettinglost.jst**.
+- WP slug for every object (page/post/attachment) = `<base>_<ext>` = `fileToSlug(filename)` (replace the last `.`→`_`, then WP-sanitise: lowercase etc.). Inverse: `slugToFilename(slug)` = last `_`→`.`. Both transforms, and the `sanitizeSlug` they share, exist **twice — in `sync.js` and in `gettinglost.jst` — and must produce IDENTICAL OUTPUT for every input.** They are not identical *text* and cannot be: one is Node (`path.extname`, `const`, template literals), the other browser ES5 (`lastIndexOf`, `var`, concatenation). **Change one, change the other**, and check the pair by behaviour, never by diffing the source.
   - `amor-lake.html` → slug `amor-lake_html`; `beavertail-lake.json` → attachment slug `beavertail-lake_json`. The FILE keeps its plain name (`amor-lake.json`, fetched by URL); only the slug carries `_<ext>`. NEVER hardcode `_html` (that was the `htmlSlug` bug, removed).
 - **Every map (sync.js + jst) is keyed by the github FILENAME. Base is NEVER a key** — base exists only transiently to construct a related filename (a page `foo.html` finds its data by swapping to the fixed `.json` → `foo.json`).
 - Authors reference other pages/files by FILENAME, never a slug: `data-file="foo.html"` (pageLink), `"file":"foo.html"` (internal reference). Internal link = `file`; external = `url`. The jst derives the slug. See [docs/rendering/blocks.md](../rendering/blocks.md).
@@ -25,12 +30,13 @@
 Under `pages/destinations/` + `media/data/destinations/` there are typed subfolders: `lakes/`, `campgrounds/`, `parks/`, `rec-sites/`. They no longer generate per-type galleries (`GALLERY_RULES` is deleted) — the folder is just filing, and the type a visitor filters on is `tags.types` on the page's JSON — a closed vocabulary of its own since 2026-08-01, see [docs/schema/types.md](../schema/types.md). A **provincial park is its own type** — it lives in `parks/`, NOT `rec-sites/` (Pierre's call: "a park is a park, not a rec site"; he moved Sproat Lake Provincial Park there by hand). A park page uses the same skeleton as a rec-site page (campground block, googleMap + description, notes, photoGallery, backToGallery). The `backToGallery` block takes **no attributes** — see [docs/rendering/blocks.md](../rendering/blocks.md). On a LAKE page, the list of nearby places is a **`notes` section named "Destinations"**, rendered by the generic notes renderer — each entry is `{name, url, description}` like any other notes entry. The dedicated `destinations` block and its Name/Type/References table were retired in the schema-unification pass (2026-07-20); nothing registers that renderer and no page carries the block. See also [docs/recipes/lake-page.md](../recipes/lake-page.md).
 
 ## Image Path Warning
-WordPress's default year/month folder behavior means a bare-filename block reference (photoGallery/photoRef/.gl-photo) can silently 404 unless re-uploaded flat or Settings→Media folder option is disabled. Check this whenever adding new images. As of 2026-07-03 ALL page/post image data is bare filenames resolved via `formatImageUrl` (flat `/wp-content/uploads/`), so flat storage is now a hard dependency — see [docs/schema/image.md](../schema/image.md).
+WordPress's default year/month folder behavior means a bare-filename block reference (`photoGallery`/`photoRef`/`photo`) can silently 404 unless re-uploaded flat or Settings→Media folder option is disabled. Check this whenever adding new images. As of 2026-07-03 ALL page/post image data is bare filenames resolved via `formatImageUrl` (flat `/wp-content/uploads/`), so flat storage is now a hard dependency — see [docs/schema/image.md](../schema/image.md).
 
 ## FileBird Folder Structure
 FileBird keeps **two independent folder trees**: media folders (Images/Data, for library attachments) and **post-type folders** (for pages/posts). Sync mirrors a repo path into BOTH: `[filebird:media]` files uploaded media into media folders, `[filebird:pages]` files the WP page/post into a page folder. So a repo folder rename (e.g. `van/instructions`→`van/howto`) creates the new folder in whichever tree the next full sync touches and **leaves the old one orphaned — sync never deletes**; rename it manually in both trees to avoid orphans (case-insensitive match lets sync reuse it).
 
-Two root media folders: **Images** and **Data** — peers.
+Three root media folders: **Images**, **Data** and **logs** — peers. `Data` mirrors
+`media/data/`; `logs` is written by `syncLogs`; `Images` is Pierre's.
 
 **Folder ids are never written down in this repo — read them from WP when needed.** They
 change when a folder is recreated, and a committed number cannot tell you it went stale.

@@ -2,11 +2,12 @@
 
 Source switched 2026-07-10 to the **live DriveBC rest-stops API**:
 `https://www.drivebc.ca/api/reststops/?format=json`, saved locally as
-`local/data/bc-rest-stop.json` (**199** records, server-maintained, `modified_at` current).
+`local/data/bc-rest-stop.json` (server-maintained, `modified_at` current).
 This REPLACES the old PDF-parsed `bc-rest-areas.json`.
 
-`local/data/` is reference data — NOT synced to WP (like [docs/projects/logs-travel.md](../projects/logs-travel.md)'s
-`logs/`; only `pages/`/`posts/`/`media/` sync).
+`local/data/` is reference data — **NOT synced to WP**. `local/` is the only top-level tree
+that never reaches WordPress; `pages/`, `posts/`, `media/` and `logs/` all sync
+([docs/projects/logs-travel.md](../projects/logs-travel.md)).
 
 **By design, this is a lookup accessed on an as-needed basis** — e.g. pulling a
 single rest stop's `id`/`url` when building a log location (Oyster Bay id=426). It is

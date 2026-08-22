@@ -9,8 +9,11 @@ badge vocabulary, synonyms — for him to rule on.
 constrains it, so it drifts as pages are authored. This pass surfaces the drift.
 It **reports**; Pierre decides. Nothing is edited without him saying so.
 
-Authoring rules the vocabulary is held to: **all keywords are lowercase**;
-singular/plural are the same word, pick one; synonyms are the same word, pick one.
+Authoring rules the vocabulary is held to: **keywords are written capitalised** (`Visited`,
+not `visited`) — they are display text, ruled 2026-08-18; singular/plural are the same word,
+pick one; synonyms are the same word, pick one. The lowercase values already in the data are
+test content and carry no ruling. Full conventions:
+[docs/conventions/keywords.md](../conventions/keywords.md).
 
 ## The division of labour
 
@@ -124,5 +127,4 @@ Files under `media/` where `tags.keywords` is applicable to the site. Not
 
 The walk finds any object carrying `tags.keywords` at any depth, which is what
 picks up the inline rows inside dataset files. A per-page glob misses those, and
-they are where most of the tagging lives — at the type migration they were 98 of
-116 tagged rows, and `whales` existed only there.
+they are where most of the tagging lives — `whales` existed only there.

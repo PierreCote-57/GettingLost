@@ -3,8 +3,13 @@
 One builder makes **both** booklets — checklists and howto — from
 [local/tools/build_booklet_pdf.py](../../local/tools/build_booklet_pdf.py). A `BOOKLETS`
 config dict holds the only per-booklet differences: `source_dir`, `data_dir`,
-`cover_title`, `cover_subtitle`, `step_style` (`checkbox` for checklists, `number` for
-howto).
+`cover_title`, `cover_subtitle`, `cover_image` and `default_output`.
+
+**List style is NOT in that config.** How a list renders — checkbox, number or bullet —
+follows the MARKUP, exactly like the web: a `class="gl-checklist"` list gets checkboxes,
+otherwise `<ol>` is numbered and `<ul>` is bulleted. One authoring convention drives both the
+page and the PDF, so there is nothing to keep in step
+([docs/rendering/blocks.md](../rendering/blocks.md)).
 
 ```bash
 python3 local/tools/build_booklet_pdf.py <checklists|howto> [output.pdf]
@@ -21,8 +26,7 @@ source page, with "Page n of N" footers including on the cover — see
 
 A page's **title comes from the sibling JSON** (`<data_dir>/<name>/<name>.json`), not the
 section `h2` — howto `h2`s are all the generic "How to". The section's own heading is
-skipped. **The builder reads a `title` key, which page JSONs have not carried since the
-2026-07-20 rename to `name`, so every page currently falls back to its filename — todo #29.**
+skipped. The builder reads the `name` key, falling back to the filename when a JSON has none.
 
 The renderer walks the section's children in order and dispatches by tag: `h2`/`h3` →
 heading, `p` → paragraph, `ol` → numbered or checkbox, `ul` → bullets (recursive),

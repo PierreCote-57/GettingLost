@@ -12,8 +12,8 @@ missing local file as a finding. Full ruling: *Images are Pierre's* in
 
 ## MODEL CHANGE 2026-07-04 — featuredImage is now GRID/LIST-ONLY; galleryImage RETIRED
 Pierre redesigned the image model so pages/posts have **no image at the top by default**:
-- **`featuredImage` = the lists/galleries image, full stop.** It feeds `featured_media` (which the theme's query-loop listings use — Posts page, home "recent posts") AND the generated gallery JSONs. It is **no longer displayed at the top of a page or single post**, because the `wp:post-featured-image` block was removed from the Twenty Twenty-Five **Pages** (`twentytwentyfive//page`) and **Single Posts** (`twentytwentyfive//single`) templates. See [docs/rendering/wp-templates.md](../rendering/wp-templates.md).
-- **Any image inside a page/post body is a `gl-photo`** the editor hand-places (with its own size). The top "hero" is now just content, decoupled from `featuredImage`.
+- **`featuredImage` = the lists/galleries image, full stop.** It feeds `featured_media`, which the theme's query-loop listings use — Posts page, home "recent posts" — and it is what the hydrated list rows carry (the generated gallery JSONs it once also fed died with the gallery system, below). It is **no longer displayed at the top of a page or single post**, because the `wp:post-featured-image` block was removed from the Twenty Twenty-Five **Pages** (`twentytwentyfive//page`) and **Single Posts** (`twentytwentyfive//single`) templates. See [docs/rendering/wp-templates.md](../rendering/wp-templates.md).
+- **Any image inside a page/post body is a `photo` block** the editor hand-places (with its own size). It was the `gl-photo` class until 2026-07-26; that hook is gone. The top "hero" is now just content, decoupled from `featuredImage`.
 - **`galleryImage` is RETIRED** — obsolete once there's no top featured image to differ from. All data migrated to `featuredImage`, and a repo-wide grep for `galleryImage` returns nothing.
 - Keep `featuredImage` populated even though it's not shown at top — it's what listings + SEO/Open-Graph previews use.
 
@@ -22,14 +22,14 @@ Pierre redesigned the image model so pages/posts have **no image at the top by d
 - **`""` is banned everywhere — a data bug.** `null` = honest "no image" (safe under `??`/`in`/schema checks; `""` is not). **Missing key ≡ null** (idiomatic JS — both falsy, both caught by `??` and `== null`).
 
 ## Resolution & consumers
-- **featured_media** (sync.js syncPages/syncPosts): featuredImage present → media-id lookup (or `FALLBACK_FEATURED_IMAGE_ID=1751` = under-construction, if named-but-not-yet-uploaded); **`null`/absent → `featured_media: 0`** = TRUE MASTER, the repo can clear it without touching WP. Consumed by the **listing query loops only** now (not shown on the single page/post itself).
+- **featured_media** (sync.js syncPages/syncPosts): featuredImage present → media-id lookup (or `FALLBACK_FEATURED_IMAGE_ID` — under-construction — if named-but-not-yet-uploaded; the id itself lives in `sync.js`, never copied into a doc); **`null`/absent → `featured_media: 0`** = TRUE MASTER, the repo can clear it without touching WP. Consumed by the **listing query loops only** now (not shown on the single page/post itself).
 - **Grid card** (`renderCard` in gettinglost.jst): `entry.featuredImage || "under-construction.png"`, straight into `formatImageUrl(…, 600, 400)`. under-construction is a **render fallback ONLY**. There is no resolved copy of the value anywhere — sync hydrates each list row from the page's own JSON, so the card reads the same `featuredImage` the page carries. The old `generateGalleryJsons`, which baked an `image` field into a generated gallery JSON, went with the gallery system.
 
 ## formatImageUrl — the two copies now DIVERGE (resize implemented 2026-07-03 via Jetpack Photon)
 - Both take a **bare filename** and throw on empty/null (fail-fast, `~/Claude/working-with-pierre.md`). But they no longer mirror:
 - **gettinglost.jst copy = the DISPLAY URL seam.** Signature `formatImageUrl(img, w, h)`; returns `https://i0.wp.com/{location.host}/wp-content/uploads/{img}?fit={w},{h}&quality=80` — a Jetpack Photon URL that resizes on the fly. `fit` = contain (never crops), `w`/`h` default 1920 (long-edge cap). `location.host` survives a future custom-domain move. **The bake-`-1920`/`-600`-variants plan is DEAD** — Photon does it live, no variant files, no filename suffix.
 - **sync.js copy stays `/wp-content/uploads/<filename>`** — deliberately NOT Photon-ified, because it's a media-map lookup KEY (matches how loadWpMediaMap keys the map), not a display URL. Photon-ifying it would break every featured-image media-id lookup.
-- Per-caller sizes + the two dual-window (thumbnail+lightbox) splits: see [docs/rendering/blocks.md](../rendering/blocks.md).
+- Per-caller sizes come from the call sites themselves (`grep formatImageUrl(` in `gettinglost.jst`); the rule they follow, and the two dual-window (thumbnail+lightbox) splits, are in [docs/rendering/blocks.md](../rendering/blocks.md).
 - WP featured image (theme-rendered, `featured_media`) is already Photon'd via Jetpack srcset — separate track, not our code.
 
 ## Reuse across pages — same image on many pages is STANDARD (confirmed 2026-07-13)
@@ -41,7 +41,7 @@ Galleries and `featuredImage` reference images by **bare filename**, so the same
 
 ## Corner chips
 
-Card corner data is the flat `badges` array; the road chip is derived at render from
+Card corner data is the flat `tags.badges` array; the road chip is derived at render from
 `access.legs` and never stored. Full spec in [docs/schema/badges-road.md](badges-road.md).
 
 ## pull-posts.js

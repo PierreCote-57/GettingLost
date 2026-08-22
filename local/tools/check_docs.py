@@ -7,19 +7,28 @@ edits, and it never drops a finding for being uninteresting.
 
 Prose is out of scope on purpose. Whether a paragraph still describes how the
 site works is a reading job, and no script can do it. What lives here is the
-part that rots silently: a link to a renamed file, a path that moved, a folder
-tree that drifted from disk, a function the code no longer has.
+part that rots silently: a link to a renamed file, a path that moved, a
+function the code no longer has.
 
     check_docs.py                 the report
     check_docs.py --verbose       also list what each check looked at
 
-Five checks:
+Six checks:
 
     links     every relative markdown link resolves
     paths     every backticked repo or home path exists
     index     docs/README.md lists every doc; projects/README.md every project
-    tree      the folders.md hierarchy matches media/data and pages on disk
     names     every code symbol a doc attributes to a source file still exists
+    cache     no doc states a count of what the data holds right now
+    format    every media/data JSON round-trips byte-identically through jsonio
+
+A seventh was tried and REMOVED 2026-08-21: a broad "does this symbol exist
+anywhere in our source" scan, unbound from a nearby filename. It reported 29
+findings and every one was a false positive — Claude tool names, LakeData
+columns, PIL classes, keyword VALUES, and symbols the docs name precisely to say
+they were rejected or retired. It fails for the same reason `names` is scoped the
+way it is (below), and a curated exclusion list would just be another cache. That
+check stays a reading job.
 
 Three sets of files, because they are not the same kind of document:
 
@@ -32,9 +41,6 @@ EVERY project, so a bare `docs/todo.md` in one of them means "the current
 project's", not this repo's, and checking it here would be asserting something
 the file never claimed. For the same reason their code names are not checked
 against this repo's source.
-
-A folder line in the folders.md tree annotated "WP only" is skipped by the tree
-check — it describes a folder that lives in WordPress with no repo counterpart.
 """
 
 import os
@@ -49,10 +55,6 @@ CLAUDE_ROOT = os.path.expanduser("~/Claude")
 SOURCE_GLOBS = ["local", "media/data/scripts", ".github/workflows"]
 
 SOURCE_EXTENSIONS = (".js", ".py", ".jst", ".cst", ".yml", ".yaml")
-
-# Folders under media/data that the tree in folders.md deliberately does not
-# mirror; the file says so in its own words right under the tree.
-TREE_EXEMPT_ROOTS = ("scripts", "posts")
 
 # A backticked token is only worth checking as a code name if it is shaped like
 # one. Prose words in backticks are the common case and must not be flagged.
@@ -81,9 +83,18 @@ RETIREMENT_WORDS = (
 	"does not exist", "no page-map", "never existed",
 )
 
+# A count of what the data holds right now does not belong in a doc — it is a
+# cache of something measurable, with nothing to invalidate it. See
+# docs/README.md, "These files are not a cache of the repo". Dated migration
+# records are history and stay true, so a line naming a year is skipped.
+CACHE_PATTERNS = (
+	re.compile(r"\b\d+ of (?:the )?\d+\b"),
+	re.compile(r"\ball \d+ (?:pages|rows|files|JSONs|destinations|entries|records|templates)\b"),
+)
+DATED_LINE = re.compile(r"20\d\d-\d\d-\d\d")
+
 LINK_PATTERN = re.compile(r"\[([^\]]*)\]\(([^)]+)\)")
 BACKTICK_PATTERN = re.compile(r"`([^`]+)`")
-FOLDER_LINE_PATTERN = re.compile(r"^(\s*)([A-Za-z0-9._-]+)/\s*(←.*)?$")
 REPO_PREFIXES = ("media/", "pages/", "local/", "docs/", "logs/", "posts/", ".claude/", ".github/")
 
 
@@ -288,60 +299,45 @@ def checkIndex(docPaths):
 	return findings
 
 
-# The folder hierarchy written in folders.md, as a set of paths. It is the
-# fenced block holding the most folder lines; the file's other blocks list the
-# four locations and hold no hierarchy.
-def parseFolderTree(text):
-	blocks = text.split("```")
-	best = []
-	for block in blocks:
-		paths = []
-		stack = []
-		for line in block.splitlines():
-			match = FOLDER_LINE_PATTERN.match(line)
-			if not match:
-				continue
-			annotation = match.group(3) or ""
-			depth = len(match.group(1)) // 2
-			stack = stack[:depth] + [match.group(2)]
-			if "WP only" in annotation:
-				continue
-			paths.append("/".join(stack))
-		if len(paths) > len(best):
-			best = paths
-	tree = set(best)
-	return tree
-
-
-# Every folder on disk the tree is meant to mirror.
-def collectDiskFolders(root, exemptRoots):
-	folders = set()
-	for dirPath, dirNames, fileNames in os.walk(os.path.join(REPO_ROOT, root)):
-		relPath = os.path.relpath(dirPath, os.path.join(REPO_ROOT, root))
-		if relPath == ".":
-			continue
-		if relPath.split(os.sep)[0] in exemptRoots:
-			continue
-		folders.add(relPath.replace(os.sep, "/"))
-	return folders
-
-
-# CHECK: the folders.md tree matches media/data, and holds every pages/ folder.
-# media/data is the strict comparison — it carries a folder per page, so the
-# tree and the disk should agree in both directions. pages/ holds no leaf page
-# folders, so only its extras are a finding.
-def checkTree():
+# CHECK: no doc states a count of what the data holds right now. Such a count is
+# true for a day and cannot announce that it went stale; say the relationship and
+# query the JSON for the number. A line carrying a date is a migration record —
+# history, which stays true — and is skipped.
+def checkCache(docPaths):
 	findings = []
-	treePath = os.path.join(DOCS_ROOT, "conventions", "folders.md")
-	tree = parseFolderTree(readText(treePath))
-	dataFolders = collectDiskFolders("media/data", TREE_EXEMPT_ROOTS)
-	pageFolders = collectDiskFolders("pages", ())
-	for missing in sorted(tree - dataFolders - pageFolders):
-		findings.append(f"docs/conventions/folders.md: `{missing}/` is in the tree but not on disk")
-	for extra in sorted(dataFolders - tree):
-		findings.append(f"docs/conventions/folders.md: `media/data/{extra}/` is on disk but not in the tree")
-	for extra in sorted(pageFolders - tree):
-		findings.append(f"docs/conventions/folders.md: `pages/{extra}/` is on disk but not in the tree")
+	for path in docPaths:
+		for number, line in enumerate(readText(path).splitlines(), start=1):
+			if DATED_LINE.search(line):
+				continue
+			for pattern in CACHE_PATTERNS:
+				match = pattern.search(line)
+				if match and line[max(0, match.start() - 1)] == '"':
+					continue  # quoted — the rule quoting an example of itself
+				if match:
+					findings.append(f"{relative(path)}:{number}: counts live data — \"{match.group(0)}\"")
+					break
+	return findings
+
+
+# CHECK: the house format claim in docs/conventions/json-format.md — that a
+# jsonio round-trip is byte-identical, which is what makes "route even
+# single-field edits through python" safe. A file that fails this would come
+# back reformatted from any edit.
+def checkFormat():
+	findings = []
+	sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+	try:
+		import jsonio
+	except ImportError:
+		return ["local/tools/jsonio.py could not be imported"]
+	for dirPath, dirNames, fileNames in os.walk(os.path.join(REPO_ROOT, "media", "data")):
+		dirNames.sort()
+		for fileName in sorted(fileNames):
+			if not fileName.endswith(".json"):
+				continue
+			full = os.path.join(dirPath, fileName)
+			if jsonio.dumps(jsonio.load(full)).rstrip("\n") + "\n" != readText(full):
+				findings.append(f"{relative(full)} is not in the jsonio house format")
 	return findings
 
 
@@ -380,8 +376,9 @@ def main(argv):
 		("links", checkLinks(projectPaths + claudePaths)),
 		("paths", checkPaths(projectTokens) + checkPaths(claudeTokens, allowRepoPaths=False)),
 		("index", checkIndex(docPaths)),
-		("tree", checkTree()),
 		("names", checkNames(projectPaths, sourceFiles)),
+		("cache", checkCache(projectPaths)),
+		("format", checkFormat()),
 	]
 	total = printReport(sections)
 	return 1 if total else 0

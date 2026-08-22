@@ -65,17 +65,20 @@ After resolution a top-level `icon` becomes a `pinList` entry at the centre (cop
 appended — the self-pointer path hands back `pageData.location` by reference).
 
 Typical destination: `"road": { "file": "<own filename>.html" }`. A map spells out
-coordinates only when it genuinely differs from the page's location — today that is Morton's
-`road` and `campground`, and mohun's `road`.
+coordinates only when its viewport genuinely differs from the page's location — a road map
+framing the highway rather than the lake is the usual reason. Query the data for which ones
+do; don't keep a list here.
 
 ## icon vocabulary + assignment rules
-Values (lowercase, controlled): `lake`, `campground`, `park`, `tent`, `picnic`, `home`. Rules:
+Values (lowercase, controlled): `lake`, `campground`, `park`, `tent`, `picnic`, `home`,
+`outhouse`. Rules:
 - **lake** — lake pages.
 - **campground** — COMMERCIAL campground / RV resort (Pacific Playgrounds, Salmon Point).
 - **tent** — rec site (or park) you can CAMP at (Elk Falls/Quinsam = `tent`, even though it's under `parks/`).
-- **picnic** — DAY-USE rec site (the two `*-dayuse` pages).
+- **picnic** — DAY-USE rec site (the `*-dayuse` pages).
 - **park** — Tyee Spit in the registry.
 - **home** — added 2026-07-08 (garage icon) for home-base / storage locations; introduced for the travel log's `logs/locations.json` (indoor-storage uses it), NOT used by destination pages. See [docs/projects/logs-travel.md](../projects/logs-travel.md).
+- **outhouse** — a pit toilet as a place in its own right.
 General rule Pierre stated: rec site with camping = tent; commercial campground = campground.
 
 ## Marker rendering (gettinglost.jst googleMap renderer)
@@ -95,15 +98,15 @@ Before this the list browser stood up its own map and borrowed pieces: `GL.loadG
 - `mapObjectFor` **drops a row with no `lat`/`lng`**. That filter cannot move into `renderPin`, which deliberately puts a coordinate-less pin at the map's centre for authored single-pin maps; rows that slipped through would stack in the middle of the map.
 - **The pin's `displayName` is the row's `name`, overwriting `location.displayName`**, which holds a town ("Black Creek, BC") — Location-column text, not a marker label. Not a contradiction of the no-automatic-page-name-label ruling: that one is about a `googleMap` block synthesizing a marker for the page it sits on, and here the row IS the record.
 - **A row with a `file` gets a `url`** and its marker is a link to that page. Rows with no `file` are registry entries with no page: no `url`, hover title only.
-- `galleries` is a `drawMap` parameter, not a closure capture, so `renderPin` resolves `img` for a page block and no-ops for the list browser, which has no page data. No `location` in the destinations data carries `img` today.
+- `galleries` is a `drawMap` parameter, not a closure capture, so `renderPin` resolves `img` for a page block and no-ops for the list browser, which has no page data. A row's `location` would need an `img` for that to matter, and the list browser has no galleries to resolve it against either way.
 
 Behavior and the rest of the view live in [../rendering/list-browser.md](../rendering/list-browser.md).
 
 ## Pin delivery — GL.PIN_ICONS as inline SVG data-URI
-The 6 marker figures are inline SVG STRINGS in `gl-constants.jst` (`GL.PIN_ICONS`), keyed by a pin's `icon`. `pinIcon()` returns `{ url: "data:image/svg+xml," + encodeURIComponent(svg), scaledSize: 48×48, anchor: (24,24) }`.
+The 7 marker figures are inline SVG STRINGS in `gl-constants.jst` (`GL.PIN_ICONS`), keyed by a pin's `icon`. `pinIcon()` returns `{ url: "data:image/svg+xml," + encodeURIComponent(svg), scaledSize: 48×48, anchor: (24,24) }`.
 - Each SVG is a standalone `48×48` viewBox, figure centered via `transform="translate(24,24)"`; `xmlns` is REQUIRED (data-URI images need it). Anchor is CENTER (Pierre rejected the teardrop shape → not bottom-anchored).
 - Chosen over `google.maps.Symbol` (single-path only — can't do our multi-shape/multi-color glyphs) and `AdvancedMarkerElement` (needs `mapId` + marker library — bigger change, not needed now).
-- Tweak art = edit the SVG numbers in `gl-constants.jst`. Design is a first pass; expect to nudge on real maps. Figures: lake=blue disc+waves, campground=amber caravan, park=green tree, tent=brown tent w/ door+guy-lines, picnic=red A-frame table, home=slate garage (peaked roof + light roll-up door, added 2026-07-08).
+- Tweak art = edit the SVG numbers in `gl-constants.jst`. Design is a first pass; expect to nudge on real maps. Figures: lake=blue disc+waves, campground=amber caravan, park=green tree, tent=brown tent w/ door+guy-lines, picnic=red A-frame table, home=slate garage (peaked roof + light roll-up door, added 2026-07-08), outhouse=green-roofed cabin with a split door and a blue vent window.
 
 ## gl-constants.jst — home for sitewide ALL-CAPS constants
 New file `media/data/scripts/gl-constants.jst`. Holds `GL.PIN_ICONS`, and `GL.TAG_COLORS` / `GL.TAG_FALLBACK` / `GL.MAP_CONFIG` MOVED here out of gettinglost.jst. `gettinglost.jst` now aliases them (`var MAP_CONFIG = GL.MAP_CONFIG;` at IIFE top). Renderer-SPECIFIC config stays with its renderer (lakes.jst's `CONFIG` stocking URL, list_browser.jst's `DATASETS_URL`/`UPLOADS` — NOT moved). Put genuinely global ALL-CAPS constants here going forward.

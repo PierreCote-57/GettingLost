@@ -25,21 +25,30 @@ The renderer reads top to bottom, in order:
 4. **Display** — `displayOptionsRow` and `displayDataset`, two different views on "all that
    is known".
 
+**Both files it fetches are the HYDRATED ones, not the repo sources.** `buildExcludedSet`
+keeps `datasets.json` and every dataset source under `media/data/shared/list_browser/` out of
+sync's verbatim files pass; `syncHydratedLists` publishes the hydrated versions under those
+same names instead. So `/wp-content/uploads/destinations.json` is the flat array with every
+`{file}` pointer already resolved — the repo file at that path is the one that still has the
+pointers in it. Nothing else under `media/data/**` is excluded this way.
+
 ### The property bag — `known`
 
 One map owned by the top level, starting empty, accumulating per phase:
 
 - phase 1 adds `params`
 - phase 2 adds `datasetList`, `dataset`, `rawRows`
-- phase 3 adds `filteredRows` and the keyword list
+- phase 3 adds `filteredRows` and `keywords`
 
-Five properties. A comment above each phase states what that phase adds; that is the complete
-map, and it stays complete because of the read-only rule below.
+A comment above each phase states what that phase adds; that is the complete map, and it
+stays complete because of the read-only rule below.
 
 **Why a bag and not explicit arguments:** the display functions are parallel siblings with
-drastically different needs (`displayViewOptions` vs `displayKeywordOptions`). Any signature
-serving all of them would just be the union of everyone's needs. The bag says "I don't know
-what you need, here is what I know, use what you want."
+drastically different needs — `displayOptionsRow` wants the vocabularies and the params,
+`displayDataset` wants the filtered rows. Any signature serving both would just be the union
+of everyone's needs. The bag says "I don't know what you need, here is what I know, use what
+you want." The control builders under `displayOptionsRow` (`buildViewToggle`,
+`buildCheckboxDropdown`, `buildAccessSelect`) take it too.
 
 ### Conventions that make it work
 
@@ -95,11 +104,12 @@ whatever is currently filtered in.
   field is the Location column's text and holds a town ("Black Creek, BC").
 - The icon is the row's own `location.icon`, so the figures here and on the destination pages
   are one vocabulary. `galleries` is a `drawMap` parameter rather than a closure capture, so
-  the `img` InfoWindow resolves on a page and no-ops here, where there is no page data — and
-  no `location` in the data carries `img` anyway.
+  the `img` InfoWindow resolves on a page and no-ops here, where there is no page data —
+  a row's `location` would need an `img` for that to matter, and there would be no
+  galleries to resolve it against.
 - **Clicking a pin opens that destination's page**, in the same tab, when the row has a
-  `file` (23 of the 191 destination rows today; the rest are registry entries with no
-  page). `mapObjectFor` resolves it to the pin's `url` with `GL.fileToSlug(row.file)` — the
+  `file` — the minority of rows; the rest are registry entries with no page.
+  `mapObjectFor` resolves it to the pin's `url` with `GL.fileToSlug(row.file)` — the
   same call the cards use, so a pin and a card can never disagree. No `file` → no `url`,
   hover title only.
 
@@ -117,11 +127,15 @@ does.
 
 ## The two switches
 
-**Related, but NOT the same vocabulary.** One option can emit several query params (a
-shortcut preset like "lake camping with van") or none (`viewMode` concise/verbose). `view`
-does both — it displays *and* filters.
+**Related, but NOT the same vocabulary.** One option can emit several query params, or none
+— imagine a shortcut preset like "lake camping with van" for the first, a concise/verbose
+display toggle for the second. Neither exists today; they are what the separation is *for*.
+`view` is the real case that does both — it displays *and* filters.
 
-- **Adding a filter is one function plus one line in the switch.** Same for a control.
+- **Adding a filter is one function plus one line in the `filterRows` switch. Adding a
+  control is one function plus one entry in the `CONTROL_BUILDERS` map.** Two dispatch
+  points, two shapes — the filter switch runs over the URL params, the control map is keyed
+  by the dataset's `options` tokens.
 - **Silence on both sides is correct, never an error.** A token with no builder builds
   nothing; a param with no filter filters nothing. Legitimate states: staged rollout (see the
   control before wiring the filter), under test, retired-but-kept.
@@ -194,9 +208,10 @@ Every filter value shows how many rows it would match. The numbers come from the
 unreachable, HTTP status, or not valid JSON. "HTTP 404" alone never says which of the two
 files was missing.
 
-`pickDataset(datasetList, id)` returns the entry or throws `"Unknown dataset <id>"`. Throwing
-is what keeps phase 2 to two statements: the not-found case lives in the helper instead of a
-branch interrupting the flow, and the single catch already reports.
+`pickDataset(known)` returns the entry or throws `"Unknown dataset <id>"`. It takes the bag
+like every other function that reads it, and unpacks `datasetList` and the `dataset` param at
+the top. Throwing is what keeps phase 2 to two statements: the not-found case lives in the
+helper instead of a branch interrupting the flow, and the single catch already reports.
 
 The catch does `el.textContent = err.message` — the same text on screen and in the console.
 No generic string, and **no "Content is temporarily unavailable"**. It is not correct: a

@@ -1,11 +1,29 @@
 {
 	"name": "Lake Template",
+	"featuredImage": "under-construction.png",
+	"excerpt": "",
+	"tags": {
+		"badges": [],
+		"types": [
+			"lake"
+		],
+		"keywords": []
+	},
 	"wpSettings": {
 		"published": false,
 		"comments": "open"
 	},
-	"lat": 0,
-	"lng": 0,
+	"location": {
+		"lat": 0,
+		"lng": 0,
+		"icon": "lake",
+		"zoom": 13
+	},
+	"googleMap": {
+		"road": {
+			"file": "lake-template.html"
+		}
+	},
 	"fishingReferences": {
 		"bcIdentifier": "",
 		"areaKm2": 0,

@@ -9,7 +9,7 @@ Every page/post data file carries:
 ```
 - `published`: boolean → WP status (`true`→publish, `false`→draft). Absent → sync leaves status unset, create falls back to draft.
 - `comments`: **string** `"open"` | `"closed"` (WP's own `comment_status` value, passed through). **Default when absent = "open"** — only an explicit `"closed"` turns comments off.
-- Migrated all 34 page/post JSONs on 2026-07-15 (format-preserving inline swap). **Home** (`media/data/shared/home/home.json`) is the one set to `"closed"`; everything else `"open"`.
+- Migrated every page/post JSON on 2026-07-15 (format-preserving inline swap). Which pages carry `"closed"` is data — grep `media/data` for it rather than reading a list here.
 
 ## Sync behaviour (`local/sync/sync.js`)
 - Helpers `wpStatusFromData()` / `wpCommentStatusFromData()` read the block.

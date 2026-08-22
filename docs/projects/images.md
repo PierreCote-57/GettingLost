@@ -18,6 +18,6 @@ edit. JSON data files are not there — they live in the repo under `media/data/
   [docs/schema/image.md](../schema/image.md) and
   [docs/rendering/blocks.md](../rendering/blocks.md).
 - **No variant files, no filename suffix, no multi-upload.** Photon replaces all of it.
-- Per-caller display sizes: gallery card 600×400, mini-gallery thumb 360×220, lightbox
-  1920×1920, custom-tag inline 480×480 — all `fit=`, contain semantics. `quality=80`
+- Every caller asks for the size it displays at, all `fit=` (contain semantics); the numbers
+  are at the `formatImageUrl` call sites in `gettinglost.jst`, not copied here. `quality=80`
   globally; 72 and 60 are available if smaller is wanted.

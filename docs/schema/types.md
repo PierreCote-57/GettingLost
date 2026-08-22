@@ -20,9 +20,9 @@ facets**; this is a fourth axis, not a promotion of type out of being a tag.
 
 ## A LIST, not a scalar
 
-Every row carries exactly one type today (116 of 116 at the migration). That is a fact about
-the data, not a constraint: a rec site on a lake should be able to say it is both without a
-schema change, so the field is a list like its two neighbours.
+Every row that carries a type carries exactly one. That is a fact about the data, not a
+constraint: a rec site on a lake should be able to say it is both without a schema change,
+so the field is a list like its two neighbours.
 
 ## Never mandatory — and that is the point
 
@@ -46,7 +46,8 @@ room not yet used, not a dead option.
   and seeded into the running total; the two are opposite on purpose.
 - **Validation** — `validateTypes` runs over the HYDRATED rows, the only place both kinds
   are visible: per-page rows resolved from `{file}` pointers and the inline rows that exist
-  nowhere but the dataset file. Walking `perPageDataMap` instead would miss 98 of 116.
+  nowhere but the dataset file. Walking `perPageDataMap` instead would miss every inline
+  row, which is most of them.
 - **The filter** — `filterTypes` is `filterByWord("types", …)`, membership with OR inside
   the control, identical in shape to `filterBadges`. Multi-select checkboxes, because the
   filter wants "lakes and parks" even though a row carries one value.

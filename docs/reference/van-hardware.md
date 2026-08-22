@@ -14,23 +14,26 @@ Always verify at least one new link actually resolves before delivering.
 The hardware itself — Truma units, electrical, awning — is documented in `~/Claude/van.md`,
 outside this repo, so it is available in any project.
 
-## Current Notes Content
-**howto-climate.json** — 3 sections:
-- "Truma CP plus" (product page + Aventa/Combi-specific operating instructions)
-- "Truma Aventa eco + soft start" (product page, product guide, operating instructions, quick start guide)
-- "Truma Combi G comfort" (product page, one sheet, operating instructions, quick start guide)
+## What the notes sections hold
 
-**howto-power.json** (built 2026-07-11) — notes sections in order: Generator (Cummins, 2 real links), Inverter (2,000 W Victron — placeholder), Solar panels (placeholder), House battery (Group 8D, 330 Ah AGM — placeholder), then the 3 Truma sections **copied verbatim** from howto-climate.json.
-- ⚠ Truma docs now DUPLICATED across howto-power.json AND howto-climate.json — if a Truma URL changes, update BOTH.
-- 3 "To be researched" placeholders await real doc URLs: inverter, solar, house battery.
+Read the files — `media/data/van/howto/howto-{climate,power,awning}/*.json`, the `notes`
+array. The section names and their links are not copied here.
+
+One rule that is NOT in the data and has to be stated: **the Truma sections are DUPLICATED
+across `howto-power.json` and `howto-climate.json`** — if a Truma URL changes, update BOTH.
+
+A section still being researched carries a row named **"To be researched"** with no url, per
+the placeholder convention above.
+
+The hardware each section describes — including which awning configuration is actually
+fitted — is in `~/Claude/van.md`, not here.
 
 ## Hosting supplier PDFs
-A PDF under `media/data/**` syncs like any other file: sync.js uploads `.json`/`.jst`/`.cst`/`.pdf` to the WP media library, flat, so it is fetchable at `/wp-content/uploads/<basename>` — which is how the booklet PDFs and the maintenance invoices are served. **Flat means a PDF filename must be unique sitewide, not just within its folder.**
+A PDF under `media/data/**` syncs like any other file: sync.js uploads `.json`/`.jst`/`.cst`/`.pdf` to the WP media library, flat, so it is fetchable at `/wp-content/uploads/<basename>` (the only files not copied verbatim are the list-browser dataset sources, published hydrated instead) — which is how the booklet PDFs and the maintenance invoices are served. **Flat means a PDF filename must be unique sitewide, not just within its folder.**
+
+A supplier PDF may instead be uploaded to WP **by hand** and referenced at the same
+`/wp-content/uploads/<basename>` path — `Coachmen-User-Guide.pdf` on howto-power is the
+case in the data. Nothing distinguishes the two at render time; the difference is only
+whether the file is in the repo.
 
 Images are the exception and stay out of the repo — they are Pierre's, uploaded by hand ([../conventions/folders.md](../conventions/folders.md)).
-
-**howto-awning.json** — 2 sections:
-- "Carefree Eclipse" (product page, owner's manual r10, installation manual)
-- "Carefree Connects (not installed)" (product page, owner's manual with BT12 r12, mobile app manual)
-
-(The awning's actual configuration — basic single-switch, no auto-retract — is in `~/Claude/van.md`.)
