@@ -12,13 +12,23 @@
 			"name": "How to images",
 			"items": [
 				{
-					"id": "awning-panel-location",
-					"img": "awning-panel-location.png",
+					"id": "12V206H_img",
+					"img": "12V206H_img.png",
 					"label": "Location of awning control panel, next to the Garmin unit"
 				},
 				{
-					"id": "awning-control-panel",
-					"img": "awning-control-panel.png",
+					"id": "12V206H_spec",
+					"img": "12V206H_spec.png",
+					"label": "Location of awning control panel, next to the Garmin unit"
+				},
+				{
+					"id": "12V206P_img",
+					"img": "12V206P_img.png",
+					"label": "Awning control panel"
+				},
+				{
+					"id": "12V206P_spec",
+					"img": "12V206P_spec.png",
 					"label": "Awning control panel"
 				}
 			]
