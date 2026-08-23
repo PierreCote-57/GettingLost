@@ -164,6 +164,34 @@ li {
   border-bottom: 2px solid #5e442c;
 }
 
+/* Authored data table: <table class="gl-table"> with a <colgroup> giving the
+ * value columns their width. table-layout:fixed makes those widths hold whatever
+ * the cells contain, and the column left without a width absorbs the remainder —
+ * the notes column, which is why the last column reads left-aligned. */
+.gl-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.gl-table th,
+.gl-table td {
+  border: 1px solid #5e442c;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+  vertical-align: top;
+}
+.gl-table thead th {
+  background: #f3ece4;
+  color: #2a1a0e;
+}
+.gl-table th:first-child,
+.gl-table td:first-child,
+.gl-table th:last-child,
+.gl-table td:last-child {
+  text-align: left;
+}
+
 /* Drop the focus rectangle on mouse click; keep it for keyboard (Tab). */
 summary:focus:not(:focus-visible) {
   outline: none;
