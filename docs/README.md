@@ -105,6 +105,7 @@ installed skill would be. `CLAUDE.md` points at them so they are known every ses
 | [rstbc-suggestions.md](reference/rstbc-suggestions.md) | rec-site name lookup |
 | [lakedata.md](reference/lakedata.md) | `local/data/LakeData.json` — read this first for a new lake page |
 | [bc-rest-stops.md](reference/bc-rest-stops.md) | `local/data/bc-rest-stop.json` |
+| [bc-open-data.md](reference/bc-open-data.md) | `local/data/bc_download/` — rest stops, offramps, exits, exit amenities; DataBC vs OSM, and how they join |
 | [fishing-images.md](reference/fishing-images.md) | `~/Working/Fishing/Images/` |
 | [van-hardware.md](reference/van-hardware.md) | Truma hardware, sourcing conventions |
 

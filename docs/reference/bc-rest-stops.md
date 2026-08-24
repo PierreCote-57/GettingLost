@@ -14,6 +14,10 @@ single rest stop's `id`/`url` when building a log location (Oyster Bay id=426). 
 NOT meant to be wired into site pages/galleries/maps; the dataset sitting "unconsumed"
 is the intended state, not a gap.
 
+A second, unrelated rest-stop pull exists: `local/data/bc_download/bc_reststop.json`, from
+the DataBC WFS layer. See [bc-open-data.md](bc-open-data.md) for what each file has that
+the other lacks — this one is the only source of the WiFi and EV-charging columns.
+
 ## Schema (per record)
 GeoJSON-ish: `{ id (int, e.g. 426=Oyster Bay), rest_stop_id (str), created_at, modified_at,
 location:{ type:"Point", coordinates:[lng,lat] }, properties:{ REST_AREA_NAME, HIGHWAY_NUMBER,
