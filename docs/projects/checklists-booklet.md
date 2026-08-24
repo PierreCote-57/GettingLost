@@ -34,6 +34,19 @@ heading, `p` → paragraph, `ol` → numbered or checkbox, `ul` → bullets (rec
 block → callout, `photoRef` → its caption text inline, `photoGallery` → ignored, images
 being out of scope.
 
+Two inline tags carry meaning but no text, so they are swapped for markers before a node is
+collapsed to its text and turned into markup afterwards: `<br>` → a real line break, and
+`<input>` → a write-on blank, an underlined run of `size` (or `width`) non-breaking spaces,
+6 when neither is given. **`size` is in characters, so `size="2"` prints a two-character
+rule** — widen the attribute, not the builder, when a blank needs more room.
+
+**Box characters need a Unicode font.** The booklet is set in Helvetica, a base-14 font
+whose WinAnsi encoding has no ballot box, so `☐` and friends printed as the notdef glyph —
+a solid black square. `BOX_CHARS` (U+2610-2612, U+25A1-25A2, U+274F-2752) are switched to
+`Arial Unicode.ttf` and nothing else is, keeping the rest of the booklet in Helvetica. The
+font is macOS-only; if it is missing the build still runs and warns on stderr, and the boxes
+go back to solid.
+
 **Render what's there.** Content and structure are the author's job, not the builder's — no
 section means a title-only page, an empty or malformed block is the author's problem. See
 [docs/rendering/blocks.md](../rendering/blocks.md).

@@ -20,6 +20,7 @@ Requires: reportlab, beautifulsoup4
     pip install --user reportlab beautifulsoup4
 """
 
+import copy
 import glob
 import json
 import os
@@ -33,6 +34,8 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, PageBreak, Table, TableStyle, Flowable, Spacer
 )
@@ -83,6 +86,42 @@ COVER_KICKER = "GETTING LOST IN CANADA"
 AMBER = colors.HexColor("#c98a3e")
 INK = colors.HexColor("#333333")
 MUTED = colors.HexColor("#555555")
+
+# ---------------------------------------------------------------------------
+# Box glyphs. The booklet is set in Helvetica, one of the base-14 fonts, whose
+# WinAnsi encoding has no ballot box -- reportlab prints the notdef glyph, a
+# SOLID black square, wherever a page writes one. A Unicode TTF is registered
+# and applied to those characters ALONE, so everything else stays Helvetica.
+# ---------------------------------------------------------------------------
+BOX_FONT = "Boxes"
+BOX_FONT_PATHS = (
+    "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+    "/Library/Fonts/Arial Unicode.ttf",
+)
+BOX_CHARS = "\u2610\u2611\u2612\u25a1\u25a2\u274f\u2750\u2751\u2752"
+BOX_RUN_RE = re.compile("[" + BOX_CHARS + "]+")
+
+def _register_box_font():
+    """Register the first box-capable font found. False if none is installed."""
+    for path in BOX_FONT_PATHS:
+        if os.path.exists(path):
+            pdfmetrics.registerFont(TTFont(BOX_FONT, path))
+            return True
+    sys.stderr.write("no box font found, box characters will print solid: %s\n"
+                     % ", ".join(BOX_FONT_PATHS))
+    return False
+
+BOX_FONT_OK = _register_box_font()
+
+
+def _boxes(markup):
+    """Paragraph markup with every box character switched to the box font."""
+    if not BOX_FONT_OK:
+        return markup
+    switched = BOX_RUN_RE.sub(
+        lambda m: '<font name="%s">%s</font>' % (BOX_FONT, m.group(0)), markup)
+    return switched
+
 
 styles = getSampleStyleSheet()
 
@@ -244,9 +283,44 @@ def render_table(table_el):
 # Parsing: pull the howto section out of a page.
 # ---------------------------------------------------------------------------
 
+# Two tags carry meaning but no text, so collapsing a node to its text would
+# lose them. Each is swapped for a private-use marker BEFORE the text is taken,
+# and the marker becomes Paragraph markup AFTER escaping -- escaping the real
+# markup would print it literally.
+BREAK_MARK = "\ue000"
+BLANK_MARK_OPEN, BLANK_MARK_CLOSE = "\ue001", "\ue002"
+BLANK_DEFAULT_CHARS = 6
+
+
+def _blank(chars):
+    """A write-on blank: an underlined run of that many non-breaking spaces."""
+    rule = "<u>%s</u>" % ("&#160;" * max(1, chars))
+    return rule
+
+
+def _markable(node):
+    """A copy of the node with <br> and <input> swapped for their markers."""
+    copied = copy.copy(node)
+    for br in copied.find_all("br"):
+        br.replace_with(BREAK_MARK)
+    for field in copied.find_all("input"):
+        size = field.get("size") or field.get("width") or BLANK_DEFAULT_CHARS
+        try:
+            chars = int(str(size).strip())
+        except ValueError:
+            chars = BLANK_DEFAULT_CHARS
+        field.replace_with(BLANK_MARK_OPEN + str(chars) + BLANK_MARK_CLOSE)
+    return copied
+
+
 def _text(node):
     """Collapsed, XML-escaped text of a node (safe for reportlab Paragraph)."""
-    return xml_escape(re.sub(r"\s+", " ", node.get_text(" ", strip=True)))
+    marked = _markable(node)
+    escaped = _boxes(xml_escape(re.sub(r"\s+", " ", marked.get_text(" ", strip=True))))
+    escaped = re.sub(r"\s*" + BREAK_MARK + r"\s*", "<br/>", escaped)
+    escaped = re.sub(BLANK_MARK_OPEN + r"(\d+)" + BLANK_MARK_CLOSE,
+                     lambda m: _blank(int(m.group(1))), escaped)
+    return escaped
 
 
 def _load_data(html_path, data_dir):
@@ -304,7 +378,7 @@ def render_element(el):
         return out
     if name == "div" and el.get("data-block-type") == "warning":
         txt = el.get("data-text", "")
-        return [Paragraph("⚠ " + xml_escape(txt), warn)] if txt else []
+        return [Paragraph("⚠ " + _boxes(xml_escape(txt)), warn)] if txt else []
     # Anything else: render whatever text it carries, else nothing.
     txt = _text(el)
     return [Paragraph(txt, intro)] if txt else []
