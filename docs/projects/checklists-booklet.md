@@ -36,9 +36,9 @@ being out of scope.
 
 Two inline tags carry meaning but no text, so they are swapped for markers before a node is
 collapsed to its text and turned into markup afterwards: `<br>` → a real line break, and
-`<input>` → a write-on blank, an underlined run of `size` (or `width`) non-breaking spaces,
-6 when neither is given. **`size` is in characters, so `size="2"` prints a two-character
-rule** — widen the attribute, not the builder, when a blank needs more room.
+`<input>` → a write-on blank, two underscores per character of its `size` (or `width`), 6
+when neither is given. The doubling is deliberate: a browser draws an input box wider than
+its `size` in characters, and the printed blank has to leave the same room to write in.
 
 **Box characters need a Unicode font.** The booklet is set in Helvetica, a base-14 font
 whose WinAnsi encoding has no ballot box, so `☐` and friends printed as the notdef glyph —

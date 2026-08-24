@@ -293,8 +293,8 @@ BLANK_DEFAULT_CHARS = 6
 
 
 def _blank(chars):
-    """A write-on blank: an underlined run of that many non-breaking spaces."""
-    rule = "<u>%s</u>" % ("&#160;" * max(1, chars))
+    """A write-on blank: two underscores per character of the field's size."""
+    rule = "_" * (2 * max(1, chars))
     return rule
 
 
